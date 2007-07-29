@@ -281,10 +281,10 @@ register struct monst *mtmp;
  *	attacks.  It is therefore wrong to add hitval to tmp; we must add
  *	it only for the specific attack (in hmonas()).
  */
-	if (uwep && !Upolyd) {
+	if (!Upolyd) {
 		tmp += hitval(uwep, mtmp);
-		tmp += weapon_hit_bonus(uwep);
-	}
+		tmp += weapon_hit_bonus(uwep);  /* picks up bare-handed bonuses */
+	} 
 	/* Let's make UNSKILLED matter, shall we?  If you're UNSKILLED,
 	 * you never get more than an 75% chance to hit anything.
 	 * (we'll let the fisticuffs guys slide on this, they've got
@@ -2196,11 +2196,9 @@ use_weapon:
 	 * we currently allow the player to get each of these as a weapon
 	 * attack.  Is this really desirable?
 	 */
-			if (uwep) {
-			    hittmp = hitval(uwep, mon);
-			    hittmp += weapon_hit_bonus(uwep);
-			    tmp += hittmp;
-			}
+			hittmp = hitval(uwep, mon);
+			hittmp += weapon_hit_bonus(uwep);
+			tmp += hittmp;
 			dhit = (tmp > (dieroll = rnd(20)) || u.uswallow);
 			/* KMH -- Don't accumulate to-hit bonuses */
 			if (uwep) tmp -= hittmp;
