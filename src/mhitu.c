@@ -2631,8 +2631,8 @@ struct attack* mattk;
 				return 0;
 			}
 			if (mtmp->mcan) {
-					if (canseemon(mtmp)) {
-				pline("%s croaks hoarsely.",Monnam(mtmp));
+				if (canseemon(mtmp)) {
+					pline("%s croaks hoarsely.",Monnam(mtmp));
 				} else {
 					You_hear("a frog nearby.");
 				}

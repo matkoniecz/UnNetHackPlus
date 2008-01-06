@@ -200,6 +200,8 @@ int fleetime;
 boolean first;
 boolean fleemsg;
 {
+	struct monst* mtmp2;
+
 	if (u.ustuck == mtmp) {
 	    if (u.uswallow)
 		expels(mtmp, mtmp->data, TRUE);
@@ -219,8 +221,25 @@ boolean fleemsg;
 		if (fleetime == 1) fleetime++;
 		mtmp->mfleetim = min(fleetime, 127);
 	    }
-	    if (!mtmp->mflee && fleemsg && canseemon(mtmp) && !mtmp->mfrozen)
-		pline("%s turns to flee!", (Monnam(mtmp)));
+	    if (!mtmp->mflee && fleemsg && !mtmp->mfrozen) {
+			 /* mindless, silent, and critters without proper voices 
+			  * won't scream, of course. */
+			 if (!rn2(8) && !mindless(mtmp->data) && !is_silent(mtmp->data) &&
+					 mtmp->data->msound != MS_BUZZ && mtmp->data->msound != MS_HISS) {
+				if (canseemon(mtmp))
+					pline("%s screams in terror!",Monnam(mtmp));
+				else 
+					You_hear("a frightened squeal!");
+				/* Check and see who was close enough to hear it */
+				for (mtmp2 = fmon; mtmp2; mtmp2 = mtmp2->nmon) {
+					if (dist2(mtmp->mx,mtmp->my,mtmp2->mx,mtmp2->my) < 19 && !rn2(3)) {
+						mtmp2->msleeping = 0;
+					}
+			   }
+			 }
+			 if (canseemon(mtmp))
+				pline("%s turns to flee!", (Monnam(mtmp)));
+		 }
 	    mtmp->mflee = 1;
 	}
 }
