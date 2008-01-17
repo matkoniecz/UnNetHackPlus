@@ -1469,7 +1469,18 @@ register struct obj   *obj;
 		Tobjnam(obj, "vanish"), s_suffix(mon_nam(mon)),
 		is_animal(u.ustuck->data) ? "entrails" : "currents");
 	} else {
-	    tmiss(obj, mon);
+		struct monst* montmp;
+		/* Oz reference: Nomes ('gnomes') are afraid of eggs
+		 * ... this is both here and in uhitm because of the odd structure
+		 * related to 'hit' and 'not hit' with the huge pile of elseifs */
+		if (obj->otyp == EGG) {
+			for (montmp = fmon; montmp; montmp = montmp->nmon) {
+				if (is_gnome(montmp->data) && m_canseeu(montmp)) {
+					monflee(montmp,rnd(6)+4,TRUE,TRUE);
+				}
+			}
+		}
+		tmiss(obj, mon);
 	}
 
 	return 0;

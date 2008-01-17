@@ -847,33 +847,38 @@ int thrown;
 			    obj->known = 1;	/* (not much point...) */
 			    useup_eggs(obj);
 			    if (!munstone(mon, TRUE))
-				minstapetrify(mon, TRUE);
+					minstapetrify(mon, TRUE);
 			    if (resists_ston(mon)) break;
-			    return (boolean) (mon->mhp > 0);
+				return (boolean) (mon->mhp > 0);
 			} else {	/* ordinary egg(s) */
+				struct monst* montmp;
 			    const char *eggp =
 				     (obj->corpsenm != NON_PM && obj->known) ?
 					      the(mons[obj->corpsenm].mname) :
 					      (cnt > 1L) ? "some" : "an";
-			    You("hit %s with %s egg%s.",
-				mon_nam(mon), eggp, plur(cnt));
+			    You("hit %s with %s egg%s.", mon_nam(mon), eggp, plur(cnt));
 			    if (touch_petrifies(mdat) && !stale_egg(obj)) {
-				pline_The("egg%s %s alive any more...",
-				      plur(cnt),
-				      (cnt == 1L) ? "isn't" : "aren't");
-				if (obj->timed) obj_stop_timers(obj);
-				obj->otyp = ROCK;
-				obj->oclass = GEM_CLASS;
-				obj->oartifact = 0;
-				obj->spe = 0;
-				obj->known = obj->dknown = obj->bknown = 0;
-				obj->owt = weight(obj);
-				if (thrown) place_object(obj, mon->mx, mon->my);
+					pline_The("egg%s %s alive any more...", plur(cnt),
+							(cnt == 1L) ? "isn't" : "aren't");
+					if (obj->timed) obj_stop_timers(obj);
+					obj->otyp = ROCK;
+					obj->oclass = GEM_CLASS;
+					obj->oartifact = 0;
+					obj->spe = 0;
+					obj->known = obj->dknown = obj->bknown = 0;
+					obj->owt = weight(obj);
+					if (thrown) place_object(obj, mon->mx, mon->my);
 			    } else {
-				pline("Splat!");
-				useup_eggs(obj);
-				exercise(A_WIS, FALSE);
+					pline("Splat!");
+					useup_eggs(obj);
+					exercise(A_WIS, FALSE);
 			    }
+				 /* Oz reference: Nomes ('gnomes') are afraid of eggs */
+				 for (montmp = fmon; montmp; montmp = montmp->nmon) {
+					 if (is_gnome(montmp->data) && m_canseeu(montmp)) {
+						 monflee(montmp,rnd(6)+4,TRUE,TRUE);
+					 }
+				 }
 			}
 			break;
 #undef useup_eggs
