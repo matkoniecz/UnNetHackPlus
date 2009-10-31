@@ -1009,8 +1009,7 @@ skip0:
 			do {
 			    x = somex(croom);  y = somey(croom);
 			} while(levl[x][y].typ != ROOM && !rn2(40));
-			if (!(IS_POOL(levl[x][y].typ) ||
-			      IS_FURNITURE(levl[x][y].typ)))
+			if (!(IS_POOL(levl[x][y].typ) || IS_FURNITURE(levl[x][y].typ)))
 			    make_engr_at(x, y, mesg, 0L, MARK);
 		    }
 		}
@@ -1018,10 +1017,12 @@ skip0:
 #ifdef REINCARNATION
 	skip_nonrogue:
 #endif
-		if(!rn2(3)) {
+		/* Boost object generation here slightly so that later when we
+		 * start encouraging players to use resources, there _are_ some */
+		if(rn2(3)) {
 		    (void) mkobj_at(0, somex(croom), somey(croom), TRUE);
 		    tryct = 0;
-		    while(!rn2(5)) {
+		    while(!rn2(4)) {
 			if(++tryct > 100) {
 			    impossible("tryct overflow4");
 			    break;
