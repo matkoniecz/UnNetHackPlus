@@ -2631,6 +2631,11 @@ struct attack* mattk;
 			if (m_canseeu(mtmp) && u.usleep) {
 				return 0;
 			}
+			/* Only do this when we're _close_ to the player */
+			if (distu(mtmp->mx,mtmp->my) > 100)
+			{
+				return 0;
+			}
 			if (mtmp->mcan) {
 				if (canseemon(mtmp)) {
 					pline("%s croaks hoarsely.",Monnam(mtmp));
