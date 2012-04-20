@@ -331,6 +331,7 @@ Helmet_on()
 		if (u.ualign.type == A_NEUTRAL)
 		    u.ualign.type = rn2(2) ? A_CHAOTIC : A_LAWFUL;
 		else u.ualign.type = -(u.ualign.type);
+		u.ualign.record = -1; /* consistent with altar conversion */
 		u.ublessed = 0; /* lose your god's protection */
 	     /* makeknown(uarmh->otyp);   -- moved below, after xname() */
 		/*FALLTHRU*/
@@ -405,6 +406,7 @@ Helmet_off()
 	    break;
 	case HELM_OF_OPPOSITE_ALIGNMENT:
 	    u.ualign.type = u.ualignbase[A_CURRENT];
+	    u.ualign.record = -1; /* consistent with altar conversion */
 	    u.ublessed = 0; /* lose the other god's protection */
 	    flags.botl = 1;
 	    break;
