@@ -1251,13 +1251,15 @@ struct obj   *obj;
 	}
 
 	if (obj->oclass == GEM_CLASS && is_unicorn(mon->data)) {
-	    if (mon->mtame) {
-		pline("%s catches and drops %s.", Monnam(mon), the(xname(obj)));
-		return 0;
-	    } else {
-		pline("%s catches %s.", Monnam(mon), the(xname(obj)));
-		return gem_accept(mon, obj);
-	    }
+		if (mon->mcanmove && !mon->msleeping) {
+			if (mon->mtame) {
+				pline("%s catches and drops %s.", Monnam(mon), the(xname(obj)));
+				return 0;
+			} else {
+				pline("%s catches %s.", Monnam(mon), the(xname(obj)));
+				return gem_accept(mon, obj);
+			}
+		}
 	}
 
 	/* don't make game unwinnable if naive player throws artifact
