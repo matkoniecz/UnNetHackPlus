@@ -24,6 +24,7 @@
 
 # /include/
 /include/autoconf.h
+/include/autoconf_paths.h
 /include/date.h
 /include/dgn_comp.h
 /include/lev_comp.h
@@ -35,22 +36,32 @@
 # /src/
 /src/*.o
 /src/unnethack
+/src/unnethack.exe
 /src/Makefile
 /src/Sysunix
+/src/Syswinnt
 /src/config.h-t
 /src/hack.h-t
 /src/vis_tab.c
 /src/monstr.c
+/src/nhraykey.dll
+/src/nhdefkey.dll
+/src/nh340key.dll
 
 # /util/
 /util/*.o
 /util/Makefile
 /util/dgn_comp
+/util/dgn_comp.exe
 /util/dgn_lex.c
 /util/dgn_yacc.c
 /util/dlb
+/util/dlb.exe
 /util/lev_comp
+/util/lev_comp.exe
 /util/lev_lex.c
 /util/lev_yacc.c
 /util/makedefs
+/util/makedefs.exe
 /util/recover
+/util/recover.exe
