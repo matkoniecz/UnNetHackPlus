@@ -1,4 +1,4 @@
-@REM  SCCS Id: @(#)nhsetup.bat  3.4     $Date: 2002/07/24 08:25:21 $
+@REM  SCCS Id: @(#)nhsetup.bat  3.4     $Date: 2006/08/09 08:15:07 $
 @REM  Copyright (c) NetHack PC Development Team 1993, 1996, 2002
 @REM  NetHack may be freely redistributed.  See license for details. 
 @REM  Win32 setup batch file, see Install.nt for details
@@ -51,6 +51,17 @@ echo           ..\..\src\Makefile.gcc-orig
 :dogcc
 copy Makefile.gcc ..\..\src\Makefile.gcc >nul
 echo MinGW Makefile copied ok.
+
+echo Copying MinGW/Cygwin Makefile - Makefile.cyg to ..\..\src\Makefile.cyg
+if NOT exist ..\..\src\Makefile.cyg goto :docyg
+copy ..\..\src\Makefile.cyg ..\..\src\Makefile.cyg-orig >nul
+echo      Your existing
+echo           ..\..\src\Makefile.cyg
+echo      has been renamed to
+echo           ..\..\src\Makefile.cyg-orig
+:docyg
+copy Makefile.cyg ..\..\src\Makefile.cyg >nul
+echo MinGW/Cygwin Makefile copied ok.
 
 :do_win
 if not exist ..\..\win\win32\nethack.dsw goto :err_win

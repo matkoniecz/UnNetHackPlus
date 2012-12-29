@@ -1,12 +1,12 @@
 == Compilation instructions for UnNetHack ==
 
 Windows user need to install an development environment as detailed in 
-the NetHack-Cygwin-MinGW HOWTO[2].
+the NetHack-Cygwin-MinGW HOWTO[2] - cygwin patch is already applied.
 
 
 On Linux and MacOSX for a single-user installation (a Linux Debian
  or Ubuntu system needs the packages gcc, flex, bison, make and
- libncurses5-dev installed):
+ libncurses5-dev installed) (untested):
 
  ./configure --prefix=$HOME/unnethack --with-owner=`id -un` --with-group=`id -gn` --enable-wizmode=`id -un` && make && make install
 
@@ -14,10 +14,10 @@ On Linux and MacOSX for a single-user installation (a Linux Debian
 
 
 On Windows for a tty build:
- ./configure --with-owner=Username --with-group=Usergroup --build=mingw32 --prefix=/opt/unnethack --without-compression --enable-tty-graphics && make && make install
+ ./configure --with-owner=Username --with-group=Usergroup --build=mingw32 --prefix=/opt/unnethack --without-compression --enable-tty-graphics  --disable-file-areas && make && make install
 
 
-Please direct bugs and questions to <bhaak@gmx.net> or post them to the
+Please direct bugs and questions to <bulwersator@gmail.com> or post them to the
 NetHack Newsgroup rec.games.roguelike.nethack[1].
 
 

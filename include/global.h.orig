@@ -86,17 +86,8 @@
  * since otherwise comparisons with signed quantities are done incorrectly
  */
 typedef schar	xchar;
-/*
- * That still doesn't explain why boolean should be signed.
- * Changing for compatibility with a MinGW header.
- * Should this be moved to config.h? Or modernized? --TC 2/8/07
- */
 #ifndef SKIP_BOOLEAN
-# ifndef __MINGW32__
 typedef xchar	boolean;		/* 0 or 1 */
-# else
-typedef uchar	boolean;		/* 0 or 1 */
-# endif
 #endif
 
 #ifndef TRUE		/* defined in some systems' native include files */
