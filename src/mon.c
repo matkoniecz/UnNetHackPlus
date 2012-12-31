@@ -1314,6 +1314,13 @@ struct monst *magr,	/* monster that is currently deciding where to move */
 	if(is_elf(md) && is_orc(ma))
 		return ALLOW_M|ALLOW_TM;
 
+	/* elves vs. kobolds */
+	if(is_elf(ma) && md->mlet==S_KOBOLD)
+		return ALLOW_M|ALLOW_TM;
+	/* and vice versa */
+	if(is_elf(md) && ma->mlet==S_KOBOLD)
+		return ALLOW_M|ALLOW_TM;
+
 	/* angels vs. demons */
 	if(ma->mlet==S_ANGEL && is_demon(md))
 		return ALLOW_M|ALLOW_TM;
