@@ -3,6 +3,8 @@
 	* Follow guidelines for color assignment (based on http://l.j-factor.com/nethack/colour.diff by "L" - Leon Arnott)
 	* Poison gas blasts leave a trail of stinking clouds (based on http://l.j-factor.com/nethack/poisoncloud.diff by "L" - Leon Arnott)
 	* Successful prayer now protects against stinking cloud (from GruntHack, by sgrunt - revision 3f358cc7401afcd39eb6193184deb9c35aa517d5)
+	* Kobolds vs elves grudge
+	* Far look during hallucination should be more amusing
 
 2012-04-01  UnNetHack 4.0.0
 	* Uncursed and blessed scrolls of magic mapping reveal secret doors
