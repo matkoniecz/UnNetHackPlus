@@ -35,10 +35,10 @@
 "UnNetHackPlus, Copyright 2009-2012"
 
 #define COPYRIGHT_BANNER_B \
-"    Based on UnNetHack, Copyright 2009-2012 and NetHack, Copyright 1985-2003 by Stichting Mathematisch"
+"   Based on UnNetHack, Copyright 2009-2012 and NetHack, Copyright 1985-2003 by"
 
 #define COPYRIGHT_BANNER_C \
-"         Centrum and M. Stephenson.  See license for details."
+"   Stichting Mathematisch Centrum and M. Stephenson.  See license for details."
 
 /*
  * If two or more successive releases have compatible data files, define
