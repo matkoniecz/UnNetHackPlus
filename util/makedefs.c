@@ -541,7 +541,7 @@ const char *build_date;
     Strcat(subbuf, " Beta");
 #endif
 
-    Sprintf(outbuf, "%s UnNetHack%s Version %s - last build %s.",
+    Sprintf(outbuf, "%s UnNetHackPlus%s Version %s - last build %s.",
 	    PORT_ID, subbuf, version_string(versbuf), build_date);
     return outbuf;
 }
@@ -832,7 +832,7 @@ static const char *build_opts[] = {
 		"record initial alignment in xlogfile",
 #endif
 		save_bones_compat_buf,
-		"basic UnNetHack features"
+		"basic UnNetHackPlus features"
 	};
 
 static const char *window_opts[] = {
@@ -889,9 +889,9 @@ do_options()
 	build_savebones_compat_string();
 	Fprintf(ofp,
 #ifdef BETA
-		"\n    UnNetHack version %s [beta]\n",
+		"\n    UnNetHackPlus version %s [beta]\n",
 #else
-		"\n    UnNetHack version %s\n",
+		"\n    UnNetHackPlus version %s\n",
 #endif
 		version_string(versbuf));
 

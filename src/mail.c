@@ -449,7 +449,7 @@ struct obj *otmp;
 {
     static char *junk[] = {
     "Please disregard previous letter.",
-    "Welcome to UnNetHack.",
+    "Welcome to UnNetHackPlus.",
 #ifdef AMIGA
     "Only Amiga makes it possible.",
     "CATS have all the answers.",
@@ -715,8 +715,7 @@ struct obj *otmp;
 #ifdef SIMPLE_MAIL
 		/* public server hints */
 		"If you need advice, #shout, somebody might mail you help.",
-		"Visit IRC channel #unnethack on freenode.",
-		"Visit http://un.nethack.nu/ for dumps of your games.",
+		"Visit http://www.reddit.com/r/nethack/",
 #endif
 	};
 

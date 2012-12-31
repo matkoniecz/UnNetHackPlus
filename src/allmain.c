@@ -581,7 +581,7 @@ newgame()
 	return;
 }
 
-/* show "welcome [back] to unnethack" message at program startup */
+/* show "welcome [back] to unnethackplus" message at program startup */
 void
 welcome(new_game)
 boolean new_game;	/* false => restoring an old game */
@@ -607,8 +607,8 @@ boolean new_game;	/* false => restoring an old game */
 	Sprintf(eos(buf), " %s", genders[currentgend].adj);
 
     role_name = (currentgend && urole.name.f) ? urole.name.f : urole.name.m;
-    pline(new_game ? "%s %s, welcome to UnNetHack!  You are a%s %s %s."
-		   : "%s %s, the%s %s %s, welcome back to UnNetHack!",
+    pline(new_game ? "%s %s, welcome to UnNetHackPlus!  You are a%s %s %s."
+		   : "%s %s, the%s %s %s, welcome back to UnNetHackPlus!",
 	  Hello((struct monst *) 0), plname, buf, urace.adj, role_name);
 #ifdef LIVELOGFILE
     /* Start live reporting */

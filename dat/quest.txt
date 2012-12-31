@@ -3522,7 +3522,7 @@ Go now!  You are banished from this place.
 %Cm - 00201
 Tutorial: WELCOME
 
-Welcome to UnNetHack! These tutorial messages will help to teach you
+Welcome to UnNetHackPlus! These tutorial messages will help to teach you
 how to play the game. (Use ? for more in-depth help on the game.)
 
 The screen generally contains (non-tutorial) messages at the top (if

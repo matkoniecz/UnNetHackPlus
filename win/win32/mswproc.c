@@ -2106,8 +2106,8 @@ logDebug(const char *fmt, ...)
 
 /* Reading and writing settings from the registry. */
 #define CATEGORYKEY         "Software"
-#define COMPANYKEY          "UnNetHack"
-#define PRODUCTKEY          "UnNetHack 4.0.0"
+#define COMPANYKEY          "UnNetHackPlus"
+#define PRODUCTKEY          "UnNetHackPlus 4.0.0"
 #define SETTINGSKEY         "Settings"
 #define MAINSHOWSTATEKEY    "MainShowState"
 #define MAINMINXKEY         "MainMinX"

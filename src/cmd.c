@@ -1773,7 +1773,7 @@ struct ext_func_tab extcmdlist[] = {
 	{"turn", "turn undead", doturn, TRUE},
 	{"twoweapon", "toggle two-weapon combat", dotwoweapon, FALSE},
 	{"untrap", "untrap something", dountrap, FALSE},
-	{"version", "list compile time options for this version of UnNetHack",
+	{"version", "list compile time options for this version of UnNetHackPlus",
 		doextversion, TRUE},
 	{"wipe", "wipe off your face", dowipe, FALSE},
 	{"xplore", "enter the explore mode", enter_explore_mode, TRUE},

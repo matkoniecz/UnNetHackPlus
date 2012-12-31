@@ -4275,7 +4275,7 @@ free_autopickup_exceptions()
 /* data for option_help() */
 static const char *opt_intro[] = {
 	"",
-	"                 UnNetHack Options Help:",
+	"                 UnNetHackPlus Options Help:",
 	"",
 #define CONFIG_SLOT 3	/* fill in next value at run-time */
 	(char *)0,

@@ -32,10 +32,10 @@
 /* #define VERSION_REVISION	1 */
 
 #define COPYRIGHT_BANNER_A \
-"UnNetHack, Copyright 2009-2012"
+"UnNetHackPlus, Copyright 2009-2012"
 
 #define COPYRIGHT_BANNER_B \
-"    Based on NetHack, Copyright 1985-2003 by Stichting Mathematisch"
+"    Based on UnNetHack, Copyright 2009-2012 and NetHack, Copyright 1985-2003 by Stichting Mathematisch"
 
 #define COPYRIGHT_BANNER_C \
 "         Centrum and M. Stephenson.  See license for details."
@@ -53,7 +53,7 @@
 
 
 /*****************************************************************************/
-/* Old vanilla ChangeLog. See top level file ChangeLog for UnNetHack */
+/* Old vanilla ChangeLog. See top level file ChangeLog for UnNetHack and UnNetHackPlus*/
 /* Version 3.4.x */
 
 /*  Patch 3, December 7, 2003

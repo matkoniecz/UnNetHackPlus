@@ -75,7 +75,7 @@ BEGIN
         MENUITEM "&About ...",                  IDM_ABOUT
         MENUITEM "&Long description of the game", IDM_HELP_LONG
         MENUITEM "List of &commands",           IDM_HELP_COMMANDS
-        MENUITEM "&History of UnNetHack",         IDM_HELP_HISTORY
+        MENUITEM "&History of UnNetHackPlus",         IDM_HELP_HISTORY
         MENUITEM "&Info on a character",        IDM_HELP_INFO_CHAR
         MENUITEM "Info on what a given &key does", IDM_HELP_INFO_KEY
         MENUITEM "List of game &options",       IDM_HELP_OPTIONS
