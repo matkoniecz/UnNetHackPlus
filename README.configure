@@ -1,4 +1,4 @@
-== Compilation instructions for UnNetHack ==
+== Compilation instructions for UnNetHackPlus ==
 
 Windows user need to install an development environment as detailed in 
 the NetHack-Cygwin-MinGW HOWTO[2] - cygwin patch is already applied.
