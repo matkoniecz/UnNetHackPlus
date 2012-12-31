@@ -452,6 +452,153 @@ bad_data_file:	impossible("'data' file in wrong format");
 /* also used by getpos hack in do_name.c */
 const char what_is_an_unknown_object[] = "an unknown object";
 
+static const char * const bogusobjects[] = {
+
+       /* Modern */
+       "polo mallet",
+       "string vest",
+       "YAFM",                             /* rgrn */
+       "applied theology textbook",        /* AFutD */
+       "handbag",
+       "onion ring",
+       "tuxedo",
+       "breath mint",
+       "potion of antacid",
+       "traffic cone",
+       "chainsaw",
+       "Klein bottle",
+       "pair of high-heeled stilettos",    /* the *other* stiletto */
+
+       /* Silly */
+       "blessed greased +5 silly object of hilarity",
+       "crystall ball bearing",
+       "left-handed iron chain",
+       "holy hand grenade",                /* Monty Python */
+       "decoder ring",
+       "amulet of huge gold chains",       /* Foo' */
+       "rubber Marduk"
+       "unicron horn",                     /* Transformers */
+       "holy grail",                       /* Monty Python */
+       "chainmail bikini",
+       "first class one-way ticket to Albuquerque", /* Weird Al */
+       "yellow spandex dragon scale mail", /* X-Men */
+
+       /* Musical Instruments */
+       "grand piano",
+       "two slightly sampled electric eels", /* Oldfield */
+       "kick drum",                        /* 303 */
+       "tooled airhorn",
+
+       /* Pop Culture */
+       "flux capacitor",                   /* BTTF */
+       "Walther PPK",                      /* Bond */
+       "hanging chad",                     /* US Election 2000 */
+       "99 red balloons",                  /* 80s */
+       "pincers of peril",                 /* Goonies */
+       "ring of schwartz",                 /* Spaceballs */
+       "signed copy of Diaspora",          /* Greg Egan */
+       "the missing evidence in the Kelner case", /* Naked Gun */
+       "blessed +9 helm of Des Lynam",     /* Bottom */
+
+       /* Roguelikes */
+       "Orb of Zot",                       /* Dungeon Crawl */
+       "head of Morgoth",                  /* Angband, sort of */
+       "hand of Vecna",                    /* SLASH'EM */
+       "eye of the beholder",              /* SLASH'EM */
+       "heavy machine gun",                /* SLASH'EM */
+       "gas grenade",                      /* SLASH'EM */
+       "gauntlets of swimming",            /* SLASH'EM */
+       "amulet versus stone",              /* SLASH'EM */
+       "potion of clairvoyance",           /* SLASH'EM */
+       "potion of invulnerability",        /* SLASH'EM */
+       "spellbook of enchant armor",       /* SLASH'EM */
+       "wand of create horde",             /* SLASH'EM */
+
+       /* Fantasy */
+       "Necronomicon",                     /* Lovecraft */
+       "pipe weed",                        /* LOTR */
+       "knife missile",                    /* Iain M. Banks */
+       "large gem",                        /* Valhalla */
+       "monster manual",                   /* D&D */
+       "spellbook called Octavo",          /* Discworld */
+       "ring of power",                    /* LOTR */
+       "lightsaber",
+       "pan-galactic gargle blaster",      /* HGttG */
+       "Silmaril",                         /* LOTR */
+       "pentagram of protection",          /* Quake */
+       "horcrux",                          /* HP */
+
+       /* Geekery */
+       "AAA chipset",                      /* Amiga */
+       "thoroughly used copy of Nethack for Dummies",
+       "named pipe",                       /* UNIX */
+       "kernel trap",
+       "copy of UnNetHackPlus 4.0.0",      /* recursion... */
+       "cursed smooth manifold",           /* Topology */
+       "vi clone",
+       "maximally subsentient emacs mode",
+       "bongard diagram",                  /* Intelligence test */
+
+       /* Historical */
+       "dead sea scroll",
+       "cat o'nine tails",
+       "pieces of eight",
+       "codpiece",
+       "straight-jacket",
+       "bayonet",
+       "iron maiden",
+       "oubliette",
+       "pestle and mortar"
+       "plowshare",
+
+       /* Mashups */
+       "potion of score doubling",
+       "scroll labelled ED AWK YACC",      /* the standard scroll */
+       "scroll labelled RTFM",
+       "scroll labelled KLAATU BARADA NIKTO", /* Evil Dead 3 */
+       "scroll of omniscience",
+       "scroll of mash keyboard",
+       "scroll of RNG taming",
+       "scroll of fungicide",
+       "helm of telemetry",
+       "blue suede boots of charisma",
+       "cubic zirconium",
+       "amulet of instadeath",
+       "amulet of bad luck",
+       "amulet of refraction",
+       "potion of rebigulation",           /* Simpsons */
+       "O-ring",
+       "wand of washing",
+       "ring named Frost Band",
+       "expensive exact replica of the Amulet of Yendor",
+       "giant beatle",
+       "lodestone",
+       "rubber chicken",                   /* c corpse */
+       "tin of Player meat",
+       "figurine of a god",
+       "tin of whoop ass",
+       "cursed -3 earring of adornment",
+       "wisdom boots",
+       "ornamental cape",
+       "acid blob skeleton",
+
+# ifdef MAIL
+       "brand new, all time lowest introductory rate special offer",
+# endif
+       "dirty rag"
+};
+
+/* Return a random bogus object name, for hallucination */
+const char *
+rndobjnam()
+{
+       int name;
+       name = rn2(SIZE(bogusobjects));
+       return bogusobjects[name];
+}
+
+
+
 STATIC_OVL int
 do_look(quick)
     boolean quick;	/* use cursor && don't search for "more info" */
@@ -469,6 +616,7 @@ do_look(quick)
     boolean need_to_look;	/* need to get explan. from glyph */
     boolean hit_trap;		/* true if found trap explanation */
     int skipped_venom;		/* non-zero if we ignored "splash of venom" */
+    int hallu_obj;		/* non-zero if found hallucinable object */
     static const char *mon_interior = "the interior of a monster";
 
     force_defsyms = FALSE;
@@ -507,6 +655,7 @@ do_look(quick)
 	need_to_look = FALSE;
 	pm = (struct permonst *)0;
 	skipped_venom = 0;
+	hallu_obj = 0;
 	found = 0;
 	out_str[0] = '\0';
 
@@ -615,6 +764,7 @@ do_look(quick)
 		    Sprintf(out_str, "%c       %s", sym, an(objexplain[i]));
 		    firstmatch = objexplain[i];
 		    found++;
+		    hallu_obj++;
 		} else {
 		    found += append_str(out_str, an(objexplain[i]));
 		}
@@ -715,7 +865,11 @@ do_look(quick)
 	 * an ambiguous explanation by something more detailed.
 	 */
 	if (from_screen) {
-	    if (found > 1 || need_to_look) {
+	    if (hallu_obj && Hallucination) {
+		char temp_buf[BUFSZ];
+		Sprintf(temp_buf, " (%s)", rndobjnam());
+		(void)strncat(out_str, temp_buf, BUFSZ-strlen(out_str)-1);
+	    } else if (found > 1 || need_to_look) {
 		char monbuf[BUFSZ];
 		char temp_buf[BUFSZ];
 
