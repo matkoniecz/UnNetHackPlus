@@ -1,3 +1,13 @@
+#temporary compilation files
+conftest.c
+confdefs.h
+confcache
+conftest.err
+conftest.er1
+conftest.l
+conftest.exe
+a.exe
+*.o
 
 # /
 /Makefile
