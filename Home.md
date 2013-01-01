@@ -1,4 +1,8 @@
-# YANI
+
+Plans for UnNetHackPlus
+
+fix completely broken alignment, maybe also better gods
+
 Eliminate tedious things
 * wraith luring by constant (low) chance for corpse
 
