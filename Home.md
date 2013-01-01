@@ -1,4 +1,3 @@
-
 Plans for UnNetHackPlus
 
 fix completely broken alignment, maybe also better gods
@@ -68,6 +67,7 @@ change sacgift to spork-type armor gift when normal one is useless (+ with 100% 
 **http://bilious.alt.org/?121
 **http://bilious.alt.org/?browse&sort=rating&page=1
 * Gargoyle weirdness
+* replace magicbane by magic marker as first gift for wizards (?)
 
 # redigest?
 *http://l.j-factor.com/nethack/colour.diff
