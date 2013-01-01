@@ -1458,6 +1458,10 @@ eatcorpse(otmp)		/* called when a corpse is selected as food */
 	    if (!retcode) consume_oeaten(otmp, 2);	/* oeaten >>= 2 */
 	    if (retcode<2 && otmp->odrained && otmp->oeaten < drainlevel(otmp))
 	        otmp->oeaten = drainlevel(otmp);
+	} else if (mnum==PM_COCKATRICE || mnum==PM_CHICKATRICE) {
+		pline("Hmm... tastes like chicken.");
+	} else if (mnum==PM_FLOATING_EYE && u.umonnum==PM_RAVEN) {
+		You("peck the eyeball with delight.");
 	} else if (!is_vampiric(youmonst.data)) {
 	    pline("%s%s %s!",
 		  !uniq ? "This " : !type_is_pname(&mons[mnum]) ? "The " : "",
