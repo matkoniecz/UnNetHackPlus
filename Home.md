@@ -1,24 +1,6 @@
 Plans for UnNetHackPlus
 
-fix completely broken alignment, maybe also better gods
-
-Eliminate tedious things
-* wraith luring by constant (low) chance for corpse
-
-Minetown non-diggable (to stop stupid dwarfs)
-
-Sporky ToD, destroy armor, graves
-
-Gradual hallu
-
-G, h in gnomish mines shouldn't walk into their own ^
-
-hallu message for angering minetown watchman
-
-better sacrifice
-
-change sacgift to spork-type armor gift when normal one is useless (+ with 100% failure rate, lamebane etc)
-
+* http://bilious.alt.org/?browse&sort=rating&page=1
 * see Linley's Dungeon Crawl on nethackwiki
 * spork Nazgul
 * spork Cloak of protection for wizards
@@ -64,10 +46,28 @@ change sacgift to spork-type armor gift when normal one is useless (+ with 100% 
 **https://github.com/sgrunt/GruntHack/commit/a06d2f7e3c734768f608df8d5a873fd583dfb394
 **https://github.com/sgrunt/GruntHack/commits/master?page=8
 * http://sporkhack.com/
-* http://bilious.alt.org/?browse&sort=rating&page=1
 * Gargoyle weirdness
 * replace magicbane by magic marker as first gift for wizards (?)
 * read everything! (http://en.wikipedia.org/wiki/List_of_S-phrases and http://en.wikipedia.org/wiki/GHS_hazard_statement for wands/!)
+fix completely broken alignment, maybe also better gods
+
+Eliminate tedious things
+* wraith luring by constant (low) chance for corpse
+
+Minetown non-diggable (to stop stupid dwarfs)
+
+Sporky ToD, destroy armor, graves
+
+Gradual hallu
+
+G, h in gnomish mines shouldn't walk into their own ^
+
+hallu message for angering minetown watchman
+
+better sacrifice
+
+change sacgift to spork-type armor gift when normal one is useless (+ with 100% failure rate, lamebane etc)
+
 
 # redigest?
 *http://l.j-factor.com/nethack/colour.diff
