@@ -14,7 +14,7 @@ Gradual hallu
 G, h in gnomish mines shouldn't walk into their own ^
 
 hallu message for angering minetown watchman
- 
+
 better sacrifice
 
 change sacgift to spork-type armor gift when normal one is useless (+ with 100% failure rate, lamebane etc)
