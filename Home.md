@@ -68,6 +68,6 @@ change sacgift to spork-type armor gift when normal one is useless (+ with 100% 
 **http://bilious.alt.org/?browse&sort=rating&page=1
 * Gargoyle weirdness
 * replace magicbane by magic marker as first gift for wizards (?)
-
+* read everything! (http://en.wikipedia.org/wiki/List_of_S-phrases and http://en.wikipedia.org/wiki/GHS_hazard_statement for wands/!)
 # redigest?
 *http://l.j-factor.com/nethack/colour.diff
