@@ -8,6 +8,7 @@ conftest.l
 conftest.exe
 a.exe
 *.o
+/sys/autoconf/depend.awk
 
 # /
 /Makefile
