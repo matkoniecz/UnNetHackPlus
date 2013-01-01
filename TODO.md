@@ -1,4 +1,4 @@
-==YANI==
+# YANI
 Eliminate tedious things
 * wraith luring by constant (low) chance for corpse
 
@@ -64,5 +64,5 @@ change sacgift to spork-type armor gift when normal one is useless (+ with 100% 
 **http://bilious.alt.org/?121
 **http://bilious.alt.org/?browse&sort=rating&page=1
 * [[Gargoyle]] weirdness
-==redigest?==
+# redigest?
 *http://l.j-factor.com/nethack/colour.diff
