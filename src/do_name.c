@@ -1226,6 +1226,23 @@ static const char * const bogusmons[] = {
 	"Gloorx Vloq", "Blork the orc",		/* Dungeon Crawl Stone Soup */
 	"unicorn pegasus kitten",		/* Wil Wheaton, John Scalzi */
 	"dwerga nethackus", "dwerga castrum",	/* Ask ASCII Ponies */
+
+	/* from UnNetHackPlus */
+	"King Krakus",			/* Polish folklore */
+	"Topielec",				/* Slavic folklore */
+	"pink oliphaunt",			/* Lord of the Rings + silliness */
+	"Amphisbaena",			/* Greek mythology */
+	"phoenix",				/* Greek mythology */
+	"catoblepas",			/* Greek mythology */
+	"phantom kangaroo",		/* urban legend */
+	"echinemon",			/* from medieval literature, "enemy of the dragon" */
+	"Ratatoskr", 			/* Norse mythology */
+	"Twrch Trwyth", 			/* Arthurian legends */
+	"Unperson", 			/* Nineteen Eighty-Four */
+	"Somebody Else's Problem",	/* Douglas Adams */
+	"Armok",				/* Dwarf Fortress */
+	"Dwarf-Eating Carp", 		/* Dwarf Fortress */
+	"werecapybara",			/* Dwarf Fortress */
 };
 
 
