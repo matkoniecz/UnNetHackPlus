@@ -1325,7 +1325,8 @@ dosacrifice()
 #endif
 #endif
 
-pline("An invisible choir sings, and you are bathed in radiance...");
+		pline("%s sings, and you are bathed in radiance...",
+			Hallucination?"The fat lady":"An invisible choir");
 		godvoice(altaralign, "Congratulations, mortal!");
 		display_nhwindow(WIN_MESSAGE, FALSE);
 verbalize("In return for thy service, I grant thee the gift of Immortality!");
