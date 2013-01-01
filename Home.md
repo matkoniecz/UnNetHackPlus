@@ -61,6 +61,7 @@ change sacgift to spork-type armor gift when normal one is useless (+ with 100% 
 **https://github.com/sgrunt/GruntHack/commit/02a48205328096f50d28e32f527c8df065f86bdc - extreme edge cases are welcome :)
 **https://github.com/sgrunt/GruntHack/commit/a06d2f7e3c734768f608df8d5a873fd583dfb394
 **https://github.com/sgrunt/GruntHack/commit/c988ad77c29a87e3059b56e32e330b51672b217a
+**https://github.com/sgrunt/GruntHack/commit/a06d2f7e3c734768f608df8d5a873fd583dfb394
 **https://github.com/sgrunt/GruntHack/commits/master?page=8
 * http://sporkhack.com/
 * http://bilious.alt.org/
