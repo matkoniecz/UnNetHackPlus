@@ -1,5 +1,6 @@
 Plans for UnNetHackPlus
 
+* http://nethackwiki.com/wiki/W343-3
 * http://bilious.alt.org/?browse&sort=rating&page=1
 * see Linley's Dungeon Crawl on nethackwiki
 * spork Nazgul
@@ -68,6 +69,9 @@ better sacrifice
 
 change sacgift to spork-type armor gift when normal one is useless (+ with 100% failure rate, lamebane etc)
 
+http://nethackwiki.com/wiki/User:SGrunt/GruntHack_vanilla_bug_tracking
+
+http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 
 # redigest?
 *http://l.j-factor.com/nethack/colour.diff
