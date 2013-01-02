@@ -1,7 +1,7 @@
 Plans for UnNetHackPlus
 
 * http://nethackwiki.com/wiki/W343-3
-* http://bilious.alt.org/?browse&sort=rating&page=1
+* http://bilious.alt.org/?browse&sort=rating&page=1 http://bilious.alt.org/?297 http://bilious.alt.org/?222 http://bilious.alt.org/?211 http://bilious.alt.org/?37 http://bilious.alt.org/?248  http://bilious.alt.org/?309 http://bilious.alt.org/?99 http://bilious.alt.org/?259 http://bilious.alt.org/?200 http://bilious.alt.org/?275 http://bilious.alt.org/?352 http://bilious.alt.org/?197 http://bilious.alt.org/?16 http://bilious.alt.org/?151 http://bilious.alt.org/?181 http://bilious.alt.org/?23
 * see Linley's Dungeon Crawl on nethackwiki
 * spork Nazgul
 * spork Cloak of protection for wizards
