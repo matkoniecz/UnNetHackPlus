@@ -339,6 +339,7 @@ dig()
 			if (IS_TREES(lev->typ)) {
 			    digtxt = "You cut down the tree.";
 			    lev->typ = ROOM;
+			    rnd_treesticks_at(dpx, dpy);
 			    if (!rn2(5)) (void) rnd_treefruit_at(dpx, dpy);
 			} else {
 			    digtxt = "You succeed in cutting away some rock.";
@@ -1128,8 +1129,11 @@ register struct monst *mtmp;
 	    }
 	} else if (IS_TREE(here->typ)) {
 	    here->typ = ROOM;
-	    if (pile && pile < 5)
-		(void) rnd_treefruit_at(mtmp->mx, mtmp->my);
+	    if (pile) {
+	        rnd_treesticks_at(mtmp->mx, mtmp->my);
+	        if (pile < 5)
+	            (void) rnd_treefruit_at(mtmp->mx, mtmp->my);
+	    }
 	} else {
 	    here->typ = CORR;
 	    if (pile && pile < 5)
