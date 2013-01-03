@@ -83,5 +83,11 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * bottlename() in potion.c return jug/pitcher/bucket/thermos/ during hallu
 * http://bilious.alt.org/?183
 * http://bilious.alt.org/?165
+* http://bilious.alt.org/?38
+* http://bilious.alt.org/?212
+* http://bilious.alt.org/?307
+* http://bilious.alt.org/?77
+* http://bilious.alt.org/?312
+
 # unable to playtest
 * http://bilious.alt.org/?178
