@@ -91,6 +91,7 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * http://bilious.alt.org/?307
 * http://bilious.alt.org/?77
 * http://bilious.alt.org/?312
+* http://bilious.alt.org/?13 - unhappy about "Eggsucker" and "Bushwacker", samurai untested
 
 # unable to playtest
 * http://bilious.alt.org/?178
