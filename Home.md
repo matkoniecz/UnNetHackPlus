@@ -82,5 +82,6 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * http://l.j-factor.com/nethack/colour.diff
 * bottlename() in potion.c return jug/pitcher/bucket/thermos/ during hallu
 * http://bilious.alt.org/?183
-#unable to playtest
+* http://bilious.alt.org/?165
+# unable to playtest
 * http://bilious.alt.org/?178
