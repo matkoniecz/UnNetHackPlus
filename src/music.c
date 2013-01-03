@@ -353,7 +353,7 @@ STATIC_OVL int
 do_improvisation(instr)
 struct obj *instr;
 {
-	int damage, do_spec = !Confusion;
+	int damage, do_spec = !Confusion && !(instr->cursed && !rn2(2));
 #if defined(MAC) || defined(AMIGA) || defined(VPIX_MUSIC) || defined (PCMUSIC)
 	struct obj itmp;
 
@@ -381,20 +381,23 @@ struct obj *instr;
 	else
 	    You("start playing %s.", the(xname(instr)));
 
+	int effective_level = u.ulevel;
+	if(instr->blessed) effective_level += 5;
+
 	switch (instr->otyp) {
 	case MAGIC_FLUTE:		/* Make monster fall asleep */
 	    if (do_spec && instr->spe > 0) {
 		consume_obj_charge(instr, TRUE);
 
 		You("produce %s.", Hallucination ? "elevator music" : "soft music");
-		put_monsters_to_sleep(u.ulevel * 5);
+		put_monsters_to_sleep(effective_level * 5);
 		exercise(A_DEX, TRUE);
 		break;
 	    } /* else FALLTHRU */
 	case WOODEN_FLUTE:		/* May charm snakes */
-	    do_spec &= (rn2(ACURR(A_DEX)) + u.ulevel > 25);
+	    do_spec &= (rn2(ACURR(A_DEX)) + effective_level > 25);
 	    pline("%s.", Tobjnam(instr, do_spec ? "trill" : "toot"));
-	    if (do_spec) charm_snakes(u.ulevel * 3);
+	    if (do_spec) charm_snakes(effective_level * 3);
 	    exercise(A_DEX, TRUE);
 	    break;
 	case FROST_HORN:		/* Idem wand of cold */
@@ -420,7 +423,7 @@ struct obj *instr;
 	    } /* else FALLTHRU */
 	case TOOLED_HORN:		/* Awaken or scare monsters */
 	    You("produce a frightful, grave sound.");
-	    awaken_monsters(u.ulevel * 30);
+	    awaken_monsters(effective_level * 30);
 	    exercise(A_WIS, FALSE);
 	    break;
 	case BUGLE:			/* Awaken & attract soldiers */
@@ -433,15 +436,15 @@ struct obj *instr;
 		consume_obj_charge(instr, TRUE);
 
 		pline("%s very attractive music.", Tobjnam(instr, "produce"));
-		charm_monsters((u.ulevel - 1) / 3 + 1);
+		charm_monsters((effective_level - 1) / 3 + 1);
 		exercise(A_DEX, TRUE);
 		break;
 	    } /* else FALLTHRU */
 	case WOODEN_HARP:		/* May calm Nymph */
-	    do_spec &= (rn2(ACURR(A_DEX)) + u.ulevel > 25);
+	    do_spec &= (rn2(ACURR(A_DEX)) + effective_level > 25);
 	    pline("%s %s.", The(xname(instr)),
 		  do_spec ? "produces a lilting melody" : "twangs");
-	    if (do_spec) calm_nymphs(u.ulevel * 3);
+	    if (do_spec) calm_nymphs(effective_level * 3);
 	    exercise(A_DEX, TRUE);
 	    break;
 	case DRUM_OF_EARTHQUAKE:	/* create several pits */
@@ -450,7 +453,7 @@ struct obj *instr;
 
 		You("produce a heavy, thunderous rolling!");
 		pline_The("entire %s is shaking around you!", get_generic_level_description(&u.uz));
-		do_earthquake((u.ulevel - 1) / 3 + 1);
+		do_earthquake((effective_level - 1) / 3 + 1);
 		/* shake up monsters in a much larger radius... */
 		awaken_monsters(ROWNO * COLNO);
 		makeknown(DRUM_OF_EARTHQUAKE);
@@ -458,7 +461,7 @@ struct obj *instr;
 	    } /* else FALLTHRU */
 	case LEATHER_DRUM:		/* Awaken monsters */
 	    You("beat a deafening row!");
-	    awaken_monsters(u.ulevel * 40);
+	    awaken_monsters(effective_level * 40);
 	    exercise(A_WIS, FALSE);
 	    break;
 	default:
