@@ -79,7 +79,8 @@ http://nethackwiki.com/wiki/User:SGrunt/GruntHack_vanilla_bug_tracking
 http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 
 # redigest?
-*http://l.j-factor.com/nethack/colour.diff
+* http://l.j-factor.com/nethack/colour.diff
 * bottlename() in potion.c return jug/pitcher/bucket/thermos/ during hallu
+* http://bilious.alt.org/?183
 #unable to playtest
 * http://bilious.alt.org/?178
