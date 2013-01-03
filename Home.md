@@ -1,7 +1,7 @@
 Plans for UnNetHackPlus
 
 * http://nethackwiki.com/wiki/W343-3
-* http://bilious.alt.org/?browse&sort=rating&page=1 http://bilious.alt.org/?297 http://bilious.alt.org/?222 http://bilious.alt.org/?211 http://bilious.alt.org/?37 http://bilious.alt.org/?248  http://bilious.alt.org/?309 http://bilious.alt.org/?99 http://bilious.alt.org/?259 http://bilious.alt.org/?200 http://bilious.alt.org/?275 http://bilious.alt.org/?352 http://bilious.alt.org/?197 http://bilious.alt.org/?16 http://bilious.alt.org/?151 http://bilious.alt.org/?181 http://bilious.alt.org/?23 http://bilious.alt.org/?101 http://bilious.alt.org/?92  http://bilious.alt.org/?359 http://bilious.alt.org/?331 ( <--- not ignoring reflection included) http://bilious.alt.org/?147 (???) http://bilious.alt.org/?193 http://bilious.alt.org/?242 http://bilious.alt.org/?433 http://bilious.alt.org/?241 (waht about sokoban, rogue quest etc?) http://bilious.alt.org/?219 http://bilious.alt.org/?161 http://bilious.alt.org/?194 http://bilious.alt.org/?265 http://bilious.alt.org/?288 http://bilious.alt.org/?35 http://bilious.alt.org/?81 http://bilious.alt.org/?227 http://bilious.alt.org/?195 http://bilious.alt.org/?86 http://bilious.alt.org/?234 http://bilious.alt.org/?33 http://bilious.alt.org/?238 http://bilious.alt.org/?246 http://bilious.alt.org/?236 http://bilious.alt.org/?115  http://bilious.alt.org/?221 http://bilious.alt.org/?143  http://bilious.alt.org/?326 http://bilious.alt.org/?410 http://bilious.alt.org/?244
+* http://bilious.alt.org/?browse&sort=rating&page=1 http://bilious.alt.org/?297 http://bilious.alt.org/?222 http://bilious.alt.org/?211 http://bilious.alt.org/?37 http://bilious.alt.org/?248  http://bilious.alt.org/?309 http://bilious.alt.org/?99 http://bilious.alt.org/?259 http://bilious.alt.org/?200 http://bilious.alt.org/?275 http://bilious.alt.org/?352 http://bilious.alt.org/?197 http://bilious.alt.org/?16 http://bilious.alt.org/?151 http://bilious.alt.org/?181 http://bilious.alt.org/?23 http://bilious.alt.org/?101 http://bilious.alt.org/?92  http://bilious.alt.org/?359 http://bilious.alt.org/?331 ( <--- not ignoring reflection included) http://bilious.alt.org/?147 (???) http://bilious.alt.org/?193 http://bilious.alt.org/?242 http://bilious.alt.org/?433  http://bilious.alt.org/?219 http://bilious.alt.org/?161 http://bilious.alt.org/?194 http://bilious.alt.org/?265 http://bilious.alt.org/?288 http://bilious.alt.org/?35 http://bilious.alt.org/?81 http://bilious.alt.org/?227 http://bilious.alt.org/?195 http://bilious.alt.org/?86 http://bilious.alt.org/?234 http://bilious.alt.org/?33 http://bilious.alt.org/?238 http://bilious.alt.org/?246 http://bilious.alt.org/?236 http://bilious.alt.org/?115  http://bilious.alt.org/?221 http://bilious.alt.org/?143  http://bilious.alt.org/?326 http://bilious.alt.org/?410 http://bilious.alt.org/?244
 
 http://bilious.alt.org/?browse&sort=rating&page=11
 
@@ -56,6 +56,7 @@ http://bilious.alt.org/?browse&sort=rating&page=11
 * http://sporkhack.com/
 * Gargoyle weirdness
 * replace magicbane by magic marker as first gift for wizards (?)
+* atop looting from asking infuriating ynq, skip for single container, show list for multiple ones (the same for eating)
 * read everything! (http://en.wikipedia.org/wiki/List_of_S-phrases and http://en.wikipedia.org/wiki/GHS_hazard_statement for wands/!)
 fix completely broken alignment, maybe also better gods
 
@@ -92,6 +93,7 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * http://bilious.alt.org/?77
 * http://bilious.alt.org/?312
 * http://bilious.alt.org/?13 - unhappy about "Eggsucker" and "Bushwacker", samurai untested
+* http://bilious.alt.org/?241 (what about sokoban, rogue quest etc?)
 
 # unable to playtest
 * http://bilious.alt.org/?178
