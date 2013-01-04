@@ -107,3 +107,30 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * http://bilious.alt.org/?259
 # unable to playtest
 * http://bilious.alt.org/?178
+
+#dump
+
+obviously evil
+stupid evil
+smug
+affably evil
+     Lawful Stupid
+    Chaotic Stupid
+    Stupid Good
+    Stupid Evil
+    Stupid Neutral 
+
+
+
+ Somebody Else's Problem 
+spellbook of detect evil
+lawyerbane
+unperson
+
+make squre blackness in wizard home quest less square
+
+There is a chest here, unlock it?
+automark level with quest teleport in overwiev
+Unlock it with an uncursed key?
+
+colourful spellbook is white (!!!!)
