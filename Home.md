@@ -79,6 +79,9 @@ http://nethackwiki.com/wiki/User:SGrunt/GruntHack_vanilla_bug_tracking
 
 http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 
+*spork shop messages
+* http://forum.rpg.net/showthread.php?466187-%28Let-s-Play!%29-Sporkhack/page2
+
 #savebreaking
 * http://bilious.alt.org/?309
 ** http://bilious.alt.org/?200 add-on
