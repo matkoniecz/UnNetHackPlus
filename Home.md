@@ -126,11 +126,14 @@ affably evil
 spellbook of detect evil
 lawyerbane
 unperson
+armok
 
 make squre blackness in wizard home quest less square
 
 There is a chest here, unlock it?
 automark level with quest teleport in overwiev
 Unlock it with an uncursed key?
+
+DF threats
 
 colourful spellbook is white (!!!!)
