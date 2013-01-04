@@ -103,7 +103,7 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * http://bilious.alt.org/?37
 * http://bilious.alt.org/?248 - save/load not persistent, not loading from settings...
 * http://bilious.alt.org/?99
-
+* http://bilious.alt.org/?259
 
 # unable to playtest
 * http://bilious.alt.org/?178
