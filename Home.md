@@ -80,8 +80,10 @@ http://nethackwiki.com/wiki/User:SGrunt/GruntHack_vanilla_bug_tracking
 http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 
 *spork shop messages
+* stinking cloud should be cyan something
 * http://forum.rpg.net/showthread.php?466187-%28Let-s-Play!%29-Sporkhack/page2
-
+* remove credit cloning, allow entering shop with digging tools
+ 
 #savebreaking
 * http://bilious.alt.org/?309
 ** http://bilious.alt.org/?200 add-on
@@ -125,13 +127,11 @@ affably evil
 
 
 
- Somebody Else's Problem 
+Somebody Else's Problem 
 spellbook of detect evil
 lawyerbane
 unperson
 armok
-
-make squre blackness in wizard home quest less square
 
 There is a chest here, unlock it?
 automark level with quest teleport in overwiev
