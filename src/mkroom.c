@@ -23,6 +23,7 @@ STATIC_DCL void FDECL(mkgarden, (struct mkroom *));
 STATIC_DCL coord * FDECL(shrine_pos, (int));
 STATIC_DCL struct permonst * NDECL(morguemon);
 STATIC_DCL struct permonst * NDECL(antholemon);
+STATIC_DCL struct permonst * NDECL(zoomon);
 STATIC_DCL struct permonst * NDECL(squadmon);
 STATIC_DCL void FDECL(save_room, (int,struct mkroom *));
 STATIC_DCL void FDECL(rest_room, (int,struct mkroom *));
@@ -277,7 +278,20 @@ struct mkroom *sroom;
 			tx = mm.x; ty = mm.y;
 		} while (occupied((xchar)tx, (xchar)ty) && --i > 0);
 	    throne_placed:
-		/* TODO: try to ensure the enthroned monster is an M2_PRINCE */
+		/* Place a king on the throne */
+		/* Allow the king to be significantly out-of-depth */
+		i = rnd(level_difficulty());
+		if (i > 9) mon = makemon(&mons[PM_OGRE_KING], tx, ty, NO_MM_FLAGS);
+		else if (i > 5) mon = makemon(&mons[PM_ELVENKING], tx, ty, NO_MM_FLAGS);
+		else if (i > 2) mon = makemon(&mons[PM_DWARF_KING], tx, ty, NO_MM_FLAGS);
+		else mon = makemon(&mons[PM_GNOME_KING], tx, ty, NO_MM_FLAGS);
+		if (mon) {
+		    mon->msleeping = 1;
+		    mon->mpeaceful = 0;
+		    set_malign(mon);
+		    /* Give him a sceptre to pound in judgment */
+		    (void) mongets(mon, MACE);
+		}
 		break;
 	    case BEEHIVE:
 		tx = sroom->lx + (sroom->hx - sroom->lx + 1)/2;
@@ -330,6 +344,7 @@ struct mkroom *sroom;
                    (type == ARMORY) ? (rn2(3) ? mkclass(S_RUSTMONST,0) :
                        &mons[PM_BROWN_PUDDING]) :
 		    (type == ANTHOLE) ? antholemon() :
+		    (type == ZOO) ? zoomon() :
 		    (struct permonst *) 0,
 		   sx, sy, NO_MM_FLAGS);
                else mon = ((struct monst *)0);
@@ -544,6 +559,18 @@ struct mkroom *croom; /* NULL == choose random room */
 	    }
 	}
     }
+}
+
+STATIC_OVL struct permonst *
+zoomon()
+{
+	struct permonst *mon;
+	int i = 0;
+
+	do
+	    mon = rndmonst();
+	while (++i < 100 && !is_animal(mon));
+	return mon;
 }
 
 STATIC_OVL void
@@ -770,11 +797,12 @@ courtmon()
 	int     i = rn2(60) + rn2(3*level_difficulty());
 	if (i > 100)		return(mkclass(S_DRAGON,0));
 	else if (i > 95)	return(mkclass(S_GIANT,0));
-	else if (i > 85)	return(mkclass(S_TROLL,0));
-	else if (i > 75)	return(mkclass(S_CENTAUR,0));
-	else if (i > 60)	return(mkclass(S_ORC,0));
-	else if (i > 45)	return(&mons[PM_BUGBEAR]);
-	else if (i > 30)	return(&mons[PM_HOBGOBLIN]);
+	else if (i > 90)	return(mkclass(S_TROLL,0));
+	else if (i > 85)	return(mkclass(S_OGRE,0));
+	else if (i > 70)	return(mkclass(S_HUMAN,0));
+	else if (i > 60)	return(mkclass(S_CENTAUR,0));
+	else if (i > 45)	return(mkclass(S_ORC,0));
+	else if (i > 30)	return(mkclass(S_HUMANOID,0));
 	else if (i > 15)	return(mkclass(S_GNOME,0));
 	else			return(mkclass(S_KOBOLD,0));
 }
