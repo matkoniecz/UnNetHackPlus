@@ -13,7 +13,6 @@ STATIC_DCL int FDECL(untrap_prob, (struct trap *ttmp));
 STATIC_DCL void FDECL(cnv_trap_obj, (int, int, struct trap *));
 STATIC_DCL void FDECL(move_into_trap, (struct trap *));
 STATIC_DCL int FDECL(try_disarm, (struct trap *,BOOLEAN_P));
-STATIC_DCL void FDECL(reward_untrap, (struct trap *, struct monst *));
 STATIC_DCL int FDECL(disarm_holdingtrap, (struct trap *));
 STATIC_DCL int FDECL(disarm_landmine, (struct trap *));
 STATIC_DCL int FDECL(disarm_squeaky_board, (struct trap *));
@@ -796,10 +795,15 @@ unsigned trflags;
 		} else
 #endif
 		{
-		    pline("%s bear trap closes on your %s!",
-			    A_Your[trap->madeby_u], body_part(FOOT));
+		    /* MRKR: beartraps wound your legs */
+		    /* from a suggestion by Sammiel in RGRN */
+		    register long side = rn2(2) ? RIGHT_SIDE : LEFT_SIDE;
+		    const char *sidestr = (side == RIGHT_SIDE) ? "right" : "left";
+		    pline("%s bear trap closes on your %s %s!",
+			    A_Your[trap->madeby_u], sidestr, body_part(FOOT));
 		    if(u.umonnum == PM_OWLBEAR || u.umonnum == PM_BUGBEAR)
 			You("howl in anger!");
+		    set_wounded_legs(side, rnd(60-ACURR(A_DEX)));
 		}
 		exercise(A_DEX, FALSE);
 		break;
@@ -3311,7 +3315,7 @@ boolean force_failure;
 	return 2;
 }
 
-STATIC_OVL void
+void
 reward_untrap(ttmp, mtmp)
 struct trap *ttmp;
 struct monst *mtmp;
@@ -3323,7 +3327,9 @@ struct monst *mtmp;
 		    mtmp->data->mlet != S_HUMAN) {
 		mtmp->mpeaceful = 1;
 		set_malign(mtmp);	/* reset alignment */
+		if (canseemon(mtmp)) {
 		pline("%s is grateful.", Monnam(mtmp));
+	    }
 	    }
 	    /* Helping someone out of a trap is a nice thing to do,
 	     * A lawful may be rewarded, but not too often.  */
