@@ -128,3 +128,4 @@ DF threats
 *  Go ahead an' run! I LIKE a movin' target ye worm livered panty waist wiggly maggot ! 
 * -Ba ba ba-ba ba you’re gonna get murdered.
 * http://ergofabulous.org/luther/insult-list.php (imp/hostile angels)
+* http://www.bay12forums.com/smf/index.php?topic=121374.new#new
