@@ -1,7 +1,7 @@
 Plans for UnNetHackPlus
 
 * http://nethackwiki.com/wiki/W343-3
-* http://bilious.alt.org/?275 http://bilious.alt.org/?352 http://bilious.alt.org/?197 http://bilious.alt.org/?16 http://bilious.alt.org/?151 http://bilious.alt.org/?181 http://bilious.alt.org/?23 http://bilious.alt.org/?101 http://bilious.alt.org/?92  http://bilious.alt.org/?359 http://bilious.alt.org/?331 ( <--- not ignoring reflection included) http://bilious.alt.org/?147 (???) http://bilious.alt.org/?193 http://bilious.alt.org/?242 http://bilious.alt.org/?433  http://bilious.alt.org/?219 http://bilious.alt.org/?161 http://bilious.alt.org/?194 http://bilious.alt.org/?265 http://bilious.alt.org/?288 http://bilious.alt.org/?35 http://bilious.alt.org/?81 http://bilious.alt.org/?227 http://bilious.alt.org/?195 http://bilious.alt.org/?86 http://bilious.alt.org/?234 http://bilious.alt.org/?33 http://bilious.alt.org/?238 http://bilious.alt.org/?246 http://bilious.alt.org/?236 http://bilious.alt.org/?115  http://bilious.alt.org/?221 http://bilious.alt.org/?143  http://bilious.alt.org/?326 http://bilious.alt.org/?410 http://bilious.alt.org/?244
+*      http://bilious.alt.org/?331 ( <--- not ignoring reflection included) http://bilious.alt.org/?147 (???) http://bilious.alt.org/?193 http://bilious.alt.org/?242 http://bilious.alt.org/?433  http://bilious.alt.org/?219 http://bilious.alt.org/?161 http://bilious.alt.org/?194 http://bilious.alt.org/?265 http://bilious.alt.org/?288 http://bilious.alt.org/?35 http://bilious.alt.org/?81 http://bilious.alt.org/?227 http://bilious.alt.org/?195 http://bilious.alt.org/?86 http://bilious.alt.org/?234 http://bilious.alt.org/?33 http://bilious.alt.org/?238 http://bilious.alt.org/?246 http://bilious.alt.org/?236 http://bilious.alt.org/?115  http://bilious.alt.org/?221 http://bilious.alt.org/?143  http://bilious.alt.org/?326 http://bilious.alt.org/?410 http://bilious.alt.org/?244
 
 http://bilious.alt.org/?browse&sort=rating&page=11
 
@@ -88,14 +88,18 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * #chat - threats, confused dwarf talks about adamantine
 #savebreaking
 * http://bilious.alt.org/?309
-* http://bilious.alt.org/?200 add-on
-
+* http://bilious.alt.org/?200 add-on to above, savefriendly
+* http://bilious.alt.org/?359 
 #savebreaking????
 * http://bilious.alt.org/?271
 
 # redigest?
 * http://l.j-factor.com/nethack/colour.diff
 * bottlename() in potion.c return jug/pitcher/bucket/thermos/ during hallu
+* http://bilious.alt.org/?352
+
+# too complicated
+* http://bilious.alt.org/?197
 * http://bilious.alt.org/?183
 * http://bilious.alt.org/?165
 * http://bilious.alt.org/?38
@@ -112,25 +116,14 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * http://bilious.alt.org/?248 - save/load not persistent, not loading from settings...
 * http://bilious.alt.org/?99
 * http://bilious.alt.org/?259
+* move bogus name generators to separate file
+* http://bilious.alt.org/?275
+* http://bilious.alt.org/?181 
+* http://bilious.alt.org/?92
+
 # unable to playtest
 * http://bilious.alt.org/?178
-
-#dump
-
-obviously evil
-stupid evil
-smug
-affably evil
-     Lawful Stupid
-    Chaotic Stupid
-    Stupid Good
-    Stupid Evil
-    Stupid Neutral 
-
-There is a chest here, unlock it?
-automark level with quest teleport in overwiev
-Unlock it with an uncursed key?
+* http://bilious.alt.org/?151
 
 DF threats
-
 colourful spellbook is white (!!!!)
