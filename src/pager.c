@@ -457,7 +457,6 @@ static const char * const bogusobjects[] = {
        /* Modern */
        "polo mallet",
        "string vest",
-       "YAFM",                             /* rgrn */
        "applied theology textbook",        /* AFutD */
        "handbag",
        "onion ring",
@@ -468,17 +467,19 @@ static const char * const bogusobjects[] = {
        "chainsaw",
        "Klein bottle",
        "pair of high-heeled stilettos",    /* the *other* stiletto */
+       "intercontinental ballistic missile",
+
+       /* injokes */
+       "YAFM",                             /* rgrn */
+       "pamphlet titled 'How to Raise the Perfect Pudding'",
+       "blessed greased +5 silly object of hilarity",
 
        /* Silly */
-       "blessed greased +5 silly object of hilarity",
        "crystall ball bearing",
-       "left-handed iron chain",
        "holy hand grenade",                /* Monty Python */
        "decoder ring",
        "amulet of huge gold chains",       /* Foo' */
-       "rubber Marduk"
        "unicron horn",                     /* Transformers */
-       "holy grail",                       /* Monty Python */
        "chainmail bikini",
        "first class one-way ticket to Albuquerque", /* Weird Al */
        "yellow spandex dragon scale mail", /* X-Men */
@@ -513,6 +514,10 @@ static const char * const bogusobjects[] = {
        "potion of invulnerability",        /* SLASH'EM */
        "spellbook of enchant armor",       /* SLASH'EM */
        "wand of create horde",             /* SLASH'EM */
+       "map of The Great Adamantine Space Elevator", /*Dwarf Fortress*/
+       "rat blood barrel",                 /*Dwarf Fortress*/
+       "fly ichor barrel",                 /*Dwarf Fortress*/
+       "cat tallow roast",                 /*Dwarf Fortress*/
 
        /* Fantasy */
        "Necronomicon",                     /* Lovecraft */
@@ -538,6 +543,7 @@ static const char * const bogusobjects[] = {
        "vi clone",
        "maximally subsentient emacs mode",
        "bongard diagram",                  /* Intelligence test */
+       "git repository",
 
        /* Historical */
        "dead sea scroll",
@@ -550,6 +556,8 @@ static const char * const bogusobjects[] = {
        "oubliette",
        "pestle and mortar"
        "plowshare",
+       "The Book of the All-Virtuous Wisdom of Joshua ben Sira",
+       "Holy Grail",                      /* Arthurian legends */
 
        /* Mashups */
        "potion of score doubling",
@@ -560,6 +568,8 @@ static const char * const bogusobjects[] = {
        "scroll of mash keyboard",
        "scroll of RNG taming",
        "scroll of fungicide",
+       "spellbook of detect foot",
+       "spellbook of detect evil",
        "helm of telemetry",
        "blue suede boots of charisma",
        "cubic zirconium",
@@ -581,6 +591,7 @@ static const char * const bogusobjects[] = {
        "wisdom boots",
        "ornamental cape",
        "acid blob skeleton",
+       "Lawyerbane",
 
 # ifdef MAIL
        "brand new, all time lowest introductory rate special offer",
