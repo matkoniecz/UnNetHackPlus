@@ -127,14 +127,6 @@ affably evil
     Stupid Evil
     Stupid Neutral 
 
-
-
-Somebody Else's Problem 
-spellbook of detect evil
-lawyerbane
-unperson
-armok
-
 There is a chest here, unlock it?
 automark level with quest teleport in overwiev
 Unlock it with an uncursed key?
