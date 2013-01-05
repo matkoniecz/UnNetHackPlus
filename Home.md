@@ -1,11 +1,11 @@
 Plans for UnNetHackPlus
 
 * http://nethackwiki.com/wiki/W343-3
-*      http://bilious.alt.org/?331 ( <--- not ignoring reflection included) http://bilious.alt.org/?147 (???) http://bilious.alt.org/?193 http://bilious.alt.org/?242 http://bilious.alt.org/?433  http://bilious.alt.org/?219 http://bilious.alt.org/?161 http://bilious.alt.org/?194 http://bilious.alt.org/?265 http://bilious.alt.org/?288 http://bilious.alt.org/?35 http://bilious.alt.org/?81 http://bilious.alt.org/?227 http://bilious.alt.org/?195 http://bilious.alt.org/?86 http://bilious.alt.org/?234 http://bilious.alt.org/?33 http://bilious.alt.org/?238 http://bilious.alt.org/?246 http://bilious.alt.org/?236 http://bilious.alt.org/?115  http://bilious.alt.org/?221 http://bilious.alt.org/?143  http://bilious.alt.org/?326 http://bilious.alt.org/?410 http://bilious.alt.org/?244
+* http://bilious.alt.org/?242 http://bilious.alt.org/?433  http://bilious.alt.org/?219 http://bilious.alt.org/?161 http://bilious.alt.org/?194 http://bilious.alt.org/?265 http://bilious.alt.org/?288 http://bilious.alt.org/?35 http://bilious.alt.org/?81 http://bilious.alt.org/?227 http://bilious.alt.org/?195 http://bilious.alt.org/?86 http://bilious.alt.org/?234 http://bilious.alt.org/?33 http://bilious.alt.org/?238 http://bilious.alt.org/?246 http://bilious.alt.org/?236 http://bilious.alt.org/?115  http://bilious.alt.org/?221 http://bilious.alt.org/?143  http://bilious.alt.org/?326 http://bilious.alt.org/?410 http://bilious.alt.org/?244
 
 http://bilious.alt.org/?browse&sort=rating&page=11
 
-
+* turn throne in perks for gold object
 * revert http://bilious.alt.org/?58 
 * see comments on http://bilious.alt.org/?216 http://bilious.alt.org/?239 http://bilious.alt.org/?51 
 * ?? http://bilious.alt.org/?375 http://bilious.alt.org/?50 http://bilious.alt.org/?338 http://bilious.alt.org/?144 
