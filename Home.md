@@ -120,4 +120,3 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * http://bilious.alt.org/?151
 
 DF threats
-colourful spellbook is white (!!!!)
