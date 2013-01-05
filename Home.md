@@ -21,7 +21,6 @@ Plans for UnNetHackPlus
 ** http://l.j-factor.com/nethack/spells.diff
 ** http://l.j-factor.com/nethack/deathdrop.diff
 ** http://l.j-factor.com/nethack/aleax.diff
-** http://l.j-factor.com/nethack/quaff.diff
 ** http://l.j-factor.com/nethack/sphere.diff
 ** http://l.j-factor.com/nethack/monring.diff (savebreaking)
 ** http://l.j-factor.com/nethack/+23patchofpatches.diff
@@ -82,6 +81,8 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * http://bilious.alt.org/?309
 * http://bilious.alt.org/?200 add-on to above, savefriendly
 * http://bilious.alt.org/?359 
+* http://l.j-factor.com/nethack/quaff.diff
+
 #savebreaking????
 * http://bilious.alt.org/?271
 
