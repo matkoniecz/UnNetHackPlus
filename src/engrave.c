@@ -83,6 +83,20 @@ static const char *random_mesg[] = {
 	"Look behind you, a Three-Headed Monkey!", /* Monkey Island */
 	"Ifnkovhgroghprm", /* Kings Quest I */
 	"Cookies are delicious delicacies", /* Mozilla Firefox */
+	/* From UnNetHackPlus */
+	"Losing is fun!", /* Dwarf Fortress */
+	"Cheer up, the worst is yet to come...",
+	"Computers let you waste time efficiently",
+	"If something cannot go wrong at all, it will go wrong in a very spectacular way.",
+	"If everything seems to be going well, you have obviously overlooked something",
+	"If anything can go wrong, it will",
+	"When things go from bad to worse, the cycle repeats.",
+	"Being dead right, won't make you any less dead.",
+	"If all else fails, hit it with a big hammer.",
+	"If many things can go wrong, they will all go wrong at the same time.",
+	"That is not dead which can eternal lie, and with strange aeons even death may die.", /* H. P. Lovecraft */
+	"Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.", /* H. P. Lovecraft */
+	"Conducts are about player skill, not about obsessive-compulsive disorder", /* TJR on RGRN */
 };
 
 char *
