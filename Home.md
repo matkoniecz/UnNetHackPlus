@@ -6,8 +6,7 @@ Plans for UnNetHackPlus
 http://bilious.alt.org/?browse&sort=rating&page=11
 
 * turn throne in perks for gold object
-* revert http://bilious.alt.org/?58 
-* see comments on http://bilious.alt.org/?216 http://bilious.alt.org/?239 http://bilious.alt.org/?51 
+* see comments on http://bilious.alt.org/?216 http://bilious.alt.org/?51 
 * ?? http://bilious.alt.org/?50  http://bilious.alt.org/?144 
 * see Linley's Dungeon Crawl on nethackwiki
 * spork Nazgul
