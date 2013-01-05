@@ -120,3 +120,11 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * http://bilious.alt.org/?151
 
 DF threats
+
+* threats
+* http://www.anim5.com/wow/generator/dwarf/index.php
+*  I can't hear ye! Scream a wee bit louder ye hairy, putrid whiny little slimey bastitch ! 
+*  Bite ME will ye? Chew on THIS ye syphilitic panty waist cockroach ! 
+*  Go ahead an' run! I LIKE a movin' target ye worm livered panty waist wiggly maggot ! 
+* -Ba ba ba-ba ba you’re gonna get murdered.
+* http://ergofabulous.org/luther/insult-list.php (imp/hostile angels)
