@@ -11,9 +11,6 @@ Plans for UnNetHackPlus
 * slash fungus
 * http://l.j-factor.com/nethack/
 ** http://l.j-factor.com/nethack/wounds.diff
-** http://l.j-factor.com/nethack/innumeracy.diff
-** http://l.j-factor.com/nethack/database.diff
-** http://l.j-factor.com/nethack/polysink.diff
 ** http://l.j-factor.com/nethack/mkroom.diff
 ** http://l.j-factor.com/nethack/glyphcolor.diff
 ** http://l.j-factor.com/nethack/wallcorr.diff
