@@ -15,7 +15,6 @@ Plans for UnNetHackPlus
 ** http://l.j-factor.com/nethack/glyphcolor.diff
 ** http://l.j-factor.com/nethack/wallcorr.diff
 ** http://l.j-factor.com/nethack/construct.diff
-** http://l.j-factor.com/nethack/poisoncloud.diff
 ** http://l.j-factor.com/nethack/bribe.diff
 ** http://l.j-factor.com/nethack/mirrorfix.diff
 ** http://l.j-factor.com/nethack/edibility.diff
