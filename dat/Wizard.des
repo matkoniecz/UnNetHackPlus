@@ -14,32 +14,37 @@ MON_GENERATION:86%, (64,"vampire bat"), (16,'B'), (16,"xorn"), (4,'W')
 GEOMETRY:center,center
 MAP
 ............................................................................
-.....................C....CC.C........................C.....................
+...........t.........C....CC.C........................C.....................
 ..........CCC.....................CCC.......................................
 ........CC........-----------.......C.C...C...C....C........................
 .......C.....---------------------...C..C..C..C.............................
-......C..C...------....\....------....C.....C...............................
+......C..C...------....\....------....C.....C.....t................t........
 ........C...||....|.........|....||.........................................
 .......C....||....|.........+....||.........................................
 .......C...||---+--.........|....|||........................................
 ......C....||...............|--S--||........................................
-...........||--+--|++----|---|..|.SS..........C......C......................
-........C..||.....|..|...|...|--|.||..CC..C.....C..........C................
-.......C...||.....|..|.--|.|.|....||.................C..C...................
-.....C......||....|..|.....|.|.--||..C..C..........C...........}}}..........
-......C.C...||....|..-----.|.....||...C.C.C..............C....}}}}}}........
+.t.........||--+--|++----|---|..|.SS..........C......C......................
+........C..||.T.T.|..|...|...|--|.||..CC..C.....C..........C..........t.....
+.......C...||....T|..|.--|.|.|....||........t........C..C...................
+.....C......||.T..|..|.....|.|.--||..C..C..........C...........}}}..........
+......C.C...||.T..|..-----.|.....||...C.C.C..............C....}}}}}}........
 .........C...------........|------....C..C.....C..CC.C......}}}}}}}}}}}.....
 .........CC..---------------------...C.C..C.....CCCCC.C.......}}}}}}}}......
 .........C........-----------..........C.C.......CCC.........}}}}}}}}}......
 ..........C.C.........................C............C...........}}}}}........
-......................CCC.C.................................................
+.................t....CCC.C.................................................
 ENDMAP
 # Dungeon Description
 REGION:(00,00,75,19),lit,"ordinary"
-REGION:(35,00,49,03),unlit,"ordinary"
-REGION:(43,12,49,16),unlit,"ordinary"
-REGION:(19,11,33,15),unlit,"ordinary",unfilled,true
+REGION:(32,00,53,01),unlit,"ordinary"
+REGION:(35,01,49,03),unlit,"ordinary"
+REGION:(40,04,51,04),unlit,"ordinary"
+REGION:(42,14,42,15),unlit,"ordinary"
+REGION:(43,12,45,15),unlit,"ordinary"
+REGION:(46,11,47,15),unlit,"ordinary"
+REGION:(47,14,49,16),unlit,"ordinary"
 REGION:(30,10,31,10),unlit,"ordinary"
+REGION:(19,11,33,15),unlit,"ordinary",unfilled,true
 # Stairs
 STAIR:(30,10),down
 # Portal arrival point
@@ -83,21 +88,24 @@ LOOP [3 + 3d3] {
   TRAP:random,random
 }
 # Monsters on siege duty.
-MONSTER: 'B',(60,09),hostile
+MONSTER: 'V',(60,09),hostile
 MONSTER: 'W',(60,10),hostile
-MONSTER: 'B',(60,11),hostile
-MONSTER: 'B',(60,12),hostile
+MONSTER: 'W',(60,11),hostile
+MONSTER: 'Z',(60,12),hostile
 MONSTER: 'i',(60,13),hostile
-MONSTER: 'B',(61,10),hostile
-MONSTER: 'B',(61,11),hostile
-MONSTER: 'B',(61,12),hostile
-MONSTER: 'B',(35,03),hostile
+MONSTER: 'M',(61,10),hostile
+MONSTER: 'Z',(61,11),hostile
+MONSTER: 'W',(61,12),hostile
+MONSTER: 'V',(35,03),hostile
 MONSTER: 'i',(35,17),hostile
-MONSTER: 'B',(36,17),hostile
-MONSTER: 'B',(34,16),hostile
+MONSTER: 'W',(36,17),hostile
+MONSTER: 'V',(34,16),hostile
 MONSTER: 'i',(34,17),hostile
 MONSTER: 'W',(67,02),hostile
-MONSTER: 'B',(10,19),hostile
+MONSTER: 'i',(10,19),hostile
+MONSTER: 'B',random,hostile
+MONSTER: 'B',random,hostile
+MONSTER: 'B',random,hostile
 
 #
 #	The "locate" level for the quest.
@@ -193,6 +201,7 @@ LOOP [8] {
 LOOP [8] {
   MONSTER:('B',"vampire bat"),random
 }
+MONSTER: 'V',random,hostile
 
 #
 #	The "goal" level for the quest.
@@ -310,6 +319,8 @@ LOOP [8] {
 LOOP [8] {
   MONSTER:('B',"vampire bat"),random
 }
+MONSTER: 'V',random,hostile
+MONSTER: 'V',random,hostile
 # Captive Monsters in the dungeon
 MONSTER:('@',"rogue"),(35,06),peaceful,"Pug"
 MONSTER:('Y',"owlbear"),(47,06),peaceful,asleep
@@ -378,6 +389,7 @@ OBJECT: random, random
 TRAP: random, random
 MONSTER: ('B', "vampire bat"), random
 }
+MONSTER: 'V',random,hostile
 
 RANDOM_CORRIDORS
 
@@ -429,5 +441,6 @@ OBJECT: random, random
 TRAP: random, random
 MONSTER: ('B', "vampire bat"), random
 }
+MONSTER: 'V',random,hostile
 
 RANDOM_CORRIDORS
