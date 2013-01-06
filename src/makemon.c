@@ -205,8 +205,11 @@ register struct monst *mtmp;
 			  w1 = rn2(2) ? BROADSWORD : LONG_SWORD;
 			  break;
 			case PM_CAPTAIN:
+			  w1 = rn2(2) ? LONG_SWORD : SILVER_SABER;
+			  break;
 			case PM_WATCH_CAPTAIN:
 			  w1 = rn2(2) ? LONG_SWORD : SILVER_SABER;
+			  mongets(mtmp, SKELETON_KEY);
 			  break;
 			default:
 			  if (!rn2(4)) w1 = DAGGER;
