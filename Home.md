@@ -23,7 +23,6 @@ Plans for UnNetHackPlus
 * Biodiversity patch
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/570505fe436ae9f29bfbd8a7d99c64dfc4ac74f5\
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/72c10822290cb4f1e6dac1230da0ebe5935455d0
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/04a696cc8e12f67cadd6618fafd2d8c2aed4ba51
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/58ff6cbb1a8b9af427353d5e17d862100ca92cae and https://github.com/Bulwersator/CopyOfSporkHack/commit/8d7660680d447251a6eb5fe1160c83c514bfad2f
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/bd4c2299a9250c30be75ec225fee9014dcd3ccbe with https://github.com/Bulwersator/CopyOfSporkHack/commit/cbda4727b965d1942e3065cd79f561af3f63040f
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/b45d6547809b891a1b30533581f43520b32666eb (caveman gruntubugfix)
