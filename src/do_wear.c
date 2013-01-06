@@ -339,12 +339,17 @@ Helmet_on()
 		/*FALLTHRU*/
 	case DUNCE_CAP:
 		if (!uarmh->cursed) {
-		    if (Blind)
+		    if (Blind) {
 			pline("%s for a moment.", Tobjnam(uarmh, "vibrate"));
-		    else
+		    } else {
 			pline("%s %s for a moment.",
 			      Tobjnam(uarmh, "glow"), hcolor(NH_BLACK));
-		    curse(uarmh);
+		    }
+		    if(uarmh->blessed) {
+			unbless(uarmh);
+		    } else {
+			curse(uarmh);
+		    }
 		}
 		flags.botl = 1;		/* reveal new alignment or INT & WIS */
 		if (Hallucination) {
