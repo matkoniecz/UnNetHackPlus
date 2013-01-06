@@ -199,6 +199,10 @@ static struct trobj Xtra_food[] = {
 	{ UNDEF_TYP, UNDEF_SPE, FOOD_CLASS, 2, 0 },
 	{ 0, 0, 0, 0, 0 }
 };
+static struct trobj Poison[] = {
+	{ POT_SICKNESS, 0, POTION_CLASS, 2, 0 },
+	{ 0, 0, 0, 0, 0 }
+};
 #ifdef TOURIST
 static struct trobj Leash[] = {
 	{ LEASH, 0, TOOL_CLASS, 1, 0 },
@@ -809,6 +813,8 @@ u_init()
 	    /* compensate for generally inferior equipment */
 	    if (!Role_if(PM_WIZARD))
 		ini_inv(Xtra_food);
+	    /* Orcs are naughty and carry poison */
+	    ini_inv(Poison);
 	    /* Orcs can recognize all orcish objects */
 	    knows_object(ORCISH_SHORT_SWORD);
 	    knows_object(ORCISH_ARROW);
