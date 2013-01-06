@@ -20,8 +20,6 @@ Plans for UnNetHackPlus
 * http://l.j-factor.com/nethack/deathdrop.diff
 * http://l.j-factor.com/nethack/aleax.diff
 * http://l.j-factor.com/nethack/sphere.diff
-* http://l.j-factor.com/nethack/c-zap.diff
-* http://l.j-factor.com/nethack/c-dunce.diff
 * Biodiversity patch
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/570505fe436ae9f29bfbd8a7d99c64dfc4ac74f5\
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/72c10822290cb4f1e6dac1230da0ebe5935455d0
