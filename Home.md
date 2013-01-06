@@ -174,7 +174,5 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 *  Bite ME will ye? Chew on THIS ye syphilitic panty waist cockroach ! 
 *  Go ahead an' run! I LIKE a movin' target ye worm livered panty waist wiggly maggot ! 
 * -Ba ba ba-ba ba you’re gonna get murdered.
-* http://ergofabulous.org/luther/insult-list.php -> maledictions
-* \dat\quest.txt
 * http://www.bay12forums.com/smf/index.php?topic=121374.new#new
 *https://github.com/Bulwersator/CopyOfSporkHack/commit/0b30fba79eed00db68d79103d2d8ecc0428b7c82
