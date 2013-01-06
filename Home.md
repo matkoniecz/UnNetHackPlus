@@ -80,7 +80,9 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * http://bilious.alt.org/?200 add-on to above, savefriendly
 * http://bilious.alt.org/?359 
 * http://l.j-factor.com/nethack/quaff.diff
-
+* nerf speed boots
+* stronger anti magic field
+* grass, not walls for nymphs
 #savebreaking????
 * http://bilious.alt.org/?271
 
