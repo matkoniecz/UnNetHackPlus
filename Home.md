@@ -20,10 +20,6 @@ Plans for UnNetHackPlus
 ** http://l.j-factor.com/nethack/deathdrop.diff
 ** http://l.j-factor.com/nethack/aleax.diff
 ** http://l.j-factor.com/nethack/sphere.diff
-** http://l.j-factor.com/nethack/monring.diff (savebreaking)
-** http://l.j-factor.com/nethack/+23patchofpatches.diff
-** http://l.j-factor.com/nethack/shuffled.diff
-** http://l.j-factor.com/nethack/cutlery.diff
 ** http://l.j-factor.com/nethack/c-zap.diff
 ** http://l.j-factor.com/nethack/c-dunce.diff
 * Biodiversity patch
@@ -75,14 +71,18 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * identify projectiles - for Rangers (techniques?)
 * autoidentify BUC of tins from BUC identified tin kit
 * #chat - threats, confused dwarf talks about adamantine
+* nerf speed boots
+* stronger anti magic field
+* grass, not walls for nymphs
+
 #savebreaking
 * http://bilious.alt.org/?309
 * http://bilious.alt.org/?200 add-on to above, savefriendly
 * http://bilious.alt.org/?359 
 * http://l.j-factor.com/nethack/quaff.diff
-* nerf speed boots
-* stronger anti magic field
-* grass, not walls for nymphs
+* http://l.j-factor.com/nethack/monring.diff (savebreaking)
+* http://l.j-factor.com/nethack/shuffled.diff
+
 #savebreaking????
 * http://bilious.alt.org/?271
 
