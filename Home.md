@@ -58,14 +58,26 @@ Plans for UnNetHackPlus
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/62788d1ac9ca8c3b902305b02c19ae2ca7d80f0a
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/70941c87feb74c63d0d4ca9bbd925ff909722117
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/719b5f56b80e73caf632f2f222ec1d99d55c46b5 (fix dipping in greasy potion bug)
-* 
-* 
-* 
-* 
-* 
-* 
-* 
-* https://github.com/Bulwersator/CopyOfSporkHack/commits/master?page=23
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/8bd8d8b90a6f95344e3c4798a9f0ae802b6a35eb with https://github.com/Bulwersator/CopyOfSporkHack/commit/1f8b526808eeae0ed6472b2b3408743822e814d1
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/4cbea28f7b10f1ca52549f1c7f19eb0ac28ebdb5
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/ea5d0c8094e0577f7054ab24447c7ae2990d49c2
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/7b77c401b7941aeb84947dd18234d1faa64cf481
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/c0872effd197e43286b0447289688c94f6bccf16 ()restore frontier()
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/e46c62936116153e5c004eaa4d214aeca42928ca
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/2be4986dd511c8d612e88d3504efeb76f0bfa178
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/904e29f56a2a8dd2a15b97cd4d96780f9021b24b
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/44f635d430d9ee183c8b2143444240b2ffc33453
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/bd80256538ba799f02b0f2e84c8792b45ee10630
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/92ea2514c68e84f30da79d471f2b5e3751471bd6
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/cbc272672e7e3e2bdb5b8969985f3b21d5cd3891
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/bd83e33f1cd7ba06919e05554903135daa28590d
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/a2a0f183104ee45ba0161a3d91fca13d4049f38d
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/0c4c2c84ea79972e28eb02979ac863dff79abdaf
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/480edfcf07dd69f4111bbd48670f212d1498d13b
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/dfb47e58a21a9e50a60245309f1c91ec53310457
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/3c861982aa93811365afaba42440f6a361c1fdb8
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/2d7f668e71867274c7aaf342f5381eeb47344441
+* https://github.com/Bulwersator/CopyOfSporkHack/commits/master?page=11
 * https://groups.google.com/forum/?fromgroups=#!msg/rec.games.roguelike.nethack/vspJEm0wwJ0/QDWJeqjn1HQJ
 * http://web.archive.org/web/20080309115104/http://www.csh.rit.edu/~topher/nethack/
 * http://www.cse.unsw.edu.au/~malcolmr/nethack/
