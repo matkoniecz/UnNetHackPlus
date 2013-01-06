@@ -1,7 +1,7 @@
 Plans for UnNetHackPlus
 
 * http://nethackwiki.com/wiki/W343-3
-* http://bilious.alt.org/?265 http://bilious.alt.org/?288 http://bilious.alt.org/?81 http://bilious.alt.org/?227 http://bilious.alt.org/?234 http://bilious.alt.org/?33 http://bilious.alt.org/?238 http://bilious.alt.org/?221
+* http://bilious.alt.org/?265 http://bilious.alt.org/?288 http://bilious.alt.org/?81 http://bilious.alt.org/?227 http://bilious.alt.org/?234 http://bilious.alt.org/?238 http://bilious.alt.org/?221
 
 * turn throne in perks for gold object
 * see comments on http://bilious.alt.org/?216 http://bilious.alt.org/?51 
