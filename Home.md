@@ -24,7 +24,6 @@ Plans for UnNetHackPlus
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/72c10822290cb4f1e6dac1230da0ebe5935455d0
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/58ff6cbb1a8b9af427353d5e17d862100ca92cae and https://github.com/Bulwersator/CopyOfSporkHack/commit/8d7660680d447251a6eb5fe1160c83c514bfad2f
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/bd4c2299a9250c30be75ec225fee9014dcd3ccbe with https://github.com/Bulwersator/CopyOfSporkHack/commit/cbda4727b965d1942e3065cd79f561af3f63040f
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/b45d6547809b891a1b30533581f43520b32666eb (caveman gruntubugfix)
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/1c3d77d54c26c509953e7a1275b6215d6e56b0e7
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/ccbf35919b50926292943f2eba3c4922bd21cb08
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/73b66b0217a8015ff1cbbce6813253b881f61009
@@ -167,10 +166,9 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * http://bilious.alt.org/?178
 * http://bilious.alt.org/?151
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/570505fe436ae9f29bfbd8a7d99c64dfc4ac74f5
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/b45d6547809b891a1b30533581f43520b32666eb (caveman gruntubugfix)
 
-DF threats
-
-* threats
+# threats
 * http://www.anim5.com/wow/generator/dwarf/index.php
 *  I can't hear ye! Scream a wee bit louder ye hairy, putrid whiny little slimey bastitch ! 
 *  Bite ME will ye? Chew on THIS ye syphilitic panty waist cockroach ! 
