@@ -1101,10 +1101,10 @@ glovecheck:		(void) rust_dmg(uarmg, "gauntlets", 1, TRUE, &youmonst);
 
 	    case ANTI_MAGIC:
 		seetrap(trap);
-		if(Antimagic) {
+		if(Antimagic && rn2(2)) {
 		    shieldeff(u.ux, u.uy);
 		    You_feel("momentarily lethargic.");
-		} else drain_en(rnd(u.ulevel) + 1);
+		} else drain_en(rnd(u.uen/2 + 3));
 		break;
 
 	    case POLY_TRAP: {
@@ -2164,6 +2164,8 @@ glovecheck:		    target = which_armor(mtmp, W_ARMG);
 			if (!rn2(21)) goto mfiretrap;
 			break;
 		case ANTI_MAGIC:
+			/* simulate energy drain by increasing cast time */
+			mtmp->mspec_used += 2;
 			break;
 
 		case LANDMINE:
