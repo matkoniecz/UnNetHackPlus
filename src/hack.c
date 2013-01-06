@@ -2386,6 +2386,7 @@ register boolean newlev;
 
 	    /* Did we just enter some other special room? */
 	    /* vault.c insists that a vault remain a VAULT,
+	     * BEEHIVEs, GARDENs have special colouration,
 	     * and temples should remain TEMPLEs,
 	     * but everything else gives a message only the first time */
 	    switch (rt) {
@@ -2395,6 +2396,7 @@ register boolean newlev;
 		case GARDEN:
 		    if (Blind) pline_The("air here smells nice and fresh!");
 		    else You("enter a beautiful garden.");
+		    rt = 0;
 		    break;
 		case SWAMP:
 		    pline("It %s rather %s down here.",
@@ -2415,7 +2417,10 @@ register boolean newlev;
 			You("have an uncanny feeling...");
 		    break;
 		case BEEHIVE:
-		    You("enter a giant beehive!");
+		    if (monstinroom(&mons[PM_QUEEN_BEE], roomno)) {
+		     You("enter a giant beehive!");
+		    }
+		    rt = 0;
 		    break;
 		case LEMUREPIT:
 		    You("enter a pit of screaming lemures!");

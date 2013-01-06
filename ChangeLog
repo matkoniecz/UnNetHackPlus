@@ -14,6 +14,7 @@
 	* Improved Beartraps 1.0 by Malcolm Ryan ( http://bilious.alt.org/?143 )
 	* Better zoos and courtrooms by "L" (Leon Arnott) ( http://l.j-factor.com/nethack/mkroom.diff )
 	* Blessed dunce caps and helms of opposite alignment will unbless (instead of turning into cursed) when worn by a player, based on http://l.j-factor.com/nethack/c-dunce.diff (by "L" - Leon Arnott)
+	* Colours for walls and floor of special dungeon regions in TTY mode, work by "L" (Leon Arnott), slightly modified. Affects beehives, gardens, Mines, Wizard's tower, Astral Plane and altars.
 
 2012-04-01  UnNetHack 4.0.0
 	* Uncursed and blessed scrolls of magic mapping reveal secret doors
