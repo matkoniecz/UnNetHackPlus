@@ -25,18 +25,17 @@ Plans for UnNetHackPlus
 * Biodiversity patch
 * https://groups.google.com/forum/?fromgroups=#!msg/rec.games.roguelike.nethack/vspJEm0wwJ0/QDWJeqjn1HQJ
 * http://web.archive.org/web/20080309115104/http://www.csh.rit.edu/~topher/nethack/
-* http://web.archive.org/web/20091027011212/http://zindorsky.kundor.org/
 * http://www.cse.unsw.edu.au/~malcolmr/nethack/
 * http://nh.gmuf.com
 * https://github.com/DanielT/NitroHack/commits/master
 * http://nethackwiki.com/wiki/NetHack_4
 * https://github.com/sgrunt/GruntHack/commits/master
-**https://github.com/sgrunt/GruntHack/commit/71c688fd496defd0da54a9fa8325700a4527ad6a (entire version lumped in one commit :( )
-**https://github.com/sgrunt/GruntHack/commit/14e47648e676e57d9e07bb17d4fea217fc5d88d3 (...)
-**https://github.com/sgrunt/GruntHack/commit/02a48205328096f50d28e32f527c8df065f86bdc - extreme edge cases are welcome :)
-**https://github.com/sgrunt/GruntHack/commit/c988ad77c29a87e3059b56e32e330b51672b217a
-**https://github.com/sgrunt/GruntHack/commit/a06d2f7e3c734768f608df8d5a873fd583dfb394
-**https://github.com/sgrunt/GruntHack/commits/master?page=8
+*https://github.com/sgrunt/GruntHack/commit/71c688fd496defd0da54a9fa8325700a4527ad6a (entire version lumped in one commit :( )
+*https://github.com/sgrunt/GruntHack/commit/14e47648e676e57d9e07bb17d4fea217fc5d88d3 (...)
+*https://github.com/sgrunt/GruntHack/commit/02a48205328096f50d28e32f527c8df065f86bdc - extreme edge cases are welcome :)
+*https://github.com/sgrunt/GruntHack/commit/c988ad77c29a87e3059b56e32e330b51672b217a
+*https://github.com/sgrunt/GruntHack/commit/a06d2f7e3c734768f608df8d5a873fd583dfb394
+*https://github.com/sgrunt/GruntHack/commits/master?page=8
 * http://sporkhack.com/
 * Gargoyle weirdness
 * replace magicbane by magic marker as first gift for wizards (?)
