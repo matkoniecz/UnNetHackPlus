@@ -17,6 +17,7 @@
 	* Rooms on nymph level are now gardens
 	* Anti-magic field should be now noticeable + it will affect monsters (from Sporkhack)
 	* Orcs start with sickness potion (from Sporkhack - https://github.com/Bulwersator/CopyOfSporkHack/commit/04a696cc8e12f67cadd6618fafd2d8c2aed4ba51 )
+	* Base bribe is higher for soldiers but no longer based on visible gold, it is now possible to bribe watch, work by "L" (Leon Arnott), slightly modified ( http://l.j-factor.com/nethack/bribe.diff ).
 
 2012-04-01  UnNetHack 4.0.0
 	* Uncursed and blessed scrolls of magic mapping reveal secret doors

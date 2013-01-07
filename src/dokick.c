@@ -335,21 +335,25 @@ register struct obj *gold;
 
 		    if (rn2(3)) {
 			if (mtmp->data == &mons[PM_SOLDIER])
-			   goldreqd = 100L;
+			   goldreqd = 200L;
 			else if (mtmp->data == &mons[PM_SERGEANT])
-			   goldreqd = 250L;
-			else if (mtmp->data == &mons[PM_LIEUTENANT])
 			   goldreqd = 500L;
+			else if (mtmp->data == &mons[PM_LIEUTENANT])
+			   goldreqd = 1000L;
 			else if (mtmp->data == &mons[PM_CAPTAIN])
-			   goldreqd = 750L;
+			   goldreqd = 1500L;
+			/* watchmen's wages are less than that of soldiers. */
+			/* bribery is 90% of soldiers/lieutenants' requirement. */
+			else if (mtmp->data == &mons[PM_WATCHMAN])
+				goldreqd = 180L;
+			else if (mtmp->data == &mons[PM_WATCH_CAPTAIN])
+				goldreqd = 900L;
 
 			if (goldreqd) {
 #ifndef GOLDOBJ
-			   if (gold->quan > goldreqd +
-				(u.ugold + u.ulevel*rn2(5))/ACURR(A_CHA))
+			   if (gold->quan > goldreqd)
 #else
-			   if (value > goldreqd +
-				(money_cnt(invent) + u.ulevel*rn2(5))/ACURR(A_CHA))
+			   if (value > goldreqd)
 #endif
 			    mtmp->mpeaceful = TRUE;
 			}
