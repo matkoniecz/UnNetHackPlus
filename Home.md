@@ -13,7 +13,6 @@ Plans for UnNetHackPlus
 * http://l.j-factor.com/nethack/wounds.diff
 * http://l.j-factor.com/nethack/wallcorr.diff
 * http://l.j-factor.com/nethack/construct.diff
-* http://l.j-factor.com/nethack/bribe.diff
 * http://l.j-factor.com/nethack/mirrorfix.diff
 * http://l.j-factor.com/nethack/edibility.diff
 * http://l.j-factor.com/nethack/spells.diff
