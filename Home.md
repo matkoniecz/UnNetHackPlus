@@ -8,7 +8,7 @@ Plans for UnNetHackPlus
 * see Linley's Dungeon Crawl on nethackwiki
 * spork Cloak of protection for wizards
 * slash fungus
-* Stun_resistance from spork - see 
+* Stun_resistance from spork - see https://github.com/Bulwersator/UnNetHackPlus/commit/fbd8a7ee603223176d3d3e1b65fecfbb2000f082
 * nethackwiki.com/wiki/Stunned#cite_note-1 - wtf?
 * http://l.j-factor.com/nethack/
 * http://l.j-factor.com/nethack/wounds.diff
