@@ -23,8 +23,6 @@ Plans for UnNetHackPlus
 * Biodiversity patch
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/58ff6cbb1a8b9af427353d5e17d862100ca92cae and https://github.com/Bulwersator/CopyOfSporkHack/commit/8d7660680d447251a6eb5fe1160c83c514bfad2f
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/bd4c2299a9250c30be75ec225fee9014dcd3ccbe with https://github.com/Bulwersator/CopyOfSporkHack/commit/cbda4727b965d1942e3065cd79f561af3f63040f
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/1c3d77d54c26c509953e7a1275b6215d6e56b0e7
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/ccbf35919b50926292943f2eba3c4922bd21cb08
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/73b66b0217a8015ff1cbbce6813253b881f61009
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/9254a4770a1f49fc6ccf1029212fe1b2c087c8ef https://github.com/Bulwersator/CopyOfSporkHack/commit/68ad70c6b002d4d4af54b85e495c8ca6be3ed5b0 https://github.com/Bulwersator/CopyOfSporkHack/commit/0c88374443b69d29241888ad7354fff4291b3848
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/11dec2a485b7319773840e6a0d76d239e0f0e1ab
@@ -34,8 +32,6 @@ Plans for UnNetHackPlus
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/2f07b8fa79b44951f3be96d88d5fcb40c2834da1
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/2a248d08bfe4bd0a38350ffd8b1efd0240df71b2
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/ef7e3277b9f61d6c9fb96ce9a83e22061d5f487d
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/70fca75e0d5064d501899b5a5d2069e082f0c966
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/1f5a8441be478d7557bc07cfe28004ac76ffa527
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/bed5b8fd8e9a8ec000561940a8234ab0ed66ecde and https://github.com/Bulwersator/CopyOfSporkHack/commit/4b9c10287ffa26a6a03483f4537454b0df7b775b
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/094ddfac1a648a07d5ed291ffc1b37803ad065f4 - reduces shkp yelling
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/89da6aa267318fa206e21a5531b9b70e70ba7943
