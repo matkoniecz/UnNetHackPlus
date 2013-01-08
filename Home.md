@@ -6,9 +6,10 @@ Plans for UnNetHackPlus
 * turn throne in perks for gold object
 * see comments on http://bilious.alt.org/?216 http://bilious.alt.org/?51 
 * see Linley's Dungeon Crawl on nethackwiki
-* spork Nazgul - https://github.com/Bulwersator/CopyOfSporkHack/commit/a47142cd447267a1f5e9b2092c29d51433c060e7
 * spork Cloak of protection for wizards
 * slash fungus
+* Stun_resistance from spork - see 
+* nethackwiki.com/wiki/Stunned#cite_note-1 - wtf?
 * http://l.j-factor.com/nethack/
 * http://l.j-factor.com/nethack/wounds.diff
 * http://l.j-factor.com/nethack/wallcorr.diff
