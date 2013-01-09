@@ -43,7 +43,6 @@ Plans for UnNetHackPlus
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/ea5d0c8094e0577f7054ab24447c7ae2990d49c2
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/7b77c401b7941aeb84947dd18234d1faa64cf481
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/c0872effd197e43286b0447289688c94f6bccf16 (restore frontier)
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/e46c62936116153e5c004eaa4d214aeca42928ca -  Add more random gravestone epitaphs 
 * too many candles, see UnNethack 3.6 release thread on rgrn
 * surface function in engrave.c - cover gardens and beehives.
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/2be4986dd511c8d612e88d3504efeb76f0bfa178
