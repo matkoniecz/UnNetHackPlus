@@ -6,8 +6,6 @@ Plans for UnNetHackPlus
 * turn throne in perks for gold object
 * see comments on http://bilious.alt.org/?216 http://bilious.alt.org/?51 
 * see Linley's Dungeon Crawl on nethackwiki
-* spork Cloak of protection for wizards
-* slash fungus
 * Stun_resistance from spork - see https://github.com/Bulwersator/UnNetHackPlus/commit/fbd8a7ee603223176d3d3e1b65fecfbb2000f082
 * nethackwiki.com/wiki/Stunned#cite_note-1 - wtf?
 * http://l.j-factor.com/nethack/
@@ -19,11 +17,8 @@ Plans for UnNetHackPlus
 * http://l.j-factor.com/nethack/spells.diff
 * http://l.j-factor.com/nethack/deathdrop.diff
 * http://l.j-factor.com/nethack/aleax.diff
-* http://l.j-factor.com/nethack/sphere.diff
 * Biodiversity patch
-*warning on Cthulhu, 6 - terror, even without normal warning source (green?)
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/58ff6cbb1a8b9af427353d5e17d862100ca92cae and https://github.com/Bulwersator/CopyOfSporkHack/commit/8d7660680d447251a6eb5fe1160c83c514bfad2f
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/bd4c2299a9250c30be75ec225fee9014dcd3ccbe with https://github.com/Bulwersator/CopyOfSporkHack/commit/cbda4727b965d1942e3065cd79f561af3f63040f
+* warning on Cthulhu, 6 - terror, even without normal warning source (green?)
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/9254a4770a1f49fc6ccf1029212fe1b2c087c8ef https://github.com/Bulwersator/CopyOfSporkHack/commit/68ad70c6b002d4d4af54b85e495c8ca6be3ed5b0 https://github.com/Bulwersator/CopyOfSporkHack/commit/0c88374443b69d29241888ad7354fff4291b3848
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/11dec2a485b7319773840e6a0d76d239e0f0e1ab
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/6d08cf5c7272d95b838fc3aefb616a773af24829
@@ -155,6 +150,10 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * http://bilious.alt.org/?92
 * http://bilious.alt.org/?433
 * http://bilious.alt.org/?194
+* http://l.j-factor.com/nethack/sphere.diff -     Flaming, freezing and shocking spheres now make nine-square explosions when they attack.     Blessed scrolls of fire do not harm the reader, and do more damage.     The source code for explode.c is substantially improved.
+* slash fungus growth
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/58ff6cbb1a8b9af427353d5e17d862100ca92cae and https://github.com/Bulwersator/CopyOfSporkHack/commit/8d7660680d447251a6eb5fe1160c83c514bfad2f - rusty tools can break
+* in dothrow.c consume food in "not tmiss(), which angers non-tame monsters" case with proper message
 
 # no playtesting
 * http://bilious.alt.org/?178
