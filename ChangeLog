@@ -20,6 +20,7 @@
 	* Base bribe is higher for soldiers but no longer based on visible gold, it is now possible to bribe watch, work by "L" (Leon Arnott), slightly modified ( http://l.j-factor.com/nethack/bribe.diff ).
 	* Nazgul scream attack added (from Sporkhack - https://github.com/Bulwersator/CopyOfSporkHack/commit/a47142cd447267a1f5e9b2092c29d51433c060e7 )
 	* Wizards may start with cloak of protection/invisibility/displacement/robe/oilskin cloak/alchemy smock (based on idea from Sporkhack - https://github.com/Bulwersator/CopyOfSporkHack/commit/ef7e3277b9f61d6c9fb96ce9a83e22061d5f487d )
+	* Now anybody may tame monkeys and apes with bananas (from Sporkhack - https://github.com/Bulwersator/CopyOfSporkHack/commit/bd4c2299a9250c30be75ec225fee9014dcd3ccbe and https://github.com/Bulwersator/CopyOfSporkHack/commit/cbda4727b965d1942e3065cd79f561af3f63040f )
 
 2012-04-01  UnNetHack 4.0.0
 	* Uncursed and blessed scrolls of magic mapping reveal secret doors

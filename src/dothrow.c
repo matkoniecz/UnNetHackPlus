@@ -1432,9 +1432,7 @@ register struct obj   *obj;
 	} else if ((befriend_with_obj(mon->data, obj)) ||
 	           (mon->mtame && dogfood(mon, obj) <= ACCFOOD) ||
 	           (obj->oclass == FOOD_CLASS &&
-	           ((Role_if(PM_ROGUE) &&
-	              mon->data == &mons[PM_MONKEY] &&
-	             (obj->otyp == BANANA || !rn2(2))) ||
+	           (
 # ifdef TOURIST
 	            (Role_if(PM_TOURIST) && 
 	             (mon->data == &mons[PM_CROCODILE] ||

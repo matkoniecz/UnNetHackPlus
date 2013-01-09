@@ -214,8 +214,9 @@
 				   ((ptr)->mlet != S_GOLEM || (ptr) == &mons[PM_FLESH_GOLEM]) && \
 				   (!is_undead(ptr) || is_vampire(ptr)))
 
-#define befriend_with_obj(ptr, obj) ((obj)->oclass == FOOD_CLASS && \
-				     is_domestic(ptr))
+#define befriend_with_obj(ptr, obj) (((obj)->oclass == FOOD_CLASS && \
+				     is_domestic(ptr)) || \
+				((ptr) == &mons[PM_MONKEY] || (ptr) == &mons[PM_APE]))
 
 #define is_rockbreaker(ptr)	(((ptr)->msound == MS_LEADER || \
 				 ((ptr) == &mons[PM_BLACK_MARKETEER]) || \
