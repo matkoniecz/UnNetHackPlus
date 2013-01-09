@@ -21,17 +21,14 @@ Plans for UnNetHackPlus
 * http://l.j-factor.com/nethack/aleax.diff
 * http://l.j-factor.com/nethack/sphere.diff
 * Biodiversity patch
+*warning on Cthulhu, 6 - terror, even without normal warning source (green?)
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/58ff6cbb1a8b9af427353d5e17d862100ca92cae and https://github.com/Bulwersator/CopyOfSporkHack/commit/8d7660680d447251a6eb5fe1160c83c514bfad2f
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/bd4c2299a9250c30be75ec225fee9014dcd3ccbe with https://github.com/Bulwersator/CopyOfSporkHack/commit/cbda4727b965d1942e3065cd79f561af3f63040f
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/73b66b0217a8015ff1cbbce6813253b881f61009
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/9254a4770a1f49fc6ccf1029212fe1b2c087c8ef https://github.com/Bulwersator/CopyOfSporkHack/commit/68ad70c6b002d4d4af54b85e495c8ca6be3ed5b0 https://github.com/Bulwersator/CopyOfSporkHack/commit/0c88374443b69d29241888ad7354fff4291b3848
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/11dec2a485b7319773840e6a0d76d239e0f0e1ab
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/6d08cf5c7272d95b838fc3aefb616a773af24829
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/6aa95dc3069c3392e3ddb5ad35042e1a78187e57
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/dabb85b77535dff9825d56f77ffbc1d19494dcb3
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/2f07b8fa79b44951f3be96d88d5fcb40c2834da1
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/2a248d08bfe4bd0a38350ffd8b1efd0240df71b2
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/ef7e3277b9f61d6c9fb96ce9a83e22061d5f487d
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/bed5b8fd8e9a8ec000561940a8234ab0ed66ecde and https://github.com/Bulwersator/CopyOfSporkHack/commit/4b9c10287ffa26a6a03483f4537454b0df7b775b
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/094ddfac1a648a07d5ed291ffc1b37803ad065f4 - reduces shkp yelling
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/89da6aa267318fa206e21a5531b9b70e70ba7943
@@ -50,8 +47,10 @@ Plans for UnNetHackPlus
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/4cbea28f7b10f1ca52549f1c7f19eb0ac28ebdb5
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/ea5d0c8094e0577f7054ab24447c7ae2990d49c2
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/7b77c401b7941aeb84947dd18234d1faa64cf481
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/c0872effd197e43286b0447289688c94f6bccf16 ()restore frontier()
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/e46c62936116153e5c004eaa4d214aeca42928ca
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/c0872effd197e43286b0447289688c94f6bccf16 (restore frontier)
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/e46c62936116153e5c004eaa4d214aeca42928ca -  Add more random gravestone epitaphs 
+* too many candles, see UnNethack 3.6 release thread on rgrn
+* surface function in engrave.c - cover gardens and beehives.
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/2be4986dd511c8d612e88d3504efeb76f0bfa178
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/904e29f56a2a8dd2a15b97cd4d96780f9021b24b
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/44f635d430d9ee183c8b2143444240b2ffc33453
@@ -163,6 +162,8 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/570505fe436ae9f29bfbd8a7d99c64dfc4ac74f5
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/b45d6547809b891a1b30533581f43520b32666eb (caveman gruntubugfix)
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/72c10822290cb4f1e6dac1230da0ebe5935455d0 - nerf Elbereth
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/dabb85b77535dff9825d56f77ffbc1d19494dcb3 -  MC3 reduced to 90% 
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/73b66b0217a8015ff1cbbce6813253b881f61009 - nerf Antimagic, power up Angels
 
 # threats
 * http://www.anim5.com/wow/generator/dwarf/index.php
