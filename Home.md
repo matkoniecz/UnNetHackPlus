@@ -3,6 +3,7 @@ Plans for UnNetHackPlus
 * http://nethackwiki.com/wiki/W343-3
 * http://bilious.alt.org/?265 http://bilious.alt.org/?288 http://bilious.alt.org/?81 http://bilious.alt.org/?227 http://bilious.alt.org/?234 http://bilious.alt.org/?238 http://bilious.alt.org/?221
 
+* from NAO - new hallucinatory monster names, random engravings and T-shirt messages
 * turn throne in perks for gold object
 * see comments on http://bilious.alt.org/?216 http://bilious.alt.org/?51 
 * see Linley's Dungeon Crawl on nethackwiki
@@ -44,7 +45,6 @@ Plans for UnNetHackPlus
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/7b77c401b7941aeb84947dd18234d1faa64cf481
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/c0872effd197e43286b0447289688c94f6bccf16 (restore frontier)
 * too many candles, see UnNethack 3.6 release thread on rgrn
-* surface function in engrave.c - cover gardens and beehives.
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/2be4986dd511c8d612e88d3504efeb76f0bfa178
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/904e29f56a2a8dd2a15b97cd4d96780f9021b24b
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/44f635d430d9ee183c8b2143444240b2ffc33453
@@ -84,14 +84,12 @@ Eliminate tedious things
 
 Minetown non-diggable (to stop stupid dwarfs)
 
-Sporky ToD, destroy armor, graves
-
-Gradual hallu
+* Sporky destroy armor
+* Gradual hallu
 
 G, h in gnomish mines shouldn't walk into their own ^
 
-better sacrifice
-
+* better sacrifice
 change sacgift to spork-type armor gift when normal one is useless (+ with 100% failure rate, lamebane etc)
 
 http://nethackwiki.com/wiki/User:SGrunt/GruntHack_vanilla_bug_tracking
@@ -171,3 +169,6 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * -Ba ba ba-ba ba you’re gonna get murdered.
 * http://www.bay12forums.com/smf/index.php?topic=121374.new#new
 *https://github.com/Bulwersator/CopyOfSporkHack/commit/0b30fba79eed00db68d79103d2d8ecc0428b7c82
+
+#recheck
+* http://alt.org/nethack/naonh.php graves checked out 9 I
