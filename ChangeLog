@@ -13,7 +13,7 @@
 	* Improved Beartraps 1.0 by Malcolm Ryan ( http://bilious.alt.org/?143 )
 	* Better zoos and courtrooms by "L" (Leon Arnott) ( http://l.j-factor.com/nethack/mkroom.diff )
 	* Blessed dunce caps and helms of opposite alignment will unbless (instead of turning into cursed) when worn by a player, based on http://l.j-factor.com/nethack/c-dunce.diff (by "L" - Leon Arnott)
-	* Colours for walls and floor of special dungeon regions in TTY mode, work by "L" (Leon Arnott), slightly modified. Affects beehives, gardens, Mines, Wizard's tower, Astral Plane and altars.
+	* Colours for walls and floor of special dungeon regions in TTY mode, work by "L" (Leon Arnott), slightly modified. Affects beehives, gardens, Mines, Wizard's tower, Astral Plane and altars ( http://l.j-factor.com/nethack/glyphcolor.diff ).
 	* Rooms on nymph level are now gardens
 	* Anti-magic field should be now noticeable + it will affect monsters (from Sporkhack)
 	* Orcs start with sickness potion (from Sporkhack - https://github.com/Bulwersator/CopyOfSporkHack/commit/04a696cc8e12f67cadd6618fafd2d8c2aed4ba51 )
