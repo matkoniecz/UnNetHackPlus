@@ -110,6 +110,7 @@ static struct trobj Ranger[] = {
 #define RAN_BOW			1
 #define RAN_TWO_ARROWS	2
 #define RAN_ZERO_ARROWS	3
+#define RAN_CLOAK 4
 	{ DAGGER, 1, WEAPON_CLASS, 1, UNDEF_BLESS },
 	{ BOW, 1, WEAPON_CLASS, 1, UNDEF_BLESS },
 	{ ARROW, 2, WEAPON_CLASS, 50, UNDEF_BLESS },
@@ -158,10 +159,11 @@ static struct trobj Valkyrie[] = {
 	{ 0, 0, 0, 0, 0 }
 };
 static struct trobj Wizard[] = {
+#define W_CLOAK		1
 #define W_MULTSTART	2
 #define W_MULTEND	6
 	{ QUARTERSTAFF, 1, WEAPON_CLASS, 1, 1 },
-	{ CLOAK_OF_MAGIC_RESISTANCE, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
+	{ UNDEF_TYP, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
 	{ UNDEF_TYP, UNDEF_SPE, WAND_CLASS, 1, UNDEF_BLESS },
 	{ UNDEF_TYP, UNDEF_SPE, RING_CLASS, 2, UNDEF_BLESS },
 	{ UNDEF_TYP, UNDEF_SPE, POTION_CLASS, 3, UNDEF_BLESS },
@@ -224,8 +226,7 @@ static struct trobj Money[] = {
 };
 #endif
 
-/* race-based substitutions for initial inventory;
-   the weaker cloak for elven rangers is intentional--they shoot better */
+/* race-based substitutions for initial inventory; */
 static struct inv_sub { short race_pm, item_otyp, subs_otyp; } inv_subs[] = {
     { PM_ELF,	DAGGER,			ELVEN_DAGGER	      },
     { PM_ELF,	SPEAR,			ELVEN_SPEAR	      },
@@ -234,7 +235,6 @@ static struct inv_sub { short race_pm, item_otyp, subs_otyp; } inv_subs[] = {
     { PM_ELF,	ARROW,			ELVEN_ARROW	      },
     { PM_ELF,	HELMET,			ELVEN_LEATHER_HELM    },
  /* { PM_ELF,	SMALL_SHIELD,		ELVEN_SHIELD	      }, */
-    { PM_ELF,	CLOAK_OF_DISPLACEMENT,	ELVEN_CLOAK	      },
     { PM_ELF,	CRAM_RATION,		LEMBAS_WAFER	      },
     { PM_ORC,	DAGGER,			ORCISH_DAGGER	      },
     { PM_ORC,	SPEAR,			ORCISH_SPEAR	      },
@@ -701,8 +701,10 @@ u_init()
 	case PM_RANGER:
 		Ranger[RAN_TWO_ARROWS].trquan = rn1(10, 50);
 		Ranger[RAN_ZERO_ARROWS].trquan = rn1(10, 30);
+		if(urace.malenum == PM_ELF) Ranger[RAN_CLOAK].trotyp = ELVEN_CLOAK; //they shoot better
 		ini_inv(Ranger);
 		skill_init(Skill_Ran);
+
 		break;
 	case PM_ROGUE:
 		Rogue[R_DAGGERS].trquan = rn1(10, 6);
@@ -748,6 +750,13 @@ u_init()
 		skill_init(Skill_V);
 		break;
 	case PM_WIZARD:
+		Wizard[W_CLOAK].trotyp = CLOAK_OF_MAGIC_RESISTANCE;
+		if(!rn2(12)) Wizard[W_CLOAK].trotyp = CLOAK_OF_PROTECTION;
+		if(!rn2(12)) Wizard[W_CLOAK].trotyp = CLOAK_OF_DISPLACEMENT;
+		if(!rn2(12)) Wizard[W_CLOAK].trotyp = CLOAK_OF_INVISIBILITY;
+		if(!rn2(12)) Wizard[W_CLOAK].trotyp = OILSKIN_CLOAK;
+		if(!rn2(12)) Wizard[W_CLOAK].trotyp = ROBE;
+		if(!rn2(12)) Wizard[W_CLOAK].trotyp = ALCHEMY_SMOCK;
 		ini_inv(Wizard);
 		if(!rn2(5)) ini_inv(Magicmarker);
 		if(!rn2(5)) ini_inv(Blindfold);
