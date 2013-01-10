@@ -1122,6 +1122,16 @@ static const char * const bogusmons[] = {
 	"wight supremacist",
 	"Magical Trevor",
 	"first category perpetual motion device",
+	"ghoti",
+	"regex engine",
+	"netsplit",
+	"peer",
+	"pigasus",
+	"Semigorgon",
+	"meeple",
+	"conventioneer",
+	"terracotta warrior",
+	"large microbat", "small megabat",
 
 	/* soundex and typos of monsters */
 	"gloating eye",
@@ -1192,6 +1202,7 @@ static const char * const bogusmons[] = {
 	"vampire mace",
 	"verbal jabberwock",
 	"water lemon",
+	"water melon",
 	"winged grizzly",
 	"yellow wight",
 
