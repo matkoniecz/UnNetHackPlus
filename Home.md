@@ -44,11 +44,7 @@ Plans for UnNetHackPlus
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/7b77c401b7941aeb84947dd18234d1faa64cf481
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/c0872effd197e43286b0447289688c94f6bccf16 (restore frontier)
 * too many candles, see UnNethack 3.6 release thread on rgrn
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/2be4986dd511c8d612e88d3504efeb76f0bfa178
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/904e29f56a2a8dd2a15b97cd4d96780f9021b24b
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/44f635d430d9ee183c8b2143444240b2ffc33453
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/bd80256538ba799f02b0f2e84c8792b45ee10630
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/92ea2514c68e84f30da79d471f2b5e3751471bd6
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/904e29f56a2a8dd2a15b97cd4d96780f9021b24b - more balanced bones
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/cbc272672e7e3e2bdb5b8969985f3b21d5cd3891
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/bd83e33f1cd7ba06919e05554903135daa28590d
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/a2a0f183104ee45ba0161a3d91fca13d4049f38d
@@ -159,6 +155,7 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/72c10822290cb4f1e6dac1230da0ebe5935455d0 - nerf Elbereth
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/dabb85b77535dff9825d56f77ffbc1d19494dcb3 -  MC3 reduced to 90% 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/73b66b0217a8015ff1cbbce6813253b881f61009 - nerf Antimagic, power up Angels
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/92ea2514c68e84f30da79d471f2b5e3751471bd6 -  Make caveman quest levels have some more variance 
 
 # threats
 * http://www.anim5.com/wow/generator/dwarf/index.php
