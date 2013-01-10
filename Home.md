@@ -3,7 +3,6 @@ Plans for UnNetHackPlus
 * http://nethackwiki.com/wiki/W343-3
 * http://bilious.alt.org/?265 http://bilious.alt.org/?288 http://bilious.alt.org/?81 http://bilious.alt.org/?227 http://bilious.alt.org/?234 http://bilious.alt.org/?238 http://bilious.alt.org/?221
 
-* from NAO - new hallucinatory monster names, random engravings and T-shirt messages
 * turn throne in perks for gold object
 * see comments on http://bilious.alt.org/?216 http://bilious.alt.org/?51 
 * see Linley's Dungeon Crawl on nethackwiki
@@ -171,4 +170,4 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 *https://github.com/Bulwersator/CopyOfSporkHack/commit/0b30fba79eed00db68d79103d2d8ecc0428b7c82
 
 #recheck
-* http://alt.org/nethack/naonh.php graves checked out 9 I
+* http://alt.org/nethack/naonh.php graves checked out 9 I - new hallucinatory monster names, random engravings, gravestones and T-shirt messages
