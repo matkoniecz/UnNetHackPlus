@@ -1254,6 +1254,7 @@ static const char * const bogusmons[] = {
 	"Armok",				/* Dwarf Fortress */
 	"Dwarf-Eating Carp", 		/* Dwarf Fortress */
 	"werecapybara",			/* Dwarf Fortress */
+	"Evil Otto", 			/* Berzerk - via GruntHack */
 };
 
 
