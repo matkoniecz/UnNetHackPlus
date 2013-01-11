@@ -26,8 +26,6 @@ Plans for UnNetHackPlus
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/104c0ed75d2e00b54ca340dcd3f60c1923b4020c
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/42f33afb5a12213e6ecaed0015a52c21ff14794b
 * search for #define CRYNUMBER 5 - shkp yelling - https://github.com/Bulwersator/CopyOfSporkHack/blob/3297b633fa0797e86b0f207f40cefa4fc0e747c1/src/shk.c
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/ee8f8bb66a5ad774a962a30376242e9dea41a6d9
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/fd39d6e162d7c9d5e8024df3301c5ff5e4c28634
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/0fb25418eecfa996588306df118b8eb5d2fa3f78
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/a7a1de62a901e7f4521a5bdd2bf4474320315d2a (? - add modified code???)
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/542d2da5e6cf7fb1ff4e4a6c1cad60b5fd7c9496
@@ -155,6 +153,8 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/92ea2514c68e84f30da79d471f2b5e3751471bd6 -  Make caveman quest levels have some more variance 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/11dec2a485b7319773840e6a0d76d239e0f0e1ab - nerf reflection
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/6d08cf5c7272d95b838fc3aefb616a773af24829 - more flee messages (wtf)
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/fd39d6e162d7c9d5e8024df3301c5ff5e4c28634 -  Poly traps may go away as monsters (and your pet) use them. 
+
 # threats
 * http://www.anim5.com/wow/generator/dwarf/index.php
 *  I can't hear ye! Scream a wee bit louder ye hairy, putrid whiny little slimey bastitch ! 
