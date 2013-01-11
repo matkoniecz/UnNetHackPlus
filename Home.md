@@ -20,11 +20,7 @@ Plans for UnNetHackPlus
 * Biodiversity patch
 * warning on Cthulhu, 6 - terror, even without normal warning source (green?)
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/9254a4770a1f49fc6ccf1029212fe1b2c087c8ef https://github.com/Bulwersator/CopyOfSporkHack/commit/68ad70c6b002d4d4af54b85e495c8ca6be3ed5b0 https://github.com/Bulwersator/CopyOfSporkHack/commit/0c88374443b69d29241888ad7354fff4291b3848
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/11dec2a485b7319773840e6a0d76d239e0f0e1ab
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/6d08cf5c7272d95b838fc3aefb616a773af24829
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/6aa95dc3069c3392e3ddb5ad35042e1a78187e57
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/2a248d08bfe4bd0a38350ffd8b1efd0240df71b2
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/bed5b8fd8e9a8ec000561940a8234ab0ed66ecde and https://github.com/Bulwersator/CopyOfSporkHack/commit/4b9c10287ffa26a6a03483f4537454b0df7b775b
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/094ddfac1a648a07d5ed291ffc1b37803ad065f4 - reduces shkp yelling
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/89da6aa267318fa206e21a5531b9b70e70ba7943
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/104c0ed75d2e00b54ca340dcd3f60c1923b4020c
@@ -146,6 +142,7 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * slash fungus growth
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/58ff6cbb1a8b9af427353d5e17d862100ca92cae and https://github.com/Bulwersator/CopyOfSporkHack/commit/8d7660680d447251a6eb5fe1160c83c514bfad2f - rusty tools can break
 * in dothrow.c consume food in "not tmiss(), which angers non-tame monsters" case with proper message
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/2a248d08bfe4bd0a38350ffd8b1efd0240df71b2 - improve monster AI
 
 # no playtesting
 * http://bilious.alt.org/?178
@@ -156,7 +153,8 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/dabb85b77535dff9825d56f77ffbc1d19494dcb3 -  MC3 reduced to 90% 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/73b66b0217a8015ff1cbbce6813253b881f61009 - nerf Antimagic, power up Angels
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/92ea2514c68e84f30da79d471f2b5e3751471bd6 -  Make caveman quest levels have some more variance 
-
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/11dec2a485b7319773840e6a0d76d239e0f0e1ab - nerf reflection
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/6d08cf5c7272d95b838fc3aefb616a773af24829 - more flee messages (wtf)
 # threats
 * http://www.anim5.com/wow/generator/dwarf/index.php
 *  I can't hear ye! Scream a wee bit louder ye hairy, putrid whiny little slimey bastitch ! 
