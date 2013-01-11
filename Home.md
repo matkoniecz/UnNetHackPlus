@@ -42,8 +42,6 @@ Plans for UnNetHackPlus
 * https://github.com/sgrunt/GruntHack/commit/71c688fd496defd0da54a9fa8325700a4527ad6a (entire version lumped in one commit :( )
 * https://github.com/sgrunt/GruntHack/commit/14e47648e676e57d9e07bb17d4fea217fc5d88d3 (...)
 * https://github.com/sgrunt/GruntHack/commit/02a48205328096f50d28e32f527c8df065f86bdc - extreme edge cases are welcome :)
-* https://github.com/sgrunt/GruntHack/commit/c988ad77c29a87e3059b56e32e330b51672b217a
-* https://github.com/sgrunt/GruntHack/commit/a06d2f7e3c734768f608df8d5a873fd583dfb394
 * https://github.com/sgrunt/GruntHack/commits/master?page=8
 * http://sporkhack.com/
 * Gargoyle weirdness
@@ -143,7 +141,7 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/fd39d6e162d7c9d5e8024df3301c5ff5e4c28634 -  Poly traps may go away as monsters (and your pet) use them. 
 * http://l.j-factor.com/nethack/spells.diff
 * http://l.j-factor.com/nethack/deathdrop.diff
-
+* https://github.com/sgrunt/GruntHack/commit/a06d2f7e3c734768f608df8d5a873fd583dfb394
 
 #recheck
 * http://alt.org/nethack/naonh.php graves checked out 9 I - new hallucinatory monster names, random engravings, gravestones and T-shirt messages
