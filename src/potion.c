@@ -1817,6 +1817,7 @@ struct obj *potion, *obj;
 	const char *tmp;
 	short mixture;
 	char Your_buf[BUFSZ];
+	const char* potion_descr;
 
 	potion->in_use = TRUE;		/* assume it will be used up */
 	if(potion->otyp == POT_WATER) {
@@ -2206,6 +2207,23 @@ struct obj *potion, *obj;
 		update_inventory();
 		return(1);
 	}
+
+	/* If a greasy potion wasn't something else, grease the dipped */
+	potion_descr = OBJ_DESCR(objects[potion->otyp]);
+	if (!strcmp(potion_descr,"greasy")) {
+		/* Drop through to "...Interesting" if you're dipping already greasy stuff */
+		if (!obj->greased) {
+			Your("%s %s covered with a thick layer of grease.",xname(obj),otense(obj, "are"));
+			obj->greased = 1;
+			if (potion->cursed && !nohands(youmonst.data)) {
+			    incr_itimeout(&Glib, rnd(10)+5);
+			    pline("Some of the grease gets all over your %s.",makeplural(body_part(HAND)));
+			}
+			useup(potion);
+			return 1;
+		}
+	}
+
 	pline("Interesting...");
 	return(1);
 }
