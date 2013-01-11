@@ -16,7 +16,6 @@ Plans for UnNetHackPlus
 * http://l.j-factor.com/nethack/edibility.diff
 * http://l.j-factor.com/nethack/spells.diff
 * http://l.j-factor.com/nethack/deathdrop.diff
-* http://l.j-factor.com/nethack/aleax.diff
 * Biodiversity patch
 * warning on Cthulhu, 6 - terror, even without normal warning source (green?)
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/9254a4770a1f49fc6ccf1029212fe1b2c087c8ef https://github.com/Bulwersator/CopyOfSporkHack/commit/68ad70c6b002d4d4af54b85e495c8ca6be3ed5b0 https://github.com/Bulwersator/CopyOfSporkHack/commit/0c88374443b69d29241888ad7354fff4291b3848
@@ -141,6 +140,7 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/58ff6cbb1a8b9af427353d5e17d862100ca92cae and https://github.com/Bulwersator/CopyOfSporkHack/commit/8d7660680d447251a6eb5fe1160c83c514bfad2f - rusty tools can break
 * in dothrow.c consume food in "not tmiss(), which angers non-tame monsters" case with proper message
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/2a248d08bfe4bd0a38350ffd8b1efd0240df71b2 - improve monster AI
+* http://l.j-factor.com/nethack/aleax.diff
 
 # no playtesting
 * http://bilious.alt.org/?178
