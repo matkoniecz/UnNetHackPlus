@@ -18,7 +18,6 @@ Plans for UnNetHackPlus
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/9254a4770a1f49fc6ccf1029212fe1b2c087c8ef https://github.com/Bulwersator/CopyOfSporkHack/commit/68ad70c6b002d4d4af54b85e495c8ca6be3ed5b0 https://github.com/Bulwersator/CopyOfSporkHack/commit/0c88374443b69d29241888ad7354fff4291b3848
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/6aa95dc3069c3392e3ddb5ad35042e1a78187e57
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/094ddfac1a648a07d5ed291ffc1b37803ad065f4 - reduces shkp yelling
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/89da6aa267318fa206e21a5531b9b70e70ba7943
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/104c0ed75d2e00b54ca340dcd3f60c1923b4020c
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/42f33afb5a12213e6ecaed0015a52c21ff14794b
 * search for #define CRYNUMBER 5 - shkp yelling - https://github.com/Bulwersator/CopyOfSporkHack/blob/3297b633fa0797e86b0f207f40cefa4fc0e747c1/src/shk.c
