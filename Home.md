@@ -155,14 +155,6 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/6d08cf5c7272d95b838fc3aefb616a773af24829 - more flee messages (wtf)
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/fd39d6e162d7c9d5e8024df3301c5ff5e4c28634 -  Poly traps may go away as monsters (and your pet) use them. 
 
-# threats
-* http://www.anim5.com/wow/generator/dwarf/index.php
-*  I can't hear ye! Scream a wee bit louder ye hairy, putrid whiny little slimey bastitch ! 
-*  Bite ME will ye? Chew on THIS ye syphilitic panty waist cockroach ! 
-*  Go ahead an' run! I LIKE a movin' target ye worm livered panty waist wiggly maggot ! 
-* -Ba ba ba-ba ba you’re gonna get murdered.
-* http://www.bay12forums.com/smf/index.php?topic=121374.new#new
-*https://github.com/Bulwersator/CopyOfSporkHack/commit/0b30fba79eed00db68d79103d2d8ecc0428b7c82
 
 #recheck
 * http://alt.org/nethack/naonh.php graves checked out 9 I - new hallucinatory monster names, random engravings, gravestones and T-shirt messages
