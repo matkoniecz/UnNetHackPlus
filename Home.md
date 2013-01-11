@@ -22,7 +22,6 @@ Plans for UnNetHackPlus
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/104c0ed75d2e00b54ca340dcd3f60c1923b4020c
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/42f33afb5a12213e6ecaed0015a52c21ff14794b
 * search for #define CRYNUMBER 5 - shkp yelling - https://github.com/Bulwersator/CopyOfSporkHack/blob/3297b633fa0797e86b0f207f40cefa4fc0e747c1/src/shk.c
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/0fb25418eecfa996588306df118b8eb5d2fa3f78 -  Greasy potions will grease things. + https://github.com/Bulwersator/CopyOfSporkHack/commit/719b5f56b80e73caf632f2f222ec1d99d55c46b5
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/a7a1de62a901e7f4521a5bdd2bf4474320315d2a (? - add modified code???)
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/70941c87feb74c63d0d4ca9bbd925ff909722117 -  Death's touch should hurt monsters/pets 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/8bd8d8b90a6f95344e3c4798a9f0ae802b6a35eb with https://github.com/Bulwersator/CopyOfSporkHack/commit/1f8b526808eeae0ed6472b2b3408743822e814d1
