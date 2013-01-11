@@ -313,6 +313,14 @@ struct obj {
 				 (obj)->otyp == FLINT     || \
 				 (obj)->otyp == TOUCHSTONE)
 
+/* object can not be polymorphed */
+#define is_unpolymorphable(obj)	((obj)->otyp == WAN_POLYMORPH || \
+				 (obj)->otyp == SPE_POLYMORPH || \
+				 (obj)->otyp == POT_POLYMORPH || \
+				 (obj)->otyp == AMULET_OF_UNCHANGING ||\
+				 (obj) == uskin || \
+				 (obj) == uball )
+
 /* misc */
 #ifdef KOPS
 #define is_flimsy(otmp)		(objects[(otmp)->otyp].oc_material <= LEATHER || \
