@@ -7,7 +7,6 @@ Plans for UnNetHackPlus
 * 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/dccb47ae2a37532ba581d01643902f30193b7211  Handle Orcus', Asmodeus', Croesus', and Pestilence's inventories in t… 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/010fc37452a1500714ab5f05dc000825be773f55 - generate more objects
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/3770da563bae83c28320532f2810a7c029b77534 -  Increase chances of getting a golem from polypiling 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/3ba79281c2f889a262449415fcf41ee3d48401ac -  Fix typo on barbarian race listing -- orc twice, dwarf none 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/caca7589c22e96e4f1c0f178d9c93db6be2a8b99 -  Inaccessible niches occasionally have iron bars. 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/d341cb2d1ae09bbb6ea3abf87f7501bd5a7565e2  Fix the special room generation so it doesn't generate too many special rooms per level.
