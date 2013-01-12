@@ -1,6 +1,7 @@
 Plans for UnNetHackPlus
 
 * http://nethackwiki.com/wiki/W343-3
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/71de5e62d922e8985b7569b14b0ac3b82c4ee6cf - open roles
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/6476b23161de3ecce0552d34bfc3c004183f9934
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/cfd432185d2598d2caed18128ee0e3ba8a188723
 * 
