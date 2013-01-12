@@ -16,7 +16,6 @@ Plans for UnNetHackPlus
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/4c76ff1e643f15f9c739ed7e0aa0bf4429fa4fbb  Rename detect food spellbook to obtain food, switch to "matter" school. '
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/763ad12873427e07f66274fd84587dabf5128551  A corpse in the niche with iron bars. 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/71bff8cb89b7e7f91f6478ea9c89f9f88195b174  Wand of nothing shall ask for direction when zapped in some games. 
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/2fb1279b3f9b72b5a4dac0a3cf62a7edeea824d5 - fix wumpus riding
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/507768e75d0a0b8aecfcea9f960f0ca021041a97  Randomly reduce +X on polymorphed objects (except for wands) 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/29f44931789ce80359a1536e7be53da1440850ed  Fix inconsistency -- master lich and arch-lich were fire resistant, and got vulnerability to fire because they're undead.
 * http://bilious.alt.org/?265 http://bilious.alt.org/?288 http://bilious.alt.org/?81 http://bilious.alt.org/?227 http://bilious.alt.org/?234 http://bilious.alt.org/?238 http://bilious.alt.org/?221
