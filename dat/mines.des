@@ -1172,6 +1172,16 @@ OBJECT:'!',(10,08)
 OBJECT:('!',"booze"),(10,09)
 OBJECT:('!',"booze"),(10,09)
 OBJECT:('!',"object detection"),(10,09)
+IF [50%] {
+	IF [10%] {
+		MONSTER:('G',"gnomish wizard"),(11,09),hostile, confused
+		MONSTER:('G',"gnome king"),(10,09),hostile, confused
+	}
+	ELSE {
+		MONSTER:('G',"gnomish wizard"),(11,09),hostile
+		MONSTER:('G',"gnome king"),(10,09),hostile
+	}
+}
 # Objects
 # The Treasure chamber...
 OBJECT:('*',"diamond"),(69,04)
