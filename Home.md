@@ -1,6 +1,9 @@
 Plans for UnNetHackPlus
 
 * http://nethackwiki.com/wiki/W343-3
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/6476b23161de3ecce0552d34bfc3c004183f9934
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/cfd432185d2598d2caed18128ee0e3ba8a188723
+* 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/dccb47ae2a37532ba581d01643902f30193b7211  Handle Orcus', Asmodeus', Croesus', and Pestilence's inventories in t… 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/010fc37452a1500714ab5f05dc000825be773f55 - generate more objects
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/3770da563bae83c28320532f2810a7c029b77534 -  Increase chances of getting a golem from polypiling 
@@ -104,6 +107,7 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/5ab7c1816e7cfbc0dbddc84eedc0a39664569bc4 + https://github.com/Bulwersator/CopyOfSporkHack/commit/ceb3cf0a3407a7decc28fc1aea77718621a6151e + https://github.com/Bulwersator/CopyOfSporkHack/commit/852de1ae27cef0a74d54bd763741bd50deb76d0e Add shambling horror; a creature with random stats each game. 
 
 #savebreaking
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/4514f5a8d55ea4464a1ec9f49240b471fe552e8b  To differentiate wood nymphs, let them walk through trees. 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/1ab79a0cc9400051cdf77a1a161c1af463bdfe09 -  Leaving bones behind may also leave your skull. 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/5e28bfdf1cf777b81baecc261bfd26f26bbf204b - interesting Juiblex + https://github.com/Bulwersator/CopyOfSporkHack/commit/b543698d53aed8ce7031ee6620ac631005894960
 * http://bilious.alt.org/?309
