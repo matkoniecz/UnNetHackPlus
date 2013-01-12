@@ -1244,7 +1244,7 @@ struct obj *obj;
 	if(poly_zapped < 0) {
 	    /* some may metamorphosize */
 	    for (i = obj->quan; i; i--)
-		if (! rn2(Luck + 45)) {
+		if (! rn2(Luck/5 + 10)) {
 		    poly_zapped = objects[obj->otyp].oc_material;
 		    break;
 		}
