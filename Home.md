@@ -1,6 +1,8 @@
 Plans for UnNetHackPlus
 
 * http://nethackwiki.com/wiki/W343-3
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/71bff8cb89b7e7f91f6478ea9c89f9f88195b174  Wand of nothing shall ask for direction when zapped in some games. 
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/2fb1279b3f9b72b5a4dac0a3cf62a7edeea824d5 - fix wumpus riding
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/507768e75d0a0b8aecfcea9f960f0ca021041a97  Randomly reduce +X on polymorphed objects (except for wands) 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/29f44931789ce80359a1536e7be53da1440850ed  Fix inconsistency -- master lich and arch-lich were fire resistant, and got vulnerability to fire because they're undead.
 * http://bilious.alt.org/?265 http://bilious.alt.org/?288 http://bilious.alt.org/?81 http://bilious.alt.org/?227 http://bilious.alt.org/?234 http://bilious.alt.org/?238 http://bilious.alt.org/?221
@@ -80,12 +82,15 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * autoidentify BUC of tins from BUC identified tin kit
 * #chat - threats, confused dwarf talks about adamantine
 * nerf speed boots
-* stronger anti magic field
-* grass, not walls for nymphs
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/b6bf67e56332fe1e4852cfad2b926da2f216559a
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/dbb7e37a081c6280d50d75cfd7b2e2e801a8354b 
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/f2658a4b96b37fc171a133d5484ee5353afbc372 
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/586f1855f856437d4cfa725d6ea164ee4d93a09c (fix to one of above)
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/5ab7c1816e7cfbc0dbddc84eedc0a39664569bc4 + https://github.com/Bulwersator/CopyOfSporkHack/commit/ceb3cf0a3407a7decc28fc1aea77718621a6151e Add shambling horror; a creature with random stats each game. 
 
 #savebreaking
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/1ab79a0cc9400051cdf77a1a161c1af463bdfe09 -  Leaving bones behind may also leave your skull. 
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/5e28bfdf1cf777b81baecc261bfd26f26bbf204b - interesting Juiblex
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/5e28bfdf1cf777b81baecc261bfd26f26bbf204b - interesting Juiblex + https://github.com/Bulwersator/CopyOfSporkHack/commit/b543698d53aed8ce7031ee6620ac631005894960
 * http://bilious.alt.org/?309
 * http://bilious.alt.org/?200 add-on to above, savefriendly
 * http://bilious.alt.org/?359 
