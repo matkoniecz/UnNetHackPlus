@@ -1,7 +1,12 @@
 Plans for UnNetHackPlus
 
 * http://nethackwiki.com/wiki/W343-3
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/507768e75d0a0b8aecfcea9f960f0ca021041a97  Randomly reduce +X on polymorphed objects (except for wands) 
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/29f44931789ce80359a1536e7be53da1440850ed  Fix inconsistency -- master lich and arch-lich were fire resistant, and got vulnerability to fire because they're undead.
 * http://bilious.alt.org/?265 http://bilious.alt.org/?288 http://bilious.alt.org/?81 http://bilious.alt.org/?227 http://bilious.alt.org/?234 http://bilious.alt.org/?238 http://bilious.alt.org/?221
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/a8ed6b03fcd3787e64bd6a0741f8a9934095a953 -  Goblins now small-group monsters. (makes start worse)
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/edd6a79da80913f8c9ccd6a90dc891357371d64c  Add potential for hostile priests to summon "associates". 
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/7fbd5b30b90f35f1af745c77fe7fe93504ae1f16  The circular bigroom may have a river. 
 * do_wear.c dotakeoff function - merge RT
 * [[threats]]
 * turn throne in perks for gold object
@@ -14,6 +19,7 @@ Plans for UnNetHackPlus
 * http://l.j-factor.com/nethack/construct.diff
 * http://l.j-factor.com/nethack/edibility.diff
 * Biodiversity patch
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/161eec3c4e0e06cab3f70b28e34b95a37f368918 -  Major alignment changes. 
 * warning on Cthulhu, 6 - terror, even without normal warning source (green?)
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/9254a4770a1f49fc6ccf1029212fe1b2c087c8ef https://github.com/Bulwersator/CopyOfSporkHack/commit/68ad70c6b002d4d4af54b85e495c8ca6be3ed5b0 https://github.com/Bulwersator/CopyOfSporkHack/commit/0c88374443b69d29241888ad7354fff4291b3848
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/6aa95dc3069c3392e3ddb5ad35042e1a78187e57
@@ -31,6 +37,7 @@ Plans for UnNetHackPlus
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/dfb47e58a21a9e50a60245309f1c91ec53310457 -  Scared covetous monsters should actually 'flee' to someplace not near the player.  Note that this doesn't include STRAT_HEAL, only magical sources of fear.
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/3c861982aa93811365afaba42440f6a361c1fdb8 -  Add potential to be gifted armor as well (which will also be +5); increase chances of getting 'ordinary gift' since randomness can, well, be pretty damn random
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/2d7f668e71867274c7aaf342f5381eeb47344441 - Chance of getting an ordinary "good" weapon instead of an artifact during sacrificing.  As you gain levels, it swings more and more towards the likelihood of getting an artifact.
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/015f96e1eb5d5ac9181d45f91890bab92f5555ed  Change god-gifts to between +3 and +5. 
 * https://github.com/Bulwersator/CopyOfSporkHack/commits/master?page=11
 * https://groups.google.com/forum/?fromgroups=#!msg/rec.games.roguelike.nethack/vspJEm0wwJ0/QDWJeqjn1HQJ
 * http://web.archive.org/web/20080309115104/http://www.csh.rit.edu/~topher/nethack/
@@ -77,6 +84,7 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * grass, not walls for nymphs
 
 #savebreaking
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/1ab79a0cc9400051cdf77a1a161c1af463bdfe09 -  Leaving bones behind may also leave your skull. 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/5e28bfdf1cf777b81baecc261bfd26f26bbf204b - interesting Juiblex
 * http://bilious.alt.org/?309
 * http://bilious.alt.org/?200 add-on to above, savefriendly
@@ -141,6 +149,8 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * http://l.j-factor.com/nethack/spells.diff
 * http://l.j-factor.com/nethack/deathdrop.diff
 * https://github.com/sgrunt/GruntHack/commit/a06d2f7e3c734768f608df8d5a873fd583dfb394
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/794cc90b031ee1d5bfa71dca209797492441d927  Significantly upgrade the chance of a footrice's hissing attack starting the stoning process -- if it hits, of course.
+* 
 
 #recheck
 * http://alt.org/nethack/naonh.php graves checked out 9 I - new hallucinatory monster names, random engravings, gravestones and T-shirt messages
