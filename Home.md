@@ -104,7 +104,7 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/dbb7e37a081c6280d50d75cfd7b2e2e801a8354b 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/f2658a4b96b37fc171a133d5484ee5353afbc372 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/586f1855f856437d4cfa725d6ea164ee4d93a09c (fix to one of above)
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/5ab7c1816e7cfbc0dbddc84eedc0a39664569bc4 + https://github.com/Bulwersator/CopyOfSporkHack/commit/ceb3cf0a3407a7decc28fc1aea77718621a6151e + https://github.com/Bulwersator/CopyOfSporkHack/commit/852de1ae27cef0a74d54bd763741bd50deb76d0e Add shambling horror; a creature with random stats each game. 
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/5ab7c1816e7cfbc0dbddc84eedc0a39664569bc4 + https://github.com/Bulwersator/CopyOfSporkHack/commit/ceb3cf0a3407a7decc28fc1aea77718621a6151e + https://github.com/Bulwersator/CopyOfSporkHack/commit/852de1ae27cef0a74d54bd763741bd50deb76d0e + https://github.com/Bulwersator/CopyOfSporkHack/commit/304054d8c3c85fa7c8256391a3236d3c8ec78326 Add shambling horror; a creature with random stats each game. 
 
 #savebreaking
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/4514f5a8d55ea4464a1ec9f49240b471fe552e8b  To differentiate wood nymphs, let them walk through trees. 
