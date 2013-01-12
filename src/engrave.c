@@ -1720,6 +1720,10 @@ static const char *epitaphs[] = {
         "Would you quit being evil over my shoulder?",
         "Yes Dear, just a few more minutes...",
         "You said it wasn't poisonous!",
+
+        /* from UnNetHackPlus */
+        "2007-2010 SporkHack",
+        "1998-2006 SLASH'EM",
 };
 
 /* Create a headstone at the given location.
