@@ -10,7 +10,6 @@ Plans for UnNetHackPlus
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/3ba79281c2f889a262449415fcf41ee3d48401ac -  Fix typo on barbarian race listing -- orc twice, dwarf none 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/caca7589c22e96e4f1c0f178d9c93db6be2a8b99 -  Inaccessible niches occasionally have iron bars. 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/d341cb2d1ae09bbb6ea3abf87f7501bd5a7565e2  Fix the special room generation so it doesn't generate too many special rooms per level.
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/9904a3740e989bc50ae84f582c33d4d720a6ddbf  Allow more than one special room per level in the DoD. 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/21de56b16793ec139ea0859cbec29c40c4072309 Non-mindless monsters will no longer blindly walk into traps they've seen
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/ee98431808762054c022366e8023197b65e15ccb  Jack up probability of shops in general and at deeper levels + https://github.com/Bulwersator/CopyOfSporkHack/commit/bbe6a56d3a6d030962719682fe9ad2d85d930511
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/b66820f04b9b8f98a822e8b1df719fd55ee07726  RANDOM_CORRIDORS now takes an optional parameter. 
