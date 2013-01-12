@@ -77,6 +77,7 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * grass, not walls for nymphs
 
 #savebreaking
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/5e28bfdf1cf777b81baecc261bfd26f26bbf204b - interesting Juiblex
 * http://bilious.alt.org/?309
 * http://bilious.alt.org/?200 add-on to above, savefriendly
 * http://bilious.alt.org/?359 
