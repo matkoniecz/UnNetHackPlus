@@ -58,7 +58,7 @@ Plans for UnNetHackPlus
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/3c861982aa93811365afaba42440f6a361c1fdb8 -  Add potential to be gifted armor as well (which will also be +5); increase chances of getting 'ordinary gift' since randomness can, well, be pretty damn random
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/2d7f668e71867274c7aaf342f5381eeb47344441 - Chance of getting an ordinary "good" weapon instead of an artifact during sacrificing.  As you gain levels, it swings more and more towards the likelihood of getting an artifact.
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/015f96e1eb5d5ac9181d45f91890bab92f5555ed  Change god-gifts to between +3 and +5. 
-* https://github.com/Bulwersator/CopyOfSporkHack/commits/master?page=11
+* https://github.com/Bulwersator/CopyOfSporkHack/commits/master?page=4
 * https://groups.google.com/forum/?fromgroups=#!msg/rec.games.roguelike.nethack/vspJEm0wwJ0/QDWJeqjn1HQJ
 * http://web.archive.org/web/20080309115104/http://www.csh.rit.edu/~topher/nethack/
 * http://www.cse.unsw.edu.au/~malcolmr/nethack/
