@@ -1,6 +1,21 @@
 Plans for UnNetHackPlus
 
 * http://nethackwiki.com/wiki/W343-3
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/dccb47ae2a37532ba581d01643902f30193b7211  Handle Orcus', Asmodeus', Croesus', and Pestilence's inventories in t… 
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/010fc37452a1500714ab5f05dc000825be773f55 - generate more objects
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/3770da563bae83c28320532f2810a7c029b77534 -  Increase chances of getting a golem from polypiling 
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/5f3f85fcf60d3e5e5929cd6957e2d393b3db623c -  Make sure dwarven archaeologists don't start with two pickaxes 
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/3ba79281c2f889a262449415fcf41ee3d48401ac -  Fix typo on barbarian race listing -- orc twice, dwarf none 
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/caca7589c22e96e4f1c0f178d9c93db6be2a8b99 -  Inaccessible niches occasionally have iron bars. 
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/d341cb2d1ae09bbb6ea3abf87f7501bd5a7565e2  Fix the special room generation so it doesn't generate too many special rooms per level.
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/9904a3740e989bc50ae84f582c33d4d720a6ddbf  Allow more than one special room per level in the DoD. 
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/21de56b16793ec139ea0859cbec29c40c4072309 Non-mindless monsters will no longer blindly walk into traps they've seen
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/ee98431808762054c022366e8023197b65e15ccb  Jack up probability of shops in general and at deeper levels + https://github.com/Bulwersator/CopyOfSporkHack/commit/bbe6a56d3a6d030962719682fe9ad2d85d930511
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/b66820f04b9b8f98a822e8b1df719fd55ee07726  RANDOM_CORRIDORS now takes an optional parameter. 
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/4c434e30415c3cd1d5efeeab1ae2c1dc903aa034  Use any style random corridors 10% of the time. 
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/57eb5ec04c8dc6b7e0a44325c7b71781335184ab  Make scroll of identify universally known. 
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/4c76ff1e643f15f9c739ed7e0aa0bf4429fa4fbb  Rename detect food spellbook to obtain food, switch to "matter" school. '
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/763ad12873427e07f66274fd84587dabf5128551  A corpse in the niche with iron bars. 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/71bff8cb89b7e7f91f6478ea9c89f9f88195b174  Wand of nothing shall ask for direction when zapped in some games. 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/2fb1279b3f9b72b5a4dac0a3cf62a7edeea824d5 - fix wumpus riding
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/507768e75d0a0b8aecfcea9f960f0ca021041a97  Randomly reduce +X on polymorphed objects (except for wands) 
@@ -86,7 +101,7 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/dbb7e37a081c6280d50d75cfd7b2e2e801a8354b 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/f2658a4b96b37fc171a133d5484ee5353afbc372 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/586f1855f856437d4cfa725d6ea164ee4d93a09c (fix to one of above)
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/5ab7c1816e7cfbc0dbddc84eedc0a39664569bc4 + https://github.com/Bulwersator/CopyOfSporkHack/commit/ceb3cf0a3407a7decc28fc1aea77718621a6151e Add shambling horror; a creature with random stats each game. 
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/5ab7c1816e7cfbc0dbddc84eedc0a39664569bc4 + https://github.com/Bulwersator/CopyOfSporkHack/commit/ceb3cf0a3407a7decc28fc1aea77718621a6151e + https://github.com/Bulwersator/CopyOfSporkHack/commit/852de1ae27cef0a74d54bd763741bd50deb76d0e Add shambling horror; a creature with random stats each game. 
 
 #savebreaking
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/1ab79a0cc9400051cdf77a1a161c1af463bdfe09 -  Leaving bones behind may also leave your skull. 
@@ -155,7 +170,10 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * http://l.j-factor.com/nethack/deathdrop.diff
 * https://github.com/sgrunt/GruntHack/commit/a06d2f7e3c734768f608df8d5a873fd583dfb394
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/794cc90b031ee1d5bfa71dca209797492441d927  Significantly upgrade the chance of a footrice's hissing attack starting the stoning process -- if it hits, of course.
-* 
+
+#unable to test
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/4a6337948eb34e2c0dbf4ec2609316d6dafcf234
+ 
 
 #recheck
 * http://alt.org/nethack/naonh.php graves checked out 9 I - new hallucinatory monster names, random engravings, gravestones and T-shirt messages
