@@ -26,6 +26,7 @@
 	* Hallucinatory monsters and monster sounds from NAO
 	* More t-shirt messages from NAO
 	* If dipping into greasy potion produced no results, grease the dipped object (from SporkHack - see https://github.com/Bulwersator/CopyOfSporkHack/commit/0fb25418eecfa996588306df118b8eb5d2fa3f78 and https://github.com/Bulwersator/CopyOfSporkHack/commit/719b5f56b80e73caf632f2f222ec1d99d55c46b5 )
+	* Dwarves have chance of starting with pickaxe (from SporkHack - https://github.com/Bulwersator/CopyOfSporkHack/commit/71de5e62d922e8985b7569b14b0ac3b82c4ee6cf)
 
 2012-04-01  UnNetHack 4.0.0
 	* Uncursed and blessed scrolls of magic mapping reveal secret doors
