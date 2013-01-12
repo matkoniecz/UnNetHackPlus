@@ -29,6 +29,7 @@
 	* Dwarves have chance of starting with pickaxe (from SporkHack - https://github.com/Bulwersator/CopyOfSporkHack/commit/71de5e62d922e8985b7569b14b0ac3b82c4ee6cf)
 	* Increase chances of getting a golem from polypiling (idea from SporkHack - https://github.com/Bulwersator/CopyOfSporkHack/commit/3770da563bae83c28320532f2810a7c029b77534)
 	* Allow more than one special room per level in the DoD (from SporkHack - https://github.com/Bulwersator/CopyOfSporkHack/commit/9904a3740e989bc50ae84f582c33d4d720a6ddbf)
+	* Chance of wand wresting raised to 1/11
 
 2012-04-01  UnNetHack 4.0.0
 	* Uncursed and blessed scrolls of magic mapping reveal secret doors
