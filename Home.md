@@ -56,7 +56,6 @@ Plans for UnNetHackPlus
 * https://groups.google.com/forum/?fromgroups=#!msg/rec.games.roguelike.nethack/vspJEm0wwJ0/QDWJeqjn1HQJ
 * http://web.archive.org/web/20080309115104/http://www.csh.rit.edu/~topher/nethack/
 * http://www.cse.unsw.edu.au/~malcolmr/nethack/
-* http://nh.gmuf.com
 * https://github.com/DanielT/NitroHack/commits/master
 * http://nethackwiki.com/wiki/NetHack_4
 * https://github.com/sgrunt/GruntHack/commit/71c688fd496defd0da54a9fa8325700a4527ad6a (entire version lumped in one commit :( )
@@ -90,7 +89,7 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * stinking cloud should be cyan something
 * http://forum.rpg.net/showthread.php?466187-%28Let-s-Play!%29-Sporkhack/page2
 * remove credit cloning, allow entering shop with digging tools
-* identify projectiles - for Rangers (techniques?)
+* identify projectiles - for Rangers http://nh.gmuf.com/ranger_ammo-343.diff
 * autoidentify BUC of tins from BUC identified tin kit
 * #chat - threats, confused dwarf talks about adamantine
 * nerf speed boots
