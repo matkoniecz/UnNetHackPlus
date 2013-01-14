@@ -1,5 +1,5 @@
 Plans for UnNetHackPlus
-
+* save last enlightenment status
 * make stupid water noticeable different from stupid fountains
 * http://nethackwiki.com/wiki/W343-3
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/71de5e62d922e8985b7569b14b0ac3b82c4ee6cf - open roles
