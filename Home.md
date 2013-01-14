@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* new level generator (moria, see newsgroup)
 * the alignment system needs a complete overhaul 
 * revert UnDragons (savebreaking????)
 * nutrition is completely unimportant after early game - increase hunger (what about vampires?) / reduce amount of food items in dungeon, nerf hungerless casting?????
