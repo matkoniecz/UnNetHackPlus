@@ -473,6 +473,7 @@ static const char * const bogusobjects[] = {
        "YAFM",                             /* rgrn */
        "pamphlet titled 'How to Raise the Perfect Pudding'",
        "blessed greased +5 silly object of hilarity",
+       "The Staff of Misspelling",
 
        /* Silly */
        "crystall ball bearing",
