@@ -31,6 +31,7 @@
 	* Allow more than one special room per level in the DoD (from SporkHack - https://github.com/Bulwersator/CopyOfSporkHack/commit/9904a3740e989bc50ae84f582c33d4d720a6ddbf)
 	* Chance of wand wresting raised to 1/11
 	* Light is classified as matter spell type, not divination (affects only new games)
+	* Nerf The Eye of the Aethiopica energy production
 
 2012-04-01  UnNetHack 4.0.0
 	* Uncursed and blessed scrolls of magic mapping reveal secret doors
