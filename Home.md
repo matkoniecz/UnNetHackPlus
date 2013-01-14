@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* nerf The Eye of the Aethiopica energy production
 * save last enlightenment status
 * make stupid water noticeable different from stupid fountains
 * http://nethackwiki.com/wiki/W343-3
