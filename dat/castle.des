@@ -621,10 +621,10 @@ MONSTER:'D',$place[8]
 MONSTER:'D',$place[9]
 
 # the prisoners
-MONSTER:('@',"prisoner"),(02,15),peaceful,asleep
-MONSTER:('@',"prisoner"),(03,13),peaceful
-MONSTER:('@',"prisoner"),(06,13)
-MONSTER:('@',"prisoner"),(10,13)
+MONSTER:('@',"prisoner"),(02,15),peaceful,asleep{}
+MONSTER:('@',"prisoner"),(03,13),peaceful{}
+MONSTER:('@',"prisoner"),(06,13){}
+MONSTER:('@',"prisoner"),(10,13){}
 
 MONSTER:('H',"fire giant"),(36,03),peaceful
 MONSTER:('j',"ochre jelly"),(43,01),asleep
