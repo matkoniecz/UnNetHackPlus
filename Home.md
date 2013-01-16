@@ -1,4 +1,6 @@
 Plans for UnNetHackPlus
+* P'lod http://en.wikipedia.org/wiki/P%27Lod
+* nethack.alt.org, there is an option (hilite_hidden_stairs)
 * new level generator (moria, see newsgroup)
 * the alignment system needs a complete overhaul 
 * revert UnDragons (savebreaking????)
