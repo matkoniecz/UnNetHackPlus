@@ -4,7 +4,6 @@ Plans for UnNetHackPlus
 * the alignment system needs a complete overhaul 
 * revert UnDragons (savebreaking????)
 * nutrition is completely unimportant after early game - increase hunger (what about vampires?) / reduce amount of food items in dungeon, nerf hungerless casting?????
-* nerf The Eye of the Aethiopica energy production
 * save last enlightenment status
 * make stupid water noticeable different from stupid fountains
 * http://nethackwiki.com/wiki/W343-3
