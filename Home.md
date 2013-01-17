@@ -1,6 +1,6 @@
 Plans for UnNetHackPlus
 * topten.c tt_oname - use names from NAO (?)
-* nethack.alt.org, there is an option (hilite_hidden_stairs)
+* nethack.alt.org, there is an option (hilite_hidden_stairs) http://bilious.alt.org/?433
 * new level generator (moria, see newsgroup)
 * the alignment system needs a complete overhaul 
 * revert UnDragons (savebreaking????)
