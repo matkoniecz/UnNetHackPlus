@@ -2450,39 +2450,36 @@ gethungry()	/* as time goes by - called by moveloop() and domove() */
 {
 	if (u.uinvulnerable) return;	/* you don't feel hungrier */
 
-	if ((!u.usleep || !rn2(10))	/* slow metabolic rate while asleep */
-		&& (carnivorous(youmonst.data) || herbivorous(youmonst.data) ||
-		    is_vampire(youmonst.data))
-		&& !Slow_digestion)
-	    u.uhunger--;		/* ordinary food consumption */
+	if ((!u.usleep || !rn2(10)) 	/* slow metabolic rate while asleep */
+		&& (carnivorous(youmonst.data) || herbivorous(youmonst.data) || is_vampire(youmonst.data))
+		&& !Slow_digestion) {
+		u.uhunger--;		/* ordinary food consumption */
+	}
 
-	if (moves % 2) {	/* odd turns */
-	    /* Regeneration uses up food, unless due to an artifact */
-	    if (HRegeneration || ((ERegeneration & (~W_ART)) &&
-				(ERegeneration != W_WEP || !uwep->oartifact)))
-			u.uhunger--;
-	    if (near_capacity() > SLT_ENCUMBER) u.uhunger--;
-	} else {		/* even turns */
-	    if (Hunger) u.uhunger--;
-	    /* Conflict uses up food too */
-	    if (HConflict || (EConflict & (~W_ARTI))) u.uhunger--;
-	    /* +0 charged rings don't do anything, so don't affect hunger */
-	    /* Slow digestion still uses ring hunger */
-	    switch ((int)(moves % 20)) {	/* note: use even cases only */
-	     case  4: if (uleft &&
-			  (uleft->spe || !objects[uleft->otyp].oc_charged))
-			    u.uhunger--;
-		    break;
-	     case  8: if (uamul) u.uhunger--;
-		    break;
-	     case 12: if (uright &&
-			  (uright->spe || !objects[uright->otyp].oc_charged))
-			    u.uhunger--;
-		    break;
-	     case 16: if (u.uhave.amulet) u.uhunger--;
-		    break;
-	     default: break;
-	    }
+	/* Regeneration uses up food, unless due to an artifact */
+	if ((!rn2(2)) && (HRegeneration || ((ERegeneration & (~W_ART)) && (ERegeneration != W_WEP || !uwep->oartifact)))){
+		u.uhunger--;
+	}
+	if ((!rn2(2)) && (near_capacity() > SLT_ENCUMBER)) {
+		u.uhunger--;
+	}
+	if ((!rn2(2)) && (Hunger)) {
+		u.uhunger--;
+	}
+	/* Conflict uses up food too */
+	if ((!rn2(2)) && (HConflict || (EConflict & (~W_ARTI)))) {
+		u.uhunger--;
+	}
+	/* +0 charged rings don't do anything, so don't affect hunger */
+	/* Slow digestion still uses ring hunger */
+	if ((!rn2(20)) && (uleft && (uleft->spe || !objects[uleft->otyp].oc_charged))) {
+		u.uhunger--;
+	}
+	if ((!rn2(20)) && (uright && (uright->spe || !objects[uright->otyp].oc_charged))) {
+		u.uhunger--;
+	}
+	if ((!rn2(20)) && (u.uhave.amulet)) {
+		u.uhunger--;
 	}
 	newuhs(TRUE);
 }
