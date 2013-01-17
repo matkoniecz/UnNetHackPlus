@@ -484,6 +484,7 @@ static const char * const bogusobjects[] = {
        "chainmail bikini",
        "first class one-way ticket to Albuquerque", /* Weird Al */
        "yellow spandex dragon scale mail", /* X-Men */
+       "Kentucky Fried Basilisk",
 
        /* Musical Instruments */
        "grand piano",
@@ -593,6 +594,7 @@ static const char * const bogusobjects[] = {
        "ornamental cape",
        "acid blob skeleton",
        "Lawyerbane",
+       "RNG corpse",
 
 # ifdef MAIL
        "brand new, all time lowest introductory rate special offer",

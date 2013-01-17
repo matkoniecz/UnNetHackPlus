@@ -1255,6 +1255,16 @@ static const char * const bogusmons[] = {
 	"Dwarf-Eating Carp", 		/* Dwarf Fortress */
 	"werecapybara",			/* Dwarf Fortress */
 	"Evil Otto", 			/* Berzerk - via GruntHack */
+	"P'lod",				/* Weekly World News */
+	"mortgage golem", 
+	"dark matter golem", 
+	"giant orange brain",		/* Dungeon Crawl Stone Soup */
+	"ugly thing",			/* Dungeon Crawl Stone Soup */
+	"hellephant",			/* Dungeon Crawl Stone Soup */
+	"inept mimic",			/* Dungeon Crawl Stone Soup */
+	"hungry ghost",			/* Dungeon Crawl Stone Soup */
+	"unborn deep dwarf",		/* Dungeon Crawl Stone Soup */
+	"Wandering mushroom",		/* Dungeon Crawl Stone Soup */
 };
 
 
