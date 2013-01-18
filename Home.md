@@ -1,10 +1,10 @@
 Plans for UnNetHackPlus
+* cap HP regenaration at normal maxHP value (external regeneration, spells and potions still work)
 * topten.c tt_oname - use names from NAO (?)
 * nethack.alt.org, there is an option (hilite_hidden_stairs) http://bilious.alt.org/?433
 * new level generator (moria, see newsgroup)
 * the alignment system needs a complete overhaul 
 * revert UnDragons (savebreaking????)
-* nutrition is completely unimportant after early game - increase hunger (what about vampires?) / reduce amount of food items in dungeon, nerf hungerless casting?????
 * save last enlightenment status
 * make stupid water noticeable different from stupid fountains
 * http://nethackwiki.com/wiki/W343-3
