@@ -1178,7 +1178,7 @@ dosacrifice()
 		|| (monstermoves <= peek_at_iced_corpse_age(otmp) + 50)) {
 	    value = monstr[otmp->corpsenm] + 1;
 	    if (otmp->oeaten)
-		value = eaten_stat(value, otmp);
+		value = 0;
 	}
 
 	if (your_race(ptr)) {
