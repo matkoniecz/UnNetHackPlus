@@ -1,5 +1,5 @@
 Plans for UnNetHackPlus
-* cap HP regenaration at normal maxHP value (external regeneration, spells and potions still work)
+* cap HP regenaration at normal maxHP value (external regeneration, spells and potions still work) - see maxHP cap in spork
 * topten.c tt_oname - use names from NAO (?)
 * nethack.alt.org, there is an option (hilite_hidden_stairs) http://bilious.alt.org/?433
 * new level generator (moria, see newsgroup)
