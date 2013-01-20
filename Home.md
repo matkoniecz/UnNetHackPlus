@@ -1,4 +1,6 @@
 Plans for UnNetHackPlus
+* fix http://nethackwiki.com/wiki/Source:End.c#line584
+* fix quaffing water as iron golem
 * http://nethackwiki.com/wiki/User:Ion_frigate#Add_a_little_spice_to_the_game
 * cap HP regenaration at normal maxHP value (external regeneration, spells and potions still work) - see maxHP cap in spork
 * topten.c tt_oname - use names from NAO (?)
