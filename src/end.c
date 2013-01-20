@@ -647,7 +647,7 @@ int how;
 		if(yn("Die?") == 'y') goto die;
 		pline("OK, so you don't %s.",
 			(how == CHOKING) ? "choke" : (how == DISINTEGRATED) ? "disintegrate" : "die");
-		if(u.uhpmax <= 0) u.uhpmax = u.ulevel * 8;	/* arbitrary */
+		if(u.uhpmax <= u.ulevel * 8) u.uhpmax = u.ulevel * 8;	/* arbitrary */
 		savelife(how);
 		killer = 0;
 		killer_format = 0;
