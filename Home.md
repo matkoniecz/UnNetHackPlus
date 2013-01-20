@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* Most of the item-type-specific commands like "quaff" or "read" have been merged into a single "use" command http://te4.org/news
 * fix quaffing water as iron golem
 * http://nethackwiki.com/wiki/User:Ion_frigate#Add_a_little_spice_to_the_game
 * cap HP regenaration at normal maxHP value (external regeneration, spells and potions still work) - see maxHP cap in spork
