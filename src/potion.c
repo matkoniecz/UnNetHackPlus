@@ -461,9 +461,11 @@ peffects(otmp)
 			pline("This tastes like water.");
 			u.uhunger += rnd(10);
 			newuhs(FALSE);
-			break;
 		}
-		unkn++;
+		else {
+			unkn++;
+		}
+
 		if(is_undead(youmonst.data) || is_demon(youmonst.data) || u.ualign.type == A_CHAOTIC) {
 			if(otmp->blessed) {
 				pline("This burns like acid!");
@@ -491,8 +493,7 @@ peffects(otmp)
 				if (u.ulycn >= LOW_PM) {
 					you_unwere(TRUE);	/* "Purified" */
 				}
-			/* make_confused(0L,TRUE); */
-			} else {
+			} else if(otmp->cursed) {
 				if(u.ualign.type == A_LAWFUL) {
 					pline("This burns like acid!");
 					losehp(d(2,6), "potion of unholy water", KILLED_BY_AN);
