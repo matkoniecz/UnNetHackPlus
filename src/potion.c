@@ -467,8 +467,9 @@ peffects(otmp)
 		}
 		if(u.umonnum == PM_IRON_GOLEM){
 			You("rust from inside!");
-			/* this is okay with unchanging */
-			rehumanize();
+			int dam = u.mhmax;
+			if (Half_physical_damage) dam = (dam+1) / 2;
+			losehp(dam, "rusting away", KILLED_BY);
 		}
 		if(is_undead(youmonst.data) || is_demon(youmonst.data) || u.ualign.type == A_CHAOTIC) {
 			if(otmp->blessed) {
