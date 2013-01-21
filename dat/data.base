@@ -372,6 +372,24 @@ barbarian
 barbed devil
 	Barbed devils lack any real special abilities, though they
 	are quite difficult to kill.
+bardiche
+long pole*
+	A long axe blade on a stick. The cutting blade is typically
+	two feet long or more, but it is mounted on one of the 
+	shortest poles for a polearm, only about five feet (1.5 meters).
+	   
+	     |\
+	     | \
+	     |  |
+	     |  |
+	     |  |
+	    Z[  |
+	    H|  |
+	    H|  |
+	    H|  |
+	    H|  |
+	    Z[_-
+	    H
 *bat
 	A bat, flitting in the darkness outside, took the wrong turn
 	as it made its nightly rounds and came in through the window
@@ -382,6 +400,20 @@ barbed devil
 	proverb, and I will show you something that ought to be in
 	some kind of a home.
 		[ A Pelican at Blandings, by P. G. Wodehouse ]
+bec de corbin
+beaked polearm
+	While this weapon does have a blunt hammer, its main 
+	feature is the heavy crow's beak blade, designed to
+	puncture heavy plate armor. The shaft is about eight
+	feet long (2.4 meters).
+	   
+	      A
+	      H
+	  _  _H______
+	 | \/ H      \
+	 |_/\_H_______\
+	      H
+	      H
 *bee
 	This giant variety of its useful normal cousin normally
 	appears in small groups, looking for raw material to produce
@@ -414,6 +446,22 @@ bell of opening
 	* Old Tom was the single cracked bronze bell in the University
 	bell tower.
 		[ Eric, by Terry Pratchett ]
+bill?guisarme
+hooked polearm
+	A bladed polearm with mutliple sharpened edges and spikes,
+	and with a hook. This weapon is about nine feet long
+	(2.7 meters).
+	   
+	    |
+	    ||
+	    ||___
+	    | _---\
+	    | \
+	 ___|  |
+	  -_   |
+	    |  |
+	    | /
+	    ||
 blindfold
 	The blindfolding was performed by binding a piece of the
 	yellowish linen whereof those of the Amahagger who condescended
@@ -1292,6 +1340,15 @@ fauchard
 	in the way of parrying or catching/holding and has no provision 
 	for dismounting opponents, though it is quite useful for crippling 
 	their mounts.
+	    ________
+	   / ___--
+	  / /
+	 | |
+	 | |
+	 | |
+	 | '
+	 ||
+	 ||
 figurine*
 	Then it appeared in Paris at just about the time that Paris
 	was full of Carlists who had to get out of Spain.  One of
@@ -1304,6 +1361,17 @@ figurine*
 	years by private owners and dealers too stupid to see what
 	it was under the skin.
 		[ The Maltese Falcon, by Dashiell Hammett ]
+flail
+nunchaku
+	The flail the weapon is derived from the flail the agricultural
+	tool. The original is made by connecting a wooden handle to a 
+	wooden club with a rope, and is used for thrashing grain. The
+	weapon is made by connecting a handle to a club, metal bar, 
+	spiked ball, or whatever will hurt the most. It is used for 
+	thrashing advesaries.
+	The nunchaku is a Japanese variaty of flail on which the
+	business end and handle are identical. This allows for a fast-
+	paced eastern style of thrashing advesaries.
 floating eye
 	Floating eyes, not surprisingly, are large, floating eyeballs
 	which drift about the dungeon.  Though not dangerous in and
@@ -1477,6 +1545,7 @@ giant humanoid
 	types of giants share a love for men - roasted, boiled, or
 	fried.  Their table manners are legendary.
 glaive
+single?edged polearm
 	The glaive is a knife-bladed spear. It has the thrusting 
 	function of the spear, and the secondary cutting function of 
 	the convex blade of the knife. The weapon was rapidly enlarged 
@@ -1484,6 +1553,18 @@ glaive
 	well as a cleaving attack. As with a spear or fauchard, however, 
 	it is not overly effective at holding opponents back, nor does 
 	it have the piercing or dismounting capabilities.
+	
+	Basically, a knife on a long stick. A nine foot long stick
+	(2.7 meters). With a big knife on the end. 
+	   
+	    |\
+	    I |
+	    I |
+	    I |
+	    I |
+	    I |
+	    I_|
+	    H
 # note: "gnomish wizard" is a monster; cave*man entry doesn't fit nonhumans
 ~gnome ??m*
 gnome*
@@ -1644,6 +1725,24 @@ hachi
 	every afternoon to wait for his master.  When Hachi died a
 	statue was erected on the station platform in his honor.  It
 	is said to bring you luck if you touch his statue.
+halb??d
+angled pole*
+	Basically an axe on a pole, this weapon has been a mainstay 
+	weapon in many armies for a long time. The axe blade angles
+	downward, and there is usually a spear tip at the end and
+	a spike protruding from the back. Due to its popularity it
+	comes in a wide variety of styles, many reaching ten feet
+	(3 meters).
+	   
+	    |
+	    I
+	    H     >\ 
+	    H_--~~  >
+	   _H      /
+	 _- H     /
+	----H__  /
+	    H  \/
+	    H    
 *harp
 	A triangular stringed instrument, often Magic.  Even when not
 	Magic, a Harp is surprisingly portable and tough and can be
@@ -1837,7 +1936,7 @@ hom*nculus
 	and mine to you, across the leagues between at the speed of
 	thought.'"
 		[ Conan the Rebel, by Poul Anderson ]
-# also gets 'pruning hook' aka guisarme
+~pruning hook      
 *hook
 	But as for Queequeg -- why, Queequeg sat there among them --
 	at the head of the table, too, it so chanced; as cool as an
@@ -2469,6 +2568,21 @@ lord surt*
 	and harry, and overcome all the gods, and burn all the
 	world with fire.
 			[ The Prose Edda, by Snorri Sturluson ]
+lucern?hammer
+pronged polearm
+	Like many polearms, this weapon has several spikes.  But
+	while many others have a blade or axe, this one has a 
+	three-pronged hammer at the end of a seven foot (2 meter)
+	pole.
+	
+	     I
+	     H
+	     H
+	     H______ 
+	  __-H    [_
+	-----H____[_
+	     H
+	     H   
 lug*
 	Lugh, or Lug, was the sun god of the Irish Celts.  One of his
 	weapons was a rod-sling which worshippers sometimes saw in
@@ -2510,6 +2624,9 @@ lynx
 	in the affections of her lover. If she kills the lynx, she
 	will overcome her rival.
 		[ 10,000 Dreams Interpreted, by Gustavus Hindman Miller ]
+mace
+	A weapon, similar to a club, but with a metal head with
+	flanges, spikes, or merely a solid metal ball.
 magic marker
 	The pen is mightier than the sword.
 		[ Richelieu, by Edward Bulwer-Lytton ]
@@ -2817,6 +2934,8 @@ monkey
 	where the monkeys drink; we do not go where the monkeys go;
 	we do not hunt where they hunt; we do not die where they die...."
 		[ The Jungle Book, by Rudyard Kipling ]
+morning star
+	A large mace with a spiked metal ball. 
 mumak*
 	... the Mumak of Harad was indeed a beast of vast bulk, and
 	the like of him does not walk now in Middle-Earth; his kin
@@ -3167,6 +3286,25 @@ panther
 	That many times I to return had turned.
 		[ Dante's Inferno, as translated
 			by Henry Wadsworth Longfellow ]
+partisan
+vulg?r polearm
+	Originally this weapon was a spear with small double
+	axe blades added below it. While the main blade retains
+	the same shape as a wide spearhead, the side blades 
+	bare only a passing similarity to the axe blaes they
+	were in ages past. Frequently merely ceremonial now,
+	these weapons are from nine to ten feet long (2.7 to
+	3 meters).       
+	   
+	   ,^.
+	   | |
+	   | |
+	   | | 
+	 . | | .
+	< ~   ~ >
+	 \     /
+	  \_ _/
+	    H
 pelias
 	Conan cried out sharply and recoiled, thrusting his companion
 	back.  Before them rose the great shimmering white form of Satha,
@@ -3392,6 +3530,22 @@ quit*
 raijin
 raiden
 	The god of thunder.
+rans??r
+hilted polearm
+	This wepaon is essentially a spear with a hilt,
+	designed to block and possibly disarm the opponent.
+	The hilt can be curved backwards or stick straight 
+	out from the thin spear head. It is from nine to  
+	eleven feet long (2.7 to 3.3 meters).       
+	 
+	   
+	    A
+	    H
+	    H
+	    H
+	    T
+	 -=ZZZ=- 
+	    H
 ranger
 * ranger
 	"Lonely men are we, Rangers of the wild, hunters -- but hunters
@@ -3861,6 +4015,22 @@ javelin
 	hands," he advised.  "Otherwise, I shouldn't be surprised if
 	they blistered."
 		[ The Book of Three, by Lloyd Alexander ]
+spetum
+forked polearm
+	This polearm has a thin spearhead with two angled dagger-
+	type blades at about 45 degrees. They can be used to attack, 
+	block, or hold an oppenent at bay. Unfortunately, they can't
+	do any of those tasks excedingly well. This weapon is
+	nine to ten feet long (2.7 to 3 meters).
+	   
+	    A
+	    H
+	    H
+	    H
+	 \  H  /
+	  \\H// 
+	   \H/
+	    H
 *spider
 	Eight legged creature capable of spinning webs to trap prey.
 
@@ -3974,6 +4144,13 @@ stormbringer
 	heard men cry so when his salvation and his nemesis, his
 	great black battle-blade Stormbringer, drank their souls.
 		[ The Lands Beyond the World, by Michael Moorcock ]
+strange object      
+	He walked for some time through a long narrow corridor
+	without finding any one and was just going to call out,
+	when suddenly in a dark corner between an old cupboard
+	and the door he caught sight of a strange object which
+	seemed to be alive.
+	   [ Crime and Punishment, by Fyodor Dostoevsky ]
 susano*o
 	The Shinto chthonic and weather god and brother of the sun
 	goddess Amaterasu, he was born from the nose of the
@@ -4333,6 +4510,21 @@ vlad*
 	He dealt with perceived challengers to his rule by impaling
 	them upright on wooden stakes.  Visiting dignitaries who
 	failed to doff their hats had them nailed to their head.
+voulge
+pole cleaver
+	Place a cleaver at the end of a seven to nine foot shaft
+	(2 to 2.7 meters) and you end up with this weapon. Its
+	short braod blade is ideal for slicing through armor.
+	   
+	      /\
+	     /  \
+	     |   \
+	    Z[   |
+	    H|   |
+	    H|   |
+	    H|   |
+	    Z[__-'
+	    H
 *vortex
 vortices
 	Swirling clouds of pure elemental energies, the vortices are
