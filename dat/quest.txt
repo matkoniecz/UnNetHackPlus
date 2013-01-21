@@ -3390,6 +3390,27 @@ essential in locating the Amulet of Yendor."
 %Cp - 00019
 "No one expects the Spanish Inquisition!"
 %E
+%Cp - 00020
+"Your sin smells to high heaven."
+%E
+%Cp - 00021
+"You are the most insane heretics and ingrafters of heretical perversity."
+%E
+%Cp - 00022
+"What you say is a blasphemy that has made you worthy of a thousand deaths."
+%E
+%Cp - 00023
+"You abominable abomination."
+%E
+%Cp - 00024
+"You are a coarse devil who hurts me but little."
+%E
+%Cp - 00025
+"Phooey on you, you servant of idols!"
+%E
+%Cp - 00026
+"You have fought against us as one would attack a cliff with a broken straw."
+%E
 #
 #	Demonic maledictions.
 #
@@ -3452,6 +3473,15 @@ essential in locating the Amulet of Yendor."
 %E
 %Cp - 00049
 "Why search for the Amulet?  Thou wouldst but lose it, cretin."
+%E
+%Cp - 00050
+"You know less than does a log on the ground."
+%E
+%Cp - 00051
+"You are a toad eater and a fawner."
+%E
+%Cp - 00052
+"There you are, like butter in sunshine."
 %E
 #
 #	Banishment message (for converted hero)
