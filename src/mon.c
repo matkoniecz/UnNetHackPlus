@@ -440,14 +440,12 @@ register struct monst *mtmp;
 	if (inpool) water_damage(mtmp->minvent, FALSE, FALSE);
 	return (0);
     } else if (mtmp->data == &mons[PM_IRON_GOLEM] && (inpool || inswamp) && !rn2(5)) {
-	int dam = d(2,6);
-	if (cansee(mtmp->mx,mtmp->my))
-	    pline("%s rusts.", Monnam(mtmp));
-	mtmp->mhp -= dam;
-	if (mtmp->mhpmax > dam) mtmp->mhpmax -= dam;
-	if (mtmp->mhp < 1) {
-	    mondead(mtmp);
-	    if (mtmp->mhp < 1) return (1);
+	if (cansee(mtmp->mx,mtmp->my)){
+		pline("%s rusts and falls to pieces!", Monnam(mtmp));
+	}
+	mondead(mtmp);
+	if (mtmp->mhp < 1){
+		return (1);
 	}
 	water_damage(mtmp->minvent, FALSE, FALSE);
 	return (0);

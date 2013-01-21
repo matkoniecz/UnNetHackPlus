@@ -1707,7 +1707,7 @@ register struct attack *mattk;
 		break;
 	    case AD_RUST:
 		if (pd == &mons[PM_IRON_GOLEM]) {
-			pline("%s falls to pieces!", Monnam(mdef));
+			pline("%s rusts and falls to pieces!", Monnam(mdef));
 			xkilled(mdef,0);
 		}
 		hurtmarmor(mdef, AD_RUST);

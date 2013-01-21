@@ -1934,7 +1934,7 @@ glovecheck:		    target = which_armor(mtmp, W_ARMG);
 			}
 			if (mptr == &mons[PM_IRON_GOLEM]) {
 				if (in_sight)
-				    pline("%s falls to pieces!", Monnam(mtmp));
+				    pline("%s rusts and falls to pieces!", Monnam(mtmp));
 				else if(mtmp->mtame)
 				    pline("May %s rust in peace.",
 								mon_nam(mtmp));

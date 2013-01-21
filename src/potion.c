@@ -1208,11 +1208,11 @@ boolean your_fault;
 		    angermon = FALSE;
 		    (void)split_mon(mon, (struct monst *)0);
 		} else if(mon->data == &mons[PM_IRON_GOLEM]) {
-		    if (canseemon(mon))
-			pline("%s rusts.", Monnam(mon));
-		    mon->mhp -= d(1,6);
-		    /* should only be by you */
-		    if (mon->mhp < 1) killed(mon);
+			if (canseemon(mon)){
+				pline("%s rusts and falls to pieces!", Monnam(mon));
+			}
+			/* should only be by you */
+			killed(mon);
 		}
 		break;
 	case POT_OIL:

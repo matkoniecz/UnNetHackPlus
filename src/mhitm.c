@@ -971,7 +971,7 @@ mdamagem(magr, mdef, mattk)
 	    case AD_RUST:
 		if (magr->mcan) break;
 		if (pd == &mons[PM_IRON_GOLEM]) {
-			if (vis) pline("%s falls to pieces!", Monnam(mdef));
+			if (vis) pline("%s rusts and falls to pieces!", Monnam(mdef));
 			mondied(mdef);
 			if (mdef->mhp > 0) return 0;
 			else if (mdef->mtame && !vis)
