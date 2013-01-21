@@ -458,50 +458,50 @@ peffects(otmp)
 		break;
 	case POT_WATER:
 		if(!otmp->blessed && !otmp->cursed) {
-		    pline("This tastes like water.");
-		    u.uhunger += rnd(10);
-		    newuhs(FALSE);
-		    break;
+			pline("This tastes like water.");
+			u.uhunger += rnd(10);
+			newuhs(FALSE);
+			break;
 		}
 		unkn++;
-		if(is_undead(youmonst.data) || is_demon(youmonst.data) ||
-				u.ualign.type == A_CHAOTIC) {
-		    if(otmp->blessed) {
-			pline("This burns like acid!");
-			exercise(A_CON, FALSE);
-			if (u.ulycn >= LOW_PM) {
-			    Your("affinity to %s disappears!",
-				 makeplural(mons[u.ulycn].mname));
-			    if (youmonst.data == &mons[u.ulycn])
-				you_unwere(FALSE);
-			    u.ulycn = NON_PM;	/* cure lycanthropy */
+		if(is_undead(youmonst.data) || is_demon(youmonst.data) || u.ualign.type == A_CHAOTIC) {
+			if(otmp->blessed) {
+				pline("This burns like acid!");
+				exercise(A_CON, FALSE);
+				if (u.ulycn >= LOW_PM) {
+					Your("affinity to %s disappears!", makeplural(mons[u.ulycn].mname));
+					if (youmonst.data == &mons[u.ulycn]) {
+						you_unwere(FALSE);
+					}
+					u.ulycn = NON_PM;	/* cure lycanthropy */
+				}
+				losehp(d(2,6), "potion of holy water", KILLED_BY_AN);
+			} else if(otmp->cursed) {
+				You_feel("quite proud of yourself.");
+				healup(d(2,6),0,0,0);
+				if (u.ulycn >= LOW_PM && !Upolyd) you_were();
+				exercise(A_CON, TRUE);
 			}
-			losehp(d(2,6), "potion of holy water", KILLED_BY_AN);
-		    } else if(otmp->cursed) {
-			You_feel("quite proud of yourself.");
-			healup(d(2,6),0,0,0);
-			if (u.ulycn >= LOW_PM && !Upolyd) you_were();
-			exercise(A_CON, TRUE);
-		    }
 		} else {
-		    if(otmp->blessed) {
-			You_feel("full of awe.");
-			make_sick(0L, (char *) 0, TRUE, SICK_ALL);
-			exercise(A_WIS, TRUE);
-			exercise(A_CON, TRUE);
-			if (u.ulycn >= LOW_PM)
-			    you_unwere(TRUE);	/* "Purified" */
+			if(otmp->blessed) {
+				You_feel("full of awe.");
+				make_sick(0L, (char *) 0, TRUE, SICK_ALL);
+				exercise(A_WIS, TRUE);
+				exercise(A_CON, TRUE);
+				if (u.ulycn >= LOW_PM) {
+					you_unwere(TRUE);	/* "Purified" */
+				}
 			/* make_confused(0L,TRUE); */
-		    } else {
-			if(u.ualign.type == A_LAWFUL) {
-			    pline("This burns like acid!");
-			    losehp(d(2,6), "potion of unholy water",
-				KILLED_BY_AN);
-			} else
-			    You_feel("full of dread.");
-			if (u.ulycn >= LOW_PM && !Upolyd) you_were();
-			exercise(A_CON, FALSE);
-		    }
+			} else {
+				if(u.ualign.type == A_LAWFUL) {
+					pline("This burns like acid!");
+					losehp(d(2,6), "potion of unholy water", KILLED_BY_AN);
+				} else {
+					You_feel("full of dread.");
+				}
+				if (u.ulycn >= LOW_PM && !Upolyd) you_were();
+				exercise(A_CON, FALSE);
+			}
 		}
 		break;
 	case POT_BOOZE:
