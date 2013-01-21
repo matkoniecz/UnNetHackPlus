@@ -465,7 +465,11 @@ peffects(otmp)
 		else {
 			unkn++;
 		}
-
+		if(u.umonnum == PM_IRON_GOLEM){
+			You("rust from inside!");
+			/* this is okay with unchanging */
+			rehumanize();
+		}
 		if(is_undead(youmonst.data) || is_demon(youmonst.data) || u.ualign.type == A_CHAOTIC) {
 			if(otmp->blessed) {
 				pline("This burns like acid!");
