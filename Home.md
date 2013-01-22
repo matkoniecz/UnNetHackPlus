@@ -184,3 +184,4 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 
 #recheck
 * http://alt.org/nethack/naonh.php graves checked out 9 I - new hallucinatory monster names, random engravings, gravestones and T-shirt messages
+* UnNH - (update through 1052 means enabling locust in data.base)
