@@ -1,7 +1,6 @@
 Plans for UnNetHackPlus
 * Most of the item-type-specific commands like "quaff" or "read" have been merged into a single "use" command http://te4.org/news
 * http://nethackwiki.com/wiki/User:Ion_frigate#Add_a_little_spice_to_the_game http://crawl.chaosforge.org/Crawl_Wiki
-* http://l.j-factor.com/nethack/database.diff
 * find encyclopedia entries for http://nethackwiki.com/wiki/Acid_blob http://nethackwiki.com/wiki/Gelatinous_cube http://nethackwiki.com/wiki/Queen_bee (abc monsters done)
 * cap HP regenaration at normal maxHP value (external regeneration, spells and potions still work) - see maxHP cap in spork
 * topten.c tt_oname - use names from NAO (?)
