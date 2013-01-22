@@ -454,152 +454,152 @@ const char what_is_an_unknown_object[] = "an unknown object";
 
 static const char * const bogusobjects[] = {
 
-       /* Modern */
-       "polo mallet",
-       "string vest",
-       "applied theology textbook",        /* AFutD */
-       "handbag",
-       "onion ring",
-       "tuxedo",
-       "breath mint",
-       "potion of antacid",
-       "traffic cone",
-       "chainsaw",
-       "Klein bottle",
-       "pair of high-heeled stilettos",    /* the *other* stiletto */
-       "intercontinental ballistic missile",
+	/* Modern */
+	"polo mallet",
+	"string vest",
+	"applied theology textbook",        /* AFutD */
+	"handbag",
+	"onion ring",
+	"tuxedo",
+	"breath mint",
+	"potion of antacid",
+	"traffic cone",
+	"chainsaw",
+	"Klein bottle",
+	"pair of high-heeled stilettos",    /* the *other* stiletto */
+	"intercontinental ballistic missile",
 
-       /* injokes */
-       "YAFM",                             /* rgrn */
-       "pamphlet titled 'How to Raise the Perfect Pudding'",
-       "blessed greased +5 silly object of hilarity",
-       "The Staff of Misspelling",
+	/* injokes */
+	"YAFM",                             /* rgrn */
+	"pamphlet titled 'How to Raise the Perfect Pudding'",
+	"blessed greased +5 silly object of hilarity",
+	"The Staff of Misspelling",
 
-       /* Silly */
-       "crystall ball bearing",
-       "holy hand grenade",                /* Monty Python */
-       "decoder ring",
-       "amulet of huge gold chains",       /* Foo' */
-       "unicron horn",                     /* Transformers */
-       "chainmail bikini",
-       "first class one-way ticket to Albuquerque", /* Weird Al */
-       "yellow spandex dragon scale mail", /* X-Men */
-       "Kentucky Fried Basilisk",
+	/* Silly */
+	"crystall ball bearing",
+	"holy hand grenade",                /* Monty Python */
+	"decoder ring",
+	"amulet of huge gold chains",       /* Foo' */
+	"unicron horn",                     /* Transformers */
+	"chainmail bikini",
+	"first class one-way ticket to Albuquerque", /* Weird Al */
+	"yellow spandex dragon scale mail", /* X-Men */
+	"Kentucky Fried Basilisk",
 
-       /* Musical Instruments */
-       "grand piano",
-       "two slightly sampled electric eels", /* Oldfield */
-       "kick drum",                        /* 303 */
-       "tooled airhorn",
+	/* Musical Instruments */
+	"grand piano",
+	"two slightly sampled electric eels", /* Oldfield */
+	"kick drum",                        /* 303 */
+	"tooled airhorn",
 
-       /* Pop Culture */
-       "flux capacitor",                   /* BTTF */
-       "Walther PPK",                      /* Bond */
-       "hanging chad",                     /* US Election 2000 */
-       "99 red balloons",                  /* 80s */
-       "pincers of peril",                 /* Goonies */
-       "ring of schwartz",                 /* Spaceballs */
-       "signed copy of Diaspora",          /* Greg Egan */
-       "the missing evidence in the Kelner case", /* Naked Gun */
-       "blessed +9 helm of Des Lynam",     /* Bottom */
+	/* Pop Culture */
+	"flux capacitor",                   /* BTTF */
+	"Walther PPK",                      /* Bond */
+	"hanging chad",                     /* US Election 2000 */
+	"99 red balloons",                  /* 80s */
+	"pincers of peril",                 /* Goonies */
+	"ring of schwartz",                 /* Spaceballs */
+	"signed copy of Diaspora",          /* Greg Egan */
+	"the missing evidence in the Kelner case", /* Naked Gun */
+	"blessed +9 helm of Des Lynam",     /* Bottom */
 
-       /* Roguelikes */
-       "Orb of Zot",                       /* Dungeon Crawl */
-       "head of Morgoth",                  /* Angband, sort of */
-       "hand of Vecna",                    /* SLASH'EM */
-       "eye of the beholder",              /* SLASH'EM */
-       "heavy machine gun",                /* SLASH'EM */
-       "gas grenade",                      /* SLASH'EM */
-       "gauntlets of swimming",            /* SLASH'EM */
-       "amulet versus stone",              /* SLASH'EM */
-       "potion of clairvoyance",           /* SLASH'EM */
-       "potion of invulnerability",        /* SLASH'EM */
-       "spellbook of enchant armor",       /* SLASH'EM */
-       "wand of create horde",             /* SLASH'EM */
-       "map of The Great Adamantine Space Elevator", /*Dwarf Fortress*/
-       "rat blood barrel",                 /*Dwarf Fortress*/
-       "fly ichor barrel",                 /*Dwarf Fortress*/
-       "cat tallow roast",                 /*Dwarf Fortress*/
+	/* Roguelikes */
+	"Orb of Zot",                       /* Dungeon Crawl */
+	"head of Morgoth",                  /* Angband, sort of */
+	"hand of Vecna",                    /* SLASH'EM */
+	"eye of the beholder",              /* SLASH'EM */
+	"heavy machine gun",                /* SLASH'EM */
+	"gas grenade",                      /* SLASH'EM */
+	"gauntlets of swimming",            /* SLASH'EM */
+	"amulet versus stone",              /* SLASH'EM */
+	"potion of clairvoyance",           /* SLASH'EM */
+	"potion of invulnerability",        /* SLASH'EM */
+	"spellbook of enchant armor",       /* SLASH'EM */
+	"wand of create horde",             /* SLASH'EM */
+	"map of The Great Adamantine Space Elevator", /*Dwarf Fortress*/
+	"rat blood barrel",                 /*Dwarf Fortress*/
+	"fly ichor barrel",                 /*Dwarf Fortress*/
+	"cat tallow roast",                 /*Dwarf Fortress*/
 
-       /* Fantasy */
-       "Necronomicon",                     /* Lovecraft */
-       "pipe weed",                        /* LOTR */
-       "knife missile",                    /* Iain M. Banks */
-       "large gem",                        /* Valhalla */
-       "monster manual",                   /* D&D */
-       "spellbook called Octavo",          /* Discworld */
-       "ring of power",                    /* LOTR */
-       "lightsaber",
-       "pan-galactic gargle blaster",      /* HGttG */
-       "Silmaril",                         /* LOTR */
-       "pentagram of protection",          /* Quake */
-       "horcrux",                          /* HP */
+	/* Fantasy */
+	"Necronomicon",                     /* Lovecraft */
+	"pipe weed",                        /* LOTR */
+	"knife missile",                    /* Iain M. Banks */
+	"large gem",                        /* Valhalla */
+	"monster manual",                   /* D&D */
+	"spellbook called Octavo",          /* Discworld */
+	"ring of power",                    /* LOTR */
+	"lightsaber",
+	"pan-galactic gargle blaster",      /* HGttG */
+	"Silmaril",                         /* LOTR */
+	"pentagram of protection",          /* Quake */
+	"horcrux",                          /* HP */
 
-       /* Geekery */
-       "AAA chipset",                      /* Amiga */
-       "thoroughly used copy of Nethack for Dummies",
-       "named pipe",                       /* UNIX */
-       "kernel trap",
-       "copy of UnNetHackPlus 4.0.0",      /* recursion... */
-       "cursed smooth manifold",           /* Topology */
-       "vi clone",
-       "maximally subsentient emacs mode",
-       "bongard diagram",                  /* Intelligence test */
-       "git repository",
+	/* Geekery */
+	"AAA chipset",                      /* Amiga */
+	"thoroughly used copy of Nethack for Dummies",
+	"named pipe",                       /* UNIX */
+	"kernel trap",
+	"copy of UnNetHackPlus 4.0.0",      /* recursion... */
+	"cursed smooth manifold",           /* Topology */
+	"vi clone",
+	"maximally subsentient emacs mode",
+	"bongard diagram",                  /* Intelligence test */
+	"git repository",
 
-       /* Historical */
-       "dead sea scroll",
-       "cat o'nine tails",
-       "pieces of eight",
-       "codpiece",
-       "straight-jacket",
-       "bayonet",
-       "iron maiden",
-       "oubliette",
-       "pestle and mortar"
-       "plowshare",
-       "The Book of the All-Virtuous Wisdom of Joshua ben Sira",
-       "Holy Grail",                      /* Arthurian legends */
+	/* Historical */
+	"dead sea scroll",
+	"cat o'nine tails",
+	"pieces of eight",
+	"codpiece",
+	"straight-jacket",
+	"bayonet",
+	"iron maiden",
+	"oubliette",
+	"pestle and mortar"
+	"plowshare",
+	"The Book of the All-Virtuous Wisdom of Joshua ben Sira",
+	"Holy Grail",                      /* Arthurian legends */
 
-       /* Mashups */
-       "potion of score doubling",
-       "scroll labelled ED AWK YACC",      /* the standard scroll */
-       "scroll labelled RTFM",
-       "scroll labelled KLAATU BARADA NIKTO", /* Evil Dead 3 */
-       "scroll of omniscience",
-       "scroll of mash keyboard",
-       "scroll of RNG taming",
-       "scroll of fungicide",
-       "spellbook of detect foot",
-       "spellbook of detect evil",
-       "helm of telemetry",
-       "blue suede boots of charisma",
-       "cubic zirconium",
-       "amulet of instadeath",
-       "amulet of bad luck",
-       "amulet of refraction",
-       "potion of rebigulation",           /* Simpsons */
-       "O-ring",
-       "wand of washing",
-       "ring named Frost Band",
-       "expensive exact replica of the Amulet of Yendor",
-       "giant beatle",
-       "lodestone",
-       "rubber chicken",                   /* c corpse */
-       "tin of Player meat",
-       "figurine of a god",
-       "tin of whoop ass",
-       "cursed -3 earring of adornment",
-       "wisdom boots",
-       "ornamental cape",
-       "acid blob skeleton",
-       "Lawyerbane",
-       "RNG corpse",
+	/* Mashups */
+	"potion of score doubling",
+	"scroll labelled ED AWK YACC",      /* the standard scroll */
+	"scroll labelled RTFM",
+	"scroll labelled KLAATU BARADA NIKTO", /* Evil Dead 3 */
+	"scroll of omniscience",
+	"scroll of mash keyboard",
+	"scroll of RNG taming",
+	"scroll of fungicide",
+	"spellbook of detect foot",
+	"spellbook of detect evil",
+	"helm of telemetry",
+	"blue suede boots of charisma",
+	"cubic zirconium",
+	"amulet of instadeath",
+	"amulet of bad luck",
+	"amulet of refraction",
+	"potion of rebigulation",           /* Simpsons */
+	"O-ring",
+	"wand of washing",
+	"ring named Frost Band",
+	"expensive exact replica of the Amulet of Yendor",
+	"giant beatle",
+	"lodestone",
+	"rubber chicken",                   /* c corpse */
+	"tin of Player meat",
+	"figurine of a god",
+	"tin of whoop ass",
+	"cursed -3 earring of adornment",
+	"wisdom boots",
+	"ornamental cape",
+	"acid blob skeleton",
+	"Lawyerbane",
+	"RNG corpse",
 
 # ifdef MAIL
-       "brand new, all time lowest introductory rate special offer",
+	"brand new, all time lowest introductory rate special offer",
 # endif
-       "dirty rag"
+	"dirty rag"
 };
 
 /* Return a random bogus object name, for hallucination */
