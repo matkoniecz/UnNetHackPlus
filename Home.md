@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* genociding your pet is OK
 * I wouldn't beef up the Kops themselves, since they are supposed to be wimpy.  But do I like the idea of them calling in the guard when they are up against an overwhelming erm, well, an opponent. http://bilious.alt.org/rgrn/?126678,126685,126686,126690,126691,126692,126694,126695,126696,126697,126698,126703,126704,126705,126709,126710,126713,126714,126724,127665
 * Most of the item-type-specific commands like "quaff" or "read" have been merged into a single "use" command http://te4.org/news
 * http://nethackwiki.com/wiki/User:Ion_frigate#Add_a_little_spice_to_the_game http://crawl.chaosforge.org/Crawl_Wiki
