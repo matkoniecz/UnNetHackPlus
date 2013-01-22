@@ -690,45 +690,15 @@ register char *enterstring;
 	}
 	/* can't do anything about blocking if teleported in */
 	if (!inside_shop(u.ux, u.uy) && !(Is_blackmarket(&u.uz))) {
-	    boolean should_block;
-	    int cnt;
-	    const char *tool;
-	    struct obj *pick = carrying(PICK_AXE),
-		       *mattock = carrying(DWARVISH_MATTOCK);
-
-	    if (pick || mattock) {
-		cnt = 1;	/* so far */
-		if (pick && mattock) {	/* carrying both types */
-		    tool = "digging tool";
-		    cnt = 2;	/* `more than 1' is all that matters */
-		} else if (pick) {
-		    tool = "pick-axe";
-		    /* hack: `pick' already points somewhere into inventory */
-		    while ((pick = pick->nobj) != 0)
-			if (pick->otyp == PICK_AXE) ++cnt;
-		} else {	/* assert(mattock != 0) */
-		    tool = "mattock";
-		    while ((mattock = mattock->nobj) != 0)
-			if (mattock->otyp == DWARVISH_MATTOCK) ++cnt;
-		    /* [ALI] Shopkeeper identifies mattock(s) */
-		    if (!Blind) makeknown(DWARVISH_MATTOCK);
-		}
-		verbalize(NOTANGRY(shkp) ?
-			  "Will you please leave your %s%s outside?" :
-			  "Leave the %s%s outside.",
-			  tool, plur(cnt));
-		should_block = TRUE;
+	    boolean should_block = FALSE;
 #ifdef STEED
-	    } else if (u.usteed) {
+	    if (u.usteed) {
 		verbalize(NOTANGRY(shkp) ?
 			  "Will you please leave %s outside?" :
 			  "Leave %s outside.", y_monnam(u.usteed));
 		should_block = TRUE;
-#endif
-	    } else {
-		should_block = (Fast && (sobj_at(PICK_AXE, u.ux, u.uy) ||
-				      sobj_at(DWARVISH_MATTOCK, u.ux, u.uy)));
 	    }
+#endif
 	    if (should_block) (void) dochug(shkp);  /* shk gets extra move */
 	}
 	return;
@@ -3402,7 +3372,7 @@ register struct monst *shkp;
 	register schar appr;
 	register struct eshk *eshkp = ESHK(shkp);
 	int z;
-	boolean uondoor = FALSE, satdoor, avoid = FALSE, badinv;
+	boolean uondoor = FALSE, satdoor, avoid = FALSE;
 
 	omx = shkp->mx;
 	omy = shkp->my;
@@ -3488,21 +3458,14 @@ register struct monst *shkp;
 		} else {
 		    uondoor = (u.ux == eshkp->shd.x && u.uy == eshkp->shd.y);
 		    if(uondoor) {
-			badinv = (!Is_blackmarket(&u.uz) &&
-				  (carrying(PICK_AXE) || carrying(DWARVISH_MATTOCK) ||
-				   (Fast && (sobj_at(PICK_AXE, u.ux, u.uy) ||
-				   sobj_at(DWARVISH_MATTOCK, u.ux, u.uy)))));
-			if(satdoor && badinv)
-			    return(0);
-			avoid = !badinv;
+			avoid = TRUE;
 		    } else {
 			avoid = (*u.ushops && distu(gx,gy) > 8);
-			badinv = FALSE;
 		    }
 
 		    if(((!eshkp->robbed && !eshkp->billct && !eshkp->debit)
 			|| avoid) && GDIST(omx,omy) < 3) {
-			if (!badinv && !onlineu(omx,omy))
+			if (!onlineu(omx,omy))
 			    return(0);
 			if(satdoor)
 			    appr = gx = gy = 0;
@@ -4283,9 +4246,7 @@ register xchar x, y;
 	if(shkp->mx == sx && shkp->my == sy
 		&& shkp->mcanmove && !shkp->msleeping
 		&& (x == sx-1 || x == sx+1 || y == sy-1 || y == sy+1)
-		&& (Invis ||
-		 (!Is_blackmarket(&u.uz) &&
-		  (carrying(PICK_AXE) || carrying(DWARVISH_MATTOCK)))
+		&& (Invis 
 #ifdef STEED
 			|| u.usteed
 #endif
