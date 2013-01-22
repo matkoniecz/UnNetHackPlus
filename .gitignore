@@ -1,3 +1,6 @@
+*.diff
+*.patch
+
 #temporary compilation files
 conftest.c
 confdefs.h
