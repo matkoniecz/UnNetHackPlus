@@ -16,8 +16,6 @@ Plans for UnNetHackPlus
 * make stupid water noticeable different from stupid fountains
 * http://nethackwiki.com/wiki/W343-3
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/71de5e62d922e8985b7569b14b0ac3b82c4ee6cf - open roles
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/cfd432185d2598d2caed18128ee0e3ba8a188723
-* 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/dccb47ae2a37532ba581d01643902f30193b7211  Handle Orcus', Asmodeus', Croesus', and Pestilence's inventories in t… 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/010fc37452a1500714ab5f05dc000825be773f55 - generate more objects
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/3ba79281c2f889a262449415fcf41ee3d48401ac -  Fix typo on barbarian race listing -- orc twice, dwarf none 
@@ -165,6 +163,7 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/ea5d0c8094e0577f7054ab24447c7ae2990d49c2 - fighting makes noise - it should be done also for mhitm, mhitu + https://github.com/Bulwersator/CopyOfSporkHack/commit/0c4c2c84ea79972e28eb02979ac863dff79abdaf 
 
 # no playtesting
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/cfd432185d2598d2caed18128ee0e3ba8a188723 Hot/cold game with the Amulet no longer requires you to wield/wear it, just carry it.
 * http://bilious.alt.org/?178
 * http://bilious.alt.org/?151
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/570505fe436ae9f29bfbd8a7d99c64dfc4ac74f5
