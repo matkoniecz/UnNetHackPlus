@@ -16,7 +16,6 @@ Plans for UnNetHackPlus
 * make stupid water noticeable different from stupid fountains
 * http://nethackwiki.com/wiki/W343-3
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/71de5e62d922e8985b7569b14b0ac3b82c4ee6cf - open roles
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/6476b23161de3ecce0552d34bfc3c004183f9934
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/cfd432185d2598d2caed18128ee0e3ba8a188723
 * 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/dccb47ae2a37532ba581d01643902f30193b7211  Handle Orcus', Asmodeus', Croesus', and Pestilence's inventories in t… 
@@ -123,7 +122,7 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * http://l.j-factor.com/nethack/quaff.diff
 * http://l.j-factor.com/nethack/monring.diff (savebreaking)
 * http://l.j-factor.com/nethack/shuffled.diff
-
+* braziers from spork?
 #savebreaking????
 * http://bilious.alt.org/?271
 
