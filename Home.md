@@ -1,4 +1,11 @@
 Plans for UnNetHackPlus
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/2d7f668e71867274c7aaf342f5381eeb47344441 - Chance of getting an ordinary "good" weapon instead of an artifact during sacrificing.  As you gain levels, it swings more and more towards the likelihood of getting an artifact.
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/3c861982aa93811365afaba42440f6a361c1fdb8 -  Add potential to be gifted armor as well (which will also be +5); increase chances of getting 'ordinary gift' since randomness can, well, be pretty damn random
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/015f96e1eb5d5ac9181d45f91890bab92f5555ed  Change god-gifts to between +3 and +5. 
+* MAGIC_MARKER as gift (type in object generator), later TRUE to initialize and TRUE to make artifact one :) http://nethackwiki.com/wiki/Source:Ref/mksobj#mksobj
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/57eb5ec04c8dc6b7e0a44325c7b71781335184ab  Make scroll of identify universally known. 
+* http://bilious.alt.org/?288
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/29f44931789ce80359a1536e7be53da1440850ed  Fix inconsistency -- master lich and arch-lich were fire resistant, and got vulnerability to fire because they're undead.
 * [[murphy]]
 * http://nethackwiki.com/wiki/Pet#Armor_and_extrinsics http://nethackwiki.com/wiki/Armor#Monsters_.28pets.29_and_armor
 * genociding your pet is OK
@@ -15,20 +22,16 @@ Plans for UnNetHackPlus
 * save last enlightenment status
 * make stupid water noticeable different from stupid fountains
 * http://nethackwiki.com/wiki/W343-3
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/71de5e62d922e8985b7569b14b0ac3b82c4ee6cf - open roles
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/dccb47ae2a37532ba581d01643902f30193b7211  Handle Orcus', Asmodeus', Croesus', and Pestilence's inventories in t… 
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/71de5e62d922e8985b7569b14b0ac3b82c4ee6cf + https://github.com/Bulwersator/CopyOfSporkHack/commit/3ba79281c2f889a262449415fcf41ee3d48401ac - open roles
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/010fc37452a1500714ab5f05dc000825be773f55 - generate more objects
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/3ba79281c2f889a262449415fcf41ee3d48401ac -  Fix typo on barbarian race listing -- orc twice, dwarf none 
+* deathdrops http://nethackwiki.com/wiki/Source:Mon.c#line1833
+* juggle object generation http://nethackwiki.com/wiki/Source:Mkobj.c#line30
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/21de56b16793ec139ea0859cbec29c40c4072309 Non-mindless monsters will no longer blindly walk into traps they've seen
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/ee98431808762054c022366e8023197b65e15ccb  Jack up probability of shops in general and at deeper levels + https://github.com/Bulwersator/CopyOfSporkHack/commit/bbe6a56d3a6d030962719682fe9ad2d85d930511
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/b66820f04b9b8f98a822e8b1df719fd55ee07726  RANDOM_CORRIDORS now takes an optional parameter. 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/4c434e30415c3cd1d5efeeab1ae2c1dc903aa034  Use any style random corridors 10% of the time. 
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/57eb5ec04c8dc6b7e0a44325c7b71781335184ab  Make scroll of identify universally known. 
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/4c76ff1e643f15f9c739ed7e0aa0bf4429fa4fbb  Rename detect food spellbook to obtain food, switch to "matter" school. '
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/71bff8cb89b7e7f91f6478ea9c89f9f88195b174  Wand of nothing shall ask for direction when zapped in some games. 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/507768e75d0a0b8aecfcea9f960f0ca021041a97  Randomly reduce +X on polymorphed objects (except for wands) 
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/29f44931789ce80359a1536e7be53da1440850ed  Fix inconsistency -- master lich and arch-lich were fire resistant, and got vulnerability to fire because they're undead.
-* http://bilious.alt.org/?265 http://bilious.alt.org/?288 http://bilious.alt.org/?81 http://bilious.alt.org/?227 http://bilious.alt.org/?234 http://bilious.alt.org/?238 http://bilious.alt.org/?221
+* http://bilious.alt.org/?265  http://bilious.alt.org/?81 http://bilious.alt.org/?227 http://bilious.alt.org/?234 http://bilious.alt.org/?238 http://bilious.alt.org/?221
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/a8ed6b03fcd3787e64bd6a0741f8a9934095a953 -  Goblins now small-group monsters. (makes start worse)
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/edd6a79da80913f8c9ccd6a90dc891357371d64c  Add potential for hostile priests to summon "associates". 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/7fbd5b30b90f35f1af745c77fe7fe93504ae1f16  The circular bigroom may have a river. 
@@ -56,13 +59,9 @@ Plans for UnNetHackPlus
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/70941c87feb74c63d0d4ca9bbd925ff909722117 -  Death's touch should hurt monsters/pets 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/8bd8d8b90a6f95344e3c4798a9f0ae802b6a35eb with https://github.com/Bulwersator/CopyOfSporkHack/commit/1f8b526808eeae0ed6472b2b3408743822e814d1
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/c0872effd197e43286b0447289688c94f6bccf16 (restore frontier)
-* too many candles, see UnNethack 3.6 release thread on rgrn
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/904e29f56a2a8dd2a15b97cd4d96780f9021b24b - more balanced bones
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/480edfcf07dd69f4111bbd48670f212d1498d13b - Monsters that are about to flee (and have a voice) may scream in fear
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/dfb47e58a21a9e50a60245309f1c91ec53310457 -  Scared covetous monsters should actually 'flee' to someplace not near the player.  Note that this doesn't include STRAT_HEAL, only magical sources of fear.
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/3c861982aa93811365afaba42440f6a361c1fdb8 -  Add potential to be gifted armor as well (which will also be +5); increase chances of getting 'ordinary gift' since randomness can, well, be pretty damn random
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/2d7f668e71867274c7aaf342f5381eeb47344441 - Chance of getting an ordinary "good" weapon instead of an artifact during sacrificing.  As you gain levels, it swings more and more towards the likelihood of getting an artifact.
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/015f96e1eb5d5ac9181d45f91890bab92f5555ed  Change god-gifts to between +3 and +5. 
 * https://github.com/Bulwersator/CopyOfSporkHack/commits/master?page=4
 * https://groups.google.com/forum/?fromgroups=#!msg/rec.games.roguelike.nethack/vspJEm0wwJ0/QDWJeqjn1HQJ
 * http://web.archive.org/web/20080309115104/http://www.csh.rit.edu/~topher/nethack/
