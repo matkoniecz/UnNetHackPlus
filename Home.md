@@ -1,5 +1,6 @@
 Plans for UnNetHackPlus
 * hill orc gray, goblin green
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/9254a4770a1f49fc6ccf1029212fe1b2c087c8ef https://github.com/Bulwersator/CopyOfSporkHack/commit/68ad70c6b002d4d4af54b85e495c8ca6be3ed5b0 https://github.com/Bulwersator/CopyOfSporkHack/commit/0c88374443b69d29241888ad7354fff4291b3848 - TOD
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/2d7f668e71867274c7aaf342f5381eeb47344441 - Chance of getting an ordinary "good" weapon instead of an artifact during sacrificing.  As you gain levels, it swings more and more towards the likelihood of getting an artifact.
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/3c861982aa93811365afaba42440f6a361c1fdb8 -  Add potential to be gifted armor as well (which will also be +5); increase chances of getting 'ordinary gift' since randomness can, well, be pretty damn random
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/015f96e1eb5d5ac9181d45f91890bab92f5555ed  Change god-gifts to between +3 and +5. 
@@ -47,11 +48,9 @@ Plans for UnNetHackPlus
 * http://l.j-factor.com/nethack/wallcorr.diff
 * http://l.j-factor.com/nethack/construct.diff
 * http://l.j-factor.com/nethack/edibility.diff
-* Biodiversity patch
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/161eec3c4e0e06cab3f70b28e34b95a37f368918 -  Major alignment changes. 
 * warning on Cthulhu, 6 - terror, even without normal warning source (green?)
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/9254a4770a1f49fc6ccf1029212fe1b2c087c8ef https://github.com/Bulwersator/CopyOfSporkHack/commit/68ad70c6b002d4d4af54b85e495c8ca6be3ed5b0 https://github.com/Bulwersator/CopyOfSporkHack/commit/0c88374443b69d29241888ad7354fff4291b3848
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/6aa95dc3069c3392e3ddb5ad35042e1a78187e57
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/6aa95dc3069c3392e3ddb5ad35042e1a78187e57 - Shopkeepers will now cry their wares at you as you pass by
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/094ddfac1a648a07d5ed291ffc1b37803ad065f4 - reduces shkp yelling
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/104c0ed75d2e00b54ca340dcd3f60c1923b4020c
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/42f33afb5a12213e6ecaed0015a52c21ff14794b
