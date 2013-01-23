@@ -302,7 +302,7 @@ register struct monst *mtmp;
 		mtmp->mnamelth = 0;
 		break;
 	    case PM_WAX_GOLEM:
-		num = d(2,4);
+		num = d(1,4);
 		while (num--)
 			obj = mksobj_at(WAX_CANDLE, x, y, TRUE, FALSE);
 		mtmp->mnamelth = 0;

@@ -1626,8 +1626,13 @@ lootcont:
 		any = TRUE;
 
 		if (cobj->olocked) {
-		    pline("Hmmm, it seems to be locked.");
-		    continue;
+			pline("Hmmm, it seems to be locked.");
+			if (flags.autounlock){
+				if(cobj->otyp != IRON_SAFE){
+					pick_lock(carrying(SKELETON_KEY), cc.x, cc.y, TRUE);
+				}
+			}
+			continue;
 		}
 		if (cobj->otyp == BAG_OF_TRICKS && cobj->spe>0) {
 		    int tmp;
