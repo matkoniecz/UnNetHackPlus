@@ -36,6 +36,7 @@
 	* Carrying digging tools to shop is no longer blocked
 	* Touch of death changed - from SporkHack. Instadeath removed, antimagic is not fully protecting.
 	* Scroll of identify universally known (from SporkHack - https://github.com/Bulwersator/CopyOfSporkHack/commit/57eb5ec04c8dc6b7e0a44325c7b71781335184ab)
+	* Fire resistance removed from master lich and arch-lich as leftover from when you had to be fire resistant to go into Gehennom at all (from SporkHack - https://github.com/Bulwersator/CopyOfSporkHack/commit/29f44931789ce80359a1536e7be53da1440850ed)
 
 2012-04-01  UnNetHack 4.0.0
 	* Uncursed and blessed scrolls of magic mapping reveal secret doors
