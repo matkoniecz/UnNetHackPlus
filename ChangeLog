@@ -35,6 +35,7 @@
 	* Potion of water used against iron golems are more effective
 	* Carrying digging tools to shop is no longer blocked
 	* Touch of death changed - from SporkHack. Instadeath removed, antimagic is not fully protecting.
+	* Scroll of identify universally known (from SporkHack - https://github.com/Bulwersator/CopyOfSporkHack/commit/57eb5ec04c8dc6b7e0a44325c7b71781335184ab)
 
 2012-04-01  UnNetHack 4.0.0
 	* Uncursed and blessed scrolls of magic mapping reveal secret doors

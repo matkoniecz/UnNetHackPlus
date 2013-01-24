@@ -624,6 +624,8 @@ u_init()
 	u.nv_range   =  1;
 	u.xray_range = -1;
 
+	/* Everyone knows what the scroll of identify is. */
+	knows_object(SCR_IDENTIFY);
 
 	/*** Role-specific initializations ***/
 	switch (Role_switch) {
