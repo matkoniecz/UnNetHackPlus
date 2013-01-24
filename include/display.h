@@ -185,7 +185,7 @@
 
 
 /* Total number of cmap indices in the sheild_static[] array. */
-#define SHIELD_COUNT 21
+#define SHIELD_COUNT 7
 
 
 /*
