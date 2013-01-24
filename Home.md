@@ -153,6 +153,7 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * http://l.j-factor.com/nethack/aleax.diff
 * http://l.j-factor.com/nethack/mirrorfix.diff
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/ea5d0c8094e0577f7054ab24447c7ae2990d49c2 - fighting makes noise - it should be done also for mhitm, mhitu + https://github.com/Bulwersator/CopyOfSporkHack/commit/0c4c2c84ea79972e28eb02979ac863dff79abdaf 
+* from angry_priest() - priests should try to reconvert altar back
 
 # no playtesting
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/cfd432185d2598d2caed18128ee0e3ba8a188723 Hot/cold game with the Amulet no longer requires you to wield/wear it, just carry it.
