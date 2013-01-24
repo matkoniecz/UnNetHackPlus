@@ -22,8 +22,7 @@
 	* Wizards may start with cloak of protection/invisibility/displacement/robe/oilskin cloak/alchemy smock (based on idea from Sporkhack - https://github.com/Bulwersator/CopyOfSporkHack/commit/ef7e3277b9f61d6c9fb96ce9a83e22061d5f487d )
 	* Now anybody may tame monkeys and apes with bananas (from Sporkhack - https://github.com/Bulwersator/CopyOfSporkHack/commit/bd4c2299a9250c30be75ec225fee9014dcd3ccbe and https://github.com/Bulwersator/CopyOfSporkHack/commit/cbda4727b965d1942e3065cd79f561af3f63040f )
 	* More random gravestone epitaphs (from NAO and original ones)
-	* New hallucinatory monsters
-	* Hallucinatory monsters and monster sounds from NAO
+	* Hallucinatory monsters and monster sounds (from NAO and original ones)
 	* More t-shirt messages from NAO
 	* If dipping into greasy potion produced no results, grease the dipped object (from SporkHack - see https://github.com/Bulwersator/CopyOfSporkHack/commit/0fb25418eecfa996588306df118b8eb5d2fa3f78 and https://github.com/Bulwersator/CopyOfSporkHack/commit/719b5f56b80e73caf632f2f222ec1d99d55c46b5 )
 	* Dwarves have chance of starting with pickaxe (from SporkHack - https://github.com/Bulwersator/CopyOfSporkHack/commit/71de5e62d922e8985b7569b14b0ac3b82c4ee6cf)
