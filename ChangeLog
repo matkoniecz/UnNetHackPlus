@@ -37,6 +37,7 @@
 	* Touch of death changed - from SporkHack. Instadeath removed, antimagic is not fully protecting.
 	* Scroll of identify universally known (from SporkHack - https://github.com/Bulwersator/CopyOfSporkHack/commit/57eb5ec04c8dc6b7e0a44325c7b71781335184ab)
 	* Fire resistance removed from master lich and arch-lich as leftover from when you had to be fire resistant to go into Gehennom at all (from SporkHack - https://github.com/Bulwersator/CopyOfSporkHack/commit/29f44931789ce80359a1536e7be53da1440850ed)
+	* Sacrifice gifts from SporkHack - you may get also armor, normal weapons (fixed and at +3 to +5) (https://github.com/Bulwersator/CopyOfSporkHack/commit/2d7f668e71867274c7aaf342f5381eeb47344441 https://github.com/Bulwersator/CopyOfSporkHack/commit/3c861982aa93811365afaba42440f6a361c1fdb8 https://github.com/Bulwersator/CopyOfSporkHack/commit/015f96e1eb5d5ac9181d45f91890bab92f5555ed)
 
 2012-04-01  UnNetHack 4.0.0
 	* Uncursed and blessed scrolls of magic mapping reveal secret doors
