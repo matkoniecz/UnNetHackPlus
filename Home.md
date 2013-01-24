@@ -1,7 +1,6 @@
 Plans for UnNetHackPlus
 * MAGIC_MARKER as gift (type in object generator), later TRUE to initialize and TRUE to make artifact one :) http://nethackwiki.com/wiki/Source:Ref/mksobj#mksobj
 * http://bilious.alt.org/?288
-* [[murphy]]
 * http://nethackwiki.com/wiki/Pet#Armor_and_extrinsics http://nethackwiki.com/wiki/Armor#Monsters_.28pets.29_and_armor
 * genociding your pet is OK
 * I wouldn't beef up the Kops themselves, since they are supposed to be wimpy.  But do I like the idea of them calling in the guard when they are up against an overwhelming erm, well, an opponent. http://bilious.alt.org/rgrn/?126678,126685,126686,126690,126691,126692,126694,126695,126696,126697,126698,126703,126704,126705,126709,126710,126713,126714,126724,127665
