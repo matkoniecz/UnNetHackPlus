@@ -1,12 +1,6 @@
 Plans for UnNetHackPlus
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/9254a4770a1f49fc6ccf1029212fe1b2c087c8ef https://github.com/Bulwersator/CopyOfSporkHack/commit/68ad70c6b002d4d4af54b85e495c8ca6be3ed5b0 https://github.com/Bulwersator/CopyOfSporkHack/commit/0c88374443b69d29241888ad7354fff4291b3848 - TOD
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/2d7f668e71867274c7aaf342f5381eeb47344441 - Chance of getting an ordinary "good" weapon instead of an artifact during sacrificing.  As you gain levels, it swings more and more towards the likelihood of getting an artifact.
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/3c861982aa93811365afaba42440f6a361c1fdb8 -  Add potential to be gifted armor as well (which will also be +5); increase chances of getting 'ordinary gift' since randomness can, well, be pretty damn random
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/015f96e1eb5d5ac9181d45f91890bab92f5555ed  Change god-gifts to between +3 and +5. 
 * MAGIC_MARKER as gift (type in object generator), later TRUE to initialize and TRUE to make artifact one :) http://nethackwiki.com/wiki/Source:Ref/mksobj#mksobj
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/57eb5ec04c8dc6b7e0a44325c7b71781335184ab  Make scroll of identify universally known. 
 * http://bilious.alt.org/?288
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/29f44931789ce80359a1536e7be53da1440850ed  Fix inconsistency -- master lich and arch-lich were fire resistant, and got vulnerability to fire because they're undead.
 * [[murphy]]
 * http://nethackwiki.com/wiki/Pet#Armor_and_extrinsics http://nethackwiki.com/wiki/Armor#Monsters_.28pets.29_and_armor
 * genociding your pet is OK
