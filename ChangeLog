@@ -3,6 +3,7 @@
 		- C343-14 "tombstone message resulting from eating an identified artifact is gramatically incorrect" (from GruntHack - https://github.com/sgrunt/GruntHack/commit/02a48205328096f50d28e32f527c8df065f86bdc)
 		- Successful prayer now protects against stinking cloud (from GruntHack - https://github.com/sgrunt/GruntHack/commit/3f358cc7401afcd39eb6193184deb9c35aa517d5)
 		- C343-438: Typo "gold piecess" may occur when selling items in a container (from GruntHack - https://github.com/sgrunt/GruntHack/commit/2cce8e189eb4960b22636fa8cc3002ffa55df952)
+		- Sacrifice that fits many cases (own race + former pet, unicorn + former pet, own race + crossaligned high altar etc) is handled properly.
 	* Mind flayer attacks only cause physical damage and int drain (from UnNetHack, revision 1025)
 	* Follow guidelines for color assignment (based on http://l.j-factor.com/nethack/colour.diff by "L" - Leon Arnott)
 	* Poison gas blasts leave a trail of stinking clouds (based on http://l.j-factor.com/nethack/poisoncloud.diff by "L" - Leon Arnott)
