@@ -22,11 +22,10 @@ STATIC_DCL void FDECL(kill_eggs, (struct obj *));
 
 #ifdef REINCARNATION
 #define LEVEL_SPECIFIC_NOCORPSE(mdat) \
-	 (Is_rogue_level(&u.uz) || \
-	   (level.flags.graveyard && is_undead(mdat) && rn2(3)))
+	 (Is_rogue_level(&u.uz))
 #else
 #define LEVEL_SPECIFIC_NOCORPSE(mdat) \
-	   (level.flags.graveyard && is_undead(mdat) && rn2(3))
+	   (0)
 #endif
 
 
@@ -1713,7 +1712,7 @@ boolean was_swallowed;			/* digestion */
 		   || is_rider(mdat))
 		return TRUE;
 	return (boolean) (!rn2((int)
-		(2 + ((int)(mdat->geno & G_FREQ)<2) + verysmall(mdat))));
+		(2 + ((int)(mdat->geno & G_FREQ)<2) + verysmall(mdat) + (int)(is_undead(mdat))*3)));
 }
 
 /** Creates Cthulhu's death message and death cloud. */

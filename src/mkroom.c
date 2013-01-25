@@ -477,7 +477,6 @@ int mm_flags;
 		     !revive(otmp)))
 		(void) makemon(mdat, cc.x, cc.y, mm_flags);
 	}
-	level.flags.graveyard = TRUE;	/* reduced chance for undead corpse */
 }
 
 STATIC_OVL struct permonst *
