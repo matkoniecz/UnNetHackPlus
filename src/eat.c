@@ -1987,6 +1987,12 @@ struct obj *otmp;
 		if (yn_function(buf,ynchars,'n')=='n') return 1;
 		else return 2;
 	}
+	if (cadaver && is_were(&mons[mnum]) && u.ulycn != mnum) {
+		Sprintf(buf, "%s like %s might be diseased. %s",
+			foodsmell, it_or_they, eat_it_anyway);
+		if (yn_function(buf,ynchars,'n')=='n') return 1;
+		else return 2;
+	}
 	if (cadaver && !vegetarian(&mons[mnum]) &&
 	    u.roleplay.vegetarian) {
 		Sprintf(buf, "%s unhealthy. %s",
