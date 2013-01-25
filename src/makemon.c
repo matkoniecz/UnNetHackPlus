@@ -682,14 +682,14 @@ register struct	monst	*mtmp;
 					   addressable, i.e. not merged with another object */
 					begin_burn(otmp, FALSE);
 				}
-			} else if (!rn2(5)) {
+			} else if (!rn2(15)) {
 				/* Add a candle to inventory anyway, but don't light it. */
 				otmp = mksobj(rn2(4) ? TALLOW_CANDLE : WAX_CANDLE,
 						TRUE, FALSE);
 				otmp->quan = 1;
 				(void) mpickobj(mtmp, otmp);
 			}
-		} else if (!rn2(10)) {
+		} else if (!rn2(15)) {
 			/* A small chance gnomes away from home have one too */
 			otmp = mksobj(rn2(4) ? TALLOW_CANDLE : WAX_CANDLE,
 					TRUE, FALSE);
