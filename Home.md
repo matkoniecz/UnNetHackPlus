@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* sacrificing candles ( splitobj )
 * stop body armor as gift for monks not wielding weapons http://nethackwiki.com/wiki/Source:NetHack_3.4.3/src/attrib.c#adjabil
 * stop gifts from making things worse than owned by player
 * MAGIC_MARKER as gift (type in object generator), later TRUE to initialize and TRUE to make artifact one :) http://nethackwiki.com/wiki/Source:Ref/mksobj#mksobj
