@@ -44,7 +44,6 @@ Plans for UnNetHackPlus
 * http://l.j-factor.com/nethack/wounds.diff
 * http://l.j-factor.com/nethack/wallcorr.diff
 * http://l.j-factor.com/nethack/construct.diff
-* http://l.j-factor.com/nethack/edibility.diff
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/161eec3c4e0e06cab3f70b28e34b95a37f368918 -  Major alignment changes. 
 * warning on Cthulhu, 6 - terror, even without normal warning source (green?)
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/6aa95dc3069c3392e3ddb5ad35042e1a78187e57 - Shopkeepers will now cry their wares at you as you pass by
