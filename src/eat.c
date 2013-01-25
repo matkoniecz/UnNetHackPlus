@@ -1921,12 +1921,11 @@ struct obj *otmp;
 	   ability to detect food that is unfit for consumption
 	   or dangerous and avoid it. */
 
-	char buf[BUFSZ], foodsmell[BUFSZ],
-	     it_or_they[QBUFSZ], eat_it_anyway[QBUFSZ];
-	boolean cadaver = (otmp->otyp == CORPSE),
-		stoneorslime = FALSE;
-	int material = objects[otmp->otyp].oc_material,
-	    mnum = otmp->corpsenm;
+	char buf[BUFSZ], foodsmell[BUFSZ], it_or_they[QBUFSZ], eat_it_anyway[QBUFSZ];
+	boolean cadaver = (otmp->otyp == CORPSE);
+	boolean deadly = FALSE;
+	int material = objects[otmp->otyp].oc_material;
+	int mnum = otmp->corpsenm;
 	long rotted = 0L;
 
 	Strcpy(foodsmell, Tobjnam(otmp, "smell"));
@@ -1936,14 +1935,16 @@ struct obj *otmp;
 
 	if (cadaver || otmp->otyp == EGG || otmp->otyp == TIN) {
 		/* These checks must match those in eatcorpse() */
-		stoneorslime = (touch_petrifies(&mons[mnum]) &&
+		deadly = (touch_petrifies(&mons[mnum]) &&
 				!Stone_resistance &&
 				!poly_when_stoned(youmonst.data));
 
-		if (mnum == PM_GREEN_SLIME)
-		    stoneorslime = (!Unchanging && !flaming(youmonst.data) &&
-			youmonst.data != &mons[PM_GREEN_SLIME]);
-
+		if (mnum == PM_GREEN_SLIME) {
+			deadly = (!Unchanging && !flaming(youmonst.data) && youmonst.data != &mons[PM_GREEN_SLIME]);
+		}
+		if (is_rider(&mons[mnum])) {
+			deadly = TRUE;
+		}
 		if (cadaver && mnum != PM_LIZARD && mnum != PM_LICHEN) {
 			long age = peek_at_iced_corpse_age(otmp);
 			/* worst case rather than random
@@ -1959,15 +1960,15 @@ struct obj *otmp;
 	 * order from most detrimental to least detrimental.
 	 */
 
-	if (cadaver && mnum != PM_ACID_BLOB && rotted > 5L && !Sick_resistance) {
-		/* Tainted meat */
-		Sprintf(buf, "%s like %s could be tainted! %s",
+	if (deadly) {
+		Sprintf(buf, "%s like %s could be something very dangerous! %s",
 			foodsmell, it_or_they, eat_it_anyway);
 		if (yn_function(buf,ynchars,'n')=='n') return 1;
 		else return 2;
 	}
-	if (stoneorslime) {
-		Sprintf(buf, "%s like %s could be something very dangerous! %s",
+	if (cadaver && mnum != PM_ACID_BLOB && rotted > 5L && !Sick_resistance) {
+		/* Tainted meat */
+		Sprintf(buf, "%s like %s could be tainted! %s",
 			foodsmell, it_or_they, eat_it_anyway);
 		if (yn_function(buf,ynchars,'n')=='n') return 1;
 		else return 2;
