@@ -127,7 +127,7 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/05b6dbfc2247fb0194bc58df6c04c278c4149fa0
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/03be90768097959dcd3e062d46c9a9afc89f77fe
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/cd21033f22b5e9e7ef318ea1a1b9dd76c8351bfa
-
+* water damage to flaming spheres (losehp(dam, "drenching", KILLED_BY); in https://github.com/Chris-plus-alphanumericgibberish/dnethack/blob/f167bb7bd5568288c1e54f7581ae34499d7945fd/dnethack-3.4.3/src/trap.c)
 
 #savebreaking?
 * http://bilious.alt.org/?271
@@ -135,6 +135,7 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * revert UnDragons
 
 #savebreaking
+* silver boots + https://github.com/Chris-plus-alphanumericgibberish/dnethack/commit/f167bb7bd5568288c1e54f7581ae34499d7945fd (dokick edit)
 * Sporkhack has added some racial equipment for gnomes to wear.
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/4bf67bd1aea2d321b8c90b3de0de5f4c269a2500
 * investigate helm of clarity from spork
