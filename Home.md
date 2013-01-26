@@ -41,7 +41,6 @@ Plans for UnNetHackPlus
 * nethack.alt.org, there is an option (hilite_hidden_stairs) http://bilious.alt.org/?433
 * new level generator (moria, see newsgroup)
 * the alignment system needs a complete overhaul 
-* revert UnDragons (savebreaking????)
 * make stupid water noticeable different from stupid fountains
 * http://nethackwiki.com/wiki/W343-3
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/71de5e62d922e8985b7569b14b0ac3b82c4ee6cf + https://github.com/Bulwersator/CopyOfSporkHack/commit/3ba79281c2f889a262449415fcf41ee3d48401ac - open roles
@@ -130,6 +129,11 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/cd21033f22b5e9e7ef318ea1a1b9dd76c8351bfa
 
 
+#savebreaking?
+* http://bilious.alt.org/?271
+* new appearances - torn spellbook
+* revert UnDragons
+
 #savebreaking
 * Sporkhack has added some racial equipment for gnomes to wear.
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/4bf67bd1aea2d321b8c90b3de0de5f4c269a2500
@@ -147,8 +151,6 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * http://l.j-factor.com/nethack/monring.diff (savebreaking)
 * http://l.j-factor.com/nethack/shuffled.diff
 * braziers from spork?
-#savebreaking????
-* http://bilious.alt.org/?271
 
 # redigest?
 * http://l.j-factor.com/nethack/colour.diff
