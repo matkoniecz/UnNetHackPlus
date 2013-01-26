@@ -5,15 +5,14 @@ Plans for UnNetHackPlus
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/ce72a17e8b23ad6e6e892127f4b3885726da02b5
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/5d10dd556b1d511b248e67f5882b0d2ffaff580d
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/9a92a24ea83d6f873ad65a4dbad73c4851d3df29
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/72e5df0904ceaea90f5082c2df38db3bfbc1ac62
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/f63ace46cb35242a082e4035e13012ac832f9639
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/d967bc58ceffbc34d685a7bd8ff9c17177ec2716 + https://github.com/Bulwersator/CopyOfSporkHack/commit/c57aa2cadebf5b2c3a580f6350806872cbed7b0f
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/c060e00fdf7507da62106a997f09e83d2d564ebb
-* erosion fixes: https://github.com/Bulwersator/CopyOfSporkHack/commit/65838348f1d8f7a0dfbfe3fac96ac3ccfa8054dc + https://github.com/Bulwersator/CopyOfSporkHack/commit/883051a12294d4f7672904c22ad709b51e80fad0
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/72e5df0904ceaea90f5082c2df38db3bfbc1ac62 +  https://github.com/Bulwersator/CopyOfSporkHack/commit/65838348f1d8f7a0dfbfe3fac96ac3ccfa8054dc + https://github.com/Bulwersator/CopyOfSporkHack/commit/883051a12294d4f7672904c22ad709b51e80fad0
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/68be37ef17c95024eb28e25820b7534d43478166
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/61b0d41fac692b0c84b99414f16f23217fd08d0f
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/c2640a22d5acf655a71ed0547dd31c3374317b80
-* Bunnies and great big iron cauldrons 
+* cauldron
 * potion of wow wow sauce 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/f2658a4b96b37fc171a133d5484ee5353afbc372 
 * http://bilious.alt.org/?38
