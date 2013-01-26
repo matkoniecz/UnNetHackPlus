@@ -23,6 +23,7 @@
 #define C(color)	color
 #define HI_DOMESTIC	CLR_WHITE	/* use for player + friendlies */
 #define HI_LORD		CLR_MAGENTA
+#define HI_ABOMINATION	CLR_BRIGHT_GREEN
 #else
 #define C(color)
 #endif
@@ -1943,7 +1944,7 @@ struct permonst _mons2[] = {
 	SIZ(1000, 0, 0, MS_HISS, MZ_LARGE), MR_DISINT|MR_STONE, 0,
 	M1_ANIMAL|M1_TUNNEL|M1_NOTAKE|M1_NOHANDS|M1_REGEN,
 	M2_NOPOLY|M2_HOSTILE|M2_WANDER|M2_NASTY,
-	M3_INFRAVISIBLE, CLR_BRIGHT_GREEN),
+	M3_INFRAVISIBLE, HI_ABOMINATION),
 #endif
 /*
  * Snakes
@@ -2842,7 +2843,7 @@ struct permonst _mons2[] = {
 	  M1_OMNIVORE,
 	M2_NOPOLY|M2_STALK|M2_HOSTILE|M2_PNAME|M2_NASTY|M2_STRONG|
 	  M2_PRINCE|M2_NEUTER|M2_ROCKTHROW|M2_MAGIC,
-	M3_WANTSAMUL|M3_WAITFORU|M3_INFRAVISION, HI_LORD), /* M3_NOTAME */
+	M3_WANTSAMUL|M3_WAITFORU|M3_INFRAVISION, HI_ABOMINATION), /* M3_NOTAME */
 	/* Riders -- the Four Horsemen of the Apocalypse ("War" == player)
 	 */
     MON("Death", S_DEMON,
