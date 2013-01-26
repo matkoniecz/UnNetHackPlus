@@ -2,8 +2,6 @@ Plans for UnNetHackPlus
 * Gnomes begin with Gnomish hats and a small pile of tallow candles - dnethack
 * Only your quest Nemeses will deliberately steal your quest artifact, other monsters may steal the amulet and invocation items. The quest artifact may of course be randomly stolen by nymphs and the like.
 +  -Makes QA a dependable source of extrinsics, deepening differences between classes. -dnethack
-* Ph’nglui mglw’nafh Cthulhu R’lyeh wgah’nagl fhtagn
-* That is not dead which can eternal lie, and with strange aeons even death may die.
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/f12afc0b61b702fcff39d18ed8f30654e357a2e6
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/1032af2e5b88947b828cdc89a062adb1178fbe5a
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/dea61cde17b8758091e3f3cef95c2d651d11cb3e
