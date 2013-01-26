@@ -833,7 +833,6 @@ u_init()
 	case PM_GNOME:
 		 if (!rn2(15))
 		 {
-			 /* Wise dwarves bring their toy to the dungeons. */
 			 ini_inv(Candle);
 		 }
 	    break;
