@@ -25,7 +25,7 @@
 	* Hallucinatory monsters and monster sounds (from NAO and original ones)
 	* More t-shirt messages from NAO
 	* If dipping into greasy potion produced no results, grease the dipped object (from SporkHack - see https://github.com/Bulwersator/CopyOfSporkHack/commit/0fb25418eecfa996588306df118b8eb5d2fa3f78 and https://github.com/Bulwersator/CopyOfSporkHack/commit/719b5f56b80e73caf632f2f222ec1d99d55c46b5 )
-	* Dwarves have chance of starting with pickaxe (from SporkHack - https://github.com/Bulwersator/CopyOfSporkHack/commit/71de5e62d922e8985b7569b14b0ac3b82c4ee6cf)
+	* Gnomes may start with candles (idea from dnethack), and dwarves with pickaxe (from SporkHack - https://github.com/Bulwersator/CopyOfSporkHack/commit/71de5e62d922e8985b7569b14b0ac3b82c4ee6cf)
 	* Increase chances of getting a golem from polypiling (idea from SporkHack - https://github.com/Bulwersator/CopyOfSporkHack/commit/3770da563bae83c28320532f2810a7c029b77534)
 	* Allow more than one special room per level in the DoD (from SporkHack - https://github.com/Bulwersator/CopyOfSporkHack/commit/9904a3740e989bc50ae84f582c33d4d720a6ddbf)
 	* Chance of wand wresting raised to 1/11

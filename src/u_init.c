@@ -209,6 +209,10 @@ static struct trobj Pickaxe[] = {
 	{ PICK_AXE, 0, TOOL_CLASS, 1, 0 },
 	{ 0, 0, 0, 0, 0 }
 };
+static struct trobj Candle[] = {
+	{ TALLOW_CANDLE, 0, TOOL_CLASS, 1, 0 },
+	{ 0, 0, 0, 0, 0 }
+};
 #ifdef TOURIST
 static struct trobj Leash[] = {
 	{ LEASH, 0, TOOL_CLASS, 1, 0 },
@@ -827,6 +831,11 @@ u_init()
 	    break;
 
 	case PM_GNOME:
+		 if (!rn2(15))
+		 {
+			 /* Wise dwarves bring their toy to the dungeons. */
+			 ini_inv(Candle);
+		 }
 	    break;
 
 	case PM_ORC:
