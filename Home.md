@@ -1,11 +1,29 @@
 Plans for UnNetHackPlus
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/f12afc0b61b702fcff39d18ed8f30654e357a2e6
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/1032af2e5b88947b828cdc89a062adb1178fbe5a
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/dea61cde17b8758091e3f3cef95c2d651d11cb3e
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/ce72a17e8b23ad6e6e892127f4b3885726da02b5
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/5d10dd556b1d511b248e67f5882b0d2ffaff580d
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/9a92a24ea83d6f873ad65a4dbad73c4851d3df29
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/72e5df0904ceaea90f5082c2df38db3bfbc1ac62
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/f63ace46cb35242a082e4035e13012ac832f9639
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/d967bc58ceffbc34d685a7bd8ff9c17177ec2716 + https://github.com/Bulwersator/CopyOfSporkHack/commit/c57aa2cadebf5b2c3a580f6350806872cbed7b0f
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/c060e00fdf7507da62106a997f09e83d2d564ebb
+* erosion fixes: https://github.com/Bulwersator/CopyOfSporkHack/commit/65838348f1d8f7a0dfbfe3fac96ac3ccfa8054dc + https://github.com/Bulwersator/CopyOfSporkHack/commit/883051a12294d4f7672904c22ad709b51e80fad0
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/68be37ef17c95024eb28e25820b7534d43478166
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/61b0d41fac692b0c84b99414f16f23217fd08d0f
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/c2640a22d5acf655a71ed0547dd31c3374317b80
+* Bunnies and great big iron cauldrons 
+* potion of wow wow sauce 
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/f2658a4b96b37fc171a133d5484ee5353afbc372 
+* http://bilious.alt.org/?38
 * sacrificing candles ( splitobj )
 * stop body armor as gift for monks not wielding weapons http://nethackwiki.com/wiki/Source:NetHack_3.4.3/src/attrib.c#adjabil
 * stop gifts from making things worse than owned by player
 * MAGIC_MARKER as gift (type in object generator), later TRUE to initialize and TRUE to make artifact one :) http://nethackwiki.com/wiki/Source:Ref/mksobj#mksobj
+* http://nethackwiki.com/wiki/Source:Polyself.c#line629
 * canibalism among sentient pets (BTW, scroll of taming affecting sentient creatures is quite disturbing) 
 * http://bilious.alt.org/?288
-* nethackwiki.com/wiki/Minion - ++
 * http://nethackwiki.com/wiki/Pet#Armor_and_extrinsics http://nethackwiki.com/wiki/Armor#Monsters_.28pets.29_and_armor
 * genociding your pet is OK
 * I wouldn't beef up the Kops themselves, since they are supposed to be wimpy.  But do I like the idea of them calling in the guard when they are up against an overwhelming erm, well, an opponent. http://bilious.alt.org/rgrn/?126678,126685,126686,126690,126691,126692,126694,126695,126696,126697,126698,126703,126704,126705,126709,126710,126713,126714,126724,127665
@@ -18,7 +36,6 @@ Plans for UnNetHackPlus
 * new level generator (moria, see newsgroup)
 * the alignment system needs a complete overhaul 
 * revert UnDragons (savebreaking????)
-* save last enlightenment status
 * make stupid water noticeable different from stupid fountains
 * http://nethackwiki.com/wiki/W343-3
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/71de5e62d922e8985b7569b14b0ac3b82c4ee6cf + https://github.com/Bulwersator/CopyOfSporkHack/commit/3ba79281c2f889a262449415fcf41ee3d48401ac - open roles
@@ -31,7 +48,6 @@ Plans for UnNetHackPlus
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/71bff8cb89b7e7f91f6478ea9c89f9f88195b174  Wand of nothing shall ask for direction when zapped in some games. 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/507768e75d0a0b8aecfcea9f960f0ca021041a97  Randomly reduce +X on polymorphed objects (except for wands) 
 * http://bilious.alt.org/?265  http://bilious.alt.org/?81 http://bilious.alt.org/?227 http://bilious.alt.org/?234 http://bilious.alt.org/?238 http://bilious.alt.org/?221
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/a8ed6b03fcd3787e64bd6a0741f8a9934095a953 -  Goblins now small-group monsters. (makes start worse)
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/edd6a79da80913f8c9ccd6a90dc891357371d64c  Add potential for hostile priests to summon "associates". 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/7fbd5b30b90f35f1af745c77fe7fe93504ae1f16  The circular bigroom may have a river. 
 * do_wear.c dotakeoff function - merge RT
@@ -39,6 +55,7 @@ Plans for UnNetHackPlus
 * turn throne in perks for gold object
 * see comments on http://bilious.alt.org/?216 http://bilious.alt.org/?51 
 * see Linley's Dungeon Crawl on nethackwiki
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/cd21033f22b5e9e7ef318ea1a1b9dd76c8351bfa
 * Stun_resistance from spork - see https://github.com/Bulwersator/UnNetHackPlus/commit/fbd8a7ee603223176d3d3e1b65fecfbb2000f082
 * nethackwiki.com/wiki/Stunned#cite_note-1 - wtf?
 * http://l.j-factor.com/nethack/wounds.diff
@@ -58,7 +75,6 @@ Plans for UnNetHackPlus
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/904e29f56a2a8dd2a15b97cd4d96780f9021b24b - more balanced bones
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/480edfcf07dd69f4111bbd48670f212d1498d13b - Monsters that are about to flee (and have a voice) may scream in fear
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/dfb47e58a21a9e50a60245309f1c91ec53310457 -  Scared covetous monsters should actually 'flee' to someplace not near the player.  Note that this doesn't include STRAT_HEAL, only magical sources of fear.
-* https://github.com/Bulwersator/CopyOfSporkHack/commits/master?page=4
 * https://groups.google.com/forum/?fromgroups=#!msg/rec.games.roguelike.nethack/vspJEm0wwJ0/QDWJeqjn1HQJ
 * http://web.archive.org/web/20080309115104/http://www.csh.rit.edu/~topher/nethack/
 * http://www.cse.unsw.edu.au/~malcolmr/nethack/
@@ -67,18 +83,14 @@ Plans for UnNetHackPlus
 * https://github.com/sgrunt/GruntHack/commit/71c688fd496defd0da54a9fa8325700a4527ad6a (entire version lumped in one commit :( )
 * https://github.com/sgrunt/GruntHack/commit/14e47648e676e57d9e07bb17d4fea217fc5d88d3 (...)
 * https://github.com/sgrunt/GruntHack/commit/02a48205328096f50d28e32f527c8df065f86bdc - extreme edge cases are welcome :)
-* http://sporkhack.com/
 * Gargoyle weirdness
-* replace magicbane by magic marker as first gift for wizards (?)
 * atop looting from asking infuriating ynq, skip for single container, show list for multiple ones (the same for eating)
 * read everything! (http://en.wikipedia.org/wiki/List_of_S-phrases and http://en.wikipedia.org/wiki/GHS_hazard_statement for wands/!)
 fix completely broken alignment, maybe also better gods
 * http://nethackwiki.com/wiki/Wizard_of_Yendor#cite_note-0 he Wizard is the only unaligned monster in NetHack; however, stethoscopes will report this as "chaotic".
 
 Eliminate tedious things
-* wraith luring by constant (low) chance for corpse
-
-Minetown non-diggable (to stop stupid dwarfs)
+* Minetown non-diggable (to stop stupid dwarfs)
 
 * Sporky destroy armor
 * Gradual hallu
@@ -102,11 +114,18 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * nerf speed boots
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/b6bf67e56332fe1e4852cfad2b926da2f216559a
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/dbb7e37a081c6280d50d75cfd7b2e2e801a8354b 
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/f2658a4b96b37fc171a133d5484ee5353afbc372 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/586f1855f856437d4cfa725d6ea164ee4d93a09c (fix to one of above)
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/5ab7c1816e7cfbc0dbddc84eedc0a39664569bc4 + https://github.com/Bulwersator/CopyOfSporkHack/commit/ceb3cf0a3407a7decc28fc1aea77718621a6151e + https://github.com/Bulwersator/CopyOfSporkHack/commit/852de1ae27cef0a74d54bd763741bd50deb76d0e + https://github.com/Bulwersator/CopyOfSporkHack/commit/304054d8c3c85fa7c8256391a3236d3c8ec78326 Add shambling horror; a creature with random stats each game. 
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/05b6dbfc2247fb0194bc58df6c04c278c4149fa0
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/03be90768097959dcd3e062d46c9a9afc89f77fe
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/cd21033f22b5e9e7ef318ea1a1b9dd76c8351bfa
+
 
 #savebreaking
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/4bf67bd1aea2d321b8c90b3de0de5f4c269a2500
+* investigate helm of clarity from spork
+* save last enlightenment status
+* nets and/or "web" spell
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/5ab7c1816e7cfbc0dbddc84eedc0a39664569bc4 + https://github.com/Bulwersator/CopyOfSporkHack/commit/ceb3cf0a3407a7decc28fc1aea77718621a6151e + https://github.com/Bulwersator/CopyOfSporkHack/commit/852de1ae27cef0a74d54bd763741bd50deb76d0e + https://github.com/Bulwersator/CopyOfSporkHack/commit/304054d8c3c85fa7c8256391a3236d3c8ec78326 Add shambling horror; a creature with random stats each game. 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/4514f5a8d55ea4464a1ec9f49240b471fe552e8b  To differentiate wood nymphs, let them walk through trees. 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/1ab79a0cc9400051cdf77a1a161c1af463bdfe09 -  Leaving bones behind may also leave your skull. 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/5e28bfdf1cf777b81baecc261bfd26f26bbf204b - interesting Juiblex + https://github.com/Bulwersator/CopyOfSporkHack/commit/b543698d53aed8ce7031ee6620ac631005894960
@@ -126,10 +145,8 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * http://bilious.alt.org/?352
 
 # too complicated
-* http://bilious.alt.org/?197
 * http://bilious.alt.org/?183
 * http://bilious.alt.org/?165
-* http://bilious.alt.org/?38
 * http://bilious.alt.org/?212
 * http://bilious.alt.org/?307
 * http://bilious.alt.org/?77
@@ -160,6 +177,11 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * from angry_priest() - priests should try to reconvert altar back
 
 # no playtesting
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/5810788cb6be40e7bed05eff6f263bb9d9f227ae
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/d941e6280fcaefeaf063bdf76caae6db5130d453
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/6aad5972e03d2edc7e678f71c0159e62374d561c
+* nethackwiki.com/wiki/Minion - ++
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/a8ed6b03fcd3787e64bd6a0741f8a9934095a953 -  Goblins now small-group monsters. (makes start worse)
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/cfd432185d2598d2caed18128ee0e3ba8a188723 Hot/cold game with the Amulet no longer requires you to wield/wear it, just carry it.
 * http://bilious.alt.org/?178
 * http://bilious.alt.org/?151
