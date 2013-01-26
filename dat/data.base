@@ -1325,6 +1325,13 @@ major demon
 	them difficult to deal with, even on the rare occasions when
 	they are friendly.
 	[ The Tough Guide to Fantasyland, by Diana Wynne Jones ]
+demonbane
+	"From the hate-scorched sky----
+	 With righteous anger in our hearts----
+	 We draw forth the sword that smites Evil!
+	 Thou art the innocent blade----
+	 Demonbane!"
+		[Demonbane]
 disintegrator
 	>>when you *dream about* the game 
 	>>Not just the "Hey, I'm in Nethack!" dream (haven't we *all* 
@@ -1657,9 +1664,9 @@ elv* cl*
 	and cloak, made according to his size, of the light but warm
 	silken stuff that the Galadrim wove.  It was hard to say of
 	what colour they were: grey with the hue of twilight under
-	the trees they seemed to be; and yet if they were moved, or
-	set in another light, they were green as shadowed leaves, or
-	brown as fallow fields by night, dusk-silver as water under
+	the trees they seemed to be; and yet if they were moved, 
+	or set in another light, they were green as shadowed leaves, 
+	or brown as fallow fields by night, dusk-silver as water under
 	the stars.
 		[ The Fellowship of the Ring, by J.R.R. Tolkien ]
 emerald
@@ -2632,7 +2639,6 @@ guard
 nurse
 student
 warrior
-*watch*
 player
 human or elf*
 	These strange creatures live mostly on the surface of the
@@ -5137,6 +5143,21 @@ forked polearm
 	don't I?"
 	"Why, yes, of course," said Wilbur.
 		[ Charlotte's Web, by E.B. White ]
+spell
+	A spell is a consciously directed act of magic which may take
+	almost any form, depending on the laws of magic in operation.
+	Commonly there will be a spoken element, ranging from a simple 
+	phrase or name to elaborately complex ritual incantations. 
+	[...]  Hand-gestures or passes may be required -- called 
+	the "somatic element" by the scientific magic investigators 
+	in L. Sprague de Camp's and Fletcher Pratt's _Incomplete
+	Enchanter_ series.
+	Many spells exhaust the caster, like Gorice's arduous conjuration
+	in _The Worm Ouroboros_ (1922) by E. R. Eddison.  Jack Vance's 
+	_The Dying Earth_ (1950) has spells which must be painstakingly 
+	impressed on the mind (whose capacity is finite), and when cast 
+	are gone until re-learned.  
+		[ The Encyclopedia of Fantasy by David Langford ]
 *spore
 *sphere
 	The attack by those who want to die -- this is the attack
@@ -5800,6 +5821,19 @@ war*hammer
 	while men of both armies scrambled in the swirling waters for
 	rubies knocked free of his armor.
 		[ A Game of Thrones, by George R.R. Martin ]
+watchman
+	They may be called the Palace Guard, the City Guard, or the 
+	Patrol. Whatever their name, their purpoes in any work of 
+	heroic fantasy is identical: it is, round about Chapter Three
+	(or ten minutes into the film) to rush into the room, attack
+	the hero one at a time, and be slaughtered. No-one ever asks
+	them if they wanted to.
+		[ Guards, Guards  by Terry Pratchett ]
+watch captain
+	"In all, I've had seventeen demands for your badge. Some want
+	parts of your body attached. Why did you have to upset
+	everybody?"
+		[ Feet of Clay by Terry Pratchett ]
 water
 	Day after day, day after day,
 	We stuck, nor breath nor motion;
@@ -5899,6 +5933,7 @@ apprentice
 	as he often said, to keep his hands free for quick conjuring
 	and his mind free for the thoughts of a mage.
 		[ A Dealing with Demons, by Craig Shaw Gardner ]
+rodney
 wizard of yendor
 	No one knows how old this mighty wizard is, or from whence he
 	came.  It is known that, having lived a span far greater than
