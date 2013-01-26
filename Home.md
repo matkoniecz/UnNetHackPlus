@@ -23,9 +23,11 @@ Plans for UnNetHackPlus
 * http://nethackwiki.com/wiki/Source:Polyself.c#line629
 * canibalism among sentient pets (BTW, scroll of taming affecting sentient creatures is quite disturbing) 
 * http://bilious.alt.org/?288
+* mark E-square
 * http://nethackwiki.com/wiki/Pet#Armor_and_extrinsics http://nethackwiki.com/wiki/Armor#Monsters_.28pets.29_and_armor
 * genociding your pet is OK
 * I wouldn't beef up the Kops themselves, since they are supposed to be wimpy.  But do I like the idea of them calling in the guard when they are up against an overwhelming erm, well, an opponent. http://bilious.alt.org/rgrn/?126678,126685,126686,126690,126691,126692,126694,126695,126696,126697,126698,126703,126704,126705,126709,126710,126713,126714,126724,127665
+* Incidentally, there's a way to pacify the Minetown Watch in most cases. First, get a stack of blessed teleport scrolls. Teleport from the staircase to the inside of a shop, pick up an item, and then teleport right outside the entrance of that shop (but not in a line from the door!). As soon as the shopkeeper comes out to kill you, pay him for the thing you stole. The Watch will decide that since you are no longer a thief, it follows that you are no longer a criminal.
 * Most of the item-type-specific commands like "quaff" or "read" have been merged into a single "use" command http://te4.org/news
 * http://nethackwiki.com/wiki/User:Ion_frigate#Add_a_little_spice_to_the_game http://crawl.chaosforge.org/Crawl_Wiki
 * find encyclopedia entries for http://nethackwiki.com/wiki/Acid_blob http://nethackwiki.com/wiki/Queen_bee (abc monsters done)
@@ -47,6 +49,9 @@ Plans for UnNetHackPlus
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/71bff8cb89b7e7f91f6478ea9c89f9f88195b174  Wand of nothing shall ask for direction when zapped in some games. 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/507768e75d0a0b8aecfcea9f960f0ca021041a97  Randomly reduce +X on polymorphed objects (except for wands) 
 * http://bilious.alt.org/?265  http://bilious.alt.org/?81 http://bilious.alt.org/?227 http://bilious.alt.org/?234 http://bilious.alt.org/?238 http://bilious.alt.org/?221
+* spork - "Gehennom is actually fun and not boring at all. The ascension run is likewise actually challenging."
+* spork - "A number of game breakers, like the rubber chicken and the E-square, have been reigned in."
+* spork - "Two-weapon fighting is no longer your automatic only choice regardless of role. Two-handed weapons and sword-and-board have meaningful advantages."
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/edd6a79da80913f8c9ccd6a90dc891357371d64c  Add potential for hostile priests to summon "associates". 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/7fbd5b30b90f35f1af745c77fe7fe93504ae1f16  The circular bigroom may have a river. 
 * do_wear.c dotakeoff function - merge RT
@@ -105,7 +110,8 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 
 * spork shop messages
 * stinking cloud should be cyan something
-* http://forum.rpg.net/showthread.php?466187-%28Let-s-Play!%29-Sporkhack/page2
+* http://i295.photobucket.com/albums/mm153/Kobold_Lord/Sporkhack%202/T06354.jpg
+* http://forum.rpg.net/showthread.php?466187-(Let-s-Play!)-Sporkhack/page8
 * remove credit cloning, allow entering shop with digging tools
 * identify projectiles - for Rangers http://nh.gmuf.com/ranger_ammo-343.diff
 * autoidentify BUC of tins from BUC identified tin kit
@@ -209,3 +215,4 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 
 #texts
 *  Juiblex the Lord of the Slime Pit, Demon Lord of Oozes and All Things Most Foul.
+* I dunno, I often hear this about Roguelikes and other really hard games, and to the extent that it's true at all, it assumes that the player has read and memorized every single spoiler and knows that (say) Blue-Footed Foozles can be defeated by harsh language but will explode with 40-kiloton yield if struck by any spell or weapon.
