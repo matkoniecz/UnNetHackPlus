@@ -34,6 +34,8 @@ static const char *developers[] = {
 	"Helge", "Ron", "Timo",
 	/* VMS team */
 	"Joshua", "Pat",
+	/* UnNetHack */
+	"Patric",
 	""};
 
 
