@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* Ph’nglui mglw’nafh Cthulhu R’lyeh wgah’nagl fhtagn
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/f12afc0b61b702fcff39d18ed8f30654e357a2e6
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/1032af2e5b88947b828cdc89a062adb1178fbe5a
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/dea61cde17b8758091e3f3cef95c2d651d11cb3e
