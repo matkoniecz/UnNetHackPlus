@@ -120,6 +120,7 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 
 
 #savebreaking
+* Sporkhack has added some racial equipment for gnomes to wear.
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/4bf67bd1aea2d321b8c90b3de0de5f4c269a2500
 * investigate helm of clarity from spork
 * save last enlightenment status
