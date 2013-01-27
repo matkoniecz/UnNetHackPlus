@@ -1,6 +1,5 @@
 Plans for UnNetHackPlus
 * [[encyclopedia]]
-* lost cosmonaut
 * unflee zombies on low HP
 * Dragons will never breath in melee combat.
 * Only your quest Nemeses will deliberately steal your quest artifact, other monsters may steal the amulet and invocation items. The quest artifact may of course be randomly stolen by nymphs and the like.  -Makes QA a dependable source of extrinsics, deepening differences between classes. -dnethack
