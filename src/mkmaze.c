@@ -462,7 +462,7 @@ fixup_special()
 		for (tryct = rnd(4); tryct; tryct--) {
 			x = somex(croom); y = somey(croom);
 			if (goodpos(x, y, (struct monst *)0, 0)) {
-				otmp = mk_tt_object(STATUE, x, y);
+				otmp = mk_player_statue_on_Medusa_island(x, y);
 				while (otmp && (poly_when_stoned(&mons[otmp->corpsenm]) || pm_resistance(&mons[otmp->corpsenm],MR_STONE))) {
 					otmp->corpsenm = rndmonnum();
 					otmp->owt = weight(otmp);
@@ -471,15 +471,9 @@ fixup_special()
 		}
 
 		if (rn2(2))
-			otmp = mk_tt_object(STATUE, somex(croom), somey(croom));
-		else /* Medusa statues don't contain books */
-			otmp = mkcorpstat(STATUE, (struct monst *)0, (struct permonst *)0, somex(croom), somey(croom), FALSE);
-		if (otmp) {
-			while (pm_resistance(&mons[otmp->corpsenm],MR_STONE) || poly_when_stoned(&mons[otmp->corpsenm])) {
-				otmp->corpsenm = rndmonnum();
-				otmp->owt = weight(otmp);
-			}
-		}
+			otmp = mk_player_statue_on_Medusa_island(somex(croom), somey(croom));
+		else 
+			otmp = mk_moster_statue_on_Medusa_island(somex(croom), somey(croom));
 	} else if(Is_wiz1_level(&u.uz)) {
 		croom = search_special(MORGUE);
 		create_secret_door(croom, W_EAST|W_WEST);
