@@ -281,6 +281,12 @@ register boolean special;
 	return(mtmp);
 }
 
+int
+get_random_role()
+{
+	return PM_ARCHEOLOGIST + rn2(PM_WIZARD - PM_ARCHEOLOGIST + 1);
+}
+
 /* create the indicated number (num) of monster-players,
  * randomly chosen, and in randomly chosen (free) locations
  * on the level.  If "special", the size of num should not
@@ -300,7 +306,7 @@ boolean special;
 		int tryct = 0;
 
 		/* roll for character class */
-		pm = PM_ARCHEOLOGIST + rn2(PM_WIZARD - PM_ARCHEOLOGIST + 1);
+		pm = get_random_role();
 		fakemon.data = &mons[pm];
 
 		/* roll for an available location */
