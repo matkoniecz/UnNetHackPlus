@@ -13,8 +13,6 @@ Plans for UnNetHackPlus
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/68be37ef17c95024eb28e25820b7534d43478166
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/61b0d41fac692b0c84b99414f16f23217fd08d0f
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/c2640a22d5acf655a71ed0547dd31c3374317b80
-* cauldron
-* potion of wow wow sauce 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/f2658a4b96b37fc171a133d5484ee5353afbc372 
 * http://bilious.alt.org/?38
 * sacrificing candles ( splitobj )
@@ -22,7 +20,7 @@ Plans for UnNetHackPlus
 * stop gifts from making things worse than owned by player
 * MAGIC_MARKER as gift (type in object generator), later TRUE to initialize and TRUE to make artifact one :) http://nethackwiki.com/wiki/Source:Ref/mksobj#mksobj
 * http://nethackwiki.com/wiki/Source:Polyself.c#line629
-* canibalism among sentient pets (BTW, scroll of taming affecting sentient creatures is quite disturbing) 
+* fix cannibalism among sentient pets (BTW, scroll of taming affecting sentient creatures is quite disturbing) 
 * http://bilious.alt.org/?288
 * mark E-square
 * http://nethackwiki.com/wiki/Pet#Armor_and_extrinsics http://nethackwiki.com/wiki/Armor#Monsters_.28pets.29_and_armor
