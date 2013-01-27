@@ -345,85 +345,85 @@ static boolean was_waterlevel; /* ugh... this shouldn't be needed */
 STATIC_OVL void
 fixup_special()
 {
-    register lev_region *r = lregions;
-    struct d_level lev;
-    register int x, y;
-    struct mkroom *croom;
-    boolean added_branch = FALSE;
+	register lev_region *r = lregions;
+	struct d_level lev;
+	register int x, y;
+	struct mkroom *croom;
+	boolean added_branch = FALSE;
 
-    if (was_waterlevel) {
-	was_waterlevel = FALSE;
-	u.uinwater = 0;
-	unsetup_waterlevel();
-    } else if (Is_waterlevel(&u.uz)) {
-	was_waterlevel = TRUE;
-	/* water level is an odd beast - it has to be set up
-	   before calling place_lregions etc. */
-	setup_waterlevel();
-    }
-    for(x = 0; x < num_lregions; x++, r++) {
-	switch(r->rtype) {
-	case LR_BRANCH:
-	    added_branch = TRUE;
-	    goto place_it;
+	if (was_waterlevel) {
+		was_waterlevel = FALSE;
+		u.uinwater = 0;
+		unsetup_waterlevel();
+	} else if (Is_waterlevel(&u.uz)) {
+		was_waterlevel = TRUE;
+		/* water level is an odd beast - it has to be set up
+		before calling place_lregions etc. */
+		setup_waterlevel();
+	}
+	for(x = 0; x < num_lregions; x++, r++) {
+		switch(r->rtype) {
+			case LR_BRANCH:
+				added_branch = TRUE;
+				goto place_it;
 
-	case LR_PORTAL:
-	    if(*r->rname.str >= '0' && *r->rname.str <= '9') {
-		/* "chutes and ladders" */
-		lev = u.uz;
-		lev.dlevel = atoi(r->rname.str);
-	    } else {
+			case LR_PORTAL:
+				if(*r->rname.str >= '0' && *r->rname.str <= '9') {
+					/* "chutes and ladders" */
+					lev = u.uz;
+					lev.dlevel = atoi(r->rname.str);
+				} else {
 #ifdef RANDOMIZED_PLANES
-		s_level *sp;
-		if (strcmp("random_plane", r->rname.str)==0) {
-			sp = get_next_elemental_plane(&u.uz);
-		} else {
-			sp = find_level(r->rname.str);
-		}
+					s_level *sp;
+					if (strcmp("random_plane", r->rname.str)==0) {
+						sp = get_next_elemental_plane(&u.uz);
+					} else {
+						sp = find_level(r->rname.str);
+					}
 #else
-		s_level *sp = find_level(r->rname.str);
+					s_level *sp = find_level(r->rname.str);
 #endif
-		lev = sp->dlevel;
-	    }
-	    /* fall into... */
+					lev = sp->dlevel;
+				}
+				/* fall into... */
 
-	case LR_UPSTAIR:
-	case LR_DOWNSTAIR:
-	place_it:
-	    place_lregion(r->inarea.x1, r->inarea.y1,
-			  r->inarea.x2, r->inarea.y2,
-			  r->delarea.x1, r->delarea.y1,
-			  r->delarea.x2, r->delarea.y2,
-			  r->rtype, &lev);
-	    break;
+			case LR_UPSTAIR:
+			case LR_DOWNSTAIR:
+			place_it:
+				place_lregion(r->inarea.x1, r->inarea.y1,
+					r->inarea.x2, r->inarea.y2,
+					r->delarea.x1, r->delarea.y1,
+					r->delarea.x2, r->delarea.y2,
+					r->rtype, &lev);
+				break;
 
-	case LR_TELE:
-	case LR_UPTELE:
-	case LR_DOWNTELE:
-	    /* save the region outlines for goto_level() */
-	    if(r->rtype == LR_TELE || r->rtype == LR_UPTELE) {
-		    updest.lx = r->inarea.x1; updest.ly = r->inarea.y1;
-		    updest.hx = r->inarea.x2; updest.hy = r->inarea.y2;
-		    updest.nlx = r->delarea.x1; updest.nly = r->delarea.y1;
-		    updest.nhx = r->delarea.x2; updest.nhy = r->delarea.y2;
-	    }
-	    if(r->rtype == LR_TELE || r->rtype == LR_DOWNTELE) {
-		    dndest.lx = r->inarea.x1; dndest.ly = r->inarea.y1;
-		    dndest.hx = r->inarea.x2; dndest.hy = r->inarea.y2;
-		    dndest.nlx = r->delarea.x1; dndest.nly = r->delarea.y1;
-		    dndest.nhx = r->delarea.x2; dndest.nhy = r->delarea.y2;
-	    }
-	    /* place_lregion gets called from goto_level() */
-	    break;
+			case LR_TELE:
+			case LR_UPTELE:
+			case LR_DOWNTELE:
+				/* save the region outlines for goto_level() */
+				if(r->rtype == LR_TELE || r->rtype == LR_UPTELE) {
+					updest.lx = r->inarea.x1; updest.ly = r->inarea.y1;
+					updest.hx = r->inarea.x2; updest.hy = r->inarea.y2;
+					updest.nlx = r->delarea.x1; updest.nly = r->delarea.y1;
+					updest.nhx = r->delarea.x2; updest.nhy = r->delarea.y2;
+				}
+				if(r->rtype == LR_TELE || r->rtype == LR_DOWNTELE) {
+					dndest.lx = r->inarea.x1; dndest.ly = r->inarea.y1;
+					dndest.hx = r->inarea.x2; dndest.hy = r->inarea.y2;
+					dndest.nlx = r->delarea.x1; dndest.nly = r->delarea.y1;
+					dndest.nhx = r->delarea.x2; dndest.nhy = r->delarea.y2;
+				}
+				/* place_lregion gets called from goto_level() */
+				break;
+		}
+
+		if (r->rname.str) free((genericptr_t) r->rname.str),  r->rname.str = 0;
 	}
 
-	if (r->rname.str) free((genericptr_t) r->rname.str),  r->rname.str = 0;
-    }
-
-    /* place dungeon branch if not placed above */
-    if (!added_branch && Is_branchlev(&u.uz)) {
-	place_lregion(0,0,0,0,0,0,0,0,LR_BRANCH,(d_level *)0);
-    }
+	/* place dungeon branch if not placed above */
+	if (!added_branch && Is_branchlev(&u.uz)) {
+		place_lregion(0,0,0,0,0,0,0,0,LR_BRANCH,(d_level *)0);
+	}
 
 	/* KMH -- Sokoban levels */
 	if(In_sokoban(&u.uz)) {
@@ -453,84 +453,81 @@ fixup_special()
 		}
 	}
 
-    /* Still need to add some stuff to level file */
-    if (Is_medusa_level(&u.uz)) {
-	struct obj *otmp;
-	int tryct;
+	/* Still need to add some stuff to level file */
+	if (Is_medusa_level(&u.uz)) {
+		struct obj *otmp;
+		int tryct;
+		croom = &rooms[0]; /* only one room on the medusa level */
 
-	croom = &rooms[0]; /* only one room on the medusa level */
-	for (tryct = rnd(4); tryct; tryct--) {
-	    x = somex(croom); y = somey(croom);
-	    if (goodpos(x, y, (struct monst *)0, 0)) {
-		otmp = mk_tt_object(STATUE, x, y);
-		while (otmp && (poly_when_stoned(&mons[otmp->corpsenm]) ||
-				pm_resistance(&mons[otmp->corpsenm],MR_STONE))) {
-		    otmp->corpsenm = rndmonnum();
-		    otmp->owt = weight(otmp);
+		for (tryct = rnd(4); tryct; tryct--) {
+			x = somex(croom); y = somey(croom);
+			if (goodpos(x, y, (struct monst *)0, 0)) {
+				otmp = mk_tt_object(STATUE, x, y);
+				while (otmp && (poly_when_stoned(&mons[otmp->corpsenm]) || pm_resistance(&mons[otmp->corpsenm],MR_STONE))) {
+					otmp->corpsenm = rndmonnum();
+					otmp->owt = weight(otmp);
+				}
+			}
 		}
-	    }
+
+		if (rn2(2))
+			otmp = mk_tt_object(STATUE, somex(croom), somey(croom));
+		else /* Medusa statues don't contain books */
+			otmp = mkcorpstat(STATUE, (struct monst *)0, (struct permonst *)0, somex(croom), somey(croom), FALSE);
+		if (otmp) {
+			while (pm_resistance(&mons[otmp->corpsenm],MR_STONE) || poly_when_stoned(&mons[otmp->corpsenm])) {
+				otmp->corpsenm = rndmonnum();
+				otmp->owt = weight(otmp);
+			}
+		}
+	} else if(Is_wiz1_level(&u.uz)) {
+		croom = search_special(MORGUE);
+		create_secret_door(croom, W_EAST|W_WEST);
+	} else if(Is_knox(&u.uz)) {
+		/* using an unfilled morgue for rm id */
+		croom = search_special(MORGUE);
+		/* avoid inappropriate morgue-related messages */
+		level.flags.graveyard = level.flags.has_morgue = 0;
+		croom->rtype = OROOM;	/* perhaps it should be set to VAULT? */
+		/* stock the main vault */
+		for(x = croom->lx; x <= croom->hx; x++){
+			for(y = croom->ly; y <= croom->hy; y++) {
+				if (!is_solid(x,y)) {
+					(void) mkgold((long) rn1(300, 600), x, y);
+					if (!rn2(3) && !is_pool(x,y))
+						(void)maketrap(x, y, rn2(3) ? LANDMINE : SPIKED_PIT);
+				}
+			}
+		}
+	} else if(Is_sanctum(&u.uz)) {
+		croom = search_special(TEMPLE);
+
+		create_secret_door(croom, W_ANY);
+	} else if(on_level(&u.uz, &orcus_level)) {
+		register struct monst *mtmp, *mtmp2;
+
+		/* it's a ghost town, get rid of shopkeepers */
+		for(mtmp = fmon; mtmp; mtmp = mtmp2) {
+			mtmp2 = mtmp->nmon;
+				if(mtmp->isshk) mongone(mtmp);
+		}
 	}
 
-	if (rn2(2))
-	    otmp = mk_tt_object(STATUE, somex(croom), somey(croom));
-	else /* Medusa statues don't contain books */
-	    otmp = mkcorpstat(STATUE, (struct monst *)0, (struct permonst *)0,
-			      somex(croom), somey(croom), FALSE);
-	if (otmp) {
-	    while (pm_resistance(&mons[otmp->corpsenm],MR_STONE)
-		   || poly_when_stoned(&mons[otmp->corpsenm])) {
-		otmp->corpsenm = rndmonnum();
-		otmp->owt = weight(otmp);
-	    }
+	if(lev_message) {
+		char *str, *nl;
+		for(str = lev_message; (nl = index(str, '\n')) != 0; str = nl+1) {
+			*nl = '\0';
+			pline("%s", str);
+		}
+		if(*str)
+			pline("%s", str);
+		free((genericptr_t)lev_message);
+		lev_message = 0;
 	}
-    } else if(Is_wiz1_level(&u.uz)) {
-	croom = search_special(MORGUE);
 
-	create_secret_door(croom, W_EAST|W_WEST);
-    } else if(Is_knox(&u.uz)) {
-	/* using an unfilled morgue for rm id */
-	croom = search_special(MORGUE);
-	/* avoid inappropriate morgue-related messages */
-	level.flags.graveyard = level.flags.has_morgue = 0;
-	croom->rtype = OROOM;	/* perhaps it should be set to VAULT? */
-	/* stock the main vault */
-	for(x = croom->lx; x <= croom->hx; x++)
-	    for(y = croom->ly; y <= croom->hy; y++) {
-	      if (!is_solid(x,y)) {
-		(void) mkgold((long) rn1(300, 600), x, y);
-		if (!rn2(3) && !is_pool(x,y))
-		    (void)maketrap(x, y, rn2(3) ? LANDMINE : SPIKED_PIT);
-	    }
-	    }
-    } else if(Is_sanctum(&u.uz)) {
-	croom = search_special(TEMPLE);
-
-	create_secret_door(croom, W_ANY);
-    } else if(on_level(&u.uz, &orcus_level)) {
-	   register struct monst *mtmp, *mtmp2;
-
-	   /* it's a ghost town, get rid of shopkeepers */
-	    for(mtmp = fmon; mtmp; mtmp = mtmp2) {
-		    mtmp2 = mtmp->nmon;
-		    if(mtmp->isshk) mongone(mtmp);
-	    }
-    }
-
-    if(lev_message) {
-	char *str, *nl;
-	for(str = lev_message; (nl = index(str, '\n')) != 0; str = nl+1) {
-	    *nl = '\0';
-	    pline("%s", str);
-	}
-	if(*str)
-	    pline("%s", str);
-	free((genericptr_t)lev_message);
-	lev_message = 0;
-    }
-
-    if (lregions)
-	free((genericptr_t) lregions),  lregions = 0;
-    num_lregions = 0;
+	if (lregions)
+		free((genericptr_t) lregions),  lregions = 0;
+	num_lregions = 0;
 }
 
 void
