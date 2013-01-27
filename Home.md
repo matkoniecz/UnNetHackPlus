@@ -114,7 +114,7 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * spork shop messages
 * stinking cloud should be cyan something
 * http://i295.photobucket.com/albums/mm153/Kobold_Lord/Sporkhack%202/T06354.jpg
-* http://forum.rpg.net/showthread.php?466187-(Let-s-Play!)-Sporkhack/page8
+* http://forum.rpg.net/showthread.php?466187-(Let-s-Play!)-Sporkhack/page10
 * remove credit cloning, allow entering shop with digging tools
 * identify projectiles - for Rangers http://nh.gmuf.com/ranger_ammo-343.diff
 * autoidentify BUC of tins from BUC identified tin kit
