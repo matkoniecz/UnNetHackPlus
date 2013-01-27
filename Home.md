@@ -1,5 +1,5 @@
 Plans for UnNetHackPlus
-* "In Rust We Trust."
+* [[encyclopedia]]
 * Only your quest Nemeses will deliberately steal your quest artifact, other monsters may steal the amulet and invocation items. The quest artifact may of course be randomly stolen by nymphs and the like.  -Makes QA a dependable source of extrinsics, deepening differences between classes. -dnethack
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/f12afc0b61b702fcff39d18ed8f30654e357a2e6
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/1032af2e5b88947b828cdc89a062adb1178fbe5a
