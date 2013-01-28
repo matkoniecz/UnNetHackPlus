@@ -113,7 +113,20 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * spork shop messages
 * stinking cloud should be cyan something
 * http://i295.photobucket.com/albums/mm153/Kobold_Lord/Sporkhack%202/T06354.jpg
-* http://forum.rpg.net/showthread.php?466187-(Let-s-Play!)-Sporkhack/page10
+* http://i295.photobucket.com/albums/mm153/Kobold_Lord/Sporkhack%202/T29316.jpg
+* devastating Wand of Death, which would shave hit points off of Mouse's MAXIMUM every time it hits him even if his amulet reflects the killing charge
+* And here we have the monster spell Destroy Armor. In vanilla, Mouse's +1 iron shoes would simply disintegrate and blow away, and he'd be out that item of armor. In Sporkhack, an undamaged article such as Mouse's shoes must be hit by the spell two to four times before being completely destroyed, each time taking between one and three instances of rust, corrosion, burn, or rot damage. There is a one-in-three chance that it will take two castings, and a one-in-twenty-seven chance it will take four castings, with the remainder taking three castings. In this case, Mouse's shoes become 'thoroughly rusted' following the naga's spell, so the next Destroy Armor spell to hit his shoes will destroy them utterly. On the other hand, things turn around in vanilla when Mouse gets magic resistance, because in vanilla magic resistance makes him completely immune to that monster spell. In Sporkhack, however, the Destroy Armor spell will pierce magic resistance just enough that it will deal just one level of damage, meaning four castings on the same piece of armor will destroy it in spite of magic resistance and corrosionproofing. You don't want this to happen to your Cloak of Magic Resistance, so for heaven's sake repair it whenever you get the chance.
+* Beware the Minetown bones file where the altar has been converted. The priest present may be peaceful, but he or she will go hostile if you #chat.
+*  Gems the unicorn keeps are worth +2 luck, and the unicorn doesn't care if they're diamonds or turquoise. If it becomes convenient later, you can bring a strong pet to withdraw your deposit from the Bank of Uni, but I don't always bother. (make only alive unicorns bring luck)
+* http://i295.photobucket.com/albums/mm153/Kobold_Lord/Sporkhack%202/T554883.jpg The Master of Assassins hasn't died yet (telewand)
+* http://i295.photobucket.com/albums/mm153/Kobold_Lord/Sporkhack%202/T63823.jpg
+*Enemies have a variety of taunts. It really makes me feel awesome when my character is killing stuff and there are two different leader-monsters making distinct sorts of conversation. It doesn't really have any numerical meaning, but I think it's a really nice touch as far as verisimilitude goes. "Why can't you fools kill him? He is only one man!"
+* http://i295.photobucket.com/albums/mm153/Kobold_Lord/Sporkhack%202/T645341.jpg http://i295.photobucket.com/albums/mm153/Kobold_Lord/Sporkhack%202/T645342.jpg This message is caused by a new divine monster spell. The hill giant shaman has just inflicted the cold vulnerability intrinsic on Mouse. It eventually wears off, but until then Mouse will take heavy damage from cold attacks even though he has 100% cold resistance. You REALLY do not want to get hit by cold attacks if you have cold vulnerability and 0% cold resistance.
+* Here's his frost spell. It's kind of sad. This spell is unique to Asmodeus, but PCs almost ALWAYS have perfect frost resistance by this point in the game
+* http://forum.rpg.net/showthread.php?466187-(Let-s-Play!)-Sporkhack/page24
+* fedora for arch providing charisma boost
+* during the new moon the petrifying hiss of a cockatrice has a 100% chance to hit UNLESS you have a lizard corpse to cure it
+
 * remove credit cloning, allow entering shop with digging tools
 * identify projectiles - for Rangers http://nh.gmuf.com/ranger_ammo-343.diff
 * autoidentify BUC of tins from BUC identified tin kit
