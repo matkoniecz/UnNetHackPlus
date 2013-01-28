@@ -126,8 +126,7 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * http://forum.rpg.net/showthread.php?466187-(Let-s-Play!)-Sporkhack/page24
 * fedora for arch providing charisma boost
 * during the new moon the petrifying hiss of a cockatrice has a 100% chance to hit UNLESS you have a lizard corpse to cure it
-
-* remove credit cloning, allow entering shop with digging tools
+* remove pet apport
 * identify projectiles - for Rangers http://nh.gmuf.com/ranger_ammo-343.diff
 * autoidentify BUC of tins from BUC identified tin kit
 * #chat - threats, confused dwarf talks about adamantine
