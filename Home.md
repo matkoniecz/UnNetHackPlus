@@ -125,7 +125,7 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * Here's his frost spell. It's kind of sad. This spell is unique to Asmodeus, but PCs almost ALWAYS have perfect frost resistance by this point in the game
 * http://forum.rpg.net/showthread.php?466187-(Let-s-Play!)-Sporkhack/page24
 * fedora for arch providing charisma boost
-* during the new moon the petrifying hiss of a cockatrice has a 100% chance to hit UNLESS you have a lizard corpse to cure it
+* during the new moon the petrifying hiss of a cockatrice has a 100% chance to hit UNLESS you have a lizard corpse to cure it http://nethackwiki.com/wiki/Source:Mhitu.c#line1190
 * remove pet apport
 * identify projectiles - for Rangers http://nh.gmuf.com/ranger_ammo-343.diff
 * autoidentify BUC of tins from BUC identified tin kit
