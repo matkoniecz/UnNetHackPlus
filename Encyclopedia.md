@@ -1,4 +1,5 @@
-* find encyclopedia entries for http://nethackwiki.com/wiki/Acid_blob winter wolf (abcdefghiklmn monsters done http://nethackwiki.com/wiki/Monster ) http://nethackwiki.com/wiki/Blue_jelly http://nethackwiki.com/wiki/Spotted_jelly http://nethackwiki.com/wiki/Ochre_jelly
+* find encyclopedia entries for http://nethackwiki.com/wiki/Acid_blob winter wolf (abcdefghiklmnop monsters done http://nethackwiki.com/wiki/Monster ) http://nethackwiki.com/wiki/Spotted_jelly
+http://nethackwiki.com/wiki/Uruk-hai
 
 
 A Song of Ice and Fire:
