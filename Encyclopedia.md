@@ -1,5 +1,5 @@
- The Wheel of Time by Robert Jordan
-"Attack on ground where your enemy believes you will not, from an unexpected direction at an unexpected time. Defend where your enemy believes you are not, and when he believes you will run. Surprise is the key to victory, and speed is the key to surprise. For the soldier, speed is life." —Comadrin
+* find encyclopedia entries for http://nethackwiki.com/wiki/Acid_blob winter wolf (abcdefghiklmn monsters done http://nethackwiki.com/wiki/Monster ) http://nethackwiki.com/wiki/Blue_jelly http://nethackwiki.com/wiki/Spotted_jelly http://nethackwiki.com/wiki/Ochre_jelly
+
 
 A Song of Ice and Fire:
 
