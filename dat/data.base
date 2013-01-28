@@ -609,6 +609,21 @@ blind io
 	large number, led a semi-independent life of their
 	own.  Several were currently hovering above the table.
 	    [ The Colour of Magic, by Terry Pratchett ]
+blue jelly
+	The tissue injury resulting from frostbite is produced in two ways. The most 
+	obvious is actual freezing of the tissues. Although ice crystals form between 
+	the cells and grow by extracting water from them, the cells are physically 
+	disrupted by the ice crystals only to a limited extent. The dehydration and 
+	osmotic and chemical imbalances resulting from  extraction of water from within 
+	the cell injure them, but permanent damage may be small. (...) The second 
+	mechanism of tissue injury by frostbite, which is much more significant is loss
+	of blood supply to the tissues. Blood may flow through larger vessels but (one 
+	of the signs of adequate rewarming is a flushing of the frozen area) oxygen 
+	cannot be deliver to the tissues because the small blood vessels that would 
+	carry it have been lost.
+		[Hypothermia, Frostbite, and Other Cold Injuries: 
+			Prevention, Survival, Rescue and Treatment
+			by Gordon G. Giesbrecht, James A. Wilkerson]
 blob
 * blob
 ooze
@@ -643,6 +658,8 @@ book of the dead
 		[ Brewer's Concise Dictionary of Phrase and Fable ]
 ~*jackboots
 ~*water walking*
+~*speed boots
+~*boots of speed
 *boot*
 	In Fantasyland these are remarkable in that they seldom or
 	never wear out and are suitable for riding or walking in
@@ -1797,6 +1814,18 @@ figurine*
 	years by private owners and dealers too stupid to see what
 	it was under the skin.
 		[ The Maltese Falcon, by Dashiell Hammett ]
+*finger of death
+wand of death
+	"Your sad excuse for a third-year Defence textbook will suggest to you that you
+	expose the mountain troll to sunlight, which will freeze it in place. This, my
+	young apprentices, is the sort of useless knowledge you will never find in my
+	lessons. You do not encounter mountain trolls in open daylight! The idea that
+	you should use sunlight to stop them is the result of foolish textbook authors
+	trying to show off their mastery of minutia at the expense of practicality.
+	Just because there is a ridiculously obscure way of dealing with mountain
+	trolls does not mean you should actually try to use it! The Killing Curse is
+	unblockable, unstoppable, and works every single time on anything with a brain."
+		[ Harry Potter and the Methods of Rationality by Eliezer Yudkowsky ]
 fire trap
 	'Let him be for a while,' said Cohen. 'I reckon the fish disagreed
 	with him.'
@@ -3059,6 +3088,10 @@ kraken
 	dice.
 		[ The Discworld Companion, 
 		  by Terry Pratchett and Stephen Briggs ]
+
+	just goes to show how much luck doesn't matter if you're an idiot.
+		[ zqwefty on www.reddit.com/r/nethack/comments/17d0tm ]
+
 *lamp
 	When he came to himself he told his mother what had passed,
 	and showed her the lamp and the fruits he had gathered in the
@@ -4115,6 +4148,14 @@ uruk*hai
 	hunting for them.  There is nothing a horde of orcs cannot
 	use.
 		[ het Boek van de Regels; Het Oog des Meesters ]
+ochre jelly
+	An ochre jelly resembles a giant amoeba, consisting of a thick, porous, golden 
+	sludge. It lurks in dungeons, slowly sludging its way along floors, walls and 
+	ceilings alike, under doors and through cracks, looking for victims. When it 
+	finds them, it extends, latches onto them, and then proceeds to engulf and 
+	constrict them. The ochre jelly reproduces asexually, and can sometimes be 
+	found with several of its divided offspring.
+		[ Wikipedia, the free encyclopedia ]
 orion
 sirius
 	Orion was the son of Neptune. He was a handsome giant and a
@@ -4409,6 +4450,12 @@ python
 	and claimed the oracle for himself. ... The old name of 
 	Delphi, Pytho, refers to the serpent.
 		[ Encyclopedia Mythica, ed. M.F. Lindemans ]
+*speed*
+	"Attack on ground where your enemy believes you will not, from an unexpected 
+	direction at an unexpected time. Defend where your enemy believes you are not, 
+	and when he believes you will run. Surprise is the key to victory, and speed 
+	is the key to surprise. For the soldier, speed is life."
+		[ Lord of Chaos by Robert Jordan ]
 quadruped
 	The woodlands and other regions are inhabited by multitudes
 	of four-legged creatures which cannot be simply classified.
@@ -4691,6 +4738,12 @@ rune*sword
 	artifact with Runes on it, even if the Runes prove only to
 	spell the maker's name.
 	[ The Tough Guide to Fantasyland, by Diana Wynne Jones ]
+# takes "rust monster, disenchanter or disintegrator" when specifying "R"
+#But for some strange reason this entry is ignored, and game displays
+#entry for rust momster. Any help to solve this bug is welcomed.
+rust monster, disenchanter or disintegrator
+	Ask not, what your magic can do to it. Ask what it can do to your magic.
+~rust monster, disenchanter or disintegrator
 rust monster
 	Rust monsters are subterranean creatures with an appetite for
 	all sorts of metals. These unique creatures, though generally
@@ -4704,11 +4757,6 @@ rust monster
 	yellowish tan on the underside and legs, to a rust red upper
 	back. Rust monsters smell like wet, oxidized metal.
 		[ Monstrous Manual, by TSR inc. ]
-#
-# takes "rust monster or disenchanter" when specifying "R"
-rust monster or disenchanter
-	These ground-dwelling monsters are known to make short
-	work out of degrading adventurers' combat equipment.
 *saber
 *sabre
 	Flashed all their sabres bare,
@@ -5784,6 +5832,7 @@ wakizashi
 		[ Wikipedia, the free encyclopedia ]
 # takes "wand or a wall" when specifying "/"
 ~*sleep
+~wand of death
 wand of *
 *wand
 	'Saruman!' he cried, and his voice grew in power and authority.
