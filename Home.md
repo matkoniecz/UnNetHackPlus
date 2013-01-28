@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* https://github.com/DanielT/NitroHack/commits/master
 * [[encyclopedia]]
 * unflee zombies on low HP
 * Dragons will never breath in melee combat.
