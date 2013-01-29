@@ -3,7 +3,6 @@ Plans for UnNetHackPlus
 * [[encyclopedia]]
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/dea61cde17b8758091e3f3cef95c2d651d11cb3e
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/ce72a17e8b23ad6e6e892127f4b3885726da02b5
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/5d10dd556b1d511b248e67f5882b0d2ffaff580d
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/9a92a24ea83d6f873ad65a4dbad73c4851d3df29
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/f63ace46cb35242a082e4035e13012ac832f9639
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/d967bc58ceffbc34d685a7bd8ff9c17177ec2716 + https://github.com/Bulwersator/CopyOfSporkHack/commit/c57aa2cadebf5b2c3a580f6350806872cbed7b0f
@@ -154,6 +153,7 @@ proud owner of a magic whistle.
 * revert UnDragons
 
 #savebreaking
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/5d10dd556b1d511b248e67f5882b0d2ffaff580d (range for telepathy)
 * silver boots + https://github.com/Chris-plus-alphanumericgibberish/dnethack/commit/f167bb7bd5568288c1e54f7581ae34499d7945fd (dokick edit)
 * Sporkhack has added some racial equipment for gnomes to wear.
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/4bf67bd1aea2d321b8c90b3de0de5f4c269a2500
