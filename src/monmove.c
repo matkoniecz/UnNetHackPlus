@@ -1317,11 +1317,6 @@ register struct monst *mtmp;
 	   are too powerful */
 	gotu = notseen ? !rn2(3) : Displaced ? !rn2(4) : FALSE;
 
-#if 0		/* this never worked as intended & isn't needed anyway */
-	/* If invis but not displaced, staying around gets you 'discovered' */
-	gotu |= (!Displaced && u.dx == 0 && u.dy == 0);
-#endif
-
 	if (!gotu) {
 	    register int try_cnt = 0;
 	    do {
