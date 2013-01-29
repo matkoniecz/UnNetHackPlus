@@ -28,22 +28,6 @@ STATIC_DCL void FDECL(kill_eggs, (struct obj *));
 	   (0)
 #endif
 
-
-#if 0
-/* part of the original warning code which was replaced in 3.3.1 */
-#ifdef OVL1
-#define warnDelay 10
-long lastwarntime;
-int lastwarnlev;
-
-const char *warnings[] = {
-	"white", "pink", "red", "ruby", "purple", "black"
-};
-
-STATIC_DCL void NDECL(warn_effects);
-#endif /* OVL1 */
-#endif /* 0 */
-
 #ifndef OVLB
 STATIC_VAR short cham_to_pm[];
 #else
