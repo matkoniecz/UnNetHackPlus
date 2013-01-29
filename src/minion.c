@@ -122,18 +122,21 @@ boolean talk;
 	    mon->isminion = TRUE;
 	    EPRI(mon)->shralign = alignment;	/* always A_LAWFUL here */
 	}
-    } else
+	} else
 	mon = makemon(&mons[mnum], u.ux, u.uy, NO_MM_FLAGS);
-    if (mon) {
-	if (talk) {
-	    pline_The("voice of %s booms:", align_gname(alignment));
-	    verbalize("Thou shalt pay for thy indiscretion!");
-	    if (!Blind)
-		pline("%s appears before you.", Amonnam(mon));
+	if (mon) {
+		if (talk) {
+			if (flags.soundok) {
+				pline_The("voice of %s booms:", align_gname(alignment));
+				verbalize("Thou shalt pay for thy indiscretion!");
+			}
+			if (!Blind) {
+				pline("%s appears before you.", Amonnam(mon));
+			}
+		}
+		mon->mpeaceful = FALSE;
+		/* don't call set_malign(); player was naughty */
 	}
-	mon->mpeaceful = FALSE;
-	/* don't call set_malign(); player was naughty */
-    }
 }
 
 #define Athome	(Inhell && !mtmp->cham)
