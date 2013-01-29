@@ -1,10 +1,6 @@
 Plans for UnNetHackPlus
 * https://github.com/DanielT/NitroHack/commits/master
 * [[encyclopedia]]
-* unflee zombies on low HP
-* Dragons will never breath in melee combat.
-* Only your quest Nemeses will deliberately steal your quest artifact, other monsters may steal the amulet and invocation items. The quest artifact may of course be randomly stolen by nymphs and the like.  -Makes QA a dependable source of extrinsics, deepening differences between classes. -dnethack
-* Unskilled use of weapons will get you occasional reminders that you suck at this. No matter how many bonuses you get, in Sporkhack you can never get more than a 75% chance to hit a monster with such a weapon. This is only a minor hassle with this artifact longsword, since Mouse will be at basic skill with it shortly, but this is a big nerf to the rubber chicken exploit. No longer is a wielded cockatrice corpse automatic instant victory against even endgame bosses; there is at least a 25% chance the boss will be able to hit back at least once. This is a bigger nerf than it sounds… Since there are no artifact corpses to receive as a gift from your god, no character will ever be skilled in their use. You could say that there's no 'right way' to beat somebody with a dead chicken.
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/f12afc0b61b702fcff39d18ed8f30654e357a2e6
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/1032af2e5b88947b828cdc89a062adb1178fbe5a
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/dea61cde17b8758091e3f3cef95c2d651d11cb3e
@@ -140,6 +136,20 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/03be90768097959dcd3e062d46c9a9afc89f77fe
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/cd21033f22b5e9e7ef318ea1a1b9dd76c8351bfa
 * water damage to flaming spheres (losehp(dam, "drenching", KILLED_BY); in https://github.com/Chris-plus-alphanumericgibberish/dnethack/blob/f167bb7bd5568288c1e54f7581ae34499d7945fd/dnethack-3.4.3/src/trap.c)
+* When I found the black market (the portal was on the nymphs level), I 
+had a few thousand zorkmids prepared. I wanted to buy a magic whistle. 
+But all whistles in the shop were tin ones. I was somewhat desperate, 
+until I realized that I could have solved my problem much earlier. I did 
+have a tin whistle even from mine town (tried whether using it would 
+train my pets to come to the stairs, but could not see any effect). I 
+also had a potion of gain level. And now I remembered (didn't I say my 
+game skills were rusty?) that you can use potions of gain level to 
+upgrade objects. I dipped the tin whistle into the potion and was the 
+proud owner of a magic whistle.
+* unflee zombies on low HP
+* Dragons will never breath in melee combat.
+* Only your quest Nemeses will deliberately steal your quest artifact, other monsters may steal the amulet and invocation items. The quest artifact may of course be randomly stolen by nymphs and the like.  -Makes QA a dependable source of extrinsics, deepening differences between classes. -dnethack
+* Unskilled use of weapons will get you occasional reminders that you suck at this. No matter how many bonuses you get, in Sporkhack you can never get more than a 75% chance to hit a monster with such a weapon. This is only a minor hassle with this artifact longsword, since Mouse will be at basic skill with it shortly, but this is a big nerf to the rubber chicken exploit. No longer is a wielded cockatrice corpse automatic instant victory against even endgame bosses; there is at least a 25% chance the boss will be able to hit back at least once. This is a bigger nerf than it sounds… Since there are no artifact corpses to receive as a gift from your god, no character will ever be skilled in their use. You could say that there's no 'right way' to beat somebody with a dead chicken.
 
 #savebreaking?
 * http://bilious.alt.org/?271
