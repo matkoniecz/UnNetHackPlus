@@ -179,8 +179,7 @@ struct obj *wep;
 		    pline("%s to glow brilliantly!", Tobjnam(wep, "begin"));
 	    }
 
-#if 0
-	    /* we'll get back to this someday, but it's not balanced yet */
+#if 0 /* we'll get back to this someday, but it's not balanced yet */
 	    if (Race_if(PM_ELF) && !wep->oartifact &&
 			    objects[wep->otyp].oc_material == IRON) {
 		/* Elves are averse to wielding cold iron */
