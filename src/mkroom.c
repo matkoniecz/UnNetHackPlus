@@ -73,6 +73,11 @@ int	roomtype;
 STATIC_OVL void
 mkshop()
 {
+	if(!rn2(mvitals[PM_SHOPKEEPER].died+1)) {
+		pline("A feeling of loss comes over you.");
+		return;
+	}
+	pline("%d shopkeepers killed", mvitals[PM_SHOPKEEPER].died);
 	register struct mkroom *sroom;
 	int i = -1;
 #ifdef WIZARD

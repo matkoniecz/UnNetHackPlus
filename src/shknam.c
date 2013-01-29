@@ -526,8 +526,11 @@ struct mkroom	*sroom;
     shkmoney = 7*shkmoney + rn2(3*shkmoney);
 #endif
 	/* it's a poor town */
-	if (Is_town_level(&u.uz))
+	if (Is_town_level(&u.uz)){
 		shkmoney /= 4;
+	}
+	
+	shkmoney /= (1 + mvitals[PM_SHOPKEEPER].died);
 
 #ifndef GOLDOBJ
 	shk->mgold = shkmoney;	
