@@ -84,7 +84,6 @@ Plans for UnNetHackPlus
 * https://github.com/sgrunt/GruntHack/commit/71c688fd496defd0da54a9fa8325700a4527ad6a (entire version lumped in one commit :( )
 * https://github.com/sgrunt/GruntHack/commit/14e47648e676e57d9e07bb17d4fea217fc5d88d3 (...)
 * https://github.com/sgrunt/GruntHack/commit/02a48205328096f50d28e32f527c8df065f86bdc - extreme edge cases are welcome :)
-* Gargoyle weirdness
 * atop looting from asking infuriating ynq, skip for single container, show list for multiple ones (the same for eating)
 * read everything! (http://en.wikipedia.org/wiki/List_of_S-phrases and http://en.wikipedia.org/wiki/GHS_hazard_statement for wands/!)
 fix completely broken alignment, maybe also better gods
@@ -245,3 +244,6 @@ proud owner of a magic whistle.
 #texts
 *  Juiblex the Lord of the Slime Pit, Demon Lord of Oozes and All Things Most Foul.
 * I dunno, I often hear this about Roguelikes and other really hard games, and to the extent that it's true at all, it assumes that the player has read and memorized every single spoiler and knows that (say) Blue-Footed Foozles can be defeated by harsh language but will explode with 40-kiloton yield if struck by any spell or weapon.
+
+#help!
+* Gargoyle weirdness (There are animated statues so it is logical that they are stone resistant. On the other hand their flesh is edible. I want to turn them into statue leaving monster like stone golem - but what should happen with stone monster hit by stone to flesh spell? Turn into meatball as for statues of monsters without corpses? Resist as their stone is also body? Do nothing? Eat significant part of HP (body of foo decays into twisted flesh)? Something else? )
