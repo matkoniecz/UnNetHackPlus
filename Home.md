@@ -1,7 +1,6 @@
 Plans for UnNetHackPlus
 * https://github.com/DanielT/NitroHack/commits/master
 * [[encyclopedia]]
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/1032af2e5b88947b828cdc89a062adb1178fbe5a
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/dea61cde17b8758091e3f3cef95c2d651d11cb3e
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/ce72a17e8b23ad6e6e892127f4b3885726da02b5
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/5d10dd556b1d511b248e67f5882b0d2ffaff580d
@@ -90,8 +89,8 @@ Plans for UnNetHackPlus
 * read everything! (http://en.wikipedia.org/wiki/List_of_S-phrases and http://en.wikipedia.org/wiki/GHS_hazard_statement for wands/!)
 fix completely broken alignment, maybe also better gods
 * http://nethackwiki.com/wiki/Wizard_of_Yendor#cite_note-0 he Wizard is the only unaligned monster in NetHack; however, stethoscopes will report this as "chaotic".
-
-Eliminate tedious things
+* .des - possibility to make drawbridge status random, see https://github.com/Bulwersator/CopyOfSporkHack/commit/1032af2e5b88947b828cdc89a062adb1178fbe5a 
+* Eliminate tedious things
 * Minetown non-diggable (to stop stupid dwarfs)
 
 * Sporky destroy armor
