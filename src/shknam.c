@@ -530,7 +530,9 @@ struct mkroom	*sroom;
 		shkmoney /= 4;
 	}
 	
-	shkmoney /= (1 + mvitals[PM_SHOPKEEPER].died);
+	if(mvitals[PM_SHOPKEEPER].died != NULL){ //yes, it is necessary
+		shkmoney /= (1 + mvitals[PM_SHOPKEEPER].died);
+	}
 
 #ifndef GOLDOBJ
 	shk->mgold = shkmoney;	
