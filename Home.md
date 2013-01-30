@@ -243,6 +243,7 @@ proud owner of a magic whistle.
 * UnNH - (update through 1052 means enabling locust in data.base)
 * https://github.com/Chris-plus-alphanumericgibberish/dnethack/commits/master (January 25)
 * sporkhack (AFAIK, it is dead - but checking will not hurt)
+* Medusa petrifications: NAO: http://www.reddit.com/r/bulwersator/comments/17keai/tesyst/c86alx9 Un http://un.nethack.nu/cause/petrified+by+Medusa
 
 #texts
 *  Juiblex the Lord of the Slime Pit, Demon Lord of Oozes and All Things Most Foul.
