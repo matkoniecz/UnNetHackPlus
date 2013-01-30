@@ -2564,11 +2564,7 @@ click_to_cmd(x, y, mod)
 STATIC_OVL char *
 parse()
 {
-#ifdef LINT	/* static char in_line[COLNO]; */
-	char in_line[COLNO];
-#else
 	static char in_line[COLNO];
-#endif
 	register int foo;
 	boolean prezero = FALSE;
 

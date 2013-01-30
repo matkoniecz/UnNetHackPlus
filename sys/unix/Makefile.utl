@@ -194,9 +194,6 @@ makedefs.o: makedefs.c $(CONFIG_H) ../include/permonst.h \
 # makedefs -z makes both vis_tab.h and vis_tab.c, but writes the .h first
 ../src/vis_tab.c: ../include/vis_tab.h
 
-lintdefs:
-	@lint -axbh -I../include -DLINT $(MAKESRC) $(CMONOBJ) | sed '/_flsbuf/d'
-
 
 # we defer this makedefs call to the src Makefile, since it knows all about
 # the main src and include files date.h is a timestamp for
@@ -234,11 +231,6 @@ lev_lex.c: lev_comp.l
 	$(LEX) $(FLEXDIST) lev_comp.l
 	mv $(LEXYYC) lev_lex.c
 
-# with all of extern.h's functions to complain about, we drown in
-# 'defined but not used' without -u
-lintlev:
-	@lint -axhu -I../include -DLINT $(SPLEVSRC) $(CALLOC) $(CNAMING) | sed '/_flsbuf/d'
-
 
 #	dependencies for dgn_comp
 #
@@ -264,11 +256,6 @@ dgn_yacc.c: dgn_comp.y
 dgn_lex.c: dgn_comp.l
 	$(LEX) $(FLEXDIST) dgn_comp.l
 	mv $(LEXYYC) dgn_lex.c
-
-# with all of extern.h's functions to complain about, we drown in
-# 'defined but not used' without -u
-lintdgn:
-	@lint -axhu -I../include -DLINT $(DGNCOMPSRC) $(CALLOC) | sed '/_flsbuf/d'
 
 
 #	dependencies for recover
