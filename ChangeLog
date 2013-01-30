@@ -1,8 +1,10 @@
 2012-?-?  UnNetHackPlus 4.0.0 (WIP)
+	* vanilia bug fixes:
+		- C343-14 "tombstone message resulting from eating an identified artifact is gramatically incorrect" (from GruntHack, by sgrunt - https://github.com/sgrunt/GruntHack/commit/02a48205328096f50d28e32f527c8df065f86bdc)
+		- Successful prayer now protects against stinking cloud (from GruntHack, by sgrunt - revision 3f358cc7401afcd39eb6193184deb9c35aa517d5)
 	* Mind flayer attacks only cause physical damage and int drain (from UnNetHack, revision 1025)
 	* Follow guidelines for color assignment (based on http://l.j-factor.com/nethack/colour.diff by "L" - Leon Arnott)
 	* Poison gas blasts leave a trail of stinking clouds (based on http://l.j-factor.com/nethack/poisoncloud.diff by "L" - Leon Arnott)
-	* Successful prayer now protects against stinking cloud (from GruntHack, by sgrunt - revision 3f358cc7401afcd39eb6193184deb9c35aa517d5)
 	* Kobolds vs elves grudge
 	* Far look during hallucination should be more amusing
 	* Assorted YAFMs 1.0 by Adam Borowski ( http://bilious.alt.org/?121 ), slightly modified
