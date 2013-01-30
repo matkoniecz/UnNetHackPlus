@@ -1,5 +1,7 @@
 Plans for UnNetHackPlus
 * https://github.com/DanielT/NitroHack/commits/master
+* https://github.com/tung/NitroHack
+* grunt (see bookmarks)
 * [[encyclopedia]]
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/dea61cde17b8758091e3f3cef95c2d651d11cb3e
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/ce72a17e8b23ad6e6e892127f4b3885726da02b5
@@ -240,6 +242,7 @@ proud owner of a magic whistle.
 * http://alt.org/nethack/naonh.php graves checked out 9 I - new hallucinatory monster names, random engravings, gravestones and T-shirt messages
 * UnNH - (update through 1052 means enabling locust in data.base)
 * https://github.com/Chris-plus-alphanumericgibberish/dnethack/commits/master (January 25)
+* sporkhack (AFAIK, it is dead - but checking will not hurt)
 
 #texts
 *  Juiblex the Lord of the Slime Pit, Demon Lord of Oozes and All Things Most Foul.
