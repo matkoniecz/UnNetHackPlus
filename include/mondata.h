@@ -175,10 +175,8 @@
 #define touch_petrifies(ptr)	((ptr) == &mons[PM_COCKATRICE] || \
 				 (ptr) == &mons[PM_CHICKATRICE])
 
-#ifdef WEBB_DISINT
 # define touch_disintegrates(ptr) ((ptr) == &mons[PM_DISINTEGRATOR] || \
 				 (ptr) == &mons[PM_ANTI_MATTER_VORTEX])
-#endif
   
 #define is_mind_flayer(ptr)	((ptr) == &mons[PM_MIND_FLAYER] || \
 				 (ptr) == &mons[PM_MASTER_MIND_FLAYER])
