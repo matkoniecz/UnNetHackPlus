@@ -63,7 +63,13 @@ Plans for UnNetHackPlus
 * http://l.j-factor.com/nethack/wounds.diff
 * http://l.j-factor.com/nethack/wallcorr.diff
 * http://l.j-factor.com/nethack/construct.diff
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/161eec3c4e0e06cab3f70b28e34b95a37f368918 -  Major alignment changes. 
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/161eec3c4e0e06cab3f70b28e34b95a37f368918 -  Major alignment changes.
+* I, and a few others, think magic resistance is too general an
+attribute, covering too many scenarios. I reckon it should be split up
+into mana/magic missile resistance (which gray DSM would confer), spell
+resistance, and death resistance. While spell resistance would remain a
+high priority, the others would be precautionary measures (much like
+acid resistance is now.) https://groups.google.com/forum/?fromgroups=#!topic/rec.games.roguelike.nethack/TrtHf-9b8SU 
 * warning on Cthulhu, 6 - terror, even without normal warning source (green?)
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/6aa95dc3069c3392e3ddb5ad35042e1a78187e57 - Shopkeepers will now cry their wares at you as you pass by
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/094ddfac1a648a07d5ed291ffc1b37803ad065f4 - reduces shkp yelling
