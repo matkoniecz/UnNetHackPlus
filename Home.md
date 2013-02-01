@@ -94,7 +94,6 @@ acid resistance is now.) https://groups.google.com/forum/?fromgroups=#!topic/rec
 * read everything! (http://en.wikipedia.org/wiki/List_of_S-phrases and http://en.wikipedia.org/wiki/GHS_hazard_statement for wands/!)
 fix completely broken alignment, maybe also better gods
 * http://nethackwiki.com/wiki/Wizard_of_Yendor#cite_note-0 he Wizard is the only unaligned monster in NetHack; however, stethoscopes will report this as "chaotic".
-* .des - possibility to make drawbridge status random, see https://github.com/Bulwersator/CopyOfSporkHack/commit/1032af2e5b88947b828cdc89a062adb1178fbe5a 
 * Eliminate tedious things
 * Minetown non-diggable (to stop stupid dwarfs)
 
@@ -244,9 +243,12 @@ proud owner of a magic whistle.
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/4a6337948eb34e2c0dbf4ec2609316d6dafcf234
  
 
+#un synchronisation
+* UnNH - (update through 1052 means enabling locust in data.base)
+* after Un.1242 .des - possibility to make drawbridge status random, see https://github.com/Bulwersator/CopyOfSporkHack/commit/1032af2e5b88947b828cdc89a062adb1178fbe5a
+
 #recheck
 * http://alt.org/nethack/naonh.php graves checked out 9 I - new hallucinatory monster names, random engravings, gravestones and T-shirt messages
-* UnNH - (update through 1052 means enabling locust in data.base)
 * https://github.com/Chris-plus-alphanumericgibberish/dnethack/commits/master (January 25)
 * sporkhack (AFAIK, it is dead - but checking will not hurt)
 * Medusa petrifications: NAO: http://www.reddit.com/r/bulwersator/comments/17keai/tesyst/c86alx9 Un http://un.nethack.nu/cause/petrified+by+Medusa
