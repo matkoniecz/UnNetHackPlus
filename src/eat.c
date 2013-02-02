@@ -147,26 +147,68 @@ static const struct { const char *txt; int nut; } tintxts[] = {
 	{"pickled",	 40},
 	{"soup made from", 20},
 	{"pureed",	500},
-#define ROTTEN_TIN 4
-	{"rotten",	-50},
-#define HOMEMADE_TIN 5
+#define HOMEMADE_TIN 4
 	{"homemade",	 50},
 	{"stir fried",   80},
 	{"candied",      100},
 	{"boiled",       50},
 	{"dried",        55},
-#define SZECHUAN_TIN 10
+#define SZECHUAN_TIN 9
 	{"szechuan",     70},
-#define FRENCH_FRIED_TIN 11
+#define FRENCH_FRIED_TIN 10
 	{"french fried", 40},
 	{"sauteed",      95},
 	{"broiled",      80},
 	{"smoked",       50},
-#define DELICIOUS_SOUP_TIN 15
+#define DELICIOUS_SOUP_TIN 14
 	{"delicious soup made from", 200},
-	{"", 0}
+#define ROTTEN_TIN 15
+	{"rotten",	-50},
+/* only specials below; ROTTEN_TIN used as marker */
+#define SPINACH_TIN 16
+	{"spinach",	  0},
+ 	{"", 0}
 };
 #define TTSZ	SIZE(tintxts)
+
+int
+tin_content_idx(struct obj *obj)
+{
+	/* for tins, spe==-1 means player made it, and spe==1 means spinach */
+	if (obj->spe ==  1) {
+		return SPINACH_TIN;
+	}
+	if (obj->spe == -1) {
+		return HOMEMADE_TIN;
+	}
+	/* don't select special stuff here */
+	return (obj->o_id % ROTTEN_TIN);
+}
+
+char *
+tin_content_text(struct obj *obj)
+{
+	static char buf[BUFSZ];
+	static const char *tin_label_msgs[] = {
+		"simulation meat",
+		"meat-like product",
+		"soylent green",
+		"spoo",
+		"stone soup"
+	};
+	int idx = (obj->corpsenm == NON_PM) ? (obj->o_id % PM_LONG_WORM_TAIL) : obj->corpsenm;
+	int t = tin_content_idx(obj);
+	if (Hallucination) {
+	sprintf(buf, "%s", tin_label_msgs[obj->o_id % SIZE(tin_label_msgs)]);
+	} else {
+		if (t == SPINACH_TIN) {
+			sprintf(buf, "%s", tintxts[t].txt);
+		} else {
+			snprintf(buf, BUFSZ, "%s %s", tintxts[t].txt, mons[idx].mname);
+		}
+	}
+	return upstart(buf);
+}
 
 static NEARDATA struct {
 	struct	obj *tin;
@@ -1106,67 +1148,74 @@ opentin()		/* called during each move whilst opening a tin */
 	const char *what;
 	int which;
 
-	if(!carried(tin.tin) && !obj_here(tin.tin, u.ux, u.uy))
+	if(!carried(tin.tin) && !obj_here(tin.tin, u.ux, u.uy)){
 					/* perhaps it was stolen? */
 		return(0);		/* %% probably we should use tinoid */
+	}
 	if(tin.usedtime++ >= 50) {
 		You("give up your attempt to open the tin.");
 		return(0);
 	}
-	if(tin.usedtime < tin.reqtime)
+	if(tin.usedtime < tin.reqtime) {
 		return(1);		/* still busy */
-	if(tin.tin->otrapped ||
-	   (tin.tin->cursed && tin.tin->spe != -1 && !rn2(8))) {
+	}
+	if(tin.tin->otrapped || (tin.tin->cursed && tin.tin->spe != -1 && !rn2(8))) {
 		b_trapped("tin", 0);
 		costly_tin("destroyed");
 		goto use_me;
 	}
 	You("succeed in opening the tin.");
 	if(tin.tin->spe != 1) {
-	    if (tin.tin->corpsenm == NON_PM) {
-		pline("It turns out to be empty.");
-		tin.tin->dknown = tin.tin->known = TRUE;
-		costly_tin((const char*)0);
-		goto use_me;
+		if (tin.tin->corpsenm == NON_PM) {
+			pline("It turns out to be empty.");
+			tin.tin->dknown = tin.tin->known = TRUE;
+			costly_tin((const char*)0);
+			goto use_me;
 		}
 		if (tin.tin->cursed) {
 			r = ROTTEN_TIN;  /* always rotten if cursed */
 		} else if (tin.tin->spe == -1) {
 			r = HOMEMADE_TIN;  /* player made it */
 		} else {
-			r = rn2(TTSZ-2); /* else take your pick */
+			r = tin_content_idx(tin.tin); /* else take your pick */
 		}
 		if (tin.tin->corpsenm == PM_GIANT_TURTLE && !tin.tin->cursed) {
 			/* Giant turtles are always endangeredelicious! */
 			r = DELICIOUS_SOUP_TIN;
 		}
-		if (r == ROTTEN_TIN && (tin.tin->corpsenm == PM_LIZARD ||
-			tin.tin->corpsenm == PM_LICHEN))
-		r = HOMEMADE_TIN;		/* lizards don't rot */
-	    else if (tin.tin->spe == -1 && !tin.tin->blessed && !rn2(7))
-		r = ROTTEN_TIN;			/* some homemade tins go bad */
-	    which = 0;	/* 0=>plural, 1=>as-is, 2=>"the" prefix */
-	    if (Hallucination) {
-		what = rndmonnam();
-	    } else {
-		what = mons[tin.tin->corpsenm].mname;
-		if (mons[tin.tin->corpsenm].geno & G_UNIQ)
-		    which = type_is_pname(&mons[tin.tin->corpsenm]) ? 1 : 2;
-	    }
-	    if (which == 0) what = makeplural(what);
-	    pline("It smells like %s%s.", (which == 2) ? "the " : "", what);
-	    if (yn("Eat it?") == 'n') {
-		if (!Hallucination) tin.tin->dknown = tin.tin->known = TRUE;
-		if (flags.verbose) You("discard the open tin.");
-		costly_tin((const char*)0);
-		goto use_me;
-	    }
-	    /* in case stop_occupation() was called on previous meal */
-	    victual.piece = (struct obj *)0;
-	    victual.fullwarn = victual.eating = victual.doreset = FALSE;
+		if (r == ROTTEN_TIN && (tin.tin->corpsenm == PM_LIZARD || tin.tin->corpsenm == PM_LICHEN)) {
+			r = tin_content_idx(tin.tin);		/* lizards don't rot */
+		} else if (tin.tin->spe == -1 && !tin.tin->blessed && !rn2(7)) {
+			r = ROTTEN_TIN;			/* some homemade tins go bad */
+		}
+		which = 0;	/* 0=>plural, 1=>as-is, 2=>"the" prefix */
+		if (Hallucination) {
+			what = rndmonnam();
+		} else {
+			what = mons[tin.tin->corpsenm].mname;
+			if (mons[tin.tin->corpsenm].geno & G_UNIQ) {
+				which = type_is_pname(&mons[tin.tin->corpsenm]) ? 1 : 2;
+			}
+		}
+		if (which == 0) {
+			what = makeplural(what);
+		}
+		pline("It smells like %s%s.", (which == 2) ? "the " : "", what);
+		if (yn("Eat it?") == 'n') {
+			if (!Hallucination) {
+				tin.tin->dknown = tin.tin->known = TRUE;
+			}
+			if (flags.verbose) {
+				You("discard the open tin.");
+			}
+			costly_tin((const char*)0);
+			goto use_me;
+		}
+		/* in case stop_occupation() was called on previous meal */
+		victual.piece = (struct obj *)0;
+		victual.fullwarn = victual.eating = victual.doreset = FALSE;
 
-	    You("consume %s %s.", tintxts[r].txt,
-			mons[tin.tin->corpsenm].mname);
+		You("consume %s %s.", tintxts[r].txt, mons[tin.tin->corpsenm].mname);
 
 		/* SZECHUAN_TIN might have free fortune cookie */
 		if (r==SZECHUAN_TIN && rn2(2)) {
@@ -1181,57 +1230,62 @@ opentin()		/* called during each move whilst opening a tin */
 				"It falls to the floor.",0,0);
 		}
 
-	    /* KMH, conduct */
-	    /* Eating a tin of monstermeat breaks food-conducts here */
-	    if (!vegetarian(&mons[tin.tin->corpsenm]))
-		violated(CONDUCT_VEGETARIAN);
-	    else if (!vegan(&mons[tin.tin->corpsenm]))
-		violated(CONDUCT_VEGAN);
-	    else
+		/* KMH, conduct */
+		/* Eating a tin of monstermeat breaks food-conducts here */
+		if (!vegetarian(&mons[tin.tin->corpsenm])) {
+			violated(CONDUCT_VEGETARIAN);
+		}
+		else if (!vegan(&mons[tin.tin->corpsenm])) {
+			violated(CONDUCT_VEGAN);
+		} else {
 		violated(CONDUCT_FOODLESS);
+		}
 
-	    tin.tin->dknown = tin.tin->known = TRUE;
-	    cprefx(tin.tin->corpsenm); cpostfx(tin.tin->corpsenm);
+		tin.tin->dknown = tin.tin->known = TRUE;
+		cprefx(tin.tin->corpsenm); cpostfx(tin.tin->corpsenm);
 
-	    /* charge for one at pre-eating cost */
-	    costly_tin((const char*)0);
-
-	    /* check for vomiting added by GAN 01/16/87 */
-	    if(tintxts[r].nut < 0) make_vomiting((long)rn1(15,10), FALSE);
-	    else lesshungry(tintxts[r].nut);
-
-	    if(r == 0 || r == FRENCH_FRIED_TIN) {
-	        /* Assume !Glib, because you can't open tins when Glib. */
-		incr_itimeout(&Glib, rnd(15));
-		pline("Eating deep fried food made your %s very slippery.",
-		      makeplural(body_part(FINGER)));
-	    }
-	} else {
-	    if (tin.tin->cursed)
-		pline("It contains some decaying%s%s substance.",
-			Blind ? "" : " ", Blind ? "" : hcolor(NH_GREEN));
-	    else
-		pline("It contains spinach.");
-
-	    if (yn("Eat it?") == 'n') {
-		if (!Hallucination && !tin.tin->cursed)
-		    tin.tin->dknown = tin.tin->known = TRUE;
-		if (flags.verbose)
-		    You("discard the open tin.");
+		/* charge for one at pre-eating cost */
 		costly_tin((const char*)0);
-		goto use_me;
-	    }
 
-	    tin.tin->dknown = tin.tin->known = TRUE;
-	    costly_tin((const char*)0);
+		if(tintxts[r].nut < 0) {
+			make_vomiting((long)rn1(15,10), FALSE);
+		} else {
+			lesshungry(tintxts[r].nut);
+		}
 
-	    if (!tin.tin->cursed)
-		pline("This makes you feel like %s!",
-		      Hallucination ? "Swee'pea" : "Popeye");
-	    lesshungry(600);
-	    gainstr(tin.tin, 0);
-	    /* Eating a tin of spinach breaks foodless-conduct here */
-	    violated(CONDUCT_FOODLESS);
+		if(r == 0 || r == FRENCH_FRIED_TIN) {
+			/* Assume !Glib, because you can't open tins when Glib. */
+			incr_itimeout(&Glib, rnd(15));
+			pline("Eating deep fried food made your %s very slippery.", makeplural(body_part(FINGER)));
+		}
+	} else {
+		if (tin.tin->cursed) {
+			pline("It contains some decaying%s%s substance.", Blind ? "" : " ", Blind ? "" : hcolor(NH_GREEN));
+		} else {
+			pline("It contains spinach.");
+		}
+		if (yn("Eat it?") == 'n') {
+			if (!Hallucination && !tin.tin->cursed) {
+				tin.tin->dknown = tin.tin->known = TRUE;
+			}
+			if (flags.verbose) {
+				You("discard the open tin.");
+			}
+			costly_tin((const char*)0);
+			goto use_me;
+		}
+
+		tin.tin->dknown = tin.tin->known = TRUE;
+		costly_tin((const char*)0);
+
+		if (!tin.tin->cursed) {
+			pline("This makes you feel like %s!",
+			Hallucination ? "Swee'pea" : "Popeye");
+		}
+		lesshungry(600);
+		gainstr(tin.tin, 0);
+		/* Eating a tin of spinach breaks foodless-conduct here */
+		violated(CONDUCT_FOODLESS);
 	}
 use_me:
 	if (carried(tin.tin)) useup(tin.tin);

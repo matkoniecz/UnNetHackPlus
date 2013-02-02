@@ -1,0 +1,20 @@
+--- src/read.c
++++ src/read.c
+@@ -183,8 +183,15 @@
+             u.uconduct.literate++;
+             return 1;
+ #endif	/* TOURIST */
+-        } else if ((scroll->otyp == TIN) ||
+-		   (scroll->otyp == CAN_OF_GREASE)) {
++        } else if (scroll->otyp == TIN) {
++	    if (scroll->o_id % 3) {
++		pline("This %s has no label.", singular(scroll, xname));
++		return(0);
++	    } else {
++		pline("The label reads: \"%s\"", tin_content_text(scroll));
++		return 1;
++	    }
++	} else if (scroll->otyp == CAN_OF_GREASE) {
+             pline("This %s has no label.", singular(scroll, xname));
+             return(0);
+ 	} else if (scroll->otyp == CANDY_BAR) {

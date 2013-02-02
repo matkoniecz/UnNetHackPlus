@@ -205,12 +205,17 @@ doread()
 		u.uconduct.literate++;
 		return 1;
 #endif	/* TOURIST */
-	} else if ((scroll->otyp == TIN) ||
-		   (scroll->otyp == CAN_OF_GREASE) ||
-		   (scroll->otyp == CANDY_BAR)) {
-		pline("This %s has no %s.", singular(scroll, xname),
-				(scroll->otyp == CANDY_BAR) ? "wrapper" : "label");
+	} else if ((scroll->otyp == CAN_OF_GREASE) || (scroll->otyp == CANDY_BAR)) {
+		pline("This %s has no %s.", singular(scroll, xname), (scroll->otyp == CANDY_BAR) ? "wrapper" : "label");
 		return(0);
+	} else if (scroll->otyp == TIN) {
+		if (scroll->o_id % 3) {
+			pline("This %s has no label.", singular(scroll, xname));
+			return 0;
+		} else {
+			pline("The label reads: \"%s\"", tin_content_text(scroll));
+			return 1;
+		}
 	} else if (scroll->otyp == MAGIC_MARKER) {
 		if (Blind) {
 			You_cant("feel any Braille writing.");
