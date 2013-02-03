@@ -4,9 +4,7 @@ Plans for UnNetHackPlus
 * grunt (see bookmarks)
 * [[encyclopedia]]
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/dea61cde17b8758091e3f3cef95c2d651d11cb3e
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/ce72a17e8b23ad6e6e892127f4b3885726da02b5
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/9a92a24ea83d6f873ad65a4dbad73c4851d3df29
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/f63ace46cb35242a082e4035e13012ac832f9639
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/c060e00fdf7507da62106a997f09e83d2d564ebb
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/72e5df0904ceaea90f5082c2df38db3bfbc1ac62 +  https://github.com/Bulwersator/CopyOfSporkHack/commit/65838348f1d8f7a0dfbfe3fac96ac3ccfa8054dc + https://github.com/Bulwersator/CopyOfSporkHack/commit/883051a12294d4f7672904c22ad709b51e80fad0
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/68be37ef17c95024eb28e25820b7534d43478166
