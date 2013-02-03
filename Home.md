@@ -8,7 +8,6 @@ Plans for UnNetHackPlus
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/c060e00fdf7507da62106a997f09e83d2d564ebb
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/72e5df0904ceaea90f5082c2df38db3bfbc1ac62 +  https://github.com/Bulwersator/CopyOfSporkHack/commit/65838348f1d8f7a0dfbfe3fac96ac3ccfa8054dc + https://github.com/Bulwersator/CopyOfSporkHack/commit/883051a12294d4f7672904c22ad709b51e80fad0
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/68be37ef17c95024eb28e25820b7534d43478166
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/61b0d41fac692b0c84b99414f16f23217fd08d0f
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/c2640a22d5acf655a71ed0547dd31c3374317b80
 * http://bilious.alt.org/?38
 * sacrificing candles ( splitobj )
