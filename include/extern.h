@@ -582,6 +582,7 @@ E int NDECL(opentin);
 E int NDECL(unfaint);
 #endif
 E char * FDECL(tin_content_text, (struct obj *));
+E boolean FDECL(tin_is_labelled, (struct obj *));
 E boolean FDECL(is_edible, (struct obj *));
 E void NDECL(init_uhunger);
 E int NDECL(Hear_again);

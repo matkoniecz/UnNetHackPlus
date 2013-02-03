@@ -209,12 +209,13 @@ doread()
 		pline("This %s has no %s.", singular(scroll, xname), (scroll->otyp == CANDY_BAR) ? "wrapper" : "label");
 		return(0);
 	} else if (scroll->otyp == TIN) {
-		if (scroll->o_id % 3) {
+		if (tin_is_labelled(scroll)) {
+			pline("The label reads: \"%s\"", tin_content_text(scroll));
+			scroll->dknown = scroll->known = TRUE;
+			return 1;
+		} else {
 			pline("This %s has no label.", singular(scroll, xname));
 			return 0;
-		} else {
-			pline("The label reads: \"%s\"", tin_content_text(scroll));
-			return 1;
 		}
 	} else if (scroll->otyp == MAGIC_MARKER) {
 		if (Blind) {

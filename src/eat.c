@@ -210,6 +210,13 @@ tin_content_text(struct obj *obj)
 	return upstart(buf);
 }
 
+boolean
+tin_is_labelled(struct obj *obj)
+{
+	if(obj->o_id % 3) return FALSE;
+	return TRUE;
+}
+
 static NEARDATA struct {
 	struct	obj *tin;
 	int	usedtime, reqtime;
@@ -1200,16 +1207,18 @@ opentin()		/* called during each move whilst opening a tin */
 		if (which == 0) {
 			what = makeplural(what);
 		}
-		pline("It smells like %s%s.", (which == 2) ? "the " : "", what);
-		if (yn("Eat it?") == 'n') {
-			if (!Hallucination) {
-				tin.tin->dknown = tin.tin->known = TRUE;
+		if (!tin.tin->dknown || !tin.tin->known) {
+			pline("It smells like %s%s.", (which == 2) ? "the " : "", what);
+			if (yn("Eat it?") == 'n') {
+				if (!Hallucination) {
+					tin.tin->dknown = tin.tin->known = TRUE;
+				}
+				if (flags.verbose) {
+					You("discard the open tin.");
+				}
+				costly_tin((const char*)0);
+				goto use_me;
 			}
-			if (flags.verbose) {
-				You("discard the open tin.");
-			}
-			costly_tin((const char*)0);
-			goto use_me;
 		}
 		/* in case stop_occupation() was called on previous meal */
 		victual.piece = (struct obj *)0;
@@ -1259,20 +1268,22 @@ opentin()		/* called during each move whilst opening a tin */
 			pline("Eating deep fried food made your %s very slippery.", makeplural(body_part(FINGER)));
 		}
 	} else {
-		if (tin.tin->cursed) {
-			pline("It contains some decaying%s%s substance.", Blind ? "" : " ", Blind ? "" : hcolor(NH_GREEN));
-		} else {
-			pline("It contains spinach.");
-		}
-		if (yn("Eat it?") == 'n') {
-			if (!Hallucination && !tin.tin->cursed) {
-				tin.tin->dknown = tin.tin->known = TRUE;
+		if (!tin.tin->dknown || !tin.tin->known || tin.tin->cursed) {
+			if (tin.tin->cursed) {
+				pline("It contains some decaying%s%s substance.", Blind ? "" : " ", Blind ? "" : hcolor(NH_GREEN));
+			} else {
+				pline("It contains spinach.");
 			}
-			if (flags.verbose) {
-				You("discard the open tin.");
+			if (yn("Eat it?") == 'n') {
+				if (!Hallucination && !tin.tin->cursed) {
+					tin.tin->dknown = tin.tin->known = TRUE;
+				}
+				if (flags.verbose) {
+					You("discard the open tin.");
+				}
+				costly_tin((const char*)0);
+				goto use_me;
 			}
-			costly_tin((const char*)0);
-			goto use_me;
 		}
 
 		tin.tin->dknown = tin.tin->known = TRUE;
@@ -1299,6 +1310,22 @@ start_tin(otmp)		/* called when starting to open a tin */
 	register struct obj *otmp;
 {
 	register int tmp;
+
+	if (!u.roleplay.illiterate) {
+		if (!Blind && tin_is_labelled(otmp)) {
+			You("see a label on the tin.");
+			if ((u.uconduct.literate != 0) || (yn("Read it?") == 'y')) {
+				pline("The label reads: \"%s\"", tin_content_text(otmp));
+				violated(CONDUCT_ILLITERACY);
+				if (!Hallucination) {
+					otmp->dknown = otmp->known = TRUE;
+				}
+				if(yn("Eat it?") == 'n') {
+					return;
+				}
+			}
+		}
+	}
 
 	if (metallivorous(youmonst.data)) {
 		You("bite right into the metal tin...");
