@@ -41,6 +41,12 @@ STATIC_PTR void FDECL(do_flood, (int,int,genericptr_t));
 STATIC_PTR void FDECL(undo_flood, (int,int,genericptr_t));
 STATIC_PTR void FDECL(set_lit, (int,int,genericptr_t));
 
+boolean
+can_read_elvish_runes()
+{
+	return Race_if(PM_ELF) || Role_if(PM_ARCHEOLOGIST);
+}
+
 int
 doread()
 {
@@ -252,25 +258,28 @@ doread()
 		if (scroll->otyp == RUNESWORD) {
 			You_cant("decipher the arcane runes.");
 			return 0;
-		} if (!Race_if(PM_ELF) && !Role_if(PM_ARCHEOLOGIST)) {
+		} if (!can_read_elvish_runes()) {
 			You_cant("decipher the Elvish runes.");
 			return 0;
 		}
 		u.uconduct.literate++;
 		if (objects[scroll->otyp].oc_merge) {
-			if (Blind)
+			if (Blind) {
 				You("feel the engraved runes:");
-			else if (flags.verbose) pline("The runes read:");
+			} else if (flags.verbose) {
+				pline("The runes read:");
+			}
 			pline("\"Made in Elfheim.\"");
 			return 1;
 		} else {
 			/* "Avoid any artifact with Runes on it, even if the Runes
 			 *  prove only to spell the maker's name." -- Diana Wynne Jones
 			 */
-			if (Blind)
+			if (Blind) {
 				You("feel the engraved signature:");
-			else
+			} else {
 				pline("It is signed:");
+			}
 			pline("\"%s\"", elf_name(scroll->o_id));
 			return 1;
 		}
