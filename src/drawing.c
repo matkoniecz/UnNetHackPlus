@@ -239,7 +239,7 @@ struct symdef defsyms[MAXPCHARS] = {
 #else
 	{'#', "",		C(CLR_GRAY)},	/* sink */
 #endif
-/*30*/	{'{', "fountain",	C(CLR_BLUE)},	/* fountain */
+/*30*/	{'{', "fountain",	C(CLR_BRIGHT_BLUE)},	/* fountain */
 	{'}', "water",		C(CLR_BLUE)},	/* pool */
 	{'.', "ice",		C(CLR_CYAN)},	/* ice */
 	{'}', "muddy swamp",	C(CLR_GREEN)},	/* muddy swamp, bog */
