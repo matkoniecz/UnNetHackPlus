@@ -10,7 +10,6 @@ Plans for UnNetHackPlus
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/68be37ef17c95024eb28e25820b7534d43478166
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/61b0d41fac692b0c84b99414f16f23217fd08d0f
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/c2640a22d5acf655a71ed0547dd31c3374317b80
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/f2658a4b96b37fc171a133d5484ee5353afbc372 
 * http://bilious.alt.org/?38
 * sacrificing candles ( splitobj )
 * stop body armor as gift for monks not wielding weapons http://nethackwiki.com/wiki/Source:NetHack_3.4.3/src/attrib.c#adjabil
