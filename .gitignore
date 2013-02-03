@@ -1,5 +1,8 @@
+#patching debris
 *.diff
 *.patch
+*.orig
+#*.rej
 
 #temporary compilation files
 conftest.c
