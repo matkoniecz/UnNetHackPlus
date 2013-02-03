@@ -267,30 +267,11 @@ doread()
 			/* "Avoid any artifact with Runes on it, even if the Runes
 			 *  prove only to spell the maker's name." -- Diana Wynne Jones
 			 */
-			/* Elf name fragments courtesy of ToME */
-			static const char *elf_syllable1[] = {
-				"Al", "An", "Bal", "Bel", "Cal", "Cel", "El", "Elr", "Elv", "Eow",
-				"Ear", "F", "Fal", "Fel", "Fin", "G", "Gal", "Gel", "Gl", "Is", "Lan",
-				"Leg", "Lom", "N", "Nal","Nel", "S", "Sal", "Sel", "T", "Tal", "Tel",
-				"Thr", "Tin",
-			};
-			static const char *elf_syllable2[] = {
-				"a", "adrie", "ara", "e", "ebri", "ele", "ere", "i", "io", "ithra",
-				"ilma", "il-Ga", "ili", "o", "orfi", "u", "y",
-			};
-			static const char *elf_syllable3[] = {
-				"l", "las", "lad", "ldor", "ldur", "linde", "lith", "mir", "n", "nd",
-				"ndel", "ndil", "ndir", "nduil", "ng", "mbor", "r", "rith", "ril",
-				"riand", "rion", "s", "thien", "viel", "wen", "wyn",
-			};
 			if (Blind)
 				You("feel the engraved signature:");
 			else
 				pline("It is signed:");
-			pline("\"%s%s%s\"",
-					elf_syllable1[scroll->o_id % SIZE(elf_syllable1)],
-					elf_syllable2[scroll->o_id % SIZE(elf_syllable2)],
-					elf_syllable3[scroll->o_id % SIZE(elf_syllable3)]);
+			pline("\"%s\"", elf_name(scroll->o_id));
 			return 1;
 		}
 	} else if (scroll->oclass != SCROLL_CLASS
