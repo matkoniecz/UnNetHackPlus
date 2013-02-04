@@ -1,3 +1,5 @@
+mumak, orc captain, Baluchitherium - http://en.wikipedia.org/wiki/Baluchitherium
+
 * find encyclopedia entries for http://nethackwiki.com/wiki/Acid_blob winter wolf (abcdefghiklmnop monsters done http://nethackwiki.com/wiki/Monster ) http://nethackwiki.com/wiki/Spotted_jelly
 http://nethackwiki.com/wiki/Uruk-hai
 
@@ -80,5 +82,4 @@ May live
 Forever! 
 
 * "In Rust We Trust."
-
 
