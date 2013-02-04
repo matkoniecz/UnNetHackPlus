@@ -1,5 +1,4 @@
 Plans for UnNetHackPlus
-* https://github.com/Chris-plus-alphanumericgibberish/dnethack/commit/cc1763974848bc8dd3dc47cc61280a2011ab0489 - giant rat
 * https://github.com/Chris-plus-alphanumericgibberish/dnethack/commit/e21dba057cd425204f8a91a141c7400855c09805 + https://github.com/Chris-plus-alphanumericgibberish/dnethack/commit/08488c9a16a43af51188cba93cf1e9f3a09635e2 + https://github.com/Chris-plus-alphanumericgibberish/dnethack/commit/f975c1f44dd610850fa8e2b0401f638e86b84da4
 * https://github.com/DanielT/NitroHack/commits/master
 * https://github.com/tung/NitroHack
