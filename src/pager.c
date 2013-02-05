@@ -454,6 +454,115 @@ const char what_is_an_unknown_object[] = "an unknown object";
 
 static const char * const bogusobjects[] = {
 
+	/* Real */
+	"arrow",
+	"elven arrow",
+	"orcish arrow",
+	"runed arrow",
+	"ruined arrow",
+	"crude arrow",
+	"vulgar arrow",
+	"ya",
+	"bamboo arrow",
+	"crossbow bolt",
+	"dart",
+	"shuriken",
+	"shurunken",
+	"boomerang",
+	"elven spear",
+	"orcish spear",
+	"dwarvish spear",
+	"silver spear",
+	"sliver spear",
+	"javelin",
+	"throwing spear",
+	"throwing spar",
+	"trident",
+	"dagger",
+	"elven dagger",
+	"orcish dagger",
+	"silver dagger",
+	"athame",
+	"scalpel",
+	"knife",
+	"stiletto",
+	"worm tooth",
+	"crysknife",
+	"axe",
+	"battle-axe",
+	"short sword",
+	"scimitar",
+	"curved sword",
+	"silver saber",
+	"broadsword",
+	"long sword",
+	"two-handed sword",
+	"katana",
+	"tsurugi",
+	"runesword",
+	"partisan",
+	"spetum",
+	"glaive",
+	"ranseur",
+	"lance",
+	"halberd",
+	"bardiche",
+	"voulge",
+	"dwarvish mattock",
+	"fauchard",
+	"guisarme",
+	"bill-guisarme",
+	"lucern hammer",
+	"bec de corbin",
+	"mace",
+	"morning star",
+	"club",
+	"quarterstaff",
+	"iron bar",
+	"aklys",
+	"thonged club",
+	"flail",
+	"bullwhip",
+	"bow",
+	"elven bow",
+	"orcish bow",
+	"yumi",
+	"sling",
+	"crossbow",
+	"fedora",
+	"conical hat",
+	"plumed helmet",
+	"etched helmet",
+	"crested helmet",
+	"visored helmet",
+	"plate mail",
+	"mithril-coat",
+	"banded mail",
+	"splint mail",
+	"chain mail",
+	"scale mail",
+	"ring mail",
+	"studded leather armor",
+	"shirt",
+	"cloak",
+	"robe",
+	"small shield",
+	"elven shield",
+	"shield of reflection",
+	"old gloves",
+	"padded gloves",
+	"riding gloves",
+	"fencing gloves",
+	"walking shoes",
+	"hard shoes",
+	"jackboots",
+	"combat boots",
+	"jungle boots",
+	"hiking boots",
+	"mud boots",
+	"buckled boots",
+	"riding boots",
+
 	/* Modern */
 	"polo mallet",
 	"string vest",
@@ -468,12 +577,25 @@ static const char * const bogusobjects[] = {
 	"Klein bottle",
 	"pair of high-heeled stilettos",    /* the *other* stiletto */
 	"intercontinental ballistic missile",
+	"doomsday device",
+	"potion of Wow-Wow sauce",
+	"dyson sphere",
+	"Demon Core",
+	"zeppelin",
+	"Great Attractor",
+	"Sloan Great Wall",
 
 	/* injokes */
 	"YAFM",                             /* rgrn */
+	"YAAP",
+	"YASD",
+	"Puddingbane",
+	"malevolent RNG",
 	"pamphlet titled 'How to Raise the Perfect Pudding'",
 	"blessed greased +5 silly object of hilarity",
 	"The Staff of Misspelling",
+	"greased very rotten partly eaten guardian naga hatchling corpse", /* longest possible object name - see objnam.c, line 7 */
+	"yet another poorly-differentiated polearm",
 
 	/* Silly */
 	"crystall ball bearing",
@@ -485,6 +607,8 @@ static const char * const bogusobjects[] = {
 	"first class one-way ticket to Albuquerque", /* Weird Al */
 	"yellow spandex dragon scale mail", /* X-Men */
 	"Kentucky Fried Basilisk",
+	"magic device",
+	"kinda lame joke",
 
 	/* Musical Instruments */
 	"grand piano",
@@ -503,6 +627,11 @@ static const char * const bogusobjects[] = {
 	"the missing evidence in the Kelner case", /* Naked Gun */
 	"blessed +9 helm of Des Lynam",     /* Bottom */
 
+	/* Culture */
+	"The Book of Sand",                 /* Jorge Luis Borges */
+	"sonic screwdriver",                /* Doctor Who */
+	"lutefisk",
+
 	/* Roguelikes */
 	"Orb of Zot",                       /* Dungeon Crawl */
 	"head of Morgoth",                  /* Angband, sort of */
@@ -517,9 +646,55 @@ static const char * const bogusobjects[] = {
 	"spellbook of enchant armor",       /* SLASH'EM */
 	"wand of create horde",             /* SLASH'EM */
 	"map of The Great Adamantine Space Elevator", /*Dwarf Fortress*/
-	"rat blood barrel",                 /*Dwarf Fortress*/
-	"fly ichor barrel",                 /*Dwarf Fortress*/
-	"cat tallow roast",                 /*Dwarf Fortress*/
+	"rat blood barrel",                 /* Dwarf Fortress */
+	"fly ichor barrel",                 /* Dwarf Fortress */
+	"cat tallow roast",                 /* Dwarf Fortress */
+	"si",                               /* ADOM, it means "strange item" */
+
+	/* fruit names from NAO - http://alt.org/nethack/petnames.html */
+	"!!+dimple cup stew+!!",            /* fruit name from NAO, inspired by Dwarf Fortress */
+	"!!-lignite rock candy-!!",         /* fruit name from NAO, inspired by Dwarf Fortress */
+	"!!cat biscuit!!",                  /* fruit name from NAO, inspired by Dwarf Fortress */
+	"!!kitten tallow roast!!",          /* fruit name from NAO, inspired by Dwarf Fortress */
+	"plump helmet",                     /* fruit name from NAO, inspired by Dwarf Fortress */
+	"+7 blessed Happy Meal",
+	"ACME Generic Fruit Product",
+	"adventurer corpse",
+	"AIDS medicine",
+	"ambrosia ration",
+	"ascension kit",
+	"bananananananana",
+	"big bowl of sauerkraut",
+	"bonesfile",
+	"brain of mind flayer",
+	"brain",
+	"brown percent sign",
+	"calculus textbook",
+	"chocolate Amulet of Yendor",
+	"corpse of a grid bug",
+	"eldritch pear",
+	"gingerbread Amulet of Yendor",
+	"Hand of Vecna",
+	"Higgs Boson",
+	"human soul",
+	"human skull",
+	"inevitable failure",
+	"lowest unoccupied molecular orbital",
+	"mammoth corpse",
+	"morsel of existential dread",
+	"motor oil",
+	"nanobots",
+	"nuclear waste",
+	"potion of genocide",
+	"potion of mana",
+	"preserved head",
+	"radioactive orb",
+	"Recursive RRF Fruit",
+	"scroll labeled EAT ME",
+	"sentient slime mold",
+	"sinister omen of imminent doom",
+	"syntax error",
+	"thoroughly useless object",
 
 	/* Fantasy */
 	"Necronomicon",                     /* Lovecraft */
@@ -534,6 +709,7 @@ static const char * const bogusobjects[] = {
 	"Silmaril",                         /* LOTR */
 	"pentagram of protection",          /* Quake */
 	"horcrux",                          /* HP */
+	"Codex of the Infinite Planes",     /* DnD */
 
 	/* Geekery */
 	"AAA chipset",                      /* Amiga */
@@ -560,27 +736,40 @@ static const char * const bogusobjects[] = {
 	"plowshare",
 	"The Book of the All-Virtuous Wisdom of Joshua ben Sira",
 	"Holy Grail",                      /* Arthurian legends */
+	"cauldron",
+	"The Five Books of Moses",         /* aka the Torah */
+	"Voynich Manuscript",
+	"scythe",
 
 	/* Mashups */
+	"scale-reinforced banded-splint mail with chain joints",
+	"potion of rebigulation",           /* Simpsons */
 	"potion of score doubling",
+	"potion of gain divinity",
+	"potion of bad breath",
 	"scroll labelled ED AWK YACC",      /* the standard scroll */
 	"scroll labelled RTFM",
 	"scroll labelled KLAATU BARADA NIKTO", /* Evil Dead 3 */
 	"scroll of omniscience",
 	"scroll of mash keyboard",
+	"scroll of plot detection",
 	"scroll of RNG taming",
 	"scroll of fungicide",
+	"scroll of stupidity",
 	"spellbook of detect foot",
 	"spellbook of detect evil",
+	"heavily obfuscated spellbook",
 	"helm of telemetry",
 	"blue suede boots of charisma",
 	"cubic zirconium",
 	"amulet of instadeath",
 	"amulet of bad luck",
 	"amulet of refraction",
-	"potion of rebigulation",           /* Simpsons */
 	"O-ring",
 	"wand of washing",
+	"wand of vaporization",
+	"wand of disruption",
+	"wand of disintegration",
 	"ring named Frost Band",
 	"expensive exact replica of the Amulet of Yendor",
 	"giant beatle",
@@ -595,6 +784,28 @@ static const char * const bogusobjects[] = {
 	"acid blob skeleton",
 	"Lawyerbane",
 	"RNG corpse",
+	"war hammer",
+	"re-curved sword",
+	"de-curved sword",
+	"circular sword",
+	"evening star",
+	"peace hammer",
+	"heap of wands of wishing", /* Janis Papanagnou on rgrn */
+	"size XXXS gray dragon scale mail", /* http://www.nicolaas.net/dudley/index.php?f=20050819 */
+	//"blessed greased fixed erodeproof disenchanterproof demonpossessionproof vacuumofdeepspaceproof proofremovalproof fully insured 100% all-natural materials completely and utterly intact, undamaged and structurally sound freshly washed and free of the stench of congealed human blood totally bereft of ancient unbreakable curses and absolutely NOT stolen from any nearby easily-angered shopkeepers +3 armor enhancement GRAY DRAGON SCALE MAIL",   /* http://www.nicolaas.net/dudley/index.php?f=20050819 */ [too long name, see #define BUFSZ in global.h]
+
+	/* from tvtropes.org */
+	"Sealed Good in a Can",
+	"Sealed Evil in a Can ",
+	"The Home Handyman's Guide to Building Gates to Hell",
+	"The Idiot's Guide to Demonology",
+	"tome of Eldritch Lore ",
+	"airborne aircraft carrier ",
+	"airborne airborne aircraft carrier carrier",
+	"MacGuffin",
+	"plot device",
+	"amulet of dependency",
+	"pirate booty",
 
 # ifdef MAIL
 	"brand new, all time lowest introductory rate special offer",
