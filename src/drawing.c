@@ -47,7 +47,7 @@ const char def_oc_syms[MAXOCLASSES] = {
 
 const char invisexplain[] = "remembered, unseen, creature";
 
-/* Object descriptions.  Used in do_look(). */
+/* Object descriptions.  Used in do_look(). Values should be in sync with bogusclasses from pager.c */
 const char * const objexplain[] = {	/* these match def_oc_syms, above */
 /* 0*/	0,
 	"strange object",

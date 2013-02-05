@@ -611,6 +611,63 @@ rndobjnam()
        return bogusobjects[name];
 }
 
+/* Return a random bogus object class name, for hallucination */
+static const char * const bogusclasses[] = {
+	/* copy of objexplain from drawing.c */
+	"strange object",
+	"weapon",
+	"suit or piece of armor",
+	"ring",
+	"amulet",
+	"useful item (pick-axe, key, lamp...)",
+	"piece of food",
+	"potion",
+	"scroll",
+	"spellbook",
+	"wand",
+	"pile of coins",
+	"gem or rock",
+	"boulder or statue",
+	"iron ball",
+	"iron chain",
+	"splash of venom",
+	/* bogus classes */
+	"illegal object",
+	"filler",
+	"useless object",
+	"artifact",
+	"ancient artifact",
+	"ascension kit item",
+	"stave",
+	"song",
+	"drink",
+	"grimoire",
+	"gear",
+	"cog",
+	"bug", 
+	"easter egg",
+	"tiny monument",
+	"junk",
+	"foo",
+	"spoiler",
+	"explosion",
+	"MacGuffin",
+	"galaxy",
+	"quasar",
+	"black hole",
+	"soul jar",
+	"lame joke",
+	"artifact of doom",
+	"something",
+};
+
+const char *
+rand_class_name()
+{
+	int name;
+	name = rn2(SIZE(bogusclasses));
+	return bogusclasses[name];
+}
 
 
 STATIC_OVL int
@@ -881,8 +938,8 @@ do_look(quick)
 	if (from_screen) {
 	    if (hallu_obj && Hallucination) {
 		char temp_buf[BUFSZ];
-		Sprintf(temp_buf, " (%s)", rndobjnam());
-		(void)strncat(out_str, temp_buf, BUFSZ-strlen(out_str)-1);
+		Sprintf(temp_buf, "%s (%s)", rand_class_name(), rndobjnam());
+		(void)strncpy(out_str, temp_buf, BUFSZ-strlen(out_str)-1);
 	    } else if (found > 1 || need_to_look) {
 		char monbuf[BUFSZ];
 		char temp_buf[BUFSZ];
