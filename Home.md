@@ -1,10 +1,6 @@
 Plans for UnNetHackPlus
 * intrinsic_possible
 * issue linker - https://github.com/Chris-plus-alphanumericgibberish/dnethack/commit/b905bf4b0d3ccea07992dadcae5b2908ac61aaab
-* https://github.com/Chris-plus-alphanumericgibberish/dnethack/commit/e21dba057cd425204f8a91a141c7400855c09805 + https://github.com/Chris-plus-alphanumericgibberish/dnethack/commit/08488c9a16a43af51188cba93cf1e9f3a09635e2 + https://github.com/Chris-plus-alphanumericgibberish/dnethack/commit/f975c1f44dd610850fa8e2b0401f638e86b84da4
-* https://github.com/DanielT/NitroHack/commits/master
-* https://github.com/tung/NitroHack
-* grunt (see bookmarks)
 * [[encyclopedia]]
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/dea61cde17b8758091e3f3cef95c2d651d11cb3e
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/9a92a24ea83d6f873ad65a4dbad73c4851d3df29
@@ -18,6 +14,9 @@ Plans for UnNetHackPlus
 * MAGIC_MARKER as gift (type in object generator), later TRUE to initialize and TRUE to make artifact one :) http://nethackwiki.com/wiki/Source:Ref/mksobj#mksobj
 * http://nethackwiki.com/wiki/Source:Polyself.c#line629
 * fix cannibalism among sentient pets (BTW, scroll of taming affecting sentient creatures is quite disturbing) 
+* https://github.com/DanielT/NitroHack/commits/master
+* https://github.com/tung/NitroHack
+* grunt (see bookmarks)
 * http://bilious.alt.org/?288
 * mark E-square
 * http://nethackwiki.com/wiki/Pet#Armor_and_extrinsics http://nethackwiki.com/wiki/Armor#Monsters_.28pets.29_and_armor
