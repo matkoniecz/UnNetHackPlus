@@ -16,6 +16,7 @@ Plans for UnNetHackPlus
 * fix cannibalism among sentient pets (BTW, scroll of taming affecting sentient creatures is quite disturbing) 
 * https://github.com/DanielT/NitroHack/commits/master
 * https://github.com/tung/NitroHack
+* https://gitorious.org/nitrohack/ais523/commits/nicehack
 * grunt (see bookmarks)
 * http://bilious.alt.org/?288
 * mark E-square
