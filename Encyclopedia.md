@@ -1,7 +1,7 @@
-mumak, orc captain, Baluchitherium - http://en.wikipedia.org/wiki/Baluchitherium
+* find encyclopedia entries for http://nethackwiki.com/wiki/Acid_blob winter wolf 
+http://nethackwiki.com/wiki/Cave_spider horse/warhorse (bri?)
 
-* find encyclopedia entries for http://nethackwiki.com/wiki/Acid_blob winter wolf (abcdefghiklmnop monsters done http://nethackwiki.com/wiki/Monster ) http://nethackwiki.com/wiki/Spotted_jelly
-http://nethackwiki.com/wiki/Uruk-hai
+(abcdefghiklmnoprqrstu monsters done http://nethackwiki.com/wiki/Monster ) http://nethackwiki.com/wiki/Spotted_jelly
 
 
 A Song of Ice and Fire:
