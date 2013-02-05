@@ -378,18 +378,27 @@ balrog
 	was a blade like a stabbing tongue of fire; in its left it
 	held a whip of many thongs.
 	'Ai, ai!' wailed Legolas.  'A Balrog!  A Balrog is come!'
-		   [ The Fellowship of the Ring, by J.R.R. Tolkien ]
+		[ The Fellowship of the Ring, by J.R.R. Tolkien ]
 baluchitherium
+	regarded as the largest land mammal known, with the largest 
+	species having an estimated mean adult mass of 12 tons and the 
+	largest individual known estimated at 4.8 m (16 ft) tall at 
+	the shoulders, 8.0 m (26.2 ft) in length from nose to rump, 
+	and 18 tons in weight.
+		[ Wikipedia, the free encyclopedia ]
 titanothere
-	Extinct rhinos include a variety of forms, the most
-	spectacular being _Baluchitherium_ from the Oligocene of
-	Asia, which is the largest known land mammal.  Its body, 18
-	feet high at the shoulder and carried on massive limbs,
-	allowed the 4-foot-long head to browse on the higher branches
-	of trees.  Though not as enormous, the titanotheres of the
-	early Tertiary were also large perissodactyls, _Brontotherium_
-	of the Oligocene being 8 feet high at the shoulder.
-		[ Prehistoric Animals, by Barry Cox ]
+	Brontotheriidae, also called Titanotheriidae, is a family of 
+	extinct mammals belonging to the order Perissodactyla, the order 
+	that includes horses, rhinoceroses, and tapirs. Superficially 
+	they looked rather like rhinos, although they were not true 
+	rhinos and are probably most closely related to horses. They 
+	lived around 56-34 million years ago, until the very close of 
+	the Eocene.
+	(...)
+	Brontotheres probably became extinct due to an inability to 
+	adapt to drier conditions and tougher vegetation (such as 
+	grasses) that spread during the Oligocene.
+		[ Wikipedia, the free encyclopedia ]
 banana
 	He took another step and she cocked her right wrist in
 	viciously.  She heard the spring click.  Weight slapped into
@@ -4177,9 +4186,9 @@ orcus
 ~orcish ranger
 ~orcish rogue
 ~orcish wizard
+~orc*captain
 orc*
 * orc
-uruk*hai
 	Orcs, bipeds with a humanoid appearance, are related to the
 	goblins, but much bigger and more dangerous.  The average orc
 	is only moderately intelligent, has broad, muscled shoulders,
@@ -4195,6 +4204,23 @@ uruk*hai
 	hunting for them.  There is nothing a horde of orcs cannot
 	use.
 		[ het Boek van de Regels; Het Oog des Meesters ]
+orc*captain
+	'Put up your weapons!' shouted Ugluk. 'And let's have no 
+	more nonsense! We go straight west from here, and down the stair. 
+	From there straight to the downs, then along the river to the forest. 
+	And we march day and night. That clear?'
+	(...)
+	The Orcs were getting ready to march again, but some of the 
+	Northerners were still unwilling, and the Isengarders slew 
+	two more before the rest were cowed.
+		[ The Two Towers, by J.R.R. Tolkien ]
+uruk*hai
+	"We are the fighting Uruk-hai! We slew the great warrior. 
+	We took the prisoners. We are the servants of Saruman the Wise, 
+	The White Hand: The Hand that gives us man's-flesh to eat. 
+	We came out of Isengard, and led you here, 
+	and we shall lead you back by the way we choose."
+		[ The Two Towers, by J.R.R. Tolkien ]
 ochre jelly
 	An ochre jelly resembles a giant amoeba, consisting of a thick, porous, golden 
 	sludge. It lurks in dungeons, slowly sludging its way along floors, walls and 
