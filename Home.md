@@ -5,7 +5,6 @@ Plans for UnNetHackPlus
 * [[encyclopedia]]
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/68be37ef17c95024eb28e25820b7534d43478166
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/c2640a22d5acf655a71ed0547dd31c3374317b80
-* stop body armor as gift for monks not wielding weapons http://nethackwiki.com/wiki/Source:NetHack_3.4.3/src/attrib.c#adjabil
 * stop gifts from making things worse than owned by player
 * MAGIC_MARKER as gift (type in object generator), later TRUE to initialize and TRUE to make artifact one :) http://nethackwiki.com/wiki/Source:Ref/mksobj#mksobj
 * http://nethackwiki.com/wiki/Source:Polyself.c#line629
