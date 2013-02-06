@@ -4,8 +4,6 @@ Plans for UnNetHackPlus
 * [[encyclopedia]]
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/68be37ef17c95024eb28e25820b7534d43478166
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/c2640a22d5acf655a71ed0547dd31c3374317b80
-* http://bilious.alt.org/?38
-* sacrificing candles ( splitobj )
 * stop body armor as gift for monks not wielding weapons http://nethackwiki.com/wiki/Source:NetHack_3.4.3/src/attrib.c#adjabil
 * stop gifts from making things worse than owned by player
 * MAGIC_MARKER as gift (type in object generator), later TRUE to initialize and TRUE to make artifact one :) http://nethackwiki.com/wiki/Source:Ref/mksobj#mksobj
@@ -208,7 +206,7 @@ proud owner of a magic whistle.
 * http://l.j-factor.com/nethack/aleax.diff
 * http://l.j-factor.com/nethack/mirrorfix.diff
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/ea5d0c8094e0577f7054ab24447c7ae2990d49c2 - fighting makes noise - it should be done also for mhitm, mhitu + https://github.com/Bulwersator/CopyOfSporkHack/commit/0c4c2c84ea79972e28eb02979ac863dff79abdaf 
-* from angry_priest() - priests should try to reconvert altar back- in the middle of spaghetti code
+* from angry_priest() - priests should try to reconvert altar back- in the middle of spaghetti code - see  http://bilious.alt.org/?38
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/dea61cde17b8758091e3f3cef95c2d651d11cb3e - When attacking a peaceful monster, make other peaceful monsters react.  - in the middle of spaghetti code
 
 # no playtesting
