@@ -1017,8 +1017,6 @@ skip0:
 #ifdef REINCARNATION
 	skip_nonrogue:
 #endif
-		/* Boost object generation here slightly so that later when we
-		 * start encouraging players to use resources, there _are_ some */
 		if(rn2(3)) {
 		    (void) mkobj_at(0, somex(croom), somey(croom), TRUE);
 		    tryct = 0;
