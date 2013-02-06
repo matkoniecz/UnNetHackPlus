@@ -1,5 +1,6 @@
 Plans for UnNetHackPlus
 * intrinsic_possible fully_identify_obj
+* mk_mplayer what about boots?
 * issue linker - https://github.com/Chris-plus-alphanumericgibberish/dnethack/commit/b905bf4b0d3ccea07992dadcae5b2908ac61aaab
 * [[encyclopedia]]
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/68be37ef17c95024eb28e25820b7534d43478166
