@@ -1988,6 +1988,7 @@ E void NDECL(set_black_marketeer_angry);
 #endif /* BLACKMARKET */
 E char *FDECL(shk_your, (char *,struct obj *));
 E char *FDECL(Shk_Your, (char *,struct obj *));
+E void FDECL(shk_holler, (struct monst*));
 
 /* ### shknam.c ### */
 
