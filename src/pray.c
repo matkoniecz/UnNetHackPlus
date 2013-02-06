@@ -727,6 +727,7 @@ gcrownu()
 	    obj = mksobj(LONG_SWORD, FALSE, FALSE);
 	    obj = oname(obj, artiname(ART_VORPAL_BLADE));
 	    obj->spe = 1;
+	    obj->oeroded = 0;
 	    at_your_feet("A sword");
 	    dropy(obj);
 	    u.ugifts++;
@@ -751,6 +752,7 @@ gcrownu()
 	    obj = oname(obj, artiname(ART_STORMBRINGER));
 	    at_your_feet(An(swordbuf));
 	    obj->spe = 1;
+	    obj->oeroded = 0;
 	    dropy(obj);
 	    u.ugifts++;
 	}
@@ -1354,6 +1356,7 @@ grant_object_from_sacrifice(int value, int saved_luck)
 				if (otmp) {
 					bless(otmp);
 					otmp->spe = rn2(3)+3; /* +3 to +5 */
+					otmp->oeroded = 0;
 					otmp->oerodeproof = TRUE;
 					dropy(otmp);
 					at_your_feet("An object");
@@ -1375,6 +1378,7 @@ grant_object_from_sacrifice(int value, int saved_luck)
 			if (otmp->cursed) {
 				uncurse(otmp);
 			}
+			otmp->oeroded = 0;
 			otmp->oerodeproof = TRUE;
 			dropy(otmp);
 			at_your_feet("An object");
