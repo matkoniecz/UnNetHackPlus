@@ -1,5 +1,5 @@
 Plans for UnNetHackPlus
-* intrinsic_possible
+* intrinsic_possible fully_identify_obj
 * issue linker - https://github.com/Chris-plus-alphanumericgibberish/dnethack/commit/b905bf4b0d3ccea07992dadcae5b2908ac61aaab
 * [[encyclopedia]]
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/9a92a24ea83d6f873ad65a4dbad73c4851d3df29
