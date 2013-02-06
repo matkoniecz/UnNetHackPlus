@@ -2454,7 +2454,7 @@ struct permonst _mons2[] = {
 	SIZ(WT_HUMAN, 400, sizeof(struct eshk), MS_SELL, MZ_HUMAN), 0, 0,
 	M1_HUMANOID|M1_OMNIVORE,
 	M2_NOPOLY|M2_HUMAN|M2_PEACEFUL|M2_STRONG|M2_COLLECT|M2_MAGIC,
-	M3_INFRAVISIBLE, HI_DOMESTIC),
+	M3_INFRAVISIBLE, CLR_YELLOW),
 #ifdef BLACKMARKET
 /* the black marketeer's speed (24) matches the speed boots he's wearing */
     MON("black marketeer", S_HUMAN, 
