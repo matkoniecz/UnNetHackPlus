@@ -71,8 +71,6 @@ acid resistance is now.) https://groups.google.com/forum/?fromgroups=#!topic/rec
 * http://www.cse.unsw.edu.au/~malcolmr/nethack/
 * https://github.com/DanielT/NitroHack/commits/master
 * http://nethackwiki.com/wiki/NetHack_4
-* https://github.com/sgrunt/GruntHack/commit/71c688fd496defd0da54a9fa8325700a4527ad6a (entire version lumped in one commit :( )
-* https://github.com/sgrunt/GruntHack/commit/14e47648e676e57d9e07bb17d4fea217fc5d88d3 (...)
 * atop looting from asking infuriating ynq, skip for single container, show list for multiple ones (the same for eating)
 * read everything! (http://en.wikipedia.org/wiki/List_of_S-phrases and http://en.wikipedia.org/wiki/GHS_hazard_statement for wands/!)
 fix completely broken alignment, maybe also better gods
