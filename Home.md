@@ -28,7 +28,6 @@ Plans for UnNetHackPlus
 * the alignment system needs a complete overhaul 
 * make stupid water noticeable different from stupid fountains
 * http://nethackwiki.com/wiki/W343-3
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/71de5e62d922e8985b7569b14b0ac3b82c4ee6cf + https://github.com/Bulwersator/CopyOfSporkHack/commit/3ba79281c2f889a262449415fcf41ee3d48401ac - open roles
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/010fc37452a1500714ab5f05dc000825be773f55 - generate more objects
 * deathdrops http://nethackwiki.com/wiki/Source:Mon.c#line1833
 * juggle object generation http://nethackwiki.com/wiki/Source:Mkobj.c#line30
