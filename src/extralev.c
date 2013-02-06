@@ -324,12 +324,12 @@ makerogueghost()
 	if (rn2(2)) {
 		ghostobj = mksobj_at(RING_MAIL, x, y, FALSE, FALSE);
 		ghostobj->spe = rn2(3);
-		if (!rn2(3)) ghostobj->oerodeproof = TRUE;
+		if (!rn2(3)) set_erodeproof(ghostobj);
 		if (rn2(4)) curse(ghostobj);
 	} else {
 		ghostobj = mksobj_at(PLATE_MAIL, x, y, FALSE, FALSE);
 		ghostobj->spe = rnd(5) - 2;
-		if (!rn2(3)) ghostobj->oerodeproof = TRUE;
+		if (!rn2(3)) set_erodeproof(ghostobj);
 		if (rn2(4)) curse(ghostobj);
 	}
 	if (rn2(2)) {

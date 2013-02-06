@@ -770,8 +770,7 @@ gcrownu()
     /* enhance weapon regardless of alignment or artifact status */
     if (ok_wep(obj)) {
 	bless(obj);
-	obj->oeroded = obj->oeroded2 = 0;
-	obj->oerodeproof = TRUE;
+	set_erodeproof(obj);
 	obj->bknown = obj->rknown = TRUE;
 	if (obj->spe < 1) obj->spe = 1;
 	/* acquire skill in this weapon */
@@ -1378,8 +1377,7 @@ grant_object_from_sacrifice(int value, int saved_luck)
 			if (otmp->cursed) {
 				uncurse(otmp);
 			}
-			otmp->oeroded = 0;
-			otmp->oerodeproof = TRUE;
+			set_erodeproof(otmp);
 			dropy(otmp);
 			at_your_feet("An object");
 			godvoice(u.ualign.type, "Use my gift wisely!");

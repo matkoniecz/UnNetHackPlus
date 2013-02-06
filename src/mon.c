@@ -217,7 +217,10 @@ register struct monst *mtmp;
 			(void) mksobj_at(UNICORN_HORN, x, y, TRUE, FALSE);
 		goto default_1;
 	    case PM_LONG_WORM:
-		(void) mksobj_at(WORM_TOOTH, x, y, TRUE, FALSE);
+		{
+		    struct obj *otmp = mksobj_at(WORM_TOOTH, x, y, TRUE, FALSE);
+		    otmp->oeroded = 0;
+		}
 		goto default_1;
 	    case PM_VAMPIRE:
 	    case PM_VAMPIRE_LORD:

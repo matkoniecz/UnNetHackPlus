@@ -1367,8 +1367,10 @@ poly_obj(obj, id)
 	otmp->oeroded2 = obj->oeroded2;
 	if (!is_flammable(otmp) && !is_rustprone(otmp)) otmp->oeroded = 0;
 	if (!is_corrodeable(otmp) && !is_rottable(otmp)) otmp->oeroded2 = 0;
-	if (is_damageable(otmp))
-	    otmp->oerodeproof = obj->oerodeproof;
+	if (is_damageable(otmp)) {
+	    if (obj->oerodeproof) { set_erodeproof(otmp); }
+	    else otmp->oerodeproof = FALSE;
+	}
 
 	/* Keep chest/box traps and poisoned ammo if we may */
 	if (obj->otrapped && Is_box(otmp)) otmp->otrapped = TRUE;
@@ -1382,8 +1384,7 @@ poly_obj(obj, id)
 		otmp->otyp = LOW_BOOTS;
 		otmp->oclass = ARMOR_CLASS;
 		otmp->spe = 0;
-		otmp->oeroded = 0;
-		otmp->oerodeproof = TRUE;
+		set_erodeproof(otmp);
 		otmp->quan = 1L;
 		otmp->cursed = FALSE;
 	    }

@@ -88,6 +88,9 @@ boolean artif;
 
 	otmp = mkobj(let, artif);
 	place_object(otmp, x, y);
+	if (is_damageable(otmp) && !otmp->oerodeproof && !rn2(5)) {
+		otmp->oeroded = rn2(2)+1;
+	}
 	return(otmp);
 }
 
@@ -99,6 +102,9 @@ boolean init, artif;
 	struct obj *otmp;
 
 	otmp = mksobj(otyp, init, artif);
+	if (is_damageable(otmp) && !otmp->oerodeproof && !rn2(5)) {
+		otmp->oeroded = rn2(2)+1;
+	}
 	place_object(otmp, x, y);
 	return(otmp);
 }
@@ -402,7 +408,9 @@ boolean artif;
 		} else	blessorcurse(otmp, 10);
 		if (is_poisonable(otmp) && !rn2(100))
 			otmp->opoisoned = 1;
-
+		if (is_damageable(otmp) && !rn2(5)) {
+			otmp->oeroded = rn2(2)+1;
+		}
 		if (artif && !rn2(20))
 		    otmp = mk_artifact(otmp, (aligntyp)A_NONE);
 		break;
@@ -569,18 +577,16 @@ boolean artif;
 			otmp->blessed = rn2(2);
 			otmp->spe = rne(3);
 		} else	blessorcurse(otmp, 10);
+		if (is_damageable(otmp) && !rn2(5)) {
+			otmp->oeroded = rn2(2)+1;
+		}
 		if (artif && !rn2(40))                
 		    otmp = mk_artifact(otmp, (aligntyp)A_NONE);
 		/* simulate lacquered armor for samurai */
 		if (Role_if(PM_SAMURAI) && otmp->otyp == SPLINT_MAIL &&
 		    (moves <= 1 || In_quest(&u.uz))) {
-#ifdef UNIXPC
-			/* optimizer bitfield bug */
-			otmp->oerodeproof = 1;
-			otmp->rknown = 1;
-#else
-			otmp->oerodeproof = otmp->rknown = 1;
-#endif
+		    set_erodeproof(otmp);
+		    otmp->rknown = 1;
 		}
 		break;
 	case WAND_CLASS:

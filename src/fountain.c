@@ -379,8 +379,7 @@ register struct obj *obj;
 			obj = oname(obj, artiname(ART_EXCALIBUR));
 			discover_artifact(ART_EXCALIBUR);
 			bless(obj);
-			obj->oeroded = obj->oeroded2 = 0;
-			obj->oerodeproof = TRUE;
+			set_erodeproof(obj);
 			exercise(A_WIS, TRUE);
 		}
 		update_inventory();

@@ -70,6 +70,8 @@ struct obj {
 	Bitfield(oeroded,2);	/* rusted/burnt weapon/armor */
 	Bitfield(oeroded2,2);	/* corroded/rotted weapon/armor */
 #define greatest_erosion(otmp) (int)((otmp)->oeroded > (otmp)->oeroded2 ? (otmp)->oeroded : (otmp)->oeroded2)
+#define set_erodeproof(otmp) { (otmp)->oeroded = (otmp)->oeroded2 = 0; (otmp)->oerodeproof = TRUE; }
+
 #define MAX_ERODE 3
 #define orotten oeroded		/* rotten food */
 #define odiluted oeroded	/* diluted potions */

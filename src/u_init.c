@@ -1065,6 +1065,7 @@ register struct trobj *trop;
 #endif
 			obj->dknown = obj->bknown = obj->rknown = 1;
 			if (objects[otyp].oc_uses_known) obj->known = 1;
+			obj->oeroded = 0;
 			obj->cursed = 0;
 			if (obj->opoisoned && u.ualign.type != A_CHAOTIC)
 			    obj->opoisoned = 0;

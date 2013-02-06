@@ -128,7 +128,7 @@ short typ;
 
 	if (typ == STRANGE_OBJECT) return;
 	obj = mksobj(typ, FALSE, FALSE);
-	if (!rn2(3)) obj->oerodeproof = 1;
+	if (!rn2(3)) set_erodeproof(obj);
 	if (!rn2(3)) curse(obj);
 	if (!rn2(3)) bless(obj);
 	/* Most players who get to the endgame who have cursed equipment
@@ -258,7 +258,7 @@ register boolean special;
 	    if (weapon != STRANGE_OBJECT) {
 		otmp = mksobj(weapon, TRUE, FALSE);
 		otmp->spe = (special ? rn1(5,4) : rn2(4));
-		if (!rn2(3)) otmp->oerodeproof = 1;
+		if (!rn2(3)) { set_erodeproof(otmp); }
 		else if (!rn2(2)) otmp->greased = 1;
 		if (special && rn2(2))
 		    otmp = mk_artifact(otmp, A_NONE);
