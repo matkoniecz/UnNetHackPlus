@@ -58,11 +58,7 @@ resistance, and death resistance. While spell resistance would remain a
 high priority, the others would be precautionary measures (much like
 acid resistance is now.) https://groups.google.com/forum/?fromgroups=#!topic/rec.games.roguelike.nethack/TrtHf-9b8SU 
 * warning on Cthulhu, 6 - terror, even without normal warning source (green?)
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/6aa95dc3069c3392e3ddb5ad35042e1a78187e57 - Shopkeepers will now cry their wares at you as you pass by
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/094ddfac1a648a07d5ed291ffc1b37803ad065f4 - reduces shkp yelling
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/104c0ed75d2e00b54ca340dcd3f60c1923b4020c
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/42f33afb5a12213e6ecaed0015a52c21ff14794b
-* search for #define CRYNUMBER 5 - shkp yelling - https://github.com/Bulwersator/CopyOfSporkHack/blob/3297b633fa0797e86b0f207f40cefa4fc0e747c1/src/shk.c
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/104c0ed75d2e00b54ca340dcd3f60c1923b4020c  Swap teleport attempt to _after_ trying to crawl out of water. 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/a7a1de62a901e7f4521a5bdd2bf4474320315d2a (? - add modified code???)
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/70941c87feb74c63d0d4ca9bbd925ff909722117 -  Death's touch should hurt monsters/pets 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/8bd8d8b90a6f95344e3c4798a9f0ae802b6a35eb with https://github.com/Bulwersator/CopyOfSporkHack/commit/1f8b526808eeae0ed6472b2b3408743822e814d1
