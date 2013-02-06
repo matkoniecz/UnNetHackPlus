@@ -1310,6 +1310,13 @@ get_base_sacrifice_value(register struct obj *otmp) /* returns base value of sac
 	return value;
 }
 
+boolean
+is_using_martial_arts()
+{
+	/* (no wielded weapons - uwep, no suit - uarm, no shield - uarms, no polymorph - Upolyd) */
+	return (Role_if(PM_MONK) || Role_if(PM_SAMURAI)) && !uwep && !uarm && !uarms && !Upolyd;
+}
+
 int 
 grant_object_from_sacrifice(int value, int saved_luck)
 {
@@ -1339,7 +1346,7 @@ grant_object_from_sacrifice(int value, int saved_luck)
 	if (rn2(10) >= (nchance*nchance)/100) {
 		if (u.uluck >= 0 && !rn2(6 + (2 * u.ugifts))) {
 			 int typ, ncount = 0; 
-			 if (rn2(2)) {
+			 if (rn2(2) && !is_using_martial_arts()) { /* don't give weapons to martial arts users */
 				/* don't give unicorn horns or anything the player's restricted in */
 				do {
 					typ = rnd_class(SPEAR,CROSSBOW);
@@ -1348,7 +1355,13 @@ grant_object_from_sacrifice(int value, int saved_luck)
 					return 1; 
 				}
 			} else {
-				typ = rnd_class(ELVEN_LEATHER_HELM,LEVITATION_BOOTS);
+				/* don't give body armor and shields to martial arts users */
+				do {
+					typ = rnd_class(ELVEN_LEATHER_HELM,LEVITATION_BOOTS);
+				} while (ncount++ < 500 && is_using_martial_arts() && (objects[typ].oc_armcat == ARM_SUIT || objects[typ].oc_armcat == ARM_SHIELD) ); 
+				if (ncount > 499) {
+					return 1; 
+				}
 			}
 			 if (typ) {
 				otmp = mksobj(typ, FALSE, FALSE);
