@@ -41,6 +41,20 @@ const struct icp mkobjprobs[] = {
 { 1, AMULET_CLASS}
 };
 
+const struct icp mkobjdeepprobs[] = {
+{15, WEAPON_CLASS},
+{15, ARMOR_CLASS},
+{10, FOOD_CLASS},
+{ 8, TOOL_CLASS},
+{ 8, GEM_CLASS},
+{16, POTION_CLASS},
+{16, SCROLL_CLASS},
+{ 4, SPBOOK_CLASS},
+{ 4, WAND_CLASS},
+{ 3, RING_CLASS},
+{ 1, AMULET_CLASS}
+};
+
 const struct icp boxiprobs[] = {
 {18, GEM_CLASS},
 {15, FOOD_CLASS},
@@ -66,14 +80,14 @@ const struct icp rogueprobs[] = {
 #endif
 
 const struct icp hellprobs[] = {
-{20, WEAPON_CLASS},
-{20, ARMOR_CLASS},
-{16, FOOD_CLASS},
+{22, WEAPON_CLASS},
+{22, ARMOR_CLASS},
+{10, FOOD_CLASS},
 {12, TOOL_CLASS},
 {10, GEM_CLASS},
 { 1, POTION_CLASS},
 { 1, SCROLL_CLASS},
-{ 8, WAND_CLASS},
+{10, WAND_CLASS},
 { 8, RING_CLASS},
 { 4, AMULET_CLASS}
 };
@@ -111,13 +125,18 @@ boolean artif;
 	int tprob, i, prob = rnd(1000);
 
 	if(oclass == RANDOM_CLASS) {
-		const struct icp *iprobs =
+		const struct icp *iprobs = (const struct icp *)mkobjprobs;
+		if(level_difficulty() > 15) {
+			iprobs = (const struct icp *)mkobjdeepprobs;
+		}
 #ifdef REINCARNATION
-				    (Is_rogue_level(&u.uz)) ?
-				    (const struct icp *)rogueprobs :
+		if(Is_rogue_level(&u.uz)) {
+			iprobs = (const struct icp *)rogueprobs;
+		}
 #endif
-				    Inhell ? (const struct icp *)hellprobs :
-				    (const struct icp *)mkobjprobs;
+		if(Inhell) {
+			iprobs = (const struct icp *)hellprobs;
+		}
 
 		for(tprob = rnd(100);
 		    (tprob -= iprobs->iprob) > 0;
