@@ -1,7 +1,8 @@
+baby worms
 * find encyclopedia entries for http://nethackwiki.com/wiki/Acid_blob winter wolf 
 http://nethackwiki.com/wiki/Cave_spider horse/warhorse (bri?)
 
-(abcdefghiklmnoprqrstu monsters done http://nethackwiki.com/wiki/Monster ) http://nethackwiki.com/wiki/Spotted_jelly
+(abcdefghiklmnoprqrstuvw monsters done http://nethackwiki.com/wiki/Monster ) http://nethackwiki.com/wiki/Spotted_jelly
 
 
 A Song of Ice and Fire:
