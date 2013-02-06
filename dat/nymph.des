@@ -3,7 +3,7 @@
 #
 
 LEVEL: "nymph"
-ROOM: "garden", unlit, random, random, (12,7)
+ROOM: "ordinary", unlit, random, random, (12,7)
 {
 TRAP:"board",random
 TRAP:"board",random
@@ -32,7 +32,7 @@ MONSTER: 'n', random, hostile
 MONSTER:('n',"Aphrodite"), random, hostile
 }
 
-ROOM: "garden", random, random, random, random
+ROOM: "ordinary", random, random, random, random
 {
 STAIR: random, up
 TRAP:"board",random
@@ -40,7 +40,7 @@ OBJECT:random,random
 MONSTER: 'n', random, hostile
 }
 
-ROOM: "garden", random, random, random, random
+ROOM: "ordinary", random, random, random, random
 {
 STAIR: random, down
 TRAP:"board",random
@@ -49,7 +49,7 @@ TRAP: random, random
 MONSTER: 'n', random, hostile
 }
 
-ROOM: "garden", random, random, random, random
+ROOM: "ordinary", random, random, random, random
 {
 TRAP:"board",random
 OBJECT:random, random
@@ -57,7 +57,7 @@ OBJECT:random, random
 MONSTER: 'n', random, hostile
 }
 
-ROOM: "garden", random, random, random, random
+ROOM: "ordinary", random, random, random, random
 {
 TRAP:"board",random
 OBJECT:random, random
@@ -65,7 +65,7 @@ TRAP: random, random
 MONSTER: 'n', random, hostile
 }
 
-ROOM: "garden", random, random, random, random
+ROOM: "ordinary", random, random, random, random
 {
 TRAP:"board",random
 OBJECT:random, random
