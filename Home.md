@@ -28,7 +28,6 @@ Plans for UnNetHackPlus
 * the alignment system needs a complete overhaul 
 * make stupid water noticeable different from stupid fountains
 * http://nethackwiki.com/wiki/W343-3
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/010fc37452a1500714ab5f05dc000825be773f55 - generate more objects
 * deathdrops http://nethackwiki.com/wiki/Source:Mon.c#line1833
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/21de56b16793ec139ea0859cbec29c40c4072309 Non-mindless monsters will no longer blindly walk into traps they've seen
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/b66820f04b9b8f98a822e8b1df719fd55ee07726  RANDOM_CORRIDORS now takes an optional parameter. 
