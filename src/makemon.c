@@ -302,6 +302,11 @@ register struct monst *mtmp;
 		      }
 		    if (!rn2(10)) (void)mongets(mtmp, ELVEN_MITHRIL_COAT);
 		    if (!rn2(10)) (void)mongets(mtmp, DWARVISH_CLOAK);
+		    if (!rn2(10000)) {
+			otmp = mksobj(RIN_INVISIBILITY, FALSE, FALSE);
+			curse(otmp);
+			(void) mpickobj(mtmp, otmp);
+		    }
 		} else if (is_dwarf(ptr)) {
 		    if (rn2(7)) (void)mongets(mtmp, DWARVISH_CLOAK);
 		    if (rn2(7)) (void)mongets(mtmp, IRON_SHOES);
