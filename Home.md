@@ -2,7 +2,6 @@ Plans for UnNetHackPlus
 * intrinsic_possible
 * issue linker - https://github.com/Chris-plus-alphanumericgibberish/dnethack/commit/b905bf4b0d3ccea07992dadcae5b2908ac61aaab
 * [[encyclopedia]]
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/dea61cde17b8758091e3f3cef95c2d651d11cb3e
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/9a92a24ea83d6f873ad65a4dbad73c4851d3df29
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/72e5df0904ceaea90f5082c2df38db3bfbc1ac62 +  https://github.com/Bulwersator/CopyOfSporkHack/commit/65838348f1d8f7a0dfbfe3fac96ac3ccfa8054dc + https://github.com/Bulwersator/CopyOfSporkHack/commit/883051a12294d4f7672904c22ad709b51e80fad0
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/68be37ef17c95024eb28e25820b7534d43478166
@@ -211,7 +210,8 @@ proud owner of a magic whistle.
 * http://l.j-factor.com/nethack/aleax.diff
 * http://l.j-factor.com/nethack/mirrorfix.diff
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/ea5d0c8094e0577f7054ab24447c7ae2990d49c2 - fighting makes noise - it should be done also for mhitm, mhitu + https://github.com/Bulwersator/CopyOfSporkHack/commit/0c4c2c84ea79972e28eb02979ac863dff79abdaf 
-* from angry_priest() - priests should try to reconvert altar back
+* from angry_priest() - priests should try to reconvert altar back- in the middle of spaghetti code
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/dea61cde17b8758091e3f3cef95c2d651d11cb3e - When attacking a peaceful monster, make other peaceful monsters react.  - in the middle of spaghetti code
 
 # no playtesting
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/5810788cb6be40e7bed05eff6f263bb9d9f227ae
