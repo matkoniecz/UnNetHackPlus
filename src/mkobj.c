@@ -88,9 +88,6 @@ boolean artif;
 
 	otmp = mkobj(let, artif);
 	place_object(otmp, x, y);
-	if (is_damageable(otmp) && !otmp->oerodeproof && !rn2(5)) {
-		otmp->oeroded = rn2(2)+1;
-	}
 	return(otmp);
 }
 
@@ -102,9 +99,6 @@ boolean init, artif;
 	struct obj *otmp;
 
 	otmp = mksobj(otyp, init, artif);
-	if (is_damageable(otmp) && !otmp->oerodeproof && !rn2(5)) {
-		otmp->oeroded = rn2(2)+1;
-	}
 	place_object(otmp, x, y);
 	return(otmp);
 }
@@ -396,6 +390,16 @@ boolean artif;
 #ifdef INVISIBLE_OBJECTS
 	otmp->oinvis = !rn2(1250);
 #endif
+
+	if (init && is_damageable(otmp)) {
+		if(!rn2(7)) {
+			otmp->oeroded = rn2(2)+1;
+		}
+		else if (!rn2(6)) {
+			set_erodeproof(otmp);
+		}
+	}
+
 	if (init) switch (let) {
 	case WEAPON_CLASS:
 		otmp->quan = is_multigen(otmp) ? (long) rn1(6,6) : 1L;
@@ -408,9 +412,6 @@ boolean artif;
 		} else	blessorcurse(otmp, 10);
 		if (is_poisonable(otmp) && !rn2(100))
 			otmp->opoisoned = 1;
-		if (is_damageable(otmp) && !rn2(5)) {
-			otmp->oeroded = rn2(2)+1;
-		}
 		if (artif && !rn2(20))
 		    otmp = mk_artifact(otmp, (aligntyp)A_NONE);
 		break;
@@ -577,9 +578,6 @@ boolean artif;
 			otmp->blessed = rn2(2);
 			otmp->spe = rne(3);
 		} else	blessorcurse(otmp, 10);
-		if (is_damageable(otmp) && !rn2(5)) {
-			otmp->oeroded = rn2(2)+1;
-		}
 		if (artif && !rn2(40))                
 		    otmp = mk_artifact(otmp, (aligntyp)A_NONE);
 		/* simulate lacquered armor for samurai */
