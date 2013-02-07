@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* copper items may be generated burnt - is it a bug?
 * intrinsic_possible fully_identify_obj
 * issue linker - https://github.com/Chris-plus-alphanumericgibberish/dnethack/commit/b905bf4b0d3ccea07992dadcae5b2908ac61aaab
 * [[encyclopedia]]
