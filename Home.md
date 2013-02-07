@@ -16,7 +16,6 @@ Plans for UnNetHackPlus
 * http://bilious.alt.org/?288 Confused Magic Whistle
 * mark E-square
 * http://nethackwiki.com/wiki/Pet#Armor_and_extrinsics http://nethackwiki.com/wiki/Armor#Monsters_.28pets.29_and_armor
-* genociding your pet is OK
 * I wouldn't beef up the Kops themselves, since they are supposed to be wimpy.  But do I like the idea of them calling in the guard when they are up against an overwhelming erm, well, an opponent. http://bilious.alt.org/rgrn/?126678,126685,126686,126690,126691,126692,126694,126695,126696,126697,126698,126703,126704,126705,126709,126710,126713,126714,126724,127665
 * Incidentally, there's a way to pacify the Minetown Watch in most cases. First, get a stack of blessed teleport scrolls. Teleport from the staircase to the inside of a shop, pick up an item, and then teleport right outside the entrance of that shop (but not in a line from the door!). As soon as the shopkeeper comes out to kill you, pay him for the thing you stole. The Watch will decide that since you are no longer a thief, it follows that you are no longer a criminal.
 * Most of the item-type-specific commands like "quaff" or "read" have been merged into a single "use" command http://te4.org/news
