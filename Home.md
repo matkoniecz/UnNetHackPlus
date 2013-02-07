@@ -22,7 +22,7 @@ Plans for UnNetHackPlus
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/fd03318e9f1e75b61f392739afb167b5ad2da18f
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/bc4d238b2254cd8cad1c6aa92423540d2085df5b
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/cece069f9d1465ebb7d388d4b2fae572bd8e0e48
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/65746a16b1876640d181276828aae7421cbac5e3 https://github.com/Bulwersator/CopyOfSporkHack/commit/c747690e1b7cd22e47d6bddebd3ce5853b009068
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/65746a16b1876640d181276828aae7421cbac5e3 https://github.com/Bulwersator/CopyOfSporkHack/commit/c747690e1b7cd22e47d6bddebd3ce5853b009068  And here we have the monster spell Destroy Armor. In vanilla, Mouse's +1 iron shoes would simply disintegrate and blow away, and he'd be out that item of armor. In Sporkhack, an undamaged article such as Mouse's shoes must be hit by the spell two to four times before being completely destroyed, each time taking between one and three instances of rust, corrosion, burn, or rot damage. There is a one-in-three chance that it will take two castings, and a one-in-twenty-seven chance it will take four castings, with the remainder taking three castings. In this case, Mouse's shoes become 'thoroughly rusted' following the naga's spell, so the next Destroy Armor spell to hit his shoes will destroy them utterly. On the other hand, things turn around in vanilla when Mouse gets magic resistance, because in vanilla magic resistance makes him completely immune to that monster spell. In Sporkhack, however, the Destroy Armor spell will pierce magic resistance just enough that it will deal just one level of damage, meaning four castings on the same piece of armor will destroy it in spite of magic resistance and corrosionproofing. You don't want this to happen to your Cloak of Magic Resistance, so for heaven's sake repair it whenever you get the chance.
 * copper items may be generated burnt - see https://github.com/Bulwersator/CopyOfSporkHack/commit/af1c9b2f9d9714fe15dd8177c5853659a66bf8b7  http://nethackwiki.com/wiki/Source:Ref/add_erosion_words#add_erosion_words  http://nethackwiki.com/wiki/Source:NetHack_3.4.3/include/objclass.h 
 * intrinsic_possible fully_identify_obj
 * issue linker - https://github.com/Chris-plus-alphanumericgibberish/dnethack/commit/b905bf4b0d3ccea07992dadcae5b2908ac61aaab
@@ -99,8 +99,6 @@ fix completely broken alignment, maybe also better gods
 * http://nethackwiki.com/wiki/Wizard_of_Yendor#cite_note-0 he Wizard is the only unaligned monster in NetHack; however, stethoscopes will report this as "chaotic".
 * Eliminate tedious things
 * Minetown non-diggable (to stop stupid dwarfs)
-
-* Sporky destroy armor
 * Gradual hallu
 
 G, h in gnomish mines shouldn't walk into their own ^
@@ -117,7 +115,6 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * http://i295.photobucket.com/albums/mm153/Kobold_Lord/Sporkhack%202/T06354.jpg
 * http://i295.photobucket.com/albums/mm153/Kobold_Lord/Sporkhack%202/T29316.jpg
 * devastating Wand of Death, which would shave hit points off of Mouse's MAXIMUM every time it hits him even if his amulet reflects the killing charge
-* And here we have the monster spell Destroy Armor. In vanilla, Mouse's +1 iron shoes would simply disintegrate and blow away, and he'd be out that item of armor. In Sporkhack, an undamaged article such as Mouse's shoes must be hit by the spell two to four times before being completely destroyed, each time taking between one and three instances of rust, corrosion, burn, or rot damage. There is a one-in-three chance that it will take two castings, and a one-in-twenty-seven chance it will take four castings, with the remainder taking three castings. In this case, Mouse's shoes become 'thoroughly rusted' following the naga's spell, so the next Destroy Armor spell to hit his shoes will destroy them utterly. On the other hand, things turn around in vanilla when Mouse gets magic resistance, because in vanilla magic resistance makes him completely immune to that monster spell. In Sporkhack, however, the Destroy Armor spell will pierce magic resistance just enough that it will deal just one level of damage, meaning four castings on the same piece of armor will destroy it in spite of magic resistance and corrosionproofing. You don't want this to happen to your Cloak of Magic Resistance, so for heaven's sake repair it whenever you get the chance.
 * Beware the Minetown bones file where the altar has been converted. The priest present may be peaceful, but he or she will go hostile if you #chat.
 *  Gems the unicorn keeps are worth +2 luck, and the unicorn doesn't care if they're diamonds or turquoise. If it becomes convenient later, you can bring a strong pet to withdraw your deposit from the Bank of Uni, but I don't always bother. (make only alive unicorns bring luck)
 * http://i295.photobucket.com/albums/mm153/Kobold_Lord/Sporkhack%202/T554883.jpg The Master of Assassins hasn't died yet (telewand)
