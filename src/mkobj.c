@@ -410,11 +410,18 @@ boolean artif;
 	otmp->oinvis = !rn2(1250);
 #endif
 
-	if (init && is_damageable(otmp)) {
-		if(!rn2(7)) {
-			otmp->oeroded = rn2(2)+1;
+	if (init) {
+		if(!rn2(14)) {
+			if(is_flammable(otmp) || is_rustprone(otmp)) {
+				otmp->oeroded = rn2(3)+1;
+			}
 		}
-		else if (!rn2(6)) {
+		if (!rn2(14)) {
+			if(is_corrodeable(otmp) || is_rottable(otmp)) {
+				otmp->oeroded2 = rn2(3)+1;
+			}
+		}
+		if (!rn2(14)) {
 			set_erodeproof(otmp);
 		}
 	}
