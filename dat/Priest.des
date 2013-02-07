@@ -9,7 +9,7 @@
 #	and receive your quest assignment.
 #
 # All Priest quest levels are explicitly marked as graveyards
-# so there's less chance for undead corpses.
+# so you have flavour messages
 #
 LEVEL: "Pri-strt"
 FLAGS: noteleport,hardfloor,mazelevel,graveyard,sky
