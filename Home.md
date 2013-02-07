@@ -13,7 +13,7 @@ Plans for UnNetHackPlus
 * https://github.com/tung/NitroHack
 * https://gitorious.org/nitrohack/ais523/commits/nicehack
 * grunt (see bookmarks)
-* http://bilious.alt.org/?288
+* http://bilious.alt.org/?288 Confused Magic Whistle
 * mark E-square
 * http://nethackwiki.com/wiki/Pet#Armor_and_extrinsics http://nethackwiki.com/wiki/Armor#Monsters_.28pets.29_and_armor
 * genociding your pet is OK
