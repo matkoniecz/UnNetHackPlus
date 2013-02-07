@@ -1,12 +1,7 @@
 Plans for UnNetHackPlus
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/6f3531ef27faf747005a21e071bf31e98101e62e
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/b104f6cee8aed1b97568ee6eabcf063229160cd2
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/19ecf5e74b1e0c5f92e445c85591daba70dfec8c
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/5d866cb42f695a0df8a1e0266bd4e7f38ce2c227
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/82026e236c7cc5b5942fdafff9c20727e960e25c
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/d5f208b70d606071a5829526e4806dab0e87832a
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/9cb0b2d6fd8e1c7384ff741e5399103f29806122
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/bea3c5848a404f6b7df325dfabded053ae92d804
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/a37cbf87d023fec33af23597e57f6657ff8744a4
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/6a1be125cce4ce8f42da4c70783a07b7c8006f6d
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/ee6f13ea2fa824d6f1cc8359b6707f1b40375363
@@ -220,6 +215,7 @@ proud owner of a magic whistle.
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/dea61cde17b8758091e3f3cef95c2d651d11cb3e - When attacking a peaceful monster, make other peaceful monsters react.  - in the middle of spaghetti code
 
 # no playtesting
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/5d866cb42f695a0df8a1e0266bd4e7f38ce2c227  Change covetous monster behavior -- when pursuing you, follow in slightly random shorter jumps, no more than about 6-7 squares
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/71dfbdb54ccbc800cc86ccdb7ed762f45658c90a - reduce amount of gold
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/b1bfbb10c01b5a699f7310b5f54589731c480e26
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/5810788cb6be40e7bed05eff6f263bb9d9f227ae
@@ -259,7 +255,7 @@ proud owner of a magic whistle.
 * Medusa petrifications: NAO: http://www.reddit.com/r/bulwersator/comments/17keai/tesyst/c86alx9 Un http://un.nethack.nu/cause/petrified+by+Medusa
 
 #texts
-*  Juiblex the Lord of the Slime Pit, Demon Lord of Oozes and All Things Most Foul.
+* Juiblex the Lord of the Slime Pit, Demon Lord of Oozes and All Things Most Foul.
 * I dunno, I often hear this about Roguelikes and other really hard games, and to the extent that it's true at all, it assumes that the player has read and memorized every single spoiler and knows that (say) Blue-Footed Foozles can be defeated by harsh language but will explode with 40-kiloton yield if struck by any spell or weapon.
 
 #help!
