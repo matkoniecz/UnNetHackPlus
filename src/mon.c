@@ -2871,7 +2871,7 @@ kill_genocided_monsters()
 		if (mtmp->cham && !kill_cham[mtmp->cham])
 		    (void) newcham(mtmp, (struct permonst *)0, FALSE, FALSE);
 		else
-		    mondead(mtmp);
+		    xkilled(mtmp, 0);
 	    }
 	    if (mtmp->minvent) kill_eggs(mtmp->minvent);
 	}
