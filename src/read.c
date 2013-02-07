@@ -155,6 +155,9 @@ doread()
     "Elvira's House O'Succubi, granting the gift of immorality!",
     /* UnNetHack */
     "I made a NetHack fork and all I got was this lousy T-shirt!",	/* galehar */
+    /* UnNetHackPlus */
+    "not food",
+    "ingredients: oxygen 65%, Carbon 18%, Hydrogen 10%, Nitrogen 3%, Calcium 1,5%, Phosphorus 1%",
 	    };
 	    char buf[BUFSZ];
 	    int erosion;
