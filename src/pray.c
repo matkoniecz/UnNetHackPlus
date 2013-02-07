@@ -1594,8 +1594,16 @@ attempt_altar_conversion(aligntyp altaralign, register struct obj *otmp)
 				u.ualign.type == A_LAWFUL ? NH_WHITE :
 				u.ualign.type ? NH_BLACK : (const char *)"gray"));
 			}
-			if (rnl(u.ulevel) > 6 && u.ualign.record > 0 && rnd(u.ualign.record) > (3*ALIGNLIM)/4)
-				summon_minion(altaralign, TRUE);
+			pline_The("voice of %s booms:", align_gname(altaralign));
+			verbalize("Thou shalt pay for thy indiscretion!");
+			int minions = rnl(u.ulevel)/4 + rn2(u.ulevel)/4 + 1;
+			if (temple_occupied(u.urooms)) {
+				minions = rnl(u.ulevel)/2 + rn2(u.ulevel)/2 + 4;
+			}
+			int counter; /* to avoid "'for' loop initial declaration used outside C99 mode" */
+			for(counter = 0; counter < minions; counter++){
+				summon_minion(altaralign, FALSE);
+			}
 			/* anger priest; test handles bones files */
 			if((pri = findpriest(temple_occupied(u.urooms))) && !p_coaligned(pri)) {
 				angry_priest();

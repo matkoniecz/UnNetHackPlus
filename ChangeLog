@@ -47,6 +47,7 @@
 	* Shopkeepers prefer save dungeons and advertise their shops
 	* Object generation modified (lowered death drops, more objects on the floor, generated object may be eroded or fixed)
 	* Killing via scroll of genocide counts as direct act of player (penalties for killing pets/peacefuls, breaks pacifist conduct, experience/alignment points are gained)
+	* God angered by altar conversion will send entire army of minions
 
 2012-04-01  UnNetHack 4.0.0
 	* Uncursed and blessed scrolls of magic mapping reveal secret doors
