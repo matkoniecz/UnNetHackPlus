@@ -4092,60 +4092,60 @@ struct monst* shkp;
 {
 	switch (ESHK(shkp)->shoptype) {
 		case ARMORSHOP:
-			pline(armor_wares[rn2(CRYNUMBER)],urace.noun);
+			verbalize(armor_wares[rn2(CRYNUMBER)],urace.noun);
 			break;
 		case SCROLLSHOP:
-			pline(scroll_wares[rn2(CRYNUMBER)],urace.noun);
+			verbalize(scroll_wares[rn2(CRYNUMBER)],urace.noun);
 			break;
 		case POTIONSHOP:
-			pline(potion_wares[rn2(CRYNUMBER)],urace.noun);
+			verbalize(potion_wares[rn2(CRYNUMBER)],urace.noun);
 			break;
 		case WEAPONSHOP:
-			pline(weapon_wares[rn2(CRYNUMBER)],urace.noun);
+			verbalize(weapon_wares[rn2(CRYNUMBER)],urace.noun);
 			break;
 		case FOODSHOP:
-			pline(food_wares[rn2(CRYNUMBER)],urace.noun);
+			verbalize(food_wares[rn2(CRYNUMBER)],urace.noun);
 			break;
 		case RINGSHOP:
-			pline(ring_wares[rn2(CRYNUMBER)],urace.noun);
+			verbalize(ring_wares[rn2(CRYNUMBER)],urace.noun);
 			break;
 		case WANDSHOP:
-			pline(wand_wares[rn2(CRYNUMBER)],urace.noun);
+			verbalize(wand_wares[rn2(CRYNUMBER)],urace.noun);
 			break;
 		case TOOLSHOP:
-			pline(tool_wares[rn2(CRYNUMBER)],urace.noun);
+			verbalize(tool_wares[rn2(CRYNUMBER)],urace.noun);
 			break;
 		case BOOKSHOP:
-			pline(book_wares[rn2(CRYNUMBER)],urace.noun);
+			verbalize(book_wares[rn2(CRYNUMBER)],urace.noun);
 			break;
 		case SHOPBASE: //general shop
 			switch (rn2(9)) {
 			case 0:
-				pline(armor_wares[rn2(CRYNUMBER)],urace.noun);
+				verbalize(armor_wares[rn2(CRYNUMBER)],urace.noun);
 				break;
 			case 1:
-				pline(scroll_wares[rn2(CRYNUMBER)],urace.noun);
+				verbalize(scroll_wares[rn2(CRYNUMBER)],urace.noun);
 				break;
 			case 2:
-				pline(potion_wares[rn2(CRYNUMBER)],urace.noun);
+				verbalize(potion_wares[rn2(CRYNUMBER)],urace.noun);
 				break;
 			case 3:
-				pline(weapon_wares[rn2(CRYNUMBER)],urace.noun);
+				verbalize(weapon_wares[rn2(CRYNUMBER)],urace.noun);
 				break;
 			case 4:
-				pline(food_wares[rn2(CRYNUMBER)],urace.noun);
+				verbalize(food_wares[rn2(CRYNUMBER)],urace.noun);
 				break;
 			case 5:
-				pline(ring_wares[rn2(CRYNUMBER)],urace.noun);
+				verbalize(ring_wares[rn2(CRYNUMBER)],urace.noun);
 				break;
 			case 6:
-				pline(wand_wares[rn2(CRYNUMBER)],urace.noun);
+				verbalize(wand_wares[rn2(CRYNUMBER)],urace.noun);
 				break;
 			case 7:
-				pline(tool_wares[rn2(CRYNUMBER)],urace.noun);
+				verbalize(tool_wares[rn2(CRYNUMBER)],urace.noun);
 				break;
 			case 8:
-				pline(book_wares[rn2(CRYNUMBER)],urace.noun);
+				verbalize(book_wares[rn2(CRYNUMBER)],urace.noun);
 				break;
 			default:
 				warning("impossible yell roll");
