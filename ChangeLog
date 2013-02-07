@@ -44,6 +44,7 @@
 	* Luring wraiths from graveyards is now pointless - undead creatures are as likely to leave corpse on graveyard as on normal levels (reduced chance for normal levels, raised for graveyards)
 	* Names for player statues on Medusa level are now based on list of people petrified by Medusa on public servers instead of top ten local players.
 	* Shopkeepers prefer save dungeons and advertise their shops
+	* Object generation modified (lowered death drops, more objects on the floor, generated object may be eroded or fixed)
 
 2012-04-01  UnNetHack 4.0.0
 	* Uncursed and blessed scrolls of magic mapping reveal secret doors
