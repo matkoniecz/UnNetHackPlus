@@ -67,7 +67,6 @@ acid resistance is now.) https://groups.google.com/forum/?fromgroups=#!topic/rec
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/dfb47e58a21a9e50a60245309f1c91ec53310457 -  Scared covetous monsters should actually 'flee' to someplace not near the player.  Note that this doesn't include STRAT_HEAL, only magical sources of fear.
 * https://groups.google.com/forum/?fromgroups=#!msg/rec.games.roguelike.nethack/vspJEm0wwJ0/QDWJeqjn1HQJ
 * http://web.archive.org/web/20080309115104/http://www.csh.rit.edu/~topher/nethack/
-* http://www.cse.unsw.edu.au/~malcolmr/nethack/
 * https://github.com/DanielT/NitroHack/commits/master
 * http://nethackwiki.com/wiki/NetHack_4
 * atop looting from asking infuriating ynq, skip for single container, show list for multiple ones (the same for eating)
