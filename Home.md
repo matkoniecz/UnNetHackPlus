@@ -1,5 +1,29 @@
 Plans for UnNetHackPlus
-* copper items may be generated burnt - is it a bug?
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/6f3531ef27faf747005a21e071bf31e98101e62e
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/b104f6cee8aed1b97568ee6eabcf063229160cd2
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/19ecf5e74b1e0c5f92e445c85591daba70dfec8c
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/5d866cb42f695a0df8a1e0266bd4e7f38ce2c227
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/82026e236c7cc5b5942fdafff9c20727e960e25c
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/d5f208b70d606071a5829526e4806dab0e87832a
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/9cb0b2d6fd8e1c7384ff741e5399103f29806122
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/bea3c5848a404f6b7df325dfabded053ae92d804
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/a37cbf87d023fec33af23597e57f6657ff8744a4
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/6a1be125cce4ce8f42da4c70783a07b7c8006f6d
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/ee6f13ea2fa824d6f1cc8359b6707f1b40375363
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/2e431ff5c77abde4093ea002db414a7ecafba9f4
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/cdb0add92fed422e61860b7c88711b347cd17b5f + https://github.com/Bulwersator/CopyOfSporkHack/commit/d25452bdea84850ada1674a7fefa343f66a9264c
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/2b5a1fabb68e8d40b29ff2e53e311e6031d38484
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/cbc86197bf6a8d63532069fa153a946bbb5b946c
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/60472fbcdfe18175ef52955d93393108505c5fda
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/d6ae5c1cba40bd5f04f11c2e6e6205ad1486992f
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/362247f3505843be26cb5397a840e0fbcc4b9680
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/e187663d121f00337532ec3d9d180268a177d8dd
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/3d21c8d06fa74db06824059bab86dcb60ab14a56 (?)
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/fd03318e9f1e75b61f392739afb167b5ad2da18f
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/bc4d238b2254cd8cad1c6aa92423540d2085df5b
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/cece069f9d1465ebb7d388d4b2fae572bd8e0e48
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/65746a16b1876640d181276828aae7421cbac5e3 https://github.com/Bulwersator/CopyOfSporkHack/commit/c747690e1b7cd22e47d6bddebd3ce5853b009068
+* copper items may be generated burnt - see https://github.com/Bulwersator/CopyOfSporkHack/commit/af1c9b2f9d9714fe15dd8177c5853659a66bf8b7  http://nethackwiki.com/wiki/Source:Ref/add_erosion_words#add_erosion_words  http://nethackwiki.com/wiki/Source:NetHack_3.4.3/include/objclass.h 
 * intrinsic_possible fully_identify_obj
 * issue linker - https://github.com/Chris-plus-alphanumericgibberish/dnethack/commit/b905bf4b0d3ccea07992dadcae5b2908ac61aaab
 * [[encyclopedia]]
@@ -130,7 +154,7 @@ proud owner of a magic whistle.
 * unflee zombies on low HP
 * Dragons will never breath in melee combat.
 * Only your quest Nemeses will deliberately steal your quest artifact, other monsters may steal the amulet and invocation items. The quest artifact may of course be randomly stolen by nymphs and the like.  -Makes QA a dependable source of extrinsics, deepening differences between classes. -dnethack
-* Unskilled use of weapons will get you occasional reminders that you suck at this. No matter how many bonuses you get, in Sporkhack you can never get more than a 75% chance to hit a monster with such a weapon. This is only a minor hassle with this artifact longsword, since Mouse will be at basic skill with it shortly, but this is a big nerf to the rubber chicken exploit. No longer is a wielded cockatrice corpse automatic instant victory against even endgame bosses; there is at least a 25% chance the boss will be able to hit back at least once. This is a bigger nerf than it sounds… Since there are no artifact corpses to receive as a gift from your god, no character will ever be skilled in their use. You could say that there's no 'right way' to beat somebody with a dead chicken.
+* Unskilled use of weapons will get you occasional reminders that you suck at this. No matter how many bonuses you get, in Sporkhack you can never get more than a 75% chance to hit a monster with such a weapon. This is only a minor hassle with this artifact longsword, since Mouse will be at basic skill with it shortly, but this is a big nerf to the rubber chicken exploit. No longer is a wielded cockatrice corpse automatic instant victory against even endgame bosses; there is at least a 25% chance the boss will be able to hit back at least once. This is a bigger nerf than it sounds… Since there are no artifact corpses to receive as a gift from your god, no character will ever be skilled in their use. You could say that there's no 'right way' to beat somebody with a dead chicken. https://github.com/Bulwersator/CopyOfSporkHack/commit/34d9e40f46ff2398cc339eb825decc82a6e476d0
 * oversight: you can #chat while being choked by a rope golem ("strangulation seem to be handled okay)
 
 #savebreaking?
@@ -139,6 +163,8 @@ proud owner of a magic whistle.
 * revert UnDragons
 
 #savebreaking
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/aee3b3d35defc3ec60611337450c071340359217 (??)
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/c89f6e57eb16e81bd37920096c6f64dfed725b03 (+later fix)
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/5d10dd556b1d511b248e67f5882b0d2ffaff580d (range for telepathy)
 * silver boots + https://github.com/Chris-plus-alphanumericgibberish/dnethack/commit/f167bb7bd5568288c1e54f7581ae34499d7945fd (dokick edit)
 * Sporkhack has added some racial equipment for gnomes to wear.
@@ -197,6 +223,8 @@ proud owner of a magic whistle.
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/dea61cde17b8758091e3f3cef95c2d651d11cb3e - When attacking a peaceful monster, make other peaceful monsters react.  - in the middle of spaghetti code
 
 # no playtesting
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/71dfbdb54ccbc800cc86ccdb7ed762f45658c90a - reduce amount of gold
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/b1bfbb10c01b5a699f7310b5f54589731c480e26
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/5810788cb6be40e7bed05eff6f263bb9d9f227ae
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/d941e6280fcaefeaf063bdf76caae6db5130d453
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/6aad5972e03d2edc7e678f71c0159e62374d561c
