@@ -263,3 +263,14 @@ proud owner of a magic whistle.
 #make patches
 * pray.c
 * generate eroded items (latest: https://github.com/Bulwersator/UnNetHackPlus/commit/c771fadad677e8baaf34478f3961aae888a33685)
+* hallu
+* read/eat tins
+* encyclopedia
+* https://github.com/Bulwersator/UnNetHackPlus/commit/b84a4ea14b454c1f0bd6f4aef3e604166d7fc759 + https://github.com/Bulwersator/UnNetHackPlus/commit/171d80a650da06c947e32c2cfc3499907693ba8a -  player statues near Medusa based on real events 
+* sporky ToD, destroy armor
+* reduce sparkling - https://github.com/Bulwersator/UnNetHackPlus/commit/e3ea95833de16c3dfecc44f3c69058866961d32c
+* more maledictions - https://github.com/Bulwersator/UnNetHackPlus/commit/f0a4d9ec0471da9514909a6d565a30eee0c35408
+* https://github.com/Bulwersator/UnNetHackPlus/commit/a638a9d477800409998e1c9ec8a5b8c92ce95876  Nerf The Eye of the Aethiopica energy production 
+* https://github.com/Bulwersator/UnNetHackPlus/commit/1d9ff4a8f2b7c3c8da062d8e974a9f4f684607d9  Add the gnome king and wizard defending cellar 
+*  src/u_init.c 
+* autoidentify wands - https://github.com/Bulwersator/UnNetHackPlus/commit/46c2ddcb606a38d3d1e2c54de57a1c38f8a1eb1c
