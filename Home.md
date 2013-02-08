@@ -259,3 +259,7 @@ proud owner of a magic whistle.
 
 #help!
 * Gargoyle weirdness (There are animated statues so it is logical that they are stone resistant. On the other hand their flesh is edible. I want to turn them into statue leaving monster like stone golem - but what should happen with stone monster hit by stone to flesh spell? Turn into meatball as for statues of monsters without corpses? Resist as their stone is also body? Do nothing? Eat significant part of HP (body of foo decays into twisted flesh)? Something else? )
+
+#make patches
+* pray.c
+* generate eroded items (latest: https://github.com/Bulwersator/UnNetHackPlus/commit/c771fadad677e8baaf34478f3961aae888a33685)
