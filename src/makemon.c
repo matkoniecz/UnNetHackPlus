@@ -466,8 +466,12 @@ register struct monst *mtmp;
 	      }
 	      break;
 	}
-	if ((int) mtmp->m_lev > rn2(75))
-		(void) mongets(mtmp, rnd_offensive_item(mtmp));
+	
+	if(!is_mercenary(mtmp->data)) { /* soldiers with wands are more likely to harm other soldiers than player */
+		if ((int) mtmp->m_lev > rn2(75)) {
+			(void) mongets(mtmp, rnd_offensive_item(mtmp));
+		}
+	}
 }
 
 #endif /* OVL2 */
@@ -510,13 +514,13 @@ register struct	monst	*mtmp;
 		    register int mac;
 
 		    switch(monsndx(ptr)) {
-			case PM_GUARD: mac = -1; break;
-			case PM_SOLDIER: mac = 3; break;
-			case PM_SERGEANT: mac = 0; break;
-			case PM_LIEUTENANT: mac = -2; break;
-			case PM_CAPTAIN: mac = -3; break;
-			case PM_WATCHMAN: mac = 3; break;
-			case PM_WATCH_CAPTAIN: mac = -2; break;
+			case PM_GUARD: mac = -2; break;
+			case PM_SOLDIER: mac = 2; break;
+			case PM_SERGEANT: mac = -1; break;
+			case PM_LIEUTENANT: mac = -4; break;
+			case PM_CAPTAIN: mac = -6; break;
+			case PM_WATCHMAN: mac = 2; break;
+			case PM_WATCH_CAPTAIN: mac = -3; break;
 			default: warning("odd mercenary %d?", monsndx(ptr));
 				mac = 0;
 				break;
