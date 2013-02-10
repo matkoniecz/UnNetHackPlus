@@ -119,7 +119,10 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 *  Formally identifying the Amulet of Yendor now. Wouldn't do to pick up one of the Wizard's fakes. In vanilla, there's an easy test: try putting it in your bag. The Amulet of Yendor will refuse to enter a container, but the fakes go in easily. That's been changed in Sporkhack, so bring a means of identification just in case. The #name trick still works.
 *  Angels are MUCH more dangerous in Sporkhack than in vanilla. Their most damaging attack in either version is a powerful stream of magic missiles. In vanilla, all magic missile attacks are completely nullified by either reflection or magic resistance, leaving the angels with only fairly ordinary attacks and magic. In Sporkhack, reflection and magic resistance only cut magic missile damage in half! So Spelunky will still take partial damage from all the angels pelting her from every angle, even as she faces Pestilence! The half spell damage from the Orb of Detection will still help, though… She will take 1/8 the normal damage of the attack each time. Most other roles will have a much tougher time keeping the angels away, since magic resistance and reflection combined is still 1/4 of a whole lot of damage.
 *  Oh, if you're wondering why nobody else came in, Spelunky locked the door. Angels and aligned priests almost never carry keys, and even if they did, Spelunky could change plans and run for the altar.
-* http://forum.rpg.net/showthread.php?466187-(Let-s-Play!)-Sporkhack/page30
+* Dark One knows many different arcane spells. While nowhere near the hardest of the quest nemeses, the Dark One still demands respect! Mind you, he demands respect a whole lot more effectively in Slash'EM, where he knows Summon Nasties and Touch of Death. Sporkhack hasn't really done much to make him more hardcore.
+* wizard quest flavor text - Um, what? Weren't you dying without that thing, or something? Maybe the Dark One was specifically doing something to the Eye of the Aethiopica that put Neferet the Green at risk? Well, swapping out the regular amulet of power for the Eye. Deciding not to worry about the fanwank explanation
+*  In Sporkhack, there's a small chance a polymorph trap will disappear each time a monster uses it, so if you get something good you want to stop right there. Gyrfalcon had some mediocre forms, but now he's stuck as an imp until I can find another polytrap. In vanilla, of course, I can keep going until I like what I see or I end up with a pet gray dragon (which is a good pet anyway).
+* http://forum.rpg.net/showthread.php?466187-(Let-s-Play!)-Sporkhack/page38
 * fedora for arch providing charisma boost (or maybe slashemism - Archaeologist	Fedora acts as luckstone)
 * during the new moon the petrifying hiss of a cockatrice has a 100% chance to hit UNLESS you have a lizard corpse to cure it http://nethackwiki.com/wiki/Source:Mhitu.c#line1190
 * remove pet apport
@@ -281,4 +284,4 @@ proud owner of a magic whistle.
 * KoboldLord for http://forum.rpg.net/showthread.php?466187-%28Let-s-Play!%29-Sporkhack/page1
 * nethack, unnethack, sporkhack (Derek Ray), dnethack (Chris), grunthack (SGrunt) developers
 * paxed, unserver keeper (medusa deaths)
-* authors of patches
+* authors of patches ("L" - Leon Arnott)
