@@ -575,9 +575,6 @@ boolean in_final_dump;
 {
 	boolean iscrys = (obj->otyp == CRYSKNIFE);
 
-
-	if (!is_damageable(obj) && !iscrys) return;
-
 	/* The only cases where any of these bits do double duty are for
 	 * rotted food and diluted potions, which are all not is_damageable().
 	 */
@@ -593,8 +590,9 @@ boolean in_final_dump;
 			case 2:	Strcat(prefix, "very "); break;
 			case 3:	Strcat(prefix, "thoroughly "); break;
 		}			
-		Strcat(prefix, is_corrodeable(obj) ? "corroded " :
-			"rotted ");
+		/* This catches things like dragonscale mail. */
+		Strcat(prefix, !is_damageable(obj) ? "deteriorated " : 
+				is_corrodeable(obj) ? "corroded " : "rotted ");
 	}
 	if (obj->oerodeproof && (in_final_dump || obj->rknown))
 		Sprintf(eos(prefix), "%s%s%s ",
@@ -602,7 +600,7 @@ boolean in_final_dump;
 			iscrys ? "fixed" :
 			is_rustprone(obj) ? "rustproof" :
 			is_corrodeable(obj) ? "corrodeproof" :	/* "stainless"? */
-			is_flammable(obj) ? "fireproof" : "",
+			is_flammable(obj) ? "fireproof" : "protected",
 			obj->rknown ? "" : "]");
 }
 
@@ -2126,7 +2124,8 @@ boolean from_user;
 			   !strncmpi(bp, "corrodeproof ", l=13) ||
 			   !strncmpi(bp, "fixed ", l=6) ||
 			   !strncmpi(bp, "fireproof ", l=10) ||
-			   !strncmpi(bp, "rotproof ", l=9)) {
+			   !strncmpi(bp, "rotproof ", l=9) ||
+			   !strncmpi(bp, "protected ", l=10)) {
 			erodeproof = 1;
 		} else if (!strncmpi(bp,"lit ", l=4) ||
 			   !strncmpi(bp,"burning ", l=8)) {
@@ -2967,14 +2966,15 @@ typfnd:
 		    otmp->oeroded = eroded;
 	    if (eroded2 && (is_corrodeable(otmp) || is_rottable(otmp)))
 		    otmp->oeroded2 = eroded2;
-
-	    /* set erodeproof */
-	    if (erodeproof && !eroded && !eroded2)
-		    otmp->oerodeproof = (Luck >= 0
+	}
+	
+	/* set erodeproof */
+	if (erodeproof && !eroded && !eroded2){
+		otmp->oerodeproof = (Luck >= 0
 #ifdef WIZARD
-					     || wizard
+					|| wizard
 #endif
-					);
+				);
 	}
 
 	/* set otmp->recharged */

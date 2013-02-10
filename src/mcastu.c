@@ -325,6 +325,9 @@ struct monst *mtmp;
 int dmg;
 int spellnum;
 {
+	struct obj* oatmp;
+	int erodelvl;
+
     if (dmg == 0 && !is_undirected_spell(AD_SPEL, spellnum)) {
 	warning("cast directed wizard spell (%d) with dmg=0?", spellnum);
 	return;
@@ -395,11 +398,25 @@ int spellnum;
 	dmg = 0;
 	break;
     case MGC_DESTRY_ARMR:
+	/* Magic resistance will reduce the amount by which your stuff is fiddled,
+	 * but it won't actually stop things from being damaged */
+	erodelvl = rnd(3);
 	if (Antimagic) {
-	    shieldeff(u.ux, u.uy);
-	    pline("A field of force surrounds you!");
-	} else if (!destroy_arm(some_armor(&youmonst))) {
-	    Your("skin itches.");
+		shieldeff(u.ux, u.uy);
+		erodelvl = 1;
+	}
+	oatmp = some_armor(&youmonst);
+	if (oatmp) {
+		if (oatmp->oerodeproof) {
+			pline("Your %s glows brown for a moment.",xname(oatmp));
+			oatmp->oerodeproof = 0;
+		} else {
+			while (erodelvl-- > 0) {
+				erode_obj(oatmp, AD_MAGM);
+			}
+		}
+	} else {
+		Your("skin itches.");
 	}
 	dmg = 0;
 	break;

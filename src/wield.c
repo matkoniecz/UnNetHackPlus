@@ -606,94 +606,179 @@ untwoweapon()
 	return;
 }
 
-/* Maybe rust object, or corrode it if acid damage is called for */
-void
-erode_obj(target, acid_dmg, fade_scrolls)
-struct obj *target;		/* object (e.g. weapon or armor) to erode */
-boolean acid_dmg;
-boolean fade_scrolls;
+/*
+ * Centralized call for eroding any single object; handles all types of
+ * damage appropriately, including magical (cf. "destroy armor" spell)
+ *
+ * For now, the corresponding AD_* damage types are used:
+ *
+ * AD_MAGM: the "destroy armor" spell
+ * AD_FIRE: fire damage
+ * AD_RUST: water damage
+ * AD_ACID: acid damage (corrosion)
+ * 
+ * If 'target' goes away as a result of this damage, returns TRUE.
+ */
+boolean
+erode_obj(target, damage_type)
+struct obj* target;
+uchar damage_type;
 {
-	int erosion;
-	struct monst *victim;
-	boolean vismon;
-	boolean visobj;
+	int old_erlevel;
+	struct monst* victim;
+	boolean vismon, visobj;
+	boolean unaffected = FALSE;
+	boolean secondary = FALSE;
+	char verb[20];
+	char past_adj[20];
+	char adjective[20];
 
-	if (!target)
-	    return;
-	victim = carried(target) ? &youmonst :
-	    mcarried(target) ? target->ocarry : (struct monst *)0;
+	if (!target) return TRUE;	/* we didn't do it, but it's gone */
+
+	victim = carried(target) ? &youmonst : mcarried(target) ? target->ocarry : (struct monst *)0;
 	vismon = victim && (victim != &youmonst) && canseemon(victim);
-	visobj = !victim && cansee(bhitpos.x, bhitpos.y); /* assume thrown */
+	visobj = !victim && cansee(bhitpos.x, bhitpos.y);	/* assume thrown */
 
-	erosion = acid_dmg ? target->oeroded2 : target->oeroded;
+	/* grease protects against rust and acid attacks */
+	if (target->greased && (damage_type == AD_RUST || damage_type == AD_ACID) ) {
+		grease_protect(target,(char*)0,victim);
+		return FALSE;
+	} 
 
-	if (target->greased) {
-	    grease_protect(target,(char *)0,victim);
-	} else if (target->oclass == SCROLL_CLASS) {
-	    if(fade_scrolls && target->otyp != SCR_BLANK_PAPER
+	/* scrolls will fade if exposed to water, or dissolve in acid */
+	if (target->oclass == SCROLL_CLASS) {
 #ifdef MAIL
-	    && target->otyp != SCR_MAIL
+		if (target->otyp == SCR_MAIL) {
+			unaffected = TRUE;
+		} else
 #endif
-					)
-	    {
-		if (!Blind) {
-		    if (victim == &youmonst)
-			Your("%s.", aobjnam(target, "fade"));
-		    else if (vismon)
-			pline("%s's %s.", Monnam(victim),
-			      aobjnam(target, "fade"));
-		    else if (visobj)
-			pline_The("%s.", aobjnam(target, "fade"));
+		if (target->otyp != SCR_BLANK_PAPER && damage_type == AD_RUST) {
+			if (!Blind) {
+				if (victim == &youmonst) {
+					Your("%s.", aobjnam(target, "fade"));
+				} else if (vismon) {
+					pline("%s's %s.",Monnam(victim),aobjnam(target,"fade"));
+				} else if (visobj) {
+					pline_The("%s.",aobjnam(target,"fade"));
+				}
+			}
+			target->otyp = SCR_BLANK_PAPER;
+			target->spe = 0;
+			return FALSE;
+		} else if (damage_type == AD_ACID) {
+			if (!Blind) {
+				if (victim == &youmonst) {
+					Your("%s!", aobjnam(target,"dissolve"));
+				} else if (vismon) {
+					pline("%s's %s!",Monnam(victim),aobjnam(target,"dissolve"));
+				} else if (visobj) {
+					pline_The("%s!",aobjnam(target,"dissolve"));
+				}
+			}
+			useupall(target);
+			return TRUE;
 		}
-		target->otyp = SCR_BLANK_PAPER;
-		target->spe = 0;
-	    }
-	} else if (target->oerodeproof ||
-		(acid_dmg ? !is_corrodeable(target) : !is_rustprone(target))) {
-	    if (flags.verbose || !(target->oerodeproof && target->rknown)) {
-		if (victim == &youmonst)
-		    Your("%s not affected.", aobjnam(target, "are"));
-		else if (vismon)
-		    pline("%s's %s not affected.", Monnam(victim),
-			aobjnam(target, "are"));
-		/* no message if not carried */
-	    }
-	    if (target->oerodeproof) target->rknown = TRUE;
-	} else if (erosion < MAX_ERODE) {
-	    if (victim == &youmonst)
-		Your("%s%s!", aobjnam(target, acid_dmg ? "corrode" : "rust"),
-		    erosion+1 == MAX_ERODE ? " completely" :
-		    erosion ? " further" : "");
-	    else if (vismon)
-		pline("%s's %s%s!", Monnam(victim),
-		    aobjnam(target, acid_dmg ? "corrode" : "rust"),
-		    erosion+1 == MAX_ERODE ? " completely" :
-		    erosion ? " further" : "");
-	    else if (visobj)
-		pline_The("%s%s!",
-		    aobjnam(target, acid_dmg ? "corrode" : "rust"),
-		    erosion+1 == MAX_ERODE ? " completely" :
-		    erosion ? " further" : "");
-	    if (acid_dmg)
-		target->oeroded2++;
-	    else
-		target->oeroded++;
-	} else {
-	    if (flags.verbose) {
-		if (victim == &youmonst)
-		    Your("%s completely %s.",
-			aobjnam(target, Blind ? "feel" : "look"),
-			acid_dmg ? "corroded" : "rusty");
-		else if (vismon)
-		    pline("%s's %s completely %s.", Monnam(victim),
-			aobjnam(target, "look"),
-			acid_dmg ? "corroded" : "rusty");
-		else if (visobj)
-		    pline_The("%s completely %s.",
-			aobjnam(target, "look"),
-			acid_dmg ? "corroded" : "rusty");
-	    }
+		unaffected = TRUE;
+	} 
+
+	/* weed out all the fooproof stuff here */
+	if ((damage_type != AD_MAGM && target->oerodeproof) ||
+			(damage_type == AD_ACID && !is_corrodeable(target) && !is_rottable(target)) ||
+			(damage_type == AD_RUST && !is_rustprone(target)) ||
+			(damage_type == AD_FIRE && !is_flammable(target))) {
+		unaffected = TRUE;
 	}
+		
+	if (unaffected) {
+		if (flags.verbose || !(target->oerodeproof && target->rknown)) {
+			if (victim == &youmonst) {
+				Your("%s not affected.",aobjnam(target,"are"));
+			} else if (vismon) {
+				pline("%s's %s not affected.",Monnam(victim),aobjnam(target,"are"));
+			}
+		}
+		if (target->oerodeproof) target->rknown = TRUE;
+		return FALSE;
+	}
+
+	switch (damage_type) {
+		case AD_MAGM:
+			if (is_flammable(target)) { 
+				strcpy(verb,"smolder"); strcpy(past_adj,"burnt"); 
+			} else if (is_rottable(target)) { 
+				strcpy(verb,"rot"); strcpy(past_adj,"rotten"); secondary = TRUE; 
+			} else if (is_rustprone(target)) { 
+				strcpy(verb,"rust"); strcpy(past_adj,"rusty");
+			} else if (is_corrodeable(target)) { 
+				strcpy(verb,"corrode"); strcpy(past_adj,"corroded"); secondary = TRUE; 
+			} else { 
+				strcpy(verb,"deteriorate"); strcpy(past_adj,"deteriorated"); 
+				secondary = TRUE;
+			}
+			break;
+		case AD_RUST:
+			if (is_rustprone(target)) { 
+				strcpy(verb,"rust"); strcpy(past_adj,"rusty");
+			} else { 
+				strcpy(verb,"rot"); strcpy(past_adj,"rotten"); secondary = TRUE; 
+			}
+			break;
+		case AD_ACID:
+			if (is_rottable(target)) { 
+				strcpy(verb,"rot"); strcpy(past_adj,"rotten"); 
+			} else {
+				strcpy(verb,"corrode"); strcpy(past_adj,"corroded"); 
+			}
+			secondary = TRUE;
+			break;
+		case AD_FIRE:
+			strcpy(verb,"smolder");
+			strcpy(past_adj,"burnt");
+			break;
+	}
+
+	old_erlevel = secondary ? target->oeroded2 : target->oeroded;
+	if (!old_erlevel) { 
+		strcpy(adjective,""); 
+	} else { 
+		if (old_erlevel+1 < MAX_ERODE) { strcpy(adjective," further"); } 
+		else { strcpy(adjective," completely"); }
+	}
+
+	/* generate obnoxious output */
+	if (old_erlevel < MAX_ERODE) {
+		if (secondary) { target->oeroded2++; } 
+		else { target->oeroded++; }
+		if (victim == &youmonst) {
+			Your("%s%s!",aobjnam(target,verb),adjective);
+		} else if (vismon) {
+			pline("%s's %s%s!",Monnam(victim),aobjnam(target,verb),adjective);
+		} else if (visobj) {
+			pline_The("%s%s!",aobjnam(target,verb),adjective);
+		}
+	} else {
+	/* eventually there will be a possibility of complete destruction here */
+		if (victim == &youmonst) {
+			if(destroy_arm(target)){
+				return TRUE;
+			}
+			pline("%s away.", Tobjnam(target, "crumble"));
+			useupall(target);
+			//Your("%s completely %s.",aobjnam(target,Blind ? "feel" : "look"),past_adj);
+		} else if (vismon) {
+			//pline("%s away.", Tobjnam(target, "crumble"));
+			//useupall(target);
+			//crashes with "extract_nobj: object lost"
+			pline("%s's %s completely %s.",Monnam(victim),aobjnam(target,"look"),past_adj);
+		} else if (visobj) {
+			//pline("%s away.", Tobjnam(target, "crumble"));
+			//useupall(target);
+			//crashes with "extract_nobj: object lost"
+			pline_The("%s completely %s.",aobjnam(target,"look"),past_adj);
+		}
+	}
+
+	return FALSE;
 }
 
 int
