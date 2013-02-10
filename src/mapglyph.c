@@ -149,7 +149,7 @@ unsigned *ospecial;
 	    } else if (iflags.use_color && offset == S_room) {
 		if (*in_rooms(x,y,BEEHIVE))
 		    color = CLR_YELLOW;
-		else if (*in_rooms(x,y,GARDEN))
+		else if (*in_rooms(x,y,GARDEN) || Is_nymph_level(&u.uz))
 		    color = CLR_GREEN;
 		else if (Is_juiblex_level(&u.uz))
 		    color = CLR_BRIGHT_GREEN;
