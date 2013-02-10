@@ -116,6 +116,9 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * http://i295.photobucket.com/albums/mm153/Kobold_Lord/Sporkhack%202/T645341.jpg http://i295.photobucket.com/albums/mm153/Kobold_Lord/Sporkhack%202/T645342.jpg This message is caused by a new divine monster spell. The hill giant shaman has just inflicted the cold vulnerability intrinsic on Mouse. It eventually wears off, but until then Mouse will take heavy damage from cold attacks even though he has 100% cold resistance. You REALLY do not want to get hit by cold attacks if you have cold vulnerability and 0% cold resistance.
 * Here's his frost spell. It's kind of sad. This spell is unique to Asmodeus, but PCs almost ALWAYS have perfect frost resistance by this point in the game
 *  This is the ideal place to settle in when clearing the Zoo at Fort Ludios. Doors have the interesting property that even when they are opened, you can only go through them straight on. The monsters have to single file through three tiles, and in the last of the three they'll stop to fight Spelunky. Until she kills the monster she faces, the others will get jammed behind it. None of them can line up to zap a wand, either, until they're already in melee with Spelunky. http://i295.photobucket.com/albums/mm153/Kobold_Lord/Sporkhack%203/T28982.jpg
+*  Formally identifying the Amulet of Yendor now. Wouldn't do to pick up one of the Wizard's fakes. In vanilla, there's an easy test: try putting it in your bag. The Amulet of Yendor will refuse to enter a container, but the fakes go in easily. That's been changed in Sporkhack, so bring a means of identification just in case. The #name trick still works.
+*  Angels are MUCH more dangerous in Sporkhack than in vanilla. Their most damaging attack in either version is a powerful stream of magic missiles. In vanilla, all magic missile attacks are completely nullified by either reflection or magic resistance, leaving the angels with only fairly ordinary attacks and magic. In Sporkhack, reflection and magic resistance only cut magic missile damage in half! So Spelunky will still take partial damage from all the angels pelting her from every angle, even as she faces Pestilence! The half spell damage from the Orb of Detection will still help, though… She will take 1/8 the normal damage of the attack each time. Most other roles will have a much tougher time keeping the angels away, since magic resistance and reflection combined is still 1/4 of a whole lot of damage.
+*  Oh, if you're wondering why nobody else came in, Spelunky locked the door. Angels and aligned priests almost never carry keys, and even if they did, Spelunky could change plans and run for the altar.
 * http://forum.rpg.net/showthread.php?466187-(Let-s-Play!)-Sporkhack/page30
 * fedora for arch providing charisma boost (or maybe slashemism - Archaeologist	Fedora acts as luckstone)
 * during the new moon the petrifying hiss of a cockatrice has a 100% chance to hit UNLESS you have a lizard corpse to cure it http://nethackwiki.com/wiki/Source:Mhitu.c#line1190
@@ -273,3 +276,9 @@ proud owner of a magic whistle.
 * https://github.com/Bulwersator/UnNetHackPlus/commit/1d9ff4a8f2b7c3c8da062d8e974a9f4f684607d9  Add the gnome king and wizard defending cellar 
 *  src/u_init.c 
 * autoidentify wands - https://github.com/Bulwersator/UnNetHackPlus/commit/46c2ddcb606a38d3d1e2c54de57a1c38f8a1eb1c
+
+#thanks
+* KoboldLord for http://forum.rpg.net/showthread.php?466187-%28Let-s-Play!%29-Sporkhack/page1
+* nethack, unnethack, sporkhack (Derek Ray), dnethack, grunthack (SGrunt) developers
+* paxed, unserver keeper (medusa deaths)
+* authors of patches
