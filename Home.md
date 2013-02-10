@@ -279,6 +279,6 @@ proud owner of a magic whistle.
 
 #thanks
 * KoboldLord for http://forum.rpg.net/showthread.php?466187-%28Let-s-Play!%29-Sporkhack/page1
-* nethack, unnethack, sporkhack (Derek Ray), dnethack, grunthack (SGrunt) developers
+* nethack, unnethack, sporkhack (Derek Ray), dnethack (Chris), grunthack (SGrunt) developers
 * paxed, unserver keeper (medusa deaths)
 * authors of patches
