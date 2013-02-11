@@ -42,18 +42,6 @@ int expltype;
 	boolean shopdamage = FALSE;
 	boolean generic = FALSE;
 
-	if (olet == WAND_CLASS)		/* retributive strike */
-		switch (Role_switch) {
-			case PM_PRIEST:
-			case PM_MONK:
-			case PM_WIZARD: damu /= 5;
-				  break;
-			case PM_HEALER:
-			case PM_KNIGHT: damu /= 2;
-				  break;
-			default:  break;
-		}
-
 	if (olet == MON_EXPLODE) {
 	    str = killer;
 	    killer = 0;		/* set again later as needed */
