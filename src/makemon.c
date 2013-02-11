@@ -1629,6 +1629,7 @@ register int otyp;
 
 		/* leaders don't tolerate inferior quality battle gear */
 		if (is_prince(mtmp->data)) {
+			(otmp)->oeroded = (otmp)->oeroded2 = 0;
 			if (otmp->oclass == WEAPON_CLASS && otmp->spe < 1) {
 				otmp->spe = 1;
 			} else if (otmp->oclass == ARMOR_CLASS && otmp->spe < 0) {
