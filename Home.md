@@ -1,6 +1,5 @@
 Plans for UnNetHackPlus
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/d5f208b70d606071a5829526e4806dab0e87832a
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/6a1be125cce4ce8f42da4c70783a07b7c8006f6d
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/ee6f13ea2fa824d6f1cc8359b6707f1b40375363
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/2e431ff5c77abde4093ea002db414a7ecafba9f4
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/cdb0add92fed422e61860b7c88711b347cd17b5f + https://github.com/Bulwersator/CopyOfSporkHack/commit/d25452bdea84850ada1674a7fefa343f66a9264c
