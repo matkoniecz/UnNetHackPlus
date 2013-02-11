@@ -1601,39 +1601,44 @@ register int otyp;
 	if (!otyp) return 0;
 	otmp = mksobj(otyp, TRUE, FALSE);
 	if (otmp) {
-	    if (mtmp->data->mlet == S_DEMON) {
-		/* demons never get blessed objects */
-		if (otmp->blessed) curse(otmp);
-	    } else if(is_lminion(mtmp)) {
-		/* lawful minions don't get cursed, bad, or rusting objects */
-		otmp->cursed = FALSE;
-		if(otmp->spe < 0) otmp->spe = 0;
-		set_erodeproof(otmp);
-	    } else if(is_mplayer(mtmp->data) && is_sword(otmp)) {
-		otmp->spe = (3 + rn2(4));
-	    }
+		if (mtmp->data->mlet == S_DEMON) {
+			/* demons never get blessed objects */
+			if (otmp->blessed) {
+				curse(otmp);
+			}
+		} else if(is_lminion(mtmp)) {
+			/* lawful minions don't get cursed, bad, or rusting objects */
+			otmp->cursed = FALSE;
+			if(otmp->spe < 0) {
+				otmp->spe = 0;
+			}
+			set_erodeproof(otmp);
+		} else if(is_mplayer(mtmp->data) && is_sword(otmp)) {
+			otmp->spe = (3 + rn2(4));
+		}
 
-	    if(otmp->otyp == CANDELABRUM_OF_INVOCATION) {
-		otmp->spe = 0;
-		otmp->age = 0L;
-		otmp->lamplit = FALSE;
-		otmp->blessed = otmp->cursed = FALSE;
-	    } else if (otmp->otyp == SPE_BOOK_OF_THE_DEAD) {
-		otmp->blessed = FALSE;
-		otmp->cursed = TRUE;
-	    }
+		if(otmp->otyp == CANDELABRUM_OF_INVOCATION) {
+			otmp->spe = 0;
+			otmp->age = 0L;
+			otmp->lamplit = FALSE;
+			otmp->blessed = otmp->cursed = FALSE;
+		} else if (otmp->otyp == SPE_BOOK_OF_THE_DEAD) {
+			otmp->blessed = FALSE;
+			otmp->cursed = TRUE;
+		}
 
-	    /* leaders don't tolerate inferior quality battle gear */
-	    if (is_prince(mtmp->data)) {
-		if (otmp->oclass == WEAPON_CLASS && otmp->spe < 1)
-		    otmp->spe = 1;
-		else if (otmp->oclass == ARMOR_CLASS && otmp->spe < 0)
-		    otmp->spe = 0;
-	    }
+		/* leaders don't tolerate inferior quality battle gear */
+		if (is_prince(mtmp->data)) {
+			if (otmp->oclass == WEAPON_CLASS && otmp->spe < 1) {
+				otmp->spe = 1;
+			} else if (otmp->oclass == ARMOR_CLASS && otmp->spe < 0) {
+				otmp->spe = 0;
+			}
+		}
 
-	    spe = otmp->spe;
-	    (void) mpickobj(mtmp, otmp);	/* might free otmp */
-	    return(spe);
+		spe = otmp->spe;
+		(void) mpickobj(mtmp, otmp);	/* might free otmp */
+		return(spe);
 	} else return(0);
 }
 
