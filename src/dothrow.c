@@ -1476,7 +1476,7 @@ register struct obj   *obj;
 		if (obj->otyp == EGG) {
 			for (montmp = fmon; montmp; montmp = montmp->nmon) {
 				if (is_gnome(montmp->data) && m_canseeu(montmp)) {
-					monflee(montmp,rnd(6)+4,TRUE,TRUE);
+					monflee(montmp,rnd(60)+40,TRUE,TRUE);
 				}
 			}
 		}
