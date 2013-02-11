@@ -418,7 +418,10 @@ boolean artif;
 					otmp->oeroded = rn2(3)+1;
 				}
 			}
-		}
+			if(otmp->oclass == POTION_CLASS) {
+				otmp->odiluted = 1;
+			}
+ 		}
 		if (!rn2(14)) {
 			if(is_corrodeable(otmp) || is_rottable(otmp)) {
 				otmp->oeroded2 = rn2(3)+1;
