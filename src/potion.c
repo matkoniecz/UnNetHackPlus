@@ -427,551 +427,641 @@ peffects(otmp)
 	switch(otmp->otyp){
 	case POT_RESTORE_ABILITY:
 	case SPE_RESTORE_ABILITY:
-		unkn++;
-		if(otmp->cursed) {
-		    pline("Ulch!  This makes you feel mediocre!");
-		    break;
-		} else {
-		    pline("Wow!  This makes you feel %s!",
-			  (otmp->blessed) ?
-				(unfixable_trouble_count(FALSE) ? "better" : "great")
-			  : "good");
-		    i = rn2(A_MAX);		/* start at a random point */
-		    for (ii = 0; ii < A_MAX; ii++) {
-			lim = AMAX(i);
-			if (i == A_STR && u.uhs >= 3) --lim;	/* WEAK */
-			if (ABASE(i) < lim) {
-			    ABASE(i) = lim;
-			    flags.botl = 1;
-			    /* only first found if not blessed */
-			    if (!otmp->blessed) break;
+		{
+			unkn++;
+			if(otmp->cursed) {
+				pline("Ulch!  This makes you feel mediocre!");
+				break;
+			} else {
+				pline("Wow!  This makes you feel %s!", (otmp->blessed) ? (unfixable_trouble_count(FALSE) ? "better" : "great") : "good");
+				i = rn2(A_MAX);		/* start at a random point */
+				for (ii = 0; ii < A_MAX; ii++) {
+					lim = AMAX(i);
+					if (i == A_STR && u.uhs >= 3) --lim;	/* WEAK */
+					if (ABASE(i) < lim) {
+						ABASE(i) = lim;
+						flags.botl = 1;
+						/* only first found if not blessed */
+						if (!otmp->blessed) {
+							break;
+						}
+					}
+					if(++i >= A_MAX) {
+						i = 0;
+					}
+				}
 			}
-			if(++i >= A_MAX) i = 0;
-		    }
 		}
 		break;
 	case POT_HALLUCINATION:
-		if (Hallucination || Halluc_resistance) nothing++;
-		(void) make_hallucinated(itimeout_incr(HHallucination,
-					   rn1(200, 600 - 300 * bcsign(otmp))),
-				  TRUE, 0L);
+		{
+			if (Hallucination || Halluc_resistance) {
+				nothing++;
+			}
+			int time = rn1(200, 600 - 300 * bcsign(otmp));
+			(void) make_hallucinated(itimeout_incr(HHallucination, time), TRUE, 0L);
+		}
 		break;
 	case POT_WATER:
-		if(!otmp->blessed && !otmp->cursed) {
-			pline("This tastes like water.");
-			u.uhunger += rnd(10);
-			newuhs(FALSE);
-		}
-		else {
-			unkn++;
-		}
-		if(u.umonnum == PM_IRON_GOLEM){
-			You("rust from inside!");
-			int dam = u.mhmax;
-			if (Half_physical_damage) dam = (dam+1) / 2;
-			losehp(dam, "rusting away", KILLED_BY);
-		}
-		if(is_undead(youmonst.data) || is_demon(youmonst.data) || u.ualign.type == A_CHAOTIC) {
-			if(otmp->blessed) {
-				pline("This burns like acid!");
-				exercise(A_CON, FALSE);
-				if (u.ulycn >= LOW_PM) {
-					Your("affinity to %s disappears!", makeplural(mons[u.ulycn].mname));
-					if (youmonst.data == &mons[u.ulycn]) {
-						you_unwere(FALSE);
-					}
-					u.ulycn = NON_PM;	/* cure lycanthropy */
-				}
-				losehp(d(2,6), "potion of holy water", KILLED_BY_AN);
-			} else if(otmp->cursed) {
-				You_feel("quite proud of yourself.");
-				healup(d(2,6),0,0,0);
-				if (u.ulycn >= LOW_PM && !Upolyd) you_were();
-				exercise(A_CON, TRUE);
+		{
+			if(!otmp->blessed && !otmp->cursed) {
+				pline("This tastes like water.");
+				u.uhunger += rnd(10);
+				newuhs(FALSE);
+			} else {
+				unkn++;
 			}
-		} else {
-			if(otmp->blessed) {
-				You_feel("full of awe.");
-				make_sick(0L, (char *) 0, TRUE, SICK_ALL);
-				exercise(A_WIS, TRUE);
-				exercise(A_CON, TRUE);
-				if (u.ulycn >= LOW_PM) {
-					you_unwere(TRUE);	/* "Purified" */
+			if(u.umonnum == PM_IRON_GOLEM){
+				You("rust from inside!");
+				int dam = u.mhmax;
+				if (Half_physical_damage) {
+					dam = (dam+1) / 2;
 				}
-			} else if(otmp->cursed) {
-				if(u.ualign.type == A_LAWFUL) {
+				losehp(dam, "rusting away", KILLED_BY);
+			}
+			if(is_undead(youmonst.data) || is_demon(youmonst.data) || u.ualign.type == A_CHAOTIC) {
+				if(otmp->blessed) {
 					pline("This burns like acid!");
-					losehp(d(2,6), "potion of unholy water", KILLED_BY_AN);
-				} else {
-					You_feel("full of dread.");
+					exercise(A_CON, FALSE);
+					if (u.ulycn >= LOW_PM) {
+						Your("affinity to %s disappears!", makeplural(mons[u.ulycn].mname));
+						if (youmonst.data == &mons[u.ulycn]) {
+							you_unwere(FALSE);
+						}
+						u.ulycn = NON_PM;	/* cure lycanthropy */
+					}
+					losehp(d(2,6), "potion of holy water", KILLED_BY_AN);
+				} else if(otmp->cursed) {
+					You_feel("quite proud of yourself.");
+					healup(d(2,6),0,0,0);
+					if (u.ulycn >= LOW_PM && !Upolyd) {
+						you_were();
+					}
+					exercise(A_CON, TRUE);
 				}
-				if (u.ulycn >= LOW_PM && !Upolyd) you_were();
-				exercise(A_CON, FALSE);
+			} else {
+				if(otmp->blessed) {
+					You_feel("full of awe.");
+					make_sick(0L, (char *) 0, TRUE, SICK_ALL);
+					exercise(A_WIS, TRUE);
+					exercise(A_CON, TRUE);
+					if (u.ulycn >= LOW_PM) {
+						you_unwere(TRUE);	/* "Purified" */
+					}
+				} else if(otmp->cursed) {
+					if(u.ualign.type == A_LAWFUL) {
+						pline("This burns like acid!");
+						losehp(d(2,6), "potion of unholy water", KILLED_BY_AN);
+					} else {
+						You_feel("full of dread.");
+					}
+					if (u.ulycn >= LOW_PM && !Upolyd) {
+						you_were();
+					}
+					exercise(A_CON, FALSE);
+				}
 			}
 		}
 		break;
 	case POT_BOOZE:
-		unkn++;
-		pline("Ooph!  This tastes like %s%s!",
-		      otmp->odiluted ? "watered down " : "",
-		      Hallucination ? "dandelion wine" : "liquid fire");
-		if (!otmp->blessed)
-		    make_confused(itimeout_incr(HConfusion, d(3,8)), FALSE);
-		/* the whiskey makes us feel better */
-		if (!otmp->odiluted) healup(1, 0, FALSE, FALSE);
-		u.uhunger += 10 * (2 + bcsign(otmp));
-		newuhs(FALSE);
-		exercise(A_WIS, FALSE);
-		if(otmp->cursed) {
-			You("pass out.");
-			multi = -rnd(15);
-			nomovemsg = "You awake with a headache.";
+		{
+			unkn++;
+			pline("Ooph!  This tastes like %s%s!",
+				otmp->odiluted ? "watered down " : "",
+				Hallucination ? "dandelion wine" : "liquid fire");
+			if (!otmp->blessed) {
+				make_confused(itimeout_incr(HConfusion, d(3,8)), FALSE);
+			}
+			/* the whiskey makes us feel better */
+			if (!otmp->odiluted) {
+				healup(1, 0, FALSE, FALSE);
+			}
+			u.uhunger += 10 * (2 + bcsign(otmp));
+			newuhs(FALSE);
+			exercise(A_WIS, FALSE);
+			if(otmp->cursed) {
+				You("pass out.");
+				multi = -rnd(15);
+				nomovemsg = "You awake with a headache.";
+			}
 		}
 		break;
 	case POT_ENLIGHTENMENT:
-		if(otmp->cursed) {
-			unkn++;
-			You("have an uneasy feeling...");
-			exercise(A_WIS, FALSE);
-		} else {
-			if (otmp->blessed) {
-				(void) adjattrib(A_INT, 1, FALSE);
-				(void) adjattrib(A_WIS, 1, FALSE);
+		{
+			if(otmp->cursed) {
+				unkn++;
+				You("have an uneasy feeling...");
+				exercise(A_WIS, FALSE);
+			} else {
+				if (otmp->blessed) {
+					(void) adjattrib(A_INT, 1, FALSE);
+					(void) adjattrib(A_WIS, 1, FALSE);
+				}
+				You_feel("self-knowledgeable...");
+				display_nhwindow(WIN_MESSAGE, FALSE);
+				enlightenment(0, TRUE);
+				pline_The("feeling subsides.");
+				exercise(A_WIS, TRUE);
 			}
-			You_feel("self-knowledgeable...");
-			display_nhwindow(WIN_MESSAGE, FALSE);
-			enlightenment(0, TRUE);
-			pline_The("feeling subsides.");
-			exercise(A_WIS, TRUE);
 		}
 		break;
 	case SPE_INVISIBILITY:
-		/* spell cannot penetrate mummy wrapping */
-		if (BInvis && uarmc->otyp == MUMMY_WRAPPING) {
-			You_feel("rather itchy under your %s.", xname(uarmc));
-			break;
+		{
+			/* spell cannot penetrate mummy wrapping */
+			if (BInvis && uarmc->otyp == MUMMY_WRAPPING) {
+				You_feel("rather itchy under your %s.", xname(uarmc));
+				break;
+			}
 		}
 		/* FALLTHRU */
 	case POT_INVISIBILITY:
-		if (Invis || Blind || BInvis) {
-		    nothing++;
-		} else {
-		    self_invis_message();
-		}
-		if (otmp->blessed) HInvis |= FROMOUTSIDE;
-		else incr_itimeout(&HInvis, rn1(15,31));
-		newsym(u.ux,u.uy);	/* update position */
-		if(otmp->cursed) {
-		    pline("For some reason, you feel your presence is known.");
-		    aggravate();
+		{
+			if (Invis || Blind || BInvis) {
+				nothing++;
+			} else {
+				self_invis_message();
+			}
+			if (otmp->blessed) {
+				HInvis |= FROMOUTSIDE;
+			} else {
+				int time = rn1(15,31);
+				incr_itimeout(&HInvis, time);
+			}
+			newsym(u.ux,u.uy);	/* update position */
+			if(otmp->cursed) {
+				pline("For some reason, you feel your presence is known.");
+				aggravate();
+			}
 		}
 		break;
 	case POT_SEE_INVISIBLE:
 		/* tastes like fruit juice in Rogue */
 	case POT_FRUIT_JUICE:
-	    {
-		int msg = Invisible && !Blind;
-
-		unkn++;
-		if (otmp->cursed)
-		    pline("Yecch!  This tastes %s.",
-			  Hallucination ? "overripe" : "rotten");
-		else
-		    pline(Hallucination ?
-		      "This tastes like 10%% real %s%s all-natural beverage." :
-				"This tastes like %s%s.",
-			  otmp->odiluted ? "reconstituted " : "",
-			  fruitname(TRUE));
-		if (otmp->otyp == POT_FRUIT_JUICE) {
-		    u.uhunger += (otmp->odiluted ? 5 : 10) * (2 + bcsign(otmp));
-		    newuhs(FALSE);
-		    break;
-		}
-		if (!otmp->cursed) {
-			/* Tell them they can see again immediately, which
-			 * will help them identify the potion...
-			 */
-			make_blinded(0L,TRUE);
-		}
-		if (otmp->blessed)
-			HSee_invisible |= FROMOUTSIDE;
-		else
-			incr_itimeout(&HSee_invisible, rn1(100,750));
-		set_mimic_blocking(); /* do special mimic handling */
-		see_monsters();	/* see invisible monsters */
-		newsym(u.ux,u.uy); /* see yourself! */
-		if (msg && !Blind) { /* Blind possible if polymorphed */
-		    You("can see through yourself, but you are visible!");
-		    unkn--;
+		{
+			int msg = Invisible && !Blind;
+			unkn++;
+			if (otmp->cursed) {
+				pline("Yecch!  This tastes %s.", Hallucination ? "overripe" : "rotten");
+			} else {
+				pline(Hallucination ?
+					"This tastes like 10%% real %s%s all-natural beverage." :
+					"This tastes like %s%s.",
+					otmp->odiluted ? "reconstituted " : "",
+					fruitname(TRUE));
+			}
+			if (otmp->otyp == POT_FRUIT_JUICE) {
+				u.uhunger += (otmp->odiluted ? 5 : 10) * (2 + bcsign(otmp));
+				newuhs(FALSE);
+				break;
+			}
+			if (!otmp->cursed) {
+				/* Tell them they can see again immediately, which
+				 * will help them identify the potion...
+				 */
+				make_blinded(0L,TRUE);
+			}
+			if (otmp->blessed) {
+				HSee_invisible |= FROMOUTSIDE;
+			} else {
+				int time = rn1(100,750);
+				incr_itimeout(&HSee_invisible, time);
+			}
+			set_mimic_blocking(); /* do special mimic handling */
+			see_monsters();	/* see invisible monsters */
+			newsym(u.ux,u.uy); /* see yourself! */
+			if (msg && !Blind) { /* Blind possible if polymorphed */
+				You("can see through yourself, but you are visible!");
+				unkn--;
+			}
 		}
 		break;
-	    }
 	case POT_PARALYSIS:
-		if (Free_action)
-		    You("stiffen momentarily.");
-		else {
-		    if (Levitation || Is_airlevel(&u.uz)||Is_waterlevel(&u.uz))
-			You("are motionlessly suspended.");
+		{
+			if (Free_action) {
+				You("stiffen momentarily.");
+			} else {
+				if (Levitation || Is_airlevel(&u.uz)||Is_waterlevel(&u.uz)) {
+					You("are motionlessly suspended.");
 #ifdef STEED
-		    else if (u.usteed)
-			You("are frozen in place!");
+				} else if (u.usteed) {
+					You("are frozen in place!");
 #endif
-		    else
-			Your("%s are frozen to the %s!",
-			     makeplural(body_part(FOOT)), surface(u.ux, u.uy));
-		    nomul(-(rn1(10, 25 - 12*bcsign(otmp))), "frozen by a potion");
-		    nomovemsg = You_can_move_again;
-		    exercise(A_DEX, FALSE);
+				} else {
+					Your("%s are frozen to the %s!", makeplural(body_part(FOOT)), surface(u.ux, u.uy));
+				}
+				nomul(-(rn1(10, 25 - 12*bcsign(otmp))), "frozen by a potion");
+				nomovemsg = You_can_move_again;
+				exercise(A_DEX, FALSE);
+			}
 		}
 		break;
 	case POT_SLEEPING:
-		if(Sleep_resistance || Free_action)
-		    You("yawn.");
-		else {
-		    You("suddenly fall asleep!");
-		    fall_asleep(-rn1(10, 25 - 12*bcsign(otmp)), TRUE);
+		{
+			if(Sleep_resistance || Free_action) {
+				You("yawn.");
+			} else {
+				You("suddenly fall asleep!");
+				fall_asleep(-rn1(10, 25 - 12*bcsign(otmp)), TRUE);
+			}
 		}
 		break;
 	case POT_MONSTER_DETECTION:
 	case SPE_DETECT_MONSTERS:
-		if (otmp->blessed) {
-		    int x, y;
-
-		    if (Detect_monsters) nothing++;
-		    unkn++;
-		    /* after a while, repeated uses become less effective */
-		    if (HDetect_monsters >= 300L)
-			i = 1;
-		    else
-			i = rn1(40,21);
-		    incr_itimeout(&HDetect_monsters, i);
-		    for (x = 1; x < COLNO; x++) {
-			for (y = 0; y < ROWNO; y++) {
-			    if (levl[x][y].glyph == GLYPH_INVISIBLE) {
-				unmap_object(x, y);
-				newsym(x,y);
-			    }
-			    if (MON_AT(x,y)) unkn = 0;
+		{
+			if (otmp->blessed) {
+			int x, y;
+				if (Detect_monsters) {
+					nothing++;
+				}
+				unkn++;
+				/* after a while, repeated uses become less effective */
+				if (HDetect_monsters >= 300L) {
+					i = 1;
+				} else {
+					i = rn1(40,21);
+				}
+				incr_itimeout(&HDetect_monsters, i);
+				for (x = 1; x < COLNO; x++) {
+					for (y = 0; y < ROWNO; y++) {
+						if (levl[x][y].glyph == GLYPH_INVISIBLE) {
+							unmap_object(x, y);
+							newsym(x,y);
+						}
+						if (MON_AT(x,y)) {
+							unkn = 0;
+						}
+					}
+				}
+				see_monsters();
+				if (unkn) {
+					You_feel("lonely.");
+				}
+				break;
 			}
-		    }
-		    see_monsters();
-		    if (unkn) You_feel("lonely.");
-		    break;
-		}
-		if (monster_detect(otmp, 0))
-			return(1);		/* nothing detected */
-		exercise(A_WIS, TRUE);
-		break;
-	case POT_OBJECT_DETECTION:
-	case SPE_DETECT_TREASURE:
-		if (object_detect(otmp, 0, FALSE))
-			return(1);		/* nothing detected */
-		exercise(A_WIS, TRUE);
-		break;
-	case POT_SICKNESS:
-		pline("Yecch!  This stuff tastes like poison.");
-		if (otmp->blessed) {
-		    pline("(But in fact it was mildly stale %s.)",
-			  fruitname(TRUE));
-		    if (!Role_if(PM_HEALER)) {
-			/* NB: blessed otmp->fromsink is not possible */
-			losehp(1, "mildly contaminated potion", KILLED_BY_AN);
-		    }
-		} else {
-		    if(Poison_resistance)
-			pline(
-			  "(But in fact it was biologically contaminated %s.)",
-			      fruitname(TRUE));
-		    if (Role_if(PM_HEALER))
-			pline("Fortunately, you have been immunized.");
-		    else {
-			int typ = rn2(A_MAX);
-
-			if (!Fixed_abil) {
-			    poisontell(typ);
-			    (void) adjattrib(typ,
-			    		Poison_resistance ? -1 : -rn1(4,3),
-			    		TRUE);
+			if (monster_detect(otmp, 0)) {
+				return(1);		/* nothing detected */
 			}
-			if(!Poison_resistance) {
-			    if (otmp->fromsink)
-				losehp(rnd(10)+5*!!(otmp->cursed),
-				       "contaminated tap water", KILLED_BY);
-			    else
-				losehp(rnd(10)+5*!!(otmp->cursed),
-				       "contaminated potion", KILLED_BY_AN);
-			}
-			exercise(A_CON, FALSE);
-		    }
-		}
-		if(Hallucination) {
-			You("are shocked back to your senses!");
-			(void) make_hallucinated(0L,FALSE,0L);
-		}
-		break;
-	case POT_CONFUSION:
-		if(!Confusion)
-		    if (Hallucination) {
-			pline("What a trippy feeling!");
-			unkn++;
-		    } else
-			pline("Huh, What?  Where am I?");
-		else	nothing++;
-		make_confused(itimeout_incr(HConfusion,
-					    rn1(7, 16 - 8 * bcsign(otmp))),
-			      FALSE);
-		break;
-	case POT_GAIN_ABILITY:
-		if(otmp->cursed) {
-		    pline("Ulch!  That potion tasted foul!");
-		    unkn++;
-		} else if (Fixed_abil) {
-		    nothing++;
-		} else {      /* If blessed, try very hard to find an ability */
-		              /* that can be increased; if not, try up to     */
-		    int itmp; /* 3 times to find one which can be increased.  */
-		    i = -1;		/* increment to 0 */
-		    for (ii = (otmp->blessed ? 1000 : A_MAX/2); ii > 0; ii--) {
-			i = rn2(A_MAX);
-			/* only give "your X is already as high as it can get"
-			   message on last attempt */
-			itmp = (ii == 1) ? 0 : -1;
-			if (adjattrib(i, 1, itmp))
-			    break;
-		    }
-		}
-		break;
-	case POT_SPEED:
-		if(Wounded_legs && !otmp->cursed
-#ifdef STEED
-		   && !u.usteed	/* heal_legs() would heal steeds legs */
-#endif
-						) {
-			heal_legs();
-			unkn++;
-			break;
-		} /* and fall through */
-	case SPE_HASTE_SELF:
-		if(!Very_fast) /* wwf@doe.carleton.ca */
-			You("are suddenly moving %sfaster.",
-				Fast ? "" : "much ");
-		else {
-			Your("%s get new energy.",
-				makeplural(body_part(LEG)));
-			unkn++;
-		}
-		exercise(A_DEX, TRUE);
-		incr_itimeout(&HFast, rn1(10, 100 + 60 * bcsign(otmp)));
-		break;
-	case POT_BLINDNESS:
-		if(Blind) nothing++;
-		make_blinded(itimeout_incr(Blinded,
-					   rn1(200, 250 - 125 * bcsign(otmp))),
-			     (boolean)!Blind);
-		break;
-	case POT_GAIN_LEVEL:
-		if (otmp->cursed) {
-			unkn++;
-			/* they went up a level */
-			if((ledger_no(&u.uz) == 1 && u.uhave.amulet) ||
-				Can_rise_up(u.ux, u.uy, &u.uz)) {
-			    const char *riseup ="rise up, through the %s!";
-			    if(ledger_no(&u.uz) == 1) {
-			        You(riseup, ceiling(u.ux,u.uy));
-#ifdef RANDOMIZED_PLANES
-				goto_level(get_first_elemental_plane(), FALSE, FALSE, FALSE);
-#else
-				goto_level(&earth_level, FALSE, FALSE, FALSE);
-#endif
-			    } else {
-			        register int newlev = depth(&u.uz)-1;
-				d_level newlevel;
-
-				get_level(&newlevel, newlev);
-				if(on_level(&newlevel, &u.uz)) {
-				    pline("It tasted bad.");
-				    break;
-				} else You(riseup, ceiling(u.ux,u.uy));
-				goto_level(&newlevel, FALSE, FALSE, FALSE);
-			    }
-			}
-			else You("have an uneasy feeling.");
-			break;
-		}
-		pluslvl(FALSE);
-		if (otmp->blessed)
-			/* blessed potions place you at a random spot in the
-			 * middle of the new level instead of the low point
-			 */
-			u.uexp = rndexp(TRUE);
-		break;
-	case POT_HEALING:
-		You_feel("better.");
-		healup(d(6 + 2 * bcsign(otmp), 4),
-		       !otmp->cursed ? 1 : 0, !!otmp->blessed, !otmp->cursed);
-		exercise(A_CON, TRUE);
-		break;
-	case POT_EXTRA_HEALING:
-		You_feel("much better.");
-		healup(d(6 + 2 * bcsign(otmp), 8),
-		       otmp->blessed ? 5 : !otmp->cursed ? 2 : 0,
-		       !otmp->cursed, TRUE);
-		(void) make_hallucinated(0L,TRUE,0L);
-		exercise(A_CON, TRUE);
-		exercise(A_STR, TRUE);
-		break;
-	case POT_FULL_HEALING:
-		You_feel("completely healed.");
-		healup(400, 4+4*bcsign(otmp), !otmp->cursed, TRUE);
-		/* Restore one lost level if blessed */
-		if (otmp->blessed && u.ulevel < u.ulevelmax) {
-		    /* when multiple levels have been lost, drinking
-		       multiple potions will only get half of them back */
-		    u.ulevelmax -= 1;
-		    pluslvl(FALSE);
-		}
-		(void) make_hallucinated(0L,TRUE,0L);
-		exercise(A_STR, TRUE);
-		exercise(A_CON, TRUE);
-		break;
-	case POT_LEVITATION:
-	case SPE_LEVITATION:
-		if (otmp->cursed) HLevitation &= ~I_SPECIAL;
-		if(!Levitation) {
-			/* kludge to ensure proper operation of float_up() */
-			HLevitation = 1;
-			float_up();
-			/* reverse kludge */
-			HLevitation = 0;
-			if (otmp->cursed && !Is_waterlevel(&u.uz)) {
-	if((u.ux != xupstair || u.uy != yupstair)
-	   && (u.ux != sstairs.sx || u.uy != sstairs.sy || !sstairs.up)
-	   && (!xupladder || u.ux != xupladder || u.uy != yupladder)
-	) {
-					You("hit your %s on the %s.",
-						body_part(HEAD),
-						ceiling(u.ux,u.uy));
-					losehp(uarmh ? 1 : rnd(10),
-						"colliding with the ceiling",
-						KILLED_BY);
-				} else (void) doup();
-			}
-		} else
-			nothing++;
-		if (otmp->blessed) {
-		    incr_itimeout(&HLevitation, rn1(50,250));
-		    HLevitation |= I_SPECIAL;
-		} else incr_itimeout(&HLevitation, rn1(140,10));
-		spoteffects(FALSE);	/* for sinks */
-		break;
-	case POT_GAIN_ENERGY:			/* M. Stephenson */
-		{	register int num;
-			if(otmp->cursed)
-			    You_feel("lackluster.");
-			else
-			    pline("Magical energies course through your body.");
-			num = rnd(5) + 5 * otmp->blessed + 1;
-			u.uenmax += (otmp->cursed) ? -num : num;
-			u.uen += (otmp->cursed) ? -num : num;
-			if(u.uenmax <= 0) u.uenmax = 0;
-			if(u.uen <= 0) u.uen = 0;
-			flags.botl = 1;
 			exercise(A_WIS, TRUE);
 		}
 		break;
-	case POT_OIL:				/* P. Winner */
+	case POT_OBJECT_DETECTION:
+	case SPE_DETECT_TREASURE:
+		{
+			if (object_detect(otmp, 0, FALSE)) {
+				return(1);		/* nothing detected */
+			}
+			exercise(A_WIS, TRUE);
+		}
+		break;
+	case POT_SICKNESS:
+		{
+			pline("Yecch!  This stuff tastes like poison.");
+			if (otmp->blessed) {
+				pline("(But in fact it was mildly stale %s.)", fruitname(TRUE));
+				if (!Role_if(PM_HEALER)) {
+					/* NB: blessed otmp->fromsink is not possible */
+					losehp(1, "mildly contaminated potion", KILLED_BY_AN);
+				}
+			} else {
+				if(Poison_resistance) {
+					pline("(But in fact it was biologically contaminated %s.)", fruitname(TRUE));
+				}
+				if (Role_if(PM_HEALER)) {
+					pline("Fortunately, you have been immunized.");
+				} else {
+					int typ = rn2(A_MAX);
+					if (!Fixed_abil) {
+						poisontell(typ);
+						(void) adjattrib(typ, Poison_resistance ? -1 : -rn1(4,3), TRUE);
+					}
+					if(!Poison_resistance) {
+						int damage = rnd(10)+5*!!(otmp->cursed);
+						if (otmp->fromsink) {
+							losehp(damage, "contaminated tap water", KILLED_BY);
+						} else {
+							losehp(damage, "contaminated potion", KILLED_BY_AN);
+						}
+					}
+					exercise(A_CON, FALSE);
+				}
+			}
+			if(Hallucination) {
+				You("are shocked back to your senses!");
+				(void) make_hallucinated(0L,FALSE,0L);
+			}
+		}
+		break;
+	case POT_CONFUSION:
+		{
+			if(!Confusion) {
+				if (Hallucination) {
+					pline("What a trippy feeling!");
+					unkn++;
+				} else {
+					pline("Huh, What?  Where am I?");
+				}
+			} else {
+				nothing++;
+			}
+			int time = rn1(7, 16 - 8 * bcsign(otmp));
+			make_confused(itimeout_incr(HConfusion, time), FALSE);
+		}
+		break;
+	case POT_GAIN_ABILITY:
+		{
+			if(otmp->cursed) {
+				pline("Ulch!  That potion tasted foul!");
+				unkn++;
+			} else if (Fixed_abil) {
+				nothing++;
+			} else {       /* If blessed, try very hard to find an ability */
+				         /* that can be increased; if not, try up to     */
+				int itmp;/* 3 times to find one which can be increased.  */
+				i = -1;  /* increment to 0 */
+				for (ii = (otmp->blessed ? 1000 : A_MAX/2); ii > 0; ii--) {
+					i = rn2(A_MAX);
+					/* only give "your X is already as high as it can get"
+					   message on last attempt */
+					itmp = (ii == 1) ? 0 : -1;
+					if (adjattrib(i, 1, itmp)) {
+						break;
+					}
+				}
+			}
+		}
+		break;
+	case POT_SPEED:
+		{
+			if(Wounded_legs && !otmp->cursed
+#ifdef STEED
+			   && !u.usteed	/* heal_legs() would heal steeds legs */
+#endif
+							) {
+				heal_legs();
+				unkn++;
+				break;
+			} 
+		}
+		/* and fall through */
+	case SPE_HASTE_SELF:
+		{
+			if(!Very_fast) {
+				You("are suddenly moving %sfaster.", Fast ? "" : "much ");
+			} else {
+				Your("%s get new energy.", makeplural(body_part(LEG))); 
+				unkn++;
+			}
+			exercise(A_DEX, TRUE);
+			int time = rn1(10, 100 + 60 * bcsign(otmp));
+			incr_itimeout(&HFast, time);
+		}
+		break;
+	case POT_BLINDNESS:
+		{
+			if(Blind) {
+				nothing++;
+			}
+			int time = rn1(200, 250 - 125 * bcsign(otmp));
+			make_blinded(itimeout_incr(Blinded, time), (boolean)!Blind);
+		}
+		break;
+	case POT_GAIN_LEVEL:
+		{
+			if (otmp->cursed) {
+				unkn++;
+				/* they went up a level */
+				if((ledger_no(&u.uz) == 1 && u.uhave.amulet) || Can_rise_up(u.ux, u.uy, &u.uz)) {
+					const char *riseup ="rise up, through the %s!";
+					if(ledger_no(&u.uz) == 1) {
+						You(riseup, ceiling(u.ux,u.uy));
+#ifdef RANDOMIZED_PLANES
+						goto_level(get_first_elemental_plane(), FALSE, FALSE, FALSE);
+#else
+						goto_level(&earth_level, FALSE, FALSE, FALSE);
+#endif
+					} else {
+						register int newlev = depth(&u.uz)-1;
+						d_level newlevel;
+						get_level(&newlevel, newlev);
+						if(on_level(&newlevel, &u.uz)) {
+							pline("It tasted bad.");
+							break;
+						} else {
+							You(riseup, ceiling(u.ux,u.uy));
+						}
+						goto_level(&newlevel, FALSE, FALSE, FALSE);
+					}
+				} else {
+					You("have an uneasy feeling.");
+				}
+				break;
+			}
+			pluslvl(FALSE);
+			if (otmp->blessed) {
+				/* blessed potions place you at a random spot in the
+				 * middle of the new level instead of the low point
+				 */
+				u.uexp = rndexp(TRUE);
+			}
+		}
+		break;
+	case POT_HEALING:
+		{
+			You_feel("better.");
+			int heal_hp = d(6 + 2 * bcsign(otmp), 4);
+			int increase_max_hp = !otmp->cursed ? 1 : 0;
+			boolean cure_sick = otmp->blessed;
+			boolean cure_blind = !otmp->cursed;
+			healup(heal_hp, increase_max_hp, cure_sick, cure_blind);
+			exercise(A_CON, TRUE);
+		}
+		break;
+	case POT_EXTRA_HEALING:
+		{
+			You_feel("much better.");
+			int heal_hp = d(6 + 2 * bcsign(otmp), 8);
+			int increase_max_hp = otmp->blessed ? 5 : !otmp->cursed ? 2 : 0;
+			boolean cure_sick = !otmp->cursed;
+			boolean cure_blind = TRUE;
+			healup(heal_hp, increase_max_hp, cure_sick, cure_blind);
+			(void) make_hallucinated(0L,TRUE,0L);
+			exercise(A_CON, TRUE);
+			exercise(A_STR, TRUE);
+		}
+		break;
+	case POT_FULL_HEALING:
+		{
+			You_feel("completely healed.");
+			int heal_hp = 400;
+			int increase_max_hp = 4+4*bcsign(otmp);
+			boolean cure_sick = !otmp->cursed;
+			boolean cure_blind = TRUE;
+			healup(heal_hp, increase_max_hp, cure_sick, cure_blind);
+			/* Restore one lost level if blessed */
+			if (otmp->blessed && u.ulevel < u.ulevelmax) {
+				/* when multiple levels have been lost, drinking
+				multiple potions will only get half of them back */
+				u.ulevelmax -= 1;
+				pluslvl(FALSE);
+			}
+			(void) make_hallucinated(0L,TRUE,0L);
+			exercise(A_STR, TRUE);
+			exercise(A_CON, TRUE);
+		}
+		break;
+	case POT_LEVITATION:
+	case SPE_LEVITATION:
+		{
+			if (otmp->cursed) HLevitation &= ~I_SPECIAL;
+			if(!Levitation) {
+				/* kludge to ensure proper operation of float_up() */
+				HLevitation = 1;
+				float_up();
+				/* reverse kludge */
+				HLevitation = 0;
+				if (otmp->cursed && !Is_waterlevel(&u.uz)) {
+					if((u.ux != xupstair || u.uy != yupstair)
+					   && (u.ux != sstairs.sx || u.uy != sstairs.sy || !sstairs.up)
+					   && (!xupladder || u.ux != xupladder || u.uy != yupladder)
+					  ) {
+						You("hit your %s on the %s.", body_part(HEAD), ceiling(u.ux,u.uy));
+						losehp(uarmh ? 1 : rnd(10), "colliding with the ceiling", KILLED_BY);
+					} else {
+						(void) doup();
+					}
+				}
+			} else {
+				nothing++;
+			}
+			int time;
+			if (otmp->blessed) {
+				time = rn1(50,250);
+				HLevitation |= I_SPECIAL;
+			} else {
+				time = rn1(140,10);
+			}
+			incr_itimeout(&HLevitation, time);
+			spoteffects(FALSE);	/* for sinks */
+		}
+		break;
+	case POT_GAIN_ENERGY:
+		{
+			register int num;
+			if(otmp->cursed) {
+				You_feel("lackluster.");
+			} else {
+				pline("Magical energies course through your body.");
+				num = rnd(5) + 5 * otmp->blessed + 1;
+				u.uenmax += (otmp->cursed) ? -num : num;
+				u.uen += (otmp->cursed) ? -num : num;
+				if(u.uenmax <= 0) u.uenmax = 0;
+				if(u.uen <= 0) u.uen = 0;
+				flags.botl = 1;
+				exercise(A_WIS, TRUE);
+			}
+		}
+		break;
+	case POT_OIL:
 		{
 			boolean good_for_you = FALSE;
-
 			if (otmp->lamplit) {
-			    if (likes_fire(youmonst.data)) {
-				pline("Ahh, a refreshing drink.");
-				good_for_you = TRUE;
-			    } else {
-				You("burn your %s.", body_part(FACE));
-				losehp(d(Fire_resistance ? 1 : 3, 4),
-				       "burning potion of oil", KILLED_BY_AN);
-			    }
-			} else if(otmp->cursed)
-			    pline("This tastes like castor oil.");
-			else
-			    pline("That was smooth!");
+				if (likes_fire(youmonst.data)) {
+					pline("Ahh, a refreshing drink.");
+					good_for_you = TRUE;
+				} else {
+					You("burn your %s.", body_part(FACE));
+					int damage = d(Fire_resistance ? 1 : 3, 4);
+					losehp(damage, "burning potion of oil", KILLED_BY_AN);
+				}
+			} else if(otmp->cursed) {
+				pline("This tastes like castor oil.");
+			} else {
+				pline("That was smooth!");
+			}
 			exercise(A_WIS, good_for_you);
 		}
 		break;
 	case POT_ACID:
-		if (Acid_resistance)
-			/* Not necessarily a creature who _likes_ acid */
-			pline("This tastes %s.", Hallucination ? "tangy" : "sour");
-		else {
-			pline("This burns%s!", otmp->blessed ? " a little" :
-					otmp->cursed ? " a lot" : " like acid");
-			losehp(d(otmp->cursed ? 2 : 1, otmp->blessed ? 4 : 8),
-					"potion of acid", KILLED_BY_AN);
-			exercise(A_CON, FALSE);
+		{
+			if (Acid_resistance) {
+				/* Not necessarily a creature who _likes_ acid */
+				pline("This tastes %s.", Hallucination ? "tangy" : "sour");
+			} else {
+				pline("This burns%s!", otmp->blessed ? " a little" : otmp->cursed ? " a lot" : " like acid");
+				int damage = d(otmp->cursed ? 2 : 1, otmp->blessed ? 4 : 8);
+				losehp(damage, "potion of acid", KILLED_BY_AN);
+				exercise(A_CON, FALSE);
+			}
+			if (Stoned) {
+				fix_petrification();
+			}
+			unkn++; /* holy/unholy water can burn like acid too */
 		}
-		if (Stoned) fix_petrification();
-		unkn++; /* holy/unholy water can burn like acid too */
 		break;
 	case POT_POLYMORPH:
-		You_feel("a little %s.", Hallucination ? "normal" : "strange");
-		if (!Unchanging) polyself(FALSE);
+		{
+			You_feel("a little %s.", Hallucination ? "normal" : "strange");
+			if (!Unchanging) polyself(FALSE);
+		}
 		break;
 	case POT_BLOOD:
 	case POT_VAMPIRE_BLOOD:
-		unkn++;
-		u.uconduct.unvegan++;
-		if (maybe_polyd(is_vampire(youmonst.data), Race_if(PM_VAMPIRE))) {
-		    violated_vegetarian();
-		    if (otmp->cursed)
-			pline("Yecch!  This %s.", Hallucination ?
-			"liquid could do with a good stir" : "blood has congealed");
-		    else pline(Hallucination ?
-		      "The %s liquid stirs memories of home." :
-		      "The %s blood tastes delicious.",
-			  otmp->odiluted ? "watery" : "thick");
-		    if (!otmp->cursed)
-			lesshungry((otmp->odiluted ? 1 : 2) *
-			  (otmp->otyp == POT_VAMPIRE_BLOOD ? 400 :
-			  otmp->blessed ? 15 : 10));
-		    if (otmp->otyp == POT_VAMPIRE_BLOOD && otmp->blessed) {
-			int num = newhp();
-			if (Upolyd) {
-			    u.mhmax += num;
-			    u.mh += num;
+		{
+			unkn++;
+			u.uconduct.unvegan++;
+			if (maybe_polyd(is_vampire(youmonst.data), Race_if(PM_VAMPIRE))) {
+				violated_vegetarian();
+				if (otmp->cursed) {
+					pline("Yecch!  This %s.", Hallucination ? "liquid could do with a good stir" : "blood has congealed");
+				} else {
+					pline(Hallucination ? "The %s liquid stirs memories of home." : "The %s blood tastes delicious.", otmp->odiluted ? "watery" : "thick");
+				}
+				if (!otmp->cursed) {
+					int nutrition = (otmp->odiluted ? 1 : 2) * (otmp->otyp == POT_VAMPIRE_BLOOD ? 400 : otmp->blessed ? 15 : 10);
+					lesshungry(nutrition);
+				}
+				if (otmp->otyp == POT_VAMPIRE_BLOOD && otmp->blessed) {
+					int num = newhp();
+					if (Upolyd) {
+						u.mhmax += num;
+						u.mh += num;
+					} else {
+						u.uhpmax += num;
+						u.uhp += num;
+					}
+				}
+			} else if (otmp->otyp == POT_VAMPIRE_BLOOD) {
+			    /* [CWC] fix conducts for potions of (vampire) blood -
+			       doesn't use violated_vegetarian() to prevent
+			       duplicated "you feel guilty" messages */
+				u.uconduct.unvegetarian++;
+				if (u.ualign.type == A_LAWFUL || Role_if(PM_MONK)) {
+					You_feel("%sguilty about drinking such a vile liquid.",
+					Role_if(PM_MONK) ? "especially " : "");
+					u.ugangr++;
+					adjalign(-15);
+				} else if (u.ualign.type == A_NEUTRAL) {
+					adjalign(-3);
+				}
+				exercise(A_CON, FALSE);
+				if (!Unchanging) {
+					int successful_polymorph = FALSE;
+					if (otmp->blessed) {
+						successful_polymorph = polymon(PM_VAMPIRE_LORD);
+					} else if (otmp->cursed) {
+						successful_polymorph = polymon(PM_VAMPIRE_BAT);
+					} else {
+						successful_polymorph = polymon(PM_VAMPIRE);
+					}
+					if (successful_polymorph) {
+						u.mtimedone = 0;	/* "Permament" change */
+					}
+				}
 			} else {
-			    u.uhpmax += num;
-			    u.uhp += num;
+				violated_vegetarian();
+				pline("Ugh.  That was vile.");
+				make_vomiting(Vomiting+d(10,8), TRUE);
 			}
-		    }
-		} else if (otmp->otyp == POT_VAMPIRE_BLOOD) {
-		    /* [CWC] fix conducts for potions of (vampire) blood -
-		       doesn't use violated_vegetarian() to prevent
-		       duplicated "you feel guilty" messages */
-		    u.uconduct.unvegetarian++;
-		    if (u.ualign.type == A_LAWFUL || Role_if(PM_MONK)) {
-			You_feel("%sguilty about drinking such a vile liquid.",
-				Role_if(PM_MONK) ? "especially " : "");
-			u.ugangr++;
-			adjalign(-15);
-		    } else if (u.ualign.type == A_NEUTRAL)
-			adjalign(-3);
-		    exercise(A_CON, FALSE);
-		    if (!Unchanging) {
-			int successful_polymorph = FALSE;
-			if (otmp->blessed)
-				successful_polymorph = polymon(PM_VAMPIRE_LORD);
-			else if (otmp->cursed)
-				successful_polymorph = polymon(PM_VAMPIRE_BAT);
-			else
-				successful_polymorph = polymon(PM_VAMPIRE);
-			if (successful_polymorph)
-				u.mtimedone = 0;	/* "Permament" change */
-		    }
-		} else {
-		    violated_vegetarian();
-		    pline("Ugh.  That was vile.");
-		    make_vomiting(Vomiting+d(10,8), TRUE);
 		}
 		break;
 	default:
