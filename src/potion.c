@@ -1939,7 +1939,7 @@ dodip()
 }
 
 /** Useup and if unidentied ask for name */
-int
+void
 poof(potion)
 struct obj *potion;
 {
