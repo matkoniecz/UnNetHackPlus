@@ -2,7 +2,6 @@ Plans for UnNetHackPlus
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/d5f208b70d606071a5829526e4806dab0e87832a
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/ee6f13ea2fa824d6f1cc8359b6707f1b40375363
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/cdb0add92fed422e61860b7c88711b347cd17b5f + https://github.com/Bulwersator/CopyOfSporkHack/commit/d25452bdea84850ada1674a7fefa343f66a9264c
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/cbc86197bf6a8d63532069fa153a946bbb5b946c
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/d6ae5c1cba40bd5f04f11c2e6e6205ad1486992f
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/362247f3505843be26cb5397a840e0fbcc4b9680
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/e187663d121f00337532ec3d9d180268a177d8dd
@@ -207,6 +206,7 @@ proud owner of a magic whistle.
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/dea61cde17b8758091e3f3cef95c2d651d11cb3e - When attacking a peaceful monster, make other peaceful monsters react.  - in the middle of spaghetti code
 
 # no playtesting
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/cbc86197bf6a8d63532069fa153a946bbb5b946c
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/cece069f9d1465ebb7d388d4b2fae572bd8e0e48
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/5d866cb42f695a0df8a1e0266bd4e7f38ce2c227  Change covetous monster behavior -- when pursuing you, follow in slightly random shorter jumps, no more than about 6-7 squares
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/71dfbdb54ccbc800cc86ccdb7ed762f45658c90a - reduce amount of gold
