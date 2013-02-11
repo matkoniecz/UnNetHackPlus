@@ -10,7 +10,6 @@ Plans for UnNetHackPlus
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/3d21c8d06fa74db06824059bab86dcb60ab14a56 (?)
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/cece069f9d1465ebb7d388d4b2fae572bd8e0e48
 * intrinsic_possible fully_identify_obj
-* issue linker - https://github.com/Chris-plus-alphanumericgibberish/dnethack/commit/b905bf4b0d3ccea07992dadcae5b2908ac61aaab
 * [[encyclopedia]]
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/68be37ef17c95024eb28e25820b7534d43478166
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/c2640a22d5acf655a71ed0547dd31c3374317b80
