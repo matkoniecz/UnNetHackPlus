@@ -73,26 +73,4 @@ TRAP: random, random
 MONSTER: 'n', random, hostile
 }
 
-TERRAIN:random, 'T'
-TERRAIN:random, 'T'
-TERRAIN:random, 'T'
-TERRAIN:random, 'T'
-TERRAIN:random, 'T'
-TERRAIN:random, 'T'
-TERRAIN:random, 'T'
-TERRAIN:random, 'T'
-TERRAIN:random, 'T'
-TERRAIN:random, 'T'
-TERRAIN:random, 'T'
-TERRAIN:random, 'T'
-TERRAIN:random, 'T'
-TERRAIN:random, 'T'
-TERRAIN:random, 'T'
-TERRAIN:random, 'T'
-TERRAIN:random, 'T'
-TERRAIN:random, 'T'
-TERRAIN:random, 'T'
-TERRAIN:random, 'T'
-TERRAIN:random, 'T'
-
 RANDOM_CORRIDORS
