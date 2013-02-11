@@ -853,10 +853,11 @@ register struct permonst *ptr;
 		debugpline("Trying to give shock resistance");
 #endif
 		if(!(HShock_resistance & FROMOUTSIDE)) {
-			if (Hallucination)
-				You_feel("grounded in reality.");
-			else
-				Your("health currently feels amplified!");
+			if (Hallucination) {
+				rn2(2) ? You_feel("grounded in reality.") : Your("health currently feels amplified!");
+			} else {
+				You_feel("well grounded.");
+			}
 			HShock_resistance |= FROMOUTSIDE;
 		}
 		break;
