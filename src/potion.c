@@ -459,6 +459,9 @@ peffects(otmp)
 				nothing++;
 			}
 			int time = rn1(200, 600 - 300 * bcsign(otmp));
+			if(otmp->odiluted) {
+				time /= 2;
+			}
 			(void) make_hallucinated(itimeout_incr(HHallucination, time), TRUE, 0L);
 		}
 		break;
@@ -584,7 +587,10 @@ peffects(otmp)
 			if (otmp->blessed) {
 				HInvis |= FROMOUTSIDE;
 			} else {
-				int time = rn1(15,31);
+				int time = rn1(25,31);
+				if(otmp->odiluted) {
+					time /= 2;
+				}
 				incr_itimeout(&HInvis, time);
 			}
 			newsym(u.ux,u.uy);	/* update position */
@@ -623,7 +629,10 @@ peffects(otmp)
 			if (otmp->blessed) {
 				HSee_invisible |= FROMOUTSIDE;
 			} else {
-				int time = rn1(100,750);
+				int time = rn1(200,700);
+				if(otmp->odiluted) {
+					time /= 2;
+				}
 				incr_itimeout(&HSee_invisible, time);
 			}
 			set_mimic_blocking(); /* do special mimic handling */
@@ -676,9 +685,12 @@ peffects(otmp)
 				unkn++;
 				/* after a while, repeated uses become less effective */
 				if (HDetect_monsters >= 300L) {
-					i = 1;
+					i = 10;
 				} else {
-					i = rn1(40,21);
+					i = rn1(50,21);
+				}
+				if(otmp->odiluted) {
+					i /= 2;
 				}
 				incr_itimeout(&HDetect_monsters, i);
 				for (x = 1; x < COLNO; x++) {
@@ -736,6 +748,9 @@ peffects(otmp)
 					}
 					if(!Poison_resistance) {
 						int damage = rnd(10)+5*!!(otmp->cursed);
+						if(otmp->odiluted) {
+							damage /= 2;
+						}
 						if (otmp->fromsink) {
 							losehp(damage, "contaminated tap water", KILLED_BY);
 						} else {
@@ -764,6 +779,9 @@ peffects(otmp)
 				nothing++;
 			}
 			int time = rn1(7, 16 - 8 * bcsign(otmp));
+			if(otmp->odiluted) {
+				time /= 2;
+			}
 			make_confused(itimeout_incr(HConfusion, time), FALSE);
 		}
 		break;
@@ -812,7 +830,10 @@ peffects(otmp)
 				unkn++;
 			}
 			exercise(A_DEX, TRUE);
-			int time = rn1(10, 100 + 60 * bcsign(otmp));
+			int time = rn1(30, 100 + 60 * bcsign(otmp));
+			if(otmp->odiluted) {
+				time /= 2;
+			}
 			incr_itimeout(&HFast, time);
 		}
 		break;
@@ -822,6 +843,9 @@ peffects(otmp)
 				nothing++;
 			}
 			int time = rn1(200, 250 - 125 * bcsign(otmp));
+			if(otmp->odiluted) {
+				time /= 2;
+			}
 			make_blinded(itimeout_incr(Blinded, time), (boolean)!Blind);
 		}
 		break;
@@ -872,6 +896,10 @@ peffects(otmp)
 			int increase_max_hp = !otmp->cursed ? 1 : 0;
 			boolean cure_sick = otmp->blessed;
 			boolean cure_blind = !otmp->cursed;
+			if(otmp->odiluted) {
+				heal_hp /= 2;
+				increase_max_hp /= 2;
+			}
 			healup(heal_hp, increase_max_hp, cure_sick, cure_blind);
 			exercise(A_CON, TRUE);
 		}
@@ -883,6 +911,10 @@ peffects(otmp)
 			int increase_max_hp = otmp->blessed ? 5 : !otmp->cursed ? 2 : 0;
 			boolean cure_sick = !otmp->cursed;
 			boolean cure_blind = TRUE;
+			if(otmp->odiluted) {
+				heal_hp /= 2;
+				increase_max_hp /= 2;
+			}
 			healup(heal_hp, increase_max_hp, cure_sick, cure_blind);
 			(void) make_hallucinated(0L,TRUE,0L);
 			exercise(A_CON, TRUE);
@@ -896,6 +928,10 @@ peffects(otmp)
 			int increase_max_hp = 4+4*bcsign(otmp);
 			boolean cure_sick = !otmp->cursed;
 			boolean cure_blind = TRUE;
+			if(otmp->odiluted) {
+				heal_hp /= 2;
+				increase_max_hp /= 2;
+			}
 			healup(heal_hp, increase_max_hp, cure_sick, cure_blind);
 			/* Restore one lost level if blessed */
 			if (otmp->blessed && u.ulevel < u.ulevelmax) {
@@ -935,10 +971,13 @@ peffects(otmp)
 			}
 			int time;
 			if (otmp->blessed) {
-				time = rn1(50,250);
+				time = rn1(140,250);
 				HLevitation |= I_SPECIAL;
 			} else {
-				time = rn1(140,10);
+				time = rn1(140,20);
+			}
+			if(otmp->odiluted) {
+				time /= 2;
 			}
 			incr_itimeout(&HLevitation, time);
 			spoteffects(FALSE);	/* for sinks */
@@ -952,6 +991,9 @@ peffects(otmp)
 			} else {
 				pline("Magical energies course through your body.");
 				num = rnd(5) + 5 * otmp->blessed + 1;
+				if(otmp->odiluted) {
+					num /= 2;
+				}
 				u.uenmax += (otmp->cursed) ? -num : num;
 				u.uen += (otmp->cursed) ? -num : num;
 				if(u.uenmax <= 0) u.uenmax = 0;
@@ -989,6 +1031,9 @@ peffects(otmp)
 			} else {
 				pline("This burns%s!", otmp->blessed ? " a little" : otmp->cursed ? " a lot" : " like acid");
 				int damage = d(otmp->cursed ? 2 : 1, otmp->blessed ? 4 : 8);
+				if(otmp->odiluted) {
+					damage /= 2;
+				}
 				losehp(damage, "potion of acid", KILLED_BY_AN);
 				exercise(A_CON, FALSE);
 			}
