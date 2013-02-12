@@ -51,6 +51,7 @@
 	* God angered by altar conversion will send entire army of minions
 	* Destroy armor is now noticeable (from Spork, see https://github.com/Bulwersator/UnNetHackPlus/commit/ee5edbd44b3e30f16162e471f38926b673fb767d for details)
 	* Throwing eggs at gnomes will make them scared (Oz reference, from Spork, see https://github.com/Bulwersator/CopyOfSporkHack/commit/ee6f13ea2fa824d6f1cc8359b6707f1b40375363)
+	* You really should be careful during new moon.
 
 2012-04-01  UnNetHack 4.0.0
 	* Uncursed and blessed scrolls of magic mapping reveal secret doors
