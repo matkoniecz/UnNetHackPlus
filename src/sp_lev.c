@@ -1636,6 +1636,9 @@ struct mkroom	*croom;
 		/* changed mpeaceful again; have to reset malign */
 		set_malign(mtmp);
 	    }
+	    if(mtmp->mpeaceful == 1 &&  !(m->name.str)) {
+		mtmp = generate_name_for_this_monster(mtmp);
+	    }
 	    if (m->asleep >= 0) {
 #ifdef UNIXPC
 		/* optimizer bug strikes again */

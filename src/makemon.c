@@ -876,6 +876,132 @@ boolean ghostly;
 	return result;
 }
 
+
+const char *
+random_gnome_name(boolean female)
+{
+	return gnome_name(rn2(10000), female);
+}
+
+const char *
+random_fairy_name(boolean female)
+{
+	return fairy_name(rn2(10000), female);
+}
+
+const char *
+random_orc_name(boolean female)
+{
+	return orc_name(rn2(10000), female);
+}
+
+const char *
+random_troll_name(boolean female)
+{
+	return troll_name(rn2(10000), female);
+}
+
+const char *
+random_dragon_name(boolean female)
+{
+	return dragon_name(rn2(10000), female);
+}
+
+const char *
+random_hobbit_name(boolean female)
+{
+	return hobbit_name(rn2(10000), female);
+}
+
+const char *
+random_dwarf_name(boolean female)
+{
+	return dwarf_name(rn2(10000), female);
+}
+
+const char *
+random_elf_name(boolean female)
+{
+	return elf_name(rn2(10000));
+}
+
+struct monst *
+generate_name_for_this_monster(struct monst *mtmp)
+{
+	int mm = monsndx(mtmp->data);
+	int s = mtmp->data->mlet;
+	struct permonst *ptr = mtmp->data;
+
+	//mm - PM_  from pm.h
+	//s S_ from monsyn.h
+	if (is_elf(ptr)) {
+		mtmp = christen_monst(mtmp, random_elf_name(mtmp->female));
+	} else if (is_mercenary(ptr)) {
+		//TODO
+	} else if (is_dwarf(ptr)) {
+		mtmp = christen_monst(mtmp, random_dwarf_name(mtmp->female));
+	} else if (is_gnome(ptr)) {
+		mtmp = christen_monst(mtmp, random_gnome_name(mtmp->female));
+	} else if (is_orc(ptr)) {
+		mtmp = christen_monst(mtmp, random_orc_name(mtmp->female));
+	} else if (is_human(ptr)) {
+		//TODO
+	} else if (is_giant(ptr)) {
+		mtmp = christen_monst(mtmp, random_troll_name(mtmp->female)); //TODO
+	} else if (is_demon(ptr)) {
+		//TODO is_dlord is_dprince
+	} else if (is_mplayer(ptr)) {
+		//TODO
+	} else if (mm == PM_GARGOYLE || mm == PM_WINGED_GARGOYLE) {
+		//TODO
+	} else if (mm == PM_GREMLIN) {
+		//TODO
+	} else if (mm == PM_HOBBIT) {
+		mtmp = christen_monst(mtmp, random_hobbit_name(mtmp->female));
+	} else if (mm == PM_BUGBEAR) {
+		//TODO
+	} else if (mm == PM_WEREWOLF) {
+		//TODO
+	} else if (mm == PM_WARG) {
+		//TODO
+	} else if (mm == PM_BUGBEAR) {
+		//TODO
+	} else if (mm == PM_MIND_FLAYER || mm == PM_MASTER_MIND_FLAYER) {
+		//TODO
+	} else if (mm == PM_HOMUNCULUS) {
+		//TODO
+	} else if (mm == PM_IMP) {
+		//TODO
+	} else if (mm == PM_QUASIT) {
+		//TODO
+	} else if (mm == PM_TENGU) {
+		//TODO
+	} else if (s == S_KOBOLD) {
+		//TODO
+	} else if (s == S_LEPRECHAUN) {
+		//TODO
+	} else if (s == S_NYMPH) {
+		mtmp = christen_monst(mtmp, random_fairy_name(mtmp->female));
+	} else if (s == S_TROLL) {
+		mtmp = christen_monst(mtmp, random_troll_name(mtmp->female));
+	} else if (s == S_DRAGON) {
+		mtmp = christen_monst(mtmp, random_dragon_name(mtmp->female));
+	} else if (s == S_NAGA) {
+		//TODO
+	} else if (s == S_OGRE) {
+		mtmp = christen_monst(mtmp, random_troll_name(mtmp->female)); //TODO
+	} else if (s == S_QUANTMECH) {
+		//TODO
+	} else if (s == S_VAMPIRE) {
+		//TODO
+	} else if (s == S_WRAITH) {
+		//TODO
+	} else if (mm == PM_IMP) {
+		//TODO
+	}
+	return mtmp;
+}
+
 /*
  * called with [x,y] = coordinates;
  *	[0,0] means anyplace
@@ -1151,6 +1277,10 @@ register int	mmflags;
 
 	if (!in_mklev)
 	    newsym(mtmp->mx,mtmp->my);	/* make sure the mon shows up */
+
+	if(mtmp->mpeaceful == 1) {
+		mtmp = generate_name_for_this_monster(mtmp);
+	}
 
 	return(mtmp);
 }

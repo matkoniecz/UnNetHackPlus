@@ -1333,6 +1333,13 @@ E void NDECL(monstr_init);
 
 /* ### mplayer.c ### */
 
+E const char *FDECL(gnome_name, (size_t,BOOLEAN_P));
+E const char *FDECL(fairy_name, (size_t,BOOLEAN_P));
+E const char *FDECL(orc_name, (size_t,BOOLEAN_P));
+E const char *FDECL(troll_name, (size_t,BOOLEAN_P));
+E const char *FDECL(dragon_name, (size_t,BOOLEAN_P));
+E const char *FDECL(hobbit_name, (size_t,BOOLEAN_P));
+E const char *FDECL(dwarf_name, (size_t,BOOLEAN_P));
 E const char *FDECL(elf_name, (size_t));
 E struct monst *FDECL(mk_mplayer, (struct permonst *,XCHAR_P,
 				   XCHAR_P,BOOLEAN_P));
