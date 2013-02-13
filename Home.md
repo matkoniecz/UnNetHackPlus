@@ -74,6 +74,7 @@ acid resistance is now.) https://groups.google.com/forum/?fromgroups=#!topic/rec
 fix completely broken alignment, maybe also better gods
 * http://nethackwiki.com/wiki/Wizard_of_Yendor#cite_note-0 he Wizard is the only unaligned monster in NetHack; however, stethoscopes will report this as "chaotic".
 * Eliminate tedious things
+* ban selling
 * Minetown non-diggable (to stop stupid dwarfs)
 * Gradual hallu
 
