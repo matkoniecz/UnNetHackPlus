@@ -108,7 +108,7 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * Dark One knows many different arcane spells. While nowhere near the hardest of the quest nemeses, the Dark One still demands respect! Mind you, he demands respect a whole lot more effectively in Slash'EM, where he knows Summon Nasties and Touch of Death. Sporkhack hasn't really done much to make him more hardcore.
 * wizard quest flavor text - Um, what? Weren't you dying without that thing, or something? Maybe the Dark One was specifically doing something to the Eye of the Aethiopica that put Neferet the Green at risk? Well, swapping out the regular amulet of power for the Eye. Deciding not to worry about the fanwank explanation
 *  In Sporkhack, there's a small chance a polymorph trap will disappear each time a monster uses it, so if you get something good you want to stop right there. Gyrfalcon had some mediocre forms, but now he's stuck as an imp until I can find another polytrap. In vanilla, of course, I can keep going until I like what I see or I end up with a pet gray dragon (which is a good pet anyway).
-* http://forum.rpg.net/showthread.php?466187-(Let-s-Play!)-Sporkhack/page40
+* http://forum.rpg.net/showthread.php?466187-(Let-s-Play!)-Sporkhack/page47
 * fedora for arch providing charisma boost (or maybe slashemism - Archaeologist	Fedora acts as luckstone)
 * during the new moon the petrifying hiss of a cockatrice has a 100% chance to hit UNLESS you have a lizard corpse to cure it http://nethackwiki.com/wiki/Source:Mhitu.c#line1190
 * remove pet apport
