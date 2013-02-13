@@ -2,7 +2,6 @@ Plans for UnNetHackPlus
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/d5f208b70d606071a5829526e4806dab0e87832a
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/cdb0add92fed422e61860b7c88711b347cd17b5f + https://github.com/Bulwersator/CopyOfSporkHack/commit/d25452bdea84850ada1674a7fefa343f66a9264c
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/d6ae5c1cba40bd5f04f11c2e6e6205ad1486992f
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/e187663d121f00337532ec3d9d180268a177d8dd
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/3d21c8d06fa74db06824059bab86dcb60ab14a56 (?)
 * intrinsic_possible fully_identify_obj
 * [[encyclopedia]]
