@@ -249,6 +249,7 @@ proud owner of a magic whistle.
 #texts
 * Juiblex the Lord of the Slime Pit, Demon Lord of Oozes and All Things Most Foul.
 * I dunno, I often hear this about Roguelikes and other really hard games, and to the extent that it's true at all, it assumes that the player has read and memorized every single spoiler and knows that (say) Blue-Footed Foozles can be defeated by harsh language but will explode with 40-kiloton yield if struck by any spell or weapon.
+* There's a few mimics in the shop, too; they're cunningly disguised as ], which represents 'strange object or mimic' and is used for no purpose in the game other than representing poorly-disguised mimics.
 
 #help!
 * Gargoyle weirdness (There are animated statues so it is logical that they are stone resistant. On the other hand their flesh is edible. I want to turn them into statue leaving monster like stone golem - but what should happen with stone monster hit by stone to flesh spell? Turn into meatball as for statues of monsters without corpses? Resist as their stone is also body? Do nothing? Eat significant part of HP (body of foo decays into twisted flesh)? Something else? )
