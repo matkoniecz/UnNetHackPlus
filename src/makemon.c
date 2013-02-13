@@ -307,6 +307,9 @@ register struct monst *mtmp;
 			curse(otmp);
 			(void) mpickobj(mtmp, otmp);
 		    }
+		    if (!rn2(5)) {
+			(void)mongets(mtmp, rnd_class(EGG, FOOD_RATION));
+		    }
 		} else if (is_dwarf(ptr)) {
 		    if (rn2(7)) (void)mongets(mtmp, DWARVISH_CLOAK);
 		    if (rn2(7)) (void)mongets(mtmp, IRON_SHOES);

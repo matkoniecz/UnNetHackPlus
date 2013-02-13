@@ -1975,6 +1975,8 @@ xkilled(mtmp, dest)
 #ifdef KOPS
 		    && mdat->mlet != S_KOP
 #endif
+		    /* death drops converted to carried objects */
+		    && mdat != &mons[PM_HOBBIT]
 		   ) {
 			int typ;
 
