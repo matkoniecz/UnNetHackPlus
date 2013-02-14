@@ -203,7 +203,6 @@ proud owner of a magic whistle.
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/dea61cde17b8758091e3f3cef95c2d651d11cb3e - When attacking a peaceful monster, make other peaceful monsters react.  - in the middle of spaghetti code
 
 # no playtesting
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/3d21c8d06fa74db06824059bab86dcb60ab14a56  Vlad no longer respects scrolls of scare monster 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/cdb0add92fed422e61860b7c88711b347cd17b5f + https://github.com/Bulwersator/CopyOfSporkHack/commit/d25452bdea84850ada1674a7fefa343f66a9264c - time increases monster generation
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/cbc86197bf6a8d63532069fa153a946bbb5b946c
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/cece069f9d1465ebb7d388d4b2fae572bd8e0e48
