@@ -10,9 +10,6 @@ Plans for UnNetHackPlus
 * MAGIC_MARKER as gift (type in object generator), later TRUE to initialize and TRUE to make artifact one :) http://nethackwiki.com/wiki/Source:Ref/mksobj#mksobj
 * http://nethackwiki.com/wiki/Source:Polyself.c#line629
 * fix cannibalism among sentient pets (BTW, scroll of taming affecting sentient creatures is quite disturbing) 
-* https://github.com/DanielT/NitroHack/commits/master
-* https://github.com/tung/NitroHack
-* https://gitorious.org/nitrohack/ais523/commits/nicehack
 * grunt (see bookmarks)
 * http://bilious.alt.org/?288 Confused Magic Whistle
 * mark E-square
@@ -246,6 +243,7 @@ proud owner of a magic whistle.
 * after Un.1242 .des - possibility to make drawbridge status random, see https://github.com/Bulwersator/CopyOfSporkHack/commit/1032af2e5b88947b828cdc89a062adb1178fbe5a
 
 #recheck
+* https://gitorious.org/nitrohack/ais523/commits/nicehack
 * http://alt.org/nethack/naonh.php graves checked out 9 I - new hallucinatory monster names, random engravings, gravestones and T-shirt messages
 * https://github.com/Chris-plus-alphanumericgibberish/dnethack/commits/master (2 II)
 * sporkhack (AFAIK, it is dead - but checking will not hurt)
