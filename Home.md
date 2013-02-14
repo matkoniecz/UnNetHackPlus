@@ -117,7 +117,6 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * during the new moon the petrifying hiss of a cockatrice has a 100% chance to hit UNLESS you have a lizard corpse to cure it http://nethackwiki.com/wiki/Source:Mhitu.c#line1190
 * remove pet apport
 * identify projectiles - for Rangers http://nh.gmuf.com/ranger_ammo-343.diff
-* autoidentify BUC of tins from BUC identified tin kit
 * #chat - threats, confused dwarf talks about adamantine
 * nerf speed boots
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/b6bf67e56332fe1e4852cfad2b926da2f216559a
