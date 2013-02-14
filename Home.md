@@ -111,7 +111,7 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * wizard quest flavor text - Um, what? Weren't you dying without that thing, or something? Maybe the Dark One was specifically doing something to the Eye of the Aethiopica that put Neferet the Green at risk? Well, swapping out the regular amulet of power for the Eye. Deciding not to worry about the fanwank explanation
 *  In Sporkhack, there's a small chance a polymorph trap will disappear each time a monster uses it, so if you get something good you want to stop right there. Gyrfalcon had some mediocre forms, but now he's stuck as an imp until I can find another polytrap. In vanilla, of course, I can keep going until I like what I see or I end up with a pet gray dragon (which is a good pet anyway).
 * randomised valley from spork
-* http://forum.rpg.net/showthread.php?466187-(Let-s-Play!)-Sporkhack/page51
+* http://forum.rpg.net/showthread.php?466187-(Let-s-Play!)-Sporkhack/page62
 *  Mars grants Nefarious with the gift of Dragonbane, an artifact spear. As I've said before, vanilla bane artifacts are uniformly crap, but in Sporkhack Dragonbane in particular is startlingly good, especially early on. Wielding it grants fire, cold, poison, shock, sleep, acid, and disintegration resistance. No, that isn't a typo. You get all of them, and at 100%. Fantastic weapon for conducts. It also has the usual anti-dragon properties, like all bane weapons.
 * fedora for arch providing charisma boost (or maybe slashemism - Archaeologist	Fedora acts as luckstone - maybe +1/+2 to luck?)
 * during the new moon the petrifying hiss of a cockatrice has a 100% chance to hit UNLESS you have a lizard corpse to cure it http://nethackwiki.com/wiki/Source:Mhitu.c#line1190
