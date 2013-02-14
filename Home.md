@@ -37,7 +37,8 @@ Plans for UnNetHackPlus
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/71bff8cb89b7e7f91f6478ea9c89f9f88195b174  Wand of nothing shall ask for direction when zapped in some games. 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/507768e75d0a0b8aecfcea9f960f0ca021041a97  Randomly reduce +X on polymorphed objects (except for wands) 
 * http://bilious.alt.org/?265  http://bilious.alt.org/?81 http://bilious.alt.org/?227 http://bilious.alt.org/?234 http://bilious.alt.org/?238 http://bilious.alt.org/?221
-* spork - "Gehennom is actually fun and not boring at all. The ascension run is likewise actually challenging."
+* spork - "Gehennom is actually fun and not boring at all. The ascension run is likewise actually challenging.
+* http://i295.photobucket.com/albums/mm153/Kobold_Lord/Sporkhack%208/T23231.jpg
 * spork - "A number of game breakers, like the rubber chicken and the E-square, have been reigned in."
 * spork - "Two-weapon fighting is no longer your automatic only choice regardless of role. Two-handed weapons and sword-and-board have meaningful advantages."
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/edd6a79da80913f8c9ccd6a90dc891357371d64c  Add potential for hostile priests to summon "associates". 
