@@ -54,7 +54,8 @@
 	* Destroy armor is now noticeable (from Spork, see https://github.com/Bulwersator/UnNetHackPlus/commit/ee5edbd44b3e30f16162e471f38926b673fb767d for details)
 	* Throwing eggs at gnomes will make them scared (Oz reference, from Spork, see https://github.com/Bulwersator/CopyOfSporkHack/commit/ee6f13ea2fa824d6f1cc8359b6707f1b40375363)
 	* You really should be careful during new moon.
-	* Smarter object colours (unique colours for can of grease - bright green and tinning kit - orange)
+	* Smarter object colours (unique colours for can of grease - bright green and tinning kit - orange).
+	* Autoidentify BUC of products from BUC identified item generator (tinning kit, horn of plenty).
 
 2012-04-01  UnNetHack 4.0.0
 	* Uncursed and blessed scrolls of magic mapping reveal secret doors

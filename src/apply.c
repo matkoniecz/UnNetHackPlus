@@ -1449,6 +1449,7 @@ register struct obj *obj;
 	    can->blessed = obj->blessed;
 	    can->owt = weight(can);
 	    can->known = 1;
+	    can->bknown = obj->bknown;
 	    can->spe = -1;  /* Mark tinned tins. No spinach allowed... */
 	    if (carried(corpse)) {
 		if (corpse->unpaid)
@@ -2981,6 +2982,7 @@ doapply()
 		    pline("%s spills out.", what);
 		    otmp->blessed = obj->blessed;
 		    otmp->cursed = obj->cursed;
+		    otmp->bknown = obj->bknown;
 		    otmp->owt = weight(otmp);
 		    otmp = hold_another_object(otmp, u.uswallow ?
 				       "Oops!  %s out of your reach!" :
