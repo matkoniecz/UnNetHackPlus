@@ -1,6 +1,7 @@
 Plans for UnNetHackPlus
 * reduce magic lamp frequency
 * gold <-> trap detection
+* Ixoth will have reflection from the Magic Mirror, so there's no point in using attack wands or spells. In vanilla, he will have magic resistance instead of reflection, so those items and abilities might actually be worthwhile.
 * yellow dragon scale mail provides immunity to stunning and confusio
 * intrinsic_possible fully_identify_obj
 * [[encyclopedia]]
