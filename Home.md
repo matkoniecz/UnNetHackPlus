@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* spellbook of repair armor
 * death texts by quest nemesis are not case devteam thinks about everything, as they may be killed is some other way (also: picking up quest artifact with alive nemesis)
 * reduce magic lamp frequency
 * gold <-> trap detection
