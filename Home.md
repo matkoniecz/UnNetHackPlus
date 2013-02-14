@@ -1,7 +1,5 @@
 Plans for UnNetHackPlus
-* spellbook of repair armor
 * death texts by quest nemesis are not case devteam thinks about everything, as they may be killed is some other way (also: picking up quest artifact with alive nemesis)
-* reduce magic lamp frequency
 * gold <-> trap detection
 * Ixoth will have reflection from the Magic Mirror, so there's no point in using attack wands or spells. In vanilla, he will have magic resistance instead of reflection, so those items and abilities might actually be worthwhile.
 *  Ixoth's stats are somewhat higher than they are in vanilla. In vanilla, Ixoth is physically substantially weaker than other dragons.
@@ -149,6 +147,7 @@ proud owner of a magic whistle.
 * fly monster spell - https://github.com/Bulwersator/CopyOfSporkHack/commit/d6ae5c1cba40bd5f04f11c2e6e6205ad1486992f + https://github.com/Bulwersator/CopyOfSporkHack/commit/cd5b178b692e2c34276486aa11032107263ca167
 
 #savebreaking
+* spellbook of repair armor
 * new randomized appearances - see https://github.com/Bulwersator/UnNetHackPlus/compare/master...new-randomized-appearances
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/aee3b3d35defc3ec60611337450c071340359217 (??)
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/c89f6e57eb16e81bd37920096c6f64dfed725b03 (+later fix)
