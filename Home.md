@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* reduce magic lamp frequency
 * gold <-> trap detection
 * yellow dragon scale mail provides immunity to stunning and confusio
 * intrinsic_possible fully_identify_obj
