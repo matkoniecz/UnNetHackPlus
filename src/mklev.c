@@ -920,7 +920,7 @@ makelevel()
 	    case 5:
 		if (u_depth > 11 && !rn2(25)) { mkroom(MORGUE); break; }
 	    case 6:
-		if (u_depth > 12 && !rn2(27)) { mkroom(ANTHOLE); break; }
+		if (u_depth > 10 && !rn2(27)) { mkroom(ANTHOLE); break; }
 	    case 7:
 		if (u_depth > 14 && !rn2(18) &&
 		    !(mvitals[PM_SOLDIER].mvflags & G_GONE)) { mkroom(BARRACKS); break; }
