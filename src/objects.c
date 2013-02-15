@@ -561,26 +561,26 @@ RING((char *)0, 0, "plastic",                 0, 0, 0, 0, 1, PLASTIC, CLR_WHITE)
 #undef RING
 
 /* amulets ... - THE Amulet comes last because it is special */
-#define AMULET(name,desc,power,prob) OBJECT( \
-		OBJ(name,desc), BITS(0,0,0,0,1,0,0,0,0,0,0,P_NONE,IRON), power, \
-		AMULET_CLASS, prob, 0, 20, 150, 0, 0, 0, 0, 20, HI_METAL )
+#define AMULET(name,desc,power,prob,material,color) OBJECT( \
+		OBJ(name,desc), BITS(0,0,0,0,1,0,0,0,0,0,0,P_NONE,material), power, \
+		AMULET_CLASS, prob, 0, 20, 150, 0, 0, 0, 0, 20, color )
 
-AMULET("amulet of ESP",           "circular",   TELEPAT,    175),
-AMULET("amulet of life saving",   "spherical",  LIFESAVED,   75),
-AMULET("amulet of strangulation", "oval",       STRANGLED,  135),
-AMULET("amulet of restful sleep", "triangular", SLEEPING,   135),
-AMULET("amulet versus poison",    "pyramidal",  POISON_RES, 165),
-AMULET("amulet of change",        "square",     0,          130),
+AMULET("amulet of ESP",              "circular",   TELEPAT,          175, IRON,     HI_METAL),
+AMULET("amulet of life saving",      "spherical",  LIFESAVED,         75, GLASS,    HI_GLASS),
+AMULET("amulet of strangulation",    "oval",       STRANGLED,        135, IRON,     HI_METAL),
+AMULET("amulet of restful sleep",    "triangular", SLEEPING,         135, IRON,     HI_METAL),
+AMULET("amulet versus poison",       "pyramidal",  POISON_RES,       165, IRON,     HI_METAL),
+AMULET("amulet of change",           "square",     0,                130, IRON,     HI_METAL),
 						/* POLYMORPH */
-AMULET("amulet of unchanging",    "concave",    UNCHANGING,	 45),
-AMULET("amulet of reflection",    "hexagonal",  REFLECTING,  75),
-AMULET("amulet of magical breathing", "octagonal",      MAGICAL_BREATHING, 65),
-AMULET((char *)0,                 "warped",     0, 0),
-AMULET((char *)0,                 "convex",     0, 0),
-AMULET((char *)0,                 "lunate",     0, 0),
-AMULET((char *)0,                 "spiked",     0, 0),
-AMULET((char *)0,                 "rectangular",0, 0),
-AMULET((char *)0,                 "elliptic",   0, 0),
+AMULET("amulet of unchanging",       "concave",    UNCHANGING,        45, IRON,     HI_METAL),
+AMULET("amulet of reflection",       "hexagonal",  REFLECTING,        75, PLATINUM, CLR_WHITE),
+AMULET("amulet of magical breathing","octagonal",  MAGICAL_BREATHING, 65, IRON,     HI_METAL),
+AMULET((char *)0,                    "warped",     0,                  0, PLASTIC,  CLR_BRIGHT_MAGENTA),
+AMULET((char *)0,                    "convex",     0,                  0, PLASTIC,  CLR_BRIGHT_GREEN),
+AMULET((char *)0,                    "lunate",     0,                  0, GOLD,     HI_GOLD),
+AMULET((char *)0,                    "spiked",     0,                  0, WOOD,     HI_WOOD),
+AMULET((char *)0,                    "rectangular",0,                  0, WOOD,     HI_WOOD),
+AMULET((char *)0,                    "elliptic",   0,                  0, WOOD,     HI_WOOD),
 OBJECT(OBJ("cheap plastic imitation of the Amulet of Yendor",
 	"Amulet of Yendor"), BITS(0,0,1,0,0,0,0,0,0,0,0,0,PLASTIC), 0,
 	AMULET_CLASS, 0, 0, 20,    0, 0, 0, 0, 0,  1, HI_MITHRIL),

@@ -57,6 +57,7 @@
 	* Smarter object colours (unique colours for can of grease - bright green and tinning kit - orange).
 	* Autoidentify BUC of products from BUC identified item generator (tinning kit, horn of plenty).
 	* Wearing fedora increases luck of archaeologists
+	* Amulets may be made from different materials (including glass!)
 
 2012-04-01  UnNetHack 4.0.0
 	* Uncursed and blessed scrolls of magic mapping reveal secret doors

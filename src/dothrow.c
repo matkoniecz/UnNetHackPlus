@@ -1767,7 +1767,8 @@ boolean in_view;
 	switch (obj->oclass == POTION_CLASS ? POT_WATER : obj->otyp) {
 		default: /* glass or crystal wand */
 			if (obj->oclass != WAND_CLASS &&
-			    obj->oclass != RING_CLASS)
+			    obj->oclass != RING_CLASS &&
+			    obj->oclass != AMULET_CLASS)
 				warning("breaking odd object?");
 		case CRYSTAL_PLATE_MAIL:
 		case LENSES:
