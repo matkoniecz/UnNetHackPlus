@@ -754,12 +754,19 @@ boolean atme;
 		Your("arms are not free to cast!");
 		return (0);
 	}
-
-	if (u.uhave.amulet) {
-		You_feel("the amulet draining your energy away.");
-		energy += rnd(2*energy);
+	if (energy > u.uen) {
+		You("don't have enough energy to cast that spell.");
+		return(0);
 	}
-	if(energy > u.uen)  {
+	if (u.uhave.amulet) {
+		u.uen -= rnd(energy);
+		if (u.uen < 0) {
+			u.uen = 0;
+		}
+		flags.botl = 1;
+		You_feel("the amulet draining your energy away.");
+	}
+	if (energy > u.uen) {
 		You("don't have enough energy to cast that spell.");
 		return(0);
 	} else {
