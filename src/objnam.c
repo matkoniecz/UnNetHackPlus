@@ -2158,7 +2158,8 @@ boolean from_user;
 			eroded = 1 + very;
 			very = 0;
 		} else if (!strncmpi(bp, "corroded ", l=9) ||
-			   !strncmpi(bp, "rotted ", l=7)) {
+			   !strncmpi(bp, "rotted ", l=7) ||
+			   !strncmpi(bp, "deteriorated ", l=13)) {
 			eroded2 = 1 + very;
 			very = 0;
 		} else if (!strncmpi(bp, "partly drained ", l=15)) {
@@ -2962,11 +2963,11 @@ typfnd:
 
 	/* set eroded */
 	if (is_damageable(otmp) || otmp->otyp == CRYSKNIFE) {
-	    if (eroded && (is_flammable(otmp) || is_rustprone(otmp)))
-		    otmp->oeroded = eroded;
-	    if (eroded2 && (is_corrodeable(otmp) || is_rottable(otmp)))
-		    otmp->oeroded2 = eroded2;
+		if ((is_flammable(otmp) || is_rustprone(otmp))) {
+			otmp->oeroded = eroded;
+		}
 	}
+	otmp->oeroded2 = eroded2;
 	
 	/* set erodeproof */
 	if (erodeproof && !eroded && !eroded2){
