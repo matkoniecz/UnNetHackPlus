@@ -7,6 +7,7 @@
 		- Genociding your pet or peaceful monsters is no longer OK ( https://github.com/Bulwersator/UnNetHackPlus/commit/40dbc7c9b3c6b398802cef30b1f9cc54499ea73b )
 		- Bare-hands now gets an actual bonus (from Spork - https://github.com/Bulwersator/CopyOfSporkHack/commit/e187663d121f00337532ec3d9d180268a177d8dd )
 		- Colour of mithril objects is now correct ( https://github.com/Bulwersator/CopyOfSporkHack/commit/67c167367b8b118c9bc9b7f4e19bdd41bbc3b308 ) 
+		- Feeling of amulet draining energy away is now correct in all situations ( https://github.com/Bulwersator/UnNetHackPlus/commit/a70a6f1d1c112af6a5a3976b6d9a41625ebff870 )
 	* Mind flayer attacks only cause physical damage and int drain (from UnNetHack, revision 1025)
 	* Follow guidelines for color assignment (based on http://l.j-factor.com/nethack/colour.diff by "L" - Leon Arnott)
 	* Poison gas blasts leave a trail of stinking clouds (based on http://l.j-factor.com/nethack/poisoncloud.diff by "L" - Leon Arnott)
