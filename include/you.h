@@ -396,7 +396,7 @@ struct you {
 #define A_CURRENT	0
 	aligntyp ualignbase[CONVERT];	/* for ualign conversion record */
 	schar uluck, moreluck;		/* luck and luck bonus */
-#define Luck	(u.uluck + u.moreluck)
+#define Luck	(u.uluck + u.moreluck + uarmh ? ((uarmh->otyp == FEDORA && Role_if(PM_ARCHEOLOGIST)) ? 1 : 0) : 0)
 #define LUCKADD		3	/* added value when carrying luck stone */
 #define LUCKMAX		10	/* on moonlit nights 11 */
 #define LUCKMIN		(-10)
