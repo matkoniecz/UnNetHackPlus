@@ -411,7 +411,7 @@ boolean artif;
 #endif
 
 	if (init) {
-		if(!rn2(14)) {
+		if(!rn2(30)) {
 			if(is_flammable(otmp) || is_rustprone(otmp)) {
 				otmp->oeroded = rn2(3)+1;
 				if(rn2(otmp->oeroded + 1)) { /* make heavily eroded items less likely than eroded items */
@@ -422,7 +422,7 @@ boolean artif;
 				otmp->odiluted = 1;
 			}
  		}
-		if (!rn2(14)) {
+		if (!rn2(30)) {
 			if(is_corrodeable(otmp) || is_rottable(otmp)) {
 				otmp->oeroded2 = rn2(3)+1;
 				if(rn2(otmp->oeroded2 + 1)) { /* make heavily eroded items less likely than eroded items */
@@ -430,7 +430,7 @@ boolean artif;
 				}
 			}
 		}
-		if (!rn2(14)) {
+		if (!rn2(20)) {
 			set_erodeproof(otmp);
 		}
 	}
