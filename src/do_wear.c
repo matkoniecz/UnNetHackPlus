@@ -1339,21 +1339,6 @@ register struct obj *otmp;
 #endif
 		}
 	} else {
-		/* Be warned!  We want off_msg after removing the item to
-		 * avoid "You were wearing ____ (being worn)."  However, an
-		 * item which grants fire resistance might cause some trouble
-		 * if removed in Hell and lifesaving puts it back on; in this
-		 * case the message will be printed at the wrong time (after
-		 * the messages saying you died and were lifesaved).  Luckily,
-		 * no cloak, shield, or fast-removable armor grants fire
-		 * resistance, so we can safely do the off_msg afterwards.
-		 * Rings do grant fire resistance, but for rings we want the
-		 * off_msg before removal anyway so there's no problem.  Take
-		 * care in adding armors granting fire resistance; this code
-		 * might need modification.
-		 * 3.2 (actually 3.1 even): this comment is obsolete since
-		 * fire resistance is not needed for Gehennom.
-		 */
 		if(is_helmet(otmp)) {
 			(void) Helmet_off();
 		} else if(is_gloves(otmp)) {
