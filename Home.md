@@ -108,7 +108,6 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * randomised valley from spork
 * http://forum.rpg.net/showthread.php?466187-(Let-s-Play!)-Sporkhack/page62
 *  Mars grants Nefarious with the gift of Dragonbane, an artifact spear. As I've said before, vanilla bane artifacts are uniformly crap, but in Sporkhack Dragonbane in particular is startlingly good, especially early on. Wielding it grants fire, cold, poison, shock, sleep, acid, and disintegration resistance. No, that isn't a typo. You get all of them, and at 100%. Fantastic weapon for conducts. It also has the usual anti-dragon properties, like all bane weapons.
-* fedora for arch providing charisma boost (or maybe slashemism - Archaeologist	Fedora acts as luckstone - maybe +1/+2 to luck?)
 * during the new moon the petrifying hiss of a cockatrice has a 100% chance to hit UNLESS you have a lizard corpse to cure it http://nethackwiki.com/wiki/Source:Mhitu.c#line1190
 * remove pet apport
 * identify projectiles - for Rangers http://nh.gmuf.com/ranger_ammo-343.diff
