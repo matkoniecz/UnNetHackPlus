@@ -106,7 +106,7 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * randomised valley from spork
 * http://i295.photobucket.com/albums/mm153/Kobold_Lord/Sporkhack%2011/T26701.jpg
 *  Got it! Giantslayer is an artifact sling. It does more damage than normal slings and provides warning against giants, but since slings suck that part is meaningless noise. The important feature of Giantslayer is that it provides near-giant strength when wielded… OR when it is set up as an alternate weapon. So as long as you're not planning to dual-wield (and monks like me clearly are not) you get an effect almost equivalent to slotless gauntlets of power. And unlike the gauntlets, Giantslayer does not interfere with spellcasting!
-* http://forum.rpg.net/showthread.php?466187-(Let-s-Play!)-Sporkhack/page72
+* http://forum.rpg.net/showthread.php?466187-(Let-s-Play!)-Sporkhack/page74
 *  Mars grants Nefarious with the gift of Dragonbane, an artifact spear. As I've said before, vanilla bane artifacts are uniformly crap, but in Sporkhack Dragonbane in particular is startlingly good, especially early on. Wielding it grants fire, cold, poison, shock, sleep, acid, and disintegration resistance. No, that isn't a typo. You get all of them, and at 100%. Fantastic weapon for conducts. It also has the usual anti-dragon properties, like all bane weapons.
 * during the new moon the petrifying hiss of a cockatrice has a 100% chance to hit UNLESS you have a lizard corpse to cure it http://nethackwiki.com/wiki/Source:Mhitu.c#line1190
 * remove pet apport
