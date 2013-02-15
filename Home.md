@@ -88,7 +88,6 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 
 * spork shop messages
 * stinking cloud should be cyan something
-* http://i295.photobucket.com/albums/mm153/Kobold_Lord/Sporkhack%202/T06354.jpg
 * http://i295.photobucket.com/albums/mm153/Kobold_Lord/Sporkhack%202/T29316.jpg
 * devastating Wand of Death, which would shave hit points off of Mouse's MAXIMUM every time it hits him even if his amulet reflects the killing charge
 * Beware the Minetown bones file where the altar has been converted. The priest present may be peaceful, but he or she will go hostile if you #chat.
