@@ -203,44 +203,45 @@ boolean fleemsg;
 	struct monst* mtmp2;
 
 	if (u.ustuck == mtmp) {
-	    if (u.uswallow)
-		expels(mtmp, mtmp->data, TRUE);
-	    else if (!sticks(youmonst.data)) {
-		unstuck(mtmp);	/* monster lets go when fleeing */
-		You("get released!");
-	    }
+		if (u.uswallow) {
+			expels(mtmp, mtmp->data, TRUE);
+		} else if (!sticks(youmonst.data)) {
+			unstuck(mtmp);	/* monster lets go when fleeing */
+			You("get released!");
+		}
 	}
 
 	if (!first || !mtmp->mflee) {
-	    /* don't lose untimed scare */
-	    if (!fleetime)
-		mtmp->mfleetim = 0;
-	    else if (!mtmp->mflee || mtmp->mfleetim) {
-		fleetime += mtmp->mfleetim;
-		/* ensure monster flees long enough to visibly stop fighting */
-		if (fleetime == 1) fleetime++;
-		mtmp->mfleetim = min(fleetime, 127);
-	    }
-	    if (!mtmp->mflee && fleemsg && !mtmp->mfrozen) {
-			 /* mindless, silent, and critters without proper voices 
-			  * won't scream, of course. */
-			 if (!rn2(8) && !mindless(mtmp->data) && !is_silent(mtmp->data) &&
-					 mtmp->data->msound != MS_BUZZ && mtmp->data->msound != MS_HISS) {
-				if (canseemon(mtmp))
+		/* don't lose untimed scare */
+		if (!fleetime) {
+			mtmp->mfleetim = 0;
+		} else if (!mtmp->mflee || mtmp->mfleetim) {
+			fleetime += mtmp->mfleetim;
+			/* ensure monster flees long enough to visibly stop fighting */
+			if (fleetime == 1) fleetime++;
+			mtmp->mfleetim = min(fleetime, 127);
+		}
+		if (!mtmp->mflee && fleemsg && !mtmp->mfrozen) {
+			/* mindless, silent, and critters without proper voices 
+			 * won't scream, of course. */
+			if (!rn2(8) && !mindless(mtmp->data) && !is_silent(mtmp->data) && mtmp->data->msound != MS_BUZZ && mtmp->data->msound != MS_HISS) {
+				if (canseemon(mtmp)) {
 					pline("%s screams in terror!",Monnam(mtmp));
-				else 
+				} else {
 					You_hear("a frightened squeal!");
+				}
 				/* Check and see who was close enough to hear it */
 				for (mtmp2 = fmon; mtmp2; mtmp2 = mtmp2->nmon) {
-					if (dist2(mtmp->mx,mtmp->my,mtmp2->mx,mtmp2->my) < 19 && !rn2(3)) {
+					if (dist2(mtmp->mx,mtmp->my,mtmp2->mx,mtmp2->my) <= 19 && !rn2(3)) {
 						mtmp2->msleeping = 0;
 					}
-			   }
-			 }
-			 if (canseemon(mtmp))
+				}
+			}
+			if (canseemon(mtmp)) {
 				pline("%s turns to flee!", (Monnam(mtmp)));
-		 }
-	    mtmp->mflee = 1;
+			}
+		}
+		mtmp->mflee = 1;
 	}
 }
 
