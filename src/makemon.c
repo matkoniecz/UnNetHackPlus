@@ -415,9 +415,6 @@ register struct monst *mtmp;
 		    case PM_HORNED_DEVIL:
 			(void)mongets(mtmp, rn2(4) ? TRIDENT : BULLWHIP);
 			break;
-		    case PM_DISPATER:
-			(void)mongets(mtmp, WAN_STRIKING);
-			break;
 		    case PM_YEENOGHU:
 			(void)mongets(mtmp, FLAIL);
 			break;
