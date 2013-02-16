@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* strange song hallu scream attack for demon lord
 * death texts by quest nemesis are not case devteam thinks about everything, as they may be killed is some other way (also: picking up quest artifact with alive nemesis)
 * gold <-> trap detection
 * Ixoth will have reflection from the Magic Mirror, so there's no point in using attack wands or spells. In vanilla, he will have magic resistance instead of reflection, so those items and abilities might actually be worthwhile.
