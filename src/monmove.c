@@ -224,15 +224,57 @@ boolean fleemsg;
 		if (!mtmp->mflee && fleemsg && !mtmp->mfrozen) {
 			/* mindless, silent, and critters without proper voices 
 			 * won't scream, of course. */
-			if (!rn2(8) && !mindless(mtmp->data) && !is_silent(mtmp->data) && mtmp->data->msound != MS_BUZZ && mtmp->data->msound != MS_HISS) {
-				if (canseemon(mtmp)) {
-					pline("%s screams in terror!",Monnam(mtmp));
+			if (!rn2(8) && !mindless(mtmp->data) && !is_silent(mtmp->data) && mtmp->data->msound != MS_BUZZ) {
+				int range = 18;
+				char visible[20];
+				char invisible[20];
+				if (mtmp->data->msound == MS_HISS) {
+					strcpy(visible, "hisses");
+					strcpy(invisible, "an angry hiss");
+				} else if (mtmp->data->msound == MS_ROAR) {
+					range = 400;
+					strcpy(visible, "roars");
+					strcpy(invisible, "a roar");
+				} else if (mtmp->data->msound == MS_WAIL) {
+					strcpy(visible, "wails");
+					strcpy(invisible, "a frightened wail");
+				} else if (mtmp->data->msound == MS_MEW) {
+					range = 10;
+					strcpy(visible, "yowls");
+					strcpy(invisible, "a frightened yowl");
+				} else if (mtmp->data->msound == MS_BARK || mtmp->data->msound == MS_GROWL) {
+					strcpy(visible, "yelps");
+					strcpy(invisible, "a frightened yelp");
+				} else if (mtmp->data->msound == MS_SQEEK) {
+					range = 10;
+					strcpy(visible, "squeals");
+					strcpy(invisible, "a frightened squeal");
+				} else if (mtmp->data->msound == MS_SQAWK) {
+					strcpy(visible, "screaks");
+					strcpy(invisible, "a frightened screak");
+				} else if (mtmp->data->msound == MS_GURGLE) {
+					strcpy(visible, "gurgles");
+					strcpy(invisible, "a frightened gurgle");
+				} else if (mtmp->data->msound == MS_BURBLE) {
+					range = 50;
+					strcpy(visible, "burbles");
+					strcpy(invisible, "a vorpal burble");
+				} else if (mtmp->data->msound == MS_SHRIEK) {
+					range = 150;
+					strcpy(visible, "shrieks");
+					strcpy(invisible, "a frightened shriek");
 				} else {
-					You_hear("a frightened squeal!");
+					strcpy(visible, "screams");
+					strcpy(invisible, "a frightened squeal");
+				}
+				if (canseemon(mtmp)) {
+					pline("%s %s in terror!", Monnam(mtmp), visible);
+				} else {
+					You_hear("%s!", invisible);
 				}
 				/* Check and see who was close enough to hear it */
 				for (mtmp2 = fmon; mtmp2; mtmp2 = mtmp2->nmon) {
-					if (dist2(mtmp->mx,mtmp->my,mtmp2->mx,mtmp2->my) <= 19 && !rn2(3)) {
+					if (dist2(mtmp->mx,mtmp->my,mtmp2->mx,mtmp2->my) <= range && !rn2(3)) {
 						mtmp2->msleeping = 0;
 					}
 				}
