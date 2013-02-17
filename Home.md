@@ -1,5 +1,4 @@
 Plans for UnNetHackPlus
-* strange song hallu scream attack for demon lord (Asmodeus)
 * switch sleeping for cold attack for nazgul (maybe)
 * Nazgul Nerf - https://github.com/Bulwersator/CopyOfSporkHack/commit/a9fcfb2a5fce2c99c4d8332ec14fd175aafeea1d
 * death texts by quest nemesis are not case devteam thinks about everything, as they may be killed is some other way (also: picking up quest artifact with alive nemesis)
