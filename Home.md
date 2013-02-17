@@ -39,6 +39,7 @@ Plans for UnNetHackPlus
 * http://i295.photobucket.com/albums/mm153/Kobold_Lord/Sporkhack%208/T23231.jpg
 * spork - "A number of game breakers, like the rubber chicken and the E-square, have been reigned in."
 * spork - "Two-weapon fighting is no longer your automatic only choice regardless of role. Two-handed weapons and sword-and-board have meaningful advantages."
+* In Spork, two-handed weapons double your effective strength bonus to damage. This makes them actually worth using.
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/edd6a79da80913f8c9ccd6a90dc891357371d64c  Add potential for hostile priests to summon "associates". 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/7fbd5b30b90f35f1af745c77fe7fe93504ae1f16  The circular bigroom may have a river. 
 * do_wear.c dotakeoff function - merge RT
