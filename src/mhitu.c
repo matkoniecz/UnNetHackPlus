@@ -678,10 +678,7 @@ mattacku(mtmp)
 			}
 			break;
 		case AT_SCRE:
-			if (ranged) {
-				sum[i] = mon_scream(mtmp, mattk);
-			}
-			/* if you're nice and close, don't bother */
+			sum[i] = mon_scream(mtmp, mattk);
 			break;
 
 		default:		/* no attack */
@@ -2652,6 +2649,7 @@ struct attack* mattk;
 			mtmp->mspec_used = 2 + rn2(3);
 			break;
 		default:
+			warning("unhandled scream type");
 			break;
 	}
 
