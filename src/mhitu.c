@@ -2651,11 +2651,11 @@ struct attack* mattk;
 				if (u.usleep) { 
 					unmul("You are shocked awake!");
 				}
-				/* if (!Stun_resistance) TODO: inplement this*/ {
+				if (!Stun_resistance) {
 					Your("mind reels from the noise!");
 					effect = 1;
 				}
-				make_stunned(dmg,FALSE);	/* Stun resistance [TODO: once inplemented] checked inside */
+				make_stunned(dmg,FALSE);	/* Stun resistance checked inside */
 			}
 			mtmp->mspec_used = 2 + rn2(3);
 			break;

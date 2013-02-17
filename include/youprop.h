@@ -60,6 +60,13 @@
 #define Drain_resistance	(HDrain_resistance || EDrain_resistance || \
 				 resists_drli(&youmonst))
 
+#define EConfusion_resistance		FALSE /* Fixme: copy this from SporkHack */
+#define Confusion_resistance		FALSE /* Fixme: copy this from SporkHack */
+
+#define EStun_resistance		FALSE /* Fixme: copy this from SporkHack */
+#define Stun_resistance			FALSE /* Fixme: copy this from SporkHack */
+
+
 /* Intrinsics only */
 #define HSick_resistance	u.uprops[SICK_RES].intrinsic
 #define Sick_resistance		(HSick_resistance || \
