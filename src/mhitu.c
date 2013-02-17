@@ -2648,7 +2648,9 @@ struct attack* mattk;
 				} else {
 					You_hear("a horrific scream!");
 				}
-				if (u.usleep) { unmul("You are shocked awake!"); }
+				if (u.usleep) { 
+					unmul("You are shocked awake!");
+				}
 				/* if (!Stun_resistance) TODO: inplement this*/ {
 					Your("mind reels from the noise!");
 					effect = 1;
