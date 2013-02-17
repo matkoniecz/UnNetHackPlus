@@ -139,6 +139,7 @@ proud owner of a magic whistle.
 * oversight: you can #chat while being choked by a rope golem ("strangulation seem to be handled okay)
 
 #savebreaking?
+* remove grinding spells (create monster, polymorph, cancellation(?)) and introduce something interesting - see http://www.reddit.com/r/roguelikes/comments/18msat/is_there_a_roguelike_with_interesting_spells/ 
 * TRAPROOM from spork
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/d5f208b70d606071a5829526e4806dab0e87832a  Increase missile weapon range from properly fired missiles. 
 * http://bilious.alt.org/?271
