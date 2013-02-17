@@ -31,7 +31,6 @@ Plans for UnNetHackPlus
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/b66820f04b9b8f98a822e8b1df719fd55ee07726  RANDOM_CORRIDORS now takes an optional parameter. 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/4c434e30415c3cd1d5efeeab1ae2c1dc903aa034  Use any style random corridors 10% of the time. 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/71bff8cb89b7e7f91f6478ea9c89f9f88195b174  Wand of nothing shall ask for direction when zapped in some games. 
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/507768e75d0a0b8aecfcea9f960f0ca021041a97  Randomly reduce +X on polymorphed objects (except for wands) 
 * http://bilious.alt.org/?265  http://bilious.alt.org/?81 http://bilious.alt.org/?227 http://bilious.alt.org/?234 http://bilious.alt.org/?238 http://bilious.alt.org/?221
 * spork - "Gehennom is actually fun and not boring at all. The ascension run is likewise actually challenging.
 * http://i295.photobucket.com/albums/mm153/Kobold_Lord/Sporkhack%208/T23231.jpg
