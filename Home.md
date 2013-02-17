@@ -44,7 +44,7 @@ Plans for UnNetHackPlus
 * see comments on http://bilious.alt.org/?216 http://bilious.alt.org/?51 
 * see Linley's Dungeon Crawl on nethackwiki
 * vaults - see crawl and https://github.com/Bulwersator/CopyOfSporkHack/commit/cd21033f22b5e9e7ef318ea1a1b9dd76c8351bfa
-* Stun_resistance from spork - see https://github.com/Bulwersator/UnNetHackPlus/commit/fbd8a7ee603223176d3d3e1b65fecfbb2000f082
+* Stun_resistance from spork - see https://github.com/Bulwersator/UnNetHackPlus/commit/b2b61283f6040af63e454a880129a3c4c22e84a5
 * nethackwiki.com/wiki/Stunned#cite_note-1 - wtf?
 * http://l.j-factor.com/nethack/wounds.diff
 * http://l.j-factor.com/nethack/wallcorr.diff
