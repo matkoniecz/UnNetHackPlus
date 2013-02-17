@@ -2627,6 +2627,10 @@ struct attack* mattk;
 			if (mtmp->mspec_used) {
 				return 0;
 			}
+			/* sleeping is more dangerous than stun */
+			if (m_canseeu(mtmp) && u.usleep) {
+				return 0;
+			}
 			if (mtmp->mcan) {
 				if (canseemon(mtmp)) {
 					pline("%s croaks hoarsely.",Monnam(mtmp));
