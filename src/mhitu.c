@@ -2659,6 +2659,20 @@ struct attack* mattk;
 			}
 			mtmp->mspec_used = 2 + rn2(3);
 			break;
+		case AD_HALU:
+			if (mtmp->mcan) {
+				if (canseemon(mtmp) && !rn2(3)) {
+					pline("%s seems surprised.", Monnam(mtmp));
+				}
+			} else {
+				int time = rnd(15) + 24;
+				if (time > HHallucination) {
+					You_hear("a strange song.");
+					(void) make_hallucinated(time ,FALSE,0L);
+					effect = 1;
+				}
+			}
+			break;
 		default:
 			warning("unhandled scream type");
 			break;
