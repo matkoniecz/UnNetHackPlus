@@ -1639,7 +1639,7 @@ boolean was_swallowed;			/* digestion */
 		   || is_rider(mdat))
 		return TRUE;
 	return (boolean) (!rn2((int)
-		(2 + ((int)(mdat->geno & G_FREQ)<2) + verysmall(mdat) + (int)(is_undead(mdat))*3)));
+		(2 + ((int)(mdat->geno & G_FREQ)<2) + verysmall(mdat) + ((int)(is_undead(mdat)))*6)));
 }
 
 /** Creates Cthulhu's death message and death cloud. */
