@@ -782,9 +782,13 @@ dobreathe()
 	mattk = attacktype_fordmg(youmonst.data, AT_BREA, AD_ANY);
 	if (!mattk)
 	    warning("bad breath attack?");	/* mouthwash needed... */
-	else
-	    buzz((int) (20 + mattk->adtyp-1), (int)mattk->damn,
+	else {
+	    buzz((int) (20 + mattk->adtyp-1), (int)mattk->damn, 
 		u.ux, u.uy, u.dx, u.dy);
+	    if (monsndx(youmonst.data) >= PM_GRAY_DRAGON && monsndx(youmonst.data) <= PM_YELLOW_DRAGON) {
+		identify_dragon(monsndx(youmonst.data) - PM_GRAY_DRAGON);
+	    }
+	}
 	return(1);
 }
 
