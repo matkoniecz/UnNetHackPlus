@@ -514,13 +514,13 @@ register struct	monst	*mtmp;
 		    register int mac;
 
 		    switch(monsndx(ptr)) {
-			case PM_GUARD: mac = -2; break;
-			case PM_SOLDIER: mac = 2; break;
-			case PM_SERGEANT: mac = -1; break;
-			case PM_LIEUTENANT: mac = -4; break;
-			case PM_CAPTAIN: mac = -6; break;
-			case PM_WATCHMAN: mac = 2; break;
-			case PM_WATCH_CAPTAIN: mac = -3; break;
+			case PM_GUARD: mac = -1 - depth(&u.uz)/5; break;
+			case PM_SOLDIER: mac = 3 - depth(&u.uz)/10; break;
+			case PM_SERGEANT: mac = 0 - depth(&u.uz)/9; break;
+			case PM_LIEUTENANT: mac = -2 - depth(&u.uz)/8; break;
+			case PM_CAPTAIN: mac = -3 - depth(&u.uz)/7; break;
+			case PM_WATCHMAN: mac = 3 - depth(&u.uz)/10; break;
+			case PM_WATCH_CAPTAIN: mac = -2 - depth(&u.uz)/8; break;
 			default: warning("odd mercenary %d?", monsndx(ptr));
 				mac = 0;
 				break;
@@ -542,7 +542,9 @@ register struct	monst	*mtmp;
 			mac += 1 + mongets(mtmp, HELMET);
 		    else if (mac < 10 && rn2(2))
 			mac += 1 + mongets(mtmp, DENTED_POT);
-		    if (mac < 10 && rn2(3))
+		    if ((depth(&u.uz) > 40 || Reflecting) && rn2(100) < depth(&u.uz))
+			mac += 2 + mongets(mtmp, SHIELD_OF_REFLECTION);
+		    else if (mac < 10 && rn2(3))
 			mac += 1 + mongets(mtmp, SMALL_SHIELD);
 		    else if (mac < 10 && rn2(2))
 			mac += 2 + mongets(mtmp, LARGE_SHIELD);
