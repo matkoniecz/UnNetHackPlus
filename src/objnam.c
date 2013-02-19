@@ -421,8 +421,6 @@ boolean ignore_oquan;
 			(obj->owt > ocl->oc_weight) ? "very " : "");
 		break;
 	    case POTION_CLASS:
-		if (obj->dknown && obj->odiluted)
-			Strcpy(buf, "diluted ");
 		if(nn || un || !obj->dknown) {
 			Strcat(buf, "potion");
 			if(!obj->dknown) break;
@@ -576,32 +574,45 @@ boolean in_final_dump;
 	boolean iscrys = (obj->otyp == CRYSKNIFE);
 
 	/* The only cases where any of these bits do double duty are for
-	 * rotted food and diluted potions, which are all not is_damageable().
+	 * rotted food and diluted potions.
 	 */
-	if (obj->oeroded && !iscrys) {
-		switch (obj->oeroded) {
-			case 2:	Strcat(prefix, "very "); break;
-			case 3:	Strcat(prefix, "thoroughly "); break;
-		}			
-		Strcat(prefix, is_rustprone(obj) ? "rusty " : "burnt ");
+	if (obj->oclass == FOOD_CLASS) {
+		return;
 	}
-	if (obj->oeroded2 && !iscrys) {
-		switch (obj->oeroded2) {
-			case 2:	Strcat(prefix, "very "); break;
-			case 3:	Strcat(prefix, "thoroughly "); break;
-		}			
-		/* This catches things like dragonscale mail. */
-		Strcat(prefix, !is_damageable(obj) ? "deteriorated " : 
+	if (obj->oclass == POTION_CLASS) {
+		if (obj->odiluted) {
+			if(obj->dknown) {
+				Strcat(prefix, "diluted ");
+			} else if (in_final_dump) {
+				Strcat(prefix, "[diluted]");
+			}
+		}
+	} else {
+		if (obj->oeroded && !iscrys) {
+			switch (obj->oeroded) {
+				case 2:	Strcat(prefix, "very "); break;
+				case 3:	Strcat(prefix, "thoroughly "); break;
+			}
+			Strcat(prefix, is_rustprone(obj) ? "rusty " : "burnt ");
+		}
+		if (obj->oeroded2 && !iscrys) {
+			switch (obj->oeroded2) {
+				case 2:	Strcat(prefix, "very "); break;
+				case 3:	Strcat(prefix, "thoroughly "); break;
+			}
+			/* This catches things like dragonscale mail. */
+			Strcat(prefix, !is_damageable(obj) ? "deteriorated " :
 				is_corrodeable(obj) ? "corroded " : "rotted ");
-	}
-	if (obj->oerodeproof && (in_final_dump || obj->rknown))
-		Sprintf(eos(prefix), "%s%s%s ",
+		}
+		if (obj->oerodeproof && (in_final_dump || obj->rknown))
+			Sprintf(eos(prefix), "%s%s%s ",
 			obj->rknown ? "" : "[",
 			iscrys ? "fixed" :
 			is_rustprone(obj) ? "rustproof" :
 			is_corrodeable(obj) ? "corrodeproof" :	/* "stainless"? */
 			is_flammable(obj) ? "fireproof" : "protected",
 			obj->rknown ? "" : "]");
+	}
 }
 
 static char *
@@ -816,6 +827,8 @@ boolean with_price;
 
 	if (obj->greased) Strcat(prefix, "greased ");
 
+	add_erosion_words(obj, prefix, dump_ID_flag);
+
 	switch(obj->oclass) {
 	case AMULET_CLASS:
 		if(obj->owornmask & W_AMUL)
@@ -825,7 +838,6 @@ boolean with_price;
 		if(ispoisoned)
 			Strcat(prefix, "poisoned ");
 plus:
-		add_erosion_words(obj, prefix, dump_ID_flag);
 		if (obj->known || do_known) {
 			Sprintf(eos(prefix), "%s%s%s ",
 			  do_known ? "[" : "", sitoa(obj->spe), do_known ? "]" : "");
@@ -837,9 +849,6 @@ plus:
 				" (being worn)");
 		goto plus;
 	case TOOL_CLASS:
-		/* weptools already get this done when we go to the +n code */
-		if (!is_weptool(obj))
-		    add_erosion_words(obj, prefix, dump_ID_flag);
 		if(obj->owornmask & (W_TOOL /* blindfold */
 #ifdef STEED
 				| W_SADDLE
@@ -881,7 +890,6 @@ plus:
 			Strcat(prefix, "[faint] ");
 		break;
 	case WAND_CLASS:
-		add_erosion_words(obj, prefix, dump_ID_flag);
 charges:
 		if (obj->known || do_known) {
 		    Sprintf(eos(bp), " %s%d:%d%s", do_known ? "[(" : "(",
@@ -893,7 +901,6 @@ charges:
 		    Strcat(bp, " (lit)");
 		break;
 	case RING_CLASS:
-		add_erosion_words(obj, prefix, dump_ID_flag);
 ring:
 		if(obj->owornmask & W_RINGR) Strcat(bp, " (on right ");
 		if(obj->owornmask & W_RINGL) Strcat(bp, " (on left ");
@@ -957,7 +964,6 @@ ring:
 		break;
 	case BALL_CLASS:
 	case CHAIN_CLASS:
-		add_erosion_words(obj, prefix, dump_ID_flag);
 		if(obj->owornmask & W_BALL)
 			Strcat(bp, " (chained to you)");
 			break;
