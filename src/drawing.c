@@ -271,7 +271,7 @@ struct symdef defsyms[MAXPCHARS] = {
 	{'"', "web",		C(CLR_GRAY)},	/* web */
 	{'^', "statue trap",	C(CLR_GRAY)},	/* trap */
 /*60*/	{'^', "magic trap",	C(CLR_YELLOW)},	/* trap */
-	{'^', "anti-magic field", C(HI_ZAP)},	/* trap */
+	{'^', "anti-magic field", C(CLR_GREEN)},	/* trap */
 	{'^', "polymorph trap",	C(CLR_BRIGHT_GREEN)},	/* trap */
 	{'|', "wall",		C(CLR_GRAY)},	/* vbeam */
 	{'-', "wall",		C(CLR_GRAY)},	/* hbeam */
