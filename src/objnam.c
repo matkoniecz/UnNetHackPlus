@@ -2976,12 +2976,14 @@ typfnd:
 	otmp->oeroded2 = eroded2;
 	
 	/* set erodeproof */
-	if (erodeproof && !eroded && !eroded2){
+	if (erodeproof){
 		otmp->oerodeproof = (Luck >= 0
 #ifdef WIZARD
 					|| wizard
 #endif
 				);
+	} else {
+		otmp->oerodeproof = erodeproof;
 	}
 
 	/* set otmp->recharged */
