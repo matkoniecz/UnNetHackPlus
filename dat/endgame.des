@@ -263,9 +263,6 @@ ENDMAP
 TELEPORT_REGION:(69,16,69,16),(0,0,0,0)
 PORTAL:(0,0,75,19),(65,13,75,19),"random_plane"
 
-LOOP [40] {
-  TRAP:"fire",random
-}
 #  An assortment of fire-appropriate nasties
 MONSTER:('D',"draken"),random
 MONSTER:('&',"balrog"),random
