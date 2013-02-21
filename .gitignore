@@ -34,6 +34,15 @@ a.exe
 /dat/quest_levs
 /dat/rumors
 /dat/spec_levs
+/dat/guioptions
+/dat/mnsel.bmp
+/dat/mnselcnt.bmp
+/dat/mnunsel.bmp
+/dat/nethack.ico
+/dat/petmark.bmp
+/dat/rip.bmp
+/dat/splash.bmp
+/dat/tiles.bmp
 
 # /doc/
 /doc/Makefile
@@ -49,6 +58,7 @@ a.exe
 /include/pm.h
 /include/vis_tab.h
 /include/win32api.h
+/include/tile.h
 
 # /src/
 /src/*.o
@@ -64,6 +74,8 @@ a.exe
 /src/nhraykey.dll
 /src/nhdefkey.dll
 /src/nh340key.dll
+/src/tile.c
+/src/nhwin.a
 
 # /util/
 /util/*.o
@@ -82,3 +94,6 @@ a.exe
 /util/makedefs.exe
 /util/recover
 /util/recover.exe
+/util/tile2bmp.exe
+/util/tilemap.exe
+/util/uudecode.exe
