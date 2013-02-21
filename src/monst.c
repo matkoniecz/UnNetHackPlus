@@ -1206,7 +1206,7 @@ NEARDATA struct permonst mons[] = {
 	 * cannot confer intrinsics, to avoid polyself/egg abuse.
 	 *
 	 * As reptiles, dragons are cold-blooded and thus aren't seen
-	 * with infravision.  Red dragons are the exception.
+	 * with infravision. Glowing dragons are the exception.
 	 */
     MON("baby tatzelworm", S_DRAGON,
 	LVL(12, 9, 2, 10, 0), G_GENO,
@@ -1237,7 +1237,7 @@ NEARDATA struct permonst mons[] = {
 	  NO_ATTK, NO_ATTK, NO_ATTK, NO_ATTK, NO_ATTK),
 	SIZ(1500, 500, 0, MS_ROAR, MZ_HUGE), MR_FIRE, 0,
 	M1_FLY|M1_THICK_HIDE|M1_NOHANDS|M1_CARNIVORE,
-	M2_HOSTILE|M2_STRONG|M2_GREEDY|M2_JEWELS, M3_INFRAVISIBLE, CLR_BROWN),
+	M2_HOSTILE|M2_STRONG|M2_GREEDY|M2_JEWELS, 0, CLR_BROWN),
     MON("baby lindworm", S_DRAGON,
 	LVL(12, 9, 2, 10, 0), G_GENO,
 	A(ATTK(AT_BITE, AD_PHYS, 2, 6),
@@ -1327,7 +1327,7 @@ NEARDATA struct permonst mons[] = {
 	M1_FLY|M1_THICK_HIDE|M1_NOHANDS|M1_SEE_INVIS|M1_OVIPAROUS|
 	  M1_CARNIVORE,
 	M2_HOSTILE|M2_STRONG|M2_NASTY|M2_GREEDY|M2_JEWELS|M2_MAGIC,
-	M3_INFRAVISIBLE, CLR_BROWN),
+	0, CLR_BROWN),
     MON("lindworm", S_DRAGON,
 	LVL(15, 9, -1, 20, -5), (G_GENO|1),
 	A(ATTK(AT_BREA, AD_COLD, 4, 6), ATTK(AT_BITE, AD_PHYS, 3, 8),
