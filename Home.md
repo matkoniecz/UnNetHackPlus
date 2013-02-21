@@ -1,7 +1,6 @@
 Plans for UnNetHackPlus
 * autotravel, traps (squaky, pits) and pernament levitation
 * investigate crash bug on exploding BoH
-* sleep/antimagic trap
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/5832f415db395a31c23ac37c7e954185e2b0425c  - stun happening during travel
 * switch sleeping for cold attack for nazgul (maybe)
 * death texts by quest nemesis are not case devteam thinks about everything, as they may be killed is some other way (also: picking up quest artifact with alive nemesis)
