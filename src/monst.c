@@ -1207,6 +1207,8 @@ NEARDATA struct permonst mons[] = {
 	 *
 	 * As reptiles, dragons are cold-blooded and thus aren't seen
 	 * with infravision. Glowing dragons are the exception.
+	 *
+	 * Note: properties of dragons are significantly modified by dragons_init and shuffle_all ("shuffle dragon scales / scale mails") from o_init.c
 	 */
     MON("baby tatzelworm", S_DRAGON,
 	LVL(12, 9, 2, 10, 0), G_GENO,
