@@ -64,6 +64,7 @@
 	* Magic trap glyph is now yellow, anti-magic field dark green
 	* Fire traps removed from Plane of Fire
 	* Land mine and beartrap objects are lightier
+	* Bear trap is no longer ineffective on diagonals
 
 2012-04-01  UnNetHack 4.0.0
 	* Uncursed and blessed scrolls of magic mapping reveal secret doors

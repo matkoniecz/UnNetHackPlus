@@ -1797,7 +1797,9 @@ domove()
 #endif
 			Norep("You are %s.", predicament);
 		    }
-		    if((u.dx && u.dy) || !rn2(5)) u.utrap--;
+		    if(!rn2(2)) {
+			u.utrap--;
+		    }
 		}
 		return;
 	}
