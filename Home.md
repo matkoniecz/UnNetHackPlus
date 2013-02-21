@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* save vibrating square in dungeon overwiev
 * autotravel, traps (squaky, pits) and pernament levitation
 * investigate crash bug on exploding BoH
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/5832f415db395a31c23ac37c7e954185e2b0425c  - stun happening during travel
