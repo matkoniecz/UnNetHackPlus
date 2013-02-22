@@ -97,7 +97,7 @@ char *outbuf;
 		Strcpy(outbuf, random_mesg[rn2(SIZE(random_mesg))]);
 	}
 
-	wipeout_text(outbuf, rnl((int)(strlen(outbuf) / 6)) + rn2((int)(strlen(outbuf) / 6)) + 1, 0);
+	wipeout_text(outbuf, rnl((int)(strlen(outbuf) / 6) + 1) + rn2((int)(strlen(outbuf) / 6) + 1), 0);
 	return outbuf;
 }
 
