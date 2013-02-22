@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* wishing for unidentified dragon mail by power is not supposed to work
 * allow amnesia for pink h, spell skills targeted
 * fast travel should not stop on graves
 * save vibrating square in dungeon overwiev
