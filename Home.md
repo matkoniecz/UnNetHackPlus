@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* https://github.com/tung/NitroHack/wiki - UnNetHack bug fixes (not already in UnNetHack)
 * wishing for unidentified dragon mail by power is not supposed to work (UnH)
 * appearances but tiles (objects.c)
 * allow amnesia for pink h, spell skills targeted
