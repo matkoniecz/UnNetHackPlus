@@ -1,5 +1,6 @@
 Plans for UnNetHackPlus
-* wishing for unidentified dragon mail by power is not supposed to work
+* wishing for unidentified dragon mail by power is not supposed to work (UnH)
+* appearances but tiles (objects.c)
 * allow amnesia for pink h, spell skills targeted
 * fast travel should not stop on graves
 * save vibrating square in dungeon overwiev
