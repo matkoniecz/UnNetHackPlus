@@ -590,6 +590,10 @@ register struct	monst	*mtmp;
 		} else if (quest_mon_represents_role(ptr,PM_MONK)) {
 		    (void) mongets(mtmp, rn2(11) ? ROBE :
 					     CLOAK_OF_MAGIC_RESISTANCE);
+		} else if (ptr == &mons[PM_WIZARD_OF_YENDOR]) {
+			if (!rn2(22)) {
+				(void)mongets(mtmp, AMULET_OF_REFLECTION);
+			}
 		}
 		break;
 	    case S_NYMPH:
@@ -667,6 +671,9 @@ register struct	monst	*mtmp;
 		if (ptr == &mons[PM_CTHULHU]) {
 			(void)mongets(mtmp, AMULET_OF_YENDOR);
 			(void)mongets(mtmp, POT_FULL_HEALING);
+			if (!rn2(22)) {
+				(void)mongets(mtmp, AMULET_OF_REFLECTION);
+			}
 		}
 		break;
 	    case S_GNOME:
