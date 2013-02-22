@@ -16,6 +16,20 @@ On Linux and MacOSX for a single-user installation (a Linux Debian
 On Windows for a tty build:
  ./configure --with-owner=Username --with-group=Usergroup --build=mingw32 --prefix=/opt/unnethack --without-compression --enable-tty-graphics  --disable-file-areas && make && make install
 
+On Windows for a tile build:
+
+ ./configure --with-owner=Username --with-group=Usergroup --build=mingw32 --prefix=/opt/unnethack --without-compression --enable-mswin-graphics --disable-tty-graphics  --disable-file-areas && make && make install
+
+It is necessary to manually copy tiles
+
+ 1) convert \tilesets\unchozo32b.png to bmp 
+ 2) copy \tilesets\unchozo32b.bmp to folder with compiled tile version
+
+or
+
+ 1) before compiling delete .bmp files from \dat\ folder (otherwise make will skip producing new files)
+ 2) copy \dat\tiles.bmp to folder with compiled tile version
+ 3) in defaults.nh change "OPTIONS=tile_file:unchozo32b.bmp,tile_width:32,tile_height:32" to "OPTIONS=tile_file:tiles.bmp,tile_width:16,tile_height:16"
 
 Please direct bugs and questions to <bulwersator@gmail.com> or post them to the
 NetHack Newsgroup rec.games.roguelike.nethack[1].
