@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* fast travel should not stop on graves
 * save vibrating square in dungeon overwiev
 * autotravel, traps (squaky, pits) and pernament levitation
 * investigate crash bug on exploding BoH
