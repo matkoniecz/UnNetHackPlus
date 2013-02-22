@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* allow amnesia for pink h, spell skills targeted
 * fast travel should not stop on graves
 * save vibrating square in dungeon overwiev
 * autotravel, traps (squaky, pits) and pernament levitation
