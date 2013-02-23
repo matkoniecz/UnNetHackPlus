@@ -1,5 +1,6 @@
 Plans for UnNetHackPlus
 * Double Cthulhu sanctum
+* trees for monk, knight quests
 * autotravel and stopping for engravings
 * monster with tele= resist \ of tele
 * https://github.com/tung/NitroHack/wiki - UnNetHack bug fixes (not already in UnNetHack)
