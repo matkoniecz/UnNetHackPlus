@@ -313,6 +313,8 @@ register boolean special;
 	    quan = rnd(3);
 	    while(quan--)
 		(void)mongets(mtmp, rnd_misc_item(mtmp));
+	    if(!rn2(22))
+		(void)mongets(mtmp, AMULET_OF_REFLECTION);
 	}
 
 	return(mtmp);
