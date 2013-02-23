@@ -934,6 +934,12 @@ makelevel()
 
     }
 
+	/* make player monsters - make them rare and ridiculously rare at shallow levels */
+	unsigned lvl = level_difficulty();
+	if(lvl*lvl*lvl > rn2(500000)) {
+		create_mplayers(1, TRUE);
+	}
+
 #ifdef REINCARNATION
 skip0:
 #endif

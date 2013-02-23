@@ -78,6 +78,7 @@
 	* Amulets may be made from different materials (including glass!)
 	* Land mine and beartrap objects are lightier
 	* Boss type monsters may have ascension kit type items (amulet of reflection)
+	* Player monsters may appear before Astral Plane
 
 	Full list of changes available at https://github.com/Bulwersator/UnNetHackPlus/commits/master
 
