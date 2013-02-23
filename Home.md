@@ -1,5 +1,6 @@
 Plans for UnNetHackPlus
 * Double Cthulhu sanctum
+* autotravel and stopping for engravings
 * monster with tele= resist \ of tele
 * https://github.com/tung/NitroHack/wiki - UnNetHack bug fixes (not already in UnNetHack)
 * wishing for unidentified dragon mail by power is not supposed to work (UnH)
