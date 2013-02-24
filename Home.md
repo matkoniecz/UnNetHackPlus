@@ -1,4 +1,7 @@
 Plans for UnNetHackPlus
+* http://bilious.alt.org/?181
+* http://bilious.alt.org/?151
+* http://bilious.alt.org/?224
 * Double Cthulhu sanctum
 * trees for monk, knight, barbarian quests
 * autotravel and stopping for engravings
@@ -150,6 +153,7 @@ proud owner of a magic whistle.
 * oversight: you can #chat while being choked by a rope golem ("strangulation seem to be handled okay)
 
 #savebreaking?
+* http://bilious.alt.org/?63
 * remove grinding spells (create monster, polymorph, cancellation(?)) and introduce something interesting - see http://www.reddit.com/r/roguelikes/comments/18msat/is_there_a_roguelike_with_interesting_spells/ 
 * TRAPROOM from spork
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/d5f208b70d606071a5829526e4806dab0e87832a  Increase missile weapon range from properly fired missiles. 
