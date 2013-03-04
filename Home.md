@@ -1,4 +1,6 @@
 Plans for UnNetHackPlus
+* https://github.com/tung/NitroHack/commit/206f8427deefee0e87110c6f93f1df49fa31e9e3
+* https://github.com/Chris-plus-alphanumericgibberish/dnethack/commit/310da13976ab30e9db08f73e94aafab96ff1ac41
 * http://bilious.alt.org/?181
 * http://bilious.alt.org/?151
 * http://bilious.alt.org/?224
