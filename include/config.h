@@ -460,6 +460,7 @@ typedef long glyph_t;
 /* #define LIVELOG_BONES_KILLER */ /* Report if a ghost of a former player is
                                     * killed - Patric Mueller (15 Aug 2009) */
 #define TUTORIAL_MODE /* Alex Smith */
+#define ASTRAL_ESCAPE /* Allow escape from Astral plane (with the Amulet) - CWC */
 
 /* End of Section 6 */
 
@@ -471,7 +472,6 @@ typedef long glyph_t;
  */
 #define STEED		/* Riding steeds */
 #define WEBB_DISINT /* Disintegrator - Nicholas Webb */
-#define ASTRAL_ESCAPE /* Allow escape from Astral plane (with the Amulet) - CWC */
 #define ADJSPLIT /* splittable #adjust - Sam Dennis, conditionalized by Jukka Lahtinen */
 #define ELBERETH_CONDUCT /* Track the number of times the player engraves Elbereth. - Ray Kulhanek */
 
