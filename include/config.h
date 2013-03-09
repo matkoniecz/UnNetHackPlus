@@ -456,16 +456,26 @@ typedef long glyph_t;
  * They come from patches that have been unconditionally incorporated
  * into UnNetHack.
  */
+
+/* #define LIVELOG_BONES_KILLER */ /* Report if a ghost of a former player is
+                                    * killed - Patric Mueller (15 Aug 2009) */
+#define TUTORIAL_MODE /* Alex Smith */
+
+/* End of Section 6 */
+
+/*
+ * Section 7:  FICTIONAL DEFINES
+ *
+ * These defines are useless, as #ifdef etc were removed from code 
+ * and features are incorporated into UnNetHackPlus without evil preprocessor instructions littering code
+ */
 #define STEED		/* Riding steeds */
 #define WEBB_DISINT /* Disintegrator - Nicholas Webb */
 #define ASTRAL_ESCAPE /* Allow escape from Astral plane (with the Amulet) - CWC */
-/* #define LIVELOG_BONES_KILLER */ /* Report if a ghost of a former player is
-                                    * killed - Patric Mueller (15 Aug 2009) */
 #define ADJSPLIT /* splittable #adjust - Sam Dennis, conditionalized by Jukka Lahtinen */
-#define TUTORIAL_MODE /* Alex Smith */
 #define ELBERETH_CONDUCT /* Track the number of times the player engraves Elbereth. - Ray Kulhanek */
 
-/* End of Section 6 */
+/* End of Section 7 */
 
 #include "global.h"	/* Define everything else according to choices above */
 
