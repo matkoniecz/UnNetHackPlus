@@ -45,9 +45,6 @@ struct conditionals {
 	{ MON_GLYPH, PM_VORPAL_JABBERWOCK, "Kop Lieutenant" },
 	{ MON_GLYPH, PM_VORPAL_JABBERWOCK, "Kop Kaptain" },
 #endif
-#ifndef WEBB_DISINT
-	{ MON_GLYPH, PM_DISENCHANTER, "disintegrator" },
-#endif
 	{ MON_GLYPH, PM_VAMPIRE_LORD, "vampire mage" },
 #ifndef BLACKMARKET
 	{ MON_GLYPH, PM_SHOPKEEPER, "black marketeer" },

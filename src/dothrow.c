@@ -1206,12 +1206,10 @@ register struct obj   *obj;
 	register int	disttmp; /* distance modifier */
 	int otyp = obj->otyp;
 	boolean guaranteed_hit = (u.uswallow && mon == u.ustuck);
-#ifdef WEBB_DISINT
 	boolean obj_disint = (touch_disintegrates(mon->data) &&
 	                      !mon->mcan &&
 	                       (mon->mhp > 1) &&
 	                        !oresist_disintegration(obj));
-#endif
 
 	/* Differences from melee weapons:
 	 *
@@ -1363,11 +1361,7 @@ register struct obj   *obj;
 			broken = 0;
 		}
 
-		if (broken
-#ifdef WEBB_DISINT
-          || obj_disint
-#endif
-                        ) {
+		if (broken || obj_disint) {
 			if (*u.ushops)
 			    check_shop_obj(obj, bhitpos.x,bhitpos.y, TRUE);
 			obfree(obj, (struct obj *)0);
@@ -1388,14 +1382,12 @@ register struct obj   *obj;
 		    if (was_swallowed && !u.uswallow && obj == uball)
 			return 1;	/* already did placebc() */
 		}
-#ifdef WEBB_DISINT
 		if (obj_disint){
 			if (*u.ushops)
 				check_shop_obj(obj, bhitpos.x,bhitpos.y, TRUE);
 			obfree(obj, (struct obj *)0);
 			return 1;
 		}
-#endif
 	    } else {
 		tmiss(obj, mon);
 	    }
@@ -1405,14 +1397,12 @@ register struct obj   *obj;
 	    if (tmp >= rnd(20)) {
 		exercise(A_DEX, TRUE);
 		(void) hmon(mon,obj,1);
-#ifdef WEBB_DISINT
 		if (obj_disint){
 			if (*u.ushops)
 				check_shop_obj(obj, bhitpos.x,bhitpos.y, TRUE);
 			obfree(obj, (struct obj *)0);
 			return 1;
 		}
-#endif
 	    } else {
 		tmiss(obj, mon);
 	    }

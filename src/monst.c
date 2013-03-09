@@ -1935,7 +1935,6 @@ struct permonst _mons2[] = {
 	SIZ(750, 200, 0, MS_GROWL, MZ_LARGE), 0, 0,
 	M1_ANIMAL|M1_CARNIVORE, M2_HOSTILE,
 	M3_INFRAVISIBLE, CLR_BLUE),
-#ifdef WEBB_DISINT
     MON("disintegrator", S_RUSTMONST,
 	LVL(18, 8, 0, 20, -3), (G_HELL|G_GENO|G_NOCORPSE|1),
 	A(ATTK(AT_CLAW, AD_DISN, 4, 4), /* don't want passive, disintegration
@@ -1945,7 +1944,6 @@ struct permonst _mons2[] = {
 	M1_ANIMAL|M1_TUNNEL|M1_NOTAKE|M1_NOHANDS|M1_REGEN,
 	M2_NOPOLY|M2_HOSTILE|M2_WANDER|M2_NASTY,
 	M3_INFRAVISIBLE, HI_ABOMINATION),
-#endif
 /*
  * Snakes
  */

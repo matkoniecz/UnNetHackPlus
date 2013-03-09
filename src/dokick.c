@@ -149,7 +149,6 @@ register xchar x, y;
 		/* we only care about kicking attacks here */
 		if (uattk->aatyp != AT_KICK) continue;
 
-#ifdef WEBB_DISINT
 		if (touch_disintegrates(mon->data) && !mon->mcan && mon->mhp>6){
 			if(uarmf) {
 				if(!oresist_disintegration(uarmf)){
@@ -166,9 +165,7 @@ register xchar x, y;
 				dis_dmg = instadisintegrate(kbuf);
 				break;
 			}
-		} else
-#endif
-		if (mon->data == &mons[PM_SHADE] &&
+		} else if (mon->data == &mons[PM_SHADE] &&
 			(!uarmf || !uarmf->blessed)) {
 		    /* doesn't matter whether it would have hit or missed,
 		       and shades have no passive counterattack */
@@ -259,7 +256,6 @@ register struct monst *mtmp;
 register struct obj *gold;
 {
 	boolean msg_given = FALSE;
-#ifdef WEBB_DISINT
 	if (touch_disintegrates(mtmp->data) && !mtmp->mcan && mtmp->mhp >6 &&
 # ifdef GOLDOBJ
 	   !oresist_disintegration(gold)
@@ -272,7 +268,6 @@ register struct obj *gold;
 		dealloc_obj(gold);
 		return TRUE;
 	}
-#endif
 
 	if(!likes_gold(mtmp->data) && !mtmp->isshk && !mtmp->ispriest
 			&& !is_mercenary(mtmp->data)) {

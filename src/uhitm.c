@@ -549,9 +549,7 @@ int thrown;
 	boolean get_dmg_bonus = TRUE;
 	boolean ispoisoned = FALSE, needpoismsg = FALSE, poiskilled = FALSE;
 	boolean silvermsg = FALSE, silverobj = FALSE;
-#ifdef WEBB_DISINT
 	boolean disint_obj = FALSE;
-#endif
 	boolean valid_weapon_attack = FALSE;
 	boolean unarmed = !uwep && !uarm && !uarms;
 	int jousting = 0;
@@ -588,7 +586,6 @@ int thrown;
 		    tmp += rnd(20);
 		    silvermsg = TRUE;
 		}
-#ifdef WEBB_DISINT
 		if (touch_disintegrates(mdat) && !mon->mcan && (mon->mhp>6)) {
 			int dis_dmg;
 			valid_weapon_attack =0;
@@ -617,10 +614,8 @@ int thrown;
 			    disint_obj = TRUE;
 			    valid_weapon_attack = 0;
 		    }
-#endif
 	    }
 	} else {
-#ifdef WEBB_DISINT
 		if (touch_disintegrates(mdat) &&
 		    !oresist_disintegration(obj) &&
 		     mon->mhp > 6 &&
@@ -629,9 +624,7 @@ int thrown;
 			valid_weapon_attack = FALSE;
 			tmp = obj->owt;
 			weight_dmg(tmp);
-		} else
-#endif
-    {
+		} else {
 	    Strcpy(saved_oname, cxname(obj));
 	    if(obj->oclass == WEAPON_CLASS || is_weptool(obj) ||
 	       obj->oclass == GEM_CLASS) {
@@ -995,16 +988,15 @@ int thrown;
 		Your("%s %s no longer poisoned.", xname(obj),
 		     otense(obj, "are"));
 	    }
-#ifdef WEBB_DISINT
-	    if (disint_obj)
-	       ;
-	    else
-#endif
-	    if (resists_poison(mon))
-		needpoismsg = TRUE;
-	    else if (rn2(10))
-		tmp += rnd(6);
-	    else poiskilled = TRUE;
+	    if (!disint_obj) {
+		if (resists_poison(mon)) {
+			needpoismsg = TRUE;
+		} else if (rn2(10)) {
+			tmp += rnd(6);
+		} else {
+			poiskilled = TRUE;
+		}
+	    }
 	}
 	if (tmp < 1) {
 	    /* make sure that negative damage adjustment can't result
@@ -1022,7 +1014,6 @@ int thrown;
 		if (get_dmg_bonus) tmp = 1;
 	    }
 	}
-#ifdef WEBB_DISINT
 	if (disint_obj && obj) { /* all the hit msgs, no object destruction */
 		if (obj->oclass == POTION_CLASS || obj->oclass == VENOM_CLASS ||
 				obj->otyp == EGG || obj->otyp == CREAM_PIE) {
@@ -1040,9 +1031,7 @@ int thrown;
 			Your("%s vanishes on impact!", xname(obj));
 			hittxt = TRUE;
 		}
-	} else
-#endif
-	if (jousting) {
+	} else if (jousting) {
 	    tmp += d(2, (obj == uwep) ? 10 : 2);	/* [was in dmgval()] */
 	    You("joust %s%s",
 			 mon_nam(mon), canseemon(mon) ? exclam(tmp) : ".");
@@ -1117,7 +1106,6 @@ int thrown;
 			 mon_nam(mon), canseemon(mon) ? exclam(tmp) : ".");
 	}
 
-#ifdef WEBB_DISINT
 	if (disint_obj && obj) {
 		if (!hittxt) {
 			if (cansee(mon->mx, mon->my)) {
@@ -1137,7 +1125,6 @@ int thrown;
 			/*obfree(obj, (struct obj *) 0 ); handled: elsewhere */
 		}
 	}
-#endif
 	if (silvermsg) {
 		const char *fmt;
 		char *whom = mon_nam(mon);
@@ -1980,11 +1967,7 @@ register struct attack *mattk;
 	    for (otmp = mdef->minvent; otmp; otmp = otmp->nobj)
 		(void) snuff_lit(otmp);
 
-      if((!touch_petrifies(mdef->data) || Stone_resistance)
-#ifdef WEBB_DISINT
-          && (!touch_disintegrates(mdef->data) || Disint_resistance)
-#endif
-        ) {
+      if((!touch_petrifies(mdef->data) || Stone_resistance) && (!touch_disintegrates(mdef->data) || Disint_resistance)) {
 		static char msgbuf[BUFSZ];
 		start_engulf(mdef);
 		switch(mattk->adtyp) {
@@ -2135,9 +2118,7 @@ register struct attack *mattk;
 		You("bite into %s.", mon_nam(mdef));
 		Sprintf(kbuf, "swallowing %s whole", an(mdef->data->mname));
 		instapetrify(kbuf);
-#ifdef WEBB_DISINT
-        instadisintegrate(kbuf);
-#endif 
+		instadisintegrate(kbuf);
 	    }
 	}
 	return(0);
@@ -2271,7 +2252,7 @@ use_weapon:
 			    else if (mattk->aatyp == AT_TENT)
 				    Your("tentacles suck %s.", mon_nam(mon));
 			    else You("hit %s.", mon_nam(mon));
-#ifdef WEBB_DISINT
+
 			    if (touch_disintegrates(mon->data) && !mon->mcan && mon->mhp>1) {
 				    int dis_dmg = 0;
 				    if (mattk->aatyp == AT_KICK && uarmf) {
@@ -2301,9 +2282,9 @@ use_weapon:
 				    }
 				    mon->mhp -= dis_dmg;
 				    if (mon->mhp < 1) mon->mhp = 1;
-			    } else
-#endif
-			    sum[i] = damageum(mon, mattk);
+			    } else {
+				sum[i] = damageum(mon, mattk);
+			    }
 			} else
 			    missum(mon, mattk);
 			break;

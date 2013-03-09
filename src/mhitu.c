@@ -1589,7 +1589,6 @@ dopois:
 
 		}
 		break;
-#ifdef WEBB_DISINT
 	    case AD_DISN:
 		hitmsg(mtmp, mattk);
 		if (!mtmp->mcan && mtmp->mhp>6) {
@@ -1675,7 +1674,6 @@ dopois:
 			}
 		}
 		break;
-#endif
      default:
        dmg = 0;
 			break;

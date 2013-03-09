@@ -24,9 +24,7 @@ STATIC_DCL int FDECL(gazemm, (struct monst *,struct monst *,struct attack *));
 STATIC_DCL int FDECL(gulpmm, (struct monst *,struct monst *,struct attack *));
 STATIC_DCL int FDECL(explmm, (struct monst *,struct monst *,struct attack *));
 STATIC_DCL int FDECL(mdamagem, (struct monst *,struct monst *,struct attack *));
-#ifdef WEBB_DISINT
 STATIC_DCL int FDECL(defdisintagr, (struct monst *,struct monst *,struct attack *));
-#endif
 STATIC_DCL void FDECL(mswingsm, (struct monst *, struct monst *, struct obj *));
 STATIC_DCL void FDECL(noises,(struct monst *,struct attack *));
 STATIC_DCL void FDECL(missmm,(struct monst *,struct monst *,struct attack *));
@@ -282,10 +280,7 @@ mattackm(magr, mdef)
 		 * players, or under conflict or confusion. 
 		 */
 		if (!magr->mconf && !Conflict && otmp && (
-#ifdef WEBB_DISINT
-          (touch_disintegrates(mdef->data) &&
-           (mattk->aatyp == AT_WEAP || !(resists_disint(magr))) ) ||
-#endif 
+          (touch_disintegrates(mdef->data) && (mattk->aatyp == AT_WEAP || !(resists_disint(magr))) ) ||
 		    (mattk->aatyp != AT_WEAP && touch_petrifies(mdef->data)))) {
 		    strike = 0;
 		    break;
@@ -583,7 +578,6 @@ explmm(magr, mdef, mattk)
 	return result;
 }
 
-#ifdef WEBB_DISINT
 STATIC_OVL int
 defdisintagr(magr, mdef, mattk)
 	register struct monst	*magr, *mdef;
@@ -714,7 +708,6 @@ defdisintagr(magr, mdef, mattk)
 	}
 	return tmp;
 }
-#endif
 
 /*
  *  See comment at top of mattackm(), for return values.
@@ -730,7 +723,6 @@ mdamagem(magr, mdef, mattk)
 	int armpro, num, tmp = d((int)mattk->damn, (int)mattk->damd);
 	boolean cancelled;
 
-#ifdef WEBB_DISINT
 	int def_disintegrated;
 	if (touch_disintegrates(pd) &&
 			(def_disintegrated = defdisintagr(magr, mdef, mattk)) != -2 )
@@ -745,7 +737,6 @@ mdamagem(magr, mdef, mattk)
 				tmp = def_disintegrated;
 				break;
 		}
-#endif
 	if (touch_petrifies(pd) && !resists_ston(magr)) {
 	    long protector = attk_protection((int)mattk->aatyp),
 		 wornitems = magr->misc_worn_check;
@@ -1300,7 +1291,6 @@ mdamagem(magr, mdef, mattk)
 		/* there's no msomearmor() function, so just do damage */
 	     /* if (cancelled) break; */
 		break;
-#ifdef WEBB_DISINT
 	    case AD_DISN: /* only hit torso aromor */
 		if (!magr->mcan && magr->mhp > 6) {
 			struct obj * otch = 0;
@@ -1339,7 +1329,6 @@ mdamagem(magr, mdef, mattk)
 				        (grow_up(magr,mdef) ?  0 : MM_AGR_DIED));
 		}
 		break;
-#endif
 	    default:	tmp = 0;
 			break;
 	}

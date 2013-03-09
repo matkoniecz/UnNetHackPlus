@@ -1170,12 +1170,10 @@ boolean your_fault;
 	register const char *botlnam = bottlename();
 	boolean isyou = (mon == &youmonst);
 	int distance;
-#ifdef WEBB_DISINT
 	boolean disint = (touch_disintegrates(mon->data) && 
 	                  !oresist_disintegration(obj) &&
 	                  !mon->mcan &&
 	                   mon->mhp>6);
-#endif
 
 	if (isyou) {
 		distance = 0;
@@ -1184,12 +1182,9 @@ boolean your_fault;
 		losehp(rnd(2), "thrown potion", KILLED_BY_AN);
 	} else {
 		distance = distu(mon->mx,mon->my);
-#ifdef WEBB_DISINT
-		if (!cansee(mon->mx,mon->my)) pline(disint?"Vip!":"Crash!");
-#else
-		if (!cansee(mon->mx,mon->my)) pline("Crash!");
-#endif
-		else {
+		if (!cansee(mon->mx,mon->my)) {
+			pline(disint ? "Vip!" : "Crash!");
+		} else {
 		    char *mnam = mon_nam(mon);
 		    char buf[BUFSZ];
 
@@ -1200,24 +1195,15 @@ boolean your_fault;
 		    } else {
 			Strcpy(buf, mnam);
 		    }
-#ifdef WEBB_DISINT
 		    pline_The("%s crashes on %s and %s.",
-			   botlnam, buf, disint?"disintegrates":"breaks into shards");
-#else
-          pline_The("%s crashes on %s breaks into shards.",
-			   botlnam, buf);
-#endif
+			   botlnam, buf, disint ? "disintegrates" : "breaks into shards");
 		}
 		if(rn2(5) && mon->mhp > 1)
 			mon->mhp--;
 	}
 
 	/* oil doesn't instantly evaporate */
-	if (obj->otyp != POT_OIL && cansee(mon->mx,mon->my) 
-#ifdef WEBB_DISINT
-       && !disint
-#endif
-       )
+	if (obj->otyp != POT_OIL && cansee(mon->mx,mon->my) && !disint)
 		pline("%s.", Tobjnam(obj, "evaporate"));
 
     if (isyou) {
@@ -1243,10 +1229,7 @@ boolean your_fault;
 	boolean angermon = TRUE;
 
 	if (!your_fault) angermon = FALSE;
-#ifdef WEBB_DISINT
-	if (!disint)
-#endif
-     {
+	if (!disint) {
 	switch (obj->otyp) {
 	case POT_HEALING:
 	case POT_EXTRA_HEALING:
@@ -1379,26 +1362,21 @@ boolean your_fault;
 		break;
 */
 	}
-     }
+	}
 
 	if (angermon)
 	    wakeup(mon);
 	else
 	    mon->msleeping = 0;
     }
-#ifdef WEBB_DISINT
-    if (!disint)
-#endif 
-   {
-
-	/* Note: potionbreathe() does its own docall() */
-	if ((distance==0 || ((distance < 3) && rn2(5))) &&
-	    (!breathless(youmonst.data) || haseyes(youmonst.data)))
-		potionbreathe(obj);
-	else if (obj->dknown && !objects[obj->otyp].oc_name_known &&
-		   !objects[obj->otyp].oc_uname && cansee(mon->mx,mon->my))
-		docall(obj);
-   }
+	if (!disint) {
+		/* Note: potionbreathe() does its own docall() */
+		if ((distance==0 || ((distance < 3) && rn2(5))) && (!breathless(youmonst.data) || haseyes(youmonst.data))) {
+			potionbreathe(obj);
+		} else if (obj->dknown && !objects[obj->otyp].oc_name_known && !objects[obj->otyp].oc_uname && cansee(mon->mx,mon->my)) {
+			docall(obj);
+		}
+	}
 	if(*u.ushops && obj->unpaid) {
 	        register struct monst *shkp =
 			shop_keeper(*in_rooms(u.ux, u.uy, SHOPBASE));

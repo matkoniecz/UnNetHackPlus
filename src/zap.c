@@ -3270,11 +3270,7 @@ xchar sx, sy;
 	    killer = fltxt;
 	    /* when killed by disintegration breath, don't leave corpse */
 	    u.ugrave_arise = (type == -ZT_BREATH(ZT_DEATH)) ? -3 : NON_PM;
-#ifdef WEBB_DISINT
 	    done((type== -ZT_BREATH(ZT_DEATH)) ? DISINTEGRATED : DIED);
-#else
-	    done(DIED);
-#endif
 	    return; /* lifesaved */
 	case ZT_LIGHTNING:
 	    if (Shock_resistance) {
@@ -3526,11 +3522,7 @@ register int dx,dy;
 #endif
 			for (otmp = mon->minvent; otmp; otmp = otmp2) {
 			    otmp2 = otmp->nobj;
-              if (
-#ifdef WEBB_DISINT
-                  otmp == m_amulet || 
-#endif
-                  !oresist_disintegration(otmp)) {
+			    if (otmp == m_amulet || !oresist_disintegration(otmp)) {
 				obj_extract_self(otmp);
 				obfree(otmp, (struct obj *)0);
 			    }

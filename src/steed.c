@@ -86,7 +86,6 @@ use_saddle(otmp)
 		instapetrify(kbuf);
  	    }
 	}
-#ifdef WEBB_DISINT
 	if (touch_disintegrates(ptr)){
 		char kbuf[BUFSZ];
 		if(!oresist_disintegration(otmp)){
@@ -96,7 +95,6 @@ use_saddle(otmp)
 		Sprintf(kbuf,"attempting to saddle %s", a_monnam(mtmp));
 		instadisintegrate(kbuf);
 	}
-#endif
 
 	if (ptr == &mons[PM_INCUBUS] || ptr == &mons[PM_SUCCUBUS]) {
 	    pline("Shame on you!");
