@@ -2024,7 +2024,6 @@ register struct monst *shkp;	/* if angry, impose a surcharge */
 	/* anger surcharge should match rile_shk's */
 	if (shkp && ESHK(shkp)->surcharge) tmp += (tmp + 2L) / 3L;
 
-	/* KMH, balance patch -- healthstone replaces rotting/health */
 	if (Is_blackmarket(&u.uz)) {
 	  if (obj->oclass==RING_CLASS    || obj->oclass==AMULET_CLASS   ||
 	      obj->oclass==POTION_CLASS  || obj->oclass==SCROLL_CLASS   ||
