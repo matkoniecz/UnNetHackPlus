@@ -35,12 +35,9 @@ unsigned gpflags;
 	 * which could be co-located and thus get restricted a bit too much.
 	 * oh well.
 	 */
-	if (mtmp != &youmonst && x == u.ux && y == u.uy
-#ifdef STEED
-			&& (!u.usteed || mtmp != u.usteed)
-#endif
-			)
-	    is_badpos = 1;
+	if (mtmp != &youmonst && x == u.ux && y == u.uy && (!u.usteed || mtmp != u.usteed)) {
+		is_badpos = 1;
+	}
 
 	if (mtmp) {
 	    mtmp2 = m_at(x,y);
@@ -113,11 +110,7 @@ unsigned gpflags;
 	 * which could be co-located and thus get restricted a bit too much.
 	 * oh well.
 	 */
-	if (mtmp != &youmonst && x == u.ux && y == u.uy
-#ifdef STEED
-			&& (!u.usteed || mtmp != u.usteed)
-#endif
-			)
+	if (mtmp != &youmonst && x == u.ux && y == u.uy && (!u.usteed || mtmp != u.usteed))
 		return FALSE;
 
 	if (mtmp) {
@@ -535,13 +528,11 @@ boolean allow_drag;
 	}
 	initrack(); /* teleports mess up tracking monsters without this */
 	update_player_regions();
-#ifdef STEED
 	/* Move your steed, too */
 	if (u.usteed) {
 		u.usteed->mx = nux;
 		u.usteed->my = nuy;
 	}
-#endif
 	/*
 	 *  Make sure the hero disappears from the old location.  This will
 	 *  not happen if she is teleported within sight of her previous
@@ -595,11 +586,9 @@ boolean force_it;
 {
 	register struct obj *otmp;
 
-#ifdef STEED
-	if (mtmp == u.usteed)
+	if (mtmp == u.usteed) {
 		return (FALSE);
-#endif
-
+	}
 	if (mtmp->mleashed) {
 	    otmp = get_mleash(mtmp);
 	    if (!otmp) {
@@ -643,11 +632,7 @@ tele()
 #ifdef WIZARD
 	(
 #endif
-	 (u.uhave.amulet || On_W_tower_level(&u.uz)
-#ifdef STEED
-	  || (u.usteed && mon_has_amulet(u.usteed))
-#endif
-	 )
+	 (u.uhave.amulet || On_W_tower_level(&u.uz) || (u.usteed && mon_has_amulet(u.usteed)))
 #ifdef WIZARD
 	 && (!wizard) )
 #endif
@@ -663,14 +648,10 @@ tele()
 	    if (unconscious()) {
 		pline("Being unconscious, you cannot control your teleport.");
 	    } else {
-#ifdef STEED
 		    char buf[BUFSZ];
 		    if (u.usteed) Sprintf(buf," and %s", mon_nam(u.usteed));
-#endif
 		    pline("To what position do you%s want to be teleported?",
-#ifdef STEED
 				u.usteed ? buf :
-#endif
 			   "");
 		    cc.x = u.ux;
 		    cc.y = u.uy;
@@ -1243,12 +1224,10 @@ boolean suppress_impossible;
 {
 	register int x, y, trycount;
 
-#ifdef STEED
 	if (mtmp == u.usteed) {
 	    tele();
 	    return TRUE;
 	}
-#endif
 
 	if (mtmp->iswiz && mtmp->mx) {	/* Wizard, not just arriving */
 	    if (!In_W_tower(u.ux, u.uy, &u.uz))

@@ -461,9 +461,9 @@ make_version()
 #ifdef TOURIST
 			| (1L << 10)
 #endif
-#ifdef STEED
+//#ifdef STEED - enabled uncoditionally
 			| (1L << 11)
-#endif
+//#endif
 #ifdef GOLDOBJ
 			| (1L << 12)
 #endif

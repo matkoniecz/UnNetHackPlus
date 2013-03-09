@@ -691,14 +691,12 @@ register char *enterstring;
 	/* can't do anything about blocking if teleported in */
 	if (!inside_shop(u.ux, u.uy) && !(Is_blackmarket(&u.uz))) {
 	    boolean should_block = FALSE;
-#ifdef STEED
 	    if (u.usteed) {
 		verbalize(NOTANGRY(shkp) ?
 			  "Will you please leave %s outside?" :
 			  "Leave %s outside.", y_monnam(u.usteed));
 		should_block = TRUE;
 	    }
-#endif
 	    if (should_block) (void) dochug(shkp);  /* shk gets extra move */
 	}
 	return;
@@ -3430,17 +3428,9 @@ register struct monst *shkp;
 	    if ((Is_blackmarket(&u.uz) && u.umonnum>0 &&
 		 mons[u.umonnum].mlet != S_HUMAN) ||
                 /* WAC Let you out if you're stuck inside */                
-                (!Is_blackmarket(&u.uz) && (Invis 
-#ifdef STEED
-			|| u.usteed
-#endif
-			                          ) && !inside_shop(u.ux, u.uy)))
+                (!Is_blackmarket(&u.uz) && (Invis || u.usteed) && !inside_shop(u.ux, u.uy)))
 #else /* BLACKMARKET */
-		if (Invis
-#ifdef STEED
-			|| u.usteed
-#endif
-			)
+		if (Invis || u.usteed)
 #endif /* BLACKMARKET */
 		{
 		    avoid = FALSE;
@@ -4394,11 +4384,7 @@ register xchar x, y;
 	if(shkp->mx == sx && shkp->my == sy
 		&& shkp->mcanmove && !shkp->msleeping
 		&& (x == sx-1 || x == sx+1 || y == sy-1 || y == sy+1)
-		&& (Invis 
-#ifdef STEED
-			|| u.usteed
-#endif
-	  )) {
+		&& (Invis || u.usteed)) {
 		pline("%s%s blocks your way!", shkname(shkp),
 				Invis ? " senses your motion and" : "");
 		return(TRUE);

@@ -9,9 +9,7 @@ STATIC_DCL void FDECL(steal_it, (struct monst *, struct attack *));
 STATIC_DCL boolean FDECL(hitum, (struct monst *,int,struct attack *));
 STATIC_DCL boolean FDECL(hmon_hitmon, (struct monst *,struct obj *,int));
 STATIC_DCL void FDECL(noisy_hit,(struct monst*,struct obj*,int));
-#ifdef STEED
 STATIC_DCL int FDECL(joust, (struct monst *,struct obj *));
-#endif
 STATIC_DCL void NDECL(demonpet);
 STATIC_DCL boolean FDECL(m_slips_free, (struct monst *mtmp,struct attack *mattk));
 STATIC_DCL int FDECL(explum, (struct monst *,struct attack *));
@@ -556,9 +554,7 @@ int thrown;
 #endif
 	boolean valid_weapon_attack = FALSE;
 	boolean unarmed = !uwep && !uarm && !uarms;
-#ifdef STEED
 	int jousting = 0;
-#endif
 	int wtype;
 	struct obj *monwep;
 	char yourbuf[BUFSZ];
@@ -646,11 +642,7 @@ int thrown;
 		    /* or strike with a missile in your hand... */
 		    (!thrown && (is_missile(obj) || is_ammo(obj))) ||
 		    /* or use a pole at short range and not mounted... */
-		    (!thrown &&
-#ifdef STEED
-		     !u.usteed &&
-#endif
-		     is_pole(obj)) ||
+		    (!thrown && !u.usteed && is_pole(obj)) ||
 		    /* or throw a missile without the proper bow... */
 		    (is_ammo(obj) && !ammo_and_launcher(obj, uwep))) {
 		    /* then do only 1-2 points of damage */
@@ -724,14 +716,13 @@ int thrown;
 				&& hates_silver(mdat)) {
 			silvermsg = TRUE; silverobj = TRUE;
 		    }
-#ifdef STEED
-		    if (u.usteed && !thrown && tmp > 0 &&
-			    weapon_type(obj) == P_LANCE && mon != u.ustuck) {
+		    if (u.usteed && !thrown && tmp > 0 && weapon_type(obj) == P_LANCE && mon != u.ustuck) {
 			jousting = joust(mon, obj);
 			/* exercise skill even for minimal damage hits */
-			if (jousting) valid_weapon_attack = TRUE;
+			if (jousting) {
+				valid_weapon_attack = TRUE;
+			}
 		    }
-#endif
 		    if (thrown && (is_ammo(obj) || is_missile(obj))) {
 			if (ammo_and_launcher(obj, uwep)) {
 			    /* Elves and Samurai do extra damage using
@@ -1051,7 +1042,6 @@ int thrown;
 		}
 	} else
 #endif
-#ifdef STEED
 	if (jousting) {
 	    tmp += d(2, (obj == uwep) ? 10 : 2);	/* [was in dmgval()] */
 	    You("joust %s%s",
@@ -1073,7 +1063,6 @@ int thrown;
 	    }
 	    hittxt = TRUE;
 	} else
-#endif
 
 	/* VERY small chance of stunning opponent if unarmed. */
 	if (unarmed && tmp > 1 && !thrown && !obj && !Upolyd) {

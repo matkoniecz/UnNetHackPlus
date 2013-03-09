@@ -184,13 +184,17 @@ unsigned seed;		/* for semi-controlled randomization */
 boolean
 can_reach_floor()
 {
-	return (boolean)(!u.uswallow &&
-#ifdef STEED
-			/* Restricted/unskilled riders can't reach the floor */
-			!(u.usteed && P_SKILL(P_RIDING) < P_BASIC) &&
-#endif
-			 (!Levitation ||
-			  Is_airlevel(&u.uz) || Is_waterlevel(&u.uz)));
+	if (u.uswallow) {
+		return FALSE;
+	}
+	/* Restricted/unskilled riders can't reach the floor */
+	if (u.usteed && P_SKILL(P_RIDING) < P_BASIC) {
+		return FALSE;
+	}
+	if (Levitation && !(Is_airlevel(&u.uz) || Is_waterlevel(&u.uz))) {
+		return FALSE;
+	}
+	return TRUE;
 }
 #endif /* OVLB */
 #ifdef OVL0

@@ -1064,18 +1064,21 @@ under_ground(mode)
 void
 see_monsters()
 {
-    register struct monst *mon;
+	register struct monst *mon;
 
-    for (mon = fmon; mon; mon = mon->nmon) {
-	if (DEADMONSTER(mon)) continue;
-	newsym(mon->mx,mon->my);
-	if (mon->wormno) see_wsegs(mon);
-    }
-#ifdef STEED
-    /* when mounted, hero's location gets caught by monster loop */
-    if (!u.usteed)
-#endif
-    newsym(u.ux, u.uy);
+	for (mon = fmon; mon; mon = mon->nmon) {
+		if (DEADMONSTER(mon)) {
+			continue;
+		}
+		newsym(mon->mx,mon->my);
+		if (mon->wormno) {
+			see_wsegs(mon);
+		}
+	}
+	/* when mounted, hero's location gets caught by monster loop */
+	if (!u.usteed) {
+		newsym(u.ux, u.uy);
+	}
 }
 
 /*

@@ -849,11 +849,7 @@ plus:
 				" (being worn)");
 		goto plus;
 	case TOOL_CLASS:
-		if(obj->owornmask & (W_TOOL /* blindfold */
-#ifdef STEED
-				| W_SADDLE
-#endif
-				)) {
+		if(obj->owornmask & (W_TOOL /* blindfold */ | W_SADDLE)) {
 			Strcat(bp, " (being worn)");
 			break;
 		}

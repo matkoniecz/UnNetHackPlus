@@ -241,21 +241,15 @@ dig()
 	    switch(rn2(3)) {
 	    case 0:
 		if(!welded(uwep)) {
-		    You("fumble and drop your %s.", xname(uwep));
-		    dropx(uwep);
+			You("fumble and drop your %s.", xname(uwep));
+			dropx(uwep);
 		} else {
-#ifdef STEED
-		    if (u.usteed)
-			Your("%s %s and %s %s!",
-			     xname(uwep),
-			     otense(uwep, "bounce"), otense(uwep, "hit"),
-			     mon_nam(u.usteed));
-		    else
-#endif
-			pline("Ouch!  Your %s %s and %s you!",
-			      xname(uwep),
-			      otense(uwep, "bounce"), otense(uwep, "hit"));
-		    set_wounded_legs(RIGHT_SIDE, 5 + rnd(5));
+			if (u.usteed) {
+				Your("%s %s and %s %s!", xname(uwep), otense(uwep, "bounce"), otense(uwep, "hit"), mon_nam(u.usteed));
+			} else {
+				pline("Ouch!  Your %s %s and %s you!", xname(uwep), otense(uwep, "bounce"), otense(uwep, "hit"));
+			}
+			set_wounded_legs(RIGHT_SIDE, 5 + rnd(5));
 		}
 		break;
 	    case 1:

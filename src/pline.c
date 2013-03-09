@@ -416,9 +416,7 @@ register struct monst *mtmp;
 				", swallowed you" :
 				", engulfed you") :
 				", holding you");
-#ifdef STEED
 	if (mtmp == u.usteed)	  Strcat(info, ", carrying you");
-#endif
 #ifdef WIZARD
 	if (wizard &&
 	    mtmp->isshk && ESHK(mtmp)->cheapskate) {
@@ -472,10 +470,7 @@ ustatusline()
 	    }	/* note: "goop" == "glop"; variation is intentional */
 	}
 	if (Stunned)		Strcat(info, ", stunned");
-#ifdef STEED
-	if (!u.usteed)
-#endif
-	if (Wounded_legs) {
+	if (!u.usteed && Wounded_legs) {
 	    const char *what = body_part(LEG);
 	    if ((Wounded_legs & BOTH_SIDES) == BOTH_SIDES)
 		what = makeplural(what);
