@@ -341,8 +341,6 @@ typedef long glyph_t;
 # endif
 #endif
 
-#define EXOTIC_PETS      /* Rob Ellwood  June 2002 */
-
 /*
  * Section 4:  THE FUN STUFF!!!
  *
@@ -407,6 +405,7 @@ typedef long glyph_t;
 #ifndef AUTOCONF
 
 #define RANDOMIZED_PLANES /* Elemental Planes order is randomized - Patric Mueller (4 Jan 2009) */
+#define EXOTIC_PETS      /* Rob Ellwood  June 2002 */
 
 #if defined(TTY_GRAPHICS) || defined(MSWIN_GRAPHICS) || \
  defined(CURSES_GRAPHICS)
