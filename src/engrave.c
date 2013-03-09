@@ -293,7 +293,6 @@ sengr_at(s, x, y)
 }
 #endif /* ELBERETH */
 
-#ifdef ELBERETH_CONDUCT
 /** Return the number of distinct times Elbereth is engraved at
  * the specified location. Case insensitive.  Counts an engraving
  * as being present even if it's still being written: if you're
@@ -321,7 +320,6 @@ nengr_at(x, y)
 
 	return count;
 }
-#endif /* ELBERETH_CONDUCT */
 
 #endif /* OVL0 */
 #ifdef OVL2
@@ -1244,7 +1242,6 @@ boolean fingers;
 
 	(void) strncat(buf, ebuf, (BUFSZ - (int)strlen(buf) - 1));
 
-#ifdef ELBERETH_CONDUCT
 	{
 		unsigned ecount1, ecount0 = nengr_at(u.ux, u.uy);
 		make_engr_at(u.ux, u.uy, buf, (moves - multi), type);
@@ -1252,9 +1249,6 @@ boolean fingers;
 		if (ecount1 > ecount0)
 			u.uconduct.elbereths += (ecount1 - ecount0);
 	}
-#else
-	make_engr_at(u.ux, u.uy, buf, (moves - multi), type);
-#endif
 
 	if (post_engr_text[0]) pline(post_engr_text);
 
