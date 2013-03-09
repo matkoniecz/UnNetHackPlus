@@ -407,8 +407,6 @@ typedef long glyph_t;
 #ifndef AUTOCONF
 
 #define RANDOMIZED_PLANES /* Elemental Planes order is randomized - Patric Mueller (4 Jan 2009) */
-#define BLACKMARKET	/* Massimo Campostrini (campo@sunthpi3.difi.unipi.it) */
-
 
 #if defined(TTY_GRAPHICS) || defined(MSWIN_GRAPHICS) || \
  defined(CURSES_GRAPHICS)
@@ -474,6 +472,7 @@ typedef long glyph_t;
 #define WEBB_DISINT /* Disintegrator - Nicholas Webb */
 #define ADJSPLIT /* splittable #adjust - Sam Dennis, conditionalized by Jukka Lahtinen */
 #define ELBERETH_CONDUCT /* Track the number of times the player engraves Elbereth. - Ray Kulhanek */
+#define BLACKMARKET	/* Massimo Campostrini (campo@sunthpi3.difi.unipi.it) */
 
 /* End of Section 7 */
 

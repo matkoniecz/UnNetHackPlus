@@ -498,12 +498,10 @@ register struct monst *mtmp;
 		if (otmp->oclass == WEAPON_CLASS &&
 		    otmp->oartifact &&
 		    touch_artifact(otmp,mtmp)) {
-#ifdef BLACKMARKET
 			/* let black marketeer wield their artifact weapon
 			   in any case. */
 			if (mtmp->data == &mons[PM_BLACK_MARKETEER])
 				return otmp;
-#endif
 			if ((strong && !wearing_shield) ||
 			    !objects[otmp->otyp].oc_bimanual)
 				return otmp;

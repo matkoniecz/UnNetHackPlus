@@ -447,9 +447,9 @@ make_version()
 #ifdef SINKS
 			| (1L <<  2)
 #endif
-#ifdef BLACKMARKET
+//#ifdef BLACKMARKET - enabled uncoditionally
 			| (1L <<  3)
-#endif
+//#endif
 		/* monsters (5..9) */
 #ifdef KOPS
 			| (1L <<  6)
@@ -646,9 +646,7 @@ static const char *build_opts[] = {
 #ifdef AUTO_OPEN
 		"auto open doors",
 #endif
-#ifdef BLACKMARKET
 		"blackmarket level",
-#endif
 #ifdef TEXTCOLOR
 		"color",
 #endif

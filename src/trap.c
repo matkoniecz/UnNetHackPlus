@@ -1164,14 +1164,11 @@ glovecheck:		(void) rust_dmg(uarmg, "gauntlets", 1, TRUE, &youmonst);
 	    }
 	    case MAGIC_PORTAL:
 		seetrap(trap);
-#if defined(BLACKMARKET)
-		if (u.usteed &&
-			(Is_blackmarket(&trap->dst) || Is_blackmarket(&u.uz)))
-		    pline("%s seems to shimmer for a moment.",
-			  Monnam(u.usteed));
-		else
-#endif
-		domagicportal(trap);
+		if (u.usteed && (Is_blackmarket(&trap->dst) || Is_blackmarket(&u.uz))) {
+			pline("%s seems to shimmer for a moment.", Monnam(u.usteed));
+		} else {
+			domagicportal(trap);
+		}
 		break;
 
 	    default:

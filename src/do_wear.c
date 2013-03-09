@@ -816,11 +816,9 @@ register struct obj *obj;
 		}
 		break;
 	case RIN_CONFLICT:
-#ifdef BLACKMARKET
 		if (Is_blackmarket(&u.uz)) {
 			set_black_marketeer_angry();
 		}
-#endif /* BLACKMARKET */
 		break;
 	case RIN_WARNING:
 		see_monsters();

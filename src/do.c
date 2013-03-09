@@ -1087,9 +1087,7 @@ register xchar x, y;
 }
 */
 
-#ifdef BLACKMARKET
 d_level new_dlevel = {0, 0};
-#endif
 
 void
 goto_level(newlevel, at_stairs, falling, portal)
@@ -1127,9 +1125,7 @@ boolean at_stairs, falling, portal;
 	if (new_ledger <= 0)
 		done(ESCAPED);	/* in fact < 0 is impossible */
 
-#ifdef BLACKMARKET
 	assign_level(&new_dlevel, newlevel);
-#endif
 
 	/* Prevent the player from going past the first quest level unless
 	 * (s)he has been given the go-ahead by the leader.
@@ -1487,11 +1483,9 @@ boolean at_stairs, falling, portal;
 		    if (!DEADMONSTER(mtmp) && mtmp->msleeping) mtmp->msleeping = 0;
 	}
 
-#ifdef BLACKMARKET
 	if (Is_blackmarket(&u.uz) && Conflict) {
 		set_black_marketeer_angry();
 	}
-#endif /* BLACKMARKET */
 
 	if (on_level(&u.uz, &astral_level))
 	    final_level();

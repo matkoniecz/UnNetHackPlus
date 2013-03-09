@@ -78,9 +78,7 @@ E struct dgn_topology {		/* special dungeon levels for speed */
     d_level	d_mineend_level;
     d_level	d_sokoend_level;
 #endif
-#ifdef BLACKMARKET
     d_level     d_blackmarket_level;
-#endif /* BLACKMARKET */
     d_level	d_minetown_level;
     d_level	d_town_level;
 } dungeon_topology;
@@ -120,9 +118,7 @@ E struct dgn_topology {		/* special dungeon levels for speed */
 #define mineend_level           (dungeon_topology.d_mineend_level)
 #define sokoend_level           (dungeon_topology.d_sokoend_level)
 #endif
-#ifdef BLACKMARKET
 #define blackmarket_level	(dungeon_topology.d_blackmarket_level)
-#endif /* BLACKMARKET */
 #define minetown_level		(dungeon_topology.d_minetown_level)
 #define town_level		(dungeon_topology.d_town_level)
 

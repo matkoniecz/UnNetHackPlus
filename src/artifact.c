@@ -1193,7 +1193,6 @@ int dieroll; /* needed for Magicbane and vorpal blades */
 		}
 	}
 	/* WAC -- 1/6 chance of cancellation with foobane weapons */
-#ifdef BLACKMARKET
 	if (otmp->oartifact == ART_ORCRIST ||
 	    otmp->oartifact == ART_DRAGONBANE ||
 	    otmp->oartifact == ART_DEMONBANE ||
@@ -1211,7 +1210,6 @@ int dieroll; /* needed for Magicbane and vorpal blades */
 		    return TRUE;
 		}
 	}
-#endif
 	return FALSE;
 }
 
@@ -1335,12 +1333,10 @@ arti_invoke(obj)
 	    anything any;
 
 	    any.a_void = 0;	/* set all bits to zero */
- #ifdef BLACKMARKET           
 	    if (Is_blackmarket(&u.uz) && *u.ushops) {
 		You("feel very disoriented for a moment.");
 		break;
 	    }
- #endif
 	    start_menu(tmpwin);
 	    /* use index+1 (cant use 0) as identifier */
 	    for (i = num_ok_dungeons = 0; i < n_dgns; i++) {
