@@ -760,9 +760,7 @@ static const char *build_opts[] = {
 #  endif
 # endif
 #endif
-#ifdef SEDUCE
 		"seduction",
-#endif
 #ifdef SHELL
 		"shell command",
 #endif

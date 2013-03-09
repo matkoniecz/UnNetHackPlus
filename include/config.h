@@ -359,7 +359,6 @@ typedef long glyph_t;
 #define REINCARNATION	/* Special Rogue-like levels */
 /* monsters & objects */
 #define KOPS		/* Keystone Kops by Scott R. Turner */
-#define SEDUCE		/* Succubi/incubi seduction, by KAA, suggested by IM */
 #define TOURIST		/* Tourist players with cameras and Hawaiian shirts */
 /* difficulty */
 #define ELBERETH	/* Engraving the E-word repels monsters */
@@ -471,6 +470,7 @@ typedef long glyph_t;
  * and features are incorporated into UnNetHackPlus without evil preprocessor instructions littering code
  */
 #define STEED		/* Riding steeds */
+#define SEDUCE		/* Succubi/incubi seduction, by KAA, suggested by IM */
 #define WEBB_DISINT /* Disintegrator - Nicholas Webb */
 #define ADJSPLIT /* splittable #adjust - Sam Dennis, conditionalized by Jukka Lahtinen */
 #define ELBERETH_CONDUCT /* Track the number of times the player engraves Elbereth. - Ray Kulhanek */

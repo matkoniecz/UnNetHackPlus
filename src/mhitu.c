@@ -15,9 +15,7 @@ STATIC_DCL int FDECL(passiveum, (struct permonst *,struct monst *,struct attack 
 # endif /* OVL1 */
 
 #ifdef OVLB
-# ifdef SEDUCE
 STATIC_DCL void FDECL(mayberem, (struct obj *, const char *));
-# endif
 #endif /* OVLB */
 
 STATIC_DCL boolean FDECL(diseasemu, (struct permonst *));
@@ -1309,11 +1307,7 @@ dopois:
 			hitmsg(mtmp, mattk);
 			if (mtmp->mcan) break;
 			/* Continue below */
-		} else if (dmgtype(youmonst.data, AD_SEDU)
-#ifdef SEDUCE
-			|| dmgtype(youmonst.data, AD_SSEX)
-#endif
-						) {
+		} else if (dmgtype(youmonst.data, AD_SEDU) || dmgtype(youmonst.data, AD_SSEX)) {
 			pline("%s %s.", Monnam(mtmp), mtmp->minvent ?
 		    "brags about the goods some dungeon explorer provided" :
 		    "makes some remarks about how difficult theft is lately");
@@ -1353,14 +1347,12 @@ dopois:
 		}
 		break;
 	    }
-#ifdef SEDUCE
 	    case AD_SSEX:
 		if(could_seduce(mtmp, &youmonst, mattk) == 1
 			&& !mtmp->mcan)
 		    if (doseduce(mtmp))
 			return 3;
 		break;
-#endif
 	    case AD_SAMU:
 		hitmsg(mtmp, mattk);
 		/* when the Wiz hits, 1/20 steals the amulet */
@@ -2284,19 +2276,11 @@ struct attack *mattk;
 		gendef = gender(mdef);
 	}
 
-	if(agrinvis && !defperc
-#ifdef SEDUCE
-		&& mattk && mattk->adtyp != AD_SSEX
-#endif
-		)
+	if(agrinvis && !defperc && mattk && mattk->adtyp != AD_SSEX)
 		return 0;
 
 	if(pagr->mlet != S_NYMPH
-		&& ((pagr != &mons[PM_INCUBUS] && pagr != &mons[PM_SUCCUBUS])
-#ifdef SEDUCE
-		    || (mattk && mattk->adtyp != AD_SSEX)
-#endif
-		   ))
+		&& ((pagr != &mons[PM_INCUBUS] && pagr != &mons[PM_SUCCUBUS]) || (mattk && mattk->adtyp != AD_SSEX)))
 		return 0;
 	
 	if(genagr == 1 - gendef)
@@ -2308,7 +2292,6 @@ struct attack *mattk;
 #endif /* OVL1 */
 #ifdef OVLB
 
-#ifdef SEDUCE
 /* Returns 1 if monster teleported */
 int
 doseduce(mon)
@@ -2593,7 +2576,6 @@ const char *str;
 	}
 	remove_worn_item(obj, TRUE);
 }
-#endif  /* SEDUCE */
 
 #endif /* OVLB */
 
