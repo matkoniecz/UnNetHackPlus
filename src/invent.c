@@ -3309,23 +3309,14 @@ doorganize()	/* inventory organizer by Del Lamb */
 	register char let;
 	char alphabet[52+1], buf[52+1];
 	char qbuf[QBUFSZ];
-#ifdef ADJSPLIT
 	char allowallcnt[3];
-#else
-	char allowall[2];
-#endif
 	const char *adj_type;
 
 	if (!flags.invlet_constant) reassign();
 	/* get a pointer to the object the user wants to organize */
-#ifdef ADJSPLIT
 	allowallcnt[0] = ALLOW_COUNT; allowallcnt[1] = ALL_CLASSES;
 	allowallcnt[2] = '\0';
 	if (!(obj = getobj(allowallcnt,"adjust"))) return(0);
-#else
-	allowall[0] = ALL_CLASSES; allowall[1] = '\0';
-	if (!(obj = getobj(allowall,"adjust"))) return(0);
-#endif
 
 	/* initialize the list with all upper and lower case letters */
 	for (let = 'a', ix = 0;  let <= 'z';) alphabet[ix++] = let++;
@@ -3354,11 +3345,7 @@ doorganize()	/* inventory organizer by Del Lamb */
 		let = yn_function(qbuf, (char *)0, '\0');
 		if(index(quitchars,let)) {
 			pline(Never_mind);
-#ifdef ADJSPLIT
 			goto cleansplit;
-#else
-			return(0);
-#endif
 		}
 		if (let == '@' || !letter(let))
 			pline("Select an inventory slot letter.");
@@ -3366,35 +3353,21 @@ doorganize()	/* inventory organizer by Del Lamb */
 			break;
 	}
 
-	/* change the inventory and print the resulting item */
-#ifndef ADJSPLIT
-	adj_type = "Moving:";
-#endif
-
-	/*
+	/* change the inventory and print the resulting item 
 	 * don't use freeinv/addinv to avoid double-touching artifacts,
 	 * dousing lamps, losing luck, cursing loadstone, etc.
 	 */
 	extract_nobj(obj, &invent);
 
-#ifdef ADJSPLIT
 	for (otmp = invent; otmp && otmp->invlet != let;)
 		otmp = otmp->nobj;
 	if (!otmp)
 		adj_type = "Moving:";
 	else if (merged(&otmp,&obj)) {
-#else
-	for (otmp = invent; otmp;)
-		if (merged(&otmp,&obj)) {
-#endif
 			adj_type = "Merging:";
 			obj = otmp;
-#ifndef ADJSPLIT
-			otmp = otmp->nobj;
-#endif
 			extract_nobj(obj, &invent);
 		} else {
-#ifdef ADJSPLIT
 		  struct obj *otmp2;
 		  for (otmp2 = invent; otmp2
 			 && otmp2->invlet != obj->invlet;)
@@ -3417,16 +3390,9 @@ doorganize()	/* inventory organizer by Del Lamb */
 				goto cleansplit;
 			}
 		  } else
-#else
-			if (otmp->invlet == let) {
-#endif
 				adj_type = "Swapping:";
 				otmp->invlet = obj->invlet;
 			}
-#ifndef ADJSPLIT
-			otmp = otmp->nobj;
-		}
-#endif
 
 	/* inline addinv (assuming flags.invlet_constant and !merged) */
 	obj->invlet = let;
@@ -3438,14 +3404,12 @@ doorganize()	/* inventory organizer by Del Lamb */
 	prinv(adj_type, obj, 0L);
 	update_inventory();
 	return(0);
-#ifdef ADJSPLIT
 cleansplit:
 	for (otmp = invent; otmp; otmp = otmp->nobj)
                 if (otmp != obj && otmp->invlet == obj->invlet)
                         merged( &otmp, &obj );
 
 	return 0;
-#endif
 }
 
 /* common to display_minventory and display_cinventory */
