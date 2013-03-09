@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* merge uhitm, mhitm, mhitu etc
 * amulet versus poison searches_for_item
 mon_reflects
 m_dowear_type
