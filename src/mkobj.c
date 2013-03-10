@@ -445,7 +445,7 @@ boolean artif;
 			curse(otmp);
 			otmp->spe = -rne(3);
 		} else	blessorcurse(otmp, 10);
-		if (is_poisonable(otmp) && !rn2(100))
+		if (is_poisonable(otmp) && !rn2(60))
 			otmp->opoisoned = 1;
 		if (artif && !rn2(20))
 		    otmp = mk_artifact(otmp, (aligntyp)A_NONE);
