@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* patchlevel.h  version.c 
 * merge uhitm, mhitm, mhitu etc
 * amulet versus poison searches_for_item
 mon_reflects
