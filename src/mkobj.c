@@ -575,12 +575,14 @@ boolean artif;
 	    }
 	    break;
 	case AMULET_CLASS:
-		if (otmp->otyp == AMULET_OF_YENDOR) flags.made_amulet = TRUE;
-		if(rn2(10) && (otmp->otyp == AMULET_OF_STRANGULATION ||
-		   otmp->otyp == AMULET_OF_CHANGE ||
-		   otmp->otyp == AMULET_OF_RESTFUL_SLEEP)) {
+		if (otmp->otyp == AMULET_OF_YENDOR) {
+			flags.made_amulet = TRUE;
+		}
+		if(rn2(10) && (otmp->otyp == AMULET_OF_STRANGULATION || otmp->otyp == AMULET_OF_CHANGE || otmp->otyp == AMULET_OF_RESTFUL_SLEEP)) {
 			curse(otmp);
-		} else	blessorcurse(otmp, 10);
+		} else {
+			blessorcurse(otmp, 10);
+		}
 	case VENOM_CLASS:
 	case CHAIN_CLASS:
 	case BALL_CLASS:
