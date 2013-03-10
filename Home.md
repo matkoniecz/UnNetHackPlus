@@ -193,7 +193,6 @@ proud owner of a magic whistle.
 
 # redigest?
 * http://l.j-factor.com/nethack/colour.diff
-* bottlename() in potion.c return jug/pitcher/bucket/thermos/ during hallu
 * http://bilious.alt.org/?352
 
 # too complicated
