@@ -1516,24 +1516,23 @@ boolean give_feedback;
 	coord cc;
 
 	if (mtmp->ispriest && *in_rooms(mtmp->mx, mtmp->my, TEMPLE)) {
-	    if (give_feedback)
-		pline("%s resists your magic!", Monnam(mtmp));
-	    return FALSE;
+		if (give_feedback) {
+			pline("%s resists your magic!", Monnam(mtmp));
+		}
+		return FALSE;
 	} else if (level.flags.noteleport && u.uswallow && mtmp == u.ustuck) {
-	    if (give_feedback)
-		You("are no longer inside %s!", mon_nam(mtmp));
-	    unstuck(mtmp);
-	    (void) rloc(mtmp, FALSE);
-	} else if (mtmp->data == &mons[PM_BLACK_MARKETEER] &&
-	           rn2(13) &&
-		   enexto_core_range(&cc, u.ux, u.uy, mtmp->data,0,
-		                     rnf(1,10) ? 4 : 3)) {
-	    rloc_to(mtmp, cc.x, cc.y);
-	} else if (is_rider(mtmp->data) && rn2(13) &&
-		   enexto(&cc, u.ux, u.uy, mtmp->data))
-	    rloc_to(mtmp, cc.x, cc.y);
-	else
-	    (void) rloc(mtmp, FALSE);
+		if (give_feedback) {
+			You("are no longer inside %s!", mon_nam(mtmp));
+		}
+		unstuck(mtmp);
+		(void) rloc(mtmp, FALSE);
+	} else if (mtmp->data == &mons[PM_BLACK_MARKETEER] && rn2(13) && enexto_core_range(&cc, u.ux, u.uy, mtmp->data, 0, rnf(1,10) ? 4 : 3)) {
+		rloc_to(mtmp, cc.x, cc.y);
+	} else if (is_rider(mtmp->data) && rn2(13) && enexto(&cc, u.ux, u.uy, mtmp->data)) {
+		rloc_to(mtmp, cc.x, cc.y);
+	} else {
+		(void) rloc(mtmp, FALSE);
+	}
 	return TRUE;
 }
 
