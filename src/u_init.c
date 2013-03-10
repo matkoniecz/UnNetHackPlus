@@ -138,7 +138,6 @@ static struct trobj Samurai[] = {
 	{ SPLINT_MAIL, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
 	{ 0, 0, 0, 0, 0 }
 };
-#ifdef TOURIST
 static struct trobj Tourist[] = {
 #define T_DARTS		0
 	{ DART, 2, WEAPON_CLASS, 25, UNDEF_BLESS },	/* quan is variable */
@@ -150,7 +149,6 @@ static struct trobj Tourist[] = {
 	{ CREDIT_CARD, 0, TOOL_CLASS, 1, 0 },
 	{ 0, 0, 0, 0, 0 }
 };
-#endif
 static struct trobj Valkyrie[] = {
 	{ LONG_SWORD, 1, WEAPON_CLASS, 1, UNDEF_BLESS },
 	{ DAGGER, 0, WEAPON_CLASS, 1, UNDEF_BLESS },
@@ -213,7 +211,6 @@ static struct trobj Candle[] = {
 	{ TALLOW_CANDLE, 0, TOOL_CLASS, 1, 0 },
 	{ 0, 0, 0, 0, 0 }
 };
-#ifdef TOURIST
 static struct trobj Leash[] = {
 	{ LEASH, 0, TOOL_CLASS, 1, 0 },
 	{ 0, 0, 0, 0, 0 }
@@ -222,7 +219,6 @@ static struct trobj Towel[] = {
 	{ TOWEL, 0, TOOL_CLASS, 1, 0 },
 	{ 0, 0, 0, 0, 0 }
 };
-#endif	/* TOURIST */
 static struct trobj Wishing[] = {
 	{ WAN_WISHING, 3, WAND_CLASS, 1, 0 },
 	{ 0, 0, 0, 0, 0 }
@@ -428,7 +424,6 @@ static const struct def_skill Skill_S[] = {
     { P_NONE, 0 }
 };
 
-#ifdef TOURIST
 static const struct def_skill Skill_T[] = {
     { P_DAGGER, P_EXPERT },		{ P_KNIFE,  P_SKILLED },
     { P_AXE, P_BASIC },			{ P_PICK_AXE, P_BASIC },
@@ -451,7 +446,6 @@ static const struct def_skill Skill_T[] = {
     { P_BARE_HANDED_COMBAT, P_SKILLED },
     { P_NONE, 0 }
 };
-#endif /* TOURIST */
 
 static const struct def_skill Skill_V[] = {
     { P_DAGGER, P_EXPERT },		{ P_AXE, P_EXPERT },
@@ -526,9 +520,7 @@ u_init()
 #if 0	/* documentation of more zero values as desirable */
 	u.usick_cause[0] = 0;
 	u.uluck  = u.moreluck = 0;
-# ifdef TOURIST
 	uarmu = 0;
-# endif
 	uarm = uarmc = uarmh = uarms = uarmg = uarmf = 0;
 	uwep = uball = uchain = uleft = uright = 0;
 	uswapwep = uquiver = 0;
@@ -718,7 +710,6 @@ u_init()
 		knows_class(ARMOR_CLASS);
 		skill_init(Skill_S);
 		break;
-#ifdef TOURIST
 	case PM_TOURIST:
 		Tourist[T_DARTS].trquan = rn1(20, 21);
 #ifndef GOLDOBJ
@@ -733,7 +724,6 @@ u_init()
 		else if(!rn2(25)) ini_inv(Magicmarker);
 		skill_init(Skill_T);
 		break;
-#endif
 	case PM_VALKYRIE:
 		ini_inv(Valkyrie);
 		if(!rn2(6)) ini_inv(Lamp);
@@ -850,11 +840,9 @@ u_init()
 		break;
 	}
 
-#ifdef TOURIST
 	/* Towel Day: In Memoriam Douglas Adams */
 	if (towelday())
 		ini_inv(Towel);
-#endif
 
 	/*** Conduct specific initialisation ***/
 
@@ -924,9 +912,7 @@ int otyp;
      case PM_RANGER:		skills = Skill_Ran; break;
      case PM_ROGUE:		skills = Skill_R; break;
      case PM_SAMURAI:		skills = Skill_S; break;
-#ifdef TOURIST
      case PM_TOURIST:		skills = Skill_T; break;
-#endif
      case PM_VALKYRIE:		skills = Skill_V; break;
      case PM_WIZARD:		skills = Skill_W; break;
      default:			skills = 0; break;	/* lint suppression */
@@ -1084,10 +1070,8 @@ register struct trobj *trop;
 				setworn(obj, W_ARMH);
 			else if (is_gloves(obj) && !uarmg)
 				setworn(obj, W_ARMG);
-#ifdef TOURIST
 			else if (is_shirt(obj) && !uarmu)
 				setworn(obj, W_ARMU);
-#endif
 			else if (is_cloak(obj) && !uarmc)
 				setworn(obj, W_ARMC);
 			else if (is_boots(obj) && !uarmf)

@@ -277,10 +277,7 @@ E uchar monsyms[MAXMCLASSES];		/* current class symbols */
 
 #include "obj.h"
 E NEARDATA struct obj *invent,
-	*uarm, *uarmc, *uarmh, *uarms, *uarmg, *uarmf,
-#ifdef TOURIST
-	*uarmu,				/* under-wear, so to speak */
-#endif
+	*uarm, *uarmc, *uarmh, *uarms, *uarmg, *uarmf, *uarmu,
 	*uskin, *uamul, *uleft, *uright, *ublindf,
 	*uwep, *uswapwep, *uquiver;
 

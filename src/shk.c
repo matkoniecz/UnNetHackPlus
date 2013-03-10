@@ -2004,12 +2004,10 @@ register struct monst *shkp;	/* if angry, impose a surcharge */
 		} else if (!(obj->o_id % 4)) /* arbitrarily impose surcharge */
 		    tmp += tmp / 3L;
 	}
-#ifdef TOURIST
 	if ((Role_if(PM_TOURIST) && u.ulevel < (MAXULEV/2))
 	    || (uarmu && !uarm && !uarmc))	/* touristy shirt visible */
 		tmp += tmp / 3L;
 	else
-#endif
 	if (uarmh && uarmh->otyp == DUNCE_CAP)
 		tmp += tmp / 3L;
 
@@ -2143,16 +2141,13 @@ register struct monst *shkp;
 {
 	long tmp = getprice(obj, TRUE) * obj->quan;
 
-#ifdef TOURIST
-	if ((Role_if(PM_TOURIST) && u.ulevel < (MAXULEV/2))
-	    || (uarmu && !uarm && !uarmc))	/* touristy shirt visible */
+	if ((Role_if(PM_TOURIST) && u.ulevel < (MAXULEV/2)) || (uarmu && !uarm && !uarmc)) { /* touristy shirt visible */
 		tmp /= 3L;
-	else
-#endif
-	if (uarmh && uarmh->otyp == DUNCE_CAP)
+	} else if (uarmh && uarmh->otyp == DUNCE_CAP) {
 		tmp /= 3L;
-	else
+	} else {
 		tmp /= 2L;
+	}
 
 	/* some shopkeepers just want to rip you off */
 	if (tmp > 4L && ESHK(shkp)->cheapskate) {
@@ -4190,12 +4185,7 @@ boolean altusage; /* some items have an "alternate" use with different cost */
 		if (otmp->spe > 1) tmp /= 4L;
 	} else if (otmp->oclass == SPBOOK_CLASS) {
 		tmp -= tmp / 5L;
-	} else if (otmp->otyp == CAN_OF_GREASE ||
-		   otmp->otyp == TINNING_KIT
-#ifdef TOURIST
-		   || otmp->otyp == EXPENSIVE_CAMERA
-#endif
-		   ) {
+	} else if (otmp->otyp == CAN_OF_GREASE || otmp->otyp == TINNING_KIT || otmp->otyp == EXPENSIVE_CAMERA) {
 		tmp /= 10L;
 	} else if (otmp->otyp == POT_OIL) {
 		tmp /= 5L;

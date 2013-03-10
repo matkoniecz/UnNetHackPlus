@@ -804,13 +804,11 @@ register struct monst *mtmp;
 				: "asks you about the One Ring.";
 		    break;
 		case PM_ARCHEOLOGIST:
-    pline_msg = "describes a recent article in \"Spelunker Today\" magazine.";
+		    pline_msg = "describes a recent article in \"Spelunker Today\" magazine.";
 		    break;
-#ifdef TOURIST
 		case PM_TOURIST:
 		    verbl_msg = "Aloha.";
 		    break;
-#endif
 		default:
 		    pline_msg = "discusses dungeon exploration.";
 		    break;
@@ -870,10 +868,8 @@ register struct monst *mtmp;
 		verbl_msg = Role_if(PM_HEALER) ?
 			  "Doc, I can't help you unless you cooperate." :
 			  "Please undress so I can examine you.";
-#ifdef TOURIST
 	    else if (uarmu)
 		verbl_msg = "Take off your shirt, please.";
-#endif
 	    else verbl_msg = "Relax, this won't hurt a bit.";
 	    break;
 	case MS_GUARD:

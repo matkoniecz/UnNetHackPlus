@@ -71,7 +71,6 @@ doread()
 	    }
 	    useup(scroll);
 	    return(1);
-#ifdef TOURIST
 	} else if (scroll->otyp == T_SHIRT) {
 	    static const char *shirt_msgs[] = { /* Scott Bigham */
     "I explored the Dungeons of Doom and all I got was this lousy T-shirt!",
@@ -210,7 +209,6 @@ doread()
 				(int)(!(scroll->o_id % 3)), (int)((scroll->o_id * 7) % 10));
 		u.uconduct.literate++;
 		return 1;
-#endif	/* TOURIST */
 	} else if ((scroll->otyp == CAN_OF_GREASE) || (scroll->otyp == CANDY_BAR)) {
 		pline("This %s has no %s.", singular(scroll, xname), (scroll->otyp == CANDY_BAR) ? "wrapper" : "label");
 		return(0);
@@ -504,9 +502,7 @@ int curse_bless;
 		break;
 	    case MAGIC_MARKER:
 	    case TINNING_KIT:
-#ifdef TOURIST
 	    case EXPENSIVE_CAMERA:
-#endif
 		if (is_cursed) stripspe(obj);
 		else if (rechrg && obj->otyp == MAGIC_MARKER) {	/* previously recharged */
 		    obj->recharged = 1;	/* override increment done above */

@@ -2158,9 +2158,7 @@ boolean ordinary;
 		case WAN_LIGHT:	/* (broken wand) */
 		 /* assert( !ordinary ); */
 		    damage = d(obj->spe, 25);
-#ifdef TOURIST
 		case EXPENSIVE_CAMERA:
-#endif
 		    damage += rnd(25);
 		    if (!resists_blnd(&youmonst)) {
 			You(are_blinded_by_the_flash);
@@ -3112,12 +3110,12 @@ struct obj **ootmp;	/* to return worn armor for caller to disintegrate */
 			/* no body armor, victim dies; destroy cloak
 			   and shirt now in case target gets life-saved */
 			tmp = MAGIC_COOKIE;
-			if ((otmp2 = which_armor(mon, W_ARMC)) != 0)
+			if ((otmp2 = which_armor(mon, W_ARMC)) != 0) {
 			    m_useup(mon, otmp2);
-#ifdef TOURIST
-			if ((otmp2 = which_armor(mon, W_ARMU)) != 0)
+			}
+			if ((otmp2 = which_armor(mon, W_ARMU)) != 0) {
 			    m_useup(mon, otmp2);
-#endif
+			}
 		    }
 		    type = -1;	/* no saving throw wanted */
 		    break;	/* not ordinary damage */
@@ -3250,9 +3248,7 @@ xchar sx, sy;
 		/* no shield or suit, you're dead; wipe out cloak
 		   and/or shirt in case of life-saving or bones */
 		if (uarmc) (void) destroy_arm(uarmc);
-#ifdef TOURIST
 		if (uarmu) (void) destroy_arm(uarmu);
-#endif
 	    } else if (nonliving(youmonst.data) || is_demon(youmonst.data)) {
 		shieldeff(sx, sy);
 		You("seem unaffected.");

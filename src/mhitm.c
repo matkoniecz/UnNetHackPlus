@@ -625,7 +625,6 @@ defdisintagr(magr, mdef, mattk)
 					mass += otch->owt;
 					m_useup(magr,otch);
 				} 
-#ifdef TOURIST
 				if (!(magr->misc_worn_check & (W_ARMC|W_ARM)) &&
 						(otch = which_armor(magr,W_ARMU)) &&
 						(!oresist_disintegration(otch))) {
@@ -635,7 +634,6 @@ defdisintagr(magr, mdef, mattk)
 					mass += otch->owt;
 					m_useup(magr,otch);
 				}
-#endif
 				break;
 			case (W_ARMG):
 				if (otmp) {
@@ -1302,11 +1300,9 @@ mdamagem(magr, mdef, mattk)
 			} else if ((otch = which_armor(mdef, W_ARM))) {
 				if (oresist_disintegration(otch))
 					otch = 0;
-#ifdef TOURIST
 			} else if ((otch = which_armor(mdef, W_ARMU))) {
 				if (oresist_disintegration(otch))
 					otch = 0;
-#endif
 			} else {
 				recip_dam = minstadisintegrate(mdef);
 			}

@@ -273,11 +273,7 @@ fnd:
 		adjalign(-1);		/* Liar! */
 	}
 
-	if (!strcmpi(buf, "Croesus") || !strcmpi(buf, "Kroisos")
-#ifdef TOURIST
-		|| !strcmpi(buf, "Creosote")
-#endif
-	    ) {
+	if (!strcmpi(buf, "Croesus") || !strcmpi(buf, "Kroisos") || !strcmpi(buf, "Creosote")) {
 	    if (!mvitals[PM_CROESUS].died) {
 		verbalize("Oh, yes, of course.  Sorry to have disturbed you.");
 		mongone(guard);

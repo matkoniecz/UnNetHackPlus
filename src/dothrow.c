@@ -1423,11 +1423,9 @@ register struct obj   *obj;
 	           (mon->mtame && dogfood(mon, obj) <= ACCFOOD) ||
 	           (obj->oclass == FOOD_CLASS &&
 	           (
-# ifdef TOURIST
 	            (Role_if(PM_TOURIST) && 
 	             (mon->data == &mons[PM_CROCODILE] ||
 	              mon->data == &mons[PM_BABY_CROCODILE])) ||
-# endif
 	            ((Role_if(PM_RANGER) || Role_if(PM_CAVEMAN)) &&
 	              mon->data == &mons[PM_WINTER_WOLF_CUB])))) {
 #else
@@ -1678,12 +1676,10 @@ boolean from_invent;
 			}
 			/* monster breathing isn't handled... [yet?] */
 			break;
-#ifdef TOURIST
 		case EXPENSIVE_CAMERA: {
 		    create_camera_demon(obj, x, y);
 		    break;
 		}
-#endif
 		case EGG:
 			/* breaking your own eggs is bad luck */
 			if (hero_caused && obj->spe && obj->corpsenm >= LOW_PM)
@@ -1731,9 +1727,7 @@ struct obj *obj;
 		obj->oclass != GEM_CLASS)
 	    return 1;
 	switch (obj->oclass == POTION_CLASS ? POT_WATER : obj->otyp) {
-#ifdef TOURIST
 		case EXPENSIVE_CAMERA:
-#endif
 		case POT_WATER:		/* really, all potions */
 		case EGG:
 		case CREAM_PIE:
@@ -1763,9 +1757,7 @@ boolean in_view;
 		case LENSES:
 		case MIRROR:
 		case CRYSTAL_BALL:
-#ifdef TOURIST
 		case EXPENSIVE_CAMERA:
-#endif
 			to_pieces = " into a thousand pieces";
 			/*FALLTHRU*/
 		case POT_WATER:		/* really, all potions */
