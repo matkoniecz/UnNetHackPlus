@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* magic draining attack (cancellation???)
 * monsters are not getting poison resistance from worn dragon scale mail
 * patchlevel.h  version.c 
 * merge uhitm, mhitm, mhitu etc
