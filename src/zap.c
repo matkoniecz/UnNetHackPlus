@@ -1534,8 +1534,8 @@ struct obj *obj, *otmp;
 		 *             monster's inventory. They are not polymorphed
 		 *             either.
 		 * UNDEAD_TURNING - When an undead creature gets killed via
-		 *	       undead turning, prevent its corpse from being
-		 *	       immediately revived by the same effect.
+		 *             undead turning, prevent its corpse from being
+		 *             immediately revived by the same effect.
 		 *
 		 * The bypass bit on all objects is reset each turn, whenever
 		 * flags.bypasses is set.
@@ -1544,9 +1544,9 @@ struct obj *obj, *otmp;
 		 * as a safeguard against any stray occurrence left in an obj
 		 * struct someplace, although that should never happen.
 		 */
-		if (flags.bypasses)
+		if (flags.bypasses) {
 			return 0;
-		else {
+		} else {
 #ifdef DEBUG
 			pline("%s for a moment.", Tobjnam(obj, "pulsate"));
 #endif
