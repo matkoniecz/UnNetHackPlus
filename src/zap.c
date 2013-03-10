@@ -1623,8 +1623,9 @@ struct obj *obj, *otmp;
 			    (void)breaks(obj, obj->ox, obj->oy);
 			res = 0;
 		}
-		/* BUG[?]: shouldn't this depend upon you seeing it happen? */
-		makeknown(otmp->otyp);
+		if(cansee(obj->ox, obj->oy)) {
+			makeknown(otmp->otyp);
+		}
 		break;
 	case WAN_CANCELLATION:
 	case SPE_CANCELLATION:
