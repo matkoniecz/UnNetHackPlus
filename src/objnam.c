@@ -2797,9 +2797,7 @@ typfnd:
 		wizard ||
 #endif
 		 (cnt <= 7 && Is_candle(otmp)) ||
-		 (cnt <= 20 &&
-		  ((oclass == WEAPON_CLASS && is_ammo(otmp))
-				|| typ == ROCK || is_missile(otmp)))))
+		 (cnt <= 100 && ((oclass == WEAPON_CLASS && is_ammo(otmp)) || typ == ROCK || is_missile(otmp)))))
 			otmp->quan = (long) cnt;
 
 #ifdef WIZARD
