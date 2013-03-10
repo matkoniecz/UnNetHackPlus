@@ -503,19 +503,6 @@ Gloves_off()
 STATIC_OVL int
 Shield_on()
 {
-/*
-    switch (uarms->otyp) {
-	case SMALL_SHIELD:
-	case ELVEN_SHIELD:
-	case URUK_HAI_SHIELD:
-	case ORCISH_SHIELD:
-	case DWARVISH_ROUNDSHIELD:
-	case LARGE_SHIELD:
-	case SHIELD_OF_REFLECTION:
-		break;
-	default: warning(unknown_type, c_shield, uarms->otyp);
-    }
-*/
     if (uarms && !is_racial_armor(uarms)) {
 	u.uconduct.non_racial_armor++;
     }
@@ -526,19 +513,6 @@ int
 Shield_off()
 {
     takeoff_mask &= ~W_ARMS;
-/*
-    switch (uarms->otyp) {
-	case SMALL_SHIELD:
-	case ELVEN_SHIELD:
-	case URUK_HAI_SHIELD:
-	case ORCISH_SHIELD:
-	case DWARVISH_ROUNDSHIELD:
-	case LARGE_SHIELD:
-	case SHIELD_OF_REFLECTION:
-		break;
-	default: warning(unknown_type, c_shield, uarms->otyp);
-    }
-*/
     setworn((struct obj *)0, W_ARMS);
     return 0;
 }
@@ -546,14 +520,6 @@ Shield_off()
 STATIC_OVL int
 Shirt_on()
 {
-/*
-    switch (uarmu->otyp) {
-	case HAWAIIAN_SHIRT:
-	case T_SHIRT:
-		break;
-	default: warning(unknown_type, c_shirt, uarmu->otyp);
-    }
-*/
     if (uarmu && !is_racial_armor(uarmu)) {
 	u.uconduct.non_racial_armor++;
     }
@@ -564,14 +530,6 @@ int
 Shirt_off()
 {
     takeoff_mask &= ~W_ARMU;
-/*
-    switch (uarmu->otyp) {
-	case HAWAIIAN_SHIRT:
-	case T_SHIRT:
-		break;
-	default: warning(unknown_type, c_shirt, uarmu->otyp);
-    }
-*/
     setworn((struct obj *)0, W_ARMU);
     return 0;
 }
@@ -872,7 +830,7 @@ register struct obj *obj;
 		    update_inventory();
 		}
 		break;
-	case RIN_INCREASE_ACCURACY:	/* KMH */
+	case RIN_INCREASE_ACCURACY:
 		u.uhitinc += obj->spe;
 		break;
 	case RIN_INCREASE_DAMAGE:
@@ -984,7 +942,7 @@ boolean gone;
 		    update_inventory();
 		}
 		break;
-	case RIN_INCREASE_ACCURACY:	/* KMH */
+	case RIN_INCREASE_ACCURACY:
 		u.uhitinc -= obj->spe;
 		break;
 	case RIN_INCREASE_DAMAGE:
