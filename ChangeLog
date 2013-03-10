@@ -15,8 +15,8 @@
 		- Angered quest guardians will no longer go berserk ( https://github.com/Bulwersator/UnNetHackPlus/commit/08bedab0bad838340d8b0dfe37ea993ff9c4acd1 ).
 	* Flavour stuff
 		- Far look during hallucination should be more amusing
+		- New hallucinatory monsters, monster sounds (original ones and from NAO) and bottle types
 		- More random gravestone epitaphs (from NAO and original ones)
-		- New hallucinatory monsters and monster sounds (original ones and from NAO)
 		- More t-shirt messages (from NAO and original ones)
 		- Names for player statues on Medusa level are now based on list of people petrified by Medusa on public servers instead of top ten local players.
 		- Kobolds vs elves grudge added
