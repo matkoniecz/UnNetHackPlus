@@ -188,8 +188,11 @@ boolean unchain_ball;	/* whether to unpunish or just unwield */
 	    else if (obj == uarmh) (void) Helmet_off();
 	    else if (obj == uarms) (void) Shield_off();
 	    else if (obj == uarmu) (void) Shirt_off();
-	    /* catchall -- should never happen */
-	    else setworn((struct obj *)0, obj->owornmask & W_ARMOR);
+	    else {
+		/* catchall -- should never happen */
+		warning("impossible happened in function remove_worn_item");
+		setworn((struct obj *)0, obj->owornmask & W_ARMOR);
+	    }
 	} else if (obj->owornmask & W_AMUL) {
 	    Amulet_off();
 	} else if (obj->owornmask & W_RING) {

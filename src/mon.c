@@ -2548,7 +2548,11 @@ boolean msg;		/* "The oldmon turns into a newmon!" */
 		if (is_mplayer(mdat) || (!is_human(mdat) && polyok(mdat)))
 		    break;
 	    }
-	    if (tryct > 100) return 0;	/* Should never happen */
+	    if (tryct > 100) {
+		/* Should never happen */
+		warning("impossible happened in function newcham");
+		return 0;
+	    }
 	} else if (mvitals[monsndx(mdat)].mvflags & G_GENOD)
 	    return(0);	/* passed in mdat is genocided */
 

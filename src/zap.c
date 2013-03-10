@@ -4279,7 +4279,11 @@ retry:
 	    if (++tries < 5) goto retry;
 	    pline(thats_enough_tries);
 	    otmp = readobjnam((char *)0, (struct obj *)0, TRUE);
-	    if (!otmp) return;	/* for safety; should never happen */
+	    if (!otmp) {
+		/* for safety; should never happen */
+		warning("impossible happened in function makewish");
+		return;
+	    }
 	} else if (otmp == &nothing) {
 	    /* explicitly wished for "nothing", presumeably attempting
 	       to retain wishless conduct */
