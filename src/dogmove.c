@@ -635,21 +635,15 @@ register int after;	/* this is extra fast monster movement */
 		    int mstatus;
 		    register struct monst *mtmp2 = m_at(nx,ny);
 
-		    if ((int)mtmp2->m_lev >= (int)mtmp->m_lev+2 ||
-			(mtmp2->data == &mons[PM_FLOATING_EYE] && rn2(10) &&
-			 mtmp->mcansee && haseyes(mtmp->data) && mtmp2->mcansee
-			 && (perceives(mtmp->data) || !mtmp2->minvis)) ||
-			(mtmp2->data==&mons[PM_GELATINOUS_CUBE] && rn2(10)) ||
-			(max_passive_dmg(mtmp2, mtmp) >= mtmp->mhp) ||
-			((mtmp->mhp*4 < mtmp->mhpmax
-			  || mtmp2->data->msound == MS_GUARDIAN
-			  || mtmp2->data->msound == MS_LEADER) &&
-			 mtmp2->mpeaceful && !Conflict) ||
-			(touch_disintegrates(mtmp2->data) &&
-			 !resists_disint(mtmp)) ||
-			   (touch_petrifies(mtmp2->data) &&
-				!resists_ston(mtmp)))
-			continue;
+		    if ((int)mtmp2->m_lev >= (int)mtmp->m_lev+2) continue;
+		    if (mtmp2->data == &mons[PM_FLOATING_EYE] && rn2(10))
+			    if(mtmp->mcansee && haseyes(mtmp->data) && mtmp2->mcansee && (perceives(mtmp->data) || !mtmp2->minvis)) continue;
+		    if (mtmp2->data == &mons[PM_GELATINOUS_CUBE] && rn2(10)) continue;
+		    if (max_passive_dmg(mtmp2, mtmp) >= mtmp->mhp) continue;
+		    if (mtmp->mhp*4 < mtmp->mhpmax || mtmp2->data->msound == MS_GUARDIAN || mtmp2->data->msound == MS_LEADER)
+			    if(mtmp2->mpeaceful && !Conflict) continue;
+		    if (touch_disintegrates(mtmp2->data) && !resists_disint(mtmp)) continue;
+		    if (touch_petrifies(mtmp2->data) && !resists_ston(mtmp)) continue;
 
 		    if (after) return(0); /* hit only once each move */
 
