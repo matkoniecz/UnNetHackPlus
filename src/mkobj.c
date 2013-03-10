@@ -577,6 +577,8 @@ boolean artif;
 	case AMULET_CLASS:
 		if (otmp->otyp == AMULET_OF_YENDOR) {
 			flags.made_amulet = TRUE;
+		} else if (is_corruptible(otmp) && !rn2(4)) {
+			otmp->ocorrupted = 1;
 		}
 		if(rn2(10) && (otmp->otyp == AMULET_OF_STRANGULATION || otmp->otyp == AMULET_OF_CHANGE || otmp->otyp == AMULET_OF_RESTFUL_SLEEP)) {
 			curse(otmp);

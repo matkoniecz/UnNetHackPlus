@@ -84,7 +84,7 @@ struct obj {
 	Bitfield(otrapped,1);	/* container is trapped */
 				/* or accidental tripped rolling boulder trap */
 #define opoisoned otrapped	/* object (weapon) is coated with poison */
-
+#define ocorrupted otrapped	/* object (amulet) is corrupted */
 	Bitfield(recharged,3);	/* number of times it's been recharged */
 	Bitfield(lamplit,1);	/* a light-source -- can be lit */
 #ifdef INVISIBLE_OBJECTS
@@ -201,6 +201,9 @@ struct obj {
 			 objects[otmp->otyp].oc_armcat == ARM_SHIRT)
 #define is_suit(otmp)	(otmp->oclass == ARMOR_CLASS && \
 			 objects[otmp->otyp].oc_armcat == ARM_SUIT)
+
+/* Amulets */
+#define is_corruptible(otmp)	(otmp->oclass == AMULET_CLASS)
 
 /* http://nethackwiki.com/wiki/Unofficial_conduct#Racial */
 #define is_elven_armor(otmp)	((otmp)->otyp == ELVEN_LEATHER_HELM\

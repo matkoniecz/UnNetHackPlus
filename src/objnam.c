@@ -293,20 +293,28 @@ boolean ignore_oquan;
 	    goto nameit;
 	switch (obj->oclass) {
 	    case AMULET_CLASS:
-		if (!obj->dknown)
-			Strcpy(buf, "amulet");
-		else if (typ == AMULET_OF_YENDOR ||
-			 typ == FAKE_AMULET_OF_YENDOR)
+		if (is_corruptible(obj) && obj->ocorrupted) {
+			Sprintf(buf, "corrupted %d ", obj->o_id);
+		} else {
+			Sprintf(buf, "%d ", obj->o_id);
+		}
+
+		if (!obj->dknown) {
+			Strcat(buf, "amulet");
+		} else if (typ == AMULET_OF_YENDOR || typ == FAKE_AMULET_OF_YENDOR) {
 			/* each must be identified individually */
-			Strcpy(buf, obj->known ? actualn : dn);
-		else if (nn)
-			Strcpy(buf, actualn);
-		else if (un)
-			Sprintf(buf,"amulet called %s", un);
-		else if (Is_sokoprize(obj))
-			Strcpy(buf, "sokoban amulet");
-		else
-			Sprintf(buf,"%s amulet", dn);
+			Strcat(buf, obj->known ? actualn : dn);
+		} else if (nn) {
+			Strcat(buf, actualn);
+		} else if (un) {
+			Strcat(buf, "amulet called ");
+			Strcat(buf, un);
+		} else if (Is_sokoprize(obj)) {
+			Strcat(buf, "sokoban amulet");
+		} else {
+			Strcat(buf, dn);
+			Strcat(buf, " amulet");
+		}
 		break;
 	    case WEAPON_CLASS:
 		if (is_poisonable(obj) && obj->opoisoned)
@@ -2027,7 +2035,7 @@ boolean from_user;
 	register int i;
 	register struct obj *otmp;
 	int cnt, spe, spesgn, typ, very, rechrg;
-	int blessed, uncursed, iscursed, ispoisoned, isgreased, isdrained;
+	int blessed, uncursed, iscursed, ispoisoned, iscorrupted, isgreased, isdrained;
 	int eroded, eroded2, erodeproof;
 #ifdef INVISIBLE_OBJECTS
 	int isinvisible;
@@ -2065,7 +2073,7 @@ boolean from_user;
 #ifdef INVISIBLE_OBJECTS
 		isinvisible =
 #endif
-		ispoisoned = isgreased = eroded = eroded2 = erodeproof =
+		iscorrupted = ispoisoned = isgreased = eroded = eroded2 = erodeproof =
 		halfeaten = islit = unlabeled = ishistoric = isdiluted = 0;
 	mntmp = NON_PM;
 #define UNDEFINED 0
@@ -2142,6 +2150,8 @@ boolean from_user;
 #endif
 			  ) {
 			ispoisoned=1;
+		} else if(!strncmpi(bp, "corrupted ", l=10)) {
+			iscorrupted=1;
 		} else if(!strncmpi(bp, "greased ",l=8)) {
 			isgreased=1;
 		} else if (!strncmpi(bp, "very ", l=5)) {

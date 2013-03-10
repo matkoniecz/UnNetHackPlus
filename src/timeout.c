@@ -189,6 +189,20 @@ nh_timeout()
 			u.uluck++;
 		}
 	}
+	if (uamul && uamul->ocorrupted) {
+		int semirand = (moves * uamul->o_id) % 1000;
+		int old_semirand = ((moves - 1) * uamul->o_id) % 1000;
+		int older_semirand = ((moves - 2) * uamul->o_id) % 1000;
+		int oldest_semirand = ((moves - 3) * uamul->o_id) % 1000;
+		if(semirand < 10 || old_semirand < 10 || older_semirand < 10 || oldest_semirand < 10) {
+			pline("CORRRRRR! o_id: %d moves: %d", uamul->o_id, moves);
+			if (!HHallucination) {
+				You_feel("disoriented."); //TODO - better message
+				stop_occupation();
+			}
+			make_hallucinated(HHallucination + 2,FALSE,0L);
+		}
+	}
 	if(u.uinvulnerable) {
 		return; /* things past this point could kill you */
 	}
