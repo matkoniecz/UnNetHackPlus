@@ -1154,10 +1154,16 @@ const char *bottlenames[] = {
 	"bottle", "phial", "flagon", "carafe", "flask", "jar", "vial"
 };
 
+const char *bogus_bottlenames[] = {
+	"jug", "pitcher", "bucket", "thermos", "amphora", "barrel", "ampoule"
+};
 
 const char *
 bottlename()
 {
+	if (Hallucination) {
+		return bogus_bottlenames[rn2(SIZE(bogus_bottlenames))];
+	}
 	return bottlenames[rn2(SIZE(bottlenames))];
 }
 
