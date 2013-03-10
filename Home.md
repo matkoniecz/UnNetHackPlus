@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* monsters are not getting poison resistance from worn dragon scale mail
 * patchlevel.h  version.c 
 * merge uhitm, mhitm, mhitu etc
 * amulet versus poison searches_for_item
