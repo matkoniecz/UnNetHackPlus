@@ -174,7 +174,7 @@ nh_timeout()
 		baseluck -= 1;
 	}
 
-	if (u.uluck != baseluck && moves % (u.uhave.amulet || u.ugangr ? 300 : 600) == 0) {
+	if (u.uluck != baseluck && moves % (((u.uhave.amulet || u.ugangr) && u.uluck > 0) ? 300 : 600) == 0) {
 	/* Cursed luckstones stop bad luck from timing out; blessed luckstones
 	 * stop good luck from timing out; normal luckstones stop both;
 	 * neither is stopped if you don't have a luckstone.
