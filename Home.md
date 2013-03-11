@@ -1,4 +1,6 @@
 Plans for UnNetHackPlus
+* cancellation blanks T-shirts (?)
+* polymorph randomizes text on t-shirts, tombstones
 * search for "Possible additions/changes:"
 * magic draining attack (cancellation???)
 * monsters are not getting poison resistance from worn dragon scale mail
