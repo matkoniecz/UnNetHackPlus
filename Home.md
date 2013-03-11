@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* search for "Possible additions/changes:"
 * magic draining attack (cancellation???)
 * monsters are not getting poison resistance from worn dragon scale mail
 * patchlevel.h  version.c 
