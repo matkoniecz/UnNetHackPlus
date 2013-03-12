@@ -3965,7 +3965,7 @@ struct monst *shkp;
 #define CRYNUMBER 5
 
 const char* armor_wares[] = {
-	"Any %s would love these!  Finest quality!"
+	"Any %s would love these!  Finest quality!",
 	"Fit for a Knight, but they'll last for weeks!",
 	"It's dangerous 'round here these days... better wear something safe!",
 	"Hey, %s, I've got something here that'll fit you perfectly!",
