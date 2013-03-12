@@ -907,6 +907,8 @@ SPELL((char *)0,         "paperback",   P_NONE, 0, 0, 0, 1, 0, HI_PAPER),
 SPELL((char *)0,         "crimson",     P_NONE, 0, 0, 0, 1, 0, CLR_RED),
 SPELL((char *)0,         "charcoal",    P_NONE, 0, 0, 0, 1, 0, CLR_BLACK),
 SPELL((char *)0,         "torn",        P_NONE, 0, 0, 0, 1, 0, CLR_BROWN),
+SPELL((char *)0,         "rotting",     P_NONE, 0, 0, 0, 1, 0, CLR_BLACK),
+SPELL((char *)0,         "buzzing",     P_NONE, 0, 0, 0, 1, 0, CLR_BRIGHT_GREEN),
 /* blank spellbook must come last because it retains its description */
 SPELL("blank paper",     "plain",       P_NONE, 18,  0, 0, 0, 0,         HI_PAPER),
 /* a special, one of a kind, spellbook */
