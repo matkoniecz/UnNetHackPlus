@@ -125,11 +125,7 @@ typedef struct branch {
 #define Is_mineend_level(x)     (on_level(x, &mineend_level))
 #define Is_sokoend_level(x)     (on_level(x, &sokoend_level))
 #endif
-#ifdef BLACKMARKET
 #define Is_blackmarket(x)       (on_level(x, &blackmarket_level))
-#else
-#define Is_blackmarket(x)       (FALSE)
-#endif /* BLACKMARKET */
 #define Is_minetown_level(x)	(on_level(x, &minetown_level))
 #define Is_town_level(x)	(on_level(x, &town_level))
 

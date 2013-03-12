@@ -565,14 +565,12 @@ register const char *word;
 					body_part(HAND));
 		return(FALSE);
 	}
-#ifdef STEED
 	if (obj->owornmask & W_SADDLE) {
 		if (*word)
 			You("cannot %s %s you are sitting on.", word,
 				something);
 		return (FALSE);
 	}
-#endif
 	return(TRUE);
 }
 
@@ -881,16 +879,13 @@ dodown()
 		    (u.ux == sstairs.sx && u.uy == sstairs.sy && !sstairs.up)),
 		ladder_down = (u.ux == xdnladder && u.uy == ydnladder);
 
-#ifdef STEED
 	if (u.usteed && !u.usteed->mcanmove) {
 		pline("%s won't move!", Monnam(u.usteed));
 		return(0);
 	} else if (u.usteed && u.usteed->meating) {
 		pline("%s is still eating.", Monnam(u.usteed));
 		return(0);
-	} else
-#endif
-	if (Levitation) {
+	} else if (Levitation) {
 	    if ((HLevitation & I_SPECIAL) || (ELevitation & W_ARTI)) {
 		/* end controlled levitation */
 		if (ELevitation & W_ARTI) {
@@ -992,16 +987,13 @@ doup()
 		You_cant("go up here.");
 		return(0);
 	}
-#ifdef STEED
 	if (u.usteed && !u.usteed->mcanmove) {
 		pline("%s won't move!", Monnam(u.usteed));
 		return(0);
 	} else if (u.usteed && u.usteed->meating) {
 		pline("%s is still eating.", Monnam(u.usteed));
 		return(0);
-	} else
-#endif
-	if(u.ustuck) {
+	} else if(u.ustuck) {
 		You("are %s, and cannot go up.",
 			!u.uswallow ? "being held" : is_animal(u.ustuck->data) ?
 			"swallowed" : "engulfed");
@@ -1095,9 +1087,7 @@ register xchar x, y;
 }
 */
 
-#ifdef BLACKMARKET
 d_level new_dlevel = {0, 0};
-#endif
 
 void
 goto_level(newlevel, at_stairs, falling, portal)
@@ -1135,9 +1125,7 @@ boolean at_stairs, falling, portal;
 	if (new_ledger <= 0)
 		done(ESCAPED);	/* in fact < 0 is impossible */
 
-#ifdef BLACKMARKET
 	assign_level(&new_dlevel, newlevel);
-#endif
 
 	/* Prevent the player from going past the first quest level unless
 	 * (s)he has been given the go-ahead by the leader.
@@ -1277,7 +1265,7 @@ boolean at_stairs, falling, portal;
 					  y > updest.nhy));
 			    } while ((occupied(x, y) ||
 				      IS_STWALL(levl[x][y].typ)) && (trycnt++ < 1000));
-			    if (trycnt >= 1000) warning("castle: placement failed to find good position"); /* TODO: change impossible() to warning() */
+			    if (trycnt >= 1000) warning("castle: placement failed to find good position");
 			    u_on_newpos(x, y);
 			} else u_on_sstairs();
 		    } else u_on_dnstairs();
@@ -1313,13 +1301,12 @@ boolean at_stairs, falling, portal;
 			    freeinv(uball);
 			}
 		    }
-#ifdef STEED
 		    /* falling off steed has its own losehp() call */
-		    if (u.usteed)
+		    if (u.usteed) {
 			dismount_steed(DISMOUNT_FELL);
-		    else
-#endif
+		    } else {
 			losehp(rnd(3), "falling downstairs", KILLED_BY);
+		    }
 		    selftouch("Falling, you");
 		} else if (u.dz && at_ladder)
 		    You("climb down the ladder.");
@@ -1368,11 +1355,7 @@ boolean at_stairs, falling, portal;
 #endif
 #endif
 
-	if ((mtmp = m_at(u.ux, u.uy)) != 0
-#ifdef STEED
-		&& mtmp != u.usteed
-#endif
-		) {
+	if ((mtmp = m_at(u.ux, u.uy)) != 0 && mtmp != u.usteed) {
 	    /* There's a monster at your target destination; it might be one
 	       which accompanied you--see mon_arrive(dogmove.c)--or perhaps
 	       it was already here.  Randomly move you to an adjacent spot
@@ -1500,11 +1483,9 @@ boolean at_stairs, falling, portal;
 		    if (!DEADMONSTER(mtmp) && mtmp->msleeping) mtmp->msleeping = 0;
 	}
 
-#ifdef BLACKMARKET
 	if (Is_blackmarket(&u.uz) && Conflict) {
 		set_black_marketeer_angry();
 	}
-#endif /* BLACKMARKET */
 
 	if (on_level(&u.uz, &astral_level))
 	    final_level();
@@ -1836,18 +1817,13 @@ heal_legs()
 			flags.botl = 1;
 		}
 
-#ifdef STEED
-		if (!u.usteed)
-#endif
-		{
+		if (!u.usteed) {
 			/* KMH, intrinsics patch */
 			if((EWounded_legs & BOTH_SIDES) == BOTH_SIDES) {
-			Your("%s feel somewhat better.",
-				makeplural(body_part(LEG)));
-		} else {
-			Your("%s feels somewhat better.",
-				body_part(LEG));
-		}
+				Your("%s feel somewhat better.", makeplural(body_part(LEG)));
+			} else {
+				Your("%s feels somewhat better.", body_part(LEG));
+			}
 		}
 		HWounded_legs = EWounded_legs = 0;
 	}

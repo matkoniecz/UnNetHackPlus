@@ -173,9 +173,7 @@ static struct {
 	{ "music shop",	 INSTRUMENTSHOP },
 	{ "candle shop", CANDLESHOP },
 	{ "pet shop",	 PETSHOP },	/* Stephen White */
-#ifdef BLACKMARKET
 	{ "black market", BLACKSHOP },
-#endif /* BLACKMARKET */
 	{ 0, 0 }
 };
 

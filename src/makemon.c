@@ -415,9 +415,6 @@ register struct monst *mtmp;
 		    case PM_HORNED_DEVIL:
 			(void)mongets(mtmp, rn2(4) ? TRIDENT : BULLWHIP);
 			break;
-		    case PM_DISPATER:
-			(void)mongets(mtmp, WAN_STRIKING);
-			break;
 		    case PM_YEENOGHU:
 			(void)mongets(mtmp, FLAIL);
 			break;
@@ -517,13 +514,13 @@ register struct	monst	*mtmp;
 		    register int mac;
 
 		    switch(monsndx(ptr)) {
-			case PM_GUARD: mac = -2; break;
-			case PM_SOLDIER: mac = 2; break;
-			case PM_SERGEANT: mac = -1; break;
-			case PM_LIEUTENANT: mac = -4; break;
-			case PM_CAPTAIN: mac = -6; break;
-			case PM_WATCHMAN: mac = 2; break;
-			case PM_WATCH_CAPTAIN: mac = -3; break;
+			case PM_GUARD: mac = -1 - depth(&u.uz)/5; break;
+			case PM_SOLDIER: mac = 3 - depth(&u.uz)/10; break;
+			case PM_SERGEANT: mac = 0 - depth(&u.uz)/9; break;
+			case PM_LIEUTENANT: mac = -2 - depth(&u.uz)/8; break;
+			case PM_CAPTAIN: mac = -3 - depth(&u.uz)/7; break;
+			case PM_WATCHMAN: mac = 3 - depth(&u.uz)/10; break;
+			case PM_WATCH_CAPTAIN: mac = -2 - depth(&u.uz)/8; break;
 			default: warning("odd mercenary %d?", monsndx(ptr));
 				mac = 0;
 				break;
@@ -545,7 +542,9 @@ register struct	monst	*mtmp;
 			mac += 1 + mongets(mtmp, HELMET);
 		    else if (mac < 10 && rn2(2))
 			mac += 1 + mongets(mtmp, DENTED_POT);
-		    if (mac < 10 && rn2(3))
+		    if ((depth(&u.uz) > 40 || Reflecting) && rn2(100) < depth(&u.uz))
+			mac += 2 + mongets(mtmp, SHIELD_OF_REFLECTION);
+		    else if (mac < 10 && rn2(3))
 			mac += 1 + mongets(mtmp, SMALL_SHIELD);
 		    else if (mac < 10 && rn2(2))
 			mac += 2 + mongets(mtmp, LARGE_SHIELD);
@@ -591,6 +590,10 @@ register struct	monst	*mtmp;
 		} else if (quest_mon_represents_role(ptr,PM_MONK)) {
 		    (void) mongets(mtmp, rn2(11) ? ROBE :
 					     CLOAK_OF_MAGIC_RESISTANCE);
+		} else if (ptr == &mons[PM_WIZARD_OF_YENDOR]) {
+			if (!rn2(22)) {
+				(void)mongets(mtmp, AMULET_OF_REFLECTION);
+			}
 		}
 		break;
 	    case S_NYMPH:
@@ -668,6 +671,9 @@ register struct	monst	*mtmp;
 		if (ptr == &mons[PM_CTHULHU]) {
 			(void)mongets(mtmp, AMULET_OF_YENDOR);
 			(void)mongets(mtmp, POT_FULL_HEALING);
+			if (!rn2(22)) {
+				(void)mongets(mtmp, AMULET_OF_REFLECTION);
+			}
 		}
 		break;
 	    case S_GNOME:
@@ -1357,9 +1363,8 @@ rndmonst()
 		if (elemlevel && wrong_elem_type(ptr)) continue;
 		if (uncommon(mndx)) continue;
 		if (Inhell && (ptr->geno & G_NOHELL)) continue;
-#ifdef BLACKMARKET	/* SWD: pets are not allowed in the black market */
+		/* SWD: pets are not allowed in the black market */
 		if (is_domestic(ptr) && Is_blackmarket(&u.uz)) continue;
-#endif
 		ct = (int)(ptr->geno & G_FREQ) + align_shift(ptr);
 		if (ct < 0 || ct > 127)
 		    panic("rndmonst: bad count [#%d: %d]", mndx, ct);

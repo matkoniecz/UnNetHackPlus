@@ -938,9 +938,7 @@ register const char *let,*word;
 		if ((taking_off(word) &&
 		    (!(otmp->owornmask & (W_ARMOR | W_RING | W_AMUL | W_TOOL))
 		     || (otmp==uarm && uarmc)
-#ifdef TOURIST
 		     || (otmp==uarmu && (uarm || uarmc))
-#endif
 		    ))
 		|| (putting_on(word) &&
 		     (otmp->owornmask & (W_ARMOR | W_RING | W_AMUL | W_TOOL)))
@@ -1029,10 +1027,8 @@ register const char *let,*word;
 			|| otmp->otyp == TIN
 			|| otmp->otyp == CAN_OF_GREASE
 			|| otmp->otyp == CANDY_BAR
-#ifdef TOURIST
 			|| otmp->otyp == T_SHIRT
 			|| otmp->otyp == CREDIT_CARD
-#endif
 			|| otmp->otyp == MAGIC_MARKER
 #ifdef GOLDOBJ
 			|| otmp->oclass == COIN_CLASS
@@ -1280,22 +1276,14 @@ register struct obj *otmp;
 boolean
 wearing_armor()
 {
-	return((boolean)(uarm || uarmc || uarmf || uarmg || uarmh || uarms
-#ifdef TOURIST
-		|| uarmu
-#endif
-		));
+	return((boolean)(uarm || uarmc || uarmf || uarmg || uarmh || uarms || uarmu));
 }
 
 boolean
 is_worn(otmp)
 register struct obj *otmp;
 {
-    return((boolean)(!!(otmp->owornmask & (W_ARMOR | W_RING | W_AMUL | W_TOOL |
-#ifdef STEED
-			W_SADDLE |
-#endif
-			W_WEP | W_SWAPWEP | W_QUIVER))));
+    return((boolean)(!!(otmp->owornmask & (W_ARMOR | W_RING | W_AMUL | W_TOOL | W_SADDLE | W_WEP | W_SWAPWEP | W_QUIVER))));
 }
 
 static NEARDATA const char removeables[] =
@@ -1607,11 +1595,14 @@ void
 fully_identify_obj(otmp)
 struct obj *otmp;
 {
-    makeknown(otmp->otyp);
-    if (otmp->oartifact) discover_artifact((xchar)otmp->oartifact);
-    otmp->known = otmp->dknown = otmp->bknown = otmp->rknown = 1;
-    if (otmp->otyp == EGG && otmp->corpsenm != NON_PM)
-	learn_egg_type(otmp->corpsenm);
+	makeknown(otmp->otyp);
+	if (otmp->oartifact) {
+		discover_artifact((xchar)otmp->oartifact);
+	}
+	otmp->known = otmp->dknown = otmp->bknown = otmp->rknown = 1;
+	if (otmp->otyp == EGG && otmp->corpsenm != NON_PM) {
+		learn_egg_type(otmp->corpsenm);
+	}
 }
 
 /* ggetobj callback routine; identify an object and give immediate feedback */
@@ -1836,11 +1827,7 @@ struct obj *obj;
 	else if (obj->otyp == CAN_OF_GREASE)
 		add_menu(win, NO_GLYPH, &any, 'a', 0, ATR_NONE,
 				"Use the can to grease an item", MENU_UNSELECTED);
-	else if (obj->otyp == LOCK_PICK ||
-#ifdef TOURIST
-			obj->otyp == CREDIT_CARD ||
-#endif
-			obj->otyp == SKELETON_KEY)
+	else if (obj->otyp == LOCK_PICK || obj->otyp == CREDIT_CARD || obj->otyp == SKELETON_KEY)
 		add_menu(win, NO_GLYPH, &any, 'a', 0, ATR_NONE,
 				"Use this tool to pick a lock", MENU_UNSELECTED);
 	else if (obj->otyp == TINNING_KIT)
@@ -1891,11 +1878,9 @@ struct obj *obj;
 				"Dip something into this potion", MENU_UNSELECTED);
 	}
 #endif
-#ifdef TOURIST
 	else if (obj->otyp == EXPENSIVE_CAMERA)
 		add_menu(win, NO_GLYPH, &any, 'a', 0, ATR_NONE,
 				"Take a photograph", MENU_UNSELECTED);
-#endif
 	else if (obj->otyp == TOWEL)
 		add_menu(win, NO_GLYPH, &any, 'a', 0, ATR_NONE,
 				"Clean yourself off with this towel", MENU_UNSELECTED);
@@ -3100,16 +3085,10 @@ doprarm()
 	if(!wearing_armor())
 		You("are not wearing any armor.");
 	else {
-#ifdef TOURIST
 		char lets[8];
-#else
-		char lets[7];
-#endif
 		register int ct = 0;
 
-#ifdef TOURIST
 		if(uarmu) lets[ct++] = obj_to_let(uarmu);
-#endif
 		if(uarm) lets[ct++] = obj_to_let(uarm);
 		if(uarmc) lets[ct++] = obj_to_let(uarmc);
 		if(uarmh) lets[ct++] = obj_to_let(uarmh);
@@ -3153,11 +3132,7 @@ STATIC_OVL boolean
 tool_in_use(obj)
 struct obj *obj;
 {
-	if ((obj->owornmask & (W_TOOL
-#ifdef STEED
-			| W_SADDLE
-#endif
-			)) != 0L) return TRUE;
+	if ((obj->owornmask & (W_TOOL | W_SADDLE)) != 0L) return TRUE;
 	if (obj->oclass != TOOL_CLASS) return FALSE;
 	return (boolean)(obj == uwep || obj->lamplit ||
 				(obj->otyp == LEASH && obj->leashmon));
@@ -3314,23 +3289,14 @@ doorganize()	/* inventory organizer by Del Lamb */
 	register char let;
 	char alphabet[52+1], buf[52+1];
 	char qbuf[QBUFSZ];
-#ifdef ADJSPLIT
 	char allowallcnt[3];
-#else
-	char allowall[2];
-#endif
 	const char *adj_type;
 
 	if (!flags.invlet_constant) reassign();
 	/* get a pointer to the object the user wants to organize */
-#ifdef ADJSPLIT
 	allowallcnt[0] = ALLOW_COUNT; allowallcnt[1] = ALL_CLASSES;
 	allowallcnt[2] = '\0';
 	if (!(obj = getobj(allowallcnt,"adjust"))) return(0);
-#else
-	allowall[0] = ALL_CLASSES; allowall[1] = '\0';
-	if (!(obj = getobj(allowall,"adjust"))) return(0);
-#endif
 
 	/* initialize the list with all upper and lower case letters */
 	for (let = 'a', ix = 0;  let <= 'z';) alphabet[ix++] = let++;
@@ -3359,11 +3325,7 @@ doorganize()	/* inventory organizer by Del Lamb */
 		let = yn_function(qbuf, (char *)0, '\0');
 		if(index(quitchars,let)) {
 			pline(Never_mind);
-#ifdef ADJSPLIT
 			goto cleansplit;
-#else
-			return(0);
-#endif
 		}
 		if (let == '@' || !letter(let))
 			pline("Select an inventory slot letter.");
@@ -3371,35 +3333,21 @@ doorganize()	/* inventory organizer by Del Lamb */
 			break;
 	}
 
-	/* change the inventory and print the resulting item */
-#ifndef ADJSPLIT
-	adj_type = "Moving:";
-#endif
-
-	/*
+	/* change the inventory and print the resulting item 
 	 * don't use freeinv/addinv to avoid double-touching artifacts,
 	 * dousing lamps, losing luck, cursing loadstone, etc.
 	 */
 	extract_nobj(obj, &invent);
 
-#ifdef ADJSPLIT
 	for (otmp = invent; otmp && otmp->invlet != let;)
 		otmp = otmp->nobj;
 	if (!otmp)
 		adj_type = "Moving:";
 	else if (merged(&otmp,&obj)) {
-#else
-	for (otmp = invent; otmp;)
-		if (merged(&otmp,&obj)) {
-#endif
 			adj_type = "Merging:";
 			obj = otmp;
-#ifndef ADJSPLIT
-			otmp = otmp->nobj;
-#endif
 			extract_nobj(obj, &invent);
 		} else {
-#ifdef ADJSPLIT
 		  struct obj *otmp2;
 		  for (otmp2 = invent; otmp2
 			 && otmp2->invlet != obj->invlet;)
@@ -3422,16 +3370,9 @@ doorganize()	/* inventory organizer by Del Lamb */
 				goto cleansplit;
 			}
 		  } else
-#else
-			if (otmp->invlet == let) {
-#endif
 				adj_type = "Swapping:";
 				otmp->invlet = obj->invlet;
 			}
-#ifndef ADJSPLIT
-			otmp = otmp->nobj;
-		}
-#endif
 
 	/* inline addinv (assuming flags.invlet_constant and !merged) */
 	obj->invlet = let;
@@ -3443,14 +3384,12 @@ doorganize()	/* inventory organizer by Del Lamb */
 	prinv(adj_type, obj, 0L);
 	update_inventory();
 	return(0);
-#ifdef ADJSPLIT
 cleansplit:
 	for (otmp = invent; otmp; otmp = otmp->nobj)
                 if (otmp != obj && otmp->invlet == obj->invlet)
                         merged( &otmp, &obj );
 
 	return 0;
-#endif
 }
 
 /* common to display_minventory and display_cinventory */

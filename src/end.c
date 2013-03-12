@@ -79,9 +79,7 @@ static NEARDATA const char *deaths[] = {		/* the array of death */
 	"burning", "dissolving under the heat and pressure",
 	"crushed", "turned to stone", "turned into slime",
 	"genocided", 
-#ifdef WEBB_DISINT
 	"disintegrated",
-#endif
 	"panic", "trickery",
 #ifdef ASTRAL_ESCAPE
 	"quit", "escaped", "defied the gods and escaped", "ascended"
@@ -93,9 +91,7 @@ static NEARDATA const char *ends[] = {		/* "when you..." */
 	"burned", "dissolved in the lava",
 	"were crushed", "turned to stone", "turned into slime",
 	"were genocided", 
-#ifdef WEBB_DISINT
 	"were disintegrated",
-#endif
 	"panicked", "were tricked",
 #ifdef ASTRAL_ESCAPE
 	"quit", "escaped", "defied the gods and escaped", "ascended"
@@ -617,11 +613,8 @@ int how;
 			useup(uamul);
 		} else {
 			if (how == CHOKING) You("vomit ...");
-#ifdef WEBB_DISINT
 			if (how == DISINTEGRATED) You("reconstitute!");
-			else
-#endif
-			You_feel("much better!");
+			else You_feel("much better!");
 			pline_The("medallion crumbles to dust!");
 			if (uamul) useup(uamul);
 

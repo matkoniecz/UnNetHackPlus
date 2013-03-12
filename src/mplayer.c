@@ -239,11 +239,9 @@ register boolean special;
 		case PM_SAMURAI:
 		    if (rn2(2)) weapon = KATANA;
 		    break;
-#ifdef TOURIST
 		case PM_TOURIST:
 		    /* Defaults are just fine */
 		    break;
-#endif
 		case PM_VALKYRIE:
 		    if (rn2(2)) weapon = WAR_HAMMER;
 		    if (rn2(2)) armor = rnd_class(PLATE_MAIL, CHAIN_MAIL);
@@ -313,6 +311,8 @@ register boolean special;
 	    quan = rnd(3);
 	    while(quan--)
 		(void)mongets(mtmp, rnd_misc_item(mtmp));
+	    if(!rn2(22))
+		(void)mongets(mtmp, AMULET_OF_REFLECTION);
 	}
 
 	return(mtmp);

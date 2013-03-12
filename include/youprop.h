@@ -60,6 +60,13 @@
 #define Drain_resistance	(HDrain_resistance || EDrain_resistance || \
 				 resists_drli(&youmonst))
 
+#define EConfusion_resistance		FALSE /* Fixme: copy this from SporkHack */
+#define Confusion_resistance		FALSE /* Fixme: copy this from SporkHack */
+
+#define EStun_resistance		FALSE /* Fixme: copy this from SporkHack */
+#define Stun_resistance			FALSE /* Fixme: copy this from SporkHack */
+
+
 /* Intrinsics only */
 #define HSick_resistance	u.uprops[SICK_RES].intrinsic
 #define Sick_resistance		(HSick_resistance || \
@@ -234,12 +241,8 @@
 				 !is_floater(youmonst.data))
 
 #define EFlying			u.uprops[FLYING].extrinsic
-#ifdef STEED
 # define Flying			(EFlying || is_flyer(youmonst.data) || \
 				 (u.usteed && is_flyer(u.usteed->data)))
-#else
-# define Flying			(EFlying || is_flyer(youmonst.data))
-#endif
 	/* May touch surface; does not override any others */
 
 #define Wwalking		(u.uprops[WWALKING].extrinsic && \
@@ -249,14 +252,9 @@
 
 #define HSwimming		u.uprops[SWIMMING].intrinsic
 #define ESwimming		u.uprops[SWIMMING].extrinsic	/* [Tom] */
-#ifdef STEED
 # define Swimming		(HSwimming || ESwimming || \
 				 is_swimmer(youmonst.data) || \
 				 (u.usteed && is_swimmer(u.usteed->data)))
-#else
-# define Swimming		(HSwimming || ESwimming || \
-				 is_swimmer(youmonst.data))
-#endif
 	/* Get wet, don't go under water unless if amphibious */
 
 #define HMagical_breathing	u.uprops[MAGICAL_BREATHING].intrinsic

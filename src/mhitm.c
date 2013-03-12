@@ -24,9 +24,7 @@ STATIC_DCL int FDECL(gazemm, (struct monst *,struct monst *,struct attack *));
 STATIC_DCL int FDECL(gulpmm, (struct monst *,struct monst *,struct attack *));
 STATIC_DCL int FDECL(explmm, (struct monst *,struct monst *,struct attack *));
 STATIC_DCL int FDECL(mdamagem, (struct monst *,struct monst *,struct attack *));
-#ifdef WEBB_DISINT
 STATIC_DCL int FDECL(defdisintagr, (struct monst *,struct monst *,struct attack *));
-#endif
 STATIC_DCL void FDECL(mswingsm, (struct monst *, struct monst *, struct obj *));
 STATIC_DCL void FDECL(noises,(struct monst *,struct attack *));
 STATIC_DCL void FDECL(missmm,(struct monst *,struct monst *,struct attack *));
@@ -282,10 +280,7 @@ mattackm(magr, mdef)
 		 * players, or under conflict or confusion. 
 		 */
 		if (!magr->mconf && !Conflict && otmp && (
-#ifdef WEBB_DISINT
-          (touch_disintegrates(mdef->data) &&
-           (mattk->aatyp == AT_WEAP || !(resists_disint(magr))) ) ||
-#endif 
+          (touch_disintegrates(mdef->data) && (mattk->aatyp == AT_WEAP || !(resists_disint(magr))) ) ||
 		    (mattk->aatyp != AT_WEAP && touch_petrifies(mdef->data)))) {
 		    strike = 0;
 		    break;
@@ -336,12 +331,10 @@ mattackm(magr, mdef)
 		break;
 
 	    case AT_ENGL:
-#ifdef STEED
 		if (u.usteed && (mdef == u.usteed)) {
 		    strike = 0;
 		    break;
 		} 
-#endif
 		/* Engulfing attacks are directed at the hero if
 		 * possible. -dlc
 		 */
@@ -585,7 +578,6 @@ explmm(magr, mdef, mattk)
 	return result;
 }
 
-#ifdef WEBB_DISINT
 STATIC_OVL int
 defdisintagr(magr, mdef, mattk)
 	register struct monst	*magr, *mdef;
@@ -633,7 +625,6 @@ defdisintagr(magr, mdef, mattk)
 					mass += otch->owt;
 					m_useup(magr,otch);
 				} 
-#ifdef TOURIST
 				if (!(magr->misc_worn_check & (W_ARMC|W_ARM)) &&
 						(otch = which_armor(magr,W_ARMU)) &&
 						(!oresist_disintegration(otch))) {
@@ -643,7 +634,6 @@ defdisintagr(magr, mdef, mattk)
 					mass += otch->owt;
 					m_useup(magr,otch);
 				}
-#endif
 				break;
 			case (W_ARMG):
 				if (otmp) {
@@ -716,7 +706,6 @@ defdisintagr(magr, mdef, mattk)
 	}
 	return tmp;
 }
-#endif
 
 /*
  *  See comment at top of mattackm(), for return values.
@@ -732,7 +721,6 @@ mdamagem(magr, mdef, mattk)
 	int armpro, num, tmp = d((int)mattk->damn, (int)mattk->damd);
 	boolean cancelled;
 
-#ifdef WEBB_DISINT
 	int def_disintegrated;
 	if (touch_disintegrates(pd) &&
 			(def_disintegrated = defdisintagr(magr, mdef, mattk)) != -2 )
@@ -747,7 +735,6 @@ mdamagem(magr, mdef, mattk)
 				tmp = def_disintegrated;
 				break;
 		}
-#endif
 	if (touch_petrifies(pd) && !resists_ston(magr)) {
 	    long protector = attk_protection((int)mattk->aatyp),
 		 wornitems = magr->misc_worn_check;
@@ -1032,12 +1019,9 @@ mdamagem(magr, mdef, mattk)
 		    if (vis) Strcpy(mdef_Monnam, Monnam(mdef));
 		    mdef->mstrategy &= ~STRAT_WAITFORU;
 		    (void) rloc(mdef, FALSE);
-		    if (vis && !canspotmon(mdef)
-#ifdef STEED
-		    	&& mdef != u.usteed
-#endif
-		    	)
+		    if (vis && !canspotmon(mdef) && mdef != u.usteed) {
 			pline("%s suddenly disappears!", mdef_Monnam);
+		    }
 		}
 		break;
 	    case AD_SLEE:
@@ -1181,9 +1165,7 @@ mdamagem(magr, mdef, mattk)
 			/* Automatic kill if drained past level 0 */
 		}
 		break;
-#ifdef SEDUCE
 	    case AD_SSEX:
-#endif
 	    case AD_SITM:	/* for now these are the same */
 	    case AD_SEDU:
 		if (magr->mcan) break;
@@ -1200,12 +1182,10 @@ mdamagem(magr, mdef, mattk)
 			Strcpy(mdefnambuf, x_monnam(mdef, ARTICLE_THE, (char *)0, 0, FALSE));
 
 			otmp = obj;
-#ifdef STEED
-			if (u.usteed == mdef &&
-					otmp == which_armor(mdef, W_SADDLE))
+			if (u.usteed == mdef && otmp == which_armor(mdef, W_SADDLE)) {
 				/* "You can no longer ride <steed>." */
 				dismount_steed(DISMOUNT_POLY);
-#endif
+			}
 			obj_extract_self(otmp);
 			if (otmp->owornmask) {
 				mdef->misc_worn_check &= ~otmp->owornmask;
@@ -1307,7 +1287,6 @@ mdamagem(magr, mdef, mattk)
 		/* there's no msomearmor() function, so just do damage */
 	     /* if (cancelled) break; */
 		break;
-#ifdef WEBB_DISINT
 	    case AD_DISN: /* only hit torso aromor */
 		if (!magr->mcan && magr->mhp > 6) {
 			struct obj * otch = 0;
@@ -1321,11 +1300,9 @@ mdamagem(magr, mdef, mattk)
 			} else if ((otch = which_armor(mdef, W_ARM))) {
 				if (oresist_disintegration(otch))
 					otch = 0;
-#ifdef TOURIST
 			} else if ((otch = which_armor(mdef, W_ARMU))) {
 				if (oresist_disintegration(otch))
 					otch = 0;
-#endif
 			} else {
 				recip_dam = minstadisintegrate(mdef);
 			}
@@ -1346,7 +1323,6 @@ mdamagem(magr, mdef, mattk)
 				        (grow_up(magr,mdef) ?  0 : MM_AGR_DIED));
 		}
 		break;
-#endif
 	    default:	tmp = 0;
 			break;
 	}

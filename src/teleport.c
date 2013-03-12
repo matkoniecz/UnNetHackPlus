@@ -35,12 +35,9 @@ unsigned gpflags;
 	 * which could be co-located and thus get restricted a bit too much.
 	 * oh well.
 	 */
-	if (mtmp != &youmonst && x == u.ux && y == u.uy
-#ifdef STEED
-			&& (!u.usteed || mtmp != u.usteed)
-#endif
-			)
-	    is_badpos = 1;
+	if (mtmp != &youmonst && x == u.ux && y == u.uy && (!u.usteed || mtmp != u.usteed)) {
+		is_badpos = 1;
+	}
 
 	if (mtmp) {
 	    mtmp2 = m_at(x,y);
@@ -113,11 +110,7 @@ unsigned gpflags;
 	 * which could be co-located and thus get restricted a bit too much.
 	 * oh well.
 	 */
-	if (mtmp != &youmonst && x == u.ux && y == u.uy
-#ifdef STEED
-			&& (!u.usteed || mtmp != u.usteed)
-#endif
-			)
+	if (mtmp != &youmonst && x == u.ux && y == u.uy && (!u.usteed || mtmp != u.usteed))
 		return FALSE;
 
 	if (mtmp) {
@@ -535,13 +528,11 @@ boolean allow_drag;
 	}
 	initrack(); /* teleports mess up tracking monsters without this */
 	update_player_regions();
-#ifdef STEED
 	/* Move your steed, too */
 	if (u.usteed) {
 		u.usteed->mx = nux;
 		u.usteed->my = nuy;
 	}
-#endif
 	/*
 	 *  Make sure the hero disappears from the old location.  This will
 	 *  not happen if she is teleported within sight of her previous
@@ -595,11 +586,9 @@ boolean force_it;
 {
 	register struct obj *otmp;
 
-#ifdef STEED
-	if (mtmp == u.usteed)
+	if (mtmp == u.usteed) {
 		return (FALSE);
-#endif
-
+	}
 	if (mtmp->mleashed) {
 	    otmp = get_mleash(mtmp);
 	    if (!otmp) {
@@ -643,11 +632,7 @@ tele()
 #ifdef WIZARD
 	(
 #endif
-	 (u.uhave.amulet || On_W_tower_level(&u.uz)
-#ifdef STEED
-	  || (u.usteed && mon_has_amulet(u.usteed))
-#endif
-	 )
+	 (u.uhave.amulet || On_W_tower_level(&u.uz) || (u.usteed && mon_has_amulet(u.usteed)))
 #ifdef WIZARD
 	 && (!wizard) )
 #endif
@@ -663,14 +648,10 @@ tele()
 	    if (unconscious()) {
 		pline("Being unconscious, you cannot control your teleport.");
 	    } else {
-#ifdef STEED
 		    char buf[BUFSZ];
 		    if (u.usteed) Sprintf(buf," and %s", mon_nam(u.usteed));
-#endif
 		    pline("To what position do you%s want to be teleported?",
-#ifdef STEED
 				u.usteed ? buf :
-#endif
 			   "");
 		    cc.x = u.ux;
 		    cc.y = u.uy;
@@ -918,11 +899,7 @@ level_tele()
 	    /* if in Knox and the requested level > 0, stay put.
 	     * we let negative values requests fall into the "heaven" loop.
 	     */
-	    if ((Is_knox(&u.uz)
-#ifdef BLACKMARKET
-		    || Is_blackmarket(&u.uz)
-#endif
-	    ) && newlev > 0) {
+	    if ((Is_knox(&u.uz) || Is_blackmarket(&u.uz)) && newlev > 0) {
 		You(shudder_for_moment);
 		return;
 	    }
@@ -1243,12 +1220,10 @@ boolean suppress_impossible;
 {
 	register int x, y, trycount;
 
-#ifdef STEED
 	if (mtmp == u.usteed) {
 	    tele();
 	    return TRUE;
 	}
-#endif
 
 	if (mtmp->iswiz && mtmp->mx) {	/* Wizard, not just arriving */
 	    if (!In_W_tower(u.ux, u.uy, &u.uz))
@@ -1384,7 +1359,6 @@ int in_sight;
 			seetrap(trap);
 		    }
 		    return 0;
-#ifdef BLACKMARKET
 	      	} else if (mtmp->mtame &&
 			(Is_blackmarket(&trap->dst) || Is_blackmarket(&u.uz))) {
 	          if (in_sight) {
@@ -1393,7 +1367,6 @@ int in_sight;
 		     seetrap(trap);
 	          }
 	          return 0;
-#endif /* BLACKMARKET */
 		} else {
 		    assign_level(&tolevel, &trap->dst);
 		    migrate_typ = MIGR_PORTAL;
@@ -1483,12 +1456,9 @@ random_teleport_level()
 	int nlev, max_depth, min_depth,
 	    cur_depth = (int)depth(&u.uz);
 
-	if (!rn2(5) || Is_knox(&u.uz)
-#ifdef BLACKMARKET
-		|| Is_blackmarket(&u.uz)
-#endif
-		)
-	    return cur_depth;
+	if (!rn2(5) || Is_knox(&u.uz) || Is_blackmarket(&u.uz)) {
+		return cur_depth;
+	}
 
 	/* What I really want to do is as follows:
 	 * -- If in a dungeon that goes down, the new level is to be restricted
@@ -1546,26 +1516,23 @@ boolean give_feedback;
 	coord cc;
 
 	if (mtmp->ispriest && *in_rooms(mtmp->mx, mtmp->my, TEMPLE)) {
-	    if (give_feedback)
-		pline("%s resists your magic!", Monnam(mtmp));
-	    return FALSE;
+		if (give_feedback) {
+			pline("%s resists your magic!", Monnam(mtmp));
+		}
+		return FALSE;
 	} else if (level.flags.noteleport && u.uswallow && mtmp == u.ustuck) {
-	    if (give_feedback)
-		You("are no longer inside %s!", mon_nam(mtmp));
-	    unstuck(mtmp);
-	    (void) rloc(mtmp, FALSE);
-#ifdef BLACKMARKET
-	} else if (mtmp->data == &mons[PM_BLACK_MARKETEER] &&
-	           rn2(13) &&
-		   enexto_core_range(&cc, u.ux, u.uy, mtmp->data,0,
-		                     rnf(1,10) ? 4 : 3)) {
-	    rloc_to(mtmp, cc.x, cc.y);
-#endif
-	} else if (is_rider(mtmp->data) && rn2(13) &&
-		   enexto(&cc, u.ux, u.uy, mtmp->data))
-	    rloc_to(mtmp, cc.x, cc.y);
-	else
-	    (void) rloc(mtmp, FALSE);
+		if (give_feedback) {
+			You("are no longer inside %s!", mon_nam(mtmp));
+		}
+		unstuck(mtmp);
+		(void) rloc(mtmp, FALSE);
+	} else if (mtmp->data == &mons[PM_BLACK_MARKETEER] && rn2(13) && enexto_core_range(&cc, u.ux, u.uy, mtmp->data, 0, rnf(1,10) ? 4 : 3)) {
+		rloc_to(mtmp, cc.x, cc.y);
+	} else if (is_rider(mtmp->data) && rn2(13) && enexto(&cc, u.ux, u.uy, mtmp->data)) {
+		rloc_to(mtmp, cc.x, cc.y);
+	} else {
+		(void) rloc(mtmp, FALSE);
+	}
 	return TRUE;
 }
 

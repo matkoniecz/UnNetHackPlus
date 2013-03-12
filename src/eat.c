@@ -998,10 +998,10 @@ register int pm;
 		    char buf[BUFSZ];
 		    You_cant("resist the temptation to mimic %s.",
 			Hallucination ? "an orange" : "a pile of gold");
-#ifdef STEED
                     /* A pile of gold can't ride. */
-		    if (u.usteed) dismount_steed(DISMOUNT_FELL);
-#endif
+		    if (u.usteed) {
+				dismount_steed(DISMOUNT_FELL);
+		    }
 		    nomul(-tmp, "pretending to be a pile of gold");
 		    Sprintf(buf, Hallucination ?
 			"You suddenly dread being peeled and mimic %s again!" :
@@ -1404,17 +1404,13 @@ struct obj *obj;
 		if (!Blind) Your(vision_clears);
 	} else if(!rn2(3)) {
 		const char *what, *where;
-		if (!Blind)
-		    what = "goes",  where = "dark";
-		else if (Levitation || Is_airlevel(&u.uz) ||
-			 Is_waterlevel(&u.uz))
-		    what = "you lose control of",  where = "yourself";
-		else
-		    what = "you slap against the", where =
-#ifdef STEED
-			   (u.usteed) ? "saddle" :
-#endif
-			   surface(u.ux,u.uy);
+		if (!Blind) {
+			what = "goes",  where = "dark";
+		} else if (Levitation || Is_airlevel(&u.uz) || Is_waterlevel(&u.uz)) {
+			what = "you lose control of",  where = "yourself";
+		} else {
+			what = "you slap against the", where = (u.usteed) ? "saddle" : surface(u.ux,u.uy);
+		}
 		pline_The("world spins and %s %s.", what, where);
 		flags.soundok = 0;
 		nomul(-rnd(10), "unconscious from rotten food");
@@ -1725,139 +1721,147 @@ struct obj *otmp;
 	/* (How often do you even _find_ 3 rings of polymorph in a game?) */
 	oldprop = u.uprops[objects[typ].oc_oprop].intrinsic;
 	if (otmp == uleft || otmp == uright) {
-	    Ring_gone(otmp);
-	    if (u.uhp <= 0) return; /* died from sink fall */
+		Ring_gone(otmp);
+		if (u.uhp <= 0) {
+			return; /* died from sink fall */
+		}
 	}
 	otmp->known = otmp->dknown = 1; /* by taste */
 	if (!rn2(otmp->oclass == RING_CLASS ? 3 : 5)) {
-	  switch (otmp->otyp) {
-	    default:
-	        if (!objects[typ].oc_oprop) break; /* should never happen */
-
-		if (!(u.uprops[objects[typ].oc_oprop].intrinsic & FROMOUTSIDE))
-		    accessory_has_effect(otmp);
-
-		u.uprops[objects[typ].oc_oprop].intrinsic |= FROMOUTSIDE;
-
 		switch (typ) {
-		  case RIN_SEE_INVISIBLE:
-		    set_mimic_blocking();
-		    see_monsters();
-		    if (Invis && !oldprop && !ESee_invisible &&
-				!perceives(youmonst.data) && !Blind) {
-			newsym(u.ux,u.uy);
-			pline("Suddenly you can see yourself.");
+		default:
+			if (!objects[typ].oc_oprop) {
+				warning("impossible happened in function eataccessory");
+				break; /* should never happen */
+			}
+			if (!(u.uprops[objects[typ].oc_oprop].intrinsic & FROMOUTSIDE)) {
+				accessory_has_effect(otmp);
+			}
+			u.uprops[objects[typ].oc_oprop].intrinsic |= FROMOUTSIDE;
+			switch (typ) {
+			case RIN_SEE_INVISIBLE:
+				set_mimic_blocking();
+				see_monsters();
+				if (Invis && !oldprop && !ESee_invisible && !perceives(youmonst.data) && !Blind) {
+					newsym(u.ux,u.uy);
+					pline("Suddenly you can see yourself.");
+					makeknown(typ);
+				}
+				break;
+			case RIN_INVISIBILITY:
+				if (!oldprop && !EInvis && !BInvis && !See_invisible && !Blind) {
+					newsym(u.ux,u.uy);
+					Your("body takes on a %s transparency...", Hallucination ? "normal" : "strange");
+					makeknown(typ);
+				}
+				break;
+			case RIN_PROTECTION_FROM_SHAPE_CHAN:
+				rescham();
+				break;
+			case RIN_LEVITATION:
+				/* undo the `.intrinsic |= FROMOUTSIDE' done above */
+				u.uprops[LEVITATION].intrinsic = oldprop;
+				if (!Levitation) {
+					float_up();
+					incr_itimeout(&HLevitation, d(10,20));
+					makeknown(typ);
+				}
+				break;
+			}
+			break;
+		case RIN_ADORNMENT:
+			accessory_has_effect(otmp);
+			if (adjattrib(A_CHA, otmp->spe, -1)) {
+				makeknown(typ);
+			}
+			break;
+		case RIN_GAIN_STRENGTH:
+			accessory_has_effect(otmp);
+			if (adjattrib(A_STR, otmp->spe, -1)) {
+				makeknown(typ);
+			}
+			break;
+		case RIN_GAIN_CONSTITUTION:
+			accessory_has_effect(otmp);
+			if (adjattrib(A_CON, otmp->spe, -1)) {
+				makeknown(typ);
+			}
+			break;
+		case RIN_GAIN_INTELLIGENCE:
+			accessory_has_effect(otmp);
+			if (adjattrib(A_INT, otmp->spe, -1)) {
+				makeknown(typ);
+			}
+			break;
+		case RIN_GAIN_WISDOM:
+			accessory_has_effect(otmp);
+			if (adjattrib(A_WIS, otmp->spe, -1)) {
+				makeknown(typ);
+			}
+			break;
+		case RIN_GAIN_DEXTERITY:
+			accessory_has_effect(otmp);
+			if (adjattrib(A_DEX, otmp->spe, -1)) {
+				makeknown(typ);
+			}
+			break;
+		case RIN_INCREASE_ACCURACY:
+			accessory_has_effect(otmp);
+			u.uhitinc += otmp->spe;
+			break;
+		case RIN_INCREASE_DAMAGE:
+			accessory_has_effect(otmp);
+			u.udaminc += otmp->spe;
+			break;
+		case RIN_PROTECTION:
+			accessory_has_effect(otmp);
+			HProtection |= FROMOUTSIDE;
+			u.ublessed += otmp->spe;
+			flags.botl = 1;
+			break;
+		case RIN_FREE_ACTION:
+			/* Give sleep resistance instead */
+			if (!(HSleep_resistance & FROMOUTSIDE)) {
+				accessory_has_effect(otmp);
+			}
+			if (!Sleep_resistance) {
+				You_feel("wide awake.");
+			}
+			HSleep_resistance |= FROMOUTSIDE;
+			break;
+		case AMULET_OF_CHANGE:
+			accessory_has_effect(otmp);
 			makeknown(typ);
-		    }
-		    break;
-		  case RIN_INVISIBILITY:
-		    if (!oldprop && !EInvis && !BInvis &&
-					!See_invisible && !Blind) {
-			newsym(u.ux,u.uy);
-			Your("body takes on a %s transparency...",
-				Hallucination ? "normal" : "strange");
+			change_sex();
+			You("are suddenly very %s!", flags.female ? "feminine" : "masculine");
+			flags.botl = 1;
+			break;
+		case AMULET_OF_UNCHANGING:
+			/* un-change: it's a pun */
+			if (!Unchanging && Upolyd) {
+				accessory_has_effect(otmp);
 			makeknown(typ);
-		    }
-		    break;
-		  case RIN_PROTECTION_FROM_SHAPE_CHAN:
-		    rescham();
-		    break;
-		  case RIN_LEVITATION:
-		    /* undo the `.intrinsic |= FROMOUTSIDE' done above */
-		    u.uprops[LEVITATION].intrinsic = oldprop;
-		    if (!Levitation) {
-			float_up();
-			incr_itimeout(&HLevitation, d(10,20));
-			makeknown(typ);
-		    }
-		    break;
+			rehumanize();
+			}
+			break;
+		case AMULET_OF_STRANGULATION: /* bad idea! */
+			/* no message--this gives no permanent effect */
+			choke(otmp);
+			break;
+		case AMULET_OF_RESTFUL_SLEEP: /* another bad idea! */
+			if (!(HSleeping & FROMOUTSIDE)) {
+				accessory_has_effect(otmp);
+			}
+			HSleeping = FROMOUTSIDE | rnd(100);
+			break;
+		case RIN_SUSTAIN_ABILITY:
+		case AMULET_OF_LIFE_SAVING:
+		case AMULET_OF_REFLECTION: /* nice try */
+		/* can't eat Amulet of Yendor or fakes,
+		 * and no oc_prop even if you could -3.
+		 */
+			break;
 		}
-		break;
-	    case RIN_ADORNMENT:
-		accessory_has_effect(otmp);
-		if (adjattrib(A_CHA, otmp->spe, -1))
-		    makeknown(typ);
-		break;
-	    case RIN_GAIN_STRENGTH:
-		accessory_has_effect(otmp);
-		if (adjattrib(A_STR, otmp->spe, -1))
-		    makeknown(typ);
-		break;
-	    case RIN_GAIN_CONSTITUTION:
-		accessory_has_effect(otmp);
-		if (adjattrib(A_CON, otmp->spe, -1))
-		    makeknown(typ);
-		break;
-	    case RIN_GAIN_INTELLIGENCE:
-		accessory_has_effect(otmp);
-		if (adjattrib(A_INT, otmp->spe, -1))
-		    makeknown(typ);
-		break;
-	    case RIN_GAIN_WISDOM:
-		accessory_has_effect(otmp);
-		if (adjattrib(A_WIS, otmp->spe, -1))
-		    makeknown(typ);
-		break;
-	    case RIN_GAIN_DEXTERITY:
-		accessory_has_effect(otmp);
-		if (adjattrib(A_DEX, otmp->spe, -1))
-		    makeknown(typ);
-		break;
-	    case RIN_INCREASE_ACCURACY:
-		accessory_has_effect(otmp);
-		u.uhitinc += otmp->spe;
-		break;
-	    case RIN_INCREASE_DAMAGE:
-		accessory_has_effect(otmp);
-		u.udaminc += otmp->spe;
-		break;
-	    case RIN_PROTECTION:
-		accessory_has_effect(otmp);
-		HProtection |= FROMOUTSIDE;
-		u.ublessed += otmp->spe;
-		flags.botl = 1;
-		break;
-	    case RIN_FREE_ACTION:
-		/* Give sleep resistance instead */
-		if (!(HSleep_resistance & FROMOUTSIDE))
-		    accessory_has_effect(otmp);
-		if (!Sleep_resistance)
-		    You_feel("wide awake.");
-		HSleep_resistance |= FROMOUTSIDE;
-		break;
-	    case AMULET_OF_CHANGE:
-		accessory_has_effect(otmp);
-		makeknown(typ);
-		change_sex();
-		You("are suddenly very %s!",
-		    flags.female ? "feminine" : "masculine");
-		flags.botl = 1;
-		break;
-	    case AMULET_OF_UNCHANGING:
-		/* un-change: it's a pun */
-		if (!Unchanging && Upolyd) {
-		    accessory_has_effect(otmp);
-		    makeknown(typ);
-		    rehumanize();
-		}
-		break;
-	    case AMULET_OF_STRANGULATION: /* bad idea! */
-		/* no message--this gives no permanent effect */
-		choke(otmp);
-		break;
-	    case AMULET_OF_RESTFUL_SLEEP: /* another bad idea! */
-		if (!(HSleeping & FROMOUTSIDE))
-		    accessory_has_effect(otmp);
-		HSleeping = FROMOUTSIDE | rnd(100);
-		break;
-	    case RIN_SUSTAIN_ABILITY:
-	    case AMULET_OF_LIFE_SAVING:
-	    case AMULET_OF_REFLECTION: /* nice try */
-	    /* can't eat Amulet of Yendor or fakes,
-	     * and no oc_prop even if you could -3.
-	     */
-		break;
-	  }
 	}
 }
 
@@ -2175,11 +2179,7 @@ doeat()		/* generic "eat" command funtion (see cmd.c) */
 	if (!is_edible(otmp)) {
 	    You("cannot eat that!");
 	    return 0;
-	} else if ((otmp->owornmask & (W_ARMOR|W_TOOL|W_AMUL
-#ifdef STEED
-			|W_SADDLE
-#endif
-			)) != 0) {
+	} else if ((otmp->owornmask & (W_ARMOR|W_TOOL|W_AMUL|W_SADDLE)) != 0) {
 	    /* let them eat rings */
 	    You_cant("eat %s you're wearing.", something);
 	    return 0;
@@ -2450,39 +2450,36 @@ gethungry()	/* as time goes by - called by moveloop() and domove() */
 {
 	if (u.uinvulnerable) return;	/* you don't feel hungrier */
 
-	if ((!u.usleep || !rn2(10))	/* slow metabolic rate while asleep */
-		&& (carnivorous(youmonst.data) || herbivorous(youmonst.data) ||
-		    is_vampire(youmonst.data))
-		&& !Slow_digestion)
-	    u.uhunger--;		/* ordinary food consumption */
+	if ((!u.usleep || !rn2(10)) 	/* slow metabolic rate while asleep */
+		&& (carnivorous(youmonst.data) || herbivorous(youmonst.data) || is_vampire(youmonst.data))
+		&& !Slow_digestion) {
+		u.uhunger--;		/* ordinary food consumption */
+	}
 
-	if (moves % 2) {	/* odd turns */
-	    /* Regeneration uses up food, unless due to an artifact */
-	    if (HRegeneration || ((ERegeneration & (~W_ART)) &&
-				(ERegeneration != W_WEP || !uwep->oartifact)))
-			u.uhunger--;
-	    if (near_capacity() > SLT_ENCUMBER) u.uhunger--;
-	} else {		/* even turns */
-	    if (Hunger) u.uhunger--;
-	    /* Conflict uses up food too */
-	    if (HConflict || (EConflict & (~W_ARTI))) u.uhunger--;
-	    /* +0 charged rings don't do anything, so don't affect hunger */
-	    /* Slow digestion still uses ring hunger */
-	    switch ((int)(moves % 20)) {	/* note: use even cases only */
-	     case  4: if (uleft &&
-			  (uleft->spe || !objects[uleft->otyp].oc_charged))
-			    u.uhunger--;
-		    break;
-	     case  8: if (uamul) u.uhunger--;
-		    break;
-	     case 12: if (uright &&
-			  (uright->spe || !objects[uright->otyp].oc_charged))
-			    u.uhunger--;
-		    break;
-	     case 16: if (u.uhave.amulet) u.uhunger--;
-		    break;
-	     default: break;
-	    }
+	/* Regeneration uses up food, unless due to an artifact */
+	if ((!rn2(2)) && (HRegeneration || ((ERegeneration & (~W_ART)) && (ERegeneration != W_WEP || !uwep->oartifact)))){
+		u.uhunger--;
+	}
+	if ((!rn2(2)) && (near_capacity() > SLT_ENCUMBER)) {
+		u.uhunger--;
+	}
+	if ((!rn2(2)) && (Hunger)) {
+		u.uhunger--;
+	}
+	/* Conflict uses up food too */
+	if ((!rn2(2)) && (HConflict || (EConflict & (~W_ARTI)))) {
+		u.uhunger--;
+	}
+	/* +0 charged rings don't do anything, so don't affect hunger */
+	/* Slow digestion still uses ring hunger */
+	if ((!rn2(20)) && (uleft && (uleft->spe || !objects[uleft->otyp].oc_charged))) {
+		u.uhunger--;
+	}
+	if ((!rn2(20)) && (uright && (uright->spe || !objects[uright->otyp].oc_charged))) {
+		u.uhunger--;
+	}
+	if ((!rn2(20)) && (u.uhave.amulet)) {
+		u.uhunger--;
 	}
 	newuhs(TRUE);
 }
@@ -2734,9 +2731,7 @@ floorfood(verb,corpsecheck)	/* get food from floor or pack */
 
 	/* if we can't touch floor objects then use invent food only */
 	if (!can_reach_floor() ||
-#ifdef STEED
 		(feeding && u.usteed) || /* can't eat off floor while riding */
-#endif
 		((is_pool(u.ux, u.uy) || is_lava(u.ux, u.uy)) &&
 		    (Wwalking || is_clinger(youmonst.data) ||
 			(Flying && !Breathless))))

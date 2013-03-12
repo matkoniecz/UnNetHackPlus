@@ -341,8 +341,6 @@ typedef long glyph_t;
 # endif
 #endif
 
-#define EXOTIC_PETS      /* Rob Ellwood  June 2002 */
-
 /*
  * Section 4:  THE FUN STUFF!!!
  *
@@ -359,9 +357,6 @@ typedef long glyph_t;
 #define REINCARNATION	/* Special Rogue-like levels */
 /* monsters & objects */
 #define KOPS		/* Keystone Kops by Scott R. Turner */
-#define SEDUCE		/* Succubi/incubi seduction, by KAA, suggested by IM */
-#define STEED		/* Riding steeds */
-#define TOURIST		/* Tourist players with cameras and Hawaiian shirts */
 /* difficulty */
 #define ELBERETH	/* Engraving the E-word repels monsters */
 /* I/O */
@@ -409,8 +404,7 @@ typedef long glyph_t;
 #ifndef AUTOCONF
 
 #define RANDOMIZED_PLANES /* Elemental Planes order is randomized - Patric Mueller (4 Jan 2009) */
-#define BLACKMARKET	/* Massimo Campostrini (campo@sunthpi3.difi.unipi.it) */
-
+#define EXOTIC_PETS      /* Rob Ellwood  June 2002 */
 
 #if defined(TTY_GRAPHICS) || defined(MSWIN_GRAPHICS) || \
  defined(CURSES_GRAPHICS)
@@ -457,15 +451,29 @@ typedef long glyph_t;
  * They come from patches that have been unconditionally incorporated
  * into UnNetHack.
  */
-#define WEBB_DISINT /* Disintegrator - Nicholas Webb */
-#define ASTRAL_ESCAPE /* Allow escape from Astral plane (with the Amulet) - CWC */
+
 /* #define LIVELOG_BONES_KILLER */ /* Report if a ghost of a former player is
                                     * killed - Patric Mueller (15 Aug 2009) */
-#define ADJSPLIT /* splittable #adjust - Sam Dennis, conditionalized by Jukka Lahtinen */
 #define TUTORIAL_MODE /* Alex Smith */
-#define ELBERETH_CONDUCT /* Track the number of times the player engraves Elbereth. - Ray Kulhanek */
+#define ASTRAL_ESCAPE /* Allow escape from Astral plane (with the Amulet) - CWC */
 
 /* End of Section 6 */
+
+/*
+ * Section 7:  FICTIONAL DEFINES
+ *
+ * These defines are useless, as #ifdef etc were removed from code 
+ * and features are incorporated into UnNetHackPlus without evil preprocessor instructions littering code
+ */
+#define STEED		/* Riding steeds */
+#define SEDUCE		/* Succubi/incubi seduction, by KAA, suggested by IM */
+#define TOURIST		/* Tourist players with cameras and Hawaiian shirts */
+#define WEBB_DISINT /* Disintegrator - Nicholas Webb */
+#define ADJSPLIT /* splittable #adjust - Sam Dennis, conditionalized by Jukka Lahtinen */
+#define ELBERETH_CONDUCT /* Track the number of times the player engraves Elbereth. - Ray Kulhanek */
+#define BLACKMARKET	/* Massimo Campostrini (campo@sunthpi3.difi.unipi.it) */
+
+/* End of Section 7 */
 
 #include "global.h"	/* Define everything else according to choices above */
 

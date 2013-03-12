@@ -349,17 +349,21 @@ exerper()
 #ifdef DEBUG
 		pline("exerper: Status checks");
 #endif
-		if ((HClairvoyant & (INTRINSIC|TIMEOUT)) &&
-			!BClairvoyant)                      exercise(A_WIS, TRUE);
-		if (HRegeneration)			exercise(A_STR, TRUE);
-
-		if(Sick || Vomiting)     exercise(A_CON, FALSE);
-		if(Confusion || Hallucination)		exercise(A_WIS, FALSE);
-		if((Wounded_legs 
-#ifdef STEED
-		    && !u.usteed
-#endif
-			    ) || Fumbling || HStun)	exercise(A_DEX, FALSE);
+		if ((HClairvoyant & (INTRINSIC|TIMEOUT)) && !BClairvoyant) {
+			exercise(A_WIS, TRUE);
+		}
+		if (HRegeneration) {
+			exercise(A_STR, TRUE);
+		}
+		if(Sick || Vomiting) {
+			exercise(A_CON, FALSE);
+		}
+		if(Confusion || Hallucination) {
+			exercise(A_WIS, FALSE);
+		}
+		if((Wounded_legs && !u.usteed ) || Fumbling || HStun) {
+			exercise(A_DEX, FALSE);
+		}
 	}
 }
 
@@ -551,9 +555,7 @@ int oldlevel, newlevel;
 	case PM_RANGER:         abil = ran_abil;	break;
 	case PM_ROGUE:          abil = rog_abil;	break;
 	case PM_SAMURAI:        abil = sam_abil;	break;
-#ifdef TOURIST
 	case PM_TOURIST:        abil = tou_abil;	break;
-#endif
 	case PM_VALKYRIE:       abil = val_abil;	break;
 	case PM_WIZARD:         abil = wiz_abil;	break;
 	default:                abil = 0;		break;

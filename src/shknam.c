@@ -15,10 +15,7 @@ extern const struct shclass shtypes[];
 STATIC_DCL void FDECL(mkshobj_at, (const struct shclass *,int,int));
 STATIC_DCL void FDECL(nameshk, (struct monst *,const char * const *));
 STATIC_DCL int  FDECL(shkinit, (const struct shclass *,struct mkroom *));
-#ifdef BLACKMARKET
-STATIC_DCL void FDECL(stock_blkmar, 
-		  (const struct shclass *, struct mkroom *, int));
-#endif /* BLACKMARKET */
+STATIC_DCL void FDECL(stock_blkmar, (const struct shclass *, struct mkroom *, int));
 
 static const char * const shkliquors[] = {
     /* Ukraine */
@@ -182,7 +179,6 @@ static const char *shkmusic[] = {
     0
 };
 
-#ifdef BLACKMARKET
 static const char *shkblack[] = {
   "One-eyed Sam", "One-eyed Sam", "One-eyed Sam",
   "One-eyed Sam", "One-eyed Sam", "One-eyed Sam",
@@ -197,7 +193,6 @@ static const char *shkblack[] = {
   "One-eyed Sam", "One-eyed Sam", "One-eyed Sam",
   0
 };
-#endif /* BLACKMARKET */
 
 static const char *shkpet[] = {
     /* Albania */
@@ -273,18 +268,10 @@ const struct shclass shtypes[] = {
 	     {10, -WOODEN_HARP	}, { 3, -MAGIC_HARP	},
 	     {10, -BELL		}, {10, -BUGLE		},
 	     {10, -LEATHER_DRUM	}, { 2, -DRUM_OF_EARTHQUAKE},
-#ifdef TOURIST
 	     { 5, -T_SHIRT	}, { 5, -LOCK_PICK	},
-#else
-	     { 5, -TIN_WHISTLE	}, { 5, -LOCK_PICK	},
-#endif
 	     {0, 0}} , shkmusic},
 	{"pet store", FOOD_CLASS, 1, D_SHOP, {
-#ifdef STEED
 	    {67, -FIGURINE}, {5, -LEASH},{10, -TRIPE_RATION}, {5, -SADDLE},
-#else
-	    {72, -FIGURINE}, {5, -LEASH},{10, -TRIPE_RATION}, 
-#endif
 	    {10, -TIN_WHISTLE}, {3, -MAGIC_WHISTLE}}, shkpet},
 	/* Shops below this point are "unique".  That is they must all have a
 	 * probability of zero.  They are only created via the special level
@@ -293,10 +280,8 @@ const struct shclass shtypes[] = {
 	{"lighting store", TOOL_CLASS, 0, D_SHOP,
 	    {{32, -WAX_CANDLE}, {50, -TALLOW_CANDLE},
 	     {5, -BRASS_LANTERN}, {10, -OIL_LAMP}, {3, -MAGIC_LAMP}}, shklight},
-#ifdef BLACKMARKET
 	{"black market", RANDOM_CLASS, 0, D_SHOP,
 	   {{100, RANDOM_CLASS}, {0, 0}, {0, 0}}, shkblack},
-#endif /* BLACKMARKET */
 	{(char *)0, 0, 0, 0, {{0, 0}, {0, 0}, {0, 0}}, 0}
 };
 
@@ -363,12 +348,6 @@ const char * const *nlp;
 	    /* special-case minetown lighting shk */
 	    shname = "Izchak";
 	    shk->female = FALSE;
-#ifdef BLACKMARKET
-	} else if (nlp == shkblack) {
-	    /* special-case black marketeer */
-	    shname = "One-eyed Sam";
-	    shk->female = TRUE;
-#endif /* BLACKMARKET */
 	} else {
 	    /* We want variation from game to game, without needing the save
 	       and restore support which would be necessary for randomization;
@@ -477,7 +456,6 @@ struct mkroom	*sroom;
 
 	/* now initialize the shopkeeper monster structure */
 	  
-#ifdef BLACKMARKET
 	shk = 0;
 	if (Is_blackmarket(&u.uz)) {
 	  shk = makemon(&mons[PM_BLACK_MARKETEER], sx, sy, NO_MM_FLAGS);
@@ -486,10 +464,6 @@ struct mkroom	*sroom;
 	  if(!(shk = makemon(&mons[PM_SHOPKEEPER], sx, sy, NO_MM_FLAGS)))
 		return(-1);
 	}        
-#else  /* BLACKMARKET */
-	if(!(shk = makemon(&mons[PM_SHOPKEEPER], sx, sy, NO_MM_FLAGS)))
-		return(-1);
-#endif /* BLACKMARKET */
   
 	shk->isshk = shk->mpeaceful = 1;
 	set_malign(shk);
@@ -521,10 +495,9 @@ struct mkroom	*sroom;
 	    (void) mongets(shk, TOUCHSTONE);
 	nameshk(shk, shp->shknms);
 
-#ifdef BLACKMARKET
-	if (Is_blackmarket(&u.uz))
-    shkmoney = 7*shkmoney + rn2(3*shkmoney);
-#endif
+	if (Is_blackmarket(&u.uz)) {
+		shkmoney = 7*shkmoney + rn2(3*shkmoney);
+	}
 	/* it's a poor town */
 	if (Is_town_level(&u.uz)){
 		shkmoney /= 4;
@@ -540,7 +513,6 @@ struct mkroom	*sroom;
   mkmonmoney(shk, shkmoney);
 #endif
 
-#ifdef BLACKMARKET
 	if (Is_blackmarket(&u.uz)) {
 	  register struct obj *otmp;
 /* make sure black marketeer can wield Thiefbane */
@@ -566,8 +538,6 @@ struct mkroom	*sroom;
 	  otmp = mksobj(SKELETON_KEY, FALSE, FALSE);
 	  mpickobj(shk, otmp);
 	}
-#endif /* BLACKMARKET */
-
 	return(sh);
 }
 
@@ -619,13 +589,11 @@ register struct mkroom *sroom;
 	    make_engr_at(m, n, buf, 0L, DUST);
     }
 
-#ifdef BLACKMARKET
     if (Is_blackmarket(&u.uz)) {
       stock_blkmar(shp, sroom, sh);
       level.flags.has_shop = TRUE;
       return;
     }
-#endif /* BLACKMARKET */
 
     for(sx = sroom->lx; sx <= sroom->hx; sx++)
 	for(sy = sroom->ly; sy <= sroom->hy; sy++) {
@@ -648,7 +616,6 @@ register struct mkroom *sroom;
     level.flags.has_shop = TRUE;
 }
 
-#ifdef BLACKMARKET
 /* stock a newly-created black market with objects */
 static void
 stock_blkmar(shp, sroom, sh)
@@ -752,7 +719,6 @@ register int sh;
      * monsters will sit on top of objects and not the other way around.
      */
 }
-#endif /* BLACKMARKET */
 
 #endif /* OVLB */
 #ifdef OVL0

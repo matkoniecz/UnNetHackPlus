@@ -289,7 +289,11 @@ makerogueghost()
 	struct mkroom *croom;
 	int x,y;
 
-	if (!nroom) return; /* Should never happen */
+	if (!nroom) {
+		/* Should never happen */
+		warning("impossible happened in function makerogueghost");
+		return; 
+	}
 	croom = &rooms[rn2(nroom)];
 	x = somex(croom); y = somey(croom);
 	if (!(ghost = makemon(&mons[PM_GHOST], x, y, NO_MM_FLAGS)))

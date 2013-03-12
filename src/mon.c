@@ -33,11 +33,7 @@ STATIC_VAR short cham_to_pm[];
 #else
 STATIC_DCL struct obj *FDECL(make_corpse,(struct monst *));
 STATIC_DCL void FDECL(m_detach, (struct monst *, struct permonst *));
-#ifdef WEBB_DISINT
 STATIC_DCL void FDECL(lifesaved_monster, (struct monst *, uchar));
-#else
-STATIC_DCL void FDECL(lifesaved_monster, (struct monst *));
-#endif
 void
 remove_monster(x,y)
 int x,y;
@@ -104,9 +100,7 @@ int mndx, mode;
 	case PM_HUNTER:      mndx = mode ? PM_RANGER    : PM_HUMAN; break;
 	case PM_THUG:        mndx = mode ? PM_ROGUE     : PM_HUMAN; break;
 	case PM_ROSHI:       mndx = mode ? PM_SAMURAI   : PM_HUMAN; break;
-#ifdef TOURIST
 	case PM_GUIDE:       mndx = mode ? PM_TOURIST   : PM_HUMAN; break;
-#endif
 	case PM_APPRENTICE:  mndx = mode ? PM_WIZARD    : PM_HUMAN; break;
 	case PM_WARRIOR:     mndx = mode ? PM_VALKYRIE  : PM_HUMAN; break;
 	default:
@@ -358,12 +352,11 @@ register struct monst *mtmp;
     inswamp = is_swamp(mtmp->mx,mtmp->my) && grounded;
     infountain = IS_FOUNTAIN(levl[mtmp->mx][mtmp->my].typ);
 
-#ifdef STEED
 	/* Flying and levitation keeps our steed out of the liquid */
 	/* (but not water-walking or swimming) */
-	if (mtmp == u.usteed && (Flying || Levitation))
+	if (mtmp == u.usteed && (Flying || Levitation)) {
 		return (0);
-#endif
+	}
 
     /* Gremlin multiplying won't go on forever since the hit points
      * keep going down, and when it gets to 1 hit point the clone
@@ -473,14 +466,12 @@ struct monst *mon;
     else if (mon->mspeed == MFAST)
 	mmove = (4 * mmove + 2) / 3;
 
-#ifdef STEED
     if (mon == u.usteed) {
 	if (u.ugallop && flags.mv) {
 	    /* average movement is 1.50 times normal */
 	    mmove = ((rn2(2) ? 4 : 5) * mmove) / 3;
 	}
     }
-#endif
 
     return mmove;
 }
@@ -967,10 +958,10 @@ struct obj *otmp;
 		(otyp != BELL_OF_OPENING || !is_covetous(mdat)))
 	    return FALSE;
 
-#ifdef STEED
 	/* Steeds don't pick up stuff (to avoid shop abuse) */
-	if (mtmp == u.usteed) return (FALSE);
-#endif
+	if (mtmp == u.usteed) {
+		return (FALSE);
+	}
 	if (mtmp->isshk) return(TRUE); /* no limit */
 	if (mtmp->mpeaceful && !mtmp->mtame) return(FALSE);
 	/* otherwise players might find themselves obligated to violate
@@ -1224,11 +1215,13 @@ struct monst *magr,	/* monster that is currently deciding where to move */
 			return ALLOW_M|ALLOW_TM;
 
 	/* Since the quest guardians are under siege, it makes sense to have 
-       them fight hostiles.  (But we don't want the quest leader to be in danger.) */
-	if(ma->msound==MS_GUARDIAN && mdef->mpeaceful==FALSE)
+	   them fight hostiles.  (But we don't want the quest leader to be in danger.) 
+	   additional checks are to keep angry quest guardians from attacking other angry quest guardians/leader
+	   (attacking your own quest leader will anger his or her guardians, quest gurdian agered by you should not be attacked by other quest guardians) */
+	if(ma->msound==MS_GUARDIAN && mdef->mpeaceful==FALSE && md->msound!=MS_GUARDIAN && md->msound!=MS_LEADER)
 		return ALLOW_M|ALLOW_TM;
 	/* and vice versa */
-	if(md->msound==MS_GUARDIAN && magr->mpeaceful==FALSE)
+	if(md->msound==MS_GUARDIAN && magr->mpeaceful==FALSE && ma->msound!=MS_GUARDIAN)
 		return ALLOW_M|ALLOW_TM;
 
 	/* elves vs. orcs */
@@ -1321,10 +1314,9 @@ register struct monst *mtmp, *mtmp2;
     relmon(mtmp);
 
     /* finish adding its replacement */
-#ifdef STEED
-    if (mtmp == u.usteed) ; else	/* don't place steed onto the map */
-#endif
-    place_monster(mtmp2, mtmp2->mx, mtmp2->my);
+    if (mtmp != u.usteed) {	/* don't place steed onto the map */
+	place_monster(mtmp2, mtmp2->mx, mtmp2->my);
+    }
     if (mtmp2->wormno)	    /* update level.monsters[wseg->wx][wseg->wy] */
 	place_wsegs(mtmp2); /* locations to mtmp2 not mtmp. */
     if (emits_light(mtmp2->data)) {
@@ -1338,9 +1330,7 @@ register struct monst *mtmp, *mtmp2;
     mtmp2->nmon = fmon;
     fmon = mtmp2;
     if (u.ustuck == mtmp) u.ustuck = mtmp2;
-#ifdef STEED
     if (u.usteed == mtmp) u.usteed = mtmp2;
-#endif
     if (mtmp2->isshk) replshk(mtmp,mtmp2);
 
     /* discard the old monster */
@@ -1404,14 +1394,9 @@ struct monst *mon;
 }
 
 STATIC_OVL void
-#ifdef WEBB_DISINT
 lifesaved_monster(mtmp,adtyp)
 struct monst *mtmp;
 uchar adtyp;
-#else
-lifesaved_monster(mtmp)
-struct monst *mtmp;
-#endif
 {
 	struct obj *lifesave = mlifesaver(mtmp);
 
@@ -1425,15 +1410,11 @@ struct monst *mtmp;
 			pline("%s medallion begins to glow!",
 				s_suffix(Monnam(mtmp)));
 			makeknown(AMULET_OF_LIFE_SAVING);
-			if (attacktype(mtmp->data, AT_EXPL)
-			    || attacktype(mtmp->data, AT_BOOM)
-#ifdef WEBB_DISINT
-             || adtyp == AD_DISN 
-#endif
-             )
+			if (attacktype(mtmp->data, AT_EXPL) || attacktype(mtmp->data, AT_BOOM) || adtyp == AD_DISN) {
 				pline("%s reconstitutes!", Monnam(mtmp));
-			else
+			} else {
 				pline("%s looks much better!", Monnam(mtmp));
+			}
 			pline_The("medallion crumbles to dust!");
 		}
 		m_useup(mtmp, lifesave);
@@ -1454,11 +1435,6 @@ struct monst *mtmp;
 	mtmp->mhp = 0;
 }
 
-#ifndef WEBB_DISINT
-void
-mondead(mtmp)
-register struct monst *mtmp;
-#else
 void
 mondead(mtmp)
 register struct monst *mtmp;
@@ -1470,7 +1446,6 @@ void
 mondead_helper(mtmp, adtyp)
 register struct monst * mtmp;
 uchar adtyp; 
-#endif
 {
 	struct permonst *mptr;
 	int tmp;
@@ -1481,18 +1456,13 @@ uchar adtyp;
 		 * the m_detach or there will be relmon problems later */
 		if(!grddead(mtmp)) return;
 	}
-#ifdef WEBB_DISINT
 	lifesaved_monster(mtmp, adtyp);
-#else
-	lifesaved_monster(mtmp);
-#endif
 	if (mtmp->mhp > 0) return;
 
-#ifdef STEED
 	/* Player is thrown from his steed when it dies */
-	if (mtmp == u.usteed)
+	if (mtmp == u.usteed) {
 		dismount_steed(DISMOUNT_GENERIC);
-#endif
+	}
 
 	/* extinguish monster's armor */
 	if ((otmp = which_armor(mtmp, W_ARM)) && (Is_gold_dragon_armor(otmp->otyp)))
@@ -1577,14 +1547,11 @@ boolean was_swallowed;			/* digestion */
 	struct permonst *mdat = mon->data;
 	int i, tmp;
 
-	if (mdat == &mons[PM_VLAD_THE_IMPALER] || mdat->mlet == S_LICH
-#ifdef WEBB_DISINT
-            || mdat == &mons[PM_DISINTEGRATOR]
-#endif 
-       ) {
-	    if (cansee(mon->mx, mon->my) && !was_swallowed)
-		pline("%s body crumbles into dust.", s_suffix(Monnam(mon)));
-	    return FALSE;
+	if (mdat == &mons[PM_VLAD_THE_IMPALER] || mdat->mlet == S_LICH || mdat == &mons[PM_DISINTEGRATOR]) {
+		if (cansee(mon->mx, mon->my) && !was_swallowed) {
+			pline("%s body crumbles into dust.", s_suffix(Monnam(mon)));
+		}
+	return FALSE;
 	}
 
 	/* Gas spores always explode upon death */
@@ -1639,7 +1606,7 @@ boolean was_swallowed;			/* digestion */
 		   || is_rider(mdat))
 		return TRUE;
 	return (boolean) (!rn2((int)
-		(2 + ((int)(mdat->geno & G_FREQ)<2) + verysmall(mdat) + (int)(is_undead(mdat))*3)));
+		(2 + ((int)(mdat->geno & G_FREQ)<2) + verysmall(mdat) + ((int)(is_undead(mdat)))*6)));
 }
 
 /** Creates Cthulhu's death message and death cloud. */
@@ -1688,11 +1655,10 @@ mongone(mdef)
 register struct monst *mdef;
 {
 	mdef->mhp = 0;	/* can skip some inventory bookkeeping */
-#ifdef STEED
 	/* Player is thrown from his steed when it disappears */
-	if (mdef == u.usteed)
+	if (mdef == u.usteed) {
 		dismount_steed(DISMOUNT_GENERIC);
-#endif
+	}
 
 	/* drop special items like the Amulet so that a dismissed Kop or nurse
 	   can't remove them from the game */
@@ -1721,13 +1687,10 @@ register struct monst *mdef;
 	 * put inventory in it, and we have to check for lifesaving before
 	 * making the statue....
 	 */
-#ifdef WEBB_DISINT
 	lifesaved_monster(mdef, AD_STON);
-#else
-	lifesaved_monster(mdef);
-#endif
-	if (mdef->mhp > 0) return;
-
+	if (mdef->mhp > 0) {
+		return;
+	}
 	mdef->mtrapped = 0;	/* (see m_detach) */
 
 	if ((int)mdef->data->msize > MZ_TINY ||
@@ -1824,16 +1787,11 @@ int how;
 	    be_sad = (mdef->mtame != 0);
 
 	/* no corpses if digested or disintegrated */
-	if (how == AD_DGST || how == -AD_RBRE
-#ifdef WEBB_DISINT
-            || how == AD_DISN)
+	if (how == AD_DGST || how == -AD_RBRE || how == AD_DISN) {
 		mondead_helper(mdef, how);
-#else
-       )
-		mondead(mdef);
-#endif
-	else
-	    mondied(mdef);
+	} else {
+		mondied(mdef);
+	}
 
 	if (mdef->data == &mons[PM_CTHULHU]) {
 		cthulhu_dies(mdef);
@@ -2085,14 +2043,12 @@ mnexto(mtmp)	/* Make monster mtmp next to you (if possible) */
 {
 	coord mm;
 
-#ifdef STEED
 	if (mtmp == u.usteed) {
 		/* Keep your steed in sync with you instead */
 		mtmp->mx = u.ux;
 		mtmp->my = u.uy;
 		return;
 	}
-#endif
 
 	if(!enexto(&mm, u.ux, u.uy, mtmp->data)) return;
 	rloc_to(mtmp, mm.x, mm.y);
@@ -2264,13 +2220,11 @@ setmangry(mtmp)
 register struct monst *mtmp;
 {
 	mtmp->mstrategy &= ~STRAT_WAITMASK;
-#ifdef BLACKMARKET
 	/* Even if the black marketeer is already angry he may not have called
 	 * for his assistants if he or his staff have not been assaulted yet.
 	 */
 	if (Is_blackmarket(&u.uz) && !mtmp->mpeaceful && mtmp->isshk)
 	    blkmar_guards(mtmp);
-#endif /* BLACKMARKET */
 	if(!mtmp->mpeaceful) return;
 	if(mtmp->mtame) return;
 	mtmp->mpeaceful = 0;
@@ -2285,7 +2239,6 @@ register struct monst *mtmp;
 		else if (flags.verbose && flags.soundok) growl(mtmp);
 	}
 
-#ifdef BLACKMARKET
 	/* Don't misbehave in the Black Market or else... */
 	if (Is_blackmarket(&u.uz)) {
 	    if (mtmp->isshk)
@@ -2298,7 +2251,6 @@ register struct monst *mtmp;
 		if (shkp)  wakeup(shkp);
 	    }
 	}
-#endif /* BLACKMARKET */
 
 	/* attacking your own quest leader will anger his or her guardians */
 	if (!flags.mon_moving &&	/* should always be the case here */
@@ -2596,7 +2548,11 @@ boolean msg;		/* "The oldmon turns into a newmon!" */
 		if (is_mplayer(mdat) || (!is_human(mdat) && polyok(mdat)))
 		    break;
 	    }
-	    if (tryct > 100) return 0;	/* Should never happen */
+	    if (tryct > 100) {
+		/* Should never happen */
+		warning("impossible happened in function newcham");
+		return 0;
+	    }
 	} else if (mvitals[monsndx(mdat)].mvflags & G_GENOD)
 	    return(0);	/* passed in mdat is genocided */
 

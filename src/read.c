@@ -71,7 +71,6 @@ doread()
 	    }
 	    useup(scroll);
 	    return(1);
-#ifdef TOURIST
 	} else if (scroll->otyp == T_SHIRT) {
 	    static const char *shirt_msgs[] = { /* Scott Bigham */
     "I explored the Dungeons of Doom and all I got was this lousy T-shirt!",
@@ -210,7 +209,6 @@ doread()
 				(int)(!(scroll->o_id % 3)), (int)((scroll->o_id * 7) % 10));
 		u.uconduct.literate++;
 		return 1;
-#endif	/* TOURIST */
 	} else if ((scroll->otyp == CAN_OF_GREASE) || (scroll->otyp == CANDY_BAR)) {
 		pline("This %s has no %s.", singular(scroll, xname), (scroll->otyp == CANDY_BAR) ? "wrapper" : "label");
 		return(0);
@@ -504,9 +502,7 @@ int curse_bless;
 		break;
 	    case MAGIC_MARKER:
 	    case TINNING_KIT:
-#ifdef TOURIST
 	    case EXPENSIVE_CAMERA:
-#endif
 		if (is_cursed) stripspe(obj);
 		else if (rechrg && obj->otyp == MAGIC_MARKER) {	/* previously recharged */
 		    obj->recharged = 1;	/* override increment done above */
@@ -866,11 +862,7 @@ maybe_tame(mtmp, sobj)
 struct monst *mtmp;
 struct obj *sobj;
 {
-#ifdef BLACKMARKET                            
 	if (sobj->cursed || Is_blackmarket(&u.uz)) {
-#else
-	if (sobj->cursed) {
-#endif
 	    setmangry(mtmp);
 	} else {
 	    if (mtmp->isshk)
@@ -1537,9 +1529,7 @@ register struct obj	*sobj;
 	    	    	if (isok(x, y) && !closed_door(x, y) &&
 	    	    			!IS_ROCK(levl[x][y].typ) &&
 	    	    			!IS_AIR(levl[x][y].typ) &&
-#ifdef BLACKMARKET
 	    	    			!(Is_blackmarket(&u.uz) && rn2(2)) &&
-#endif
 					(x != u.ux || y != u.uy)) {
 				boulder_created += drop_boulder_on_monster(x, y, confused, TRUE);
 	    	    	}

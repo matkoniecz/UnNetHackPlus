@@ -200,28 +200,90 @@ int fleetime;
 boolean first;
 boolean fleemsg;
 {
+	struct monst* mtmp2;
+
 	if (u.ustuck == mtmp) {
-	    if (u.uswallow)
-		expels(mtmp, mtmp->data, TRUE);
-	    else if (!sticks(youmonst.data)) {
-		unstuck(mtmp);	/* monster lets go when fleeing */
-		You("get released!");
-	    }
+		if (u.uswallow) {
+			expels(mtmp, mtmp->data, TRUE);
+		} else if (!sticks(youmonst.data)) {
+			unstuck(mtmp);	/* monster lets go when fleeing */
+			You("get released!");
+		}
 	}
 
 	if (!first || !mtmp->mflee) {
-	    /* don't lose untimed scare */
-	    if (!fleetime)
-		mtmp->mfleetim = 0;
-	    else if (!mtmp->mflee || mtmp->mfleetim) {
-		fleetime += mtmp->mfleetim;
-		/* ensure monster flees long enough to visibly stop fighting */
-		if (fleetime == 1) fleetime++;
-		mtmp->mfleetim = min(fleetime, 127);
-	    }
-	    if (!mtmp->mflee && fleemsg && canseemon(mtmp) && !mtmp->mfrozen)
-		pline("%s turns to flee!", (Monnam(mtmp)));
-	    mtmp->mflee = 1;
+		/* don't lose untimed scare */
+		if (!fleetime) {
+			mtmp->mfleetim = 0;
+		} else if (!mtmp->mflee || mtmp->mfleetim) {
+			fleetime += mtmp->mfleetim;
+			/* ensure monster flees long enough to visibly stop fighting */
+			if (fleetime == 1) fleetime++;
+			mtmp->mfleetim = min(fleetime, 127);
+		}
+		if (!mtmp->mflee && fleemsg && !mtmp->mfrozen) {
+			/* mindless, silent, and critters without proper voices 
+			 * won't scream, of course. */
+			if (!rn2(8) && !mindless(mtmp->data) && !is_silent(mtmp->data) && mtmp->data->msound != MS_BUZZ) {
+				int range = 18;
+				char visible[20];
+				char invisible[20];
+				if (mtmp->data->msound == MS_HISS) {
+					strcpy(visible, "hisses");
+					strcpy(invisible, "an angry hiss");
+				} else if (mtmp->data->msound == MS_ROAR) {
+					range = 400;
+					strcpy(visible, "roars");
+					strcpy(invisible, "a roar");
+				} else if (mtmp->data->msound == MS_WAIL) {
+					strcpy(visible, "wails");
+					strcpy(invisible, "a frightened wail");
+				} else if (mtmp->data->msound == MS_MEW) {
+					range = 10;
+					strcpy(visible, "yowls");
+					strcpy(invisible, "a frightened yowl");
+				} else if (mtmp->data->msound == MS_BARK || mtmp->data->msound == MS_GROWL) {
+					strcpy(visible, "yelps");
+					strcpy(invisible, "a frightened yelp");
+				} else if (mtmp->data->msound == MS_SQEEK) {
+					range = 10;
+					strcpy(visible, "squeals");
+					strcpy(invisible, "a frightened squeal");
+				} else if (mtmp->data->msound == MS_SQAWK) {
+					strcpy(visible, "screaks");
+					strcpy(invisible, "a frightened screak");
+				} else if (mtmp->data->msound == MS_GURGLE) {
+					strcpy(visible, "gurgles");
+					strcpy(invisible, "a frightened gurgle");
+				} else if (mtmp->data->msound == MS_BURBLE) {
+					range = 50;
+					strcpy(visible, "burbles");
+					strcpy(invisible, "a vorpal burble");
+				} else if (mtmp->data->msound == MS_SHRIEK) {
+					range = 150;
+					strcpy(visible, "shrieks");
+					strcpy(invisible, "a frightened shriek");
+				} else {
+					strcpy(visible, "screams");
+					strcpy(invisible, "a frightened squeal");
+				}
+				if (canseemon(mtmp)) {
+					pline("%s %s in terror!", Monnam(mtmp), visible);
+				} else {
+					You_hear("%s!", invisible);
+				}
+				/* Check and see who was close enough to hear it */
+				for (mtmp2 = fmon; mtmp2; mtmp2 = mtmp2->nmon) {
+					if (dist2(mtmp->mx,mtmp->my,mtmp2->mx,mtmp2->my) <= range && !rn2(3)) {
+						mtmp2->msleeping = 0;
+					}
+				}
+			}
+			if (canseemon(mtmp)) {
+				pline("%s turns to flee!", (Monnam(mtmp)));
+			}
+		}
+		mtmp->mflee = 1;
 	}
 }
 
@@ -493,11 +555,7 @@ toofar:
 	   mtmp->mconf || mtmp->mstun || (mtmp->minvis && !rn2(3)) ||
 	   (mdat->mlet == S_LEPRECHAUN && !ygold && (lepgold || rn2(2))) ||
 #endif
-	   (is_wanderer(mdat) && !rn2(4)) || (Conflict && !mtmp->iswiz
-#ifdef BLACKMARKET
-	   && !Is_blackmarket(&u.uz)
-#endif
-	   ) ||
+	   (is_wanderer(mdat) && !rn2(4)) || (Conflict && !mtmp->iswiz && !Is_blackmarket(&u.uz)) ||
 	   (!mtmp->mcansee && !rn2(4)) || mtmp->mpeaceful) {
 		/* Possibly cast an undirected spell if not attacking you */
 		/* note that most of the time castmu() will pick a directed
@@ -556,12 +614,7 @@ toofar:
 
 /*	Now, attack the player if possible - one attack set per monst	*/
 
-	if (!mtmp->mpeaceful ||
-	    (Conflict && !resist(mtmp, RING_CLASS, 0, 0)
-#ifdef BLACKMARKET
-		&& !Is_blackmarket(&u.uz)
-#endif
-	)) {
+	if (!mtmp->mpeaceful || (Conflict && !resist(mtmp, RING_CLASS, 0, 0) && !Is_blackmarket(&u.uz))) {
 	    if(inrange && !noattacks(mdat) && u.uhp > 0 && !scared && tmp != 3)
 		if(mattacku(mtmp)) return(1); /* monster died (e.g. exploded) */
 
@@ -1370,9 +1423,7 @@ struct monst *mtmp;
 		    typ != SLING &&
 		    !is_cloak(obj) && typ != FEDORA &&
 		    !is_gloves(obj) && typ != LEATHER_JACKET &&
-#ifdef TOURIST
 		    typ != CREDIT_CARD && !is_shirt(obj) &&
-#endif
 		    !(typ == CORPSE && verysmall(&mons[obj->corpsenm])) &&
 		    typ != FORTUNE_COOKIE && typ != CANDY_BAR &&
 		    typ != PANCAKE && typ != LEMBAS_WAFER &&

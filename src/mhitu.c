@@ -15,9 +15,7 @@ STATIC_DCL int FDECL(passiveum, (struct permonst *,struct monst *,struct attack 
 # endif /* OVL1 */
 
 #ifdef OVLB
-# ifdef SEDUCE
 STATIC_DCL void FDECL(mayberem, (struct obj *, const char *));
-# endif
 #endif /* OVLB */
 
 STATIC_DCL boolean FDECL(diseasemu, (struct permonst *));
@@ -332,10 +330,7 @@ mattacku(mtmp)
 	    range2 = 0;
 	    foundyou = 1;
 	    if(u.uinvulnerable) return (0); /* stomachs can't hurt you! */
-	}
-
-#ifdef STEED
-	else if (u.usteed) {
+	} else if (u.usteed) {
 		if (mtmp == u.usteed)
 			/* Your steed won't attack you */
 			return (0);
@@ -352,7 +347,6 @@ mattacku(mtmp)
 			return (!!(mattackm(u.usteed, mtmp) & MM_DEF_DIED));
 		}
 	}
-#endif
 
 	if (u.uundetected && !range2 && foundyou && !u.uswallow) {
 		u.uundetected = 0;
@@ -678,10 +672,7 @@ mattacku(mtmp)
 			}
 			break;
 		case AT_SCRE:
-			if (ranged) {
-				sum[i] = mon_scream(mtmp, mattk);
-			}
-			/* if you're nice and close, don't bother */
+			sum[i] = mon_scream(mtmp, mattk);
 			break;
 
 		default:		/* no attack */
@@ -746,10 +737,8 @@ int attk;
 		 */
 		if (uarm)
 		    (void)rust_dmg(uarm, xname(uarm), hurt, TRUE, &youmonst);
-#ifdef TOURIST
 		else if (uarmu)
 		    (void)rust_dmg(uarmu, xname(uarmu), hurt, TRUE, &youmonst);
-#endif
 		break;
 	    case 2:
 		if (!uarms || !rust_dmg(uarms, xname(uarms), hurt, FALSE, &youmonst))
@@ -793,9 +782,7 @@ struct attack *mattk;
 {
 	struct obj *obj = (uarmc ? uarmc : uarm);
 
-#ifdef TOURIST
 	if (!obj) obj = uarmu;
-#endif
 	if (mattk->adtyp == AD_DRIN) obj = uarmh;
 
 	/* if your cloak/armor is greased, monster slips off; this
@@ -842,11 +829,9 @@ struct monst *mon;
 
 	/* armor types for shirt, gloves, shoes, and shield don't currently
 	   provide any magic cancellation but we might as well be complete */
-#ifdef TOURIST
 	armor = (mon == &youmonst) ? uarmu : which_armor(mon, W_ARMU);
 	if (armor && armpro < objects[armor->otyp].a_can)
 	    armpro = objects[armor->otyp].a_can;
-#endif
 	armor = (mon == &youmonst) ? uarmg : which_armor(mon, W_ARMG);
 	if (armor && armpro < objects[armor->otyp].a_can)
 	    armpro = objects[armor->otyp].a_can;
@@ -857,12 +842,10 @@ struct monst *mon;
 	if (armor && armpro < objects[armor->otyp].a_can)
 	    armpro = objects[armor->otyp].a_can;
 
-#ifdef STEED
 	/* this one is really a stretch... */
 	armor = (mon == &youmonst) ? 0 : which_armor(mon, W_SADDLE);
 	if (armor && armpro < objects[armor->otyp].a_can)
 	    armpro = objects[armor->otyp].a_can;
-#endif
 
 	return armpro;
 }
@@ -1169,13 +1152,8 @@ dopois:
 		 * still _can_ attack you when you're flying or mounted.
 		 * [FIXME: why can't a flying attacker overcome this?]
 		 */
-		  if (
-#ifdef STEED
-			u.usteed ||
-#endif
-				    Levitation || Flying) {
-		    pline("%s tries to reach your %s %s!", Monnam(mtmp),
-			  sidestr, body_part(LEG));
+		  if (u.usteed || Levitation || Flying) {
+		    pline("%s tries to reach your %s %s!", Monnam(mtmp), sidestr, body_part(LEG));
 		    dmg = 0;
 		  } else if (mtmp->mcan) {
 		    pline("%s nuzzles against your %s %s!", Monnam(mtmp),
@@ -1323,11 +1301,7 @@ dopois:
 			hitmsg(mtmp, mattk);
 			if (mtmp->mcan) break;
 			/* Continue below */
-		} else if (dmgtype(youmonst.data, AD_SEDU)
-#ifdef SEDUCE
-			|| dmgtype(youmonst.data, AD_SSEX)
-#endif
-						) {
+		} else if (dmgtype(youmonst.data, AD_SEDU) || dmgtype(youmonst.data, AD_SSEX)) {
 			pline("%s %s.", Monnam(mtmp), mtmp->minvent ?
 		    "brags about the goods some dungeon explorer provided" :
 		    "makes some remarks about how difficult theft is lately");
@@ -1367,14 +1341,12 @@ dopois:
 		}
 		break;
 	    }
-#ifdef SEDUCE
 	    case AD_SSEX:
 		if(could_seduce(mtmp, &youmonst, mattk) == 1
 			&& !mtmp->mcan)
 		    if (doseduce(mtmp))
 			return 3;
 		break;
-#endif
 	    case AD_SAMU:
 		hitmsg(mtmp, mattk);
 		/* when the Wiz hits, 1/20 steals the amulet */
@@ -1428,10 +1400,7 @@ dopois:
 		}
 		/* this condition must match the one in sounds.c for MS_NURSE */
 		if ((!(uwep && (uwep->oclass == WEAPON_CLASS || is_weptool(uwep))))
-#ifdef TOURIST
-		   && !uarmu
-#endif
-		   && !uarm && !uarmh && !uarms && !uarmg && !uarmc && !uarmf) {
+		   && !uarmu && !uarm && !uarmh && !uarms && !uarmg && !uarmc && !uarmf) {
 		    boolean goaway = FALSE;
 		    pline("%s hits!  (I hope you don't mind.)", Monnam(mtmp));
 		    if (Upolyd) {
@@ -1603,7 +1572,6 @@ dopois:
 
 		}
 		break;
-#ifdef WEBB_DISINT
 	    case AD_DISN:
 		hitmsg(mtmp, mattk);
 		if (!mtmp->mcan && mtmp->mhp>6) {
@@ -1662,11 +1630,9 @@ dopois:
 						} else if (uarm) {
 							if (!oresist_disintegration(uarm))
 								destroyme = uarm;
-#ifdef TOURIST
 						} else if (uarmu) {
 							if (!oresist_disintegration(uarmu))
 								destroyme = uarmu;
-#endif
 						} else
 							touched = 1;
 						break;
@@ -1689,7 +1655,6 @@ dopois:
 			}
 		}
 		break;
-#endif
      default:
        dmg = 0;
 			break;
@@ -1781,7 +1746,6 @@ gulpmu(mtmp, mattk)	/* monster swallows you, or damage if u.uswallow */
 		place_monster(mtmp, u.ux, u.uy);
 		u.ustuck = mtmp;
 		newsym(mtmp->mx,mtmp->my);
-#ifdef STEED
 		if (is_animal(mtmp->data) && u.usteed) {
 			char buf[BUFSZ];
 			/* Too many quirks presently if hero and steed
@@ -1792,9 +1756,9 @@ gulpmu(mtmp, mattk)	/* monster swallows you, or damage if u.uswallow */
 			pline ("%s lunges forward and plucks you off %s!",
 				Monnam(mtmp), buf);
 			dismount_steed(DISMOUNT_ENGULFED);
-		} else
-#endif
-		pline("%s engulfs you!", Monnam(mtmp));
+		} else {
+			pline("%s engulfs you!", Monnam(mtmp));
+		}
 		stop_occupation();
 		reset_occupations();	/* behave as if you had moved */
 
@@ -1944,9 +1908,7 @@ gulpmu(mtmp, mattk)	/* monster swallows you, or damage if u.uswallow */
 			/* no shield or suit, you're dead; wipe out cloak
 			   and/or shirt in case of life-saving or bones */
 			if (uarmc) (void) destroy_arm(uarmc);
-#ifdef TOURIST
 			if (uarmu) (void) destroy_arm(uarmu);
-#endif
 			You("are disintegrated!");
 			tmp = u.uhp;
 			if (Half_physical_damage) tmp *= 2; /* sorry */
@@ -2301,19 +2263,11 @@ struct attack *mattk;
 		gendef = gender(mdef);
 	}
 
-	if(agrinvis && !defperc
-#ifdef SEDUCE
-		&& mattk && mattk->adtyp != AD_SSEX
-#endif
-		)
+	if(agrinvis && !defperc && mattk && mattk->adtyp != AD_SSEX)
 		return 0;
 
 	if(pagr->mlet != S_NYMPH
-		&& ((pagr != &mons[PM_INCUBUS] && pagr != &mons[PM_SUCCUBUS])
-#ifdef SEDUCE
-		    || (mattk && mattk->adtyp != AD_SSEX)
-#endif
-		   ))
+		&& ((pagr != &mons[PM_INCUBUS] && pagr != &mons[PM_SUCCUBUS]) || (mattk && mattk->adtyp != AD_SSEX)))
 		return 0;
 	
 	if(genagr == 1 - gendef)
@@ -2325,7 +2279,6 @@ struct attack *mattk;
 #endif /* OVL1 */
 #ifdef OVLB
 
-#ifdef SEDUCE
 /* Returns 1 if monster teleported */
 int
 doseduce(mon)
@@ -2416,11 +2369,7 @@ register struct monst *mon;
 	    }
 	}
 
-	if (!uarmc && !uarmf && !uarmg && !uarms && !uarmh
-#ifdef TOURIST
-								&& !uarmu
-#endif
-									)
+	if (!uarmc && !uarmf && !uarmg && !uarms && !uarmh && !uarmu)
 		pline("%s murmurs sweet nothings into your ear.",
 			Blind ? (fem ? "She" : "He") : Monnam(mon));
 	else
@@ -2434,10 +2383,8 @@ register struct monst *mon;
 		mayberem(uarmg, "gloves");
 	mayberem(uarms, "shield");
 	mayberem(uarmh, "helmet");
-#ifdef TOURIST
 	if(!uarmc && !uarm)
 		mayberem(uarmu, "shirt");
-#endif
 
 	if (uarm || uarmc) {
 		verbalize("You're such a %s; I wish...",
@@ -2602,15 +2549,12 @@ const char *str;
 			(obj == uarmc || obj == uarms) ? "it's in the way" :
 			(obj == uarmf) ? "let me rub your feet" :
 			(obj == uarmg) ? "they're too clumsy" :
-#ifdef TOURIST
 			(obj == uarmu) ? "let me massage you" :
-#endif
 			/* obj == uarmh */
 			hairbuf);
 	}
 	remove_worn_item(obj, TRUE);
 }
-#endif  /* SEDUCE */
 
 #endif /* OVLB */
 
@@ -2630,9 +2574,18 @@ struct attack* mattk;
 			if (mtmp->mspec_used) {
 				return 0;
 			}
+			/* sleeping is more dangerous than stun */
+			if (m_canseeu(mtmp) && u.usleep) {
+				return 0;
+			}
+			/* Only do this when we're _close_ to the player */
+			if (distu(mtmp->mx,mtmp->my) > 100)
+			{
+				return 0;
+			}
 			if (mtmp->mcan) {
-					if (canseemon(mtmp)) {
-				pline("%s croaks hoarsely.",Monnam(mtmp));
+				if (canseemon(mtmp)) {
+					pline("%s croaks hoarsely.",Monnam(mtmp));
 				} else {
 					You_hear("a frog nearby.");
 				}
@@ -2642,16 +2595,19 @@ struct attack* mattk;
 				} else {
 					You_hear("a horrific scream!");
 				}
-				if (u.usleep) { unmul("You are shocked awake!"); }
-				/* if (!Stun_resistance) TODO: inplement this*/ {
+				if (u.usleep) { 
+					unmul("You are shocked awake!");
+				}
+				if (!Stun_resistance) {
 					Your("mind reels from the noise!");
 					effect = 1;
 				}
-				make_stunned(dmg,FALSE);	/* Stun resistance [TODO: once inplemented] checked inside */
+				make_stunned(dmg,FALSE);	/* Stun resistance checked inside */
 			}
 			mtmp->mspec_used = 2 + rn2(3);
 			break;
 		default:
+			warning("unhandled scream type");
 			break;
 	}
 

@@ -363,62 +363,92 @@ register struct monst *mtmp;
 	aligntyp alignment;
 	char info[BUFSZ], monnambuf[BUFSZ];
 
-	if (mtmp->ispriest || mtmp->data == &mons[PM_ALIGNED_PRIEST]
-				|| mtmp->data == &mons[PM_ANGEL])
+	if (mtmp->ispriest || mtmp->data == &mons[PM_ALIGNED_PRIEST] || mtmp->data == &mons[PM_ANGEL]) {
 		alignment = EPRI(mtmp)->shralign;
-	else
+	} else {
 		alignment = mtmp->data->maligntyp;
-	alignment = (alignment > 0) ? A_LAWFUL :
-		(alignment < 0) ? A_CHAOTIC :
-		A_NEUTRAL;
+	}
+	if (alignment == A_NONE) {
+		alignment = A_NONE;
+	} else if (alignment > 0) {
+		alignment = A_LAWFUL;
+	} else if (alignment < 0) {
+		alignment = A_CHAOTIC;
+	} else {
+		alignment = A_NEUTRAL;
+	}
 
 	info[0] = 0;
-	if (mtmp->mtame) {	  Strcat(info, ", tame");
+	if (mtmp->mtame) {
+		Strcat(info, ", tame");
 #ifdef WIZARD
-	    if (wizard) {
-		Sprintf(eos(info), " (%d", mtmp->mtame);
-		if (!mtmp->isminion)
-		    Sprintf(eos(info), "; hungry %ld; apport %d",
-			EDOG(mtmp)->hungrytime, EDOG(mtmp)->apport);
-		Strcat(info, ")");
-	    }
+		if (wizard) {
+			Sprintf(eos(info), " (%d", mtmp->mtame);
+			if (!mtmp->isminion) {
+				Sprintf(eos(info), "; hungry %ld; apport %d", EDOG(mtmp)->hungrytime, EDOG(mtmp)->apport);
+			}
+			Strcat(info, ")");
+		}
 #endif
+	} else if (mtmp->mpeaceful) {
+		Strcat(info, ", peaceful");
 	}
-	else if (mtmp->mpeaceful) Strcat(info, ", peaceful");
-	if (mtmp->meating)	  Strcat(info, ", eating");
-	if (mtmp->mcan)		  Strcat(info, ", cancelled");
-	if (mtmp->mconf)	  Strcat(info, ", confused");
-	if (mtmp->mblinded || !mtmp->mcansee)
-				  Strcat(info, ", blind");
-	if (mtmp->mstun)	  Strcat(info, ", stunned");
-	if (mtmp->msleeping)	  Strcat(info, ", asleep");
+	if (mtmp->meating) {
+		Strcat(info, ", eating");
+	}
+	if (mtmp->mcan) {
+		Strcat(info, ", cancelled");
+	}
+	if (mtmp->mconf) {
+		Strcat(info, ", confused");
+	}
+	if (mtmp->mblinded || !mtmp->mcansee) {
+		Strcat(info, ", blind");
+	}
+	if (mtmp->mstun) {
+		Strcat(info, ", stunned");
+	}
+	if (mtmp->msleeping) {
+		Strcat(info, ", asleep");
 #if 0	/* unfortunately mfrozen covers temporary sleep and being busy
 	   (donning armor, for instance) as well as paralysis */
-	else if (mtmp->mfrozen)	  Strcat(info, ", paralyzed");
+	} else if (mtmp->mfrozen) {
+		Strcat(info, ", paralyzed");
 #else
-	else if (mtmp->mfrozen || !mtmp->mcanmove)
-				  Strcat(info, ", can't move");
+	} else if (mtmp->mfrozen || !mtmp->mcanmove) {
+		Strcat(info, ", can't move");
 #endif
-				  /* [arbitrary reason why it isn't moving] */
-	else if (mtmp->mstrategy & STRAT_WAITMASK)
-				  Strcat(info, ", meditating");
-	else if (mtmp->mflee)	  Strcat(info, ", scared");
-	if (mtmp->mtrapped)	  Strcat(info, ", trapped");
-	if (mtmp->mspeed)	  Strcat(info,
-					mtmp->mspeed == MFAST ? ", fast" :
-					mtmp->mspeed == MSLOW ? ", slow" :
-					", ???? speed");
-	if (mtmp->mundetected)	  Strcat(info, ", concealed");
-	if (mtmp->minvis)	  Strcat(info, ", invisible");
-	if (mtmp == u.ustuck)	  Strcat(info,
+	} else if (mtmp->mstrategy & STRAT_WAITMASK) {
+				  Strcat(info, ", meditating");  /* [arbitrary reason why it isn't moving] */
+	} else if (mtmp->mflee) {
+		Strcat(info, ", scared");
+	}
+	if (mtmp->mtrapped) {
+		Strcat(info, ", trapped");
+	}
+	if (mtmp->mspeed) {
+		Strcat(info,
+			mtmp->mspeed == MFAST ? ", fast" :
+			mtmp->mspeed == MSLOW ? ", slow" :
+			", ???? speed");
+	}
+	if (mtmp->mundetected) {
+		Strcat(info, ", concealed");
+	}
+	if (mtmp->minvis) {
+		Strcat(info, ", invisible");
+	}
+	if (mtmp == u.ustuck) {
+		Strcat(info,
 			(sticks(youmonst.data)) ? ", held by you" :
 				u.uswallow ? (is_animal(u.ustuck->data) ?
 				", swallowed you" :
 				", engulfed you") :
 				", holding you");
-#ifdef STEED
-	if (mtmp == u.usteed)	  Strcat(info, ", carrying you");
-#endif
+	}
+	if (mtmp == u.usteed) {
+		Strcat(info, ", carrying you");
+	}
 #ifdef WIZARD
 	if (wizard &&
 	    mtmp->isshk && ESHK(mtmp)->cheapskate) {
@@ -428,8 +458,7 @@ register struct monst *mtmp;
 
 	/* avoid "Status of the invisible newt ..., invisible" */
 	/* and unlike a normal mon_nam, use "saddled" even if it has a name */
-	Strcpy(monnambuf, x_monnam(mtmp, ARTICLE_THE, (char *)0,
-	    (SUPPRESS_IT|SUPPRESS_INVISIBLE), FALSE));
+	Strcpy(monnambuf, x_monnam(mtmp, ARTICLE_THE, (char *)0, (SUPPRESS_IT|SUPPRESS_INVISIBLE), FALSE));
 
 	pline("Status of %s (%s):  Level %d  HP %d(%d)  AC %d%s.",
 		monnambuf,
@@ -472,10 +501,7 @@ ustatusline()
 	    }	/* note: "goop" == "glop"; variation is intentional */
 	}
 	if (Stunned)		Strcat(info, ", stunned");
-#ifdef STEED
-	if (!u.usteed)
-#endif
-	if (Wounded_legs) {
+	if (!u.usteed && Wounded_legs) {
 	    const char *what = body_part(LEG);
 	    if ((Wounded_legs & BOTH_SIDES) == BOTH_SIDES)
 		what = makeplural(what);
