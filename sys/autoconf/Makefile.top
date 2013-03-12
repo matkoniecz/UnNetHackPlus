@@ -1,4 +1,4 @@
-#	UnNetHack Makefile.
+#	UnNetHackPlus Makefile.
 #       @configure_input@
 #	SCCS Id: @(#)Makefile.top	3.4	1995/01/05
 
@@ -33,8 +33,8 @@ mkdir_p = mkdir -p --
 bindir = @bindir@
 
 EXEEXT	 = @EXEEXT@
-SCRIPT   = unnethack
-GAME     = unnethack$(EXEEXT)
+SCRIPT   = unnethackplus
+GAME     = unnethackplus$(EXEEXT)
 GAMEUID  = @OWNER@
 GAMEGRP  = @GROUP@
 
