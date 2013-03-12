@@ -697,7 +697,20 @@ register struct monst *mtmp;
 		pline_msg = mtmp->mpeaceful ? "drones." : "buzzes angrily.";
 		break;
 	case MS_GRUNT:
-		pline_msg = "grunts.";
+		if (is_orc(ptr)) {
+			static const char *orc_insults_msgs[] = {
+				/* from http://www.anim5.com/wow/generator/dwarf/index.php */
+				"I can't hear ye! Scream a wee bit louder ye hairy, putrid whiny little slimey bastitch!",
+				"Bite ME will ye? Chew on THIS ye syphilitic panty waist cockroach!",
+				"Lemme spell out the rules for ye. I win. YOU LOSE! ye potato faced bug chewin' gutless kidneywipe!",
+				"Go ahead an' run! I LIKE a movin' target ye worm livered panty waist wiggly maggot!",
+				"Ba ba ba-ba ba you’re gonna get murdered",
+				"Have a face full o' boot ye bloated rat spawned chunk O' bat spit!",
+			};
+			verbl_msg = orc_insults_msgs[rn2(SIZE(orc_insults_msgs))];
+		} else {
+			pline_msg = "grunts.";
+		}
 		break;
 	case MS_NEIGH:
 		if (mtmp->mtame < 5) {
@@ -775,9 +788,28 @@ register struct monst *mtmp;
 			if (In_endgame(&u.uz) && is_mplayer(ptr)) {
 				mplayer_talk(mtmp);
 				break;
-			} else {
-				return 0;	/* no sound */
+			} else if (is_dwarf(ptr)) {
+				if (is_elf(youmonst.data)) {
+					static const char *dwarf_to_elf_insults_msgs[] = {
+						"You dendrophile!", //by Volfgarix from bay12forums
+						"Hey, pointy-eared tree hugger!" //from SporkHack
+					};
+					verbl_msg = dwarf_to_elf_insults_msgs[rn2(SIZE(dwarf_to_elf_insults_msgs))];
+				} else {
+					verbl_msg = "Your socks are of inadequate craftmanship!"; //by Shook from bay12forums
+				}
+				break;
+			} else if (is_elf(ptr)) {
+				if (is_dwarf(youmonst.data)) {
+					verbl_msg = "You lawn ornament!"; //from SporkHack
+					break;
+				}
 			}
+			if(is_dwarf(youmonst.data) && !is_dwarf((ptr))) {
+				verbl_msg = "I don't talk with minerals."; //by vadia from bay12forums
+				break;
+			}
+			return 0;	/* no sound */
 		}
 		/* Generic peaceful humanoid behaviour. */
 		if (mtmp->mflee) {
