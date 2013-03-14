@@ -447,7 +447,6 @@ walk_path(src_cc, dest_cc, check_proc, arg)
  * your movements at the time.
  *
  * Possible additions/changes:
- *	o set stunned if we hit a wall or door
  *	o reset nomul when we stop
  *	o creepy feeling if pass through monster (if ever implemented...)
  */
@@ -482,22 +481,26 @@ hurtle_step(genericptr_t arg, int x, int y)
 				s = "bumping into a door";
 			}
 			losehp(rnd(2+*range), s, KILLED_BY);
+			make_stunned(HStun + 5+*range, TRUE);
 			return FALSE;
 		}
 		if (levl[x][y].typ == IRONBARS) {
 			You("crash into some iron bars.  Ouch!");
 			losehp(rnd(2+*range), "crashing into iron bars", KILLED_BY);
+			make_stunned(HStun + 5+*range, TRUE);
 			return FALSE;
 		}
 		if ((obj = sobj_at(BOULDER,x,y)) != 0) {
 			You("bump into a %s.  Ouch!", xname(obj));
 			losehp(rnd(2+*range), "bumping into a boulder", KILLED_BY);
+			make_stunned(HStun + 5+*range, TRUE);
 			return FALSE;
 		}
 		if (!may_pass) {
 			/* did we hit a no-dig non-wall position? */
 			You("smack into something!");
 			losehp(rnd(2+*range), "touching the edge of the universe", KILLED_BY);
+			make_stunned(HStun + 5+*range, TRUE);
 			return FALSE;
 		}
 		if ((u.ux - x) && (u.uy - y) && bad_rock(youmonst.data,u.ux,y) && bad_rock(youmonst.data,x,u.uy)) {
@@ -514,6 +517,7 @@ hurtle_step(genericptr_t arg, int x, int y)
 	if ((mon = m_at(x, y)) != 0) {
 		You("bump into %s.", a_monnam(mon));
 		wakeup(mon);
+		make_stunned(HStun + 5+*range, TRUE);
 		return FALSE;
 	}
 
