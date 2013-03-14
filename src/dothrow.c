@@ -447,12 +447,9 @@ walk_path(src_cc, dest_cc, check_proc, arg)
  * your movements at the time.
  *
  * Possible additions/changes:
- *	o really attack monster if we hit one
  *	o set stunned if we hit a wall or door
  *	o reset nomul when we stop
  *	o creepy feeling if pass through monster (if ever implemented...)
- *	o bounce off walls
- *	o let jumps go over boulders
  */
 boolean
 hurtle_step(genericptr_t arg, int x, int y)
