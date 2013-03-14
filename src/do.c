@@ -1274,8 +1274,7 @@ boolean at_stairs, falling, portal;
 		if (Punished && !Levitation) {
 			pline("With great effort you climb the %s.",
 				at_ladder ? "ladder" : "stairs");
-		} else if (at_ladder)
-		    You("climb up the ladder.");
+		}
 	    } else {	/* down */
 		if (at_ladder) {
 		    u_on_newpos(xupladder, yupladder);
@@ -1308,8 +1307,7 @@ boolean at_stairs, falling, portal;
 			losehp(rnd(3), "falling downstairs", KILLED_BY);
 		    }
 		    selftouch("Falling, you");
-		} else if (u.dz && at_ladder)
-		    You("climb down the ladder.");
+		}
 	    }
 	} else {	/* trap door or level_tele or In_endgame */
 	    if (was_in_W_tower && On_W_tower_level(&u.uz))
