@@ -13,7 +13,7 @@ m_dowear_type
 * http://bilious.alt.org/?151
 * http://bilious.alt.org/?224
 * Double Cthulhu sanctum
-* trees for monk, knight, barbarian quests
+* trees for monk, knight
 * autotravel and stopping for engravings
 * monster with tele= resist \ of tele
 * https://github.com/tung/NitroHack/wiki - UnNetHack bug fixes (not already in UnNetHack)
