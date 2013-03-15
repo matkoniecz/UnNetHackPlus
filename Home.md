@@ -157,7 +157,6 @@ proud owner of a magic whistle.
 * unflee zombies on low HP
 * Dragons will never breath in melee combat.
 * Only your quest Nemeses will deliberately steal your quest artifact, other monsters may steal the amulet and invocation items. The quest artifact may of course be randomly stolen by nymphs and the like.  -Makes QA a dependable source of extrinsics, deepening differences between classes. -dnethack
-* Unskilled use of weapons will get you occasional reminders that you suck at this. No matter how many bonuses you get, in Sporkhack you can never get more than a 75% chance to hit a monster with such a weapon. This is only a minor hassle with this artifact longsword, since Mouse will be at basic skill with it shortly, but this is a big nerf to the rubber chicken exploit. No longer is a wielded cockatrice corpse automatic instant victory against even endgame bosses; there is at least a 25% chance the boss will be able to hit back at least once. This is a bigger nerf than it sounds… Since there are no artifact corpses to receive as a gift from your god, no character will ever be skilled in their use. You could say that there's no 'right way' to beat somebody with a dead chicken. https://github.com/Bulwersator/CopyOfSporkHack/commit/34d9e40f46ff2398cc339eb825decc82a6e476d0
 * oversight: you can #chat while being choked by a rope golem ("strangulation seem to be handled okay)
 
 #savebreaking?
