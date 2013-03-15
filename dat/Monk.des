@@ -35,6 +35,35 @@ MAP
 ............................................................................
 ............................................................................
 ENDMAP
+
+$rand = 1d5
+SWITCH [ $rand ] {
+	CASE 1:
+		$forest = selection:filter (10%, floodfill (01,01))
+		TERRAIN: $forest, 'T'
+		BREAK
+	CASE 2:
+		$forest = selection:filter (3%, floodfill (01,01))
+		TERRAIN: $forest, 'T'
+		BREAK
+	CASE 3:
+		$forest = selection:filter (1%, floodfill (01,01))
+		TERRAIN: $forest, 'T'
+		BREAK
+	CASE 4:
+		$forest = selection:filter (5%, floodfill (01,01))
+		TERRAIN: $forest, 't'
+		BREAK
+	CASE 5:
+		$forest = selection:filter (2%, floodfill (01,01))
+		TERRAIN: $forest, 'T'
+		$forest = selection:filter (2%, floodfill (01,01))
+		TERRAIN: $forest, 't'
+		BREAK
+	DEFAULT:
+		MESSAGE: "Warning: this reached supposedly unreachable code in Monk.des " . $rand
+		BREAK
+} 
 # Dungeon Description
 REGION:(00,00,75,19),lit,"ordinary"
 REGION:(24,06,33,13),lit,"temple"
