@@ -62,6 +62,7 @@
 		- more objects on the floor
 		- generated objects may be eroded or fixed
 		- reduced amount of food on lower levels
+	* Rework amnesia - mind flayers now destroy spells and skills
 	* Poison gas blasts leave a trail of stinking clouds (based on http://l.j-factor.com/nethack/poisoncloud.diff by "L" - Leon Arnott)
 	* Assorted YAFMs 1.0 by Adam Borowski ( http://bilious.alt.org/?121 ), slightly modified
 	* Cursed musical instruments will work only in 50% of cases, blessed ones are more effective
