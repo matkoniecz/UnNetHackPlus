@@ -964,9 +964,8 @@ int enhance_skill(boolean want_dump)
 	    } /* want_dump or not */
 
 	    /* List the skills, making ones that could be advanced
-	       selectable.  List the miscellaneous skills first.
-	       Possible future enhancement:  list spell skills before
-	       weapon skills for spellcaster roles. */
+	     * selectable.  List the miscellaneous skills first.
+	     */
 	  for (pass = 0; pass < SIZE(skill_ranges); pass++)
 	    for (i = skill_ranges[pass].first;
 		 i <= skill_ranges[pass].last; i++) {
