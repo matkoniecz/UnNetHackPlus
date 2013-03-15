@@ -1115,39 +1115,44 @@ void
 add_skill_slot(n)
 int n;	/* number of slots to gain; normally one */
 {
-    int i, before, after;
+	int i, before, after;
 
-    for (i = 0, before = 0; i < P_NUM_SKILLS; i++)
-	if (can_advance(i, FALSE)) before++;
-    u.weapon_slots += n;
-    for (i = 0, after = 0; i < P_NUM_SKILLS; i++)
-	if (can_advance(i, FALSE)) after++;
-    if (before < after)
-	give_may_advance_msg(P_NONE);
+	for (i = 0, before = 0; i < P_NUM_SKILLS; i++) {
+		if (can_advance(i, FALSE)) before++;
+	}
+	u.weapon_slots += n;
+	for (i = 0, after = 0; i < P_NUM_SKILLS; i++) {
+		if (can_advance(i, FALSE)) after++;
+	}
+	if (before < after) {
+		give_may_advance_msg(P_NONE);
+	}
 }
 
 void
 lose_skill_slot(n)
 int n;	/* number of slots to lose; normally one */
 {
-    int skill;
+	int skill;
 
-    while (--n >= 0) {
-	/* deduct first from unused slots, then from last placed slot, if any */
-	if (u.weapon_slots) {
-	    u.weapon_slots--;
-	} else if (u.skills_advanced) {
-	    skill = u.skill_record[--u.skills_advanced];
-	    if (P_SKILL(skill) <= P_UNSKILLED)
-		panic("lose_skill_slot (%d)", skill);
-	    P_SKILL(skill)--;	/* drop skill one level */
-	    /* Lost skill might have taken more than one slot; refund rest. */
-	    u.weapon_slots = slots_required(skill) - 1;
-	    /* It might now be possible to advance some other pending
-	       skill by using the refunded slots, but giving a message
-	       to that effect would seem pretty confusing.... */
+	while (--n >= 0) {
+		/* deduct first from unused slots, then from last placed slot, if any */
+		if (u.weapon_slots) {
+			u.weapon_slots--;
+		} else if (u.skills_advanced) {
+			skill = u.skill_record[--u.skills_advanced];
+			if (P_SKILL(skill) <= P_UNSKILLED) {
+				panic("lose_skill_slot (%d)", skill);
+			}
+			P_SKILL(skill)--; /* drop skill one level */
+			/* Lost skill might have taken more than one slot; refund rest. */
+			u.weapon_slots = slots_required(skill) - 1;
+			/* It might now be possible to advance some other pending
+			 * skill by using the refunded slots, but giving a message
+			 * to that effect would seem pretty confusing.... 
+			 */
+		}
 	}
-    }
 }
 
 int
