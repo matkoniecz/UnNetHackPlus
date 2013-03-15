@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* introduce and use full unicode support (see http://doryen.eptalys.net/forum/index.php?topic=1473.0 for potential)
 * foocubi - A new challenge (celibacy) [from SLASH'EM] / all effects are bad / penalty for monk/knight.
 * http://fantasynamegenerators.com/demon_names.php
 * magic draining attack (cancellation???)
