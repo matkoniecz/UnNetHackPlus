@@ -1112,7 +1112,7 @@ int degree;
 }
 
 void
-add_weapon_skill(n)
+add_skill_slot(n)
 int n;	/* number of slots to gain; normally one */
 {
     int i, before, after;
@@ -1127,7 +1127,7 @@ int n;	/* number of slots to gain; normally one */
 }
 
 void
-lose_weapon_skill(n)
+lose_skill_slot(n)
 int n;	/* number of slots to lose; normally one */
 {
     int skill;
@@ -1139,7 +1139,7 @@ int n;	/* number of slots to lose; normally one */
 	} else if (u.skills_advanced) {
 	    skill = u.skill_record[--u.skills_advanced];
 	    if (P_SKILL(skill) <= P_UNSKILLED)
-		panic("lose_weapon_skill (%d)", skill);
+		panic("lose_skill_slot (%d)", skill);
 	    P_SKILL(skill)--;	/* drop skill one level */
 	    /* Lost skill might have taken more than one slot; refund rest. */
 	    u.weapon_slots = slots_required(skill) - 1;
