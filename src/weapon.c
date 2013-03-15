@@ -1138,6 +1138,7 @@ int n;	/* number of slots to lose; normally one */
 	while (--n >= 0) {
 		/* deduct first from unused slots, then from last placed slot, if any */
 		if (u.unused_skill_slots) {
+			/* This function reduces nuber of available slots by n */
 			u.unused_skill_slots--;
 		} else if (u.skills_advanced) {
 			skill = u.skill_record[--u.skills_advanced];
@@ -1146,7 +1147,9 @@ int n;	/* number of slots to lose; normally one */
 			}
 			P_SKILL(skill)--; /* drop skill one level */
 			/* Lost skill might have taken more than one slot; refund rest. */
-			u.unused_skill_slots = slots_required(skill) - 1;
+			u.unused_skill_slots += slots_required(skill);
+			/* This function reduces nuber of available slots by n */
+			u.unused_skill_slots--;
 			/* It might now be possible to advance some other pending
 			 * skill by using the refunded slots, but giving a message
 			 * to that effect would seem pretty confusing.... 
