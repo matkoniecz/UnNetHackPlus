@@ -666,7 +666,7 @@ boolean with_price;
 		     foo thing [thing of actual] -> foo thing [of actual]
 		       eg. square amulet [of strangulation]
 		     thing of foo [actual thing] -> thing of foo [of actual]
-		       eg. scroll labeled DUAM XNAHT [of amnesia]
+		       eg. scroll labeled DUAM XNAHT [of flood]
 		     foo thing [actual thing] -> foo thing [actual]
 		       eg. mud boots [speed boots]
 		     thing [thing of actual] -> thing [of actual]
