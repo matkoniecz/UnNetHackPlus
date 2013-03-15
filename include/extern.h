@@ -2425,6 +2425,7 @@ E int NDECL(enhance_weapon_skill);
 E void NDECL(dump_weapon_skill);
 #endif
 E void FDECL(unrestrict_weapon_skill, (int));
+E void NDECL(forget_skills);
 E void FDECL(lose_skill, (int));
 E void FDECL(use_skill, (int,int));
 E void FDECL(add_skill_slot, (int));

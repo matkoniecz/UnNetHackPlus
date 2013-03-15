@@ -1097,6 +1097,20 @@ int skill;
 #ifdef OVLB
 
 void
+forget_skills()
+{
+	int skill;
+	for (skill = 0; skill < P_NUM_SKILLS; skill++) {
+		if(!rn2(7) && P_ADVANCE(skill) > 0) {
+			P_ADVANCE(skill) = rn2(P_ADVANCE(skill));
+			while (P_ADVANCE(skill) < practice_needed_to_advance(P_SKILL(skill) - 1)) { /* Loss was enough to bring skill level down */
+				lose_skill(skill);
+			}
+		}
+	}
+}
+
+void
 use_skill(skill,degree)
 int skill;
 int degree;
