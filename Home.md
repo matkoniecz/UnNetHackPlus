@@ -170,7 +170,8 @@ proud owner of a magic whistle.
 * fly monster spell - https://github.com/Bulwersator/CopyOfSporkHack/commit/d6ae5c1cba40bd5f04f11c2e6e6205ad1486992f + https://github.com/Bulwersator/CopyOfSporkHack/commit/cd5b178b692e2c34276486aa11032107263ca167
 
 #savebreaking
-* spellbook of repair armor
+* http://www.statslab.cam.ac.uk/~eva/slashem/wands.html
+* spellbook of repair armor (spork?)
 * new randomized appearances - see https://github.com/Bulwersator/UnNetHackPlus/compare/master...new-randomized-appearances
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/aee3b3d35defc3ec60611337450c071340359217 (??)
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/c89f6e57eb16e81bd37920096c6f64dfed725b03 (+later fix)
