@@ -1,4 +1,6 @@
 Plans for UnNetHackPlus
+* http://doryen.eptalys.net/articles/bsp-dungeon-generation/
+* http://doryen.eptalys.net/data/libtcod/doc/1.5.1/html2/namegen_file_4.html?c=false&cpp=false&cs=false&py=false&lua=false (king names)
 * introduce and use full unicode support (see http://doryen.eptalys.net/forum/index.php?topic=1473.0 for potential)
 * foocubi - A new challenge (celibacy) [from SLASH'EM] / all effects are bad / penalty for monk/knight.
 * http://fantasynamegenerators.com/demon_names.php
