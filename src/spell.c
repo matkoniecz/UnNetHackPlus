@@ -1017,7 +1017,7 @@ throwspell()
 * You forget 1d(known) spells. Forgotten spells are removed starting from the bottom of the spellcasting menu
 */
 void
-losespells()
+forget_spells()
 {
 	int  n, nzap, i;
 
