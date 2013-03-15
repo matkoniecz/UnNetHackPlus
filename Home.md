@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* foocubi - A new challenge (celibacy) [from SLASH'EM] / all effects are bad / penalty for monk/knight.
 * http://fantasynamegenerators.com/demon_names.php
 * magic draining attack (cancellation???)
 * monsters are not getting poison resistance from worn dragon scale mail
