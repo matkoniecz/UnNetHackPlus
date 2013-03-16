@@ -317,3 +317,10 @@ proud owner of a magic whistle.
 * nethack, unnethack, sporkhack (Derek Ray), dnethack (Chris), grunthack (SGrunt) developers
 * paxed, unserver keeper (medusa deaths)
 * authors of patches ("L" - Leon Arnott)
+* bhaak for help
+
+#spam
+* http://www.tt-forums.net/viewtopic.php?f=2&t=19187
+* rgrn
+* /r/nethack
+* /r/roguelikes
