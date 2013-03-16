@@ -2125,6 +2125,12 @@ struct obj *potion, *obj;
 			potion->in_use = FALSE;	/* didn't go poof */
 			return(1);
 		}
+		if (is_corrodeable(obj)) {
+			erode_obj(obj, AD_ACID);
+			makeknown(POT_ACID);
+			poof(potion);
+			return(1);
+		}
 	}
 
 	if(is_poisonable(obj)) {
