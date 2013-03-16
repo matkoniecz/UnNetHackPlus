@@ -1,4 +1,6 @@
 Plans for UnNetHackPlus
+* king names
+* read state after spellbook name
 * 		if (Punished) {
 			u.bc_felt = 0;	/* forget felt ball&chain */
 		}
