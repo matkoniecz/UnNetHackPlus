@@ -934,6 +934,12 @@ makelevel()
 
     }
 
+	/* make player monsters - make them rare and ridiculously rare at shallow levels */
+	unsigned lvl = level_difficulty();
+	if(lvl*lvl*lvl > rn2(500000)) {
+		create_mplayers(1, TRUE);
+	}
+
 #ifdef REINCARNATION
 skip0:
 #endif
@@ -1009,8 +1015,13 @@ skip0:
 			do {
 			    x = somex(croom);  y = somey(croom);
 			} while(levl[x][y].typ != ROOM && !rn2(40));
-			if (!(IS_POOL(levl[x][y].typ) || IS_FURNITURE(levl[x][y].typ)))
-			    make_engr_at(x, y, mesg, 0L, MARK);
+			if (!(IS_POOL(levl[x][y].typ) || IS_FURNITURE(levl[x][y].typ))) {
+				xchar engraving_type = MARK;
+				if (rn2(2)) {
+					engraving_type = 0; /* random */
+				}
+				make_engr_at(x, y, mesg, 0L, engraving_type);
+			}
 		    }
 		}
 

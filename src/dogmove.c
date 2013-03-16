@@ -264,17 +264,13 @@ register struct edog *edog;
 		stop_occupation();
 	    } else if (monstermoves > edog->hungrytime + 750 || mtmp->mhp < 1) {
  dog_died:
-		if (mtmp->mleashed
-#ifdef STEED
-		    && mtmp != u.usteed
-#endif
-		    )
-		    Your("leash goes slack.");
-		else if (cansee(mtmp->mx, mtmp->my))
-		    pline("%s starves.", Monnam(mtmp));
-		else
-		    You_feel("%s for a moment.",
-			Hallucination ? "bummed" : "sad");
+		if (mtmp->mleashed && mtmp != u.usteed) {
+			Your("leash goes slack.");
+		} else if (cansee(mtmp->mx, mtmp->my)) {
+			pline("%s starves.", Monnam(mtmp));
+		} else {
+			You_feel("%s for a moment.", Hallucination ? "bummed" : "sad");
+		}
 		mondied(mtmp);
 		return(TRUE);
 	    }
@@ -368,11 +364,10 @@ int after, udist, whappr;
 	xchar otyp;
 	int appr;
 
-#ifdef STEED
 	/* Steeds don't move on their own will */
-	if (mtmp == u.usteed)
+	if (mtmp == u.usteed) {
 		return (-2);
-#endif
+	}
 
 	omx = mtmp->mx;
 	omy = mtmp->my;
@@ -538,7 +533,6 @@ register int after;	/* this is extra fast monster movement */
 	if (has_edog && dog_hunger(mtmp, edog)) return(2);	/* starved */
 
 	udist = distu(omx,omy);
-#ifdef STEED
 	/* Let steeds eat and maybe throw rider during Conflict */
 	if (mtmp == u.usteed) {
 	    if (Conflict && !resist(mtmp, RING_CLASS, 0, 0)) {
@@ -546,10 +540,9 @@ register int after;	/* this is extra fast monster movement */
 		return (1);
 	    }
 	    udist = 1;
-	} else
-#endif
-	/* maybe we tamed him while being swallowed --jgm */
-	if (!udist) return(0);
+	} else if (!udist) { /* maybe we tamed him while being swallowed */
+		return(0);
+	}
 
 	nix = omx;	/* set before newdogpos */
 	niy = omy;
@@ -642,23 +635,15 @@ register int after;	/* this is extra fast monster movement */
 		    int mstatus;
 		    register struct monst *mtmp2 = m_at(nx,ny);
 
-		    if ((int)mtmp2->m_lev >= (int)mtmp->m_lev+2 ||
-			(mtmp2->data == &mons[PM_FLOATING_EYE] && rn2(10) &&
-			 mtmp->mcansee && haseyes(mtmp->data) && mtmp2->mcansee
-			 && (perceives(mtmp->data) || !mtmp2->minvis)) ||
-			(mtmp2->data==&mons[PM_GELATINOUS_CUBE] && rn2(10)) ||
-			(max_passive_dmg(mtmp2, mtmp) >= mtmp->mhp) ||
-			((mtmp->mhp*4 < mtmp->mhpmax
-			  || mtmp2->data->msound == MS_GUARDIAN
-			  || mtmp2->data->msound == MS_LEADER) &&
-			 mtmp2->mpeaceful && !Conflict) ||
-#ifdef WEBB_DISINT
-			(touch_disintegrates(mtmp2->data) &&
-			 !resists_disint(mtmp)) ||
-#endif
-			   (touch_petrifies(mtmp2->data) &&
-				!resists_ston(mtmp)))
-			continue;
+		    if ((int)mtmp2->m_lev >= (int)mtmp->m_lev+2) continue;
+		    if (mtmp2->data == &mons[PM_FLOATING_EYE] && rn2(10))
+			    if(mtmp->mcansee && haseyes(mtmp->data) && mtmp2->mcansee && (perceives(mtmp->data) || !mtmp2->minvis)) continue;
+		    if (mtmp2->data == &mons[PM_GELATINOUS_CUBE] && rn2(10)) continue;
+		    if (max_passive_dmg(mtmp2, mtmp) >= mtmp->mhp) continue;
+		    if (mtmp->mhp*4 < mtmp->mhpmax || mtmp2->data->msound == MS_GUARDIAN || mtmp2->data->msound == MS_LEADER)
+			    if(mtmp2->mpeaceful && !Conflict) continue;
+		    if (touch_disintegrates(mtmp2->data) && !resists_disint(mtmp)) continue;
+		    if (touch_petrifies(mtmp2->data) && !resists_ston(mtmp)) continue;
 
 		    if (after) return(0); /* hit only once each move */
 

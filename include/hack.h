@@ -36,7 +36,6 @@
 #define BY_PAPER	2
 #define BY_OTHER	9
 
-#ifdef STEED
 /* Macros for why you are no longer riding */
 #define DISMOUNT_GENERIC	0
 #define DISMOUNT_FELL		1
@@ -45,7 +44,6 @@
 #define DISMOUNT_ENGULFED	4
 #define DISMOUNT_BONES		5
 #define DISMOUNT_BYCHOICE	6
-#endif
 
 /* Special returns from mapglyph() */
 #define MG_CORPSE	0x01
@@ -82,8 +80,10 @@
 #define TRICKED	13
 #define QUIT		14
 #define ESCAPED	15
+#ifdef ASTRAL_ESCAPE
 #define DEFIED		16
 #define ASCENDED	17
+#endif
 
 #include "align.h"
 #include "dungeon.h"

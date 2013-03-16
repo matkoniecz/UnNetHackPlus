@@ -447,9 +447,9 @@ make_version()
 #ifdef SINKS
 			| (1L <<  2)
 #endif
-#ifdef BLACKMARKET
+//#ifdef BLACKMARKET - enabled uncoditionally
 			| (1L <<  3)
-#endif
+//#endif
 		/* monsters (5..9) */
 #ifdef KOPS
 			| (1L <<  6)
@@ -458,12 +458,12 @@ make_version()
 			| (1L <<  7)
 #endif
 		/* objects (10..14) */
-#ifdef TOURIST
+//#ifdef TOURIST - enabled uncoditionally
 			| (1L << 10)
-#endif
-#ifdef STEED
+//#endif
+//#ifdef STEED - enabled uncoditionally
 			| (1L << 11)
-#endif
+//#endif
 #ifdef GOLDOBJ
 			| (1L << 12)
 #endif
@@ -646,9 +646,7 @@ static const char *build_opts[] = {
 #ifdef AUTO_OPEN
 		"auto open doors",
 #endif
-#ifdef BLACKMARKET
 		"blackmarket level",
-#endif
 #ifdef TEXTCOLOR
 		"color",
 #endif
@@ -760,9 +758,7 @@ static const char *build_opts[] = {
 #  endif
 # endif
 #endif
-#ifdef SEDUCE
 		"seduction",
-#endif
 #ifdef SHELL
 		"shell command",
 #endif
@@ -782,12 +778,8 @@ static const char *build_opts[] = {
 #ifdef TIMED_DELAY
 		"timed wait for display effects",
 #endif
-#ifdef TOURIST
 		"tourists",
-#endif
-#ifdef TOURIST
 		"UTF-8 glyphs",
-#endif
 #ifdef USER_SOUNDS
 # ifdef USER_SOUNDS_REGEX
 		"user sounds via regular expressions",
@@ -1852,13 +1844,13 @@ do_objs()
 		    if (*c >= 'a' && *c <= 'z') *c -= (char)('a' - 'A');
 		    else if (*c < 'A' || *c > 'Z') *c = '_';
 
-		if (!strncmp(objnam, "THE_", 4))
+		if (!strncmp(objnam, "THE_", 4)) {
 			objnam += 4;
-#ifdef TOURIST
+		}
 		/* fudge _platinum_ YENDORIAN EXPRESS CARD */
-		if (!strncmp(objnam, "PLATINUM_", 9))
+		if (!strncmp(objnam, "PLATINUM_", 9)) {
 			objnam += 9;
-#endif
+		}
 		Fprintf(ofp,"#define\tART_%s\t%d\n", limit(objnam, 1), i);
 	}
 

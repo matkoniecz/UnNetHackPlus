@@ -52,9 +52,7 @@ STATIC_VAR NEARDATA const short skill_names_indices[P_NUM_SKILLS] = {
 	PN_CLERIC_SPELL,     PN_ESCAPE_SPELL,
 	PN_MATTER_SPELL,
 	PN_BARE_HANDED,   PN_TWO_WEAPONS,
-#ifdef STEED
 	PN_RIDING
-#endif
 };
 
 /* note: entry [0] isn't used */
@@ -500,12 +498,10 @@ register struct monst *mtmp;
 		if (otmp->oclass == WEAPON_CLASS &&
 		    otmp->oartifact &&
 		    touch_artifact(otmp,mtmp)) {
-#ifdef BLACKMARKET
 			/* let black marketeer wield their artifact weapon
 			   in any case. */
 			if (mtmp->data == &mons[PM_BLACK_MARKETEER])
 				return otmp;
-#endif
 			if ((strong && !wearing_shield) ||
 			    !objects[otmp->otyp].oc_bimanual)
 				return otmp;
@@ -817,7 +813,7 @@ boolean speedy;
 	    (P_ADVANCE(skill) >=
 		(unsigned) practice_needed_to_advance(P_SKILL(skill))
 	    && u.skills_advanced < P_SKILL_LIMIT
-	    && u.weapon_slots >= slots_required(skill)));
+	    && u.unused_skill_slots >= slots_required(skill)));
 }
 
 /* return true if any skill can be advanced */
@@ -859,7 +855,7 @@ STATIC_OVL void
 skill_advance(skill)
 int skill;
 {
-    u.weapon_slots -= slots_required(skill);
+    u.unused_skill_slots -= slots_required(skill);
     P_SKILL(skill)++;
     u.skill_record[u.skills_advanced++] = skill;
     /* subtly change the advance message to indicate no more advancement */
@@ -968,9 +964,8 @@ int enhance_skill(boolean want_dump)
 	    } /* want_dump or not */
 
 	    /* List the skills, making ones that could be advanced
-	       selectable.  List the miscellaneous skills first.
-	       Possible future enhancement:  list spell skills before
-	       weapon skills for spellcaster roles. */
+	     * selectable.  List the miscellaneous skills first.
+	     */
 	  for (pass = 0; pass < SIZE(skill_ranges); pass++)
 	    for (i = skill_ranges[pass].first;
 		 i <= skill_ranges[pass].last; i++) {
@@ -1055,7 +1050,7 @@ int enhance_skill(boolean want_dump)
 #ifdef WIZARD
 	    if (wizard && !speedy)
 		Sprintf(eos(buf), "  (%d slot%s available)",
-			u.weapon_slots, plur(u.weapon_slots));
+			u.unused_skill_slots, plur(u.unused_skill_slots));
 #endif
 	    if (want_dump) {
 		dump_html("</table>\n", "");
@@ -1069,6 +1064,9 @@ int enhance_skill(boolean want_dump)
 		n = selected[0].item.a_int - 1;	/* get item selected */
 		free((genericptr_t)selected);
 		skill_advance(n);
+		if (speedy) {
+			P_ADVANCE(n) = practice_needed_to_advance(P_SKILL(n) - 1);
+		}
 		/* check for more skills able to advance, if so then .. */
 		for (n = i = 0; i < P_NUM_SKILLS; i++) {
 		    if (can_advance(i, speedy)) {
@@ -1102,6 +1100,20 @@ int skill;
 #ifdef OVLB
 
 void
+forget_skills()
+{
+	int skill;
+	for (skill = 0; skill < P_NUM_SKILLS; skill++) {
+		if(!rn2(7) && P_ADVANCE(skill) > 0) {
+			P_ADVANCE(skill) = rn2(P_ADVANCE(skill));
+			while (P_ADVANCE(skill) < practice_needed_to_advance(P_SKILL(skill) - 1)) { /* Loss was enough to bring skill level down */
+				lose_skill(skill);
+			}
+		}
+	}
+}
+
+void
 use_skill(skill,degree)
 int skill;
 int degree;
@@ -1117,42 +1129,49 @@ int degree;
 }
 
 void
-add_weapon_skill(n)
+add_skill_slot(n)
 int n;	/* number of slots to gain; normally one */
 {
-    int i, before, after;
+	int i, before, after;
 
-    for (i = 0, before = 0; i < P_NUM_SKILLS; i++)
-	if (can_advance(i, FALSE)) before++;
-    u.weapon_slots += n;
-    for (i = 0, after = 0; i < P_NUM_SKILLS; i++)
-	if (can_advance(i, FALSE)) after++;
-    if (before < after)
-	give_may_advance_msg(P_NONE);
+	for (i = 0, before = 0; i < P_NUM_SKILLS; i++) {
+		if (can_advance(i, FALSE)) before++;
+	}
+	u.unused_skill_slots += n;
+	for (i = 0, after = 0; i < P_NUM_SKILLS; i++) {
+		if (can_advance(i, FALSE)) after++;
+	}
+	if (before < after) {
+		give_may_advance_msg(P_NONE);
+	}
 }
 
 void
-lose_weapon_skill(n)
+lose_skill(int skill)
+{
+	if (P_SKILL(skill) <= P_UNSKILLED) {
+		panic("lose_skill_slot (%d)", skill);
+	}
+	P_SKILL(skill)--; /* drop skill one level */
+	/* Refund slots from lost skill */
+	u.unused_skill_slots += slots_required(skill);
+	/* It might now be possible to advance some other pending
+	 * skill by using the refunded slots, but giving a message
+	 * to that effect would seem pretty confusing.... 
+	 */
+}
+
+void
+lose_skill_slot(n)
 int n;	/* number of slots to lose; normally one */
 {
-    int skill;
-
-    while (--n >= 0) {
-	/* deduct first from unused slots, then from last placed slot, if any */
-	if (u.weapon_slots) {
-	    u.weapon_slots--;
-	} else if (u.skills_advanced) {
-	    skill = u.skill_record[--u.skills_advanced];
-	    if (P_SKILL(skill) <= P_UNSKILLED)
-		panic("lose_weapon_skill (%d)", skill);
-	    P_SKILL(skill)--;	/* drop skill one level */
-	    /* Lost skill might have taken more than one slot; refund rest. */
-	    u.weapon_slots = slots_required(skill) - 1;
-	    /* It might now be possible to advance some other pending
-	       skill by using the refunded slots, but giving a message
-	       to that effect would seem pretty confusing.... */
+	while (--n >= 0) {
+		/* deduct first from unused slots, then from last placed slot, if any */
+		u.unused_skill_slots--;
+		if (u.unused_skill_slots < 0) {
+			lose_skill(u.skill_record[--u.skills_advanced]);
+		} 
 	}
-    }
 }
 
 int
@@ -1233,7 +1252,6 @@ struct obj *weapon;
 	bonus = ((bonus + 2) * (martial_bonus() ? 2 : 1)) / 2;
     }
 
-#ifdef STEED
 	/* KMH -- It's harder to hit while you are riding */
 	if (u.usteed) {
 		switch (P_SKILL(P_RIDING)) {
@@ -1245,7 +1263,6 @@ struct obj *weapon;
 		}
 		if (u.twoweap) bonus -= 2;
 	}
-#endif
 
     return bonus;
 }
@@ -1302,7 +1319,6 @@ struct obj *weapon;
 	bonus = ((bonus + 1) * (martial_bonus() ? 3 : 1)) / 2;
     }
 
-#ifdef STEED
 	/* KMH -- Riding gives some thrusting damage */
 	if (u.usteed && type != P_TWO_WEAPON_COMBAT) {
 		switch (P_SKILL(P_RIDING)) {
@@ -1313,7 +1329,6 @@ struct obj *weapon;
 		    case P_EXPERT:      bonus += 2; break;
 		}
 	}
-#endif
 
     return bonus;
 }
@@ -1370,10 +1385,9 @@ const struct def_skill *class_skill;
 	    P_SKILL(P_BARE_HANDED_COMBAT) = P_BASIC;
 
 	/* Roles that start with a horse know how to ride it */
-#ifdef STEED
-	if (urole.petnum == PM_PONY)
-	    P_SKILL(P_RIDING) = P_BASIC;
-#endif
+	if (urole.petnum == PM_PONY) {
+		P_SKILL(P_RIDING) = P_BASIC;
+	}
 
 	/*
 	 * Make sure we haven't missed setting the max on a skill

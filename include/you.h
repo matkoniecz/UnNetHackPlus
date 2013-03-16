@@ -422,17 +422,15 @@ struct you {
 	long	usleep;		/* sleeping; monstermove you last started */
 	int uinvault;
 	struct monst *ustuck;
-#ifdef STEED
 	struct monst *usteed;
 	long ugallop;
 	int urideturns;
-#endif
 	int	umortality;		/* how many times you died */
 	int ugrave_arise; /* you die and become something aside from a ghost */
 	time_t	ubirthday;		/* real world time when game began */
 	time_t	udeathday;		/* real world time when game ended */
 
-	int	weapon_slots;		/* unused skill slots */
+	int	unused_skill_slots;
 	int	skills_advanced;		/* # of advances made so far */
 	xchar	skill_record[P_SKILL_LIMIT];	/* skill advancements */
 	struct skills weapon_skills[P_NUM_SKILLS];

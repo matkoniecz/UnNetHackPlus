@@ -666,7 +666,7 @@ boolean with_price;
 		     foo thing [thing of actual] -> foo thing [of actual]
 		       eg. square amulet [of strangulation]
 		     thing of foo [actual thing] -> thing of foo [of actual]
-		       eg. scroll labeled DUAM XNAHT [of amnesia]
+		       eg. scroll labeled DUAM XNAHT [of flood]
 		     foo thing [actual thing] -> foo thing [actual]
 		       eg. mud boots [speed boots]
 		     thing [thing of actual] -> thing [of actual]
@@ -849,11 +849,7 @@ plus:
 				" (being worn)");
 		goto plus;
 	case TOOL_CLASS:
-		if(obj->owornmask & (W_TOOL /* blindfold */
-#ifdef STEED
-				| W_SADDLE
-#endif
-				)) {
+		if(obj->owornmask & (W_TOOL /* blindfold */ | W_SADDLE)) {
 			Strcat(bp, " (being worn)");
 			break;
 		}
@@ -1784,9 +1780,7 @@ STATIC_OVL NEARDATA const struct o_range o_ranges[] = {
 	{ "boots",	ARMOR_CLASS,  LOW_BOOTS,      LEVITATION_BOOTS },
 	{ "shoes",	ARMOR_CLASS,  LOW_BOOTS,      IRON_SHOES },
 	{ "cloak",	ARMOR_CLASS,  MUMMY_WRAPPING, CLOAK_OF_DISPLACEMENT },
-#ifdef TOURIST
 	{ "shirt",	ARMOR_CLASS,  HAWAIIAN_SHIRT, T_SHIRT },
-#endif
 	{ "dragon scales",
 			ARMOR_CLASS,  GRAY_DRAGON_SCALES, YELLOW_DRAGON_SCALES },
 	{ "dragon scale mail",
@@ -2001,10 +1995,8 @@ struct alt_spellings {
 	{ "mattock", DWARVISH_MATTOCK },
 	{ "amulet of poison resistance", AMULET_VERSUS_POISON },
 	{ "stone", ROCK },
-#ifdef TOURIST
 	{ "camera", EXPENSIVE_CAMERA },
 	{ "tee shirt", T_SHIRT },
-#endif
 	{ "can", TIN },
 	{ "can opener", TIN_OPENER },
 	{ "kelp", KELP_FROND },
@@ -2805,9 +2797,7 @@ typfnd:
 		wizard ||
 #endif
 		 (cnt <= 7 && Is_candle(otmp)) ||
-		 (cnt <= 20 &&
-		  ((oclass == WEAPON_CLASS && is_ammo(otmp))
-				|| typ == ROCK || is_missile(otmp)))))
+		 (cnt <= 100 && ((oclass == WEAPON_CLASS && is_ammo(otmp)) || typ == ROCK || is_missile(otmp)))))
 			otmp->quan = (long) cnt;
 
 #ifdef WIZARD

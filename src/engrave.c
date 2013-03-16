@@ -28,10 +28,9 @@ static const char *random_mesg[] = {
 	"Madam, in Eden, I'm Adam.", /* A palindrome */
 	"Two thumbs up!", /* Siskel & Ebert */
 	"Hello, World!", /* The First C Program */
-#ifdef MAIL
 	"You've got mail!", /* AOL */
-#endif
 	"As if!", /* Clueless */
+
 	/* From Slash'Em */
 	/* [Tom] added these */
 	"Y?v?l s??ks!", /* just kidding... */
@@ -44,6 +43,7 @@ static const char *random_mesg[] = {
 	"UY WUZ HERE", /* :] */
 	"I'll be back!", /* Terminator */
 	"That is not dead which can eternal lie.", /* HPL */
+
 	/* From NAO */
 	"Arooo!  Werewolves of Yendor!", /* gang tag */
 	"Dig for Victory here", /* pun, duh */
@@ -65,6 +65,7 @@ static const char *random_mesg[] = {
 	"X marks the spot",
 	"X <--- You are here.",
 	"You are the one millionth visitor to this place!  Please wait 200 turns for your wand of wishing.",
+
 	/* From UnNetHack */
 	"She's watching you!", /* Portal */
 	"The cake is a lie!", /* Portal */
@@ -83,6 +84,22 @@ static const char *random_mesg[] = {
 	"Look behind you, a Three-Headed Monkey!", /* Monkey Island */
 	"Ifnkovhgroghprm", /* Kings Quest I */
 	"Cookies are delicious delicacies", /* Mozilla Firefox */
+
+	/* From UnNetHackPlus */
+	"Losing is fun!", /* Dwarf Fortress */
+	/* Murphy's laws */
+	"Cheer up, the worst is yet to come...",
+	"Computers let you waste time efficiently",
+	"If something cannot go wrong at all, it will go wrong in a very spectacular way.",
+	"If everything seems to be going well, you have obviously overlooked something",
+	"If anything can go wrong, it will",
+	"When things go from bad to worse, the cycle repeats.",
+	"Being dead right, won't make you any less dead.",
+	"If all else fails, hit it with a big hammer.",
+	"If many things can go wrong, they will all go wrong at the same time.",
+	"That is not dead which can eternal lie, and with strange aeons even death may die.", /* H. P. Lovecraft */
+	"Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.", /* H. P. Lovecraft */
+	"Conducts are about player skill, not about obsessive-compulsive disorder", /* TJR on RGRN */
 };
 
 char *
@@ -93,10 +110,11 @@ char *outbuf;
 
 	/* a random engraving may come from the "rumors" file,
 	   or from the list above */
-	if (!rn2(4) || !(rumor = getrumor(0, outbuf, TRUE)) || !*rumor)
-	    Strcpy(outbuf, random_mesg[rn2(SIZE(random_mesg))]);
+	if (!rn2(4) || !(rumor = getrumor(0, outbuf, TRUE)) || !*rumor) {
+		Strcpy(outbuf, random_mesg[rn2(SIZE(random_mesg))]);
+	}
 
-	wipeout_text(outbuf, (int)(strlen(outbuf) / 4), 0);
+	wipeout_text(outbuf, rnl((int)(strlen(outbuf) / 6) + 1) + rn2((int)(strlen(outbuf) / 6) + 1), 0);
 	return outbuf;
 }
 
@@ -183,13 +201,17 @@ unsigned seed;		/* for semi-controlled randomization */
 boolean
 can_reach_floor()
 {
-	return (boolean)(!u.uswallow &&
-#ifdef STEED
-			/* Restricted/unskilled riders can't reach the floor */
-			!(u.usteed && P_SKILL(P_RIDING) < P_BASIC) &&
-#endif
-			 (!Levitation ||
-			  Is_airlevel(&u.uz) || Is_waterlevel(&u.uz)));
+	if (u.uswallow) {
+		return FALSE;
+	}
+	/* Restricted/unskilled riders can't reach the floor */
+	if (u.usteed && P_SKILL(P_RIDING) < P_BASIC) {
+		return FALSE;
+	}
+	if (Levitation && !(Is_airlevel(&u.uz) || Is_waterlevel(&u.uz))) {
+		return FALSE;
+	}
+	return TRUE;
 }
 #endif /* OVLB */
 #ifdef OVL0
@@ -288,7 +310,6 @@ sengr_at(s, x, y)
 }
 #endif /* ELBERETH */
 
-#ifdef ELBERETH_CONDUCT
 /** Return the number of distinct times Elbereth is engraved at
  * the specified location. Case insensitive.  Counts an engraving
  * as being present even if it's still being written: if you're
@@ -316,7 +337,6 @@ nengr_at(x, y)
 
 	return count;
 }
-#endif /* ELBERETH_CONDUCT */
 
 #endif /* OVL0 */
 #ifdef OVL2
@@ -1239,7 +1259,6 @@ boolean fingers;
 
 	(void) strncat(buf, ebuf, (BUFSZ - (int)strlen(buf) - 1));
 
-#ifdef ELBERETH_CONDUCT
 	{
 		unsigned ecount1, ecount0 = nengr_at(u.ux, u.uy);
 		make_engr_at(u.ux, u.uy, buf, (moves - multi), type);
@@ -1247,9 +1266,6 @@ boolean fingers;
 		if (ecount1 > ecount0)
 			u.uconduct.elbereths += (ecount1 - ecount0);
 	}
-#else
-	make_engr_at(u.ux, u.uy, buf, (moves - multi), type);
-#endif
 
 	if (post_engr_text[0]) pline(post_engr_text);
 

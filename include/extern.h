@@ -389,9 +389,7 @@ E int NDECL(Gloves_off);
 E int NDECL(Boots_off);
 E int NDECL(Cloak_off);
 E int NDECL(Shield_off);
-#ifdef TOURIST
 E int NDECL(Shirt_off);
-#endif
 E void NDECL(Amulet_off);
 E void FDECL(Ring_on, (struct obj *));
 E void FDECL(Ring_off, (struct obj *));
@@ -1083,9 +1081,7 @@ E int FDECL(magic_negation, (struct monst *));
 E int FDECL(gazemu, (struct monst *,struct attack *));
 E void FDECL(mdamageu, (struct monst *,int));
 E int FDECL(could_seduce, (struct monst *,struct monst *,struct attack *));
-#ifdef SEDUCE
 E int FDECL(doseduce, (struct monst *));
-#endif
 
 /* ### minion.c ### */
 
@@ -1719,7 +1715,9 @@ E const char *FDECL(halu_gname, (ALIGNTYP_P));
 E const char *FDECL(rnd_gname, (int));
 E const char *FDECL(align_gtitle, (ALIGNTYP_P));
 E void FDECL(altar_wrath, (int,int));
+#ifdef ASTRAL_ESCAPE
 E int FDECL(invoke_amulet, (struct obj *));
+#endif
 E int NDECL(in_trouble);
 
 
@@ -1786,7 +1784,7 @@ E void FDECL(recharge, (struct obj *,int));
 E void FDECL(forget_objects, (int));
 E void FDECL(forget_levels, (int));
 E void NDECL(forget_traps);
-E void FDECL(forget_map, (int));
+E void FDECL(forget_map, (boolean));
 E int FDECL(seffects, (struct obj *));
 #ifdef USE_TRAMPOLI
 E void FDECL(set_lit, (int,int,genericptr_t));
@@ -1982,10 +1980,8 @@ E void FDECL(costly_gold, (XCHAR_P,XCHAR_P,long));
 E long FDECL(get_cost_of_shop_item, (struct obj *));
 E boolean FDECL(block_door, (XCHAR_P,XCHAR_P));
 E boolean FDECL(block_entry, (XCHAR_P,XCHAR_P));
-#ifdef BLACKMARKET
 E void FDECL(blkmar_guards, (struct monst *));
 E void NDECL(set_black_marketeer_angry);
-#endif /* BLACKMARKET */
 E char *FDECL(shk_your, (char *,struct obj *));
 E char *FDECL(Shk_Your, (char *,struct obj *));
 E void FDECL(shk_holler, (struct monst*));
@@ -2046,7 +2042,7 @@ E void NDECL(age_spells);
 E int NDECL(docast);
 E int FDECL(spell_skilltype, (int));
 E int FDECL(spelleffects, (int,BOOLEAN_P));
-E void NDECL(losespells);
+E void NDECL(forget_spells);
 E int NDECL(dovspell);
 E void FDECL(initialspell, (struct obj *));
 E void NDECL(dump_spells);
@@ -2075,7 +2071,6 @@ E struct obj *FDECL(findgold, (struct obj *));
 
 /* ### steed.c ### */
 
-#ifdef STEED
 E void NDECL(rider_cant_reach);
 E boolean FDECL(can_saddle, (struct monst *));
 E int FDECL(use_saddle, (struct obj *));
@@ -2086,7 +2081,6 @@ E void NDECL(exercise_steed);
 E void NDECL(kick_steed);
 E void FDECL(dismount_steed, (int));
 E void FDECL(place_monster, (struct monst *,int,int));
-#endif
 
 /* ### teleport.c ### */
 
@@ -2431,9 +2425,11 @@ E int NDECL(enhance_weapon_skill);
 E void NDECL(dump_weapon_skill);
 #endif
 E void FDECL(unrestrict_weapon_skill, (int));
+E void NDECL(forget_skills);
+E void FDECL(lose_skill, (int));
 E void FDECL(use_skill, (int,int));
-E void FDECL(add_weapon_skill, (int));
-E void FDECL(lose_weapon_skill, (int));
+E void FDECL(add_skill_slot, (int));
+E void FDECL(lose_skill_slot, (int));
 E int FDECL(weapon_type, (struct obj *));
 E int NDECL(uwep_skill_type);
 E int FDECL(weapon_hit_bonus, (struct obj *));

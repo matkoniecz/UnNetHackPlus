@@ -1,67 +1,88 @@
-2012-?-?  UnNetHackPlus 4.0.0 (WIP)
-	* vanilia bug fixes:
-		- C343-14 "tombstone message resulting from eating an identified artifact is gramatically incorrect" (from GruntHack - https://github.com/sgrunt/GruntHack/commit/02a48205328096f50d28e32f527c8df065f86bdc)
+2012-?-?  UnNetHackPlus 4.0.0 (based on revision 1025 of UnNetHack) (WIP)
+	* vanilia bug fixes
+		- C343-14 "tombstone message resulting from eating an identified artifact is gramatically incorrect" fixed (from GruntHack - https://github.com/sgrunt/GruntHack/commit/02a48205328096f50d28e32f527c8df065f86bdc)
 		- Successful prayer now protects against stinking cloud (from GruntHack - https://github.com/sgrunt/GruntHack/commit/3f358cc7401afcd39eb6193184deb9c35aa517d5)
-		- C343-438: Typo "gold piecess" may occur when selling items in a container (from GruntHack - https://github.com/sgrunt/GruntHack/commit/2cce8e189eb4960b22636fa8cc3002ffa55df952)
+		- C343-438: "Typo "gold piecess" may occur when selling items in a container" fixed (from GruntHack - https://github.com/sgrunt/GruntHack/commit/2cce8e189eb4960b22636fa8cc3002ffa55df952)
 		- Sacrifice that fits many cases (own race + former pet, unicorn + former pet, own race + crossaligned high altar etc) is handled properly ( https://github.com/Bulwersator/UnNetHackPlus/commit/f6613cddae87eccbaeff969a4bf8942421f5ea86 )
 		- Genociding your pet or peaceful monsters is no longer OK ( https://github.com/Bulwersator/UnNetHackPlus/commit/40dbc7c9b3c6b398802cef30b1f9cc54499ea73b )
 		- Bare-hands now gets an actual bonus (from Spork - https://github.com/Bulwersator/CopyOfSporkHack/commit/e187663d121f00337532ec3d9d180268a177d8dd )
 		- Colour of mithril objects is now correct ( https://github.com/Bulwersator/CopyOfSporkHack/commit/67c167367b8b118c9bc9b7f4e19bdd41bbc3b308 ) 
 		- Feeling of amulet draining energy away is now correct in all situations ( https://github.com/Bulwersator/UnNetHackPlus/commit/a70a6f1d1c112af6a5a3976b6d9a41625ebff870 )
-		- Missing foo_on/foo_off calls for objects with strange delay values ( https://github.com/Bulwersator/UnNetHackPlus/commit/c786ec52c46f7f22bbaee3a1a15748013a1b9806 )
+		- Missing foo_on/foo_off calls for objects with strange delay values fixed (this bug was not detectable by players) ( https://github.com/Bulwersator/UnNetHackPlus/commit/c786ec52c46f7f22bbaee3a1a15748013a1b9806 )
 		- Dual ring of slow digestion bug is fixed ( https://github.com/Bulwersator/UnNetHackPlus/commit/0f73968c0e9a8d79d6f444a8cf89f207af0429c1 )
-	* Mind flayer attacks only cause physical damage and int drain (from UnNetHack, revision 1025)
-	* Follow guidelines for color assignment (based on http://l.j-factor.com/nethack/colour.diff by "L" - Leon Arnott)
+		- Stethoscope no longer reports unaligned monsters as chaotic (affects Wizard of Yendor, priest[ess] of Moloch) ( https://github.com/Bulwersator/UnNetHackPlus/commit/e451c45ac70c367b56bd39792b6899175d7e3e1a )
+	* UnNetHack bug fixes
+		- Angered quest guardians will no longer go berserk ( https://github.com/Bulwersator/UnNetHackPlus/commit/08bedab0bad838340d8b0dfe37ea993ff9c4acd1 ).
+	* Flavour stuff
+		- Far look during hallucination should be more amusing
+		- New hallucinatory monsters, monster sounds (original ones and from NAO) and bottle types
+		- More random gravestone epitaphs (from NAO and original ones)
+		- More t-shirt messages (from NAO and original ones)
+		- Names for player statues on Medusa level are now based on list of people petrified by Medusa on public servers instead of top ten local players.
+		- Kobolds vs elves grudge added
+		- Wands and Gain Ability 0.1 by Grunt ( http://bilious.alt.org/?250 )
+		- Trees planted on: quest levels of wizard and samurai, nymph level
+		- Tree Cutting v1.0 by Michael Lehotay ( http://bilious.alt.org/?67 )
+	* Starting equipment changes
+		- Gnomes may start with candles (idea from dnethack), and dwarves with pickaxe (from SporkHack - https://github.com/Bulwersator/CopyOfSporkHack/commit/71de5e62d922e8985b7569b14b0ac3b82c4ee6cf)
+		- Orcs start game with sickness potion (from Sporkhack - https://github.com/Bulwersator/CopyOfSporkHack/commit/04a696cc8e12f67cadd6618fafd2d8c2aed4ba51 )
+		- Wizards may start with cloak of protection/invisibility/displacement/robe/oilskin cloak/alchemy smock (based on idea from Sporkhack - https://github.com/Bulwersator/CopyOfSporkHack/commit/ef7e3277b9f61d6c9fb96ce9a83e22061d5f487d )
+		- Scroll of identify universally known (from SporkHack - https://github.com/Bulwersator/CopyOfSporkHack/commit/57eb5ec04c8dc6b7e0a44325c7b71781335184ab)
+		- Wearing fedora increases luck of archaeologists
+	* Nerfing
+		- Increase chances of getting a golem from polypiling (idea from SporkHack - https://github.com/Bulwersator/CopyOfSporkHack/commit/3770da563bae83c28320532f2810a7c029b77534)
+		- The Eye of the Aethiopica energy production is no longer completely insane
+		- Shopkeepers prefer save dungeons
+	* Interface changes
+		- Colours for walls and floor of special dungeon regions in TTY mode, work by "L" (Leon Arnott), slightly modified. Affects beehives, gardens, Mines, Wizard's tower, Astral Plane and altars ( http://l.j-factor.com/nethack/glyphcolor.diff ).
+		- Magic trap glyph is now yellow, anti-magic field dark green
+		- Smarter object colours (unique colours for can of grease - bright green and tinning kit - orange).
+		- Follow guidelines for monster color assignment (based on http://l.j-factor.com/nethack/colour.diff by "L" - Leon Arnott)
+		- Bear trap is no longer ineffective on diagonals
+	* Grinding elimination
+		- Chance of wand wresting raised to 1/11
+		- Carrying digging tools to shop is no longer blocked
+		- Luring wraiths from graveyards is now pointless - undead creatures are as likely to leave corpse on graveyard as on normal levels (reduced chance for normal levels, raised for graveyards)
+		- Autoidentify BUC of products from BUC identified item generator (tinning kit, horn of plenty).
+		- Fire traps removed from Plane of Fire
+	* Merging in the best part of SporkHack absent from UnNetHack
+		- Allow more than one special room per level in the DoD (from SporkHack - https://github.com/Bulwersator/CopyOfSporkHack/commit/9904a3740e989bc50ae84f582c33d4d720a6ddbf)
+		- Touch of death changed - from SporkHack. Instadeath removed, antimagic is not fully protecting.
+		- Fire resistance removed from master lich and arch-lich as leftover from when you had to be fire resistant to go into Gehennom at all (from SporkHack - https://github.com/Bulwersator/CopyOfSporkHack/commit/29f44931789ce80359a1536e7be53da1440850ed)
+		- Sacrifice gifts from SporkHack - you may get also armor, normal weapons (fixed and at +3 to +5) (https://github.com/Bulwersator/CopyOfSporkHack/commit/2d7f668e71867274c7aaf342f5381eeb47344441 https://github.com/Bulwersator/CopyOfSporkHack/commit/3c861982aa93811365afaba42440f6a361c1fdb8 https://github.com/Bulwersator/CopyOfSporkHack/commit/015f96e1eb5d5ac9181d45f91890bab92f5555ed)
+		- Shopkeepers advertise their shops
+		- Destroy armor is now noticeable (from Spork, see https://github.com/Bulwersator/UnNetHackPlus/commit/ee5edbd44b3e30f16162e471f38926b673fb767d for details)
+		- Throwing eggs at gnomes will make them scared (Oz reference, from Spork, see https://github.com/Bulwersator/CopyOfSporkHack/commit/ee6f13ea2fa824d6f1cc8359b6707f1b40375363)
+		- Nazgul scream attack added (from Sporkhack - https://github.com/Bulwersator/CopyOfSporkHack/commit/a47142cd447267a1f5e9b2092c29d51433c060e7 + https://github.com/Bulwersator/CopyOfSporkHack/commit/a9fcfb2a5fce2c99c4d8332ec14fd175aafeea1d )
+		- Now anybody may tame monkeys and apes with bananas (from Sporkhack - https://github.com/Bulwersator/CopyOfSporkHack/commit/bd4c2299a9250c30be75ec225fee9014dcd3ccbe and https://github.com/Bulwersator/CopyOfSporkHack/commit/cbda4727b965d1942e3065cd79f561af3f63040f )
+		- If dipping into greasy potion produced no results, grease the dipped object (from SporkHack - see https://github.com/Bulwersator/CopyOfSporkHack/commit/0fb25418eecfa996588306df118b8eb5d2fa3f78 and https://github.com/Bulwersator/CopyOfSporkHack/commit/719b5f56b80e73caf632f2f222ec1d99d55c46b5 )
+		- Effects of anti-magic field should be now noticeable and it will affect also monsters (from Sporkhack)
+	* Object generation modified 
+		- lowered amount of death drops
+		- more objects on the floor
+		- generated objects may be eroded or fixed
+		- reduced amount of food on lower levels
+	* Rework amnesia - mind flayers now destroy spells and skills
 	* Poison gas blasts leave a trail of stinking clouds (based on http://l.j-factor.com/nethack/poisoncloud.diff by "L" - Leon Arnott)
-	* Kobolds vs elves grudge
-	* Far look during hallucination should be more amusing
 	* Assorted YAFMs 1.0 by Adam Borowski ( http://bilious.alt.org/?121 ), slightly modified
 	* Cursed musical instruments will work only in 50% of cases, blessed ones are more effective
-	* Wands and Gain Ability 0.1 by Grunt ( http://bilious.alt.org/?250 )
-	* Tree Cutting v1.0 by Michael Lehotay ( http://bilious.alt.org/?67 )
-	* More interesting wizard quest (more interesting monsters like vampires)
-	* Trees planted on: quest levels of wizard and samurai, nymph level
+	* More interesting monsters on wizard quest (for example vampires)
 	* Improved Beartraps 1.0 by Malcolm Ryan ( http://bilious.alt.org/?143 )
 	* Better zoos and courtrooms by "L" (Leon Arnott) ( http://l.j-factor.com/nethack/mkroom.diff )
 	* Blessed dunce caps and helms of opposite alignment will unbless (instead of turning into cursed) when worn by a player, based on http://l.j-factor.com/nethack/c-dunce.diff (by "L" - Leon Arnott)
-	* Colours for walls and floor of special dungeon regions in TTY mode, work by "L" (Leon Arnott), slightly modified. Affects beehives, gardens, Mines, Wizard's tower, Astral Plane and altars ( http://l.j-factor.com/nethack/glyphcolor.diff ).
-	* Anti-magic field should be now noticeable + it will affect monsters (from Sporkhack)
-	* Orcs start with sickness potion (from Sporkhack - https://github.com/Bulwersator/CopyOfSporkHack/commit/04a696cc8e12f67cadd6618fafd2d8c2aed4ba51 )
 	* Base bribe is higher for soldiers but no longer based on visible gold, it is now possible to bribe watch, work by "L" (Leon Arnott), slightly modified ( http://l.j-factor.com/nethack/bribe.diff ).
-	* Nazgul scream attack added (from Sporkhack - https://github.com/Bulwersator/CopyOfSporkHack/commit/a47142cd447267a1f5e9b2092c29d51433c060e7 )
-	* Wizards may start with cloak of protection/invisibility/displacement/robe/oilskin cloak/alchemy smock (based on idea from Sporkhack - https://github.com/Bulwersator/CopyOfSporkHack/commit/ef7e3277b9f61d6c9fb96ce9a83e22061d5f487d )
-	* Now anybody may tame monkeys and apes with bananas (from Sporkhack - https://github.com/Bulwersator/CopyOfSporkHack/commit/bd4c2299a9250c30be75ec225fee9014dcd3ccbe and https://github.com/Bulwersator/CopyOfSporkHack/commit/cbda4727b965d1942e3065cd79f561af3f63040f )
-	* More random gravestone epitaphs (from NAO and original ones)
-	* Hallucinatory monsters and monster sounds (from NAO and original ones)
-	* More t-shirt messages from NAO
-	* If dipping into greasy potion produced no results, grease the dipped object (from SporkHack - see https://github.com/Bulwersator/CopyOfSporkHack/commit/0fb25418eecfa996588306df118b8eb5d2fa3f78 and https://github.com/Bulwersator/CopyOfSporkHack/commit/719b5f56b80e73caf632f2f222ec1d99d55c46b5 )
-	* Gnomes may start with candles (idea from dnethack), and dwarves with pickaxe (from SporkHack - https://github.com/Bulwersator/CopyOfSporkHack/commit/71de5e62d922e8985b7569b14b0ac3b82c4ee6cf)
-	* Increase chances of getting a golem from polypiling (idea from SporkHack - https://github.com/Bulwersator/CopyOfSporkHack/commit/3770da563bae83c28320532f2810a7c029b77534)
-	* Allow more than one special room per level in the DoD (from SporkHack - https://github.com/Bulwersator/CopyOfSporkHack/commit/9904a3740e989bc50ae84f582c33d4d720a6ddbf)
-	* Chance of wand wresting raised to 1/11
 	* Light is classified as matter spell type, not divination (affects only new games)
-	* Nerf The Eye of the Aethiopica energy production
 	* Partly eaten corpses are worthless for sacrificing
 	* Potion of water used against iron golems are more effective
-	* Carrying digging tools to shop is no longer blocked
-	* Touch of death changed - from SporkHack. Instadeath removed, antimagic is not fully protecting.
-	* Scroll of identify universally known (from SporkHack - https://github.com/Bulwersator/CopyOfSporkHack/commit/57eb5ec04c8dc6b7e0a44325c7b71781335184ab)
-	* Fire resistance removed from master lich and arch-lich as leftover from when you had to be fire resistant to go into Gehennom at all (from SporkHack - https://github.com/Bulwersator/CopyOfSporkHack/commit/29f44931789ce80359a1536e7be53da1440850ed)
-	* Sacrifice gifts from SporkHack - you may get also armor, normal weapons (fixed and at +3 to +5) (https://github.com/Bulwersator/CopyOfSporkHack/commit/2d7f668e71867274c7aaf342f5381eeb47344441 https://github.com/Bulwersator/CopyOfSporkHack/commit/3c861982aa93811365afaba42440f6a361c1fdb8 https://github.com/Bulwersator/CopyOfSporkHack/commit/015f96e1eb5d5ac9181d45f91890bab92f5555ed)
-	* Luring wraiths from graveyards is now pointless - undead creatures are as likely to leave corpse on graveyard as on normal levels (reduced chance for normal levels, raised for graveyards)
-	* Names for player statues on Medusa level are now based on list of people petrified by Medusa on public servers instead of top ten local players.
-	* Shopkeepers prefer save dungeons and advertise their shops
-	* Object generation modified (lowered death drops, more objects on the floor, generated object may be eroded or fixed)
 	* Killing via scroll of genocide counts as direct act of player (penalties for killing pets/peacefuls, breaks pacifist conduct, experience/alignment points are gained)
 	* God angered by altar conversion will send entire army of minions
-	* Destroy armor is now noticeable (from Spork, see https://github.com/Bulwersator/UnNetHackPlus/commit/ee5edbd44b3e30f16162e471f38926b673fb767d for details)
-	* Throwing eggs at gnomes will make them scared (Oz reference, from Spork, see https://github.com/Bulwersator/CopyOfSporkHack/commit/ee6f13ea2fa824d6f1cc8359b6707f1b40375363)
 	* You really should be careful during new moon.
-	* Smarter object colours (unique colours for can of grease - bright green and tinning kit - orange).
-	* Autoidentify BUC of products from BUC identified item generator (tinning kit, horn of plenty).
-	* Amulets may be made from different materials (including glass!)
-	* Wearing fedora increases luck of archaeologists
-	* Magic trap glyph is now yellow, anti-magic field dark green
+	* Land mine and beartrap objects are lightier
+	* Boss type monsters may have ascension kit type items (amulet of reflection)
+	* Player monsters may appear before Astral Plane
+	* New big room variant
+
+	Full list of changes available at https://github.com/Bulwersator/UnNetHackPlus/commits/master
 
 2012-04-01  UnNetHack 4.0.0
 	* Uncursed and blessed scrolls of magic mapping reveal secret doors

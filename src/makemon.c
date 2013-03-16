@@ -590,6 +590,10 @@ register struct	monst	*mtmp;
 		} else if (quest_mon_represents_role(ptr,PM_MONK)) {
 		    (void) mongets(mtmp, rn2(11) ? ROBE :
 					     CLOAK_OF_MAGIC_RESISTANCE);
+		} else if (ptr == &mons[PM_WIZARD_OF_YENDOR]) {
+			if (!rn2(22)) {
+				(void)mongets(mtmp, AMULET_OF_REFLECTION);
+			}
 		}
 		break;
 	    case S_NYMPH:
@@ -667,6 +671,9 @@ register struct	monst	*mtmp;
 		if (ptr == &mons[PM_CTHULHU]) {
 			(void)mongets(mtmp, AMULET_OF_YENDOR);
 			(void)mongets(mtmp, POT_FULL_HEALING);
+			if (!rn2(22)) {
+				(void)mongets(mtmp, AMULET_OF_REFLECTION);
+			}
 		}
 		break;
 	    case S_GNOME:
@@ -1356,9 +1363,8 @@ rndmonst()
 		if (elemlevel && wrong_elem_type(ptr)) continue;
 		if (uncommon(mndx)) continue;
 		if (Inhell && (ptr->geno & G_NOHELL)) continue;
-#ifdef BLACKMARKET	/* SWD: pets are not allowed in the black market */
+		/* SWD: pets are not allowed in the black market */
 		if (is_domestic(ptr) && Is_blackmarket(&u.uz)) continue;
-#endif
 		ct = (int)(ptr->geno & G_FREQ) + align_shift(ptr);
 		if (ct < 0 || ct > 127)
 		    panic("rndmonst: bad count [#%d: %d]", mndx, ct);

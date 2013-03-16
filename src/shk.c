@@ -346,7 +346,6 @@ register boolean nearshop;
 		  (mvitals[PM_KOP_LIEUTENANT].mvflags & G_GONE) &&
 		  (mvitals[PM_KOP_KAPTAIN].mvflags & G_GONE));
 
-#ifdef BLACKMARKET
       if (Is_blackmarket(&u.uz)) {
 	nokops = ((mvitals[PM_SOLDIER].mvflags & G_GONE) &&
 		  (mvitals[PM_SERGEANT].mvflags & G_GONE) &&
@@ -355,7 +354,6 @@ register boolean nearshop;
  
 	Strcpy(kopname, "guards");
       }
-#endif /* defined(BLACKMARKET) */
  
 	if(!angry_guards(!flags.soundok) && nokops) {
 	    if(flags.verbose && flags.soundok)
@@ -368,10 +366,7 @@ register boolean nearshop;
 	{
 	    coord mm;
 
-	    if (nearshop)
-#ifdef BLACKMARKET                
-	    if (!Is_blackmarket(&u.uz)) 
-#endif /* BLACKMARKET */
+	    if (nearshop && !Is_blackmarket(&u.uz)) 
 		{
 		/* Create swarm around you, if you merely "stepped out" */
 		if (flags.verbose)
@@ -384,7 +379,6 @@ register boolean nearshop;
 	    if (flags.verbose)
 		 pline_The("%s are after you!", kopname);
 	    /* Create swarm near down staircase (hinders return to level) */
-#ifdef BLACKMARKET            
 	    if (Is_blackmarket(&u.uz)) {
 	      struct trap *trap = ftrap;
 	      while (trap) {
@@ -398,10 +392,6 @@ register boolean nearshop;
 	    mm.x = xdnstair;
 	    mm.y = ydnstair;
 	    }            
-#else /* BLACKMARKET */
-	    mm.x = xdnstair;
-	    mm.y = ydnstair;
-#endif /* BLACKMARKET */
 	    makekops(&mm);
 	    /* Create swarm near shopkeeper (hinders return to shop) */
 	    mm.x = shkp->mx;
@@ -411,7 +401,6 @@ register boolean nearshop;
 }
 #endif	/* KOPS */
 
-#ifdef BLACKMARKET
 void 
 blkmar_guards(shkp)
 register struct monst *shkp;
@@ -457,7 +446,6 @@ set_black_marketeer_angry()
 		}
 	}
 }
-#endif /* BLACKMARKET */
 
 /* x,y is strictly inside shop */
 char
@@ -514,10 +502,8 @@ boolean newlev;
 
 	if (rob_shop(shkp)) {
 
-#ifdef BLACKMARKET
 	    if (Is_blackmarket(&u.uz))
 		blkmar_guards(shkp);
-#endif
 
 #ifdef KOPS
 	    call_kops(shkp, (!newlev && levl[u.ux0][u.uy0].edge));
@@ -545,10 +531,8 @@ xchar x, y;
 
 	if (rob_shop(shkp)) {
 
-#ifdef BLACKMARKET
 	    if (Is_blackmarket(&u.uz))
 		blkmar_guards(shkp);
-#endif
 
 #ifdef KOPS
 	    /*[might want to set 2nd arg based on distance from shop doorway]*/
@@ -653,24 +637,17 @@ register char *enterstring;
 
 	if (Invis) {
 	    pline("%s senses your presence.", shkname(shkp));
-#ifdef BLACKMARKET            
 	    if (!Is_blackmarket(&u.uz)) {
-	    verbalize("Invisible customers are not welcome!");
-	    return;
+		verbalize("Invisible customers are not welcome!");
+		return;
 	}
-#else /* BLACKMARKET */
-	    verbalize("Invisible customers are not welcome!");
-	    return;
-#endif /* BLACKMARKET */
 	}
  
-#ifdef BLACKMARKET
 	    if (Is_blackmarket(&u.uz) &&
 		u.umonnum>0 && mons[u.umonnum].mlet != S_HUMAN) {
 	      verbalize("Non-human customers are not welcome!");
 	      return;
 	}
-#endif /* BLACKMARKET */
 
 	rt = rooms[*enterstring - ROOMOFFSET].rtype;
 
@@ -691,14 +668,12 @@ register char *enterstring;
 	/* can't do anything about blocking if teleported in */
 	if (!inside_shop(u.ux, u.uy) && !(Is_blackmarket(&u.uz))) {
 	    boolean should_block = FALSE;
-#ifdef STEED
 	    if (u.usteed) {
 		verbalize(NOTANGRY(shkp) ?
 			  "Will you please leave %s outside?" :
 			  "Leave %s outside.", y_monnam(u.usteed));
 		should_block = TRUE;
 	    }
-#endif
 	    if (should_block) (void) dochug(shkp);  /* shk gets extra move */
 	}
 	return;
@@ -1384,13 +1359,9 @@ proceed:
 #endif
 		    make_happy_shk(shkp, FALSE);
 		} else {
-#ifdef BLACKMARKET
 			/* Blackmarket shopkeeper are not easily pacified */
 			int peace_offering = (shkp->data == &mons[PM_BLACK_MARKETEER]) ?
 				5000L : 1000L;
-#else
-			int peace_offering = 1000L;
-#endif
 		    /* shopkeeper is angry, but has not been robbed --
 		     * door broken, attacked, etc. */
 		    pline("%s is after your hide, not your money!",
@@ -2033,12 +2004,10 @@ register struct monst *shkp;	/* if angry, impose a surcharge */
 		} else if (!(obj->o_id % 4)) /* arbitrarily impose surcharge */
 		    tmp += tmp / 3L;
 	}
-#ifdef TOURIST
 	if ((Role_if(PM_TOURIST) && u.ulevel < (MAXULEV/2))
 	    || (uarmu && !uarm && !uarmc))	/* touristy shirt visible */
 		tmp += tmp / 3L;
 	else
-#endif
 	if (uarmh && uarmh->otyp == DUNCE_CAP)
 		tmp += tmp / 3L;
 
@@ -2053,8 +2022,6 @@ register struct monst *shkp;	/* if angry, impose a surcharge */
 	/* anger surcharge should match rile_shk's */
 	if (shkp && ESHK(shkp)->surcharge) tmp += (tmp + 2L) / 3L;
 
-#ifdef BLACKMARKET
-	/* KMH, balance patch -- healthstone replaces rotting/health */
 	if (Is_blackmarket(&u.uz)) {
 	  if (obj->oclass==RING_CLASS    || obj->oclass==AMULET_CLASS   ||
 	      obj->oclass==POTION_CLASS  || obj->oclass==SCROLL_CLASS   ||
@@ -2066,7 +2033,6 @@ register struct monst *shkp;	/* if angry, impose a surcharge */
 	    tmp *= 25;
 	  }
 	}
-#endif /* BLACKMARKET */
 
 	return tmp;
 }
@@ -2175,16 +2141,13 @@ register struct monst *shkp;
 {
 	long tmp = getprice(obj, TRUE) * obj->quan;
 
-#ifdef TOURIST
-	if ((Role_if(PM_TOURIST) && u.ulevel < (MAXULEV/2))
-	    || (uarmu && !uarm && !uarmc))	/* touristy shirt visible */
+	if ((Role_if(PM_TOURIST) && u.ulevel < (MAXULEV/2)) || (uarmu && !uarm && !uarmc)) { /* touristy shirt visible */
 		tmp /= 3L;
-	else
-#endif
-	if (uarmh && uarmh->otyp == DUNCE_CAP)
+	} else if (uarmh && uarmh->otyp == DUNCE_CAP) {
 		tmp /= 3L;
-	else
+	} else {
 		tmp /= 2L;
+	}
 
 	/* some shopkeepers just want to rip you off */
 	if (tmp > 4L && ESHK(shkp)->cheapskate) {
@@ -3426,22 +3389,10 @@ register struct monst *shkp;
 		avoid = FALSE;
 	} else {
 #define	GDIST(x,y)	(dist2(x,y,gx,gy))
-#ifdef BLACKMARKET
 	    if ((Is_blackmarket(&u.uz) && u.umonnum>0 &&
 		 mons[u.umonnum].mlet != S_HUMAN) ||
                 /* WAC Let you out if you're stuck inside */                
-                (!Is_blackmarket(&u.uz) && (Invis 
-#ifdef STEED
-			|| u.usteed
-#endif
-			                          ) && !inside_shop(u.ux, u.uy)))
-#else /* BLACKMARKET */
-		if (Invis
-#ifdef STEED
-			|| u.usteed
-#endif
-			)
-#endif /* BLACKMARKET */
+                (!Is_blackmarket(&u.uz) && (Invis || u.usteed) && !inside_shop(u.ux, u.uy)))
 		{
 		    avoid = FALSE;
 		} else {
@@ -3602,7 +3553,6 @@ coord *mm;
 
 	cnt = abs(depth(&u.uz)) + rnd(5);
 
-#ifdef BLACKMARKET
 	if (Is_blackmarket(&u.uz)) {
 	  kop_pm[0] = PM_SOLDIER;
 	  kop_pm[1] = PM_SERGEANT;
@@ -3612,7 +3562,6 @@ coord *mm;
   
 	  cnt = 7 + rnd(10);
 	}
-#endif /* BLACKMARKET */
  
 	kop_cnt[0] = cnt;
 	kop_cnt[1] = (cnt / 3) + 1;   /* at least one sarge */
@@ -4016,7 +3965,7 @@ struct monst *shkp;
 #define CRYNUMBER 5
 
 const char* armor_wares[] = {
-	"Any %s would love these!  Finest quality!"
+	"Any %s would love these!  Finest quality!",
 	"Fit for a Knight, but they'll last for weeks!",
 	"It's dangerous 'round here these days... better wear something safe!",
 	"Hey, %s, I've got something here that'll fit you perfectly!",
@@ -4236,12 +4185,7 @@ boolean altusage; /* some items have an "alternate" use with different cost */
 		if (otmp->spe > 1) tmp /= 4L;
 	} else if (otmp->oclass == SPBOOK_CLASS) {
 		tmp -= tmp / 5L;
-	} else if (otmp->otyp == CAN_OF_GREASE ||
-		   otmp->otyp == TINNING_KIT
-#ifdef TOURIST
-		   || otmp->otyp == EXPENSIVE_CAMERA
-#endif
-		   ) {
+	} else if (otmp->otyp == CAN_OF_GREASE || otmp->otyp == TINNING_KIT || otmp->otyp == EXPENSIVE_CAMERA) {
 		tmp /= 10L;
 	} else if (otmp->otyp == POT_OIL) {
 		tmp /= 5L;
@@ -4394,11 +4338,7 @@ register xchar x, y;
 	if(shkp->mx == sx && shkp->my == sy
 		&& shkp->mcanmove && !shkp->msleeping
 		&& (x == sx-1 || x == sx+1 || y == sy-1 || y == sy+1)
-		&& (Invis 
-#ifdef STEED
-			|| u.usteed
-#endif
-	  )) {
+		&& (Invis || u.usteed)) {
 		pline("%s%s blocks your way!", shkname(shkp),
 				Invis ? " senses your motion and" : "");
 		return(TRUE);

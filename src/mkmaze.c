@@ -1190,8 +1190,11 @@ xchar x,y;
 	register struct rm *lev;
 	schar ltyp;
 
-	if (!isok(x,y))
-		return "drink";		/* should never happen */
+	if (!isok(x,y)) {
+		/* should never happen */
+		warning("impossible happened in function waterbody_name");
+		return "drink";
+	}
 	lev = &levl[x][y];
 	ltyp = lev->typ;
 

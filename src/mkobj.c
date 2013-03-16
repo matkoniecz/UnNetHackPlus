@@ -445,7 +445,7 @@ boolean artif;
 			curse(otmp);
 			otmp->spe = -rne(3);
 		} else	blessorcurse(otmp, 10);
-		if (is_poisonable(otmp) && !rn2(100))
+		if (is_poisonable(otmp) && !rn2(60))
 			otmp->opoisoned = 1;
 		if (artif && !rn2(20))
 		    otmp = mk_artifact(otmp, (aligntyp)A_NONE);
@@ -542,9 +542,7 @@ boolean artif;
 		case OILSKIN_SACK:
 		case BAG_OF_HOLDING:	mkbox_cnts(otmp);
 					break;
-#ifdef TOURIST
 		case EXPENSIVE_CAMERA:
-#endif
 		case TINNING_KIT:
 		case MAGIC_MARKER:	otmp->spe = rn1(60,20);
 					break;
@@ -577,12 +575,14 @@ boolean artif;
 	    }
 	    break;
 	case AMULET_CLASS:
-		if (otmp->otyp == AMULET_OF_YENDOR) flags.made_amulet = TRUE;
-		if(rn2(10) && (otmp->otyp == AMULET_OF_STRANGULATION ||
-		   otmp->otyp == AMULET_OF_CHANGE ||
-		   otmp->otyp == AMULET_OF_RESTFUL_SLEEP)) {
+		if (otmp->otyp == AMULET_OF_YENDOR) {
+			flags.made_amulet = TRUE;
+		}
+		if(rn2(10) && (otmp->otyp == AMULET_OF_STRANGULATION || otmp->otyp == AMULET_OF_CHANGE || otmp->otyp == AMULET_OF_RESTFUL_SLEEP)) {
 			curse(otmp);
-		} else	blessorcurse(otmp, 10);
+		} else {
+			blessorcurse(otmp, 10);
+		}
 	case VENOM_CLASS:
 	case CHAIN_CLASS:
 	case BALL_CLASS:

@@ -32,10 +32,10 @@
 /* #define VERSION_REVISION	1 */
 
 #define COPYRIGHT_BANNER_A \
-"UnNetHackPlus, Copyright 2009-2012"
+"UnNetHackPlus, Copyright 2009-2013"
 
 #define COPYRIGHT_BANNER_B \
-"   Based on UnNetHack, Copyright 2009-2012 and NetHack, Copyright 1985-2003 by"
+"   Based on UnNetHack, Copyright 2009-2013 and NetHack, Copyright 1985-2003 by"
 
 #define COPYRIGHT_BANNER_C \
 "   Stichting Mathematisch Centrum and M. Stephenson.  See license for details."

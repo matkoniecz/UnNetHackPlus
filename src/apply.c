@@ -11,9 +11,7 @@ static const char tools[] = { TOOL_CLASS, WEAPON_CLASS, WAND_CLASS, 0 };
 static const char tools_too[] = { ALL_CLASSES, TOOL_CLASS, POTION_CLASS,
 				  WEAPON_CLASS, WAND_CLASS, GEM_CLASS, 0 };
 
-#ifdef TOURIST
 STATIC_DCL int FDECL(use_camera, (struct obj *));
-#endif
 STATIC_DCL int FDECL(use_towel, (struct obj *));
 STATIC_DCL boolean FDECL(its_dead, (int,int,int *,struct obj*));
 STATIC_DCL int FDECL(use_stethoscope, (struct obj *));
@@ -48,7 +46,6 @@ void FDECL( amii_speaker, ( struct obj *, char *, int ) );
 
 static const char no_elbow_room[] = "don't have enough elbow-room to maneuver.";
 
-#ifdef TOURIST
 STATIC_OVL int
 use_camera(obj)
 	struct obj *obj;
@@ -86,7 +83,6 @@ use_camera(obj)
 	}
 	return 1;
 }
-#endif
 
 STATIC_OVL int
 use_towel(obj)
@@ -252,7 +248,6 @@ use_stethoscope(obj)
 	last_used_move = moves;
 	last_used_movement = youmonst.movement;
 
-#ifdef STEED
 	if (u.usteed && u.dz > 0) {
 		if (interference) {
 			pline("%s interferes.", Monnam(u.ustuck));
@@ -260,9 +255,7 @@ use_stethoscope(obj)
 		} else
 			mstatusline(u.usteed);
 		return res;
-	} else
-#endif
-	if (u.uswallow && (u.dx || u.dy || u.dz)) {
+	} else if (u.uswallow && (u.dx || u.dy || u.dz)) {
 		mstatusline(u.ustuck);
 		return res;
 	} else if (u.uswallow && interference) {
@@ -454,13 +447,11 @@ struct obj *obj;
 	if(!get_adjacent_loc((char *)0, (char *)0, u.ux, u.uy, &cc)) return;
 
 	if((cc.x == u.ux) && (cc.y == u.uy)) {
-#ifdef STEED
 		if (u.usteed && u.dz > 0) {
 		    mtmp = u.usteed;
 		    spotmon = 1;
 		    goto got_target;
 		}
-#endif
 		pline("Leash yourself?  Very funny...");
 		return;
 	}
@@ -471,10 +462,7 @@ struct obj *obj;
 	}
 
 	spotmon = canspotmon(mtmp);
-#ifdef STEED
  got_target:
-#endif
-
 	if(!mtmp->mtame) {
 	    if(!spotmon)
 		There("is no creature there.");
@@ -554,10 +542,10 @@ next_to_u()
 			}
 		}
 	}
-#ifdef STEED
 	/* no pack mules for the Amulet */
-	if (u.usteed && mon_has_amulet(u.usteed)) return FALSE;
-#endif
+	if (u.usteed && mon_has_amulet(u.usteed)) {
+		return FALSE;
+	}
 	return(TRUE);
 }
 
@@ -1288,23 +1276,19 @@ int magic; /* 0=Physical, otherwise skill level */
 		const char *bp = body_part(LEG);
 
 		if (wl == BOTH_SIDES) bp = makeplural(bp);
-#ifdef STEED
-		if (u.usteed)
+		if (u.usteed) {
 		    pline("%s is in no shape for jumping.", Monnam(u.usteed));
-		else
-#endif
-		Your("%s%s %s in no shape for jumping.",
-		     (wl == LEFT_SIDE) ? "left " :
-			(wl == RIGHT_SIDE) ? "right " : "",
-		     bp, (wl == BOTH_SIDES) ? "are" : "is");
+		} else {
+			Your("%s%s %s in no shape for jumping.",
+				(wl == LEFT_SIDE) ? "left " :
+				(wl == RIGHT_SIDE) ? "right " : "",
+				bp, (wl == BOTH_SIDES) ? "are" : "is");
+		}
+		return 0;
+	} else if (u.usteed && u.utrap) {
+		pline("%s is stuck in a trap.", Monnam(u.usteed));
 		return 0;
 	}
-#ifdef STEED
-	else if (u.usteed && u.utrap) {
-		pline("%s is stuck in a trap.", Monnam(u.usteed));
-		return (0);
-	}
-#endif
 
 	pline("Where do you want to jump?");
 	cc.x = u.ux;
@@ -1809,7 +1793,6 @@ struct obj *obj;
 			You(need_to_remove_outer_armor, buf, xname(otmp));
 			return;
 		}
-#ifdef TOURIST
 		if ((otmp->owornmask & WORN_SHIRT) && (uarmc || uarm)) {
 			Strcpy(buf, uarmc ? xname(uarmc) : "");
 			if (uarmc && uarm) Strcat(buf, " and ");
@@ -1817,7 +1800,6 @@ struct obj *obj;
 			You(need_to_remove_outer_armor, buf, xname(otmp));
 			return;
 		}
-#endif
 		consume_obj_charge(obj, TRUE);
 
 		if (otmp != &zeroobj) {
@@ -2053,7 +2035,6 @@ struct obj *otmp;
 	    trapinfo.time_needed += (tmp > 12) ? 1 : (tmp > 7) ? 2 : 4;
 	/*[fumbling and/or confusion and/or cursed object check(s)
 	   should be incorporated here instead of in set_trap]*/
-#ifdef STEED
 	if (u.usteed && P_SKILL(P_RIDING) < P_BASIC) {
 	    boolean chance;
 
@@ -2083,7 +2064,6 @@ struct obj *otmp;
 		return;
 	    }
 	}
-#endif
 	You("begin setting %s %s.",
 	    shk_your(buf, otmp),
 	    defsyms[trap_to_defsym(what_trap(ttyp))].explanation);
@@ -2175,19 +2155,13 @@ struct obj *obj;
     } else if ((!u.dx && !u.dy) || (u.dz > 0)) {
 	int dam;
 
-#ifdef STEED
 	/* Sometimes you hit your steed by mistake */
 	if (u.usteed && !rn2(proficient + 2)) {
 	    You("whip %s!", mon_nam(u.usteed));
 	    kick_steed();
 	    return 1;
 	}
-#endif
-	if (Levitation
-#ifdef STEED
-			|| u.usteed
-#endif
-		) {
+	if (Levitation || u.usteed) {
 	    /* Have a shot at snaring something on the floor */
 	    otmp = level.objects[u.ux][u.uy];
 	    if (otmp && otmp->otyp == CORPSE && otmp->corpsenm == PM_HORSE) {
@@ -2845,9 +2819,7 @@ doapply()
 		use_grease(obj);
 		break;
 	case LOCK_PICK:
-#ifdef TOURIST
 	case CREDIT_CARD:
-#endif
 	case SKELETON_KEY:
 		(void) pick_lock(obj,0,0,FALSE);
 		break;
@@ -2861,11 +2833,9 @@ doapply()
 	case LEASH:
 		use_leash(obj);
 		break;
-#ifdef STEED
 	case SADDLE:
 		res = use_saddle(obj);
 		break;
-#endif
 	case MAGIC_WHISTLE:
 		use_magic_whistle(obj);
 		break;
@@ -2918,11 +2888,9 @@ doapply()
 	case POT_OIL:
 		light_cocktail(obj);
 		break;
-#ifdef TOURIST
 	case EXPENSIVE_CAMERA:
 		res = use_camera(obj);
 		break;
-#endif
 	case TOWEL:
 		res = use_towel(obj);
 		break;
@@ -3039,11 +3007,7 @@ unfixable_trouble_count(is_horn)
 
 	if (Stoned) unfixable_trbl++;
 	if (Strangled) unfixable_trbl++;
-	if (Wounded_legs
-#ifdef STEED
-		    && !u.usteed
-#endif
-				) unfixable_trbl++;
+	if (Wounded_legs && !u.usteed) unfixable_trbl++;
 	if (Slimed) unfixable_trbl++;
 	/* lycanthropy is not desirable, but it doesn't actually make you feel
 	   bad */

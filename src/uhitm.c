@@ -9,9 +9,7 @@ STATIC_DCL void FDECL(steal_it, (struct monst *, struct attack *));
 STATIC_DCL boolean FDECL(hitum, (struct monst *,int,struct attack *));
 STATIC_DCL boolean FDECL(hmon_hitmon, (struct monst *,struct obj *,int));
 STATIC_DCL void FDECL(noisy_hit,(struct monst*,struct obj*,int));
-#ifdef STEED
 STATIC_DCL int FDECL(joust, (struct monst *,struct obj *));
-#endif
 STATIC_DCL void NDECL(demonpet);
 STATIC_DCL boolean FDECL(m_slips_free, (struct monst *mtmp,struct attack *mattk));
 STATIC_DCL int FDECL(explum, (struct monst *,struct attack *));
@@ -67,10 +65,8 @@ int attk;
 		}
 		if ((target = which_armor(mdef, W_ARM)) != (struct obj *)0) {
 		    (void)rust_dmg(target, xname(target), hurt, TRUE, mdef);
-#ifdef TOURIST
 		} else if ((target = which_armor(mdef, W_ARMU)) != (struct obj *)0) {
 		    (void)rust_dmg(target, xname(target), hurt, TRUE, mdef);
-#endif
 		}
 		break;
 	    case 2:
@@ -551,14 +547,10 @@ int thrown;
 	boolean get_dmg_bonus = TRUE;
 	boolean ispoisoned = FALSE, needpoismsg = FALSE, poiskilled = FALSE;
 	boolean silvermsg = FALSE, silverobj = FALSE;
-#ifdef WEBB_DISINT
 	boolean disint_obj = FALSE;
-#endif
 	boolean valid_weapon_attack = FALSE;
 	boolean unarmed = !uwep && !uarm && !uarms;
-#ifdef STEED
 	int jousting = 0;
-#endif
 	int wtype;
 	struct obj *monwep;
 	char yourbuf[BUFSZ];
@@ -592,7 +584,6 @@ int thrown;
 		    tmp += rnd(20);
 		    silvermsg = TRUE;
 		}
-#ifdef WEBB_DISINT
 		if (touch_disintegrates(mdat) && !mon->mcan && (mon->mhp>6)) {
 			int dis_dmg;
 			valid_weapon_attack =0;
@@ -621,10 +612,8 @@ int thrown;
 			    disint_obj = TRUE;
 			    valid_weapon_attack = 0;
 		    }
-#endif
 	    }
 	} else {
-#ifdef WEBB_DISINT
 		if (touch_disintegrates(mdat) &&
 		    !oresist_disintegration(obj) &&
 		     mon->mhp > 6 &&
@@ -633,9 +622,7 @@ int thrown;
 			valid_weapon_attack = FALSE;
 			tmp = obj->owt;
 			weight_dmg(tmp);
-		} else
-#endif
-    {
+		} else {
 	    Strcpy(saved_oname, cxname(obj));
 	    if(obj->oclass == WEAPON_CLASS || is_weptool(obj) ||
 	       obj->oclass == GEM_CLASS) {
@@ -646,11 +633,7 @@ int thrown;
 		    /* or strike with a missile in your hand... */
 		    (!thrown && (is_missile(obj) || is_ammo(obj))) ||
 		    /* or use a pole at short range and not mounted... */
-		    (!thrown &&
-#ifdef STEED
-		     !u.usteed &&
-#endif
-		     is_pole(obj)) ||
+		    (!thrown && !u.usteed && is_pole(obj)) ||
 		    /* or throw a missile without the proper bow... */
 		    (is_ammo(obj) && !ammo_and_launcher(obj, uwep))) {
 		    /* then do only 1-2 points of damage */
@@ -724,14 +707,13 @@ int thrown;
 				&& hates_silver(mdat)) {
 			silvermsg = TRUE; silverobj = TRUE;
 		    }
-#ifdef STEED
-		    if (u.usteed && !thrown && tmp > 0 &&
-			    weapon_type(obj) == P_LANCE && mon != u.ustuck) {
+		    if (u.usteed && !thrown && tmp > 0 && weapon_type(obj) == P_LANCE && mon != u.ustuck) {
 			jousting = joust(mon, obj);
 			/* exercise skill even for minimal damage hits */
-			if (jousting) valid_weapon_attack = TRUE;
+			if (jousting) {
+				valid_weapon_attack = TRUE;
+			}
 		    }
-#endif
 		    if (thrown && (is_ammo(obj) || is_missile(obj))) {
 			if (ammo_and_launcher(obj, uwep)) {
 			    /* Elves and Samurai do extra damage using
@@ -785,16 +767,13 @@ int thrown;
 			}
 			tmp = 1;
 			break;
-#ifdef TOURIST
 		    case EXPENSIVE_CAMERA:
-			You("succeed in destroying %s camera.  Congratulations!",
-			        shk_your(yourbuf, obj));
+			You("succeed in destroying %s camera.  Congratulations!", shk_your(yourbuf, obj));
 			create_camera_demon(obj, u.ux, u.uy);
 			useup(obj);
 			return(TRUE);
 			/*NOTREACHED*/
 			break;
-#endif
 		    case CORPSE:		/* fixed by polder@cs.vu.nl */
 			if (touch_petrifies(&mons[obj->corpsenm])) {
 			    static const char withwhat[] = "corpse";
@@ -1004,16 +983,15 @@ int thrown;
 		Your("%s %s no longer poisoned.", xname(obj),
 		     otense(obj, "are"));
 	    }
-#ifdef WEBB_DISINT
-	    if (disint_obj)
-	       ;
-	    else
-#endif
-	    if (resists_poison(mon))
-		needpoismsg = TRUE;
-	    else if (rn2(10))
-		tmp += rnd(6);
-	    else poiskilled = TRUE;
+	    if (!disint_obj) {
+		if (resists_poison(mon)) {
+			needpoismsg = TRUE;
+		} else if (rn2(10)) {
+			tmp += rnd(6);
+		} else {
+			poiskilled = TRUE;
+		}
+	    }
 	}
 	if (tmp < 1) {
 	    /* make sure that negative damage adjustment can't result
@@ -1031,7 +1009,6 @@ int thrown;
 		if (get_dmg_bonus) tmp = 1;
 	    }
 	}
-#ifdef WEBB_DISINT
 	if (disint_obj && obj) { /* all the hit msgs, no object destruction */
 		if (obj->oclass == POTION_CLASS || obj->oclass == VENOM_CLASS ||
 				obj->otyp == EGG || obj->otyp == CREAM_PIE) {
@@ -1049,10 +1026,7 @@ int thrown;
 			Your("%s vanishes on impact!", xname(obj));
 			hittxt = TRUE;
 		}
-	} else
-#endif
-#ifdef STEED
-	if (jousting) {
+	} else if (jousting) {
 	    tmp += d(2, (obj == uwep) ? 10 : 2);	/* [was in dmgval()] */
 	    You("joust %s%s",
 			 mon_nam(mon), canseemon(mon) ? exclam(tmp) : ".");
@@ -1073,7 +1047,6 @@ int thrown;
 	    }
 	    hittxt = TRUE;
 	} else
-#endif
 
 	/* VERY small chance of stunning opponent if unarmed. */
 	if (unarmed && tmp > 1 && !thrown && !obj && !Upolyd) {
@@ -1128,7 +1101,6 @@ int thrown;
 			 mon_nam(mon), canseemon(mon) ? exclam(tmp) : ".");
 	}
 
-#ifdef WEBB_DISINT
 	if (disint_obj && obj) {
 		if (!hittxt) {
 			if (cansee(mon->mx, mon->my)) {
@@ -1148,7 +1120,6 @@ int thrown;
 			/*obfree(obj, (struct obj *) 0 ); handled: elsewhere */
 		}
 	}
-#endif
 	if (silvermsg) {
 		const char *fmt;
 		char *whom = mon_nam(mon);
@@ -1300,9 +1271,7 @@ struct attack *mattk;
 	    /* grabbing attacks the body */
 	    obj = which_armor(mdef, W_ARMC);		/* cloak */
 	    if (!obj) obj = which_armor(mdef, W_ARM);	/* suit */
-#ifdef TOURIST
 	    if (!obj) obj = which_armor(mdef, W_ARMU);	/* shirt */
-#endif
 	}
 
 	/* if your cloak/armor is greased, monster slips off; this
@@ -1608,9 +1577,7 @@ register struct attack *mattk;
 		    minstapetrify(mdef, TRUE);
 		tmp = 0;
 		break;
-#ifdef SEDUCE
 	    case AD_SSEX:
-#endif
 	    case AD_SEDU:
 	    case AD_SITM:
 		steal_it(mdef, mattk);
@@ -1991,11 +1958,7 @@ register struct attack *mattk;
 	    for (otmp = mdef->minvent; otmp; otmp = otmp->nobj)
 		(void) snuff_lit(otmp);
 
-      if((!touch_petrifies(mdef->data) || Stone_resistance)
-#ifdef WEBB_DISINT
-          && (!touch_disintegrates(mdef->data) || Disint_resistance)
-#endif
-        ) {
+      if((!touch_petrifies(mdef->data) || Stone_resistance) && (!touch_disintegrates(mdef->data) || Disint_resistance)) {
 		static char msgbuf[BUFSZ];
 		start_engulf(mdef);
 		switch(mattk->adtyp) {
@@ -2146,9 +2109,7 @@ register struct attack *mattk;
 		You("bite into %s.", mon_nam(mdef));
 		Sprintf(kbuf, "swallowing %s whole", an(mdef->data->mname));
 		instapetrify(kbuf);
-#ifdef WEBB_DISINT
-        instadisintegrate(kbuf);
-#endif 
+		instadisintegrate(kbuf);
 	    }
 	}
 	return(0);
@@ -2218,13 +2179,11 @@ use_weapon:
 			break;
 		case AT_CLAW:
 			if (i==0 && uwep && !cantwield(youmonst.data)) goto use_weapon;
-#ifdef SEDUCE
 			/* succubi/incubi are humanoid, but their _second_
 			 * attack is AT_CLAW, not their first...
 			 */
 			if (i==1 && uwep && (u.umonnum == PM_SUCCUBUS ||
 				u.umonnum == PM_INCUBUS)) goto use_weapon;
-#endif
 		case AT_BITE:
 			/* [ALI] Vampires are also smart. They avoid biting
 			   monsters if doing so would be fatal */
@@ -2282,7 +2241,7 @@ use_weapon:
 			    else if (mattk->aatyp == AT_TENT)
 				    Your("tentacles suck %s.", mon_nam(mon));
 			    else You("hit %s.", mon_nam(mon));
-#ifdef WEBB_DISINT
+
 			    if (touch_disintegrates(mon->data) && !mon->mcan && mon->mhp>1) {
 				    int dis_dmg = 0;
 				    if (mattk->aatyp == AT_KICK && uarmf) {
@@ -2312,9 +2271,9 @@ use_weapon:
 				    }
 				    mon->mhp -= dis_dmg;
 				    if (mon->mhp < 1) mon->mhp = 1;
-			    } else
-#endif
-			    sum[i] = damageum(mon, mattk);
+			    } else {
+				sum[i] = damageum(mon, mattk);
+			    }
 			} else
 			    missum(mon, mattk);
 			break;

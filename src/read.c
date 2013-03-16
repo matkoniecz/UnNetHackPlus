@@ -71,7 +71,6 @@ doread()
 	    }
 	    useup(scroll);
 	    return(1);
-#ifdef TOURIST
 	} else if (scroll->otyp == T_SHIRT) {
 	    static const char *shirt_msgs[] = { /* Scott Bigham */
     "I explored the Dungeons of Doom and all I got was this lousy T-shirt!",
@@ -210,7 +209,6 @@ doread()
 				(int)(!(scroll->o_id % 3)), (int)((scroll->o_id * 7) % 10));
 		u.uconduct.literate++;
 		return 1;
-#endif	/* TOURIST */
 	} else if ((scroll->otyp == CAN_OF_GREASE) || (scroll->otyp == CANDY_BAR)) {
 		pline("This %s has no %s.", singular(scroll, xname), (scroll->otyp == CANDY_BAR) ? "wrapper" : "label");
 		return(0);
@@ -504,9 +502,7 @@ int curse_bless;
 		break;
 	    case MAGIC_MARKER:
 	    case TINNING_KIT:
-#ifdef TOURIST
 	    case EXPENSIVE_CAMERA:
-#endif
 		if (is_cursed) stripspe(obj);
 		else if (rechrg && obj->otyp == MAGIC_MARKER) {	/* previously recharged */
 		    obj->recharged = 1;	/* override increment done above */
@@ -734,8 +730,7 @@ forget_objects(percent)
 
 /* Forget some or all of map (depends on parameters). */
 void
-forget_map(howmuch)
-	int howmuch;
+forget_map(boolean all_map)
 {
 	register int zx, zy;
 
@@ -744,7 +739,7 @@ forget_map(howmuch)
 
 	known = TRUE;
 	for(zx = 0; zx < COLNO; zx++) for(zy = 0; zy < ROWNO; zy++)
-	    if (howmuch & ALL_MAP || rn2(7)) {
+	    if (all_map || rn2(7)) {
 		/* Zonk all memory of this location. */
 		levl[zx][zy].seenv = 0;
 		levl[zx][zy].stepped_on = 0;
@@ -815,62 +810,13 @@ forget_levels(percent)
 	}
 }
 
-#if 0
-/*
- * Forget some things (e.g. after reading a scroll of amnesia).  When called,
- * the following are always forgotten:
- *
- *	- felt ball & chain
- *	- traps
- *	- part (6 out of 7) of the map
- *
- * Other things are subject to flags:
- *
- *	howmuch & ALL_MAP	= forget whole map
- *	howmuch & ALL_SPELLS	= forget all spells
- */
-static void
-forget(howmuch)
-int howmuch;
-{
-
-	if (Punished) u.bc_felt = 0;	/* forget felt ball&chain */
-
-	forget_map(howmuch);
-	forget_traps();
-
-	/* 1 in 3 chance of forgetting some levels */
-	if (!rn2(3)) forget_levels(rn2(25));
-
-	/* 1 in 3 chance of forgeting some objects */
-	if (!rn2(3)) forget_objects(rn2(25));
-
-	if (howmuch & ALL_SPELLS) losespells();
-	/*
-	 * Make sure that what was seen is restored correctly.  To do this,
-	 * we need to go blind for an instant --- turn off the display,
-	 * then restart it.  All this work is needed to correctly handle
-	 * walls which are stone on one side and wall on the other.  Turning
-	 * off the seen bits above will make the wall revert to stone,  but
-	 * there are cases where we don't want this to happen.  The easiest
-	 * thing to do is to run it through the vision system again, which
-	 * is always correct.
-	 */
-	docrt();		/* this correctly will reset vision */
-}
-#endif
-
 /* monster is hit by scroll of taming's effect */
 static void
 maybe_tame(mtmp, sobj)
 struct monst *mtmp;
 struct obj *sobj;
 {
-#ifdef BLACKMARKET                            
 	if (sobj->cursed || Is_blackmarket(&u.uz)) {
-#else
-	if (sobj->cursed) {
-#endif
 	    setmangry(mtmp);
 	} else {
 	    if (mtmp->isshk)
@@ -1464,22 +1410,6 @@ register struct obj	*sobj;
 		    pline("Unfortunately, you can't grasp the details.");
 		}
 		break;
-#ifdef SCR_AMNESIA
-	case SCR_AMNESIA:
-		known = TRUE;
-		forget(	(!sobj->blessed ? ALL_SPELLS : 0) |
-			(!confused || sobj->cursed ? ALL_MAP : 0) );
-		if (Hallucination) /* Ommmmmm! */
-			Your("mind releases itself from mundane concerns.");
-		else if (!strncmpi(plname, "Maud", 4))
-			pline("As your mind turns inward on itself, you forget everything else.");
-		else if (rn2(2))
-			pline("Who was that Maud person anyway?");
-		else
-			pline("Thinking of Maud you forget everything else.");
-		exercise(A_WIS, FALSE);
-		break;
-#endif
 	case SCR_FIRE:
 		/*
 		 * Note: Modifications have been made as of 3.0 to allow for
@@ -1537,9 +1467,7 @@ register struct obj	*sobj;
 	    	    	if (isok(x, y) && !closed_door(x, y) &&
 	    	    			!IS_ROCK(levl[x][y].typ) &&
 	    	    			!IS_AIR(levl[x][y].typ) &&
-#ifdef BLACKMARKET
 	    	    			!(Is_blackmarket(&u.uz) && rn2(2)) &&
-#endif
 					(x != u.ux || y != u.uy)) {
 				boulder_created += drop_boulder_on_monster(x, y, confused, TRUE);
 	    	    	}

@@ -447,130 +447,127 @@ walk_path(src_cc, dest_cc, check_proc, arg)
  * your movements at the time.
  *
  * Possible additions/changes:
- *	o really attack monster if we hit one
- *	o set stunned if we hit a wall or door
  *	o reset nomul when we stop
  *	o creepy feeling if pass through monster (if ever implemented...)
- *	o bounce off walls
- *	o let jumps go over boulders
  */
 boolean
-hurtle_step(arg, x, y)
-    genericptr_t arg;
-    int x, y;
+hurtle_step(genericptr_t arg, int x, int y)
 {
-    int ox, oy, *range = (int *)arg;
-    struct obj *obj;
-    struct monst *mon;
-    boolean may_pass = TRUE;
-    struct trap *ttmp;
-    
-    if (!isok(x,y)) {
-	You_feel("the spirits holding you back.");
-	return FALSE;
-    } else if (!in_out_region(x, y)) {
-	return FALSE;
-    } else if (*range == 0) {
-	return FALSE;			/* previous step wants to stop now */
-    }
+	int ox, oy, *range = (int *)arg;
+	struct obj *obj;
+	struct monst *mon;
+	boolean may_pass = TRUE;
+	struct trap *ttmp;
 
-    if (!Passes_walls || !(may_pass = may_passwall(x, y))) {
-	if (IS_ROCK(levl[x][y].typ) || closed_door(x,y)) {
-	    const char *s;
-
-	    pline("Ouch!");
-	    if (IS_TREES(levl[x][y].typ))
-		s = "bumping into a tree";
-	    else if (IS_ROCK(levl[x][y].typ))
-		s = "bumping into a wall";
-	    else
-		s = "bumping into a door";
-	    losehp(rnd(2+*range), s, KILLED_BY);
-	    return FALSE;
-	}
-	if (levl[x][y].typ == IRONBARS) {
-	    You("crash into some iron bars.  Ouch!");
-	    losehp(rnd(2+*range), "crashing into iron bars", KILLED_BY);
-	    return FALSE;
-	}
-	if ((obj = sobj_at(BOULDER,x,y)) != 0) {
-	    You("bump into a %s.  Ouch!", xname(obj));
-	    losehp(rnd(2+*range), "bumping into a boulder", KILLED_BY);
-	    return FALSE;
-	}
-	if (!may_pass) {
-	    /* did we hit a no-dig non-wall position? */
-	    You("smack into something!");
-	    losehp(rnd(2+*range), "touching the edge of the universe", KILLED_BY);
-	    return FALSE;
-	}
-	if ((u.ux - x) && (u.uy - y) &&
-		bad_rock(youmonst.data,u.ux,y) && bad_rock(youmonst.data,x,u.uy)) {
-	    boolean too_much = (invent && (inv_weight() + weight_cap() > 600));
-	    /* Move at a diagonal. */
-	    if (bigmonst(youmonst.data) || too_much) {
-		You("%sget forcefully wedged into a crevice.",
-			too_much ? "and all your belongings " : "");
-		losehp(rnd(2+*range), "wedging into a narrow crevice", KILLED_BY);
+	if (!isok(x,y)) {
+		You_feel("the spirits holding you back.");
 		return FALSE;
-	    }
+	} else if (!in_out_region(x, y)) {
+		return FALSE;
+	} else if (*range == 0) {
+		return FALSE; /* previous step wants to stop now */
 	}
-    }
 
-    if ((mon = m_at(x, y)) != 0) {
-	You("bump into %s.", a_monnam(mon));
-	wakeup(mon);
-	return FALSE;
-    }
-    if ((u.ux - x) && (u.uy - y) &&
-	bad_rock(youmonst.data,u.ux,y) && bad_rock(youmonst.data,x,u.uy)) {
-	/* Move at a diagonal. */
-	if (In_sokoban(&u.uz)) {
-	    You("come to an abrupt halt!");
-	    return FALSE;
+	if (!Passes_walls || !(may_pass = may_passwall(x, y))) {
+		if (IS_ROCK(levl[x][y].typ) || closed_door(x,y)) {
+			const char *s;
+
+			pline("Ouch!");
+			if (IS_TREES(levl[x][y].typ)) {
+				s = "bumping into a tree";
+			} else if (IS_ROCK(levl[x][y].typ)) {
+				s = "bumping into a wall";
+			} else {
+				s = "bumping into a door";
+			}
+			losehp(rnd(2+*range), s, KILLED_BY);
+			make_stunned(HStun + 5+*range, TRUE);
+			return FALSE;
+		}
+		if (levl[x][y].typ == IRONBARS) {
+			You("crash into some iron bars.  Ouch!");
+			losehp(rnd(2+*range), "crashing into iron bars", KILLED_BY);
+			make_stunned(HStun + 5+*range, TRUE);
+			return FALSE;
+		}
+		if ((obj = sobj_at(BOULDER,x,y)) != 0) {
+			You("bump into a %s.  Ouch!", xname(obj));
+			losehp(rnd(2+*range), "bumping into a boulder", KILLED_BY);
+			make_stunned(HStun + 5+*range, TRUE);
+			return FALSE;
+		}
+		if (!may_pass) {
+			/* did we hit a no-dig non-wall position? */
+			You("smack into something!");
+			losehp(rnd(2+*range), "touching the edge of the universe", KILLED_BY);
+			make_stunned(HStun + 5+*range, TRUE);
+			return FALSE;
+		}
+		if ((u.ux - x) && (u.uy - y) && bad_rock(youmonst.data,u.ux,y) && bad_rock(youmonst.data,x,u.uy)) {
+			boolean too_much = (invent && (inv_weight() + weight_cap() > 600));
+			/* Move at a diagonal. */
+			if (bigmonst(youmonst.data) || too_much) {
+				You("%sget forcefully wedged into a crevice.", too_much ? "and all your belongings " : "");
+				losehp(rnd(2+*range), "wedging into a narrow crevice", KILLED_BY);
+				return FALSE;
+			}
+		}
 	}
-    }
 
-    ox = u.ux;
-    oy = u.uy;
-    u.ux = x;
-    u.uy = y;
-    newsym(ox, oy);		/* update old position */
-    vision_recalc(1);		/* update for new position */
-    flush_screen(1);
-    /* FIXME:
-     * Each trap should really trigger on the recoil if
-     * it would trigger during normal movement. However,
-     * not all the possible side-effects of this are
-     * tested [as of 3.4.0] so we trigger those that
-     * we have tested, and offer a message for the
-     * ones that we have not yet tested.
-     */
-    if ((ttmp = t_at(x, y)) != 0) {
-    	if (ttmp->ttyp == MAGIC_PORTAL) {
-    		dotrap(ttmp,0);
-    		return FALSE;
-	} else if (ttmp->ttyp == FIRE_TRAP) {
-    		dotrap(ttmp,0);
-	} else if ((ttmp->ttyp == PIT || ttmp->ttyp == SPIKED_PIT ||
-		    ttmp->ttyp == HOLE || ttmp->ttyp == TRAPDOOR) &&
-		   In_sokoban(&u.uz)) {
-		/* Air currents overcome the recoil */
-    		dotrap(ttmp,0);
+	if ((mon = m_at(x, y)) != 0) {
+		You("bump into %s.", a_monnam(mon));
+		wakeup(mon);
+		make_stunned(HStun + 5+*range, TRUE);
+		return FALSE;
+	}
+
+	if ((u.ux - x) && (u.uy - y) && bad_rock(youmonst.data,u.ux,y) && bad_rock(youmonst.data,x,u.uy)) {
+		/* Move at a diagonal. */
+		if (In_sokoban(&u.uz)) {
+			You("come to an abrupt halt!");
+			return FALSE;
+		}
+	}
+
+	ox = u.ux;
+	oy = u.uy;
+	u.ux = x;
+	u.uy = y;
+	newsym(ox, oy);		/* update old position */
+	vision_recalc(1);		/* update for new position */
+	flush_screen(1);
+	/* FIXME:
+	 * Each trap should really trigger on the recoil if
+	 * it would trigger during normal movement. However,
+	 * not all the possible side-effects of this are
+	 * tested [as of 3.4.0] so we trigger those that
+	 * we have tested, and offer a message for the
+	 * ones that we have not yet tested.
+	 */
+	if ((ttmp = t_at(x, y)) != 0) {
+		if (ttmp->ttyp == MAGIC_PORTAL) {
+			dotrap(ttmp,0);
+			return FALSE;
+		} else if (ttmp->ttyp == FIRE_TRAP) {
+			dotrap(ttmp,0);
+		} else if (In_sokoban(&u.uz) && (ttmp->ttyp == PIT || ttmp->ttyp == SPIKED_PIT || ttmp->ttyp == HOLE || ttmp->ttyp == TRAPDOOR)) {
+			/* Air currents overcome the recoil */
+			dotrap(ttmp,0);
+			*range = 0;
+			return TRUE;
+		} else {
+			if (ttmp->tseen)
+				You("pass right over %s %s.",
+					(ttmp->ttyp == ARROW_TRAP) ? "an" : "a",
+					defsyms[trap_to_defsym(ttmp->ttyp)].explanation);
+		}
+	}
+	if (--*range < 0) { /* make sure our range never goes negative */
 		*range = 0;
-		return TRUE;
-    	} else {
-		if (ttmp->tseen)
-		    You("pass right over %s %s.",
-		    	(ttmp->ttyp == ARROW_TRAP) ? "an" : "a",
-		    	defsyms[trap_to_defsym(ttmp->ttyp)].explanation);
-    	}
-    }
-    if (--*range < 0)		/* make sure our range never goes negative */
-	*range = 0;
-    if (*range != 0)
-	delay_output();
-    return TRUE;
+	} if (*range != 0) {
+		delay_output();
+	}
+	return TRUE;
 }
 
 STATIC_OVL boolean
@@ -1206,12 +1203,10 @@ register struct obj   *obj;
 	register int	disttmp; /* distance modifier */
 	int otyp = obj->otyp;
 	boolean guaranteed_hit = (u.uswallow && mon == u.ustuck);
-#ifdef WEBB_DISINT
 	boolean obj_disint = (touch_disintegrates(mon->data) &&
 	                      !mon->mcan &&
 	                       (mon->mhp > 1) &&
 	                        !oresist_disintegration(obj));
-#endif
 
 	/* Differences from melee weapons:
 	 *
@@ -1363,11 +1358,7 @@ register struct obj   *obj;
 			broken = 0;
 		}
 
-		if (broken
-#ifdef WEBB_DISINT
-          || obj_disint
-#endif
-                        ) {
+		if (broken || obj_disint) {
 			if (*u.ushops)
 			    check_shop_obj(obj, bhitpos.x,bhitpos.y, TRUE);
 			obfree(obj, (struct obj *)0);
@@ -1388,14 +1379,12 @@ register struct obj   *obj;
 		    if (was_swallowed && !u.uswallow && obj == uball)
 			return 1;	/* already did placebc() */
 		}
-#ifdef WEBB_DISINT
 		if (obj_disint){
 			if (*u.ushops)
 				check_shop_obj(obj, bhitpos.x,bhitpos.y, TRUE);
 			obfree(obj, (struct obj *)0);
 			return 1;
 		}
-#endif
 	    } else {
 		tmiss(obj, mon);
 	    }
@@ -1405,14 +1394,12 @@ register struct obj   *obj;
 	    if (tmp >= rnd(20)) {
 		exercise(A_DEX, TRUE);
 		(void) hmon(mon,obj,1);
-#ifdef WEBB_DISINT
 		if (obj_disint){
 			if (*u.ushops)
 				check_shop_obj(obj, bhitpos.x,bhitpos.y, TRUE);
 			obfree(obj, (struct obj *)0);
 			return 1;
 		}
-#endif
 	    } else {
 		tmiss(obj, mon);
 	    }
@@ -1433,11 +1420,9 @@ register struct obj   *obj;
 	           (mon->mtame && dogfood(mon, obj) <= ACCFOOD) ||
 	           (obj->oclass == FOOD_CLASS &&
 	           (
-# ifdef TOURIST
 	            (Role_if(PM_TOURIST) && 
 	             (mon->data == &mons[PM_CROCODILE] ||
 	              mon->data == &mons[PM_BABY_CROCODILE])) ||
-# endif
 	            ((Role_if(PM_RANGER) || Role_if(PM_CAVEMAN)) &&
 	              mon->data == &mons[PM_WINTER_WOLF_CUB])))) {
 #else
@@ -1688,12 +1673,10 @@ boolean from_invent;
 			}
 			/* monster breathing isn't handled... [yet?] */
 			break;
-#ifdef TOURIST
 		case EXPENSIVE_CAMERA: {
 		    create_camera_demon(obj, x, y);
 		    break;
 		}
-#endif
 		case EGG:
 			/* breaking your own eggs is bad luck */
 			if (hero_caused && obj->spe && obj->corpsenm >= LOW_PM)
@@ -1741,9 +1724,7 @@ struct obj *obj;
 		obj->oclass != GEM_CLASS)
 	    return 1;
 	switch (obj->oclass == POTION_CLASS ? POT_WATER : obj->otyp) {
-#ifdef TOURIST
 		case EXPENSIVE_CAMERA:
-#endif
 		case POT_WATER:		/* really, all potions */
 		case EGG:
 		case CREAM_PIE:
@@ -1767,16 +1748,13 @@ boolean in_view;
 	switch (obj->oclass == POTION_CLASS ? POT_WATER : obj->otyp) {
 		default: /* glass or crystal wand */
 			if (obj->oclass != WAND_CLASS &&
-			    obj->oclass != RING_CLASS &&
-			    obj->oclass != AMULET_CLASS)
+			    obj->oclass != RING_CLASS)
 				warning("breaking odd object?");
 		case CRYSTAL_PLATE_MAIL:
 		case LENSES:
 		case MIRROR:
 		case CRYSTAL_BALL:
-#ifdef TOURIST
 		case EXPENSIVE_CAMERA:
-#endif
 			to_pieces = " into a thousand pieces";
 			/*FALLTHRU*/
 		case POT_WATER:		/* really, all potions */
