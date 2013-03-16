@@ -804,6 +804,16 @@ static const char * const bogusobjects[] = {
 	"plot device",
 	"amulet of dependency",
 	"pirate booty",
+	/* end of tvtropes.org */
+
+	/* via ProgressQuest */
+	"spellbook of animate nightstand",
+	"spellbook of astral miasma",
+	"spellbook of curse family",
+	"spellbook of spectral oyster",
+	"spellbook of innoculate",
+	"jar of gelatinous cube jam",
+	/* end of ProgressQuest */
 
 # ifdef MAIL
 	"brand new, all time lowest introductory rate special offer",

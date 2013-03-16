@@ -1254,6 +1254,42 @@ static const char * const bogusmons[] = {
 	"munchkin",
 	"shambling horror",		/* SporkHack */
 	"Grid Bug Mk. 2",			/* SLAS'EM (nickname of arc bugs) */
+	"yet another D&D monster",
+	"kobold mage",
+	"hobbyte",
+	/* via ProgressQuest */
+	"will-o'-the-wisp", 
+	"ignis fatuus",
+	"triceratops",
+	"sylph",
+	"stegosaurus",
+	"sphinx",
+	"spectre",
+	"lamassu",
+	"su-monster",			/* Dungeons & Dragons */
+	"shambling mound",		/* Dungeons & Dragons */
+	"sand elemental",			/* Dungeons & Dragons */
+	"rubber golem"			/* Dungeons & Dragons */
+	"remorhaz",				/* Dungeons & Dragons */
+	"otyugh",				/* Dungeons & Dragons */
+	"bacon elemental",
+	"roper",
+	"roc",
+	"peryton",				/* Jorge Luis Borges - Book of Imaginary Beings */
+	"octopus",
+	"beer golem",			/* ProgressQuest */
+	"rice giant",			/* ProgressQuest */
+	"porn elemental",			/* ProgressQuest */
+	"demicanadian",			/* ProgressQuest */
+	"gyrognome",			/* ProgressQuest */
+	"cardboard golem",
+	"cheese elemental",
+	"dervish",
+	"dragon turtle",
+	"megalosaurus",
+	"organist",
+	/* end of monsters via ProgressQuest */
+
 };
 
 
