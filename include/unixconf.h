@@ -286,10 +286,6 @@
 #endif
 #define tgetch getchar
 
-#ifndef AUTOCONF
-#define SHELL		/* do not delete the '!' command */
-#endif
-
 #if defined(POSIX_TYPES) || defined(__GNUC__)
 #include <stdlib.h>
 #include <unistd.h>

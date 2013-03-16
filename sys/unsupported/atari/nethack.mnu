@@ -6,7 +6,6 @@
 #%about "About NetHack" "v"
 
 File
-	"Shell"		"!"
 	"Options"	"O"
 	---
 	"Save Game"	"S"

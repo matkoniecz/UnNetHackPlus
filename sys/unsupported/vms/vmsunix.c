@@ -29,7 +29,7 @@ extern unsigned long smg$init_term_table_by_type(), smg$del_term_table();
 
 static int FDECL(veryold, (int));
 static char *NDECL(verify_term);
-#if defined(SHELL) || defined(SUSPEND)
+#if defined(SUSPEND)
 static void FDECL(hack_escape, (BOOLEAN_P,const char *));
 static void FDECL(hack_resume, (BOOLEAN_P));
 #endif
@@ -308,13 +308,7 @@ verify_termcap()	/* called from startup(src/termcap.c) */
 }
 /*------*/
 
-#ifdef SHELL
-# ifndef CLI$M_NOWAIT
-#  define CLI$M_NOWAIT 1
-# endif
-#endif
-
-#if defined(CHDIR) || defined(SHELL) || defined(SECURE)
+#if defined(CHDIR) || defined(SECURE)
 static unsigned long oprv[2];
 
 void
@@ -359,82 +353,6 @@ boolean screen_manip;
 	    resume_nhwindows();	/* setup terminal modes, redraw screen, &c */
 }
 #endif	/* SHELL || SUSPEND */
-
-#ifdef SHELL
-unsigned long dosh_pid = 0,	/* this should cover any interactive escape */
-	mail_pid = 0;	/* this only covers the last mail or phone; */
-/*(mail & phone commands aren't expected to leave any process hanging around)*/
-
-int dosh()
-{
-	return vms_doshell("", TRUE);	/* call for interactive child process */
-}
-
-/* vms_doshell -- called by dosh() and readmail() */
-
-/* If execstring is not a null string, then it will be executed in a spawned */
-/* subprocess, which will then return.  It is for handling mail or phone     */
-/* interactive commands, which are only available if both MAIL and SHELL are */
-/* #defined, but we don't bother making the support code conditionalized on  */
-/* MAIL here, just on SHELL being enabled.				     */
-
-/* Normally, all output from this interaction will be 'piped' to the user's  */
-/* screen (SYS$OUTPUT).  However, if 'screenoutput' is set to FALSE, output  */
-/* will be piped into oblivion.  Used for silent phone call rejection.	     */
-
-int
-vms_doshell(execstring, screenoutput)
-const char *execstring;
-boolean screenoutput;
-{
-	unsigned long status, new_pid, spawnflags = 0;
-	struct dsc$descriptor_s comstring, *command, *inoutfile = 0;
-	static char dev_null[] = "_NLA0:";
-	static $DESCRIPTOR(nulldevice, dev_null);
-
-	/* Is this an interactive shell spawn, or do we have a command to do? */
-	if (execstring && *execstring) {
-		comstring.dsc$w_length = strlen(execstring);
-		comstring.dsc$b_dtype = DSC$K_DTYPE_T;
-		comstring.dsc$b_class = DSC$K_CLASS_S;
-		comstring.dsc$a_pointer = (char *)execstring;
-		command = &comstring;
-	} else
-		command = 0;
-
-	/* use asynch subprocess and suppress output iff one-shot command */
-	if (!screenoutput) {
-		spawnflags = CLI$M_NOWAIT;
-		inoutfile = &nulldevice;
-	}
-
-	hack_escape(screenoutput, command ? (const char *) 0 :
-     "  \"Escaping\" into a subprocess; LOGOUT to reconnect and resume play. ");
-
-	if (command || !dosh_pid || !vms_ok(status = lib$attach(&dosh_pid))) {
-# ifdef CHDIR
-		(void) chdir(getenv("PATH"));
-# endif
-		privoff();
-		new_pid = 0;
-		status = lib$spawn(command, inoutfile, inoutfile, &spawnflags,
-				   (struct dsc$descriptor_s *) 0, &new_pid);
-		if (!command) dosh_pid = new_pid; else mail_pid = new_pid;
-		privon();
-# ifdef CHDIR
-		chdirx((char *) 0, 0);
-# endif
-	}
-
-	hack_resume(screenoutput);
-
-	if (!vms_ok(status)) {
-		pline("  Spawn failed.  (%%x%08lX) ", status);
-		mark_synch();
-	}
-	return 0;
-}
-#endif	/* SHELL */
 
 #ifdef SUSPEND
 /* dosuspend() -- if we're a subprocess, attach to our parent;

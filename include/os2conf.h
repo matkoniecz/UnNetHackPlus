@@ -36,7 +36,6 @@
 
 /*#define MFLOPPY			/* floppy and ramdisk support */
 #define RANDOM			/* Berkeley random(3) */
-#define SHELL			/* shell escape */
 /* #define TERMLIB		/* use termcap file */
 #define ANSI_DEFAULT		/* allows NetHack to run without termcap file */
 #define TEXTCOLOR		/* allow color */

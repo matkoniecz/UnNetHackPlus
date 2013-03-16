@@ -138,7 +138,6 @@ extern char *FDECL(gets, (char *));
 
 #define TEXTCOLOR		/* Use colored monsters and objects */
 #define HACKFONT		/* Use special hack.font */
-#define SHELL			/* Have a shell escape command (!) */
 #define MAIL			/* Get mail at unexpected occasions */
 #define DEFAULT_ICON "NetHack:default.icon"	/* private icon */
 #define AMIFLUSH		/* toss typeahead (select flush in .cnf) */

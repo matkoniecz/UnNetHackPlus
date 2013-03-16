@@ -26,8 +26,6 @@
 #	error "Unsupported Windows CE platform"
 #endif
 
-/* #define SHELL	/* nt use of pcsys routines caused a hang */
-
 #define RANDOM		/* have Berkeley random(3) */
 #define TEXTCOLOR	/* Color text */
 

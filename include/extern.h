@@ -2249,10 +2249,7 @@ E void FDECL(regularize, (char *));
 # if defined(TIMED_DELAY) && !defined(msleep) && defined(SYSV)
 E void FDECL(msleep, (unsigned));
 # endif
-# ifdef SHELL
-E int NDECL(dosh);
-# endif /* SHELL */
-# if defined(SHELL) || defined(DEF_PAGER) || defined(DEF_MAILREADER)
+# if defined(DEF_PAGER) || defined(DEF_MAILREADER)
 E int FDECL(child, (int));
 # endif
 #ifdef FILE_AREAS
@@ -2394,14 +2391,11 @@ E boolean FDECL(file_is_stmlf, (int));
 E int FDECL(vms_define, (const char *,const char *,int));
 E int FDECL(vms_putenv, (const char *));
 E char *NDECL(verify_termcap);
-# if defined(CHDIR) || defined(SHELL) || defined(SECURE)
+# if defined(CHDIR) || defined(SECURE)
 E void NDECL(privoff);
 E void NDECL(privon);
 # endif
-# ifdef SHELL
-E int NDECL(dosh);
-# endif
-# if defined(SHELL) || defined(MAIL)
+# if defined(MAIL)
 E int FDECL(vms_doshell, (const char *,BOOLEAN_P));
 # endif
 # ifdef SUSPEND

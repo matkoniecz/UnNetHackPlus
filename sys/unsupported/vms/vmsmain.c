@@ -380,14 +380,6 @@ byebye()
 	below satisfy the most combinations of compiler vs <signal.h>.
      */
     int (*hup)();
-#ifdef SHELL
-    extern unsigned long dosh_pid, mail_pid;
-    extern unsigned long FDECL(sys$delprc,(unsigned long *,const genericptr_t));
-
-    /* clean up any subprocess we've spawned that may still be hanging around */
-    if (dosh_pid) (void) sys$delprc(&dosh_pid, 0), dosh_pid = 0;
-    if (mail_pid) (void) sys$delprc(&mail_pid, 0), mail_pid = 0;
-#endif
 
     /* SIGHUP doesn't seem to do anything on VMS, so we fudge it here... */
     hup = (int(*)()) signal(SIGHUP, SIG_IGN);

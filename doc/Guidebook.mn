@@ -663,8 +663,6 @@ another spell to swap places with it, and then have opportunity to
 make further exchanges.
 .lp "\e
 Show what types of objects have been discovered.
-.lp !
-Escape to a shell.
 .lp #
 Perform an extended command.  As you can see, the authors of NetHack
 used up all the letters, so this is a way to introduce the less frequently
