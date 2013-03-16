@@ -1248,6 +1248,12 @@ static const char * const bogusmons[] = {
 	"hungry ghost",			/* Dungeon Crawl Stone Soup */
 	"unborn deep dwarf",		/* Dungeon Crawl Stone Soup */
 	"Wandering mushroom",		/* Dungeon Crawl Stone Soup */
+	"Vlad the Inhaler",
+	"Delaunay tessellation field estimator",
+	"unnameable horror from beyond", /* NAO fruit name*/
+	"munchkin",
+	"shambling horror",		/* SporkHack */
+	"Grid Bug Mk. 2",			/* SLAS'EM (nickname of arc bugs) */
 };
 
 
