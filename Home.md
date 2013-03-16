@@ -1,6 +1,7 @@
 Plans for UnNetHackPlus
 * king names
 * read state after spellbook name
+* success state as colour for wizards (symbol?)
 * 		if (Punished) {
 			u.bc_felt = 0;	/* forget felt ball&chain */
 		}
