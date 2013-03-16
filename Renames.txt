@@ -1,4 +1,5 @@
 game: UnNetHack to UnNetHackPlus
+monster: gold dragon to glowing dragon - it allows to have this monster in colour depending on breath type
 function: add_weapon_skill to add_skill_slot - old name was extremely confusing, new one should be example of self-documenting code
 function: lose_weapon_skill to lose_skill_slot - old name was extremely confusing, new one should be example of self-documenting code
 member of you structure: weapon_slots wo unused_skill_slots - old name was extremely confusing, new one should be example of self-documenting code
