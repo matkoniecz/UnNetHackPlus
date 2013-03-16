@@ -1,4 +1,7 @@
 Plans for UnNetHackPlus
+* kill MAIL SHELL
+* esc on gen
+* DFlike statues
 * king names
 * read state after spellbook name
 * success state as colour for wizards (symbol?)
@@ -11,7 +14,7 @@ Plans for UnNetHackPlus
 * introduce and use full unicode support (see http://doryen.eptalys.net/forum/index.php?topic=1473.0 for potential)
 * foocubi - A new challenge (celibacy) [from SLASH'EM] / all effects are bad / penalty for monk/knight.
 * http://fantasynamegenerators.com/demon_names.php
-* magic draining attack (cancellation???)
+* magic draining attack (cancellation???) - magic destroyer - yellow R (peaceful NPCish???)? - yellow V?
 * monsters are not getting poison resistance from worn dragon scale mail
 * patchlevel.h  version.c 
 * merge uhitm, mhitm, mhitu etc
