@@ -1289,7 +1289,9 @@ static const char * const bogusmons[] = {
 	"megalosaurus",
 	"organist",
 	/* end of monsters via ProgressQuest */
-
+#ifndef MAIL
+	"mail daemon",
+#endif
 };
 
 
