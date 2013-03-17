@@ -70,12 +70,6 @@ struct version_info *version_data;
 const char *filename;
 boolean complain;
 {
-#ifndef VERSION_COMPATIBILITY
-    if (complain) {
-		pline("VERSION_COMPATIBILITY is undefined");
-	}
-    return FALSE;
-#endif
 	if ((version_data->incarnation < VERSION_COMPATIBILITY || version_data->incarnation > VERSION_NUMBER) &&
 	(version_data->incarnation < MIN_UN_VERSION_COMPATIBILITY || version_data->incarnation > MAX_UN_VERSION_COMPATIBILITY)){
 	    if (complain) {
