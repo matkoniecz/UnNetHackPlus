@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* on savegame mismatch game eats the save
 * list created monster without kills
 * kill MAIL Removal possibility of enabling MAIL fixed following bugs: C343-165, C343-320, C343-415.
 * enable SHOW_EXTINCT SHOW_BORN
