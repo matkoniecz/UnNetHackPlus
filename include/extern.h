@@ -1452,6 +1452,7 @@ E void NDECL(synch_cursor);
 
 /* ### o_init.c ### */
 
+E int NDECL(get_random_color);
 E void NDECL(init_objects);
 E int NDECL(find_skates);
 E void NDECL(oinit);
