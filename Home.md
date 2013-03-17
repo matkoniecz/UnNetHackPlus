@@ -11,7 +11,6 @@ Plans for UnNetHackPlus
 * 		if (Punished) {
 			u.bc_felt = 0;	/* forget felt ball&chain */
 		}
-* enable C99 mode, declaring variables outside of for is ridiculous in XXI century
 * http://doryen.eptalys.net/articles/bsp-dungeon-generation/
 * http://doryen.eptalys.net/data/libtcod/doc/1.5.1/html2/namegen_file_4.html?c=false&cpp=false&cs=false&py=false&lua=false (king names)
 * introduce and use full unicode support (see http://doryen.eptalys.net/forum/index.php?topic=1473.0 for potential)
