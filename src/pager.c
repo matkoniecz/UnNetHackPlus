@@ -814,10 +814,7 @@ static const char * const bogusobjects[] = {
 	"spellbook of innoculate",
 	"jar of gelatinous cube jam",
 	/* end of ProgressQuest */
-
-# ifdef MAIL
 	"brand new, all time lowest introductory rate special offer",
-# endif
 	"dirty rag"
 };
 
