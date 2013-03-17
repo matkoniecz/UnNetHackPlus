@@ -76,7 +76,8 @@ boolean complain;
 	}
     return FALSE;
 #endif
-	if (version_data->incarnation < VERSION_COMPATIBILITY || version_data->incarnation > VERSION_NUMBER) {
+	if ((version_data->incarnation < VERSION_COMPATIBILITY || version_data->incarnation > VERSION_NUMBER) &&
+	(version_data->incarnation < MIN_UN_VERSION_COMPATIBILITY || version_data->incarnation > MAX_UN_VERSION_COMPATIBILITY)){
 	    if (complain) {
 			pline("Version mismatch for file \"%s\".", filename);
 		}
