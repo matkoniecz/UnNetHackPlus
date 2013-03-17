@@ -858,8 +858,8 @@ struct monst *mon;
  */
 STATIC_OVL int
 hitmu(mtmp, mattk)
-	register struct monst *mtmp;
-	register struct attack  *mattk;
+register struct monst *mtmp;
+register struct attack  *mattk;
 {
 	register struct permonst *mdat = mtmp->data;
 	register int uncancelled, ptmp;
