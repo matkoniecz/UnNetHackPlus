@@ -1,6 +1,6 @@
 Plans for UnNetHackPlus
 * list created monster without kills
-* kill MAIL SHELL
+* kill MAIL
 * esc on gen
 * DFlike statues
 * king names
