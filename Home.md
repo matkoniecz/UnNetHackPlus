@@ -1,6 +1,8 @@
 Plans for UnNetHackPlus
 * list created monster without kills
 * kill MAIL
+* enable SHOW_EXTINCT SHOW_BORN
+* cleanup configure
 * esc on gen
 * DFlike statues
 * king names
