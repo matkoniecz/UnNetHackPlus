@@ -1,6 +1,7 @@
 Plans for UnNetHackPlus
+
+#linuxblock
 * color revert tutorial
-* on savegame mismatch game eats the save
 * list created monster without kills
 * kill MAIL Removal possibility of enabling MAIL fixed following bugs: C343-165, C343-320, C343-415.
 * enable SHOW_EXTINCT SHOW_BORN
@@ -246,6 +247,7 @@ proud owner of a magic whistle.
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/ea5d0c8094e0577f7054ab24447c7ae2990d49c2 - fighting makes noise - it should be done also for mhitm, mhitu + https://github.com/Bulwersator/CopyOfSporkHack/commit/0c4c2c84ea79972e28eb02979ac863dff79abdaf 
 * from angry_priest() - priests should try to reconvert altar back- in the middle of spaghetti code - see  http://bilious.alt.org/?38
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/dea61cde17b8758091e3f3cef95c2d651d11cb3e - When attacking a peaceful monster, make other peaceful monsters react.  - in the middle of spaghetti code
+* on savegame mismatch game eats the save
 
 # no playtesting
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/cdb0add92fed422e61860b7c88711b347cd17b5f + https://github.com/Bulwersator/CopyOfSporkHack/commit/d25452bdea84850ada1674a7fefa343f66a9264c - time increases monster generation
@@ -295,7 +297,6 @@ proud owner of a magic whistle.
 * Juiblex the Lord of the Slime Pit, Demon Lord of Oozes and All Things Most Foul.
 * I dunno, I often hear this about Roguelikes and other really hard games, and to the extent that it's true at all, it assumes that the player has read and memorized every single spoiler and knows that (say) Blue-Footed Foozles can be defeated by harsh language but will explode with 40-kiloton yield if struck by any spell or weapon.
 * There's a few mimics in the shop, too; they're cunningly disguised as ], which represents 'strange object or mimic' and is used for no purpose in the game other than representing poorly-disguised mimics.
-*  WARGHLBARGLEARGLEBARGLE!
 
 #help!
 * Gargoyle weirdness (There are animated statues so it is logical that they are stone resistant. On the other hand their flesh is edible. I want to turn them into statue leaving monster like stone golem - but what should happen with stone monster hit by stone to flesh spell? Turn into meatball as for statues of monsters without corpses? Resist as their stone is also body? Do nothing? Eat significant part of HP (body of foo decays into twisted flesh)? Something else? )
