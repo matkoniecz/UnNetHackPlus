@@ -8,17 +8,17 @@ On Linux and MacOSX for a single-user installation (a Linux Debian
  or Ubuntu system needs the packages gcc, flex, bison, make and
  libncurses5-dev installed) (untested):
 
- ./configure --prefix=$HOME/unnethack --with-owner=`id -un` --with-group=`id -gn` --enable-wizmode=`id -un` && make && make install
+ ./configure --prefix=$HOME/unnethackplus --with-owner=`id -un` --with-group=`id -gn` --enable-wizmode=`id -un` && make && make install
 
- The game will be started with ~/unnethack/bin/unnethack
+ The game will be started with ~/unnethackplus/bin/unnethackplus
 
 
 On Windows for a tty build:
- ./configure --with-owner=Username --with-group=Usergroup --build=mingw32 --prefix=/opt/unnethack --without-compression --enable-tty-graphics  --disable-file-areas && make && make install
+ ./configure --with-owner=Username --with-group=Usergroup --build=mingw32 --prefix=/opt/unnethackplus --without-compression --enable-tty-graphics  --disable-file-areas && make && make install
 
 On Windows for a tile build:
 
- ./configure --with-owner=Username --with-group=Usergroup --build=mingw32 --prefix=/opt/unnethack --without-compression --enable-mswin-graphics --disable-tty-graphics  --disable-file-areas && make && make install
+ ./configure --with-owner=Username --with-group=Usergroup --build=mingw32 --prefix=/opt/unnethackplus --without-compression --enable-mswin-graphics --disable-tty-graphics  --disable-file-areas && make && make install
 
 It is necessary to manually copy tiles
 
