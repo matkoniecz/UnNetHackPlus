@@ -4,7 +4,7 @@ Plans for UnNetHackPlus
 * list created monster without kills
 * kill MAIL Removal possibility of enabling MAIL fixed following bugs: C343-165, C343-320, C343-415.
 * enable SHOW_EXTINCT SHOW_BORN
-* cleanup configure https://github.com/Bulwersator/CopyOfUnNetHack/commits/master/trunk/configure http://www.gnu.org/software/autoconf/manual/autoconf.html#Making-configure-Scripts http://www.gnu.org/software/autoconf/manual/autoconf.html#autoreconf-Invocation
+* cleanup configure https://github.com/Bulwersator/CopyOfUnNetHack/commits/master/trunk/configure http://www.gnu.org/software/autoconf/manual/autoconf.html#Making-configure-Scripts http://www.gnu.org/software/autoconf/manual/autoconf.html#autoreconf-Invocation http://www.edwardrosten.com/code/autoconf/index.html
 * esc on gen
 * [[DFlike statues]]
 * king names
