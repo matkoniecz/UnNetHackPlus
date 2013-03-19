@@ -708,6 +708,7 @@ static const char * const bogusobjects[] = {
 	"pentagram of protection",          /* Quake */
 	"horcrux",                          /* HP */
 	"Codex of the Infinite Planes",     /* DnD */
+	"dragon's claw",
 
 	/* Geekery */
 	"AAA chipset",                      /* Amiga */
