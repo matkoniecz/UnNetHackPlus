@@ -1,5 +1,5 @@
 Plans for UnNetHackPlus
-
+* http://nhqdb.alt.org/?695 http://nhqdb.alt.org/?475 http://nhqdb.alt.org/?168 http://nhqdb.alt.org/?301 http://nhqdb.alt.org/?281 http://nhqdb.alt.org/?293 http://nhqdb.alt.org/?663 http://nhqdb.alt.org/?668 http://nhqdb.alt.org/?672 http://nhqdb.alt.org/?686 http://nhqdb.alt.org/?8 http://nhqdb.alt.org/?195 
 * http://nethackwiki.com/wiki/Talk:Cthulhu
 * object icons appearing in menus, like on linux 
 * color revert tutorial
