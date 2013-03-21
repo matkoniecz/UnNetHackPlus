@@ -1,6 +1,6 @@
 Plans for UnNetHackPlus
 
-#linuxblock
+* http://nethackwiki.com/wiki/Talk:Cthulhu
 * object icons appearing in menus, like on linux 
 * color revert tutorial
 * list created monster without kills
