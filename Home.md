@@ -1,5 +1,6 @@
 Plans for UnNetHackPlus
 * paranoid_liquid
+* kicking unidentified secret door
 * weeping angels - blinking effect - long, rare move (what about blindness? Should it be instant YASD?) pschysical attacks
 * http://bilious.alt.org/?440
 * http://bilious.alt.org/?270
