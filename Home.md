@@ -2,7 +2,7 @@ Plans for UnNetHackPlus
 * https://github.com/sgrunt/GruntHack/commit/00fac16b796e33189b8f542160fd49d9ff8d790c - magical items generated more frequently at deeper dungeon levels
 * paranoid_liquid
 * kicking unidentified secret door
-* weeping angels - blinking effect - long, rare move (what about blindness? Should it be instant YASD?) pschysical attacks
+* weeping angels - blinking effect - long, rare move (what about blindness? Should it be instant YASD?) pschysical attacks, trap autoturned into statue trap
 * http://bilious.alt.org/?440
 * http://bilious.alt.org/?270
 * Allow looking at dungeon overview during level teleport prompt - from http://nethackwiki.com/wiki/Bugs_in_NetHack_4
