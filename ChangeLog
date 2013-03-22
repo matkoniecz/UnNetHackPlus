@@ -11,6 +11,7 @@
 		- Missing foo_on/foo_off calls for objects with strange delay values fixed (this bug was not detectable by players)
 		- Dual ring of slow digestion bug is fixed
 		- Stethoscope no longer reports unaligned monsters as chaotic (affects Wizard of Yendor, priest[ess] of Moloch)
+		- C343-351 "Alchemy-caused explosions don't wake nearby monsters."
 	* UnNetHack bug fixes
 		- Angered quest guardians will no longer go berserk.
 	* Flavour stuff
