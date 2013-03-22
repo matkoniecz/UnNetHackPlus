@@ -1,18 +1,18 @@
 2012-?-?  UnNetHackPlus 4.7.0 (based on UnNetHack 4.0.0) (WIP)
 	* vanilia bug fixes
-		- C343-14 "tombstone message resulting from eating an identified artifact is gramatically incorrect" fixed (from GruntHack - https://github.com/sgrunt/GruntHack/commit/02a48205328096f50d28e32f527c8df065f86bdc)
-		- Successful prayer now protects against stinking cloud (from GruntHack - https://github.com/sgrunt/GruntHack/commit/3f358cc7401afcd39eb6193184deb9c35aa517d5)
-		- C343-438: "Typo "gold piecess" may occur when selling items in a container" fixed (from GruntHack - https://github.com/sgrunt/GruntHack/commit/2cce8e189eb4960b22636fa8cc3002ffa55df952)
-		- Sacrifice that fits many cases (own race + former pet, unicorn + former pet, own race + crossaligned high altar etc) is handled properly ( https://github.com/Bulwersator/UnNetHackPlus/commit/f6613cddae87eccbaeff969a4bf8942421f5ea86 )
-		- Genociding your pet or peaceful monsters is no longer OK ( https://github.com/Bulwersator/UnNetHackPlus/commit/40dbc7c9b3c6b398802cef30b1f9cc54499ea73b )
-		- Bare-hands now gets an actual bonus (from Spork - https://github.com/Bulwersator/CopyOfSporkHack/commit/e187663d121f00337532ec3d9d180268a177d8dd )
-		- Colour of mithril objects is now correct ( https://github.com/Bulwersator/CopyOfSporkHack/commit/67c167367b8b118c9bc9b7f4e19bdd41bbc3b308 ) 
-		- Feeling of amulet draining energy away is now correct in all situations ( https://github.com/Bulwersator/UnNetHackPlus/commit/a70a6f1d1c112af6a5a3976b6d9a41625ebff870 )
-		- Missing foo_on/foo_off calls for objects with strange delay values fixed (this bug was not detectable by players) ( https://github.com/Bulwersator/UnNetHackPlus/commit/c786ec52c46f7f22bbaee3a1a15748013a1b9806 )
-		- Dual ring of slow digestion bug is fixed ( https://github.com/Bulwersator/UnNetHackPlus/commit/0f73968c0e9a8d79d6f444a8cf89f207af0429c1 )
-		- Stethoscope no longer reports unaligned monsters as chaotic (affects Wizard of Yendor, priest[ess] of Moloch) ( https://github.com/Bulwersator/UnNetHackPlus/commit/e451c45ac70c367b56bd39792b6899175d7e3e1a )
+		- C343-14 "tombstone message resulting from eating an identified artifact is gramatically incorrect" fixed (from GruntHack)
+		- Successful prayer now protects against stinking cloud (from GruntHack)
+		- C343-438: "Typo "gold piecess" may occur when selling items in a container" fixed (from GruntHack)
+		- Sacrifice that fits many cases (own race + former pet, unicorn + former pet, own race + crossaligned high altar etc) is handled properly
+		- Genociding your pet or peaceful monsters is no longer OK
+		- Bare-hands now gets an actual bonus (from Spork)
+		- Colour of mithril objects is now correct 
+		- Feeling of amulet draining energy away is now correct in all situations 
+		- Missing foo_on/foo_off calls for objects with strange delay values fixed (this bug was not detectable by players)
+		- Dual ring of slow digestion bug is fixed
+		- Stethoscope no longer reports unaligned monsters as chaotic (affects Wizard of Yendor, priest[ess] of Moloch)
 	* UnNetHack bug fixes
-		- Angered quest guardians will no longer go berserk ( https://github.com/Bulwersator/UnNetHackPlus/commit/08bedab0bad838340d8b0dfe37ea993ff9c4acd1 ).
+		- Angered quest guardians will no longer go berserk.
 	* Flavour stuff
 		- Far look during hallucination should be more amusing
 		- New hallucinatory monsters, monster sounds (original ones and from NAO) and bottle types
