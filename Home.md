@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* https://github.com/sgrunt/GruntHack/commit/00fac16b796e33189b8f542160fd49d9ff8d790c - magical items generated more frequently at deeper dungeon levels
 * paranoid_liquid
 * kicking unidentified secret door
 * weeping angels - blinking effect - long, rare move (what about blindness? Should it be instant YASD?) pschysical attacks
