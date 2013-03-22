@@ -15,6 +15,7 @@ conftest.exe
 a.exe
 *.o
 /sys/autoconf/depend.awk
+/lex.yy.c
 
 # /
 /Makefile
