@@ -1094,15 +1094,8 @@ register struct trobj *trop;
 		if ((obj->otyp == BLINDFOLD) && u.roleplay.blindfolded)
 				setworn(obj, W_TOOL);
 
-#if !defined(PYRAMID_BUG) && !defined(MAC)
 		if(--trop->trquan) continue;	/* make a similar object */
-#else
-		if(trop->trquan) {		/* check if zero first */
-			--trop->trquan;
-			if(trop->trquan)
-				continue;	/* make a similar object */
-		}
-#endif
+
 		trop++;
 	}
 }
