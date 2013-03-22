@@ -1,4 +1,6 @@
 Plans for UnNetHackPlus
+* http://bilious.alt.org/?440
+* http://bilious.alt.org/?270
 * Allow looking at dungeon overview during level teleport prompt - from http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * revamp https://github.com/Bulwersator/UnNetHackPlus/blob/master/README.configure (z windowsem z msdna)
 * http://nhqdb.alt.org/?695 http://nhqdb.alt.org/?475 http://nhqdb.alt.org/?168 http://nhqdb.alt.org/?301 http://nhqdb.alt.org/?281 http://nhqdb.alt.org/?293 http://nhqdb.alt.org/?663 http://nhqdb.alt.org/?668 http://nhqdb.alt.org/?672 http://nhqdb.alt.org/?686 http://nhqdb.alt.org/?8 http://nhqdb.alt.org/?195  http://nhqdb.alt.org/?311
