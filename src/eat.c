@@ -42,6 +42,7 @@ STATIC_DCL int FDECL(rottenfood, (struct obj *));
 STATIC_DCL void NDECL(eatspecial);
 STATIC_DCL void FDECL(eataccessory, (struct obj *));
 STATIC_DCL const char *FDECL(foodword, (struct obj *));
+STATIC_DCL const char *FDECL(decayed_food_word, (struct obj *));
 STATIC_DCL boolean FDECL(maybe_cannibal, (int,BOOLEAN_P));
 
 char msgbuf[BUFSZ];
@@ -1393,7 +1394,7 @@ STATIC_OVL int
 rottenfood(obj)
 struct obj *obj;
 {
-	pline("Blecch!  Rotten %s!", foodword(obj));
+	pline("Blecch!  %s %s!", upstart(decayed_food_word(obj)), foodword(obj));
 	if(!rn2(4)) {
 		if (Hallucination) You_feel("rather trippy.");
 		else You_feel("rather %s.", body_part(LIGHT_HEADED));
@@ -1939,6 +1940,24 @@ register struct obj *otmp;
 	}
 	return foodwords[objects[otmp->otyp].oc_material];
 }
+
+/* NOTE: the order of these words exactly corresponds to the
+   order of oc_material values #define'd in objclass.h (and foodwords array above). */
+static const char *decayed_food_words[] = {
+	"rotten", "decayed", "dirty", "rotten", "rotten",
+	"rotten", "rotten", "rotten", "rotten", "dirty", "dirty",
+	"contaminated", "contaminated", "contaminated", "contaminated", "contaminated", "contaminated", "contaminated",
+	"dirty", "dirty", "dirty", "dirty"
+};
+
+STATIC_OVL const char *
+decayed_food_word(otmp)
+register struct obj *otmp;
+{
+	if (otmp->oclass == FOOD_CLASS) return "rotten";
+	return decayed_food_words[objects[otmp->otyp].oc_material];
+}
+
 
 STATIC_OVL void
 fpostfx(otmp)		/* called after consuming (non-corpse) food */
