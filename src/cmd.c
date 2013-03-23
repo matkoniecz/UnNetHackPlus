@@ -403,10 +403,14 @@ domonability()
 	} else if (is_mind_flayer(youmonst.data)) {
 		return domindblast();
 	} else if (u.umonnum == PM_GREMLIN) {
-		if(IS_FOUNTAIN(levl[u.ux][u.uy].typ)) {
-			if (split_mon(&youmonst, (struct monst *)0)) {
-				dryup(u.ux, u.uy, TRUE);
-				return 1;
+		if (IS_FOUNTAIN(levl[u.ux][u.uy].typ)) {
+			if (!Levitation) {
+				if (split_mon(&youmonst, (struct monst *)0)) {
+					dryup(u.ux, u.uy, TRUE);
+					return 1;
+				}
+			} else {
+				floating_above("water");
 			}
 		} else {
 			There("is no fountain here.");
