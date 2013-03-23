@@ -386,30 +386,45 @@ extcmd_via_menu()	/* here after # - now show pick-list of possible commands */
 STATIC_PTR int
 domonability()
 {
-	if (can_breathe(youmonst.data)) return dobreathe();
-	else if (attacktype(youmonst.data, AT_SPIT)) return dospit();
-	else if (youmonst.data->mlet == S_NYMPH) return doremove();
-	else if (attacktype(youmonst.data, AT_GAZE)) return dogaze();
-	else if (is_were(youmonst.data)) return dosummon();
-	else if (webmaker(youmonst.data)) return dospinweb();
-	else if (is_hider(youmonst.data)) return dohide();
-	else if (is_mind_flayer(youmonst.data)) return domindblast();
-	else if (u.umonnum == PM_GREMLIN) {
-	    if(IS_FOUNTAIN(levl[u.ux][u.uy].typ)) {
-		if (split_mon(&youmonst, (struct monst *)0))
-		    dryup(u.ux, u.uy, TRUE);
-	    } else There("is no fountain here.");
+	if (can_breathe(youmonst.data)) {
+		return dobreathe();
+	} else if (attacktype(youmonst.data, AT_SPIT)) {
+		return dospit();
+	} else if (youmonst.data->mlet == S_NYMPH) {
+		return doremove();
+	} else if (attacktype(youmonst.data, AT_GAZE)) {
+		return dogaze();
+	} else if (is_were(youmonst.data)) {
+		return dosummon();
+	} else if (webmaker(youmonst.data)) {
+		return dospinweb();
+	} else if (is_hider(youmonst.data)) {
+		return dohide();
+	} else if (is_mind_flayer(youmonst.data)) {
+		return domindblast();
+	} else if (u.umonnum == PM_GREMLIN) {
+		if(IS_FOUNTAIN(levl[u.ux][u.uy].typ)) {
+			if (split_mon(&youmonst, (struct monst *)0)) {
+				dryup(u.ux, u.uy, TRUE);
+			}
+		} else {
+			There("is no fountain here.");
+		}
 	} else if (is_unicorn(youmonst.data)) {
-	    fix_attributes_and_properties((struct obj *)0,0);
-	    return 1;
+		fix_attributes_and_properties((struct obj *)0,0);
+		return 1;
 	} else if (youmonst.data->msound == MS_SHRIEK) {
-	    You("shriek.");
-	    if(u.uburied)
-		pline("Unfortunately sound does not carry well through rock.");
-	    else aggravate();
-	} else if (Upolyd)
+		You("shriek.");
+		if(u.uburied) {
+			pline("Unfortunately sound does not carry well through rock.");
+		} else {
+			aggravate();
+		}
+	} else if (Upolyd) {
 		pline("Any special ability you may have is purely reflexive.");
-	else You("don't have a special ability in your normal form!");
+	} else {
+		You("don't have a special ability in your normal form!");
+	}
 	return 0;
 }
 
