@@ -1934,10 +1934,9 @@ foodword(otmp)
 register struct obj *otmp;
 {
 	if (otmp->oclass == FOOD_CLASS) return "food";
-	if (otmp->oclass == GEM_CLASS &&
-	    objects[otmp->otyp].oc_material == GLASS &&
-	    otmp->dknown)
+	if (otmp->oclass == GEM_CLASS && objects[otmp->otyp].oc_material == GLASS && otmp->dknown) {
 		makeknown(otmp->otyp);
+	}
 	return foodwords[objects[otmp->otyp].oc_material];
 }
 
