@@ -200,6 +200,9 @@ int fleetime;
 boolean first;
 boolean fleemsg;
 {
+	if (DEADMONSTER(mtmp)) {
+		return;
+	}
 	struct monst* mtmp2;
 
 	if (u.ustuck == mtmp) {
