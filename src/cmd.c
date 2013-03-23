@@ -406,6 +406,7 @@ domonability()
 		if(IS_FOUNTAIN(levl[u.ux][u.uy].typ)) {
 			if (split_mon(&youmonst, (struct monst *)0)) {
 				dryup(u.ux, u.uy, TRUE);
+				return 1;
 			}
 		} else {
 			There("is no fountain here.");
@@ -420,6 +421,7 @@ domonability()
 		} else {
 			aggravate();
 		}
+		return 1;
 	} else if (Upolyd) {
 		pline("Any special ability you may have is purely reflexive.");
 	} else {
