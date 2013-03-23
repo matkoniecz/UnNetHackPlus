@@ -2,7 +2,6 @@ Plans for UnNetHackPlus
 * https://github.com/sgrunt/GruntHack/commit/00fac16b796e33189b8f542160fd49d9ff8d790c - magical items generated more frequently at deeper dungeon levels
 * paranoid_liquid
 * kicking unidentified secret door
-* weeping angels - blinking effect - long, rare move (what about blindness? Should it be instant YASD?) pschysical attacks, trap autoturned into statue trap
 * http://bilious.alt.org/?440
 * http://bilious.alt.org/?270
 * Allow looking at dungeon overview during level teleport prompt - from http://nethackwiki.com/wiki/Bugs_in_NetHack_4
@@ -296,7 +295,8 @@ proud owner of a magic whistle.
 #un synchronisation
 * UnNH - (update through 1052 means enabling locust in data.base)
 * after Un.1242 .des - possibility to make drawbridge status random, see https://github.com/Bulwersator/CopyOfSporkHack/commit/1032af2e5b88947b828cdc89a062adb1178fbe5a
-
+* weeping angels - blinking effect - long, rare move (what about blindness? Should it be instant YASD?) pschysical attacks, trap autoturned into statue trap
+* mark "Picking up gold doesn't honor the setting of pickup_burden if the game is compiled without GOLD_OBJ (no prompt when the encumbrance level is exceeded). " in http://nethackwiki.com/wiki/User:Bulwersator/UnNetHackPlus_bug_tracking as fixed
 #recheck
 * https://gitorious.org/nitrohack/ais523/commits/nicehack
 * http://alt.org/nethack/naonh.php graves checked out 9 I - new hallucinatory monster names, random engravings, gravestones and T-shirt messages
