@@ -296,7 +296,8 @@ proud owner of a magic whistle.
 * UnNH - (update through 1052 means enabling locust in data.base)
 * after Un.1242 .des - possibility to make drawbridge status random, see https://github.com/Bulwersator/CopyOfSporkHack/commit/1032af2e5b88947b828cdc89a062adb1178fbe5a
 * weeping angels - blinking effect - long, rare move (what about blindness? Should it be instant YASD?) pschysical attacks, trap autoturned into statue trap
-* mark "Picking up gold doesn't honor the setting of pickup_burden if the game is compiled without GOLD_OBJ (no prompt when the encumbrance level is exceeded). " in http://nethackwiki.com/wiki/User:Bulwersator/UnNetHackPlus_bug_tracking as fixed
+* mark "Picking up gold doesn't honor the setting of pickup_burden if the game is compiled without GOLD_OBJ (no prompt when the encumbrance level is exceeded)." and "impossible() can mangle the parameter values." in http://nethackwiki.com/wiki/User:Bulwersator/UnNetHackPlus_bug_tracking as fixed
+
 #recheck
 * https://gitorious.org/nitrohack/ais523/commits/nicehack
 * http://alt.org/nethack/naonh.php graves checked out 9 I - new hallucinatory monster names, random engravings, gravestones and T-shirt messages
