@@ -118,16 +118,10 @@
 #define MAIL		/* enable broadcast trapping */
 
 /*
- * SHELL enables the player to 'escape' into a spawned subprocess via
- * the '!' command.  Logout or attach back to the parent to resume play.
- * If the player attaches back to NetHack, then a subsequent escape will
- * re-attach to the existing subprocess.  Any such subprocess left over
- * at game exit will be deleted by an exit handler.
  * SUSPEND enables someone running NetHack in a subprocess to reconnect
  * to the parent process with the <ctrl/Z> command; this is not very
  * close to Unix job control, but it's better than nothing.
  */
-#define SHELL		/* do not delete the '!' command */
 #define SUSPEND		/* don't delete the ^Z command, such as it is */
 
 #define RANDOM		/* use sys/share/random.c instead of vaxcrtl rand */

@@ -1771,6 +1771,7 @@ register struct obj *obj;
 		if (obj->otyp == POT_ACID) {
 			pline("It boils vigorously!");
 			You("are caught in the explosion!");
+			wake_nearby();
 			losehp(Acid_resistance ? rnd(5) : rnd(10),
 			       "elementary chemistry", KILLED_BY);
 			makeknown(obj->otyp);
@@ -2041,6 +2042,7 @@ struct obj *potion, *obj;
 		/* KMH, balance patch -- acid is particularly unstable */
 		if (obj->cursed || obj->otyp == POT_ACID || potion->otyp == POT_ACID || !rn2(10)) {
 			pline("BOOM!  They explode!");
+			wake_nearby();
 			exercise(A_STR, FALSE);
 			if (!breathless(youmonst.data) || haseyes(youmonst.data)) {
 				potionbreathe(obj);
@@ -2119,12 +2121,19 @@ struct obj *potion, *obj;
 		return(1);
 	}
 #endif
-	if (potion->otyp == POT_ACID && obj->otyp == CORPSE && obj->corpsenm == PM_LICHEN && !Blind) {
-		pline("%s %s %s around the edges.", The(cxname(obj)),
-		  otense(obj, "turn"),
-		  potion->odiluted ? hcolor(NH_ORANGE) : hcolor(NH_RED));
-		potion->in_use = FALSE;	/* didn't go poof */
-		return(1);
+	if (potion->otyp == POT_ACID) {
+		if (obj->otyp == CORPSE && obj->corpsenm == PM_LICHEN && !Blind) {
+			pline("%s %s %s around the edges.", The(cxname(obj)), otense(obj, "turn"), potion->odiluted ? hcolor(NH_ORANGE) : hcolor(NH_RED));
+			makeknown(POT_ACID);
+			potion->in_use = FALSE;	/* didn't go poof */
+			return(1);
+		}
+		if (is_corrodeable(obj)) {
+			erode_obj(obj, AD_ACID);
+			makeknown(POT_ACID);
+			poof(potion);
+			return(1);
+		}
 	}
 
 	if(is_poisonable(obj)) {
@@ -2239,6 +2248,7 @@ struct obj *potion, *obj;
 		if (obj->lamplit || potion->lamplit) {
 			useup(potion);
 			explode(u.ux, u.uy, 11, d(6,6), 0, EXPL_FIERY);
+			wake_nearby();
 			exercise(A_WIS, FALSE);
 			return 1;
 		}

@@ -11,6 +11,7 @@ extern long bytes_counted;
 #endif
 
 STATIC_DCL boolean FDECL(no_bones_level, (d_level *));
+STATIC_DCL boolean FDECL(is_special_monster, (struct permonst *));
 STATIC_DCL void FDECL(goodfruit, (int));
 STATIC_DCL void FDECL(resetobjs,(struct obj *,BOOLEAN_P));
 STATIC_DCL void FDECL(drop_upon_death, (struct monst *, struct obj *));
@@ -243,6 +244,26 @@ can_make_bones()
 	return TRUE;
 }
 
+/* is it a special monster that should be removed from bones */
+boolean
+is_special_monster(struct permonst *mptr)
+{
+	if (mptr == &mons[PM_WIZARD_OF_YENDOR]){
+		return TRUE;
+	} else if (mptr == &mons[PM_MEDUSA]){
+		return TRUE;
+	} else if (mptr->msound == MS_NEMESIS){
+		return TRUE;
+	} else if (mptr->msound == MS_LEADER){
+		return TRUE;
+	} else if (mptr == &mons[PM_VLAD_THE_IMPALER]){
+		return TRUE;
+	} else if (mptr == &mons[PM_CTHULHU]){
+		return TRUE;
+	}
+	return FALSE;
+}
+
 /* save bones and possessions of a deceased adventurer */
 void
 savebones(corpse)
@@ -282,10 +303,7 @@ struct obj *corpse;
 	for (mtmp = fmon; mtmp; mtmp = mtmp->nmon) {
 	    if (DEADMONSTER(mtmp)) continue;
 	    mptr = mtmp->data;
-	    if (mtmp->iswiz || mptr == &mons[PM_MEDUSA] ||
-		    mptr->msound == MS_NEMESIS || mptr->msound == MS_LEADER ||
-		    mptr == &mons[PM_VLAD_THE_IMPALER] ||
-		    mptr == &mons[PM_CTHULHU]) {
+	    if (is_special_monster(mptr)) {
 		mongone(mtmp);
 	    }
 	}

@@ -706,6 +706,7 @@ register struct monst *mtmp;
 				"Go ahead an' run! I LIKE a movin' target ye worm livered panty waist wiggly maggot!",
 				"Ba ba ba-ba ba you’re gonna get murdered",
 				"Have a face full o' boot ye bloated rat spawned chunk O' bat spit!",
+				"WARGHLBARGLEARGLEBARGLE!",
 			};
 			verbl_msg = orc_insults_msgs[rn2(SIZE(orc_insults_msgs))];
 		} else {

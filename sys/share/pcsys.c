@@ -74,68 +74,6 @@ static const char *COMSPEC =
 
 #define getcomspec() nh_getenv(COMSPEC)
 
-# ifdef SHELL
-int
-dosh()
-{
-	extern char orgdir[];
-	char *comspec;
-# ifndef __GO32__
-	int spawnstat;
-# endif
-#if defined(MSDOS) && defined(NO_TERMS)
-	int grmode = iflags.grmode;
-#endif
-	if ((comspec = getcomspec())) {
-#  ifndef TOS	/* TOS has a variety of shells */
-		suspend_nhwindows("To return to NetHack, enter \"exit\" at the system prompt.\n");
-#  else
-#   if defined(MSDOS) && defined(NO_TERMS)
-		grmode = iflags.grmode;
-#   endif
-		suspend_nhwindows((char *)0);
-#  endif /* TOS */
-#  ifndef NOCWD_ASSUMPTIONS
-		chdirx(orgdir, 0);
-#  endif
-#  ifdef __GO32__
-		if (system(comspec) < 0) {  /* wsu@eecs.umich.edu */
-#  else
-#   ifdef MOVERLAY
-       /* Free the cache memory used by overlays, close .exe */
-	_movefpause |= __MOVE_PAUSE_DISK;
-	_movefpause |= __MOVE_PAUSE_CACHE;
-	_movepause();
-#   endif
-		spawnstat = spawnl(P_WAIT, comspec, comspec, (char *)0);
-#   ifdef MOVERLAY
-		 _moveresume();
-#   endif
-
-		if ( spawnstat < 0) {
-#  endif
-			raw_printf("Can't spawn \"%s\"!", comspec);
-			getreturn("to continue");
-		}
-#  ifdef TOS
-/* Some shells (e.g. Gulam) turn the cursor off when they exit */
-		if (iflags.BIOS)
-			(void)Cursconf(1, -1);
-#  endif
-#  ifndef NOCWD_ASSUMPTIONS
-		chdirx(hackdir, 0);
-#  endif
-		get_scr_size(); /* maybe the screen mode changed (TH) */
-#  if defined(MSDOS) && defined(NO_TERMS)
-		if (grmode) gr_init();
-#  endif
-		resume_nhwindows();
-	} else
-		pline("Can't find %s.",COMSPEC);
-	return 0;
-}
-# endif /* SHELL */
-
 # ifdef MFLOPPY
 
 void

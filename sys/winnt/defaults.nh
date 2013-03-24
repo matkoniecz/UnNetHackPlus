@@ -1,4 +1,4 @@
-# Sample config file for win32 NetHack
+# Sample config file for win32 UnNetHackPlus
 # A '#' at the beginning of a line means the rest of the line is a comment.
 #
 # Some options MUST be set in this file, other options can be toggled while

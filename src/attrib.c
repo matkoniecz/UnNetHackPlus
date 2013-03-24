@@ -613,9 +613,9 @@ int oldlevel, newlevel;
 
 	if (oldlevel > 0) {
 	    if (newlevel > oldlevel)
-		add_weapon_skill(newlevel - oldlevel);
+		add_skill_slot(newlevel - oldlevel);
 	    else
-		lose_weapon_skill(oldlevel - newlevel);
+		lose_skill_slot(oldlevel - newlevel);
 	}
 }
 

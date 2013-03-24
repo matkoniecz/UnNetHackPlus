@@ -105,6 +105,13 @@ shuffle(o_low, o_high, domaterial)
 	}
 }
 
+int
+get_random_color()
+{
+	const int colors[] = {CLR_BLACK, CLR_RED, CLR_GREEN, CLR_BROWN, CLR_BLUE, CLR_MAGENTA, CLR_CYAN, CLR_GRAY, CLR_ORANGE, CLR_BRIGHT_GREEN, CLR_YELLOW, CLR_BRIGHT_BLUE, CLR_BRIGHT_MAGENTA, CLR_WHITE};
+	return colors[rn2(SIZE(colors))];
+}
+
 void
 init_objects()
 {
@@ -123,6 +130,12 @@ register char oclass;
 	 */
 	for (i = 0; i < MAXOCLASSES; i++)
 		bases[i] = 0;
+	/* set color for objects with CLR_RANDOM */
+	for (i = 0; i < NUM_OBJECTS; i++) {
+		if (objects[i].oc_color == CLR_RANDOM) {
+			objects[i].oc_color = get_random_color();
+		}
+	}
 	/* initialize object descriptions */
 	for (i = 0; i < NUM_OBJECTS; i++)
 		objects[i].oc_name_idx = objects[i].oc_descr_idx = i;

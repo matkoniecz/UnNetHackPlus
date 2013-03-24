@@ -28,10 +28,9 @@ static const char *random_mesg[] = {
 	"Madam, in Eden, I'm Adam.", /* A palindrome */
 	"Two thumbs up!", /* Siskel & Ebert */
 	"Hello, World!", /* The First C Program */
-#ifdef MAIL
 	"You've got mail!", /* AOL */
-#endif
 	"As if!", /* Clueless */
+
 	/* From Slash'Em */
 	/* [Tom] added these */
 	"Y?v?l s??ks!", /* just kidding... */
@@ -44,6 +43,7 @@ static const char *random_mesg[] = {
 	"UY WUZ HERE", /* :] */
 	"I'll be back!", /* Terminator */
 	"That is not dead which can eternal lie.", /* HPL */
+
 	/* From NAO */
 	"Arooo!  Werewolves of Yendor!", /* gang tag */
 	"Dig for Victory here", /* pun, duh */
@@ -65,6 +65,7 @@ static const char *random_mesg[] = {
 	"X marks the spot",
 	"X <--- You are here.",
 	"You are the one millionth visitor to this place!  Please wait 200 turns for your wand of wishing.",
+
 	/* From UnNetHack */
 	"She's watching you!", /* Portal */
 	"The cake is a lie!", /* Portal */
@@ -83,6 +84,22 @@ static const char *random_mesg[] = {
 	"Look behind you, a Three-Headed Monkey!", /* Monkey Island */
 	"Ifnkovhgroghprm", /* Kings Quest I */
 	"Cookies are delicious delicacies", /* Mozilla Firefox */
+
+	/* From UnNetHackPlus */
+	"Losing is fun!", /* Dwarf Fortress */
+	/* Murphy's laws */
+	"Cheer up, the worst is yet to come...",
+	"Computers let you waste time efficiently",
+	"If something cannot go wrong at all, it will go wrong in a very spectacular way.",
+	"If everything seems to be going well, you have obviously overlooked something",
+	"If anything can go wrong, it will",
+	"When things go from bad to worse, the cycle repeats.",
+	"Being dead right, won't make you any less dead.",
+	"If all else fails, hit it with a big hammer.",
+	"If many things can go wrong, they will all go wrong at the same time.",
+	"That is not dead which can eternal lie, and with strange aeons even death may die.", /* H. P. Lovecraft */
+	"Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.", /* H. P. Lovecraft */
+	"Conducts are about player skill, not about obsessive-compulsive disorder", /* TJR on RGRN */
 };
 
 char *

@@ -1452,6 +1452,7 @@ E void NDECL(synch_cursor);
 
 /* ### o_init.c ### */
 
+E int NDECL(get_random_color);
 E void NDECL(init_objects);
 E int NDECL(find_skates);
 E void NDECL(oinit);
@@ -1784,7 +1785,7 @@ E void FDECL(recharge, (struct obj *,int));
 E void FDECL(forget_objects, (int));
 E void FDECL(forget_levels, (int));
 E void NDECL(forget_traps);
-E void FDECL(forget_map, (int));
+E void FDECL(forget_map, (boolean));
 E int FDECL(seffects, (struct obj *));
 #ifdef USE_TRAMPOLI
 E void FDECL(set_lit, (int,int,genericptr_t));
@@ -2042,7 +2043,7 @@ E void NDECL(age_spells);
 E int NDECL(docast);
 E int FDECL(spell_skilltype, (int));
 E int FDECL(spelleffects, (int,BOOLEAN_P));
-E void NDECL(losespells);
+E void NDECL(forget_spells);
 E int NDECL(dovspell);
 E void FDECL(initialspell, (struct obj *));
 E void NDECL(dump_spells);
@@ -2249,10 +2250,7 @@ E void FDECL(regularize, (char *));
 # if defined(TIMED_DELAY) && !defined(msleep) && defined(SYSV)
 E void FDECL(msleep, (unsigned));
 # endif
-# ifdef SHELL
-E int NDECL(dosh);
-# endif /* SHELL */
-# if defined(SHELL) || defined(DEF_PAGER) || defined(DEF_MAILREADER)
+# if defined(DEF_PAGER) || defined(DEF_MAILREADER)
 E int FDECL(child, (int));
 # endif
 #ifdef FILE_AREAS
@@ -2394,14 +2392,11 @@ E boolean FDECL(file_is_stmlf, (int));
 E int FDECL(vms_define, (const char *,const char *,int));
 E int FDECL(vms_putenv, (const char *));
 E char *NDECL(verify_termcap);
-# if defined(CHDIR) || defined(SHELL) || defined(SECURE)
+# if defined(CHDIR) || defined(SECURE)
 E void NDECL(privoff);
 E void NDECL(privon);
 # endif
-# ifdef SHELL
-E int NDECL(dosh);
-# endif
-# if defined(SHELL) || defined(MAIL)
+# if defined(MAIL)
 E int FDECL(vms_doshell, (const char *,BOOLEAN_P));
 # endif
 # ifdef SUSPEND
@@ -2425,9 +2420,11 @@ E int NDECL(enhance_weapon_skill);
 E void NDECL(dump_weapon_skill);
 #endif
 E void FDECL(unrestrict_weapon_skill, (int));
+E void NDECL(forget_skills);
+E void FDECL(lose_skill, (int));
 E void FDECL(use_skill, (int,int));
-E void FDECL(add_weapon_skill, (int));
-E void FDECL(lose_weapon_skill, (int));
+E void FDECL(add_skill_slot, (int));
+E void FDECL(lose_skill_slot, (int));
 E int FDECL(weapon_type, (struct obj *));
 E int NDECL(uwep_skill_type);
 E int FDECL(weapon_hit_bonus, (struct obj *));

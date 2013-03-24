@@ -35,7 +35,6 @@
 /* configurable options */
 #define MFLOPPY			/* floppy support		*/
 #define RANDOM			/* improved random numbers	*/
-#define SHELL			/* allow spawning of shell	*/
 #define TERMLIB			/* use termcap			*/
 #define TEXTCOLOR		/* allow color			*/
 #define MAIL			/* enable the fake maildemon */

@@ -1013,21 +1013,26 @@ throwspell()
 	}
 }
 
+/*
+* You forget 1d(known) spells. Forgotten spells are removed starting from the bottom of the spellcasting menu
+*/
 void
-losespells()
+forget_spells()
 {
-	boolean confused = (Confusion != 0);
 	int  n, nzap, i;
 
 	book = 0;
-	for (n = 0; n < MAXSPELL && spellid(n) != NO_SPELL; n++)
+	for (n = 0; n < MAXSPELL && spellid(n) != NO_SPELL; n++) {
 		continue;
+	}
 	if (n) {
-		nzap = rnd(n) + confused ? 1 : 0;
-		if (nzap > n) nzap = n;
+		nzap = rnd(n);
+		if (nzap > n) {
+			nzap = n;
+		}
 		for (i = n - nzap; i < n; i++) {
-		    spellid(i) = NO_SPELL;
-		    exercise(A_WIS, FALSE);	/* ouch! */
+			spellid(i) = NO_SPELL;
+			exercise(A_WIS, FALSE);	/* ouch! */
 		}
 	}
 }

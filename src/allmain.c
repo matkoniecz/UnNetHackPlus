@@ -453,8 +453,9 @@ void
 stop_occupation()
 {
 	if(occupation) {
-		if (!maybe_finished_meal(TRUE))
-		    You("stop %s.", occtxt);
+		if (!maybe_finished_meal(TRUE)) {
+			You("stop %s.", occtxt);
+		}
 		occupation = 0;
 		flags.botl = 1; /* in case u.uhs changed */
 /* fainting stops your occupation, there's no reason to sync.
