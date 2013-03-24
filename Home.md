@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* reduce u.gold
 * https://github.com/sgrunt/GruntHack/commit/00fac16b796e33189b8f542160fd49d9ff8d790c - magical items generated more frequently at deeper dungeon levels
 * paranoid_liquid
 * kicking unidentified secret door
