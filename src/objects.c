@@ -881,9 +881,9 @@ SPELL("stone to flesh",  "thick",       P_HEALING_SPELL, 15,  1, 3, 1, IMMEDIATE
 SPELL("flame sphere",    "",      P_MATTER_SPELL, 20,  2, 1, 1, NODIR, CLR_BROWN),
 SPELL("freeze sphere",   "",   P_MATTER_SPELL, 20,  2, 1, 1, NODIR, CLR_BROWN),
 #endif
-SPELL((char *)0,         "canvas",      P_NONE, 0, 0, 0, 1, 0, CLR_RANDOM),
+SPELL((char *)0,         "colorful",    P_NONE, 0, 0, 0, 1, 0, CLR_RANDOM),
+SPELL((char *)0,         "canvas",      P_NONE, 0, 0, 0, 1, 0, CLR_BROWN),
 SPELL((char *)0,         "hardcover",   P_NONE, 0, 0, 0, 1, 0, CLR_BROWN),
-SPELL((char *)0,         "colorful",    P_NONE, 0, 0, 0, 1, 0, CLR_BRIGHT_GREEN),
 SPELL((char *)0,         "dark",        P_NONE, 0, 0, 0, 1, 0, CLR_BLACK),
 SPELL((char *)0,         "spotted",     P_NONE, 0, 0, 0, 1, 0, HI_PAPER),
 SPELL((char *)0,         "faded",       P_NONE, 0, 0, 0, 1, 0, CLR_GRAY),
