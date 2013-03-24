@@ -337,71 +337,76 @@ register int roomno;
 	char buf[BUFSZ];
 
 	if(!temple_occupied(u.urooms0)) {
-	    if(tended) {
-		shrined = has_shrine(priest);
-		sanctum = (Is_sanctum(&u.uz) || In_endgame(&u.uz));
-		can_speak = (priest->mcanmove && !priest->msleeping &&
-			     flags.soundok);
-		if (can_speak) {
-		    unsigned save_priest = priest->ispriest;
-		    /* don't reveal the altar's owner upon temple entry in
-		       the endgame; for the Sanctum, the next message names
-		       Moloch so suppress the "of Moloch" for him here too */
-		    if (sanctum && !Hallucination) priest->ispriest = 0;
-		    pline("%s intones:",
-			canseemon(priest) ? Monnam(priest) : "A nearby voice");
-		    priest->ispriest = save_priest;
-		}
-		msg2 = 0;
-		if(sanctum && Is_sanctum(&u.uz)) {
-		    if(priest->mpeaceful) {
-			msg1 = "Infidel, you have entered Moloch's Sanctum!";
-			msg2 = "Be gone!";
-			priest->mpeaceful = 0;
-			set_malign(priest);
-		    } else
-			msg1 = "You desecrate this place by your presence!";
+		if(tended) {
+			shrined = has_shrine(priest);
+			sanctum = (Is_sanctum(&u.uz) || In_endgame(&u.uz));
+			can_speak = priest->mcanmove && !priest->msleeping;
+			can_speak = can_speak && flags.soundok;
+			if (can_speak) {
+				unsigned save_priest = priest->ispriest;
+				/* don't reveal the altar's owner upon temple entry in
+				 * the endgame; for the Sanctum, the next message names
+				 * Moloch so suppress the "of Moloch" for him here too 
+				 */
+				if (sanctum && !Hallucination) priest->ispriest = 0;
+				pline("%s intones:", canseemon(priest) ? Monnam(priest) : "A nearby voice");
+				priest->ispriest = save_priest;
+			}
+			msg2 = 0;
+			if(sanctum && Is_sanctum(&u.uz)) {
+				if(priest->mpeaceful) {
+					msg1 = "Infidel, you have entered Moloch's Sanctum!";
+					msg2 = "Be gone!";
+					priest->mpeaceful = 0;
+					set_malign(priest);
+				} else {
+					msg1 = "You desecrate this place by your presence!";
+				}
+			} else {
+				Sprintf(buf, "Pilgrim, you enter a %s place!", !shrined ? "desecrated" : "sacred");
+				msg1 = buf;
+			}
+			if (can_speak) {
+				verbalize(msg1);
+				if (msg2) {
+					verbalize(msg2);
+				}
+			}
+			if(!sanctum) {
+				/* !tended -> !shrined */
+				if (!shrined || !p_coaligned(priest) || u.ualign.record <= ALGN_SINNED) {
+					You("have a%s forbidding feeling...", (!shrined) ? "" : " strange");
+				} else {
+					You("experience a strange sense of peace.");
+				}
+			}
 		} else {
-		    Sprintf(buf, "Pilgrim, you enter a %s place!",
-			    !shrined ? "desecrated" : "sacred");
-		    msg1 = buf;
-		}
-		if (can_speak) {
-		    verbalize(msg1);
-		    if (msg2) verbalize(msg2);
-		}
-		if(!sanctum) {
-		    /* !tended -> !shrined */
-		    if (!shrined || !p_coaligned(priest) ||
-			    u.ualign.record <= ALGN_SINNED)
-			You("have a%s forbidding feeling...",
-				(!shrined) ? "" : " strange");
-		    else You("experience a strange sense of peace.");
-		}
-	    } else {
-		switch(rn2(3)) {
-		  case 0: You("have an eerie feeling..."); break;
-		  case 1: You_feel("like you are being watched."); break;
-		  default: pline("A shiver runs down your %s.",
-			body_part(SPINE)); break;
-		}
-		if(!rn2(5)) {
-		    struct monst *mtmp;
+			switch(rn2(3)) {
+			case 0: You("have an eerie feeling..."); break;
+			case 1: You_feel("like you are being watched."); break;
+			default: pline("A shiver runs down your %s.", body_part(SPINE)); break;
+			}
+			if(!rn2(5)) {
+				struct monst *mtmp;
 
-		    if(!(mtmp = makemon(&mons[PM_GHOST],u.ux,u.uy,NO_MM_FLAGS)))
-			return;
-		    if (!Blind || sensemon(mtmp))
-			pline("An enormous ghost appears next to you!");
-		    else You("sense a presence close by!");
-		    mtmp->mpeaceful = 0;
-		    set_malign(mtmp);
-		    if(flags.verbose)
-			You("are frightened to death, and unable to move.");
-		    nomul(-3, "frightened to death");
-		    nomovemsg = "You regain your composure.";
-	       }
-	   }
-       }
+				if(!(mtmp = makemon(&mons[PM_GHOST],u.ux,u.uy,NO_MM_FLAGS))) {
+					return;
+				}
+				if (!Blind || sensemon(mtmp)) {
+					pline("An enormous ghost appears next to you!");
+				} else {
+					You("sense a presence close by!");
+				}
+				mtmp->mpeaceful = 0;
+				set_malign(mtmp);
+				if(flags.verbose) {
+					You("are frightened to death, and unable to move.");
+				}
+				nomul(-3, "frightened to death");
+				nomovemsg = "You regain your composure.";
+			}
+		}
+	}
 }
 
 void
@@ -415,122 +420,124 @@ register struct monst *priest;
 	u.uconduct.gnostic++;
 
 	if(priest->mflee || (!priest->ispriest && coaligned && strayed)) {
-	    pline("%s doesn't want anything to do with you!",
-				Monnam(priest));
-	    priest->mpeaceful = 0;
-	    return;
+		pline("%s doesn't want anything to do with you!", Monnam(priest));
+		priest->mpeaceful = 0;
+		return;
 	}
 
 	/* priests don't chat unless peaceful and in their own temple */
-	if(!histemple_at(priest,priest->mx,priest->my) ||
-		 !priest->mpeaceful || !priest->mcanmove || priest->msleeping) {
-	    static const char *cranky_msg[3] = {
-		"Thou wouldst have words, eh?  I'll give thee a word or two!",
-		"Talk?  Here is what I have to say!",
-		"Pilgrim, I would speak no longer with thee."
-	    };
+	if(!histemple_at(priest,priest->mx,priest->my) || !priest->mpeaceful || !priest->mcanmove || priest->msleeping) {
+		static const char *cranky_msg[3] = {
+			"Thou wouldst have words, eh?  I'll give thee a word or two!",
+			"Talk?  Here is what I have to say!",
+			"Pilgrim, I would speak no longer with thee."
+			};
 
-	    if(!priest->mcanmove || priest->msleeping) {
-		pline("%s breaks out of %s reverie!",
-		      Monnam(priest), mhis(priest));
-		priest->mfrozen = priest->msleeping = 0;
-		priest->mcanmove = 1;
-	    }
-	    priest->mpeaceful = 0;
-	    verbalize(cranky_msg[rn2(3)]);
-	    return;
+		if(!priest->mcanmove || priest->msleeping) {
+			pline("%s breaks out of %s reverie!", Monnam(priest), mhis(priest));
+			priest->mfrozen = priest->msleeping = 0;
+			priest->mcanmove = 1;
+		}
+		priest->mpeaceful = 0;
+		verbalize(cranky_msg[rn2(3)]);
+		return;
 	}
 
 	/* you desecrated the temple and now you want to chat? */
-	if(priest->mpeaceful && *in_rooms(priest->mx, priest->my, TEMPLE) &&
-		  !has_shrine(priest)) {
-	    verbalize("Begone!  Thou desecratest this holy place with thy presence.");
-	    priest->mpeaceful = 0;
-	    return;
+	if(priest->mpeaceful && *in_rooms(priest->mx, priest->my, TEMPLE) && !has_shrine(priest)) {
+		verbalize("Begone!  Thou desecratest this holy place with thy presence.");
+		priest->mpeaceful = 0;
+		return;
 	}
 #ifndef GOLDOBJ
 	if(!u.ugold) {
-	    if(coaligned && !strayed) {
-		if (priest->mgold > 0L) {
-		    /* Note: two bits is actually 25 cents.  Hmm. */
-		    pline("%s gives you %s for an ale.", Monnam(priest),
-			(priest->mgold == 1L) ? "one bit" : "two bits");
-		    if (priest->mgold > 1L)
-			u.ugold = 2L;
-		    else
-			u.ugold = 1L;
-		    priest->mgold -= u.ugold;
-		    flags.botl = 1;
+		if(coaligned && !strayed) {
+			if (priest->mgold > 0L) {
+				/* Note: two bits is actually 25 cents.  Hmm. */
+				pline("%s gives you %s for an ale.", Monnam(priest), (priest->mgold == 1L) ? "one bit" : "two bits");
+				if (priest->mgold > 1L) {
+					u.ugold = 2L;
+				} else {
+					u.ugold = 1L;
+				}
+				priest->mgold -= u.ugold;
+				flags.botl = 1;
 #else
 	if(!money_cnt(invent)) {
-	    if(coaligned && !strayed) {
-                long pmoney = money_cnt(priest->minvent);
-		if (pmoney > 0L) {
-		    /* Note: two bits is actually 25 cents.  Hmm. */
-		    pline("%s gives you %s for an ale.", Monnam(priest),
-			(pmoney == 1L) ? "one bit" : "two bits");
-		     money2u(priest, pmoney > 1L ? 2 : 1);
+		if(coaligned && !strayed) {
+			long pmoney = money_cnt(priest->minvent);
+			if (pmoney > 0L) {
+				/* Note: two bits is actually 25 cents.  Hmm. */
+				pline("%s gives you %s for an ale.", Monnam(priest), (pmoney == 1L) ? "one bit" : "two bits");
+				money2u(priest, pmoney > 1L ? 2 : 1);
 #endif
-		} else
-		    pline("%s preaches the virtues of poverty.", Monnam(priest));
-		exercise(A_WIS, TRUE);
-	    } else
-		pline("%s is not interested.", Monnam(priest));
-	    return;
+			} else {
+				pline("%s preaches the virtues of poverty.", Monnam(priest));
+			}
+			exercise(A_WIS, TRUE);
+		} else {
+			pline("%s is not interested.", Monnam(priest));
+		}
+		return;
 	} else {
-	    long offer;
+		long offer;
 
-	    pline("%s asks you for a contribution for the temple.",
-			Monnam(priest));
-	    if((offer = bribe(priest)) == 0) {
-		verbalize("Thou shalt regret thine action!");
-		if(coaligned) adjalign(-1);
-	    } else if(offer < (u.ulevel * 200)) {
+		pline("%s asks you for a contribution for the temple.", Monnam(priest));
+		offer = bribe(priest);
+		if(offer == 0) {
+			verbalize("Thou shalt regret thine action!");
+			if(coaligned) {
+				adjalign(-1);
+			}
+		} else if(offer < (u.ulevel * 200)) {
 #ifndef GOLDOBJ
-		if(u.ugold > (offer * 2L)) verbalize("Cheapskate.");
+			if(u.ugold > (offer * 2L)) verbalize("Cheapskate.");
 #else
-		if(money_cnt(invent) > (offer * 2L)) verbalize("Cheapskate.");
+			if(money_cnt(invent) > (offer * 2L)) verbalize("Cheapskate.");
 #endif
-		else {
-		    verbalize("I thank thee for thy contribution.");
-		    /*  give player some token  */
-		    exercise(A_WIS, TRUE);
-		}
-	    } else if(offer < (u.ulevel * 400)) {
-		verbalize("Thou art indeed a pious individual.");
+			else {
+				verbalize("I thank thee for thy contribution.");
+				/*  give player some token  */
+				exercise(A_WIS, TRUE);
+			}
+		} else if(offer < (u.ulevel * 400)) {
+			verbalize("Thou art indeed a pious individual.");
 #ifndef GOLDOBJ
-		if(u.ugold < (offer * 2L)) {
+			if(u.ugold < (offer * 2L)) {
 #else
-		if(money_cnt(invent) < (offer * 2L)) {
+			if(money_cnt(invent) < (offer * 2L)) {
 #endif
-		    if (coaligned && u.ualign.record <= ALGN_SINNED)
-			adjalign(1);
-		    verbalize("I bestow upon thee a blessing.");
-		    incr_itimeout(&HClairvoyant, rn1(500,500));
-		}
-	    } else if(offer < (u.ulevel * 600) &&
-		      u.ublessed < 20 &&
-		      (u.ublessed < 9 || !rn2(u.ublessed))) {
-		verbalize("Thy devotion has been rewarded.");
-		if (!(HProtection & INTRINSIC))  {
-			HProtection |= FROMOUTSIDE;
-			if (!u.ublessed)  u.ublessed = rn1(3, 2);
-		} else u.ublessed++;
-	    } else {
-		verbalize("Thy selfless generosity is deeply appreciated.");
+				if (coaligned && u.ualign.record <= ALGN_SINNED) {
+					adjalign(1);
+				}
+				verbalize("I bestow upon thee a blessing.");
+				incr_itimeout(&HClairvoyant, rn1(500,500));
+			}
+		} else if(offer < (u.ulevel * 600) && u.ublessed < 20 && (u.ublessed < 9 || !rn2(u.ublessed))) {
+			verbalize("Thy devotion has been rewarded.");
+			if (!(HProtection & INTRINSIC))  {
+				HProtection |= FROMOUTSIDE;
+				if (!u.ublessed) {
+					u.ublessed = rn1(3, 2);
+				}
+			} else {
+				u.ublessed++;
+			}
+		} else {
+			verbalize("Thy selfless generosity is deeply appreciated.");
 #ifndef GOLDOBJ
-		if(u.ugold < (offer * 2L) && coaligned) {
+			if(u.ugold < (offer * 2L) && coaligned) {
 #else
-		if(money_cnt(invent) < (offer * 2L) && coaligned) {
+			if(money_cnt(invent) < (offer * 2L) && coaligned) {
 #endif
-		    if(strayed && (moves - u.ucleansed) > 5000L) {
-			u.ualign.record = 0; /* cleanse thee */
-			u.ucleansed = moves;
-		    } else {
-			adjalign(2);
-		    }
+				if(strayed && (moves - u.ucleansed) > 5000L) {
+					u.ualign.record = 0; /* cleanse thee */
+					u.ucleansed = moves;
+				} else {
+					adjalign(2);
+				}
+			}
 		}
-	    }
 	}
 }
 
