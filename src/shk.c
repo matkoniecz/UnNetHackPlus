@@ -3325,7 +3325,7 @@ register struct monst *shkp;
 	omy = shkp->my;
 
 	/* Random advertising to passersby */
-	if (!ANGRY(shkp) && inhishop(shkp) && !*u.ushops && distu(shkp->mx,shkp->my)<=150 && !rn2(10)) {
+	if (!ANGRY(shkp) && inhishop(shkp) && !*u.ushops && distu(shkp->mx,shkp->my)<=150 && !rn2(40)) {
 		shk_holler(shkp);
 	}
 
