@@ -340,7 +340,7 @@ register int roomno;
 		if(tended) {
 			shrined = has_shrine(priest);
 			sanctum = (Is_sanctum(&u.uz) || In_endgame(&u.uz));
-			can_speak = priest->mcanmove && !priest->msleeping;
+			can_speak = priest->mcanmove && !priest->msleeping && !is_silent(priest->data);
 			can_speak = can_speak && flags.soundok;
 			if (can_speak) {
 				unsigned save_priest = priest->ispriest;
@@ -439,13 +439,17 @@ register struct monst *priest;
 			priest->mcanmove = 1;
 		}
 		priest->mpeaceful = 0;
-		verbalize(cranky_msg[rn2(3)]);
+		if (!is_silent(priest->data)) {
+			verbalize(cranky_msg[rn2(3)]);
+		}
 		return;
 	}
 
 	/* you desecrated the temple and now you want to chat? */
 	if(priest->mpeaceful && *in_rooms(priest->mx, priest->my, TEMPLE) && !has_shrine(priest)) {
-		verbalize("Begone!  Thou desecratest this holy place with thy presence.");
+		if (!is_silent(priest->data)) {
+			verbalize("Begone!  Thou desecratest this holy place with thy presence.");
+		}
 		priest->mpeaceful = 0;
 		return;
 	}
@@ -471,7 +475,7 @@ register struct monst *priest;
 				pline("%s gives you %s for an ale.", Monnam(priest), (pmoney == 1L) ? "one bit" : "two bits");
 				money2u(priest, pmoney > 1L ? 2 : 1);
 #endif
-			} else {
+			} else if (!is_silent(priest->data)) {
 				pline("%s preaches the virtues of poverty.", Monnam(priest));
 			}
 			exercise(A_WIS, TRUE);
@@ -479,7 +483,7 @@ register struct monst *priest;
 			pline("%s is not interested.", Monnam(priest));
 		}
 		return;
-	} else {
+	} else if (!is_silent(priest->data)) {
 		long offer;
 
 		pline("%s asks you for a contribution for the temple.", Monnam(priest));
