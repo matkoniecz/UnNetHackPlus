@@ -192,6 +192,27 @@ MSGTYPE=stop "The bullwhip wraps around * you're wielding!"
 #more info about MSGTYPE available at http://nethackwiki.com/wiki/MSGTYPE
 #this configuration is based on scorchgeek's rcfile: http://alt.org/nethack/userdata/s/scorchgeek/scorchgeek.nh343rc
 
+#MONSTERCOLOR allows changing color for a monster. 
+#Available colours: black, red, green, brown, blue, magenta, cyan, gray, orange, lightgreen, yellow, lightblue, lightmagenta, lightcyan, white. 
+#For example, uncommenting following options reverts changes introduced by UnNetHackPlus
+#MONSTERCOLOR=chickatrice:brown
+#MONSTERCOLOR=fox:red
+#MONSTERCOLOR=warg:brown
+#MONSTERCOLOR=mind flayer:magenta
+#MONSTERCOLOR=master mind flayer:magenta
+#MONSTERCOLOR=manes:red
+#MONSTERCOLOR=goblin:gray
+#MONSTERCOLOR=orc:red
+#MONSTERCOLOR=hill orc:yellow
+#MONSTERCOLOR=rabid rat:brown
+#MONSTERCOLOR=aleax:yellow
+#MONSTERCOLOR=giant bat:red
+#MONSTERCOLOR=vampire bat:black
+#MONSTERCOLOR=kop Lieutenant:cyan
+#MONSTERCOLOR=owlbear:brown
+#MONSTERCOLOR=Wizard of Yendor:magenta
+#MONSTERCOLOR=cthulhu:magenta
+
 # Prevent alert notification messages about feature changes in a
 # (Un)NetHack version and the previous versions
 OPTIONS=suppress_alert=3.5.0
