@@ -45,6 +45,7 @@
 		- Smarter object colours (unique colours for can of grease - bright green and tinning kit - orange).
 		- Follow guidelines for monster color assignment (based on work by "L" - Leon Arnott)
 		- Bear trap is no longer ineffective on diagonals
+		- Better default config file - MSGTYPE and MONSTERCOLOR are mentioned, obvious MSGTYPE settings are appplied.
 	* Grinding elimination
 		- Chance of wand wresting raised to 1/11
 		- Carrying digging tools to shop is no longer blocked
