@@ -31,7 +31,6 @@ Plans for UnNetHackPlus
 * http://fantasynamegenerators.com/demon_names.php
 * magic draining attack (cancellation???) - magic destroyer - yellow R (peaceful NPCish???)? - yellow V?
 * monsters are not getting poison resistance from worn dragon scale mail
-* patchlevel.h  version.c 
 * merge uhitm, mhitm, mhitu etc
 * amulet versus poison searches_for_item
 mon_reflects
@@ -41,13 +40,10 @@ m_dowear_type
 * http://bilious.alt.org/?181
 * http://bilious.alt.org/?151
 * http://bilious.alt.org/?224
-* Double Cthulhu sanctum
 * autotravel and stopping for engravings
 * monster with tele= resist \ of tele
 * https://github.com/tung/NitroHack/wiki - UnNetHack bug fixes (not already in UnNetHack)
 * wishing for unidentified dragon mail by power is not supposed to work (UnH)
-* appearances but tiles (objects.c)
-* allow amnesia for pink h, spell skills targeted
 * fast travel should not stop on graves
 * save vibrating square in dungeon overwiev
 * autotravel, traps (squaky, pits) and pernament levitation
@@ -77,7 +73,7 @@ m_dowear_type
 * topten.c tt_oname - use names from NAO (?)
 * nethack.alt.org, there is an option (hilite_hidden_stairs) http://bilious.alt.org/?433
 * new level generator (moria, see newsgroup)
-* the alignment system needs a complete overhaul 
+* the alignment system  a complete overhaul 
 * make stupid water noticeable different from stupid fountains
 * http://nethackwiki.com/wiki/W343-3
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/21de56b16793ec139ea0859cbec29c40c4072309 Non-mindless monsters will no longer blindly walk into traps they've seen
