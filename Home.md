@@ -107,7 +107,7 @@ into mana/magic missile resistance (which gray DSM would confer), spell
 resistance, and death resistance. While spell resistance would remain a
 high priority, the others would be precautionary measures (much like
 acid resistance is now.) https://groups.google.com/forum/?fromgroups=#!topic/rec.games.roguelike.nethack/TrtHf-9b8SU 
-* warning on Cthulhu, 6 - terror, green
+* warning on Cthulhu, 6 - terror, green - http://nethackwiki.com/wiki/Drawing.c#line192
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/a7a1de62a901e7f4521a5bdd2bf4474320315d2a (? - add modified code???)
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/70941c87feb74c63d0d4ca9bbd925ff909722117 -  Death's touch should hurt monsters/pets 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/8bd8d8b90a6f95344e3c4798a9f0ae802b6a35eb with https://github.com/Bulwersator/CopyOfSporkHack/commit/1f8b526808eeae0ed6472b2b3408743822e814d1
@@ -196,6 +196,7 @@ proud owner of a magic whistle.
 
 #savebreaking
 * http://www.statslab.cam.ac.uk/~eva/slashem/wands.html
+** http://nethackwiki.com/wiki/Wand_of_fireball
 * spellbook of repair armor (spork?)
 * new randomized appearances - see https://github.com/Bulwersator/UnNetHackPlus/compare/master...new-randomized-appearances
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/aee3b3d35defc3ec60611337450c071340359217 (??)
