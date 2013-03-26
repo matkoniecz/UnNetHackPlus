@@ -1658,19 +1658,6 @@ domove()
 		return;
 	}
 
-	/* warn player before walking into known traps */
-	if (iflags.paranoid_trap &&
-			((trap = t_at(x, y)) && trap->tseen)) {
-		char qbuf[BUFSZ];
-		Sprintf(qbuf,"Do you really want to %s into that %s?", 
-				locomotion(youmonst.data, "step"),
-				defsyms[trap_to_defsym(trap->ttyp)].explanation);
-		if (yn(qbuf) != 'y') {
-			nomul(0, 0);
-			flags.move = 0;
-			return;
-		}
-	}
 	if(u.utrap) {
 		if(u.utraptype == TT_PIT && Passes_walls) {
 			You("phase through walls and escape from pit."); 
@@ -1764,6 +1751,20 @@ domove()
 		    }
 		}
 		return;
+	}
+
+	/* warn player before walking into known traps */
+	if (iflags.paranoid_trap &&
+			((trap = t_at(x, y)) && trap->tseen)) {
+		char qbuf[BUFSZ];
+		Sprintf(qbuf,"Do you really want to %s into that %s?", 
+				locomotion(youmonst.data, "step"),
+				defsyms[trap_to_defsym(trap->ttyp)].explanation);
+		if (yn(qbuf) != 'y') {
+			nomul(0, 0);
+			flags.move = 0;
+			return;
+		}
 	}
 
 	if (!test_move(u.ux, u.uy, x-u.ux, y-u.uy, DO_MOVE)) {
