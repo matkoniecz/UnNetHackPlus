@@ -921,8 +921,7 @@ glovecheck:		(void) rust_dmg(uarmg, "gauntlets", 1, TRUE, &youmonst);
 			You("land %s!", predicament);
 		    }
 		}
-		if (!Passes_walls)
-		    u.utrap = rn1(6,2);
+		u.utrap = rn1(6,2);
 		u.utraptype = TT_PIT;
 		if (!steedintrap(trap, (struct obj *)0)) {
 			if (ttype == SPIKED_PIT) {

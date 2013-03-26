@@ -489,13 +489,6 @@ int	mntmp;
 	else
 		u.uundetected = 0;
 
-	if (u.utraptype == TT_PIT) {
-	    if (could_pass_walls && !Passes_walls) {
-		u.utrap = rn1(6,2);
-	    } else if (!could_pass_walls && Passes_walls) {
-		u.utrap = 0;
-	    }
-	}
 	if (was_blind && !Blind) {	/* previous form was eyeless */
 	    Blinded = 1L;
 	    make_blinded(0L, TRUE);	/* remove blindness */

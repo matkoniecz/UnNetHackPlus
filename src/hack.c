@@ -1672,7 +1672,10 @@ domove()
 		}
 	}
 	if(u.utrap) {
-		if(u.utraptype == TT_PIT) {
+		if(u.utraptype == TT_PIT && Passes_walls) {
+			You("phase through walls and escape from pit."); 
+			u.utrap = 0;
+		} else if(u.utraptype == TT_PIT) {
 		    if (!rn2(2) && sobj_at(BOULDER, u.ux, u.uy)) {
 			Your("%s gets stuck in a crevice.", body_part(LEG));
 			display_nhwindow(WIN_MESSAGE, FALSE);
