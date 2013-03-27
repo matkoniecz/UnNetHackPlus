@@ -439,104 +439,114 @@ int *fail_reason;
 	Strcpy(statuename,the(xname(statue)));
 
 	if (statue->oxlth && statue->oattached == OATTACHED_MONST) {
-	    cc.x = x,  cc.y = y;
-	    mon = montraits(statue, &cc);
-	    if (mon && mon->mtame && !mon->isminion)
-		wary_dog(mon, TRUE);
+		cc.x = x,  cc.y = y;
+		mon = montraits(statue, &cc);
+		if (mon && mon->mtame && !mon->isminion) {
+			wary_dog(mon, TRUE);
+		}
 	} else {
-	    /* statue of any golem hit with stone-to-flesh becomes flesh golem */
-	    if (is_golem(&mons[statue->corpsenm]) && cause == ANIMATE_SPELL)
-	    	mptr = &mons[PM_FLESH_GOLEM];
-	    else
-		mptr = &mons[statue->corpsenm];
-	    /*
-	     * Guard against someone wishing for a statue of a unique monster
-	     * (which is allowed in normal play) and then tossing it onto the
-	     * [detected or guessed] location of a statue trap.  Normally the
-	     * uppermost statue is the one which would be activated.
-	     */
-	    if ((mptr->geno & G_UNIQ) && cause != ANIMATE_SPELL) {
-	        if (fail_reason) *fail_reason = AS_MON_IS_UNIQUE;
-	        return (struct monst *)0;
-	    }
-	    if (cause == ANIMATE_SPELL &&
-		((mptr->geno & G_UNIQ) || mptr->msound == MS_GUARDIAN)) {
+		/* statue of any golem hit with stone-to-flesh becomes flesh golem */
+		if (is_golem(&mons[statue->corpsenm]) && cause == ANIMATE_SPELL) {
+			mptr = &mons[PM_FLESH_GOLEM];
+		} else {
+			mptr = &mons[statue->corpsenm];
+		}
+		/*
+		 * Guard against someone wishing for a statue of a unique monster
+		 * (which is allowed in normal play) and then tossing it onto the
+		 * [detected or guessed] location of a statue trap.  Normally the
+		 * uppermost statue is the one which would be activated.
+		 */
+		if ((mptr->geno & G_UNIQ) && cause != ANIMATE_SPELL) {
+			if (fail_reason) {
+				*fail_reason = AS_MON_IS_UNIQUE;
+			}
+			return (struct monst *)0;
+		}
+		if (cause == ANIMATE_SPELL && ((mptr->geno & G_UNIQ) || mptr->msound == MS_GUARDIAN)) {
 		/* Statues of quest guardians or unique monsters
 		 * will not stone-to-flesh as the real thing.
 		 */
-		mon = makemon(&mons[PM_DOPPELGANGER], x, y,
-			NO_MINVENT|MM_NOCOUNTBIRTH|MM_ADJACENTOK);
-		if (mon) {
+			mon = makemon(&mons[PM_DOPPELGANGER], x, y, NO_MINVENT|MM_NOCOUNTBIRTH|MM_ADJACENTOK);
+			if (mon) {
 			/* makemon() will set mon->cham to
 			 * CHAM_ORDINARY if hero is wearing
 			 * ring of protection from shape changers
 			 * when makemon() is called, so we have to
 			 * check the field before calling newcham().
 			 */
-			if (mon->cham == CHAM_DOPPELGANGER)
-				(void) newcham(mon, mptr, FALSE, FALSE);
+				if (mon->cham == CHAM_DOPPELGANGER) {
+					(void) newcham(mon, mptr, FALSE, FALSE);
+				}
+			}
+		} else {
+			mon = makemon(mptr, x, y, (cause == ANIMATE_SPELL) ? (NO_MINVENT | MM_ADJACENTOK) : NO_MINVENT);
 		}
-	    } else
-		mon = makemon(mptr, x, y, (cause == ANIMATE_SPELL) ?
-			(NO_MINVENT | MM_ADJACENTOK) : NO_MINVENT);
 	}
 
 	if (!mon) {
-	    if (fail_reason) *fail_reason = AS_NO_MON;
-	    return (struct monst *)0;
+		if (fail_reason) {
+			*fail_reason = AS_NO_MON;
+		}
+		return (struct monst *)0;
 	}
 
 	/* in case statue is wielded and hero zaps stone-to-flesh at self */
-	if (statue->owornmask) remove_worn_item(statue, TRUE);
+	if (statue->owornmask) {
+		remove_worn_item(statue, TRUE);
+	}
 
 	/* allow statues to be of a specific gender */
-	if (statue->spe & STATUE_MALE)
-	    mon->female = FALSE;
-	else if (statue->spe & STATUE_FEMALE)
-	    mon->female = TRUE;
+	if (statue->spe & STATUE_MALE) {
+		mon->female = FALSE;
+	} else if (statue->spe & STATUE_FEMALE) {
+		mon->female = TRUE;
+	}
 	/* if statue has been named, give same name to the monster */
-	if (statue->onamelth)
-	    mon = christen_monst(mon, ONAME(statue));
+	if (statue->onamelth) {
+		mon = christen_monst(mon, ONAME(statue));
+	}
 	/* transfer any statue contents to monster's inventory */
 	while ((item = statue->cobj) != 0) {
-	    obj_extract_self(item);
-	    (void) add_to_minv(mon, item);
+		obj_extract_self(item);
+		(void) add_to_minv(mon, item);
 	}
 	m_dowear(mon, TRUE);
 	delobj(statue);
 
 	/* mimic statue becomes seen mimic; other hiders won't be hidden */
-	if (mon->m_ap_type) seemimic(mon);
-	else mon->mundetected = FALSE;
-	if ((x == u.ux && y == u.uy) || cause == ANIMATE_SPELL) {
-	    const char *comes_to_life = nonliving(mon->data) ?
-					"moves" : "comes to life"; 
-	    if (cause == ANIMATE_SPELL)
-	    	pline("%s %s!", upstart(statuename),
-	    		canspotmon(mon) ? comes_to_life : "disappears");
-	    else
-		pline_The("statue %s!",
-			canspotmon(mon) ? comes_to_life : "disappears");
-	    if (historic) {
-		    You_feel("guilty that the historic statue is now gone.");
-		    adjalign(-1);
-	    }
-	} else if (cause == ANIMATE_SHATTER)
-	    pline("Instead of shattering, the statue suddenly %s!",
-		canspotmon(mon) ? "comes to life" : "disappears");
-	else if (cause == ANIMATE_NORMAL) {
-	    You("find %s posing as a statue.",
-		canspotmon(mon) ? a_monnam(mon) : something);
-	    stop_occupation();
+	if (mon->m_ap_type) {
+		seemimic(mon);
 	} else {
-	    warning("impossible happened in function animate_statue");
+		mon->mundetected = FALSE;
+	}
+	if ((x == u.ux && y == u.uy) || cause == ANIMATE_SPELL) {
+		const char *comes_to_life = nonliving(mon->data) ? "moves" : "comes to life"; 
+		if (cause == ANIMATE_SPELL) {
+			pline("%s %s!", upstart(statuename), canspotmon(mon) ? comes_to_life : "disappears");
+		} else {
+			pline_The("statue %s!", canspotmon(mon) ? comes_to_life : "disappears");
+		}
+		if (historic) {
+			You_feel("guilty that the historic statue is now gone.");
+			adjalign(-1);
+	    }
+	} else if (cause == ANIMATE_SHATTER) {
+		pline("Instead of shattering, the statue suddenly %s!", canspotmon(mon) ? "comes to life" : "disappears");
+	} else if (cause == ANIMATE_NORMAL) {
+		You("find %s posing as a statue.",
+		canspotmon(mon) ? a_monnam(mon) : something);
+		stop_occupation();
+	} else {
+		warning("impossible happened in function animate_statue");
 	}
 	/* avoid hiding under nothing */
-	if (x == u.ux && y == u.uy &&
-		Upolyd && hides_under(youmonst.data) && !OBJ_AT(x, y))
-	    u.uundetected = 0;
-
-	if (fail_reason) *fail_reason = AS_OK;
+	if (x == u.ux && y == u.uy && Upolyd && hides_under(youmonst.data) && !OBJ_AT(x, y)) {
+		u.uundetected = 0;
+	}
+	if (fail_reason) {
+		*fail_reason = AS_OK;
+	}
 	return mon;
 }
 
