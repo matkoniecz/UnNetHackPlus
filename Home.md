@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* [[dumping grounds]]
 * search for "YAFM needed", "performance", "optimization"
 * exploded ring of levitation -> you float gently
 * reduce u.gold
