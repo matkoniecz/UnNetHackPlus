@@ -524,10 +524,12 @@ int *fail_reason;
 	} else if (cause == ANIMATE_SHATTER)
 	    pline("Instead of shattering, the statue suddenly %s!",
 		canspotmon(mon) ? "comes to life" : "disappears");
-	else { /* cause == ANIMATE_NORMAL */
+	else if (cause == ANIMATE_NORMAL) {
 	    You("find %s posing as a statue.",
 		canspotmon(mon) ? a_monnam(mon) : something);
 	    stop_occupation();
+	} else {
+	    warning("impossible happened in function animate_statue");
 	}
 	/* avoid hiding under nothing */
 	if (x == u.ux && y == u.uy &&
