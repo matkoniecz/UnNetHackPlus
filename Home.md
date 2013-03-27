@@ -334,6 +334,7 @@ proud owner of a magic whistle.
 * paxed, unserver keeper (medusa deaths)
 * authors of patches ("L" - Leon Arnott)
 * bhaak for help
+* http://www.reddit.com/r/roguelikes/comments/1b3o9f/a_directory_of_directories_of_random_generators_a/
 
 #spam
 * http://www.tt-forums.net/viewtopic.php?f=2&t=19187
