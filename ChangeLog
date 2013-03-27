@@ -15,7 +15,7 @@
 		- C343-355 "Archeologists start out at basic skill level in sling." (from GruntHack)
 		- Weird messages on decayed food for strangevores are fixed
 		- C343-299 "Killing tame engulfer from inside gives a warning message." (from GruntHack)
-		- C343-160 "Name "leather [[spellbook]]" is misleading." (renamed to "torn")
+		- C343-160 "Name "leather spellbook" is misleading." (renamed to "torn")
 		- C343-175 - chatting to tame prisoners is fixed (thanks to Reddit user Nuclear_Winterfell)
 		- C343-17 "After polymorphing into a xorn and returning to human form, player can be stuck in a pit that isn't there."
 		- "Player polymorphed into Xorn is not trapped by pits but (s)he receives "You fall into a pit!" message" and other related buggy behaviours
