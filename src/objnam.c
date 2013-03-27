@@ -2906,7 +2906,6 @@ typfnd:
 			break;
 		case FIGURINE:
 			if (!(mons[mntmp].geno & G_UNIQ)
-			    && !is_human(&mons[mntmp])
 #ifdef MAIL
 			    && mntmp != PM_MAIL_DAEMON
 #endif
