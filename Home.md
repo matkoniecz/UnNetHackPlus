@@ -1,5 +1,5 @@
 Plans for UnNetHackPlus
-* search for "YAFM needed"
+* search for "YAFM needed", "performance", "optimization"
 * exploded ring of levitation -> you float gently
 * reduce u.gold
 * https://github.com/sgrunt/GruntHack/commit/00fac16b796e33189b8f542160fd49d9ff8d790c - magical items generated more frequently at deeper dungeon levels
