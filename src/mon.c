@@ -2970,6 +2970,17 @@ short otyp;
 		break;
 	}
 }
+
+struct permonst *
+get_monster_index_after_stone_to_flesh(struct permonst *mptr)
+{
+	/* any fleshified golem becomes flesh golem */
+	if (is_golem(mptr)) {
+		return &mons[PM_FLESH_GOLEM];
+	}
+	return mptr;
+}
+
 #endif /* OVLB */
 
 /*mon.c*/

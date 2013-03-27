@@ -19,6 +19,7 @@
 		- C343-175 - chatting to tame prisoners is fixed (thanks to Reddit user Nuclear_Winterfell)
 		- C343-17 "After polymorphing into a xorn and returning to human form, player can be stuck in a pit that isn't there."
 		- "Player polymorphed into Xorn is not trapped by pits but (s)he receives "You fall into a pit!" message" and other related buggy behaviours
+		- "Statues/figurines of golems hit with stone-to-flesh spell are supposed (see Trap.c, line 423 of vanilia source code) to turn into flesh golems, not meatballs."
 		Patches are linked at http://nethackwiki.com/wiki/User:Bulwersator/UnNetHackPlus_bug_tracking
 	* UnNetHack bug fixes
 		- Angered quest guardians will no longer go berserk.

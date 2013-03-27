@@ -1042,6 +1042,7 @@ E void FDECL(set_malign, (struct monst *));
 E void FDECL(set_mimic_sym, (struct monst *));
 E int FDECL(mbirth_limit, (int));
 E void FDECL(mimic_hit_msg, (struct monst *, SHORT_P));
+E struct permonst *FDECL(get_monster_index_after_stone_to_flesh, (struct permonst *));
 #ifdef GOLDOBJ
 E void FDECL(mkmonmoney, (struct monst *, long));
 #endif

@@ -1691,7 +1691,7 @@ struct obj *obj, *otmp;
 
 			    (void) get_obj_location(obj, &oox, &ooy, 0);
 			    refresh_x = oox; refresh_y = ooy;
-			    if (vegetarian(&mons[obj->corpsenm])) {
+			    if (vegetarian(get_monster_index_after_stone_to_flesh(&mons[obj->corpsenm]))) {
 				/* Don't animate monsters that aren't flesh */
 				obj = poly_obj(obj, MEATBALL);
 			    	goto smell;
@@ -1729,14 +1729,14 @@ makecorpse:			if (mons[obj->corpsenm].geno &
 			    res = 0;
 			    break;
 			}
-			if (vegetarian(&mons[obj->corpsenm])) {
+			if (vegetarian(get_monster_index_after_stone_to_flesh(&mons[obj->corpsenm]))) {
 			    /* Don't animate monsters that aren't flesh */
 			    obj = poly_obj(obj, MEATBALL);
 			    goto smell;
 			}
 			(void) get_obj_location(obj, &oox, &ooy, 0);
 			refresh_x = oox; refresh_y = ooy;
-			mon = makemon(&mons[obj->corpsenm],
+			mon = makemon(get_monster_index_after_stone_to_flesh(&mons[obj->corpsenm]),
 				      oox, ooy, NO_MM_FLAGS);
 			if (mon) {
 			    delobj(obj);

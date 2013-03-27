@@ -445,9 +445,8 @@ int *fail_reason;
 			wary_dog(mon, TRUE);
 		}
 	} else {
-		/* statue of any golem hit with stone-to-flesh becomes flesh golem */
-		if (is_golem(&mons[statue->corpsenm]) && cause == ANIMATE_SPELL) {
-			mptr = &mons[PM_FLESH_GOLEM];
+		if (cause == ANIMATE_SPELL) {
+			mptr = get_monster_index_after_stone_to_flesh(&mons[statue->corpsenm]);
 		} else {
 			mptr = &mons[statue->corpsenm];
 		}
