@@ -462,9 +462,9 @@ int *fail_reason;
 			}
 			return (struct monst *)0;
 		}
-		if (cause == ANIMATE_SPELL && ((mptr->geno & G_UNIQ) || mptr->msound == MS_GUARDIAN)) {
-		/* Statues of quest guardians or unique monsters
-		 * will not stone-to-flesh as the real thing.
+		if (cause == ANIMATE_SPELL && ((mptr->geno & G_UNIQ))) {
+		/* 
+		 * Statues of unique monsters will not stone-to-flesh as the real thing.
 		 */
 			mon = makemon(&mons[PM_DOPPELGANGER], x, y, NO_MINVENT|MM_NOCOUNTBIRTH|MM_ADJACENTOK);
 			if (mon) {
