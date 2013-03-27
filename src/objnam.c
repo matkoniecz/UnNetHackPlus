@@ -25,12 +25,32 @@ struct Jitem {
 };
 
 /* true for gems/rocks that should have " stone" appended to their names */
-#define GemStone(typ)	(typ == FLINT ||				\
-			 (objects[typ].oc_material == GEMSTONE &&	\
-			  (typ != DILITHIUM_CRYSTAL && typ != RUBY &&	\
-			   typ != DIAMOND && typ != SAPPHIRE &&		\
-			   typ != BLACK_OPAL && 	\
-			   typ != EMERALD && typ != OPAL)))
+boolean
+GemStone(int typ)
+{
+	if (typ == FLINT) {
+		return TRUE;
+	}
+	if (objects[typ].oc_material == GEMSTONE) {
+		if (typ == DILITHIUM_CRYSTAL) {
+			return FALSE;
+		} else if (typ == RUBY) {
+			return FALSE;
+		} else if (typ == DIAMOND) {
+			return FALSE;
+		} else if (typ == SAPPHIRE) {
+			return FALSE;
+		} else if (typ == BLACK_OPAL) {
+			return FALSE;
+		} else if (typ == EMERALD) {
+			return FALSE;
+		} else if (typ == OPAL) {
+			return FALSE;
+		}
+		return TRUE;
+	}
+	return FALSE;
+}
 
 #ifndef OVLB
 
