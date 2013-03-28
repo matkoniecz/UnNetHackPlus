@@ -1,4 +1,6 @@
 Plans for UnNetHackPlus
+* #version
+* bars for timeout of levitation, speed, protection, confuse monster on melee attack
 * [[dumping grounds]]
 * search for "YAFM needed", "performance", "optimization"
 * exploded ring of levitation -> you float gently
