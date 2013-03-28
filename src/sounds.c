@@ -706,7 +706,9 @@ register struct monst *mtmp;
 				"Go ahead an' run! I LIKE a movin' target ye worm livered panty waist wiggly maggot!",
 				"Ba ba ba-ba ba you’re gonna get murdered",
 				"Have a face full o' boot ye bloated rat spawned chunk O' bat spit!",
-				"WARGHLBARGLEARGLEBARGLE!",
+				/* end of this source */
+				
+				"WARGHLBARGLEARGLEBARGLE!", // from http://forum.rpg.net/showthread.php?466187-%28Let-s-Play!%29-Sporkhack/page46
 			};
 			verbl_msg = orc_insults_msgs[rn2(SIZE(orc_insults_msgs))];
 		} else {
@@ -765,7 +767,8 @@ register struct monst *mtmp;
 				} else {
 					honorific = "man";
 				}
-				Sprintf(verbuf, "I understand you're a %s who knows how to get things.", honorific);
+				/* from http://www.reddit.com/r/nethack/comments/1awkre/looking_for_better_chatting_response_from_tame/ */
+				Sprintf(verbuf, "I understand you're a %s who knows how to get things.", honorific); 
 				verbl_msg = verbuf;
 			} else {
 				verbl_msg = "Sorry, I'm all out of wishes.";
