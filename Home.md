@@ -1,4 +1,10 @@
 Plans for UnNetHackPlus
+MS_BOAST => MS_GIANT
+AZTEC_C_WORKAROUND
+
+http://www.imdb.com/character/ch0002561/quotes
+They say you are a man of good... taste. 
+The blood is the life... and it shall be mine. 
 * #version
 * bars for timeout of levitation, speed, protection, confuse monster on melee attack
 * [[dumping grounds]]
