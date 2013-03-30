@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+
 MS_BOAST => MS_GIANT
 AZTEC_C_WORKAROUND
 
@@ -310,6 +311,7 @@ proud owner of a magic whistle.
 * after Un.1242 .des - possibility to make drawbridge status random, see https://github.com/Bulwersator/CopyOfSporkHack/commit/1032af2e5b88947b828cdc89a062adb1178fbe5a
 * weeping angels - blinking effect - long, rare move (what about blindness? Should it be instant YASD?) pschysical attacks, trap autoturned into statue trap
 * mark "Picking up gold doesn't honor the setting of pickup_burden if the game is compiled without GOLD_OBJ (no prompt when the encumbrance level is exceeded)." and "impossible() can mangle the parameter values." in http://nethackwiki.com/wiki/User:Bulwersator/UnNetHackPlus_bug_tracking as fixed
+* deep orc color (black? white uruk-hai?)
 
 #recheck
 * https://gitorious.org/nitrohack/ais523/commits/nicehack
