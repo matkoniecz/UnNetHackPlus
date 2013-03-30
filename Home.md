@@ -10,6 +10,7 @@ They say you are a man of good... taste.
 The blood is the life... and it shall be mine. 
 You fools! You think you can destroy me with your wafers and your wolf's-bane, Me, the King of my kind?! You shall see!
 
+* kill paging in guidebook
 * #version
 * bars for timeout of levitation, speed, protection, confuse monster on melee attack
 * [[dumping grounds]]
