@@ -1,5 +1,6 @@
 Plans for UnNetHackPlus
 
+PARANOID
 MS_BOAST => MS_GIANT
 AZTEC_C_WORKAROUND
 
