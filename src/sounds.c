@@ -501,21 +501,455 @@ register struct monst *mtmp;
     }
 }
 
-static int
-domonnoise(mtmp)
-register struct monst *mtmp;
+int
+produce_sound(const char* pline_msg, const char*  verbl_msg, struct monst *mtmp)
 {
-	register const char *pline_msg = 0; /* Monnam(mtmp) will be prepended */
-	register const char *verbl_msg = 0; /* verbalize() */
+	if (pline_msg) {
+		pline("%s %s", Monnam(mtmp), pline_msg);
+	} else if (verbl_msg) {
+		verbalize(verbl_msg);
+	}
+	return 1;
+}
+
+int
+produce_random_spoken_response_from_this_list(struct monst *mtmp, char ** const list, const int size)
+{
+	verbalize(list[rn2(size)]);
+	return 1;
+}
+
+int
+produce_random_spoken_response_from_list(struct monst *mtmp, char ** const tame, const int t_size, char ** const peaceful, const int p_size, char ** const hostile, const int h_size)
+{
+	if (mtmp->mtame) {
+		return produce_random_spoken_response_from_this_list(mtmp, tame, t_size);
+	} else if (mtmp->mpeaceful) {
+		return produce_random_spoken_response_from_this_list(mtmp, peaceful, p_size);
+	} else {
+		return produce_random_spoken_response_from_this_list(mtmp, hostile, h_size);
+	}
+}
+
+int
+vampire_chat(struct monst *mtmp)
+{
+	const char *pline_msg = 0; // Monnam(mtmp) will be prepended
+	const char *verbl_msg = 0; // verbalize()
+	char verbuf[BUFSZ];
+	/* vampire messages are varied by tameness, peacefulness, and time of night */
+	boolean isnight = night();
+	boolean kindred = maybe_polyd(u.umonnum == PM_VAMPIRE || u.umonnum == PM_VAMPIRE_LORD, Race_if(PM_VAMPIRE)); /* DEFERRED u.umonnum == PM_VAMPIRE_MAGE, */
+	boolean nightchild = (Upolyd && (u.umonnum == PM_WOLF || u.umonnum == PM_WINTER_WOLF || u.umonnum == PM_WINTER_WOLF_CUB));
+	const char *racenoun = (flags.female && urace.individual.f) ?
+			urace.individual.f : (urace.individual.m) ?
+			urace.individual.m : urace.noun;
+
+	if (mtmp->mtame) {
+		if (kindred) {
+			Sprintf(verbuf, "Good %s to you Master%s",
+				isnight ? "evening" : "day",
+				isnight ? "!" : ".  Why do we not rest?");
+			verbl_msg = verbuf;
+		} else {
+			Sprintf(verbuf,"%s%s",
+				nightchild ? "Child of the night, " : "",
+				midnight() ?
+					"I can stand this craving no longer!" :
+				isnight ?
+					"I beg you, help me satisfy this growing craving!" :
+					"I find myself growing a little weary.");
+			verbl_msg = verbuf;
+		}
+	} else if (mtmp->mpeaceful) {
+		if (kindred && isnight) {
+			Sprintf(verbuf, "Good feeding %s!",
+				flags.female ? "sister" : "brother");
+			verbl_msg = verbuf;
+		} else if (nightchild && isnight) {
+			Sprintf(verbuf,
+				"How nice to hear you, child of the night!");
+				verbl_msg = verbuf;
+		} else {
+			verbl_msg = "I only drink... potions.";
+		}
+	} else {
+		int vampindex;
+		static const char * const vampmsg[] = {
+		/* These first two (0 and 1) are specially handled below */
+		"I vant to suck your %s!",
+		"I vill come after %s without regret!",
+		/* other famous vampire quotes can follow here if desired */
+		};
+		if (kindred) {
+			verbl_msg = "This is my hunting ground that you dare to prowl!";
+		} else if (youmonst.data == &mons[PM_SILVER_DRAGON] || youmonst.data == &mons[PM_BABY_SILVER_DRAGON]) {
+			/* Silver dragons are silver in color, not made of silver */
+			Sprintf(verbuf, "%s! Your silver sheen does not frighten me!",
+				youmonst.data == &mons[PM_SILVER_DRAGON] ?
+				"Fool" : "Young Fool");
+			verbl_msg = verbuf; 
+		} else {
+			vampindex = rn2(SIZE(vampmsg));
+			if (vampindex == 0) {
+				Sprintf(verbuf, vampmsg[vampindex], body_part(BLOOD));
+				verbl_msg = verbuf;
+			} else if (vampindex == 1) {
+				Sprintf(verbuf, vampmsg[vampindex],
+					Upolyd ? an(mons[u.umonnum].mname) : an(racenoun));
+				verbl_msg = verbuf;
+			} else {
+				verbl_msg = vampmsg[vampindex];
+			}
+		}
+	}
+	return produce_sound(pline_msg, verbl_msg, mtmp);
+}
+
+int
+bark_chat(struct monst *mtmp)
+{
+	const char *pline_msg = 0; // Monnam(mtmp) will be prepended
+	const char *verbl_msg = 0; // verbalize()
+	if (flags.moonphase == FULL_MOON && night()) {
+		pline_msg = "howls.";
+	} else if (mtmp->mpeaceful) {
+		if (mtmp->mtame &&
+		(mtmp->mconf || mtmp->mflee || mtmp->mtrapped ||
+		moves > EDOG(mtmp)->hungrytime || mtmp->mtame < 5)) {
+			pline_msg = "whines.";
+		} else if (mtmp->mtame && EDOG(mtmp)->hungrytime > moves + 1000) {
+			pline_msg = "yips.";
+		} else {
+			if (mtmp->data != &mons[PM_DINGO]) {/* dingos do not actually bark */
+				pline_msg = "barks.";
+			}
+		}
+	} else {
+		pline_msg = "growls.";
+	}
+	return produce_sound(pline_msg, verbl_msg, mtmp);
+}
+
+int
+grunt_chat(struct monst *mtmp)
+{
+	const char *pline_msg = 0; // Monnam(mtmp) will be prepended
+	const char *verbl_msg = 0; // verbalize()
+	struct permonst *ptr = mtmp->data;
+	if (is_orc(ptr) && !mtmp->mpeaceful) {
+		char * orc_insults_msgs[] = {
+			/* from http://www.anim5.com/wow/generator/dwarf/index.php */
+			"I can't hear ye! Scream a wee bit louder ye hairy, putrid whiny little slimey bastitch!",
+			"Bite ME will ye? Chew on THIS ye syphilitic panty waist cockroach!",
+			"Lemme spell out the rules for ye. I win. YOU LOSE! ye potato faced bug chewin' gutless kidneywipe!",
+			"Go ahead an' run! I LIKE a movin' target ye worm livered panty waist wiggly maggot!",
+			"Ba ba ba-ba ba you’re gonna get murdered",
+			"Have a face full o' boot ye bloated rat spawned chunk O' bat spit!",
+			/* end of this source */
+			
+			"WARGHLBARGLEARGLEBARGLE!", // from http://forum.rpg.net/showthread.php?466187-%28Let-s-Play!%29-Sporkhack/page46
+		};
+		return produce_random_spoken_response_from_this_list(mtmp, orc_insults_msgs, SIZE(orc_insults_msgs));
+	} else {
+		pline_msg = "grunts.";
+	}
+	return produce_sound(pline_msg, verbl_msg, mtmp);
+}
+
+int
+humanoid_chat(struct monst *mtmp)
+{
+	const char *pline_msg = 0; // Monnam(mtmp) will be prepended
+	const char *verbl_msg = 0; // verbalize()
+	if (!mtmp->mpeaceful) {
+		if (In_endgame(&u.uz) && is_mplayer(mtmp->data)) {
+			return hostile_mplayer_talk(mtmp);
+		} else if (is_dwarf(mtmp->data)) {
+			if (is_elf(youmonst.data)) {
+				char *dwarf_to_elf_insults_msgs[] = {
+					"You dendrophile!", //by Volfgarix from bay12forums
+					"Hey, pointy-eared tree hugger!" //from SporkHack
+				};
+				return produce_random_spoken_response_from_this_list(mtmp, dwarf_to_elf_insults_msgs, SIZE(dwarf_to_elf_insults_msgs));
+			} else {
+				verbl_msg = "Your socks are of inadequate craftmanship!"; //by Shook from bay12forums
+			}
+		} else if (is_elf(mtmp->data)) {
+			if (is_dwarf(youmonst.data)) {
+				verbl_msg = "You lawn ornament!"; //from SporkHack
+			}
+		}
+		if(is_dwarf(youmonst.data) && !is_dwarf((mtmp->data))) {
+			verbl_msg = "I don't talk with minerals."; //by vadia from bay12forums
+		}
+		return 0;	/* no sound */
+	}
+	/* Generic peaceful humanoid behaviour. */
+	if (mtmp->mflee) {
+		pline_msg = "wants nothing to do with you.";
+	} else if (mtmp->mhp < mtmp->mhpmax/4) {
+		pline_msg = "moans.";
+	} else if (mtmp->mconf || mtmp->mstun) {
+		verbl_msg = !rn2(3) ? "Huh?" : rn2(2) ? "What?" : "Eh?";
+	} else if (!mtmp->mcansee) {
+		verbl_msg = "I can't see!";
+	} else if (mtmp->mtrapped) {
+		struct trap *t = t_at(mtmp->mx, mtmp->my);
+		if (t) t->tseen = 1;
+		verbl_msg = "I'm trapped!";
+	} else if (mtmp->mhp < mtmp->mhpmax/2) {
+		pline_msg = "asks for a potion of healing.";
+	} else if (mtmp->mtame && !mtmp->isminion && moves > EDOG(mtmp)->hungrytime) {
+		verbl_msg = "I'm hungry.";
+	/* Specific monsters' interests */
+	} else if (is_elf(mtmp->data)) {
+		pline_msg = "curses orcs.";
+	} else if (is_dwarf(mtmp->data)) {
+		pline_msg = "talks about mining.";
+	} else if (likes_magic(mtmp->data)) {
+		pline_msg = "talks about spellcraft.";
+	} else if (mtmp->data->mlet == S_CENTAUR) {
+		pline_msg = "discusses hunting.";
+	} else {
+		switch (monsndx(mtmp->data)) {
+		case PM_HOBBIT:
+			pline_msg = (mtmp->mhpmax - mtmp->mhp >= 10) ?
+				"complains about unpleasant dungeon conditions."
+				: "asks you about the One Ring.";
+			break;
+		case PM_ARCHEOLOGIST:
+			pline_msg = "describes a recent article in \"Spelunker Today\" magazine.";
+			break;
+		case PM_TOURIST:
+			verbl_msg = "Aloha.";
+			break;
+		default:
+			pline_msg = "discusses dungeon exploration.";
+			break;
+		}
+	}
+	return produce_sound(pline_msg, verbl_msg, mtmp);
+}
+
+int
+neigh_chat(struct monst *mtmp)
+{
+	const char *pline_msg = 0; // Monnam(mtmp) will be prepended
+	const char *verbl_msg = 0; // verbalize()
+	if (mtmp->mtame < 5) {
+		pline_msg = "neighs.";
+	} else if (moves > EDOG(mtmp)->hungrytime) {
+		pline_msg = "whinnies.";
+	} else {
+		pline_msg = "whickers.";
+	}
+	return produce_sound(pline_msg, verbl_msg, mtmp);
+}
+
+int
+werecreature_chat(struct monst *mtmp)
+{
+	const char *pline_msg = 0; // Monnam(mtmp) will be prepended
+	const char *verbl_msg = 0; // verbalize()
+	struct permonst *ptr = mtmp->data;
+	if (flags.moonphase == FULL_MOON && (night() ^ !rn2(13))) {
+		pline("%s throws back %s head and lets out a blood curdling %s!",
+			Monnam(mtmp), mhis(mtmp),
+			ptr == &mons[PM_HUMAN_WERERAT] ? "shriek" : "howl");
+		wake_nearto(mtmp->mx, mtmp->my, 11*11);
+	} else {
+		pline_msg = "whispers inaudibly.  All you can make out is \"moon\".";
+	}
+	return produce_sound(pline_msg, verbl_msg, mtmp);
+}
+
+int
+soldier_chat(struct monst *mtmp)
+{
+	char * soldier_foe_msg[] = {
+		"Resistance is useless!",
+		"You're dog meat!",
+		"Surrender!",
+	};
+	char * soldier_pax_msg[] = {
+		"What lousy pay we're getting here!",
+		"The food's not fit for Orcs!",
+		"My feet hurt, I've been on them all day!",
+	};
+	return produce_random_spoken_response_from_list(mtmp, soldier_pax_msg, SIZE(soldier_pax_msg), soldier_pax_msg, SIZE(soldier_pax_msg), soldier_foe_msg, SIZE(soldier_foe_msg));
+}
+
+int
+laugh_chat(struct monst *mtmp)
+{
+	const char *pline_msg = 0; // Monnam(mtmp) will be prepended
+	const char *verbl_msg = 0; // verbalize()
+	static const char * const laugh_msg[4] = {
+		"giggles.", "chuckles.", "snickers.", "laughs.",
+	};
+	pline_msg = laugh_msg[rn2(SIZE(laugh_msg))];
+	return produce_sound(pline_msg, verbl_msg, mtmp);
+}
+
+int
+djinni_chat(struct monst *mtmp)
+{
+	const char *pline_msg = 0; // Monnam(mtmp) will be prepended
+	const char *verbl_msg = 0; // verbalize()
 	struct permonst *ptr = mtmp->data;
 	char verbuf[BUFSZ];
+	if (mtmp->mtame) {
+		if (ptr == &mons[PM_PRISONER]) {
+			char *honorific;
+			if (is_neuter(youmonst.data)) {
+				honorific = "creature";
+			} else if(flags.female) {
+				honorific = "woman";
+			} else {
+				honorific = "man";
+			}
+			/* from http://www.reddit.com/r/nethack/comments/1awkre/looking_for_better_chatting_response_from_tame/ */
+			Sprintf(verbuf, "I understand you're a %s who knows how to get things.", honorific); 
+			verbl_msg = verbuf;
+		} else {
+			verbl_msg = "Sorry, I'm all out of wishes.";
+		}
+	} else if (mtmp->mpeaceful) {
+		if (ptr == &mons[PM_WATER_DEMON]) {
+			pline_msg = "gurgles.";
+		} else {
+			verbl_msg = "I'm free!";
+		}
+	} else {
+		verbl_msg = "This will teach you not to disturb me!";
+	}
+	return produce_sound(pline_msg, verbl_msg, mtmp);
+}
 
+int
+seduce_chat(struct monst *mtmp)
+{
+	const char *pline_msg = 0; // Monnam(mtmp) will be prepended
+	const char *verbl_msg = 0; // verbalize()
+	if (mtmp->data->mlet != S_NYMPH && could_seduce(mtmp, &youmonst, (struct attack *)0) == 1) {
+		(void) doseduce(mtmp);
+		return 0;
+	}
+	switch ((poly_gender() != (int) mtmp->female) ? rn2(3) : 0) {
+	case 2:
+		verbl_msg = "Hello, sailor.";
+	case 1:
+		pline_msg = "comes on to you.";
+	default:
+		pline_msg = "cajoles you.";
+	}
+	return produce_sound(pline_msg, verbl_msg, mtmp);
+}
+
+int
+arrest_chat(struct monst *mtmp)
+{
+	const char *pline_msg = 0; // Monnam(mtmp) will be prepended
+	const char *verbl_msg = 0; // verbalize()
+	if (mtmp->mpeaceful) {
+		verbalize("Just the facts, %s.", flags.female ? "Ma'am" : "Sir");
+	} else {
+		static const char * const arrest_msg[3] = {
+			"Anything you say can be used against you.",
+			"You're under arrest!",
+			"Stop in the name of the Law!",
+		};
+		verbl_msg = arrest_msg[rn2(3)];
+	}
+	return produce_sound(pline_msg, verbl_msg, mtmp);
+}
+
+int
+nurse_chat(struct monst *mtmp)
+{
+	const char *pline_msg = 0; // Monnam(mtmp) will be prepended
+	const char *verbl_msg = 0; // verbalize()
+	if (uwep && (uwep->oclass == WEAPON_CLASS || is_weptool(uwep))) {
+		verbl_msg = "Put that weapon away before you hurt someone!";
+	} else if (uarmc || uarm || uarmh || uarms || uarmg || uarmf) {
+		verbl_msg = Role_if(PM_HEALER) ?
+		  "Doc, I can't help you unless you cooperate." :
+		  "Please undress so I can examine you.";
+	} else if (uarmu) {
+		verbl_msg = "Take off your shirt, please.";
+	} else {
+		verbl_msg = "Relax, this won't hurt a bit.";
+	}
+	return produce_sound(pline_msg, verbl_msg, mtmp);
+}
+
+int
+guard_chat(struct monst *mtmp)
+{
+	const char *pline_msg = 0; // Monnam(mtmp) will be prepended
+	const char *verbl_msg = 0; // verbalize()
+#ifndef GOLDOBJ
+	if (u.ugold) {
+#else
+		if (money_cnt(invent)) {
+#endif
+		verbl_msg = "Please drop that gold and follow me.";
+	} else {
+		verbl_msg = "Please follow me.";
+	}
+	return produce_sound(pline_msg, verbl_msg, mtmp);
+}
+
+int
+rider_chat(struct monst *mtmp)
+{
+	const char *pline_msg = 0; // Monnam(mtmp) will be prepended
+	const char *verbl_msg = 0; // verbalize()
+		if (mtmp->data == &mons[PM_DEATH] && !rn2(10)) {
+			pline_msg = "is busy reading a copy of Sandman #8.";
+		} else {
+			verbl_msg = (mtmp->data == &mons[PM_DEATH]) ? "WHO DO YOU THINK YOU ARE, WAR?" : "Who do you think you are, War?";
+		}
+	return produce_sound(pline_msg, verbl_msg, mtmp);
+}
+
+/*
+template
+
+int
+_chat(struct monst *mtmp)
+{
+	const char *pline_msg = 0; // Monnam(mtmp) will be prepended
+	const char *verbl_msg = 0; // verbalize()
+	char verbuf[BUFSZ];
+
+	return produce_sound(pline_msg, verbl_msg, mtmp);
+}
+*/
+
+boolean
+chatting_impossible(struct permonst *ptr)
+{
 	/* presumably nearness and sleep checks have already been made */
 	if (!flags.soundok) {
-		return(0);
+		return TRUE;
 	}
 	if (is_silent(ptr)) {
-		return(0);
+		return TRUE;
+	}
+	return FALSE;
+}
+
+static int
+domonnoise(struct monst *mtmp)
+{
+	const char *pline_msg = 0; // Monnam(mtmp) will be prepended
+	const char *verbl_msg = 0; // verbalize()
+	struct permonst *ptr = mtmp->data;
+
+	if(chatting_impossible(ptr)){
+		return 0;
 	}
 
 	/* Make sure its your role's quest quardian; adjust if not */
@@ -536,114 +970,21 @@ register struct monst *mtmp;
 		return doconsult(mtmp);
 	case MS_PRIEST:
 		priest_talk(mtmp);
-		break;
+		return 1;
 	case MS_LEADER:
 	case MS_NEMESIS:
 	case MS_GUARDIAN:
 		quest_chat(mtmp);
-		break;
+		return 1;
 	case MS_SELL: /* pitch, pay, total */
 		shk_chat(mtmp);
-		break;
+		return 1;
 	case MS_VAMPIRE:
-		{
-			/* vampire messages are varied by tameness, peacefulness, and time of night */
-			boolean isnight = night();
-			boolean kindred = maybe_polyd(u.umonnum == PM_VAMPIRE || u.umonnum == PM_VAMPIRE_LORD, Race_if(PM_VAMPIRE)); /* DEFERRED u.umonnum == PM_VAMPIRE_MAGE, */
-			boolean nightchild = (Upolyd && (u.umonnum == PM_WOLF || u.umonnum == PM_WINTER_WOLF || u.umonnum == PM_WINTER_WOLF_CUB));
-			const char *racenoun = (flags.female && urace.individual.f) ?
-					urace.individual.f : (urace.individual.m) ?
-					urace.individual.m : urace.noun;
-
-			if (mtmp->mtame) {
-				if (kindred) {
-					Sprintf(verbuf, "Good %s to you Master%s",
-						isnight ? "evening" : "day",
-						isnight ? "!" : ".  Why do we not rest?");
-					verbl_msg = verbuf;
-				} else {
-					Sprintf(verbuf,"%s%s",
-						nightchild ? "Child of the night, " : "",
-						midnight() ?
-							"I can stand this craving no longer!" :
-						isnight ?
-							"I beg you, help me satisfy this growing craving!" :
-							"I find myself growing a little weary.");
-					verbl_msg = verbuf;
-				}
-			} else if (mtmp->mpeaceful) {
-				if (kindred && isnight) {
-					Sprintf(verbuf, "Good feeding %s!",
-						flags.female ? "sister" : "brother");
-					verbl_msg = verbuf;
-				} else if (nightchild && isnight) {
-					Sprintf(verbuf,
-						"How nice to hear you, child of the night!");
-						verbl_msg = verbuf;
-				} else {
-					verbl_msg = "I only drink... potions.";
-				}
-			} else {
-				int vampindex;
-				static const char * const vampmsg[] = {
-				/* These first two (0 and 1) are specially handled below */
-				"I vant to suck your %s!",
-				"I vill come after %s without regret!",
-				/* other famous vampire quotes can follow here if desired */
-				};
-				if (kindred) {
-					verbl_msg = "This is my hunting ground that you dare to prowl!";
-				} else if (youmonst.data == &mons[PM_SILVER_DRAGON] || youmonst.data == &mons[PM_BABY_SILVER_DRAGON]) {
-					/* Silver dragons are silver in color, not made of silver */
-					Sprintf(verbuf, "%s! Your silver sheen does not frighten me!",
-						youmonst.data == &mons[PM_SILVER_DRAGON] ?
-						"Fool" : "Young Fool");
-					verbl_msg = verbuf; 
-				} else {
-					vampindex = rn2(SIZE(vampmsg));
-					if (vampindex == 0) {
-						Sprintf(verbuf, vampmsg[vampindex], body_part(BLOOD));
-						verbl_msg = verbuf;
-					} else if (vampindex == 1) {
-						Sprintf(verbuf, vampmsg[vampindex],
-							Upolyd ? an(mons[u.umonnum].mname) : an(racenoun));
-						verbl_msg = verbuf;
-					} else {
-						verbl_msg = vampmsg[vampindex];
-					}
-				}
-			}
-		break;
-		}
+		return vampire_chat(mtmp);
 	case MS_WERE:
-		if (flags.moonphase == FULL_MOON && (night() ^ !rn2(13))) {
-			pline("%s throws back %s head and lets out a blood curdling %s!",
-				Monnam(mtmp), mhis(mtmp),
-				ptr == &mons[PM_HUMAN_WERERAT] ? "shriek" : "howl");
-			wake_nearto(mtmp->mx, mtmp->my, 11*11);
-		} else {
-			pline_msg = "whispers inaudibly.  All you can make out is \"moon\".";
-		}
-		break;
+		return werecreature_chat(mtmp);
 	case MS_BARK:
-		if (flags.moonphase == FULL_MOON && night()) {
-			pline_msg = "howls.";
-		} else if (mtmp->mpeaceful) {
-			if (mtmp->mtame &&
-			(mtmp->mconf || mtmp->mflee || mtmp->mtrapped ||
-			moves > EDOG(mtmp)->hungrytime || mtmp->mtame < 5)) {
-				pline_msg = "whines.";
-			} else if (mtmp->mtame && EDOG(mtmp)->hungrytime > moves + 1000) {
-				pline_msg = "yips.";
-			} else {
-				if (mtmp->data != &mons[PM_DINGO]) {/* dingos do not actually bark */
-					pline_msg = "barks.";
-				}
-			}
-		} else {
-			pline_msg = "growls.";
-		}
-		break;
+		return bark_chat(mtmp);
 	case MS_MEW:
 		if (mtmp->mtame) {
 			if (mtmp->mconf || mtmp->mflee || mtmp->mtrapped || mtmp->mtame < 5) {
@@ -697,33 +1038,9 @@ register struct monst *mtmp;
 		pline_msg = mtmp->mpeaceful ? "drones." : "buzzes angrily.";
 		break;
 	case MS_GRUNT:
-		if (is_orc(ptr)) {
-			static const char *orc_insults_msgs[] = {
-				/* from http://www.anim5.com/wow/generator/dwarf/index.php */
-				"I can't hear ye! Scream a wee bit louder ye hairy, putrid whiny little slimey bastitch!",
-				"Bite ME will ye? Chew on THIS ye syphilitic panty waist cockroach!",
-				"Lemme spell out the rules for ye. I win. YOU LOSE! ye potato faced bug chewin' gutless kidneywipe!",
-				"Go ahead an' run! I LIKE a movin' target ye worm livered panty waist wiggly maggot!",
-				"Ba ba ba-ba ba you’re gonna get murdered",
-				"Have a face full o' boot ye bloated rat spawned chunk O' bat spit!",
-				/* end of this source */
-				
-				"WARGHLBARGLEARGLEBARGLE!", // from http://forum.rpg.net/showthread.php?466187-%28Let-s-Play!%29-Sporkhack/page46
-			};
-			verbl_msg = orc_insults_msgs[rn2(SIZE(orc_insults_msgs))];
-		} else {
-			pline_msg = "grunts.";
-		}
-		break;
+		return grunt_chat(mtmp);
 	case MS_NEIGH:
-		if (mtmp->mtame < 5) {
-			pline_msg = "neighs.";
-		} else if (moves > EDOG(mtmp)->hungrytime) {
-			pline_msg = "whinnies.";
-		} else {
-			pline_msg = "whickers.";
-		}
-		break;
+		return neigh_chat(mtmp);
 	case MS_WAIL:
 		pline_msg = "wails mournfully.";
 		break;
@@ -746,43 +1063,12 @@ register struct monst *mtmp;
 		nomul(-2, "scared by rattling");
 		break;
 	case MS_LAUGH:
-		{
-		static const char * const laugh_msg[4] = {
-			"giggles.", "chuckles.", "snickers.", "laughs.",
-		};
-		pline_msg = laugh_msg[rn2(4)];
-		}
-		break;
+		return laugh_chat(mtmp);
 	case MS_MUMBLE:
 		pline_msg = "mumbles incomprehensibly.";
 		break;
 	case MS_DJINNI:
-		if (mtmp->mtame) {
-			if (ptr == &mons[PM_PRISONER]) {
-				char *honorific;
-				if (is_neuter(youmonst.data)) {
-					honorific = "creature";
-				} else if(flags.female) {
-					honorific = "woman";
-				} else {
-					honorific = "man";
-				}
-				/* from http://www.reddit.com/r/nethack/comments/1awkre/looking_for_better_chatting_response_from_tame/ */
-				Sprintf(verbuf, "I understand you're a %s who knows how to get things.", honorific); 
-				verbl_msg = verbuf;
-			} else {
-				verbl_msg = "Sorry, I'm all out of wishes.";
-			}
-		} else if (mtmp->mpeaceful) {
-			if (ptr == &mons[PM_WATER_DEMON]) {
-				pline_msg = "gurgles.";
-			} else {
-				verbl_msg = "I'm free!";
-			}
-		} else {
-			verbl_msg = "This will teach you not to disturb me!";
-		}
-		break;
+		return djinni_chat(mtmp);
 	case MS_BOAST:	/* giants */
 		if (!mtmp->mpeaceful) {
 			switch (rn2(4)) {
@@ -801,107 +1087,12 @@ register struct monst *mtmp;
 		}
 		/* else FALLTHRU */
 	case MS_HUMANOID:
-		if (!mtmp->mpeaceful) {
-			if (In_endgame(&u.uz) && is_mplayer(ptr)) {
-				mplayer_talk(mtmp);
-				break;
-			} else if (is_dwarf(ptr)) {
-				if (is_elf(youmonst.data)) {
-					static const char *dwarf_to_elf_insults_msgs[] = {
-						"You dendrophile!", //by Volfgarix from bay12forums
-						"Hey, pointy-eared tree hugger!" //from SporkHack
-					};
-					verbl_msg = dwarf_to_elf_insults_msgs[rn2(SIZE(dwarf_to_elf_insults_msgs))];
-				} else {
-					verbl_msg = "Your socks are of inadequate craftmanship!"; //by Shook from bay12forums
-				}
-				break;
-			} else if (is_elf(ptr)) {
-				if (is_dwarf(youmonst.data)) {
-					verbl_msg = "You lawn ornament!"; //from SporkHack
-					break;
-				}
-			}
-			if(is_dwarf(youmonst.data) && !is_dwarf((ptr))) {
-				verbl_msg = "I don't talk with minerals."; //by vadia from bay12forums
-				break;
-			}
-			return 0;	/* no sound */
-		}
-		/* Generic peaceful humanoid behaviour. */
-		if (mtmp->mflee) {
-			pline_msg = "wants nothing to do with you.";
-		} else if (mtmp->mhp < mtmp->mhpmax/4) {
-			pline_msg = "moans.";
-		} else if (mtmp->mconf || mtmp->mstun) {
-			verbl_msg = !rn2(3) ? "Huh?" : rn2(2) ? "What?" : "Eh?";
-		} else if (!mtmp->mcansee) {
-			verbl_msg = "I can't see!";
-		} else if (mtmp->mtrapped) {
-			struct trap *t = t_at(mtmp->mx, mtmp->my);
-			if (t) t->tseen = 1;
-			verbl_msg = "I'm trapped!";
-		} else if (mtmp->mhp < mtmp->mhpmax/2) {
-			pline_msg = "asks for a potion of healing.";
-		} else if (mtmp->mtame && !mtmp->isminion && moves > EDOG(mtmp)->hungrytime) {
-			verbl_msg = "I'm hungry.";
-		/* Specific monsters' interests */
-		} else if (is_elf(ptr)) {
-			pline_msg = "curses orcs.";
-		} else if (is_dwarf(ptr)) {
-			pline_msg = "talks about mining.";
-		} else if (likes_magic(ptr)) {
-			pline_msg = "talks about spellcraft.";
-		} else if (ptr->mlet == S_CENTAUR) {
-			pline_msg = "discusses hunting.";
-		} else {
-			switch (monsndx(ptr)) {
-			case PM_HOBBIT:
-				pline_msg = (mtmp->mhpmax - mtmp->mhp >= 10) ?
-					"complains about unpleasant dungeon conditions."
-					: "asks you about the One Ring.";
-				break;
-			case PM_ARCHEOLOGIST:
-				pline_msg = "describes a recent article in \"Spelunker Today\" magazine.";
-				break;
-			case PM_TOURIST:
-				verbl_msg = "Aloha.";
-				break;
-			default:
-				pline_msg = "discusses dungeon exploration.";
-			break;
-			}
-		}
-		break;
+		return humanoid_chat(mtmp);
 	case MS_SEDUCE:
-		if (ptr->mlet != S_NYMPH && could_seduce(mtmp, &youmonst, (struct attack *)0) == 1) {
-			(void) doseduce(mtmp);
-			break;
-		}
-		switch ((poly_gender() != (int) mtmp->female) ? rn2(3) : 0) {
-		case 2:
-			verbl_msg = "Hello, sailor.";
-			break;
-		case 1:
-			pline_msg = "comes on to you.";
-			break;
-		default:
-			pline_msg = "cajoles you.";
-		}
-		break;
+		return seduce_chat(mtmp);
 #ifdef KOPS
 	case MS_ARREST:
-		if (mtmp->mpeaceful) {
-			verbalize("Just the facts, %s.", flags.female ? "Ma'am" : "Sir");
-		} else {
-			static const char * const arrest_msg[3] = {
-				"Anything you say can be used against you.",
-				"You're under arrest!",
-				"Stop in the name of the Law!",
-			};
-			verbl_msg = arrest_msg[rn2(3)];
-		}
-		break;
+		return arrest_chat(mtmp);
 #endif
 	case MS_BRIBE:
 		if (mtmp->mpeaceful && !mtmp->mtame) {
@@ -919,61 +1110,17 @@ register struct monst *mtmp;
 		pline_msg = "seems to mutter a cantrip.";
 		break;
 	case MS_NURSE:
-		if (uwep && (uwep->oclass == WEAPON_CLASS || is_weptool(uwep))) {
-			verbl_msg = "Put that weapon away before you hurt someone!";
-		} else if (uarmc || uarm || uarmh || uarms || uarmg || uarmf) {
-			verbl_msg = Role_if(PM_HEALER) ?
-			  "Doc, I can't help you unless you cooperate." :
-			  "Please undress so I can examine you.";
-		} else if (uarmu) {
-			verbl_msg = "Take off your shirt, please.";
-		} else {
-			verbl_msg = "Relax, this won't hurt a bit.";
-		}
-		break;
+		return nurse_chat(mtmp);
+	break;
 	case MS_GUARD:
-#ifndef GOLDOBJ
-		if (u.ugold) {
-#else
-		if (money_cnt(invent)) {
-#endif
-			verbl_msg = "Please drop that gold and follow me.";
-		} else {
-			verbl_msg = "Please follow me.";
-		}
-		break;
+		return guard_chat(mtmp);
 	case MS_SOLDIER:
-		{
-		static const char * const soldier_foe_msg[3] = {
-			"Resistance is useless!",
-			"You're dog meat!",
-			"Surrender!",
-		};
-		static const char * const soldier_pax_msg[3] = {
-			"What lousy pay we're getting here!",
-			"The food's not fit for Orcs!",
-			"My feet hurt, I've been on them all day!",
-		};
-		verbl_msg = mtmp->mpeaceful ? soldier_pax_msg[rn2(3)] : soldier_foe_msg[rn2(3)];
-		}
-		break;
+		return soldier_chat(mtmp);
 	case MS_RIDER:
-		if (ptr == &mons[PM_DEATH] && !rn2(10)) {
-			pline_msg = "is busy reading a copy of Sandman #8.";
-		} else {
-			verbl_msg = (ptr == &mons[PM_DEATH]) ? "WHO DO YOU THINK YOU ARE, WAR?" : "Who do you think you are, War?";
-		}
-		break;
+		return rider_chat(mtmp);
 	}
-
-	if (pline_msg) {
-		pline("%s %s", Monnam(mtmp), pline_msg);
-	} else if (verbl_msg) {
-		verbalize(verbl_msg);
-	}
-	return(1);
+	return produce_sound(pline_msg, verbl_msg, mtmp);
 }
-
 
 int
 dotalk()
@@ -989,8 +1136,8 @@ dotalk()
 static int
 dochat()
 {
-    register struct monst *mtmp;
-    register int tx,ty;
+    struct monst *mtmp;
+    int tx,ty;
     struct obj *otmp;
     int mon_count = 0;
     int dx,dy;

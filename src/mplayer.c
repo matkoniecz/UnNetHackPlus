@@ -360,8 +360,8 @@ boolean special;
 	}
 }
 
-void
-mplayer_talk(mtmp)
+int
+hostile_mplayer_talk(mtmp)
 register struct monst *mtmp;
 {
 	static const char *same_class_msg[3] = {
@@ -374,12 +374,11 @@ register struct monst *mtmp;
 		"Here is what I have to say!",
 	};
 
-	if(mtmp->mpeaceful) return; /* will drop to humanoid talk */
-
 	pline("Talk? -- %s",
 		(mtmp->data == &mons[urole.malenum] ||
 		mtmp->data == &mons[urole.femalenum]) ?
 		same_class_msg[rn2(3)] : other_class_msg[rn2(3)]);
+	return 1;
 }
 
 /*mplayer.c*/

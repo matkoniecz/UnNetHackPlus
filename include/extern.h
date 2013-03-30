@@ -1334,7 +1334,7 @@ E const char *FDECL(elf_name, (size_t));
 E struct monst *FDECL(mk_mplayer, (struct permonst *,XCHAR_P,
 				   XCHAR_P,BOOLEAN_P));
 E void FDECL(create_mplayers, (int,BOOLEAN_P));
-E void FDECL(mplayer_talk, (struct monst *));
+E int FDECL(hostile_mplayer_talk, (struct monst *));
 
 #if defined(MICRO) || defined(WIN32)
 
