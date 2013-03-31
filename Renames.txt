@@ -3,3 +3,4 @@ function: add_weapon_skill to add_skill_slot - old name was extremely confusing,
 function: lose_weapon_skill to lose_skill_slot - old name was extremely confusing, new one should be example of self-documenting code
 function: mplayer_talk to hostile_mplayer_talk - to properly describe functionality
 member of you structure: weapon_slots to unused_skill_slots - old name was extremely confusing, new one should be example of self-documenting code
+constant: MS_BOAST -> MS_GIANT - old name was not describing properly meaning and required comments to clarify

@@ -1059,7 +1059,7 @@ domonnoise(struct monst *mtmp)
 		break;
 	case MS_DJINNI:
 		return djinni_chat(mtmp);
-	case MS_BOAST:	/* giants */
+	case MS_GIANT:
 		if (!mtmp->mpeaceful) {
 			switch (rn2(4)) {
 			case 0: 
