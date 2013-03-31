@@ -1,11 +1,15 @@
 http://donjon.bin.sh/fantasy/random/#dungeon_graffiti
+http://www.imdb.com/character/ch0002561/quotes done to  You fools! Do you think with your crosses and your wafers you can destroy me? Me! You do not know how many men have come against me. I am the king of my kind! You have accomplished nothing, Van Helsing. Time is on my side. In a century, when you are dust, I shall wake and call Lucy, my queen from her grave. I have in my time had many brides, Mr. Harker. But I shall set Lucy above them all. 
+
+They say you are a man of good... taste. 
+The blood is the life... and it shall be mine. 
+You fools! You think you can destroy me with your wafers and your wolf's-bane, Me, the King of my kind?! You shall see!
+
 Upon the Night of Dweomers, when iron is made flesh and the Golden Scepter is wreathed in flames, the Copper Tower shall be restored
 You cannot kill it with swords
 Run away!
 It's a trap
 The walls listen
-Bend the pin to reset the trap
-The Emerald Legion killed a rust monster here
 This is not a secret door
 Explosive runes
 Praise Shiva the Destroyer
