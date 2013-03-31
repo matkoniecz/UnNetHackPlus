@@ -1,7 +1,7 @@
 Plans for UnNetHackPlus
 
 MS_BOAST => MS_GIANT
-* "checking whether to enable" in configure
+* "checking whether to enable" in configure + autoconf.h
 * kill paging in guidebook
 * #version
 * bars for timeout of levitation, speed, protection, confuse monster on melee attack
