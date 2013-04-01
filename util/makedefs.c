@@ -634,6 +634,7 @@ build_savebones_compat_string()
 }
 
 static const char *build_pseudo_opts[] = {
+		"auto open doors",
 		"basic UnNetHack features",
 		"blackmarket level",
 		"dungeon map overview patch",
@@ -653,9 +654,6 @@ static const char *build_opts[] = {
 #endif
 #ifdef AUTOPICKUP_EXCEPTIONS
 		"autopickup_exceptions",
-#endif
-#ifdef AUTO_OPEN
-		"auto open doors",
 #endif
 #ifdef TEXTCOLOR
 		"color",

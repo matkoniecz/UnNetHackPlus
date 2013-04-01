@@ -431,8 +431,6 @@ typedef long glyph_t;
 /*#define DUMP_HTML_LOG*/   /* Dump game end information to a html file */
 #define DUMPMSGS 30     /* Number of latest messages in the dump file  */
 
-#define AUTO_OPEN	/* open doors by walking into them - Stefano Busti */
-
 /* #define WHEREIS_FILE "./whereis/%n.whereis" */ /* Write out player's current location to player.whereis */
 
 #endif /* AUTOCONF */
@@ -466,6 +464,7 @@ typedef long glyph_t;
  * and features are incorporated into UnNetHackPlus without evil preprocessor instructions littering code
  * these defines are also listed in build_pseudo_opts (util\makedefs.c)
  */
+#define AUTO_OPEN	/* open doors by walking into them - Stefano Busti */
 #define STEED		/* Riding steeds */
 #define SEDUCE		/* Succubi/incubi seduction, by KAA, suggested by IM */
 #define TOURIST		/* Tourist players with cameras and Hawaiian shirts */

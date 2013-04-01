@@ -359,9 +359,7 @@ struct instance_flags {
 #ifdef REALTIME_ON_BOTL
 	boolean  showrealtime; /* show actual elapsed time */
 #endif
-#ifdef AUTO_OPEN
 	boolean  autoopen;	/* open doors by walking into them */
-#endif
 	boolean  dark_room;	/* show shadows in lit rooms */
 	boolean  vanilla_ui_behavior;	/* fall back to vanilla behavior */
 	boolean  show_annotation;	/* level annotation when entering level */
