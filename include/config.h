@@ -464,6 +464,7 @@ typedef long glyph_t;
  *
  * These defines are useless, as #ifdef etc were removed from code 
  * and features are incorporated into UnNetHackPlus without evil preprocessor instructions littering code
+ * these defines are also listed in build_pseudo_opts (util\makedefs.c)
  */
 #define STEED		/* Riding steeds */
 #define SEDUCE		/* Succubi/incubi seduction, by KAA, suggested by IM */

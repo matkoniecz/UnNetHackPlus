@@ -633,6 +633,17 @@ build_savebones_compat_string()
 #endif
 }
 
+static const char *build_pseudo_opts[] = {
+		"basic UnNetHack features",
+		"blackmarket level",
+		"dungeon map overview patch",
+		"saddles and riding",
+		"seduction",
+		"tourists",
+		"UnNetHackPlus features",
+		"UTF-8 glyphs",
+	};
+
 static const char *build_opts[] = {
 #ifdef AMIGA_WBENCH
 		"Amiga WorkBench support",
@@ -646,7 +657,6 @@ static const char *build_opts[] = {
 #ifdef AUTO_OPEN
 		"auto open doors",
 #endif
-		"blackmarket level",
 #ifdef TEXTCOLOR
 		"color",
 #endif
@@ -665,7 +675,6 @@ static const char *build_opts[] = {
 #ifdef REALTIME_ON_BOTL
 		"elapsed time on status line",
 #endif
-		"dungeon map overview patch",
 #ifdef ELBERETH
 		"Elbereth",
 #endif
@@ -723,15 +732,11 @@ static const char *build_opts[] = {
 #  endif
 # endif
 #endif
-		"pickup thrown objects",
 #ifdef REDO
 		"redo command",
 #endif
 #ifdef REINCARNATION
 		"rogue level",
-#endif
-#ifdef STEED
-		"saddles and riding",
 #endif
 #ifdef SCORE_ON_BOTL
 		"score on status line",
@@ -758,7 +763,6 @@ static const char *build_opts[] = {
 #  endif
 # endif
 #endif
-		"seduction",
 #ifdef SINKS
 		"sinks",
 #endif
@@ -775,8 +779,6 @@ static const char *build_opts[] = {
 #ifdef TIMED_DELAY
 		"timed wait for display effects",
 #endif
-		"tourists",
-		"UTF-8 glyphs",
 #ifdef USER_SOUNDS
 # ifdef USER_SOUNDS_REGEX
 		"user sounds via regular expressions",
@@ -821,7 +823,6 @@ static const char *build_opts[] = {
 		"record initial alignment in xlogfile",
 #endif
 		save_bones_compat_buf,
-		"basic UnNetHackPlus features"
 	};
 
 static const char *window_opts[] = {
@@ -895,6 +896,19 @@ do_options()
 		Fprintf(ofp," "),  length++;
 	    Fprintf(ofp,"%s", str),  length += strlen(str);
 	    Fprintf(ofp,(i < SIZE(build_opts) - 1) ? "," : "."),  length++;
+	}
+
+	Fprintf(ofp,"\n\nOptions enabled in all editions:\n");
+
+	length = COLNO + 1;	/* force 1st item onto new line */
+	for (i = 0; i < SIZE(build_pseudo_opts); i++) {
+	    str = build_pseudo_opts[i];
+	    if (length + strlen(str) > COLNO - 5)
+		Fprintf(ofp,"\n%s", indent),  length = strlen(indent);
+	    else
+		Fprintf(ofp," "),  length++;
+	    Fprintf(ofp,"%s", str),  length += strlen(str);
+	    Fprintf(ofp,(i < SIZE(build_pseudo_opts) - 1) ? "," : "."),  length++;
 	}
 
 	Fprintf(ofp,"\n\nSupported windowing systems:\n");
