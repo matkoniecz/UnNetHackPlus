@@ -53,9 +53,9 @@ static const char *developers[] = {
 STATIC_OVL const char *
 dev_name()
 {
-	register int i, m = 0, n = SIZE(developers);
-	register struct monst *mtmp;
-	register boolean match;
+	int i, m = 0, n = SIZE(developers);
+	struct monst *mtmp;
+	boolean match;
 
 	do {
 	    match = FALSE;
@@ -77,7 +77,7 @@ dev_name()
 
 STATIC_OVL void
 get_mplname(mtmp, nam)
-register struct monst *mtmp;
+struct monst *mtmp;
 char *nam;
 {
 	boolean fmlkind = is_female(mtmp->data);
@@ -151,11 +151,11 @@ short typ;
 
 struct monst *
 mk_mplayer(ptr, x, y, special)
-register struct permonst *ptr;
+struct permonst *ptr;
 xchar x, y;
-register boolean special;
+boolean special;
 {
-	register struct monst *mtmp;
+	struct monst *mtmp;
 	char nam[PL_NSIZ];
 
 	if(!is_mplayer(ptr))
@@ -335,7 +335,7 @@ get_random_role()
  */
 void
 create_mplayers(num, special)
-register int num;
+int num;
 boolean special;
 {
 	int pm, x, y;
@@ -364,7 +364,7 @@ boolean special;
 
 int
 hostile_mplayer_talk(mtmp)
-register struct monst *mtmp;
+struct monst *mtmp;
 {
 	static const char *same_class_msg[3] = {
 		"I can't win, and neither will you!",

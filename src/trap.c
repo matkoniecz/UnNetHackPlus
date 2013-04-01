@@ -109,8 +109,8 @@ struct monst *victim;
  */
 boolean
 rust_dmg(otmp, ostr, type, print, victim)
-register struct obj *otmp;
-register const char *ostr;
+struct obj *otmp;
+const char *ostr;
 int type;
 boolean print;
 struct monst *victim;
@@ -198,8 +198,8 @@ struct monst *victim;
 
 void
 grease_protect(otmp,ostr,victim)
-register struct obj *otmp;
-register const char *ostr;
+struct obj *otmp;
+const char *ostr;
 struct monst *victim;
 {
 	static const char txt[] = "protected by the layer of grease!";
@@ -228,11 +228,11 @@ struct monst *victim;
 
 struct trap *
 maketrap(x,y,typ)
-register int x, y, typ;
+int x, y, typ;
 {
-	register struct trap *ttmp;
-	register struct rm *lev;
-	register boolean oldplace;
+	struct trap *ttmp;
+	struct rm *lev;
+	boolean oldplace;
 
 	if ((ttmp = t_at(x,y)) != 0) {
 	    if (ttmp->ttyp == MAGIC_PORTAL) return (struct trap *)0;
@@ -615,11 +615,11 @@ struct obj *objchn, *saddle;
 
 void
 dotrap(trap, trflags)
-register struct trap *trap;
+struct trap *trap;
 unsigned trflags;
 {
-	register int ttype = trap->ttyp;
-	register struct obj *otmp;
+	int ttype = trap->ttyp;
+	struct obj *otmp;
 	boolean already_seen = trap->tseen;
 	boolean webmsgok = (!(trflags & NOWEBMSG));
 	boolean forcebungle = (trflags & FORCEBUNGLE);
@@ -791,7 +791,7 @@ unsigned trflags;
 		} else {
 		    /* MRKR: beartraps wound your legs */
 		    /* from a suggestion by Sammiel in RGRN */
-		    register long side = rn2(2) ? RIGHT_SIDE : LEFT_SIDE;
+		    long side = rn2(2) ? RIGHT_SIDE : LEFT_SIDE;
 		    const char *sidestr = (side == RIGHT_SIDE) ? "right" : "left";
 		    pline("%s bear trap closes on your %s %s!",
 			    A_Your[trap->madeby_u], sidestr, body_part(FOOT));
@@ -1017,7 +1017,7 @@ glovecheck:		(void) rust_dmg(uarmg, "gauntlets", 1, TRUE, &youmonst);
 
 		/* Time stuck in the web depends on your/steed strength. */
 		{
-		    register int str = ACURR(A_STR);
+		    int str = ACURR(A_STR);
 
 		    /* If mounted, the steed gets trapped.  Use mintrap
 		     * to do all the work.  If mtrapped is set as a result,
@@ -1309,12 +1309,12 @@ struct trap *trap;
 int
 launch_obj(otyp, x1, y1, x2, y2, style)
 short otyp;
-register int x1,y1,x2,y2;
+int x1,y1,x2,y2;
 int style;
 {
-	register struct monst *mtmp;
-	register struct obj *otmp, *otmp2;
-	register int dx,dy;
+	struct monst *mtmp;
+	struct obj *otmp, *otmp2;
+	int dx,dy;
 	struct obj *singleobj;
 	boolean used_up = FALSE;
 	boolean otherside = FALSE;
@@ -1543,7 +1543,7 @@ int style;
 
 void
 seetrap(trap)
-	register struct trap *trap;
+	struct trap *trap;
 {
 	if(!trap->tseen) {
 	    trap->tseen = 1;
@@ -1562,7 +1562,7 @@ short otyp;
 long ocount;
 {
 	struct obj *otmp;
-	register int tmp;
+	int tmp;
 	schar dx,dy;
 	int distance;
 	coord cc;
@@ -1644,9 +1644,9 @@ schar dx,dy;
 
 int
 mintrap(mtmp)
-register struct monst *mtmp;
+struct monst *mtmp;
 {
-	register struct trap *trap = t_at(mtmp->mx, mtmp->my);
+	struct trap *trap = t_at(mtmp->mx, mtmp->my);
 	boolean trapkilled = FALSE;
 	struct permonst *mptr = mtmp->data;
 	struct obj *otmp;
@@ -1696,7 +1696,7 @@ register struct monst *mtmp;
 		}
 	    }
 	} else {
-	    register int tt = trap->ttyp;
+	    int tt = trap->ttyp;
 	    boolean in_sight, tear_web, see_it,
 	    trap_visible = (trap->tseen && cansee(trap->tx,trap->ty)),
 		    inescapable = ((tt == HOLE || tt == PIT) && In_sokoban(&u.uz) && !trap->madeby_u);
@@ -2381,7 +2381,7 @@ int
 float_down(hmask, emask)
 long hmask, emask;     /* might cancel timeout */
 {
-	register struct trap *trap = (struct trap *)0;
+	struct trap *trap = (struct trap *)0;
 	d_level current_dungeon_level;
 	boolean no_msg = FALSE;
 
@@ -2568,13 +2568,13 @@ struct obj *box;	/* null for floor trap */
 STATIC_OVL void
 domagictrap()
 {
-	register int fate = rnd(20);
+	int fate = rnd(20);
 
 	/* What happened to the poor sucker? */
 
 	if (fate < 10) {
 	  /* Most of the time, it creates some monsters. */
-	  register int cnt = rnd(4);
+	  int cnt = rnd(4);
 
 	  if (!resists_blnd(&youmonst)) {
 		You("are momentarily blinded by a flash of light!");
@@ -2630,8 +2630,8 @@ domagictrap()
 
 	     case 19:
 		    /* tame nearby monsters */
-		   {   register int i,j;
-		       register struct monst *mtmp;
+		   {   int i,j;
+		       struct monst *mtmp;
 
 		       (void) adjattrib(A_CHA,1,FALSE);
 		       for(i = -1; i <= 1; i++) for(j = -1; j <= 1; j++) {
@@ -2763,8 +2763,8 @@ xchar x, y;
 /* returns TRUE if obj is destroyed */
 boolean
 water_damage(obj, force, here)
-register struct obj *obj;
-register boolean force, here;
+struct obj *obj;
+boolean force, here;
 {
 	struct obj *otmp;
 	struct obj *obj_original = obj;
@@ -2844,8 +2844,8 @@ boolean *lostsome;
 	int invc = inv_cnt();
 
 	while (near_capacity() > (Punished ? UNENCUMBERED : SLT_ENCUMBER)) {
-	    register struct obj *obj, *otmp = (struct obj *)0;
-	    register int i;
+	    struct obj *obj, *otmp = (struct obj *)0;
+	    int i;
 
 	    /* Pick a random object */
 	    if (invc > 0) {
@@ -3054,7 +3054,7 @@ drown()
 
 void
 drain_en(n)
-register int n;
+int n;
 {
 	if (!u.uenmax) return;
 	You_feel("your magical energy drain away!");
@@ -3514,9 +3514,9 @@ int
 untrap(force)
 boolean force;
 {
-	register struct obj *otmp;
-	register boolean confused = (Confusion > 0 || Hallucination > 0);
-	register int x,y;
+	struct obj *otmp;
+	boolean confused = (Confusion > 0 || Hallucination > 0);
+	int x,y;
 	int ch;
 	struct trap *ttmp;
 	struct monst *mtmp;
@@ -3714,11 +3714,11 @@ boolean force;
 /* only called when the player is doing something to the chest directly */
 boolean
 chest_trap(obj, bodypart, disarm)
-register struct obj *obj;
-register int bodypart;
+struct obj *obj;
+int bodypart;
 boolean disarm;
 {
-	register struct obj *otmp = obj, *otmp2;
+	struct obj *otmp = obj, *otmp2;
 	char	buf[80];
 	const char *msg;
 	coord cc;
@@ -3760,7 +3760,7 @@ boolean disarm;
 			  struct monst *shkp = 0;
 			  long loss = 0L;
 			  boolean costly, insider;
-			  register xchar ox = obj->ox, oy = obj->oy;
+			  xchar ox = obj->ox, oy = obj->oy;
 
 			  /* the obj location need not be that of player */
 			  costly = (costly_spot(ox, oy) &&
@@ -3895,9 +3895,9 @@ boolean disarm;
 
 struct trap *
 t_at(x,y)
-register int x, y;
+int x, y;
 {
-	register struct trap *trap = ftrap;
+	struct trap *trap = ftrap;
 	while(trap) {
 		if(trap->tx == x && trap->ty == y) return(trap);
 		trap = trap->ntrap;
@@ -3910,9 +3910,9 @@ register int x, y;
 
 void
 deltrap(trap)
-register struct trap *trap;
+struct trap *trap;
 {
-	register struct trap *ttmp;
+	struct trap *ttmp;
 
 	if(trap == ftrap)
 		ftrap = ftrap->ntrap;
@@ -3925,7 +3925,7 @@ register struct trap *trap;
 
 boolean
 delfloortrap(ttmp)
-register struct trap *ttmp;
+struct trap *ttmp;
 {
 	/* Destroy a trap that emanates from the floor. */
 	/* some of these are arbitrary -dlc */
@@ -3942,7 +3942,7 @@ register struct trap *ttmp;
 		     (ttmp->ttyp == WEB) ||
 		     (ttmp->ttyp == MAGIC_TRAP) ||
 		     (ttmp->ttyp == ANTI_MAGIC))) {
-	    register struct monst *mtmp;
+	    struct monst *mtmp;
 
 	    if (ttmp->tx == u.ux && ttmp->ty == u.uy) {
 		u.utrap = 0;
@@ -3959,10 +3959,10 @@ register struct trap *ttmp;
 /* used for doors (also tins).  can be used for anything else that opens. */
 void
 b_trapped(item, bodypart)
-register const char *item;
-register int bodypart;
+const char *item;
+int bodypart;
 {
-	register int lvl = level_difficulty();
+	int lvl = level_difficulty();
 	int dmg = rnd(5 + (lvl < 5 ? lvl : 2+lvl/2));
 
 	pline("KABOOM!!  %s was booby-trapped!", The(item));
@@ -4050,7 +4050,7 @@ static const char lava_killer[] = "molten lava";
 boolean
 lava_effects()
 {
-    register struct obj *obj, *obj2;
+    struct obj *obj, *obj2;
     int dmg;
     boolean usurvive;
 

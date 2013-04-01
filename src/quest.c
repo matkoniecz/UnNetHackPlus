@@ -286,7 +286,7 @@ chat_with_leader()
 
 void
 leader_speaks(mtmp)
-	register struct monst *mtmp;
+	struct monst *mtmp;
 {
 	/* maybe you attacked leader? */
 	if(!mtmp->mpeaceful) {
@@ -348,7 +348,7 @@ chat_with_guardian()
 
 STATIC_OVL void
 prisoner_speaks (mtmp)
-	register struct monst *mtmp;
+	struct monst *mtmp;
 {
 	if (mtmp->data == &mons[PM_PRISONER] &&
 			(mtmp->mstrategy & STRAT_WAITMASK)) {
@@ -370,7 +370,7 @@ prisoner_speaks (mtmp)
 
 void
 quest_chat(mtmp)
-	register struct monst *mtmp;
+	struct monst *mtmp;
 {
     if (mtmp->m_id == Qstat(leader_m_id)) {
 	chat_with_leader();
@@ -386,7 +386,7 @@ quest_chat(mtmp)
 
 void
 quest_talk(mtmp)
-	register struct monst *mtmp;
+	struct monst *mtmp;
 {
     if (mtmp->m_id == Qstat(leader_m_id)) {
 	leader_speaks(mtmp);

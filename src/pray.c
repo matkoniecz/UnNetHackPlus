@@ -197,7 +197,7 @@ in_trouble()
 STATIC_OVL struct obj *
 worst_cursed_item()
 {
-    register struct obj *otmp;
+    struct obj *otmp;
 
     /* if strained or worse, check for loadstone first */
     if (near_capacity() >= HVY_ENCUMBER) {
@@ -252,7 +252,7 @@ worst_cursed_item()
 
 STATIC_OVL void
 fix_worst_trouble(trouble)
-register int trouble;
+int trouble;
 {
 	int i;
 	struct obj *otmp = 0;
@@ -538,7 +538,7 @@ STATIC_OVL void
 angrygods(resp_god)
 aligntyp resp_god;
 {
-	register int	maxanger;
+	int	maxanger;
 
 	if(Inhell) resp_god = A_NONE;
 	u.ublessed = 0;
@@ -921,7 +921,7 @@ pleased(g_align)
 	    flags.botl = 1;
 	    break;
 	case 4: {
-	    register struct obj *otmp;
+	    struct obj *otmp;
 	    int any = 0;
 
 	    if (Blind)
@@ -1020,8 +1020,8 @@ STATIC_OVL boolean
 water_prayer(bless_water)
     boolean bless_water;
 {
-    register struct obj* otmp;
-    register long changed = 0;
+    struct obj* otmp;
+    long changed = 0;
     boolean other = FALSE, bc_known = !(Blind || Hallucination);
 
     for(otmp = level.objects[u.ux][u.uy]; otmp; otmp = otmp->nexthere) {
@@ -1081,7 +1081,7 @@ static NEARDATA const char sacrifice_types[] = { FOOD_CLASS, AMULET_CLASS, 0 };
 
 STATIC_OVL void
 consume_offering(otmp)
-register struct obj *otmp;
+struct obj *otmp;
 {
     if (Hallucination)
 	switch (rn2(3)) {
@@ -1105,7 +1105,7 @@ register struct obj *otmp;
 }
 
 boolean
-is_this_corpse_of_pet(register struct obj *otmp)
+is_this_corpse_of_pet(struct obj *otmp)
 {
 	struct monst *mtmp;
 	if(!otmp->oxlth) { /* Does the object have extra data? (oxlth is "Object eXtra data LengTH") */
@@ -1130,7 +1130,7 @@ is_this_corpse_of_pet(register struct obj *otmp)
 }
 
 int
-sacrifice_amulet(aligntyp altaralign, register struct obj *otmp)
+sacrifice_amulet(aligntyp altaralign, struct obj *otmp)
 {
 	int conduct, cdt;
 	char killerbuf[128];
@@ -1269,7 +1269,7 @@ get_max_sacrifice_value()
 }
 
 int
-get_base_sacrifice_value(register struct obj *otmp) /* returns base value of sacrifice (may be later adjusted - pet status, unicorns etc) */
+get_base_sacrifice_value(struct obj *otmp) /* returns base value of sacrifice (may be later adjusted - pet status, unicorns etc) */
 {
 	/*
 	Was based on nutritional value and aging behavior (< 50 moves).
@@ -1282,7 +1282,7 @@ get_base_sacrifice_value(register struct obj *otmp) /* returns base value of sac
 	*/
 	int value = 0;
 	extern const int monstr[];
-	register struct permonst *ptr = &mons[otmp->corpsenm];
+	struct permonst *ptr = &mons[otmp->corpsenm];
 	if (otmp->corpsenm == PM_ACID_BLOB || (monstermoves <= peek_at_iced_corpse_age(otmp) + 50)) {
 		value = monstr[otmp->corpsenm] + 1;
 		if (otmp->oeaten) {
@@ -1309,7 +1309,7 @@ grant_object_from_sacrifice(int value, int saved_luck)
 {
 	int nartifacts = nartifact_exist();
 	int nchance = u.ulevel+6;
-	register struct obj *otmp;
+	struct obj *otmp;
 	 /* you were already in pretty good standing
 	  * The player can gain an artifact;
 	  * The chance goes down as the number of artifacts goes up.
@@ -1409,7 +1409,7 @@ grant_object_from_sacrifice(int value, int saved_luck)
 }
 
 void
-dosacrifice_of_own_race(aligntyp altaralign, register struct obj *otmp)
+dosacrifice_of_own_race(aligntyp altaralign, struct obj *otmp)
 {
 	int pm;
 	if (is_demon(youmonst.data)) {
@@ -1475,10 +1475,10 @@ dosacrifice_of_own_race(aligntyp altaralign, register struct obj *otmp)
 }
 
 int
-sacrifice_corpse(aligntyp altaralign, register struct obj *otmp) /* returns value of sacrifice */
+sacrifice_corpse(aligntyp altaralign, struct obj *otmp) /* returns value of sacrifice */
 {
 	int value = 0;
-	register struct permonst *ptr = &mons[otmp->corpsenm];
+	struct permonst *ptr = &mons[otmp->corpsenm];
 
 	/* KMH, conduct */
 	u.uconduct.gnostic++;
@@ -1528,7 +1528,7 @@ sacrifice_corpse(aligntyp altaralign, register struct obj *otmp) /* returns valu
 }
 
 int
-attempt_altar_conversion(aligntyp altaralign, register struct obj *otmp)
+attempt_altar_conversion(aligntyp altaralign, struct obj *otmp)
 {
 	/* Is this a conversion ? */
 	/* An unaligned altar in Gehennom will always elicit rejection. */
@@ -1610,7 +1610,7 @@ attempt_altar_conversion(aligntyp altaralign, register struct obj *otmp)
 int
 dosacrifice()
 {
-	register struct obj *otmp;
+	struct obj *otmp;
 	aligntyp altaralign = a_align(u.ux,u.uy);
 	char qbuf[QBUFSZ];
 	char c;
@@ -1913,7 +1913,7 @@ doturn()
 	if (!Role_if(PM_PRIEST) && !Role_if(PM_KNIGHT)) {
 		/* Try to use turn undead spell. */
 		if (objects[SPE_TURN_UNDEAD].oc_name_known) {
-		    register int sp_no;
+		    int sp_no;
 		    for (sp_no = 0; sp_no < MAXSPELL &&
 			 spl_book[sp_no].sp_id != NO_SPELL &&
 			 spl_book[sp_no].sp_id != SPE_TURN_UNDEAD; sp_no++);
@@ -2090,7 +2090,7 @@ aligntyp alignment;
 
 void
 altar_wrath(x, y)
-register int x, y;
+int x, y;
 {
     aligntyp altaralign = a_align(x,y);
 
@@ -2110,7 +2110,7 @@ STATIC_OVL boolean
 blocked_boulder(dx,dy)
 int dx,dy;
 {
-    register struct obj *otmp;
+    struct obj *otmp;
     long count = 0L;
 
     for(otmp = level.objects[u.ux+dx][u.uy+dy]; otmp; otmp = otmp->nexthere) {

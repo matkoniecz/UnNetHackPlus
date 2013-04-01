@@ -66,7 +66,7 @@ int glyph, *ocolor, x, y;
 glyph_t *ochar;
 unsigned *ospecial;
 {
-	register int offset;
+	int offset;
 #if defined(TEXTCOLOR) || defined(ROGUE_COLOR)
 	int color = NO_COLOR;
 #endif

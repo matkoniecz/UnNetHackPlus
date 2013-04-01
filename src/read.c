@@ -50,8 +50,8 @@ can_read_elvish_runes()
 int
 doread()
 {
-	register struct obj *scroll;
-	register boolean confused;
+	struct obj *scroll;
+	boolean confused;
 
 	known = FALSE;
 	if(check_capacity((char *)0)) return (0);
@@ -348,7 +348,7 @@ doread()
 
 static void
 stripspe(obj)
-register struct obj *obj;
+struct obj *obj;
 {
 	if (obj->blessed) pline(nothing_happens);
 	else {
@@ -363,7 +363,7 @@ register struct obj *obj;
 
 static void
 p_glow1(otmp)
-register struct obj	*otmp;
+struct obj	*otmp;
 {
 	Your("%s %s briefly.", xname(otmp),
 	     otense(otmp, Blind ? "vibrate" : "glow"));
@@ -371,8 +371,8 @@ register struct obj	*otmp;
 
 static void
 p_glow2(otmp,color)
-register struct obj	*otmp;
-register const char *color;
+struct obj	*otmp;
+const char *color;
 {
 	Your("%s %s%s%s for a moment.",
 		xname(otmp),
@@ -408,7 +408,7 @@ recharge(obj, curse_bless)
 struct obj *obj;
 int curse_bless;
 {
-	register int n;
+	int n;
 	boolean is_cursed, is_blessed;
 
 	is_cursed = curse_bless < 0;
@@ -735,7 +735,7 @@ forget_objects(percent)
 void
 forget_map(boolean all_map)
 {
-	register int zx, zy;
+	int zx, zy;
 
 	if (In_sokoban(&u.uz))
 	    return;
@@ -756,7 +756,7 @@ forget_map(boolean all_map)
 void
 forget_traps()
 {
-	register struct trap *trap;
+	struct trap *trap;
 
 	/* forget all traps (except the one the hero is in :-) */
 	for (trap = ftrap; trap; trap = trap->ntrap)
@@ -853,8 +853,8 @@ do_flood(x, y, poolcnt)
 int x, y;
 genericptr_t poolcnt;
 {
-	register struct monst *mtmp;
-	register struct trap *ttmp;
+	struct monst *mtmp;
+	struct trap *ttmp;
 
 	if (nexttodoor(x, y) || (rn2(1 + distmin(u.ux, u.uy, x, y))) ||
 	    (sobj_at(BOULDER, x, y)) || (levl[x][y].typ != ROOM))
@@ -884,11 +884,11 @@ genericptr_t poolcnt;
  
 int
 seffects(sobj)
-register struct obj	*sobj;
+struct obj	*sobj;
 {
-	register int cval;
-	register boolean confused = (Confusion != 0);
-	register struct obj *otmp;
+	int cval;
+	boolean confused = (Confusion != 0);
+	struct obj *otmp;
 
 	if (objects[sobj->otyp].oc_magic)
 		exercise(A_WIS, TRUE);		/* just for trying */
@@ -908,7 +908,7 @@ register struct obj	*sobj;
 #endif
 	case SCR_ENCHANT_ARMOR:
 	    {
-		register schar s;
+		schar s;
 		boolean special_armor;
 		boolean same_color;
 
@@ -1100,8 +1100,8 @@ register struct obj	*sobj;
 		break;
 	case SCR_SCARE_MONSTER:
 	case SPE_CAUSE_FEAR:
-	    {	register int ct = 0;
-		register struct monst *mtmp;
+	    {	int ct = 0;
+		struct monst *mtmp;
 
 		for(mtmp = fmon; mtmp; mtmp = mtmp->nmon) {
 		    if (DEADMONSTER(mtmp)) continue;
@@ -1134,7 +1134,7 @@ register struct obj	*sobj;
 	    break;
 	case SCR_REMOVE_CURSE:
 	case SPE_REMOVE_CURSE:
-	    {	register struct obj *obj;
+	    {	struct obj *obj;
 		if(confused)
 		    if (Hallucination)
 			You_feel("the power of the Force against you!");
@@ -1376,7 +1376,7 @@ register struct obj	*sobj;
 		}
 		/* reveal secret doors for uncursed and blessed scrolls */
 		if (!sobj->cursed) {
-			register int x, y;
+			int x, y;
 			for (x = 1; x < COLNO; x++)
 				for (y = 0; y < ROWNO; y++)
 					if (levl[x][y].typ == SDOOR)
@@ -1443,7 +1443,7 @@ register struct obj	*sobj;
 		!Is_rogue_level(&u.uz) && 
 #endif
 	    	 (!In_endgame(&u.uz) || Is_earthlevel(&u.uz))) {
-	    	register int x, y;
+	    	int x, y;
 		int boulder_created = 0;
 
 	    	/* Identify the scroll */
@@ -1513,7 +1513,7 @@ register struct obj	*sobj;
 
 static void
 wand_explode(obj)
-register struct obj *obj;
+struct obj *obj;
 {
     obj->in_use = TRUE;	/* in case losehp() is fatal */
     Your("%s vibrates violently, and explodes!",xname(obj));
@@ -1541,7 +1541,7 @@ genericptr_t val;
 
 void
 litroom(on,obj)
-register boolean on;
+boolean on;
 struct obj *obj;
 {
 	char is_lit;	/* value is irrelevant; we use its address
@@ -1549,7 +1549,7 @@ struct obj *obj;
 
 	/* first produce the text (provided you're not blind) */
 	if(!on) {
-		register struct obj *otmp;
+		struct obj *otmp;
 
 		if (!Blind) {
 		    if(u.uswallow) {
@@ -1692,7 +1692,7 @@ do_class_genocide()
 			else
 #ifdef WIZARD	/* to aid in topology testing; remove pesky monsters */
 			  if (wizard && buf[0] == '*') {
-			    register struct monst *mtmp, *mtmp2;
+			    struct monst *mtmp, *mtmp2;
 
 			    gonecnt = 0;
 			    for (mtmp = fmon; mtmp; mtmp = mtmp2) {
@@ -1803,9 +1803,9 @@ boolean only_on_level; /**< if TRUE only genocide monsters on current level,
 /* 5 (4 | 1) = normal genocide from throne */
 {
 	char buf[BUFSZ];
-	register int	i, killplayer = 0;
-	register int mndx;
-	register struct permonst *ptr;
+	int	i, killplayer = 0;
+	int mndx;
+	struct permonst *ptr;
 	const char *which;
 	const char *on_this_level;
 
@@ -1837,7 +1837,7 @@ boolean only_on_level; /**< if TRUE only genocide monsters on current level,
 #ifdef WIZARD	/* to aid in topology testing; remove pesky monsters */
 		/* copy from do_class_genocide */
 		if (wizard && buf[0] == '*') {
-			register struct monst *mtmp, *mtmp2;
+			struct monst *mtmp, *mtmp2;
 
 			int gonecnt = 0;
 			for (mtmp = fmon; mtmp; mtmp = mtmp2) {
@@ -1977,7 +1977,7 @@ boolean only_on_level; /**< if TRUE only genocide monsters on current level,
 
 void
 punish(sobj)
-register struct obj	*sobj;
+struct obj	*sobj;
 {
 	/* KMH -- Punishment is still okay when you are riding */
 	You("are being punished for your misbehavior!");
@@ -2175,8 +2175,8 @@ int x,y;
 boolean confused;
 boolean by_player; /**< is boulder creation caused by player */
 {
-			    register struct obj *otmp2;
-			    register struct monst *mtmp2;
+			    struct obj *otmp2;
+			    struct monst *mtmp2;
 
 	    	    	    /* Make the object(s) */
 	    	    	    otmp2 = mksobj(confused ? ROCK : BOULDER,

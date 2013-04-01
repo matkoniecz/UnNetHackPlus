@@ -157,8 +157,8 @@ STATIC_OVL void
 mkbox_cnts(box)
 struct obj *box;
 {
-	register int n;
-	register struct obj *otmp;
+	int n;
+	struct obj *otmp;
 
 	box->cobj = (struct obj *) 0;
 
@@ -188,7 +188,7 @@ struct obj *box;
 		    (void) stop_timer(REVIVE_MON, (genericptr_t)otmp);
 		}
 	    } else {
-		register int tprob;
+		int tprob;
 		const struct icp *iprobs = boxiprobs;
 
 		for (tprob = rnd(100); (tprob -= iprobs->iprob) > 0; iprobs++)
@@ -221,8 +221,8 @@ struct obj *box;
 int
 rndmonnum()	/* select a random, common monster type */
 {
-	register struct permonst *ptr;
-	register int	i;
+	struct permonst *ptr;
+	int	i;
 
 	/* Plan A: get a level-appropriate common monster */
 	ptr = rndmonst();
@@ -347,9 +347,9 @@ struct obj *otmp;
  */
 void
 bill_dummy_object(otmp)
-register struct obj *otmp;
+struct obj *otmp;
 {
-	register struct obj *dummy;
+	struct obj *dummy;
 
 	if (otmp->unpaid)
 	    subfrombill(otmp, shop_keeper(*u.ushops));
@@ -742,7 +742,7 @@ start_corpse_timeout(body)
 
 void
 bless(otmp)
-register struct obj *otmp;
+struct obj *otmp;
 {
 #ifdef GOLDOBJ
 	if (otmp->oclass == COIN_CLASS) return;
@@ -760,7 +760,7 @@ register struct obj *otmp;
 
 void
 unbless(otmp)
-register struct obj *otmp;
+struct obj *otmp;
 {
 	otmp->blessed = 0;
 	if (carried(otmp) && confers_luck(otmp))
@@ -771,7 +771,7 @@ register struct obj *otmp;
 
 void
 curse(otmp)
-register struct obj *otmp;
+struct obj *otmp;
 {
 #ifdef GOLDOBJ
 	if (otmp->oclass == COIN_CLASS) return;
@@ -800,7 +800,7 @@ register struct obj *otmp;
 
 void
 uncurse(otmp)
-register struct obj *otmp;
+struct obj *otmp;
 {
 	otmp->cursed = 0;
 	if (carried(otmp) && confers_luck(otmp))
@@ -817,8 +817,8 @@ register struct obj *otmp;
 
 void
 blessorcurse(otmp, chance)
-register struct obj *otmp;
-register int chance;
+struct obj *otmp;
+int chance;
 {
 	if(otmp->blessed || otmp->cursed) return;
 
@@ -837,7 +837,7 @@ register int chance;
 
 int
 bcsign(otmp)
-register struct obj *otmp;
+struct obj *otmp;
 {
 	return(!!otmp->blessed - !!otmp->cursed);
 }
@@ -855,7 +855,7 @@ register struct obj *otmp;
  */
 int
 weight(obj)
-register struct obj *obj;
+struct obj *obj;
 {
 	int wt = objects[obj->otyp].oc_weight;
 
@@ -863,7 +863,7 @@ register struct obj *obj;
 		wt += mons[PM_HOUSECAT].cwt;
 	if (Is_container(obj) || obj->otyp == STATUE) {
 		struct obj *contents;
-		register int cwt = 0;
+		int cwt = 0;
 
 		if (obj->otyp == STATUE && obj->corpsenm >= LOW_PM)
 		    wt = (int)obj->quan *
@@ -937,7 +937,7 @@ mkgold(amount, x, y)
 long amount;
 int x, y;
 {
-    register struct obj *gold = g_at(x,y);
+    struct obj *gold = g_at(x,y);
 
     if (amount <= 0L)
 	amount = (long)(1 + rnd(level_difficulty()+2) * rnd(30));
@@ -977,7 +977,7 @@ struct permonst *ptr;
 int x, y;
 boolean init;
 {
-	register struct obj *otmp;
+	struct obj *otmp;
 
 	if (objtype != CORPSE && objtype != STATUE)
 	    warning("making corpstat type %d", objtype);
@@ -1100,9 +1100,9 @@ boolean copyof;
 struct obj *
 mk_tt_object(objtype, x, y)
 int objtype; /* CORPSE or STATUE */
-register int x, y;
+int x, y;
 {
-	register struct obj *otmp, *otmp2;
+	struct obj *otmp, *otmp2;
 	boolean initialize_it;
 
 	/* player statues never contain books */
@@ -1166,7 +1166,7 @@ const char *nm;
 
 boolean
 is_flammable(otmp)
-register struct obj *otmp;
+struct obj *otmp;
 {
 	int otyp = otmp->otyp;
 	int omat = objects[otyp].oc_material;
@@ -1179,7 +1179,7 @@ register struct obj *otmp;
 
 boolean
 is_rottable(otmp)
-register struct obj *otmp;
+struct obj *otmp;
 {
 	int otyp = otmp->otyp;
 
@@ -1198,10 +1198,10 @@ register struct obj *otmp;
 /* put the object at the given location */
 void
 place_object(otmp, x, y)
-register struct obj *otmp;
+struct obj *otmp;
 int x, y;
 {
-    register struct obj *otmp2 = level.objects[x][y];
+    struct obj *otmp2 = level.objects[x][y];
 
     if (otmp->where != OBJ_FREE)
 	panic("place_object: obj not free (%d)", otmp->where);
@@ -1353,7 +1353,7 @@ int force;	/* 0 = no force so do checks, <0 = force off, >0 force on */
 
 void
 remove_object(otmp)
-register struct obj *otmp;
+struct obj *otmp;
 {
     xchar x = otmp->ox;
     xchar y = otmp->oy;

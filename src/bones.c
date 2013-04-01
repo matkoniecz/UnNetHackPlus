@@ -44,7 +44,7 @@ STATIC_OVL void
 goodfruit(id)
 int id;
 {
-	register struct fruit *f;
+	struct fruit *f;
 
 	for(f=ffruit; f; f=f->nextf) {
 		if(f->fid == -id) {
@@ -217,7 +217,7 @@ struct obj *cont;
 boolean
 can_make_bones()
 {
-	register struct trap *ttmp;
+	struct trap *ttmp;
 
 	if (ledger_no(&u.uz) <= 0 || ledger_no(&u.uz) > maxledgerno())
 	    return FALSE;
@@ -462,8 +462,8 @@ struct obj *corpse;
 int
 getbones()
 {
-	register int fd;
-	register int ok;
+	int fd;
+	int ok;
 	char c, *bonesid, oldbonesid[10];
 
 	if(discover)		/* save bones files for real games */
@@ -511,7 +511,7 @@ getbones()
 #endif
 			trickery(errbuf);
 		} else {
-			register struct monst *mtmp;
+			struct monst *mtmp;
 
 			getlev(fd, 0, 0, TRUE);
 

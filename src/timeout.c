@@ -28,7 +28,7 @@ static NEARDATA const char * const stoned_texts[] = {
 STATIC_OVL void
 stoned_dialogue()
 {
-	register long i = (Stoned & TIMEOUT);
+	long i = (Stoned & TIMEOUT);
 
 	if (i > 0L && i <= SIZE(stoned_texts)) {
 		pline(stoned_texts[SIZE(stoned_texts) - i]);
@@ -53,7 +53,7 @@ static NEARDATA const char * const vomiting_texts[] = {
 STATIC_OVL void
 vomiting_dialogue()
 {
-	register long i = (Vomiting & TIMEOUT) / 3L;
+	long i = (Vomiting & TIMEOUT) / 3L;
 
 	if ((((Vomiting & TIMEOUT) % 3L) == 2) && (i >= 0)
 	    && (i < SIZE(vomiting_texts)))
@@ -93,7 +93,7 @@ static NEARDATA const char * const choke_texts2[] = {
 STATIC_OVL void
 choke_dialogue()
 {
-	register long i = (Strangled & TIMEOUT);
+	long i = (Strangled & TIMEOUT);
 
 	if(i > 0 && i <= SIZE(choke_texts)) {
 	    if (Breathless || !rn2(50))
@@ -121,7 +121,7 @@ static NEARDATA const char * const slime_texts[] = {
 STATIC_OVL void
 slime_dialogue()
 {
-	register long i = (Slimed & TIMEOUT) / 2L;
+	long i = (Slimed & TIMEOUT) / 2L;
 
 	if (((Slimed & TIMEOUT) % 2L) && i >= 0L
 		&& i < SIZE(slime_texts)) {
@@ -162,7 +162,7 @@ burn_away_slime()
 void
 nh_timeout()
 {
-	register struct prop *upp;
+	struct prop *upp;
 	int sleeptime;
 	int m_idx;
 	int baseluck = 0;
@@ -180,7 +180,7 @@ nh_timeout()
 	 * neither is stopped if you don't have a luckstone.
 	 * Luck is based at 0 usually, +1 if a full moon and -1 on Friday 13th
 	 */
-		register int time_luck = stone_luck(FALSE);
+		int time_luck = stone_luck(FALSE);
 		boolean nostone = !carrying(LUCKSTONE) && !stone_luck(TRUE);
 
 		if(u.uluck > baseluck && (nostone || time_luck < 0)) {
@@ -1209,7 +1209,7 @@ void
 do_storms()
 {
     int nstrike;
-    register int x, y;
+    int x, y;
     int dirx, diry;
     int count;
 

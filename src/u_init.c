@@ -484,7 +484,7 @@ static const struct def_skill Skill_W[] = {
 
 STATIC_OVL void
 knows_object(obj)
-register int obj;
+int obj;
 {
 	discover_object(obj,TRUE,FALSE);
 	objects[obj].oc_pre_discovered = 1;	/* not a "discovery" */
@@ -495,9 +495,9 @@ register int obj;
  */
 STATIC_OVL void
 knows_class(sym)
-register char sym;
+char sym;
 {
-	register int ct;
+	int ct;
 	for (ct = 1; ct < NUM_OBJECTS; ct++)
 		if (objects[ct].oc_class == sym && !objects[ct].oc_magic &&
 		    !Is_dragon_armor(ct))
@@ -507,7 +507,7 @@ register char sym;
 void
 u_init()
 {
-	register int i;
+	int i;
 
 	flags.female = flags.initgend;
 	flags.beginner = 1;
@@ -877,7 +877,7 @@ u_init()
  */
 	for(i = 0; i < A_MAX; i++)
 	    if(!rn2(20)) {
-		register int xd = rn2(7) - 2;	/* biased variation */
+		int xd = rn2(7) - 2;	/* biased variation */
 		(void) adjattrib(i, xd, TRUE);
 		if (ABASE(i) < AMAX(i)) AMAX(i) = ABASE(i);
 	    }
@@ -927,7 +927,7 @@ int otyp;
 
 STATIC_OVL void
 ini_inv(trop)
-register struct trobj *trop;
+struct trobj *trop;
 {
 	struct obj *obj;
 	int otyp, i;

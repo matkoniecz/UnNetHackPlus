@@ -57,7 +57,7 @@ lookat(x, y, buf, monbuf)
     int x, y;
     char *buf, *monbuf;
 {
-    register struct monst *mtmp = (struct monst *) 0;
+    struct monst *mtmp = (struct monst *) 0;
     struct permonst *pm = (struct permonst *) 0;
     int glyph;
 
@@ -1217,7 +1217,7 @@ doquickwhatis()
 int
 doidtrap()
 {
-	register struct trap *trap;
+	struct trap *trap;
 	int x, y, tt;
 
 	if (!getdir("^")) return 0;
@@ -1253,7 +1253,7 @@ char *cbuf;
 {
 	dlb *fp;
 	char bufr[BUFSZ];
-	register char *buf = &bufr[6], *ep, ctrl, meta;
+	char *buf = &bufr[6], *ep, ctrl, meta;
 
 	fp = dlb_fopen_area(NH_CMDHELPAREA, CMDHELPFILE, "r");
 	if (!fp) {

@@ -132,7 +132,7 @@ int
 dosave0()
 {
 	const char *fq_save;
-	register int fd, ofd;
+	int fd, ofd;
 	xchar ltmp;
 	d_level uz_save;
 	char whynot[BUFSZ];
@@ -291,7 +291,7 @@ dosave0()
 
 STATIC_OVL void
 savegamestate(fd, mode)
-register int fd, mode;
+int fd, mode;
 {
 	int uid;
 #if defined(RECORD_REALTIME) || defined(REALTIME_ON_BOTL)
@@ -656,7 +656,7 @@ int fd;
 
 void
 bflush(fd)  /* flush run and buffer */
-register int fd;
+int fd;
 {
     bwritefd = fd;
     if (outrunlength >= 0) {	/* flush run */
@@ -683,9 +683,9 @@ void
 bwrite(fd, loc, num)
 int fd;
 genericptr_t loc;
-register unsigned num;
+unsigned num;
 {
-    register unsigned char *bp = (unsigned char *)loc;
+    unsigned char *bp = (unsigned char *)loc;
 
     if (!compressing) {
 #ifdef MFLOPPY
@@ -769,9 +769,9 @@ bflush(fd)
 
 void
 bwrite(fd,loc,num)
-register int fd;
-register genericptr_t loc;
-register unsigned num;
+int fd;
+genericptr_t loc;
+unsigned num;
 {
 	boolean failed;
 
@@ -826,7 +826,7 @@ bclose(fd)
 
 STATIC_OVL void
 savelevchn(fd, mode)
-register int fd, mode;
+int fd, mode;
 {
 	s_level	*tmplev, *tmplev2;
 	int cnt = 0;
@@ -848,9 +848,9 @@ register int fd, mode;
 
 STATIC_OVL void
 savedamage(fd, mode)
-register int fd, mode;
+int fd, mode;
 {
-	register struct damage *damageptr, *tmp_dam;
+	struct damage *damageptr, *tmp_dam;
 	unsigned int xl = 0;
 
 	damageptr = level.damagelist;
@@ -873,8 +873,8 @@ register int fd, mode;
 
 void
 save_mongen_override(fd, or, mode)
-register int fd, mode;
-register struct mon_gen_override *or;
+int fd, mode;
+struct mon_gen_override *or;
 {
     struct mon_gen_tuple *mt;
     struct mon_gen_tuple *prev;
@@ -908,8 +908,8 @@ register struct mon_gen_override *or;
 
 void
 save_lvl_sounds(fd, or, mode)
-register int fd, mode;
-register struct lvl_sounds *or;
+int fd, mode;
+struct lvl_sounds *or;
 {
     int marker = 0;
     int i;
@@ -946,10 +946,10 @@ register struct lvl_sounds *or;
 
 STATIC_OVL void
 saveobjchn(fd, otmp, mode)
-register int fd, mode;
-register struct obj *otmp;
+int fd, mode;
+struct obj *otmp;
 {
-	register struct obj *otmp2;
+	struct obj *otmp2;
 	unsigned int xl;
 	int minusone = -1;
 
@@ -978,10 +978,10 @@ register struct obj *otmp;
 
 STATIC_OVL void
 savemonchn(fd, mtmp, mode)
-register int fd, mode;
-register struct monst *mtmp;
+int fd, mode;
+struct monst *mtmp;
 {
-	register struct monst *mtmp2;
+	struct monst *mtmp2;
 	unsigned int xl;
 	int minusone = -1;
 	struct permonst *monbegin = &mons[0];
@@ -1008,10 +1008,10 @@ register struct monst *mtmp;
 
 STATIC_OVL void
 savetrapchn(fd, trap, mode)
-register int fd, mode;
-register struct trap *trap;
+int fd, mode;
+struct trap *trap;
 {
-	register struct trap *trap2;
+	struct trap *trap2;
 
 	while (trap) {
 	    trap2 = trap->ntrap;
@@ -1032,9 +1032,9 @@ register struct trap *trap;
  */
 void
 savefruitchn(fd, mode)
-register int fd, mode;
+int fd, mode;
 {
-	register struct fruit *f2, *f1;
+	struct fruit *f2, *f1;
 
 	f1 = ffruit;
 	while (f1) {

@@ -187,7 +187,7 @@ int shotlimit;
 int
 dothrow()
 {
-	register struct obj *obj;
+	struct obj *obj;
 	int shotlimit;
 
 	/*
@@ -346,7 +346,7 @@ dofire()
  */
 void
 hitfloor(obj)
-register struct obj *obj;
+struct obj *obj;
 {
 	if (IS_SOFT(levl[u.ux][u.uy].typ) || u.uinwater) {
 		dropy(obj);
@@ -687,9 +687,9 @@ mhurtle(mon, dx, dy, range)
 
 STATIC_OVL void
 check_shop_obj(obj, x, y, broken)
-register struct obj *obj;
-register xchar x, y;
-register boolean broken;
+struct obj *obj;
+xchar x, y;
+boolean broken;
 {
 	struct monst *shkp = shop_keeper(*u.ushops);
 
@@ -866,12 +866,12 @@ struct obj *obj;
 
 void
 throwit(obj, wep_mask, twoweap)
-register struct obj *obj;
+struct obj *obj;
 long wep_mask;	/* used to re-equip returning boomerang */
 boolean twoweap; /* used to restore twoweapon mode if wielded weapon returns */
 {
-	register struct monst *mon;
-	register int range, urange;
+	struct monst *mon;
+	int range, urange;
 	boolean impaired = (Confusion || Stunned || Blind ||
 			   Hallucination || Fumbling);
 
@@ -1196,11 +1196,11 @@ struct monst *mon;
  */
 int
 thitmonst(mon, obj)
-register struct monst *mon;
-register struct obj   *obj;
+struct monst *mon;
+struct obj   *obj;
 {
-	register int	tmp; /* Base chance to hit */
-	register int	disttmp; /* distance modifier */
+	int	tmp; /* Base chance to hit */
+	int	disttmp; /* distance modifier */
 	int otyp = obj->otyp;
 	boolean guaranteed_hit = (u.uswallow && mon == u.ustuck);
 	boolean obj_disint = (touch_disintegrates(mon->data) &&
@@ -1473,8 +1473,8 @@ register struct obj   *obj;
 
 STATIC_OVL int
 gem_accept(mon, obj)
-register struct monst *mon;
-register struct obj *obj;
+struct monst *mon;
+struct obj *obj;
 {
 	char buf[BUFSZ];
 	boolean is_buddy = sgn(mon->data->maligntyp) == sgn(u.ualign.type);
@@ -1786,7 +1786,7 @@ struct obj *obj;
 #ifndef GOLDOBJ
 	long zorks = obj->quan;
 #endif
-	register struct monst *mon;
+	struct monst *mon;
 
 	if(!u.dx && !u.dy && !u.dz) {
 #ifndef GOLDOBJ
