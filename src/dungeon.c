@@ -710,9 +710,7 @@ struct level_map {
 	{ "medusa",	&medusa_level },
 	{ "oracle",	&oracle_level },
 	{ "orcus",	&orcus_level },
-#ifdef REINCARNATION
 	{ "rogue",	&rogue_level },
-#endif
 	{ "sanctum",	&sanctum_level },
 	{ "valley",	&valley_level },
 	{ "water",	&water_level },

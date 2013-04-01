@@ -861,7 +861,6 @@ glyph_t value;
 #endif
 }
 
-#ifdef REINCARNATION
 
 /*
  * saved display symbols for objects & features.
@@ -1056,6 +1055,5 @@ boolean is_rlevel;
 #endif
     }
 }
-#endif /* REINCARNATION */
 
 /*drawing.c*/

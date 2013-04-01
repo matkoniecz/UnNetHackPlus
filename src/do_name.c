@@ -1314,7 +1314,6 @@ rndmonnam()
 	return mons[name].mname;
 }
 
-#ifdef REINCARNATION
 const char *
 roguename() /* Name of a Rogue player */
 {
@@ -1332,7 +1331,6 @@ roguename() /* Name of a Rogue player */
 	return rn2(3) ? (rn2(2) ? "Michael Toy" : "Kenneth Arnold")
 		: "Glenn Wichman";
 }
-#endif /* REINCARNATION */
 #endif /* OVLB */
 
 #ifdef OVL2

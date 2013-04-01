@@ -20,13 +20,8 @@ STATIC_DCL int FDECL(select_newcham_form, (struct monst *));
 STATIC_DCL void FDECL(kill_eggs, (struct obj *));
 #endif
 
-#ifdef REINCARNATION
 #define LEVEL_SPECIFIC_NOCORPSE(mdat) \
 	 (Is_rogue_level(&u.uz))
-#else
-#define LEVEL_SPECIFIC_NOCORPSE(mdat) \
-	   (0)
-#endif
 
 #ifndef OVLB
 STATIC_VAR short cham_to_pm[];
@@ -1053,15 +1048,10 @@ nexttry:	/* eels prefer the water, but if there is no water nearby,
 		(levl[nx][ny].doormask & D_LOCKED && !(flag & UNLOCKDOOR))) &&
 	       !thrudoor) continue;
 	    if(nx != x && ny != y && (nodiag ||
-#ifdef REINCARNATION
 	       ((IS_DOOR(nowtyp) &&
 		 ((levl[x][y].doormask & ~D_BROKEN) || Is_rogue_level(&u.uz))) ||
 		(IS_DOOR(ntyp) &&
 		 ((levl[nx][ny].doormask & ~D_BROKEN) || Is_rogue_level(&u.uz))))
-#else
-	       ((IS_DOOR(nowtyp) && (levl[x][y].doormask & ~D_BROKEN)) ||
-		(IS_DOOR(ntyp) && (levl[nx][ny].doormask & ~D_BROKEN)))
-#endif
 	       ))
 		continue;
 	    if((is_pool(nx,ny) == wantpool || poolok) &&

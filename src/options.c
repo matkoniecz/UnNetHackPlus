@@ -2975,10 +2975,8 @@ goodfruit:
 				 || (boolopt[i].addr) == &iflags.UTF8graphics
 # endif
 				) {
-# ifdef REINCARNATION
 			    if (!initial && Is_rogue_level(&u.uz))
 				assign_rogue_graphics(FALSE);
-# endif
 			    need_redraw = TRUE;
 # ifdef TERMLIB
 			    if ((boolopt[i].addr) == &iflags.DECgraphics)
@@ -3005,10 +3003,8 @@ goodfruit:
 				switch_graphics(iflags.UTF8graphics ?
 						UTF8_GRAPHICS : ASCII_GRAPHICS);
 # endif
-# ifdef REINCARNATION
 			    if (!initial && Is_rogue_level(&u.uz))
 				assign_rogue_graphics(TRUE);
-# endif
 			}
 #endif /* TERMLIB || ASCIIGRAPH || MAC_GRAPHICS_ENV */
 

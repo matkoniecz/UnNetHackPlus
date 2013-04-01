@@ -1438,11 +1438,7 @@ struct obj	*sobj;
 		return(1);
 	case SCR_EARTH:
 	    /* TODO: handle steeds */
-	    if (
-#ifdef REINCARNATION
-		!Is_rogue_level(&u.uz) && 
-#endif
-	    	 (!In_endgame(&u.uz) || Is_earthlevel(&u.uz))) {
+	    if (!Is_rogue_level(&u.uz) && (!In_endgame(&u.uz) || Is_earthlevel(&u.uz))) {
 	    	int x, y;
 		int boulder_created = 0;
 
@@ -1597,7 +1593,6 @@ do_it:
 	if (Punished && !on && !Blind)
 	    move_bc(1, 0, uball->ox, uball->oy, uchain->ox, uchain->oy);
 
-#ifdef REINCARNATION
 	if (Is_rogue_level(&u.uz)) {
 	    /* Can't use do_clear_area because MAX_RADIUS is too small */
 	    /* rogue lighting must light the entire room */
@@ -1612,7 +1607,6 @@ do_it:
 	    }
 	    /* hallways remain dark on the rogue level */
 	} else
-#endif
 	    do_clear_area(u.ux,u.uy,
 		(obj && obj->oclass==SCROLL_CLASS && obj->blessed) ? 9 : 5,
 		set_lit, (genericptr_t)(on ? &is_lit : (char *)0));

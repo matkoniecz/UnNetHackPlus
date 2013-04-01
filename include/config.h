@@ -354,7 +354,6 @@ typedef long glyph_t;
 #define SINKS		/* Kitchen sinks - Janet Walz */
 /* dungeon levels */
 #define WALLIFIED_MAZE	/* Fancy mazes - Jean-Christophe Collet */
-#define REINCARNATION	/* Special Rogue-like levels */
 /* monsters & objects */
 #define KOPS		/* Keystone Kops by Scott R. Turner */
 /* difficulty */
@@ -473,6 +472,7 @@ typedef long glyph_t;
 #define ELBERETH_CONDUCT /* Track the number of times the player engraves Elbereth. - Ray Kulhanek */
 #define BLACKMARKET	/* Massimo Campostrini (campo@sunthpi3.difi.unipi.it) */
 #define PARANOID
+#define REINCARNATION	/* Special Rogue-like levels */
 
 /* End of Section 7 */
 

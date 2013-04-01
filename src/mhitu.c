@@ -625,9 +625,7 @@ mattacku(mtmp)
 			break;
 		case AT_WEAP:
 			if(range2) {
-#ifdef REINCARNATION
 				if (!Is_rogue_level(&u.uz))
-#endif
 					thrwmu(mtmp);
 			} else {
 			    int hittmp = 0;
