@@ -44,6 +44,8 @@ static const char *developers[] = {
 	"Chris",
 	/* patches included in UnNetHackPlus ("L" - Leon Arnott) */
 	"Leon",
+	/* UnNetHackPlus */
+	"Mateusz",
 	""};
 
 
