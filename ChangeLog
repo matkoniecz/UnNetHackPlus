@@ -21,6 +21,7 @@
 		- "Player polymorphed into Xorn is not trapped by pits but (s)he receives "You fall into a pit!" message" and other related buggy behaviours
 		- "Statues/figurines of golems hit with stone-to-flesh spell are supposed (see Trap.c, line 423 of vanilia source code) to turn into flesh golems, not meatballs."
 		- C343-109 "There is a grammar error in the Tourist leader's greeting."
+		- C343-1 "At a pit the game can give messages with poor grammar."
 		Patches are linked at http://nethackwiki.com/wiki/User:Bulwersator/UnNetHackPlus_bug_tracking
 	* UnNetHack bug fixes
 		- Angered quest guardians will no longer go berserk.
