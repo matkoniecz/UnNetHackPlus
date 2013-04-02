@@ -96,23 +96,30 @@ experience(mtmp, nk)	/* return # of exp points for mtmp after nk killed */
 }
 
 /**
- * Adds to Experience and Scoring counter
+ * Adds to Experience counter
  */
 void
-more_experienced(exp, score)
-	int exp, score;
+more_experienced(int exp)
 {
 	u.uexp += exp;
-	u.urscore += 4*score;
-	if(exp
-#ifdef SCORE_ON_BOTL
-	   || flags.showscore
-#endif
-	   ) flags.botl = 1;
-	if (u.uexp >= (Role_if(PM_WIZARD) ? 1000 : 2000))
+	if (u.uexp >= (Role_if(PM_WIZARD) ? 1000 : 2000)) {
 		flags.beginner = 0;
-	
+	}
 	newexplevel();		/* will decide if you go up */
+}
+
+/**
+ * Adds to Scoring counter
+ */
+void
+more_points(int score)
+{
+	u.urscore += score;
+#ifdef SCORE_ON_BOTL
+	if(flags.showscore) {
+		flags.botl = 1;
+		}
+#endif
 }
 
 void

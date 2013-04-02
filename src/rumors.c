@@ -373,7 +373,8 @@ struct monst *oracl;
 		exercise(A_WIS, !cheapskate);
 	}
 	if (add_xpts) {
-		more_experienced(add_xpts, add_xpts);
+		more_experienced(add_xpts);
+		more_points(4*add_xpts);
 	}
 	return 1;
 }
