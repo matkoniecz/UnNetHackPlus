@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* investigate SCORE_ON_BOTL
 * "checking whether to enable" in configure + autoconf.h + autoconf.hin
 * kill paging in guidebook
 * #version
