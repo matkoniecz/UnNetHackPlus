@@ -810,10 +810,12 @@ die:
 		u.urscore = get_score_value();
 #ifdef ASTRAL_ESCAPE
 		if (how == ASCENDED || how == DEFIED) {
+			u.urscore += 1000;
 			u.urscore *= 2L;
 		}
 #else
 		if (how == ASCENDED) {
+			u.urscore += 1000;
 			u.urscore *= 2L;
 		}
 #endif
