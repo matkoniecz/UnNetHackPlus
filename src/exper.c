@@ -111,6 +111,8 @@ more_experienced(exp, score)
 	   ) flags.botl = 1;
 	if (u.uexp >= (Role_if(PM_WIZARD) ? 1000 : 2000))
 		flags.beginner = 0;
+	
+	newexplevel();		/* will decide if you go up */
 }
 
 void

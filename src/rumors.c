@@ -374,7 +374,6 @@ struct monst *oracl;
 	}
 	if (add_xpts) {
 		more_experienced(add_xpts, add_xpts);
-		newexplevel();
 	}
 	return 1;
 }
