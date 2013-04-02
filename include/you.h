@@ -416,7 +416,8 @@ struct you {
 #else
 	long	umoney0;
 #endif
-	long	uexp, urexp;
+	long	uexp;	/**< experience points collected on the way to the higher experience level */
+	long	urexp;
 	long	urscore;	/**< the current score */
 	long	ucleansed;	/* to record moves when player was cleansed */
 	long	usleep;		/* sleeping; monstermove you last started */
