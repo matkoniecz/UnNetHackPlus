@@ -1580,6 +1580,7 @@ struct obj *obj, *otmp;
 		}
 		/* KMH, conduct */
 		u.uconduct.polypiles++;
+		more_points(-1);
 		/* any saved lock context will be dangerously obsolete */
 		if (Is_box(obj)) (void) boxlock(obj, otmp);
 

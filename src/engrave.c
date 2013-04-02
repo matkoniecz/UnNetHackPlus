@@ -1262,8 +1262,10 @@ boolean fingers;
 		unsigned ecount1, ecount0 = nengr_at(u.ux, u.uy);
 		make_engr_at(u.ux, u.uy, buf, (moves - multi), type);
 		ecount1 = nengr_at(u.ux, u.uy);
-		if (ecount1 > ecount0)
+		if (ecount1 > ecount0) {
 			u.uconduct.elbereths += (ecount1 - ecount0);
+			more_points(-10 * (ecount1 - ecount0));
+		}
 	}
 
 	if (post_engr_text[0]) pline(post_engr_text);
