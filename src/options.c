@@ -218,11 +218,7 @@ static struct Bool_Opt
 	{"showbuc", &iflags.show_buc, TRUE, SET_IN_GAME},
 	{"showdmg", &iflags.showdmg, FALSE, SET_IN_GAME},
 	{"show_dgn_name", &iflags.show_dgn_name, TRUE, SET_IN_GAME},
-#ifdef EXP_ON_BOTL
 	{"showexp", &flags.showexp, FALSE, SET_IN_GAME},
-#else
-	{"showexp", (boolean *)0, FALSE, SET_IN_FILE},
-#endif
 	{"showrace", &iflags.showrace, FALSE, SET_IN_GAME},
 #ifdef REALTIME_ON_BOTL
 	{"showrealtime", &iflags.showrealtime, FALSE, SET_IN_GAME},
@@ -3012,9 +3008,7 @@ goodfruit:
 			if (initial) return;
 
 			if ((boolopt[i].addr) == &flags.time
-#ifdef EXP_ON_BOTL
 			 || (boolopt[i].addr) == &flags.showexp
-#endif
 #ifdef SCORE_ON_BOTL
 			 || (boolopt[i].addr) == &flags.showscore
 #endif

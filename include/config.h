@@ -364,7 +364,6 @@ typedef long glyph_t;
 # define CLIPPING	/* allow smaller screens -- ERS */
 #endif
 
-#define EXP_ON_BOTL	/* Show experience on bottom line */
 /* #define SCORE_ON_BOTL */	/* added by Gary Erickson (erickson@ucivax) */
 #endif /* AUTOCONF */
 
@@ -464,6 +463,7 @@ typedef long glyph_t;
  * these defines are also listed in build_pseudo_opts (util\makedefs.c)
  */
 #define AUTO_OPEN	/* open doors by walking into them - Stefano Busti */
+#define EXP_ON_BOTL	/* Show experience on bottom line */
 #define STEED		/* Riding steeds */
 #define SEDUCE		/* Succubi/incubi seduction, by KAA, suggested by IM */
 #define TOURIST		/* Tourist players with cameras and Hawaiian shirts */
