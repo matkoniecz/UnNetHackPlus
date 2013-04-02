@@ -133,15 +133,16 @@ moveloop()
 
 		    monstermoves++;
 		    moves++;
+
+		    /********************************/
+		    /* once-per-turn things go here */
+		    /********************************/
+
 		    if(moves <= 1000) {
 		       more_points(1);
 		    } else if (moves % 10 == 0) {
 		       more_points(-1);
 		    }
-
-		    /********************************/
-		    /* once-per-turn things go here */
-		    /********************************/
 
 		    if (flags.bypasses) clear_bypasses();
 		    if(Glib) glibr();
