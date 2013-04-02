@@ -1833,7 +1833,7 @@ xkilled(mtmp, dest)
  */
 	int	dest;
 {
-	int tmp, x = mtmp->mx, y = mtmp->my;
+	int x = mtmp->mx, y = mtmp->my;
 	struct permonst *mdat;
 	int mndx;
 	struct obj *otmp;
@@ -1969,9 +1969,10 @@ cleanup:
 
 	/* give experience points */
 	int nr_killed = (int)mvitals[mndx].died;
-	tmp = experience(mtmp, nr_killed);
-	more_experienced(tmp);
-	more_points(4*max(tmp/nr_killed,1));
+	more_experienced(experience(mtmp, nr_killed));
+	if (nr_killed == 1) {
+		more_points(1);
+	}
 
 	/* adjust alignment points */
 	if (mtmp->m_id == quest_status.leader_m_id) {		/* REAL BAD! */
