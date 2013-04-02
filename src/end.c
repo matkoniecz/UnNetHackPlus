@@ -535,7 +535,7 @@ winid endwin;
 			otmp->otyp == SPE_BOOK_OF_THE_DEAD ||
 			otmp->otyp == CANDELABRUM_OF_INVOCATION) {
 	    value = arti_cost(otmp);	/* zorkmid value */
-	    points = value * 5 / 2;	/* score value */
+	    points = 2;	/* score value */
 	    if (counting) {
 		u.urscore += points;
 	    } else {
@@ -795,14 +795,27 @@ die:
 	/* finish_paybill should be called after disclosure but before bones */
 	if (bones_ok && taken) finish_paybill();
 
-	/* calculate score, before creating bones [container gold] */
+	/* 
+	 * save amount of carried money, before creating bones [container gold]
+	 * save score before dumps 
+	 */
 	{
-	    int deepest = deepest_lev_reached(FALSE);
-	    u.urscore += 50L * (long)(deepest - 1);
-	    if (deepest > 20)
-		u.urscore += 1000L * (long)((deepest > 30) ? 10 : deepest - 20);
+#ifndef GOLDOBJ
+		umoney = u.ugold;
+#else
+		umoney = money_cnt(invent);
+#endif
+		umoney += hidden_gold();	/* accumulate gold from containers */
+
+		u.urscore += get_score_value();
 #ifdef ASTRAL_ESCAPE
-	    if (how == ASCENDED || how == DEFIED) u.urscore *= 2L;
+		if (how == ASCENDED || how == DEFIED) {
+			u.urscore *= 2L;
+		}
+#else
+		if (how == ASCENDED) {
+			u.urscore *= 2L;
+		}
 #endif
 	}
 
@@ -903,13 +916,6 @@ die:
 		    val->list[i].count = 0L;
 		}
 	    get_valuables(invent);
-
-	    /* add points for collected valuables */
-	    for (val = valuables; val->list; val++)
-		for (i = 0; i < val->size; i++)
-		    if (val->list[i].count != 0L)
-			u.urscore += val->list[i].count
-				  * (long)objects[val->list[i].typ].oc_cost;
 
 	    /* count the points for artifacts */
 	    artifact_score(invent, TRUE, endwin);
@@ -1375,6 +1381,17 @@ boolean want_disp;
 		    destroy_nhwindow(klwin);
 	    }
 	}
+}
+
+
+int
+get_score_value()
+{
+	long int deepest = deepest_lev_reached(FALSE);
+	if (deepest > 40) {
+		deepest = 40;
+	}
+	return 100 * (deepest-1);
 }
 
 /*end.c*/

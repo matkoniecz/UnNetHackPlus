@@ -246,8 +246,7 @@ max_rank_sz()
 long
 botl_score()
 {
-    int deepest = deepest_lev_reached(FALSE);
-    return u.urscore + (long)(50 * (deepest - 1)) + (long)(deepest > 30 ? 10000 : deepest > 20 ? 1000*(deepest - 20) : 0);
+	return u.urscore + get_score_value();
 }
 #endif
 
