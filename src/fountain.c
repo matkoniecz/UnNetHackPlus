@@ -570,8 +570,6 @@ drinksink()
 				pline("But it quiets down.");
 			break;
 		case 8: pline("Yuk, this water tastes awful.");
-			more_experienced(1,1,0);
-			newexplevel();
 			break;
 		case 9: pline("Gaggg... this tastes like sewage!  You vomit.");
 			morehungry(rn1(30-ACURR(A_CON), 11));

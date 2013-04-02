@@ -980,7 +980,6 @@ boolean fingers;
 	/* Identify stylus */
 	if (doknown) {
 	    makeknown(otmp->otyp);
-	    more_experienced(0,0,10);
 	}
 
 	if (teleengr) {
