@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* A.S. engraving (from Journey to the Centre of the Earth, by Jules Verne)
 * nuke sokoban
 * investigate SCORE_ON_BOTL
 * "checking whether to enable" in configure + autoconf.h + autoconf.hin
