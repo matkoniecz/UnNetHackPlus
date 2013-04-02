@@ -1387,11 +1387,15 @@ boolean want_disp;
 int
 get_score_value()
 {
-	long int deepest = deepest_lev_reached(FALSE);
+	int deepest = deepest_lev_reached(FALSE);
 	if (deepest > 40) {
 		deepest = 40;
 	}
-	return u.urscore + 100 * (deepest-1);
+	int score = u.urscore + 100 * (deepest-1);
+	if (score < 0) {
+		score = 0;
+	}
+	return score;
 }
 
 /*end.c*/
