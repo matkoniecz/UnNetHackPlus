@@ -1264,7 +1264,7 @@ boolean fingers;
 		ecount1 = nengr_at(u.ux, u.uy);
 		if (ecount1 > ecount0) {
 			u.uconduct.elbereths += (ecount1 - ecount0);
-			more_points(-10 * (ecount1 - ecount0));
+			more_points(-2 * (ecount1 - ecount0));
 		}
 	}
 

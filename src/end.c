@@ -810,12 +810,12 @@ die:
 		u.urscore = get_score_value();
 #ifdef ASTRAL_ESCAPE
 		if (how == ASCENDED || how == DEFIED) {
-			u.urscore += 1000;
+			u.urscore += 500;
 			u.urscore *= 2L;
 		}
 #else
 		if (how == ASCENDED) {
-			u.urscore += 1000;
+			u.urscore += 500;
 			u.urscore *= 2L;
 		}
 #endif
@@ -1393,7 +1393,7 @@ get_score_value()
 	if (deepest > 40) {
 		deepest = 40;
 	}
-	int score = u.urscore + 100 * (deepest-1);
+	int score = u.urscore + 20 * (deepest-1);
 	if (score < 0) {
 		score = 0;
 	}
