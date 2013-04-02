@@ -242,14 +242,6 @@ max_rank_sz()
 #endif /* OVLB */
 #ifdef OVL0
 
-#ifdef SCORE_ON_BOTL
-long
-botl_score()
-{
-	return u.urscore + get_score_value();
-}
-#endif
-
 #ifdef DUMP_LOG
 void bot1str(char *newbot1)
 #else
@@ -346,7 +338,7 @@ bot1()
 			(u.ualign.type == A_NEUTRAL) ? "  Neutral" : "  Lawful");
 #ifdef SCORE_ON_BOTL
 	if (flags.showscore)
-	    Sprintf(nb = eos(nb), " S:%ld", botl_score());
+	    Sprintf(nb = eos(nb), " S:%ld", get_score_value());
 #endif
 #ifdef DUMP_LOG
 }

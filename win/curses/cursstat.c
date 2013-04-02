@@ -1008,17 +1008,17 @@ void curses_update_stats(boolean redraw)
     }
     if (prevscore.display)
     {
-        if (botl_score() != prevscore.value)
+        if (get_score_value() != prevscore.value)
 	    {
-	        if (botl_score() > prevscore.value)
+	        if (get_score_value() > prevscore.value)
 	        {
 	            prevscore.highlight_color = STAT_UP_COLOR;
 	        }
-	        else    /* Not sure this is possible */
+	        else
 	        {
                 prevscore.highlight_color = STAT_DOWN_COLOR;
 	        }
-            sprintf(buf, "%ld", botl_score());
+            sprintf(buf, "%ld", get_score_value());
             free(prevscore.txt);
             prevscore.txt = curses_copy_of(buf);
             prevscore.highlight_turns = 3;
@@ -1045,7 +1045,7 @@ void curses_update_stats(boolean redraw)
         }
     }
     
-    prevscore.value = botl_score(); /* Track it even when it's not displayed */
+    prevscore.value = get_score_value(); /* Track it even when it's not displayed */
 #endif  /* SCORE_ON_BOTL */
 
     /* Hunger */
@@ -1977,8 +1977,8 @@ static void init_stats()
 
     /* Score */
 #ifdef SCORE_ON_BOTL
-    prevscore.value = botl_score();
-    sprintf(buf, "%ld", botl_score());
+    prevscore.value = get_score_value();
+    sprintf(buf, "%ld", get_score_value());
     prevscore.txt = curses_copy_of(buf);
 	prevscore.display = flags.showscore;
 	prevscore.highlight_turns = 0;

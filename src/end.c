@@ -807,7 +807,7 @@ die:
 #endif
 		umoney += hidden_gold();	/* accumulate gold from containers */
 
-		u.urscore += get_score_value();
+		u.urscore = get_score_value();
 #ifdef ASTRAL_ESCAPE
 		if (how == ASCENDED || how == DEFIED) {
 			u.urscore *= 2L;
@@ -1391,7 +1391,7 @@ get_score_value()
 	if (deepest > 40) {
 		deepest = 40;
 	}
-	return 100 * (deepest-1);
+	return u.urscore + 100 * (deepest-1);
 }
 
 /*end.c*/

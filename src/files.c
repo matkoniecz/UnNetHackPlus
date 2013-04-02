@@ -689,7 +689,7 @@ boolean playing; /**< True if game is running.  */
 	        u.uhpmax,
 	        moves,
 #ifdef SCORE_ON_BOTL
-	        botl_score(),
+	        get_score_value(),
 #else
 	        0L,
 #endif
