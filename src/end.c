@@ -797,24 +797,7 @@ die:
 
 	/* calculate score, before creating bones [container gold] */
 	{
-	    long tmp;
 	    int deepest = deepest_lev_reached(FALSE);
-
-#ifndef GOLDOBJ
-	    umoney = u.ugold;
-	    tmp = u.ugold0;
-#else
-	    umoney = money_cnt(invent);
-	    tmp = u.umoney0;
-#endif
-	    umoney += hidden_gold();	/* accumulate gold from containers */
-	    tmp = umoney - tmp;		/* net gain */
-
-	    if (tmp < 0L)
-		tmp = 0L;
-	    if (how < PANICKED)
-		tmp -= tmp / 10L;
-	    u.urscore += tmp;
 	    u.urscore += 50L * (long)(deepest - 1);
 	    if (deepest > 20)
 		u.urscore += 1000L * (long)((deepest > 30) ? 10 : deepest - 20);
