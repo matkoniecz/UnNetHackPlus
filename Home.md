@@ -1,6 +1,25 @@
 Plans for UnNetHackPlus
+http://www.darkshire.net/jhkim/rpg/lordoftherings/names.pdf
+
+http://en.wikipedia.org/wiki/List_of_fictional_demons
+
+http://tvtropes.org/pmwiki/pmwiki.php/Main/HorrorTropes
+http://tvtropes.org/pmwiki/pmwiki.php/Main/ThisIndexIsCursed
+http://tvtropes.org/pmwiki/pmwiki.php/Main/AppliedPhlebotinum
+http://tvtropes.org/pmwiki/pmwiki.php/Main/PlotDevice
+http://tvtropes.org/pmwiki/pmwiki.php/Main/NarrativeDevices
+http://tvtropes.org/pmwiki/pmwiki.php/Main/ChekhovsGun
+http://tvtropes.org/pmwiki/pmwiki.php/Main/TomeOfEldritchLore
+http://tvtropes.org/pmwiki/pmwiki.php/Main/AlienKudzu
+http://tvtropes.org/pmwiki/pmwiki.php/Main/GoneHorriblyRight
+http://tvtropes.org/pmwiki/pmwiki.php/Main/SpeculativeFictionTropes
+Absolute Xenophobe 
+
+"Once upon a midnight dreary, while I pondered, weak and weary,
+Over many a quaint and curious volume of forgotten lore..."
+— Edgar Allan Poe, The Raven 
+
 * A.S. engraving (from Journey to the Centre of the Earth, by Jules Verne)
-* nuke sokoban
 * investigate SCORE_ON_BOTL
 * "checking whether to enable" in configure + autoconf.h + autoconf.hin
 * kill paging in guidebook
