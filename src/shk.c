@@ -2669,14 +2669,18 @@ xchar x, y;
 	boolean isgold = (obj->oclass == COIN_CLASS);
 	boolean only_partially_your_contents = FALSE;
 
-	if(!(shkp = shop_keeper(*in_rooms(x, y, SHOPBASE))) ||
-	   !inhishop(shkp)) return;
-	if(!costly_spot(x, y))	return;
-	if(!*u.ushops) return;
-
+	if(!(shkp = shop_keeper(*in_rooms(x, y, SHOPBASE))) || !inhishop(shkp)) {
+		return;
+	}
+	if(!costly_spot(x, y)) {
+		return;
+	}
+	if(!*u.ushops) {
+		return;
+	}
 	if(obj->unpaid && !container && !isgold) {
-	    sub_one_frombill(obj, shkp);
-	    return;
+		sub_one_frombill(obj, shkp);
+		return;
 	}
 	if(container) {
 		/* find the price of content before subfrombill */
@@ -2687,27 +2691,29 @@ xchar x, y;
 	}
 
 	saleitem = saleable(shkp, obj);
-	if(!isgold && !obj->unpaid && saleitem)
-	    ltmp = set_cost(obj, shkp);
+	if(!isgold && !obj->unpaid && saleitem) {
+		ltmp = set_cost(obj, shkp);
+	}
 
 	offer = ltmp + cltmp;
 
 	/* get one case out of the way: nothing to sell, and no gold */
-	if(!isgold &&
-	   ((offer + gltmp) == 0L || sell_how == SELL_DONTSELL)) {
-		boolean unpaid = (obj->unpaid ||
-				  (container && count_unpaid(obj->cobj)));
-
+	if(!isgold && ((offer + gltmp) == 0L || sell_how == SELL_DONTSELL)) {
+		boolean unpaid = (obj->unpaid || (container && count_unpaid(obj->cobj)));
 		if(container) {
 			dropped_container(obj, shkp, FALSE);
-			if(!obj->unpaid && !saleitem)
-			    obj->no_charge = 1;
-			if(obj->unpaid || count_unpaid(obj->cobj))
-			    subfrombill(obj, shkp);
-		} else obj->no_charge = 1;
-
-		if(!unpaid && (sell_how != SELL_DONTSELL))
-		    pline("%s seems uninterested.", Monnam(shkp));
+			if(!obj->unpaid && !saleitem) {
+				obj->no_charge = 1;
+			}
+			if(obj->unpaid || count_unpaid(obj->cobj)) {
+				subfrombill(obj, shkp);
+			}
+		} else {
+			obj->no_charge = 1;
+		}
+		if(!unpaid && (sell_how != SELL_DONTSELL)) {
+			pline("%s seems uninterested.", Monnam(shkp));
+		}
 		return;
 	}
 
@@ -2722,49 +2728,59 @@ xchar x, y;
 	}
 
 	if(eshkp->robbed) {  /* shkp is not angry? */
-		if(isgold) offer = obj->quan;
-		else if(cgold) offer += cgold;
-		if((eshkp->robbed -= offer < 0L))
+		if(isgold) {
+			offer = obj->quan;
+		} else if(cgold) {
+			offer += cgold;
+		}
+		if((eshkp->robbed -= offer < 0L)) {
 			eshkp->robbed = 0L;
-		if(offer) verbalize(
-  "Thank you for your contribution to restock this recently plundered shop.");
+		}
+		if(offer) {
+			verbalize("Thank you for your contribution to restock this recently plundered shop.");
+		}
 		subfrombill(obj, shkp);
 		return;
 	}
 
 	if(isgold || cgold) {
-		if(!cgold) gltmp = obj->quan;
-
-		if(eshkp->debit >= gltmp) {
-		    if(eshkp->loan) { /* you carry shop's gold */
-			 if(eshkp->loan >= gltmp)
-			     eshkp->loan -= gltmp;
-			 else eshkp->loan = 0L;
-		    }
-		    eshkp->debit -= gltmp;
-		    Your("debt is %spaid off.",
-				eshkp->debit ? "partially " : "");
-		} else {
-		    long delta = gltmp - eshkp->debit;
-
-		    eshkp->credit += delta;
-		    if(eshkp->debit) {
-			eshkp->debit = 0L;
-			eshkp->loan = 0L;
-			Your("debt is paid off.");
-		    }
-		    pline("%ld %s %s added to your credit.",
-				delta, currency(delta), delta > 1L ? "are" : "is");
+		if(!cgold) {
+			gltmp = obj->quan;
 		}
-		if(offer) goto move_on;
-		else {
-		    if(!isgold) {
-			if (container)
-			    dropped_container(obj, shkp, FALSE);
-			if (!obj->unpaid && !saleitem) obj->no_charge = 1;
-			subfrombill(obj, shkp);
-		    }
-		    return;
+		if(eshkp->debit >= gltmp) {
+			if(eshkp->loan) { /* you carry shop's gold */
+				if(eshkp->loan >= gltmp) {
+					eshkp->loan -= gltmp;
+				} else {
+					eshkp->loan = 0L;
+				}
+			}
+			eshkp->debit -= gltmp;
+			Your("debt is %spaid off.", eshkp->debit ? "partially " : "");
+		} else {
+			long delta = gltmp - eshkp->debit;
+
+			eshkp->credit += delta;
+			if(eshkp->debit) {
+				eshkp->debit = 0L;
+				eshkp->loan = 0L;
+				Your("debt is paid off.");
+			}
+			pline("%ld %s %s added to your credit.", delta, currency(delta), delta > 1L ? "are" : "is");
+		}
+		if(offer) {
+			goto move_on;
+		} else {
+			if(!isgold) {
+				if (container) {
+					dropped_container(obj, shkp, FALSE);
+				}
+				if (!obj->unpaid && !saleitem) {
+					obj->no_charge = 1;
+				}
+				subfrombill(obj, shkp);
+			}
+			return;
 		}
 	}
 move_on:
@@ -2777,8 +2793,9 @@ move_on:
 		   obj->age < 20L * (long)objects[obj->otyp].oc_cost)) {
 		pline("%s seems uninterested%s.", Monnam(shkp),
 			cgold ? " in the rest" : "");
-		if (container)
-		    dropped_container(obj, shkp, FALSE);
+		if (container) {
+			dropped_container(obj, shkp, FALSE);
+		}
 		obj->no_charge = 1;
 		return;
 	}
@@ -2792,54 +2809,59 @@ move_on:
 		long tmpcr = ((offer * 9L) / 10L) + (offer <= 1L);
 
 		if (sell_how == SELL_NORMAL || auto_credit) {
-		    c = sell_response = 'y';
+			c = sell_response = 'y';
 		} else if (sell_response != 'n') {
-		    pline("%s cannot pay you at present.", Monnam(shkp));
-		    Sprintf(qbuf,
+			pline("%s cannot pay you at present.", Monnam(shkp));
+			Sprintf(qbuf,
 			    "Will you accept %ld %s in credit for %s?",
 			    tmpcr, currency(tmpcr), doname(obj));
-		    /* won't accept 'a' response here */
-		    /* KLY - 3/2000 yes, we will, it's a damn nuisance
-                       to have to constantly hit 'y' to sell for credit */
-		    c = ynaq(qbuf);
-		    if (c == 'a') {
-			c = 'y';
-			auto_credit = TRUE;
-		    }
-		} else		/* previously specified "quit" */
-		    c = 'n';
-
+			c = ynaq(qbuf);
+			if (c == 'a') {
+				c = 'y';
+				auto_credit = TRUE;
+			}
+		} else { /* previously specified "quit" */
+			c = 'n';
+		}
+		
 		if (c == 'y') {
-		    shk_names_obj(shkp, obj, (sell_how != SELL_NORMAL) ?
+			shk_names_obj(shkp, obj, (sell_how != SELL_NORMAL) ?
 			    "traded %s for %ld zorkmid%s in %scredit." :
-			"relinquish %s and acquire %ld zorkmid%s in %scredit.",
+			    "relinquish %s and acquire %ld zorkmid%s in %scredit.",
 			    tmpcr,
 			    (eshkp->credit > 0L) ? "additional " : "");
-		    eshkp->credit += tmpcr;
-		    subfrombill(obj, shkp);
+			eshkp->credit += tmpcr;
+			subfrombill(obj, shkp);
 		} else {
-		    if (c == 'q') sell_response = 'n';
-		    if (container)
-			dropped_container(obj, shkp, FALSE);
-		    if (!obj->unpaid) obj->no_charge = 1;
-		    subfrombill(obj, shkp);
+			if (c == 'q') {
+				sell_response = 'n';
+			}
+			if (container) {
+				dropped_container(obj, shkp, FALSE);
+			}
+			if (!obj->unpaid) {
+				obj->no_charge = 1;
+			}
+			subfrombill(obj, shkp);
 		}
 	} else {
 		char qbuf[BUFSZ];
 #ifndef GOLDOBJ
 		boolean short_funds = (offer > shkp->mgold);
-		if (short_funds) offer = shkp->mgold;
+		if (short_funds) {
+			offer = shkp->mgold;
+		}
 #else
-                long shkmoney = money_cnt(shkp->minvent);
+		long shkmoney = money_cnt(shkp->minvent);
 		boolean short_funds = (offer > shkmoney);
-		if (short_funds) offer = shkmoney;
+		if (short_funds) {
+			offer = shkmoney;
+		}
 #endif
 		if (!sell_response) {
-		    only_partially_your_contents =
-			(contained_cost(obj, shkp, 0L, FALSE, FALSE) !=
-			 contained_cost(obj, shkp, 0L, FALSE, TRUE));
-		    Sprintf(qbuf,
-			 "%s offers%s %ld gold piece%s for%s %s %s.  Sell %s?",
+			only_partially_your_contents = (contained_cost(obj, shkp, 0L, FALSE, FALSE) != contained_cost(obj, shkp, 0L, FALSE, TRUE));
+			Sprintf(qbuf,
+			    "%s offers%s %ld gold piece%s for%s %s %s.  Sell %s?",
 			    Monnam(shkp), short_funds ? " only" : "",
 			    offer, plur(offer),
 			    (!ltmp && cltmp && only_partially_your_contents) ?
@@ -2848,12 +2870,14 @@ move_on:
 			    (obj->quan == 1L &&
 			    !(!ltmp && cltmp && only_partially_your_contents)) ?
 			    "it" : "them");
-		} else  qbuf[0] = '\0';		/* just to pacify lint */
+		} else  {
+			qbuf[0] = '\0';		/* just to pacify lint */
+		}
 
 		switch (sell_response ? sell_response : ynaq(qbuf)) {
 		 case 'q':  sell_response = 'n';
 		 case 'n':  if (container)
-				dropped_container(obj, shkp, FALSE);
+			    dropped_container(obj, shkp, FALSE);
 			    if (!obj->unpaid) obj->no_charge = 1;
 			    subfrombill(obj, shkp);
 			    break;
