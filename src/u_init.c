@@ -24,8 +24,9 @@ STATIC_DCL boolean FDECL(restricted_spell_discipline, (int));
 /*
  *	Initial inventory for the various roles.
  */
-
 static struct trobj Archeologist[] = {
+#define A_POTION_OF_OBJECT_DETECTION	8
+#define A_SCROLL_OF_GOLD_DETECTION	9
 	/* if adventure has a name...  idea from tan@uvm-gen */
 	{ BULLWHIP, 2, WEAPON_CLASS, 1, UNDEF_BLESS },
 	{ LEATHER_JACKET, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
@@ -35,6 +36,8 @@ static struct trobj Archeologist[] = {
 	{ TINNING_KIT, UNDEF_SPE, TOOL_CLASS, 1, UNDEF_BLESS },
 	{ TOUCHSTONE, 0, GEM_CLASS, 1, 0 },
 	{ SACK, 0, TOOL_CLASS, 1, 0 },
+	{ POT_OBJECT_DETECTION, 0, POTION_CLASS, 1, UNDEF_BLESS },	/* quan is variable */
+	{ SCR_GOLD_DETECTION, 0, SCROLL_CLASS, 1, UNDEF_BLESS },	/* quan is variable */
 	{ 0, 0, 0, 0, 0 }
 };
 static struct trobj Barbarian[] = {
@@ -217,6 +220,10 @@ static struct trobj Leash[] = {
 };
 static struct trobj Towel[] = {
 	{ TOWEL, 0, TOOL_CLASS, 1, 0 },
+	{ 0, 0, 0, 0, 0 }
+};
+static struct trobj Key[] = {
+	{ SKELETON_KEY, 0, TOOL_CLASS, 1, 0 },
 	{ 0, 0, 0, 0, 0 }
 };
 static struct trobj Wishing[] = {
@@ -612,10 +619,13 @@ u_init()
 	 * skew the results if we use rn2(2)...  --KAA
 	 */
 	case PM_ARCHEOLOGIST:
+		Archeologist[A_POTION_OF_OBJECT_DETECTION].trquan = rn2(3);
+		Archeologist[A_SCROLL_OF_GOLD_DETECTION].trquan = rn2(3);
 		ini_inv(Archeologist);
 		if(!rn2(10)) ini_inv(Tinopener);
-		else if(!rn2(4)) ini_inv(Lamp);
-		else if(!rn2(10)) ini_inv(Magicmarker);
+		if(!rn2(4)) ini_inv(Lamp);
+		if(!rn2(20)) ini_inv(Magicmarker);
+		ini_inv(Key);
 		knows_object(SACK);
 		knows_object(TOUCHSTONE);
 		skill_init(Skill_A);
