@@ -933,6 +933,10 @@ struct trobj *trop;
 	int otyp, i;
 
 	while (trop->trclass) {
+		if(trop->trquan == 0) {
+			trop++;
+			continue;
+		}
 		if (trop->trotyp != UNDEF_TYP) {
 			otyp = (int)trop->trotyp;
 			if (urace.malenum != PM_HUMAN) {
