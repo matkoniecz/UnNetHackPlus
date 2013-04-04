@@ -11,9 +11,7 @@ http://tvtropes.org/pmwiki/pmwiki.php/Main/NarrativeDevices
 http://tvtropes.org/pmwiki/pmwiki.php/Main/ChekhovsGun
 http://tvtropes.org/pmwiki/pmwiki.php/Main/TomeOfEldritchLore
 http://tvtropes.org/pmwiki/pmwiki.php/Main/AlienKudzu
-http://tvtropes.org/pmwiki/pmwiki.php/Main/GoneHorriblyRight
 http://tvtropes.org/pmwiki/pmwiki.php/Main/SpeculativeFictionTropes
-Absolute Xenophobe 
 
 "Once upon a midnight dreary, while I pondered, weak and weary,
 Over many a quaint and curious volume of forgotten lore..."
