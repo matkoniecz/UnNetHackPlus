@@ -2,7 +2,8 @@ Plans for UnNetHackPlus
 http://www.darkshire.net/jhkim/rpg/lordoftherings/names.pdf
 
 http://en.wikipedia.org/wiki/List_of_fictional_demons
-
+http://tvtropes.org/pmwiki/pmwiki.php/Main/BattleCry
+http://tvtropes.org/pmwiki/pmwiki.php/Main/WrittenRoar
 http://tvtropes.org/pmwiki/pmwiki.php/Main/HorrorTropes
 http://tvtropes.org/pmwiki/pmwiki.php/Main/ThisIndexIsCursed
 http://tvtropes.org/pmwiki/pmwiki.php/Main/AppliedPhlebotinum
