@@ -1,4 +1,6 @@
 Plans for UnNetHackPlus
+*  save and bones files accepted from versions
+*
 http://www.darkshire.net/jhkim/rpg/lordoftherings/names.pdf
 "It's time for you to die again." 
 http://en.wikipedia.org/wiki/List_of_fictional_demons
