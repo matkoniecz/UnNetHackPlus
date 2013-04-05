@@ -169,7 +169,7 @@ get_score_change_for_passed_time(int turn)
 {
 	if(turn <= 1000) {
 		return 1;
-	} else if (turn % 10 == 0) {
+	} else if (turn % 50 == 0) {
 		return -1;
 	}
 }
