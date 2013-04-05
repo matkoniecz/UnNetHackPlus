@@ -73,6 +73,23 @@ suit or piece of armor
 	Lying there on the mud mortally wounded, I learned what true armor 
 	class was that day."
 	 	[ When Help Collides, by J. D. Berry ]
+acid blob
+	Acid blobs have no offensive properties and pose no direct threats; however, 
+	they pose a dastardly trap for the inexperienced player. Attacking them may 
+	prompt a reactive splash of acid, which will cause HP loss (unless acid 
+	resistant) and may corrode susceptible weapons and armor. Eating their 
+	corpse will cause acid damage unless you have acid resistance. 
+
+	Additionally, their viscous nature allows them to flow under closed doors, 
+	making them a persistent (if slow) pursuer and possibly causing the player 
+	to run into them by accident.
+
+	They may be peaceful if you are neutral.
+
+	Acid blobs are candidates for filling up a dungeon level so that other 
+	monsters cannot revive; they are harmless and can be generated rapidly if 
+	you have enough scrolls of create monster.
+		[ NetHackWiki, the NetHack Wiki ]
 aclys
 aklys
 	A short studded or spiked club attached to a cord allowing
