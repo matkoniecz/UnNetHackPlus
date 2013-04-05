@@ -27,8 +27,6 @@ Gravestone	Here lies Balin, son of Fundin, Lord of Moria
 Gravestone	Here lies Sgeo, killed while reading a gravestone.
 Gravestone	Here lies Urist McMiner, killed by falling multiple z-levels.
 Gravestone	Here lies a hacker, buried alive.
-Gravestone	Here lies a happy hacker, killed by a hallucinogen-distorted succubus, while helpless.
-Gravestone	Here lies the Gnome with a Wand of Death, vanquished by a black dragon's breath. "Damn RNG."
 Gravestone	Lorem Ipsum
 Gravestone	Oops.
 Gravestone	Quidquid Latine dictum sit, altum sonatur.
@@ -42,10 +40,6 @@ Gravestone	This gravestone does not indicate a bones file.
 Gravestone	This headstone intentionally left blank.
 Gravestone	This space for rent; go to http://www.alt.org/nethack/addmsgs/
 Gravestone	This space intentionally left blank.
-Gravestone	This was actually just a pit, but since there was a corpse, we filled it.
-Gravestone	This way to the crypt.
-Gravestone	To the strongest!
-Gravestone	Trolls just want to be loved!
 Gravestone	Tu quoque, Brute?
 Gravestone	Uisne Agnoscere Mercem?
 Gravestone	VACANCY
@@ -66,22 +60,8 @@ Angelic taunt	Hast thee read the book of John? Then I must plunge thy head benea
 Angelic taunt	Hearken thee unto St. Tux, for he doth still eat fish.
 Angelic taunt	Heaven's net is wide, but it lets nothing through.
 Angelic taunt	Hold still for your smiting!
-Angelic taunt	I am not burdened by any sort of genitals! Jealous you must be!
 Angelic taunt	I find your lack of faith disturbing.
-Angelic taunt	I forgot my alignment!
-Angelic taunt	May the ordure of demons bemire you from heel to crown!
-Angelic taunt	May their paths become dark and slippery, and may the angel of the Lord afflict them.
-Angelic taunt	Mortal, the task has fallen upon me to forcibly remove thy head from thy arse!
 Angelic taunt	My wrath is upon thee!
-Angelic taunt	Now your'e making my CRAZY flare up!
-Angelic taunt	Now, namusan--!
-Angelic taunt	Objection!
-Angelic taunt	Stop right here, criminal scum!
-Angelic taunt	Submit or be smitten, mortal!
-Angelic taunt	Surrender, or die in obscurity!
-Angelic taunt	The righteous hath a refuge in death -- a pity that thou canst not.
-Angelic taunt	The things that cannot be cut by my blade are next to none!
-Angelic taunt	Thou doest need penance!
 Demonic taunt	Go away. I am in an angry mood today and I might kill you. Hey! That' a good idea!
 Demonic taunt	Hurry up and die already, I'm hungry!
 Demonic taunt	I shall bathe in thy blood! I shall taste of they flesh! And than...tea and crumpets we shall have!
@@ -108,8 +88,6 @@ False rumor	Has anyone really been far even as decided to use even go want to do
 False rumor	Having a hard time against Demogorgon? Try zapping him with a wand of death
 False rumor	Help! I am being held captive in a fortune cookie factory!
 False rumor	Here lies Albert the... Oh no, this is a fortune cookie.
-False rumor	Hey, at least it's not crack.
-False rumor	I AM ERROR
 False rumor	I heard that cockatrice corpses can't stone you if they're tinned.
 False rumor	I know what you did last summer...
 False rumor	I like corm.
@@ -120,208 +98,21 @@ False rumor	IN BED! BAHAH!
 False rumor	If it looks like fruit juice and tastes like fruit juice... it is fruit juice.
 False rumor	If you eat a turtle corpse, you can swim.
 False rumor	If you engrave something with a wand of wishing, you add charges to it.
-False rumor	If you kick a sink enough, something good might pop out
-False rumor	If you like Sokoban, try a Sokoban game!
-False rumor	If you like Sokoban, wait until you find the Minesweeper level!
-False rumor	If you like Sokoban, wait until you find the Sudoku level!
-False rumor	If you wish hard enough, you can get pants.
-False rumor	Ii Ma, the warden, keeps the place without recourse.
-False rumor	Instead of trying to ascend, why not take a break and do something productive?
-False rumor	Lawful gods love dogs. Dead ones.
-False rumor	Learn Chinese: Rice
-False rumor	Liquid fire is better than the real thing.
-False rumor	Living light brings bad luck!
-False rumor	Looks like we're in for some rain.
 False rumor	Lucky numbers: 10-14-15-28-56
-False rumor	Make sure to destroy any heathen altars you find.
-False rumor	Need more pets? Talk to a giant named Andre!
-False rumor	NetHack 3.5.0 is out! nethack.org
-False rumor	NetHack 3.5.0 released! http://www.nethack.org
-False rumor	NetHack is impossible
-False rumor	Nethack is an online game, you dope.
-False rumor	Nethack. Nethack never changes.
-False rumor	Never go with the odds.
-False rumor	Nothing but strikes at Mid-World Lanes!
-False rumor	Open for inventory
 False rumor	Pets lose loyalty if they are not fed frequently.
-False rumor	Placing a dilithium crystal in your warp drive will cause you to shoot off into space.
-False rumor	Press A, B and Z together for the nude code.
-False rumor	Quen ant is hardest 'a' monster in NetHack
-False rumor	Rat king is hardest rat
 False rumor	Read your children a scroll of punishment.
-False rumor	Reading scroll names carefully may have identification purposes... if we hadn't upgraded to 3.4.3.
-False rumor	See cookie for secrets of the Universe.
-False rumor	Shopkeepers will only sell artifact weapons to those they truly trust.
-False rumor	Snape killed Dumbledore.
-False rumor	Snape kills Dumbledore
-False rumor	Some say the corpse of a chickatrice tastes like Wraith meat.
-False rumor	Someone set us up the bomb.
-False rumor	Spammer demon can throw junk mail to you
-False rumor	Spikes are only poisoned when you're not immune.
-False rumor	Thank you $playername but the Amulet is in another dungeon!
-False rumor	That say that if you change alignment you can always change back.
-False rumor	That wasn't a cookie. That was a time-release blood packet.
-False rumor	That wasn't beef.
-False rumor	The Amulet of Yendor is not as far away as you may think.
-False rumor	The Amulet of Yendor is not real. Offering it will blow you up!
 False rumor	The Wizard of Yendor exists in multiple dimensions simultaneously.
-False rumor	The gods dislike revealers of secrets; only cursed things will always speak truth.
-False rumor	The meal wasn't chicken.
-False rumor	The world is quiet here...
-False rumor	There are other worlds than these.
-False rumor	There is a powerful artifact hidden somewhere on this level.
-False rumor	There's a bomb in the lasagna!
-False rumor	There's a helpful bear on the 28th floor.
-False rumor	They say Crawl is better than NetHack.
-False rumor	They say NetHack is better than Crawl.
-False rumor	They say a monk that drinks a potion of booze will become a better fighter.
-False rumor	They say dogs will not eat lizard corpses.
-False rumor	They say eating cockatrices like swallowing viagra pill
-False rumor	They say it's very pleasant to #sit on the vibrating square
-False rumor	They say killing a gecko often yields a gecko hide, which can be sold of hundreds of zorkmids.
-False rumor	They say that "They" can never be trusted.
-False rumor	They say that Angband is better than NetHack.
-False rumor	They say that Dick Dale's hands are so strong, he can play the Golden Gate Bridge like a harp.
-False rumor	They say that Manny knows what he's talking about.
-False rumor	They say that Minecraft is better than nethack
-False rumor	They say that Minecraft is free to play
-False rumor	They say that NetHack is better than Angband.
-False rumor	They say that a Fortune Cookie never lies.
-False rumor	They say that a Valkyrie can't cast spells.
-False rumor	They say that a bear trap can only catch bears.
-False rumor	They say that a cockatrice can't hurt you if you don't see it.
-False rumor	They say that a cockatrice's touch is always deadly.
-False rumor	They say that a cursed scroll of teleportation takes you nowhere.
-False rumor	They say that a knight in grey could be your best friend.
-False rumor	They say that a loadstone can help you find your way.
-False rumor	They say that a naga is just a big snake.
-False rumor	They say that a pit viper will never fall in a pit.
-False rumor	They say that a rust monster will not reach your helmet.
-False rumor	They say that a spellbook of genocide makes your life a lot easier.
-False rumor	They say that a tsunami might drown you on the Plane of Water.
-False rumor	They say that applying an acid blob corpse on your wounds when confused really, really stings.
-False rumor	They say that bears have love affairs, and even camels.
 False rumor	They say that beartraps, foocubi, and potions of confusion are a good combination.
-False rumor	They say that being drunk makes you more attractive.
-False rumor	They say that breaking a wand of wishing may give you extra wishes
-False rumor	They say that by digging down next to pools of lava, you might reveal some secrets.
-False rumor	They say that carrying uncursed loadstones will raise your strength to 18/**
-False rumor	They say that chickatrices are not as deadly as cockatrices.
-False rumor	They say that civilized people should not eat horses.
-False rumor	They say that cockatrice tastes like chicken.
-False rumor	They say that dilithium crystals can be used to cast warp drive.
-False rumor	They say that drinking a potion of oil will make you smarter.
-False rumor	They say that each of the Planes has a Crystal you must destroy.
-False rumor	They say that eating a dead cockatrice can save you from turning to stone.
-False rumor	They say that eating a lich could improve your self-control.
-False rumor	They say that eating a stalker can make you blind.
-False rumor	They say that eels may know the way to victory.
-False rumor	They say that elves will respect the name of Elbereth.
-False rumor	They say that hitting a gecko with a credit card can save you 15% or more on car insurance.
-False rumor	They say that hitting a golem with a rubber chicken is a clever move
-False rumor	They say that killing Vlad with an iron chain, then eating his body, grants you life saving
-False rumor	They say that land mines can be made into time bombs.
-False rumor	They say that nethack is better than Minecraft
-False rumor	They say that no one really subscribes to rec.games.roguelike.nethack.
-False rumor	They say that one must drink water regularly to survive.
-False rumor	They say that one with a rank level of 3 and is chaotic can get Flamebane easily.
-False rumor	They say that only a knight can wield Excalibur.
-False rumor	They say that shopkeepers are very weak...
-False rumor	They say that shopkeepers will never buy stolen goods.
-False rumor	They say that soldier ants live in military barracks.
-False rumor	They say that stepping on a polymorph trap twice will change you back.
-False rumor	They say that the Amulet is in another castle.
-False rumor	They say that the Dungeons of Doom are quite dangerous.
-False rumor	They say that the Holy Hand Grenade of Antioch can be used to slay any monster.
-False rumor	They say that the Oracle always carries a wand of wishing.
-False rumor	They say that the Palantir of Westernesse is a very powerful artifact.
-False rumor	They say that the Plane of Earth often has earthquakes.
 False rumor	They say that the Wizard of Yendor cannot be harmed by any mortal weapon.
-False rumor	They say that the blessed Sled of Kane can help the rosebuds blossom.
 False rumor	They say that the magic word is "XYZZY"
-False rumor	They say that the sky is black too...
-False rumor	They say that the wizard of Yendor is weak against wooden sticks...
 False rumor	They say that there is a djinni inside a wand of wishing.
-False rumor	They say that there is a magical volcano on the Plane of Fire.
-False rumor	They say that they satisfied your mother last night.
-False rumor	They say that turnips do not spoil if you leave them on tables.
-False rumor	They say that two bags of holding are better than one.
 False rumor	They say that unicorn horns can't be polymorphed.
-False rumor	They say that xorns make poor companions.
-False rumor	They say that you can eat the Amulet of Yendor to slay the Hermit.
-False rumor	They say that you can't make holy water without an altar.
-False rumor	They say that you should always trust fortune cookies
-False rumor	They say that you should ask the Oracle about woodchucks.
-False rumor	They say that you should bring a vuvuzela with you to Fort Ludios
-False rumor	They say that you should drop the Amulet of Yendor into molten lava to make it even more powerful.
-False rumor	They say that you should never meet with a succubus. Who knows where they've been down there?...
-False rumor	They say that you should pick up a loadstone if you see one.
-False rumor	They say that you shouldn't mount a succubus without protection.
-False rumor	They say the Pick-axe of Anhur is essential for large-scale digs.
-False rumor	They say the more luckstones you have, the better.
-False rumor	They say things about you.
-False rumor	They say you can break a wand of light to get a certain "edge".
-False rumor	They say you can make potions of oil by mixing water and acid.
-False rumor	They say you can trade glass trinkets for something nice.
-False rumor	They say you should only sacrifice a unicorn on an altar of its own alignment.
-False rumor	This is a secret to everybody
-False rumor	This is a true rumor
-False rumor	This rumor tells the truth
-False rumor	To barrel roll, press Z or R twice!
-False rumor	To cast spells, you must first teach your pet how to read spellbooks.
-False rumor	Trololololololololololololol
-False rumor	Trololololololololololololololololol
-False rumor	UNIX® is a registered trademark of The Open Group
-False rumor	Use the magic marker to mark the spot.
-False rumor	Using laser cats while drunk is always a bad idea.
-False rumor	Vlad is a hard enemy, even aristotle3 dies from him
-False rumor	WARNING: Objects on screen may be closer than they appear
-False rumor	Want Rodney gone for good? Well, how would you deal with a pesky troll?
-False rumor	Werenewt hit harder than werelichen
-False rumor	Wereshopkeeper can bite you
-False rumor	When in trouble, when in doubt; run in circles, scream and shout.
-False rumor	Who was that maud person anyway?
-False rumor	Who's "they", and why do they say so much?
-False rumor	You are so hosed! Escape now and call it a draw!
-False rumor	You are totally going to win this time!
-False rumor	You choke on the fortune cookie. You choke! You die.. ==More==
-False rumor	You die...
-False rumor	You feel a change coming over you.
-False rumor	You find kitten! Way to go, robot!
-False rumor	You have nice breasts...
 False rumor	You just got scammed out of a funny message.
-False rumor	You musn't bite the table.
-False rumor	You will ascend to demigodhood on this game
 False rumor	You will die in 1289 turns.
-False rumor	You'll ne'er be vanquish'd 'til Birnam wood comes to Dunsinane
 False rumor	Your lucky numbers are: 11 23 63 77 22
-False rumor	i like pie
-True rumor	"There's a cockatrice behind me--?"
-True rumor	+39 helm of sun as good as +16 sword of killing
-True rumor	7 days
-True rumor	@ die when killed.
-True rumor	Always know where your towel is!
-True rumor	Are you confused? Wield a potion of water, and read a scroll of remove curse.
-True rumor	Be careful when hallucinating, you might be fighting something entirely different...
-True rumor	By Her name are foes cowed, but for her kindred.
-True rumor	Coming soon: Nethack 4.0.0! (Call NET-HACK to place your order)
-True rumor	Confusion: hard proof that 40-proof-hard can make you 'proof
-True rumor	Cursed tin of abbot meat is the worst food in NetHack
-True rumor	Dagger is great throwing weapon
-True rumor	Did you know that Fort Ludios is better for the return trip?
-True rumor	Do not taunt Happy Fun Ball.
 True rumor	Do you have any blank paper for your magic marker?
 True rumor	Don't play drunk... unless you play better, then don't play sober.
 True rumor	Don't play tired.
-True rumor	Dwarves, wounded or not, have the mystical strength of a doily.
-True rumor	Eating rider can make you liveproof
-True rumor	Enchant dragon scales to get dragon scale armor.
-True rumor	Foxes bark.
-True rumor	Get naked, kick a sink, sleep around, and run, to gain a level.
-True rumor	Grid bugs would be in a lot of trouble if bear traps came in their size.
-True rumor	He almost cleared that throne room, til the GWTWOD appeared...
-True rumor	Hungry? Get a unicorn horn, and you can eat almost anything.
-True rumor	I've found more potions of full healing at the bottom of the dungeon.
 True rumor	If the lava looks blue, you're playing too fast.
 True rumor	If you can read this, you just broke illiterate.
 True rumor	It's never good to be held under one's own weight, especially when next to someone named Ken.
@@ -332,27 +123,8 @@ True rumor	Most items in NetHack either start out useless or are useless by Dlvl
 True rumor	NetHack doesn't care if you live or die. Slash'EM wants you DEAD
 True rumor	Once you are dead and buried, a Rogue will dig you up and ascend with a tin of your corpse.
 True rumor	PROTIP: To defeat Demogorgon, hit it until it dies.
-True rumor	Playing on public servers promotes good habits.
-True rumor	Remember, Don't eat anything while satiated after eating a huge chunk of meat.
-True rumor	Remember: Where ever you go, there you are!
-True rumor	Roy Smeding likes penis
-True rumor	Running shoes work better with a light napsack.
-True rumor	Sinks also operate as gravity wells.
-True rumor	So i herd the Wizard of Yendor lieks mudkips?
-True rumor	Thats what she said!
 True rumor	The gods appreciate honesty; only blessed things will always speak truth.
 True rumor	They say Gehennom is not for the light-hearted
-True rumor	They say Wikipedia is unreliable.
-True rumor	They say diamonds never get dull from engraving.
-True rumor	They say if you exterminate bugs, you'll get snakes on the plane
-True rumor	They say it can help to give The Wizard the finger.
-True rumor	They say no dog was ever charged with theft.
-True rumor	They say that Croesus is a popular name around these parts.
-True rumor	They say that Demogorgon can PWN ur arse
-True rumor	They say that Fatty eats babies.
-True rumor	They say that Medusa is REALLY ugly
-True rumor	They say that Vlad used to make various shortcuts down the dungeon.
-True rumor	They say that a diamond can engrave anything.
 True rumor	They say that a hard hat will protect you from falling rocks.
 True rumor	They say that a magic lamp never burns out.
 True rumor	They say that a mirror will not frighten a nymph.
@@ -438,44 +210,6 @@ T-Shirt	:-)
 T-Shirt	:-)
 T-Shirt	:-)
 T-Shirt	<tits> </tits>
-T-Shirt	=^.^=
-T-Shirt	@ k a
-T-Shirt	ARE YOU ASKING FOR A CHALLENGE?!?!?!?
-T-Shirt	Aberzombie and Fitch
-T-Shirt	Aim >>> <<< here
-T-Shirt	All I got was this lousy T-Shirt
-T-Shirt	Anarchy in the U(nderground) K(ingdom)
-T-Shirt	Anhur is my homeboy
-T-Shirt	Aperture Science Torso-Covering Device
-T-Shirt	Ask Me About Grim Fandango
-T-Shirt	Ask Me About Loom
-T-Shirt	Ask Me About Rogue
-T-Shirt	B.a.r. Equipment
-T-Shirt	Beauty Is In The Eye Of The Beerholder
-T-Shirt	Best in Show
-T-Shirt	Big Daddy
-T-Shirt	Blue Sun
-T-Shirt	C:/DOS C:/DOS/RUN RUN/DOS/RUN
-T-Shirt	CITY NAME SPORTS TEAM
-T-Shirt	Came back from the demigod bar to watch you puny mortals ascend.
-T-Shirt	Can you believe that they actually put this on a T-Shirt?
-T-Shirt	Cockatrices can't touch this
-T-Shirt	Cool Tapes
-T-Shirt	Croesus for President 2008 - Campaign Finance Reform Now (for the other guy)
-T-Shirt	D.A.R.E. - Dungeon Adventure Resistance Education
-T-Shirt	Darmok and Jalad at Tanagra - World Tour '91
-T-Shirt	David Allen CEO
-T-Shirt	Deep Throat
-T-Shirt	DethKlok
-T-Shirt	Dev Team
-T-Shirt	Dispater is my homeboy
-T-Shirt	Don't ask me, I only work here
-T-Shirt	Don't know where to buy some lighting? Visit Itzchak's at minetown.
-T-Shirt	Down With Pants!
-T-Shirt	Dry clean only... good luck
-T-Shirt	Dubno;withmyheadman
-T-Shirt	E.Z. Moad
-T-Shirt	ELBERETH ALREADY!
 T-Shirt	Elbereth
 T-Shirt	Elvira's House O'Succubi, granting the gift of immorality!
 T-Shirt	End Mercantile Opacity Discrimination Now: Let Invisible Customers Shop!
@@ -488,51 +222,23 @@ T-Shirt	FREE PUG AND NEWT!
 T-Shirt	Fhtagn!
 T-Shirt	Flooring inspector.
 T-Shirt	Frankie say: Ascend
-T-Shirt	Free shirt: Limit 1
 T-Shirt	Funny message goes here
-T-Shirt	Gamefaqs.com, We have a nethack board.
-T-Shirt	Gehennoms Angels
-T-Shirt	Glutton For Punishment
 T-Shirt	Go Team Ant!
 T-Shirt	Go team 'a'!
-T-Shirt	Got Newt?
-T-Shirt	Got OCD?
-T-Shirt	Got Potion?
-T-Shirt	Got pr0n?
-T-Shirt	Great, you're not illiterate. Now try Elbereth.
-T-Shirt	Have a heart. Spay or neuter your d or f.
-T-Shirt	Hawaiian T-Shits Just Suck!
-T-Shirt	He who dies with the most toys is nonetheless dead.
-T-Shirt	Heading for Godhead
-T-Shirt	Hey! Nymphs! Steal This T-Shirt!
-T-Shirt	Hey, Wizard of Yendor, Demigod This!
-T-Shirt	Hi, My name is $playername!
-T-Shirt	Home Taping is Killing Music
-T-Shirt	How To Keep An Idiot In Suspense - See Other Side
 T-Shirt	I <3 Dungeon of Doom
-T-Shirt	I <3 Maud
 T-Shirt	I Am Not a Pack Rat – I Am a Collector
-T-Shirt	I Support Single Succubi
-T-Shirt	I am a Demigod, oh yes...
-T-Shirt	I am a Valkyrie. If you see me running, try to keep up.
 T-Shirt	I ascended to demi-godhood, and all I got was this lousy T-Shirt!
 T-Shirt	I beat anorexia
-T-Shirt	I bounced off a rubber tree
-T-Shirt	I can hold my breath for TEN minutes!
 T-Shirt	I couldn't afford this T-shirt so I stole it!
 T-Shirt	I do not have the amulet of yendor YET !!!
 T-Shirt	I don't like your ringtone
 T-Shirt	I got zapped with a wand of polymorph and all I became was this stupid T-shirt.
 T-Shirt	I killed the Wizard and all I got was this stupid T-shirt!
 T-Shirt	I killed the wizard of Yendor, and all i got is this stupid t-shirt.
-T-Shirt	I met Carl, the swordmaster of Jambalaya island and all I got was this lousy t-shirt
 T-Shirt	I prepared explosive runes this morning.
 T-Shirt	I scored with the princess
-T-Shirt	I took the red pill!
 T-Shirt	I want to live forever or die in the attempt.
 T-Shirt	I went into the Mazes of Menace and all I got was this stupid T-Shirt.
-T-Shirt	I went to Yendor and all I got was this lousy T-Shirt.
-T-Shirt	I wish these were magic lamps
 T-Shirt	I wished for blessed +2 GDSM and all I got was this lousy T-shirt.
 T-Shirt	I won the nethack.alt.org June Tournament., and all I got was this lousy T-Shiry!
 T-Shirt	I'm Confused!
@@ -566,48 +272,21 @@ T-Shirt	Make Love, Not War
 T-Shirt	Maxim 1: Pillage, then burn
 T-Shirt	Maybe if this shirt is witty enough, someone will finally love me.
 T-Shirt	Meat Is Mordor
-T-Shirt	Medusa is my homegirl
 T-Shirt	Mind Flayers suck!
 T-Shirt	Minetown Better Business Bureau
 T-Shirt	Minetown Watch
-T-Shirt	Ms. Palm's House of Negotiable Affection -- A Very Reputable House Of Disrepute
-T-Shirt	My name is shawnz. Take me off and see how fat I am.
 T-Shirt	My other armor is a blessed +5 gray dragon scale mail.
 T-Shirt	My other sword is a Vorpal Blade!
-T-Shirt	My sisters' are bigger
 T-Shirt	Neferet/Pelias '08
-T-Shirt	Next time you wave at me, use more than one finger, please.
-T-Shirt	No Outfit Is Complete Without a Little Cat Fur
 T-Shirt	No, I will not fix your computer.
 T-Shirt	No, this is not a blessed +7 silver dragon scale mail. You must be crazy.
 T-Shirt	Nothing happens.
-T-Shirt	OPTIONS=marvin,!suck,rngfavor
-T-Shirt	Objects In This Shirt Are Closer Than They Appear
 T-Shirt	Occupy Fort Ludios
 T-Shirt	Only you can prevent forest fires.
 T-Shirt	Outlook not so good.
 T-Shirt	Overcharge me!
-T-Shirt	P Happens
-T-Shirt	Pain is vital bodily fluids leaving the body.
-T-Shirt	Play Paranoid!
-T-Shirt	Plunder Island Brimstone Beach Club Lifetime Member
-T-Shirt	Porn Star
-T-Shirt	Prefectionist.
-T-Shirt	Protection Racketeer
-T-Shirt	Queen B
-T-Shirt	Randomness Happens
-T-Shirt	Real Men Are Valkyries
-T-Shirt	Real men love Crom
-T-Shirt	Real men watch ponies.
-T-Shirt	Rodney for President!
-T-Shirt	Rodney in '08. OR ELSE!
-T-Shirt	Rogues do it from behind!
-T-Shirt	Rogues do it from behind.
 T-Shirt	Romanes Eunt Domus
 T-Shirt	Romani Ite Domum
-T-Shirt	SHOOOOP DA WHOOOOOOOP!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
-T-Shirt	SPONSORED BY GOLDENPALACE.COM
-T-Shirt	Save The Rare Endangered Spycrab!
 T-Shirt	Save collapsing wavefunctions: don't look at me!
 T-Shirt	Scalding Lake
 T-Shirt	Seduce Me, Please.
@@ -615,66 +294,15 @@ T-Shirt	Serial Ascender
 T-Shirt	Shoot, and I'll move. In a flash.
 T-Shirt	Smile if you're not wearing underpants.
 T-Shirt	Sokoban Gym -- Get Strong or Die Trying
-T-Shirt	Somebody stole my Mojo!
-T-Shirt	Telepathics Do It Blindly
 T-Shirt	The Amulet of Yendor has been stolen by Moloch. Are you a bad enough dude to retrieve the Amulet?
-T-Shirt	The Game
-T-Shirt	The Hellhound Gang
-T-Shirt	The Werewolves
-T-Shirt	The front says: "+5" The back says: "fireproof"
-T-Shirt	The front says: "This message is false." The back says: "The message on the front is true."
-T-Shirt	The front says: "Throw daggers!" The back says: "Because they're sharper than rocks."
-T-Shirt	The tengu shuffle is my favorite dance.
-T-Shirt	There are 10 types of adventurers. Those who understand binary and those who don't.
-T-Shirt	They Might Be Ettins
-T-Shirt	They Might Be H
-T-Shirt	They Might Be Storm Giants
-T-Shirt	They say that this is not an actual t-shirt, but more like a halfshirt
-T-Shirt	This T-Shirt left intentionally blank
-T-Shirt	This T-shirt sucks.
-T-Shirt	This is an ironic t-shirt.
-T-Shirt	This is not a T-Shirt
-T-Shirt	This is not a shirt.
 T-Shirt	Torso Awaregness intrinsic
 T-Shirt	Tourists Be Gone!
-T-Shirt	Up with miniskirts!
-T-Shirt	Visit Nicolai's house of magic, a last vestige of civilization in an otherwise uncivilized land.
 T-Shirt	Weapons don't kill people, I kill people
-T-Shirt	Where's the beef?
 T-Shirt	White Zombie
-T-Shirt	Winner of the 2006 Wet T-shirt contest!
-T-Shirt	Woodstock '69
-T-Shirt	Words on a Shirt
-T-Shirt	Worship me
 T-Shirt	Xorn ate my +7 Stormbringer and +6 Grayswandir
-T-Shirt	Xorns Do It Anywhere
 T-Shirt	Yet Another Stupid T-Shirt
-T-Shirt	You feel douchy! You must have a poor sense of fashion..
 T-Shirt	You feel geeky! You must be leading a sunless lifestyle.
 T-Shirt	You laugh because I'm different, I laugh because you're about to die
-T-Shirt	You see here a ye flask.
-T-Shirt	You should hear what the voices in my head are saying about you.
-T-Shirt	You're killing me!
-T-Shirt	Young Men's Cavedigging Association
-T-Shirt	Your Dad On A Sybian
-T-Shirt	Your Head A Splode
-T-Shirt	Your bones itch.
-T-Shirt	^^ My eyes are up here! ^^
-T-Shirt	cK -- "Cockatrice touches the Kop"
-T-Shirt	d, your dog or a killer?
-T-Shirt	lol
-T-Shirt	mde.tv
-T-Shirt	mde.tv
-T-Shirt	noitcelfer fo trihs-T 5+ desselB
-T-Shirt	only 100 zm for that t-shirt
-T-Shirt	sloshy
-T-Shirt	sysadmin
-T-Shirt	the High Priest of Moloch knows how to accessorize
-T-Shirt	your an idiot
-T-Shirt	zorkmid
-T-Shirt	~~It's Time 2 Throw Down~~
-Spam	**FR33 P0T10N 0F FULL H34L1NG**
-Spam	An HTML attachment was scrubbed...
 Spam	Are YOU tired of the same old messages? Go to http://alt.org/nethack/addmsgs/ now!
 Spam	Badger badger badger badger badger badger MUSHROOM MUSHROOM!
 Spam	CONGRATULATIONS! you are now the proud owner of 40 newts.
@@ -691,24 +319,6 @@ Spam	Hello.
 Spam	How are you gentlemen?
 Spam	Hummmmmmmmmmmmmmmmmmmmmmm...
 Spam	I am Nigerian prince HORRE YED MOBUTU contacting you regarding the transfer of $10000000 zorkmids
-Spam	I've had it with you $playername !
-Spam	IM in ur base, killing ur doods!!!111
-Spam	LOL ROFL LMAO
-Spam	Lolol!
-Spam	MAKE ZORKMIDS FAST, GUARANTEED!
-Spam	Made you look!
-Spam	Magic-B-Here sells wands of not exactly finest quality! Bye today!
-Spam	Make a contract with me to become a puella magi!
-Spam	Me, too!
-Spam	PENIS PENIS PENIS PENIS PENIS PENIS PENIS PENIS PENIS PENIS PENIS PENIS PENIS PENIS PENIS PENIS
-Spam	Play FREE roguelike game - http://crawl.akrasiac.org/
-Spam	Please return to sender (Asmodeus).
-Spam	Please send 15300 zorkmids security deposit to help me move 11 million (Z) out of Ludios!
-Spam	Pole Arm Wax! Only 350 Zk.
-Spam	Potion of generic C1al1s, only 10 zorkmids, satisfaction guaranteed!
-Spam	Red in the morning, sailor's warning.
-Spam	SEVEN DAYS
-Spam	Sale @ Izchak's! The first five visitors will get a free lamp!
 Spam	Scroll of punishment. Apply directly to the forehead.
 Spam	Send $5 to the return address, and get a free subscription to Thumbs magazine!
 Spam	Sword enlargement scrolls! Base price: 60 zorkmids!
@@ -724,8 +334,6 @@ Spam	This scroll was made with cockatrice leather. Have a nice day.
 Spam	This space intentionally left blank.
 Spam	Thou needst no longer toil with a mere quarterstaff!
 Spam	Try new magic Scroll! Up to three inches GUARANTEED!
-Spam	Undeliverable mail returned to sender: no such address <rodney@dungeons.doom>
-Spam	WAN7 +0 EN L4GE Y UR PEN???
 Spam	Watch out! The-Gnome-With-The-Wand-Of-Death is behind that door!
 Spam	YENDOR EATS CHEEZE WIZZ
 Spam	Yo Momma!
@@ -746,19 +354,9 @@ Engraving	$playername sux!
 Engraving	+7 Magicbane. Do you want to kill monsters, or do you want to fool around?
 Engraving	--More--
 Engraving	/join #nethack
-Engraving	1/0
-Engraving	1337
-Engraving	2, 12, 1112, 3112, 132112, 1113122112, ...
-Engraving	3ngr@\/r \/\/u$ }{3@r 3|\|d }{e 1eft $u/\/\ 133tsp3@k!!!!1111!!!oneoneone
 Engraving	4, 8, 15, 16, 23, 42
 Engraving	666 420 Tongue Kiss Your Father
 Engraving	<-- Go that way!
-Engraving	A - cursed loadstone.
-Engraving	A horse is a horse of course...
-Engraving	Aaoooooooooooo! Werewolves of Yendor!
-Engraving	All work and no play makes Jack a dull boy
-Engraving	Allburrith
-Engraving	Always Be Closing!
 Engraving	At last... the amulet ^n my grasp..... hidden in the sec+et room on th! %3rd level...
 Engraving	Bark!
 Engraving	Beware the exploding cow!
