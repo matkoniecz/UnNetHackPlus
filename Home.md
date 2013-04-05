@@ -1,5 +1,4 @@
 Plans for UnNetHackPlus
-* http://www.alt.org/nethack/addmsgs/viewmsgs.php
 *  save and bones files accepted from versions
 * http://nethackwiki.com/wiki/Key#Breakage
 * http://www.darkshire.net/jhkim/rpg/lordoftherings/names.pdf
@@ -327,6 +326,7 @@ proud owner of a magic whistle.
 * deep orc color (black? white uruk-hai?)
 
 #recheck
+* [[alt.org - NetHack Addi(c)tion: Current Random Messages]] http://www.alt.org/nethack/addmsgs/viewmsgs.php
 * https://gitorious.org/nitrohack/ais523/commits/nicehack
 * http://alt.org/nethack/naonh.php graves checked out 9 I - new hallucinatory monster names, random engravings, gravestones and T-shirt messages
 * https://github.com/Chris-plus-alphanumericgibberish/dnethack/commits/master (2 II)
