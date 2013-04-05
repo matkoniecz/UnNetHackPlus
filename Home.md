@@ -20,7 +20,7 @@ http://tvtropes.org/pmwiki/pmwiki.php/Main/AlienKudzu
 Over many a quaint and curious volume of forgotten lore..."
 — Edgar Allan Poe, The Raven 
 
-* A.S. engraving (from Journey to the Centre of the Earth, by Jules Verne)
+* Beware of Dreams come true!
 * investigate SCORE_ON_BOTL
 * "checking whether to enable" in configure + autoconf.h + autoconf.hin
 * kill paging in guidebook
