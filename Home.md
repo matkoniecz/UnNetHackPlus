@@ -1,9 +1,9 @@
 Plans for UnNetHackPlus
 *  save and bones files accepted from versions
-*
-http://www.darkshire.net/jhkim/rpg/lordoftherings/names.pdf
-"It's time for you to die again." 
-http://en.wikipedia.org/wiki/List_of_fictional_demons
+* http://nethackwiki.com/wiki/Key#Breakage
+* http://www.darkshire.net/jhkim/rpg/lordoftherings/names.pdf
+* "It's time for you to die again." 
+* http://en.wikipedia.org/wiki/List_of_fictional_demons
 http://tvtropes.org/pmwiki/pmwiki.php/Main/BattleCry
 http://tvtropes.org/pmwiki/pmwiki.php/Main/WrittenRoar
 http://tvtropes.org/pmwiki/pmwiki.php/Main/HorrorTropes
