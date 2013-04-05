@@ -54,7 +54,8 @@
 		- Bear trap is no longer ineffective on diagonals
 		- Better default config file - MSGTYPE and MONSTERCOLOR are mentioned, obvious MSGTYPE settings are appplied.
 		- PARANOID define enabled
-		- Smarter warning player before walking into known traps
+		- Smarter paranoid_trap
+		- automatically apply unlocking tool to containers during #loot-ing
 	* Grinding elimination
 		- Chance of wand wresting raised to 1/11
 		- Carrying digging tools to shop is no longer blocked
