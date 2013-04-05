@@ -118,8 +118,70 @@ more_points(int score)
 #ifdef SCORE_ON_BOTL
 	if(flags.showscore) {
 		flags.botl = 1;
-		}
+	}
 #endif
+}
+
+int
+get_score_value()
+{
+	int deepest = deepest_lev_reached(FALSE);
+	if (deepest > 40) {
+		deepest = 40;
+	}
+	int score = u.urscore + 30 * (deepest-1);
+	if (score < 0) {
+		score = 0;
+	}
+	return score;
+}
+
+int
+get_score_bonus_for_artifact(struct obj * otmp)
+{
+	return 10;
+}
+
+int
+get_score_penalty_for_elbereth()
+{
+	return -2;
+}
+
+int
+get_score_penalty_for_polypiling()
+{
+	return -1;
+}
+
+int
+get_score_bonus_for_killing_monster(int mndx)
+{
+	int nr_killed = (int)mvitals[mndx].died;
+	if (nr_killed == 1) {
+		return 5;
+	}
+	return 0;
+}
+
+int
+get_score_change_for_passed_time(int turn)
+{
+	if(turn <= 1000) {
+		return 1;
+	} else if (turn % 10 == 0) {
+		return -1;
+	}
+}
+
+int
+get_score_adjusted_for_ascension(int score)
+{
+	score *= 2;
+	if(score < 0) {
+		score = 0;
+	}
+	score += 1000;
 }
 
 void

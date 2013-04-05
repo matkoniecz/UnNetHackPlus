@@ -614,7 +614,6 @@ E void FDECL(done, (int));
 E void FDECL(container_contents, (struct obj *,BOOLEAN_P,BOOLEAN_P,BOOLEAN_P));
 E void FDECL(terminate, (int));
 E int NDECL(num_genocides);
-E int NDECL(get_score_value);
 
 /* ### engrave.c ### */
 
@@ -646,6 +645,13 @@ E void FDECL(make_grave, (int,int,const char *));
 E int FDECL(experience, (struct monst *,int));
 E void FDECL(more_experienced, (int));
 E void FDECL(more_points, (int));
+E int NDECL(get_score_value);
+E int FDECL(get_score_bonus_for_artifact, (struct obj *));
+E int NDECL(get_score_penalty_for_elbereth);
+E int NDECL(get_score_penalty_for_polypiling);
+E int FDECL(get_score_bonus_for_killing_monster, (int));
+E int FDECL(get_score_change_for_passed_time, (int));
+E int FDECL(get_score_adjusted_for_ascension, (int));
 E void FDECL(losexp, (const char *));
 E void NDECL(newexplevel);
 E void FDECL(pluslvl, (BOOLEAN_P));

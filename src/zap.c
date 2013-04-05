@@ -1580,7 +1580,7 @@ struct obj *obj, *otmp;
 		}
 		/* KMH, conduct */
 		u.uconduct.polypiles++;
-		more_points(-1);
+		more_points(get_score_penalty_for_polypiling());
 		/* any saved lock context will be dangerously obsolete */
 		if (Is_box(obj)) (void) boxlock(obj, otmp);
 

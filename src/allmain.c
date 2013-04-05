@@ -137,12 +137,8 @@ moveloop()
 		    /********************************/
 		    /* once-per-turn things go here */
 		    /********************************/
-
-		    if(moves <= 1000) {
-		       more_points(1);
-		    } else if (moves % 10 == 0) {
-		       more_points(-1);
-		    }
+		
+		    more_points(get_score_change_for_passed_time(moves));
 
 		    if (flags.bypasses) clear_bypasses();
 		    if(Glib) glibr();

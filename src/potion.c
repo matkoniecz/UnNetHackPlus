@@ -2005,7 +2005,7 @@ struct obj *potion, *obj;
 			short save_otyp = obj->otyp;
 			/* KMH, conduct */
 			u.uconduct.polypiles++;
-			more_points(-1);
+			more_points(get_score_penalty_for_polypiling());
 
 			if (obj == uwep) was_wep = TRUE;
 			else if (obj == uswapwep) was_swapwep = TRUE;

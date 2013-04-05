@@ -535,7 +535,7 @@ winid endwin;
 			otmp->otyp == SPE_BOOK_OF_THE_DEAD ||
 			otmp->otyp == CANDELABRUM_OF_INVOCATION) {
 	    value = arti_cost(otmp);	/* zorkmid value */
-	    points = 2;	/* score value */
+	    points = get_score_bonus_for_artifact(otmp);	/* score value */
 	    if (counting) {
 		u.urscore += points;
 	    } else {
@@ -810,13 +810,11 @@ die:
 		u.urscore = get_score_value();
 #ifdef ASTRAL_ESCAPE
 		if (how == ASCENDED || how == DEFIED) {
-			u.urscore += 500;
-			u.urscore *= 2L;
+			u.urscore = get_score_adjusted_for_ascension(u.urscore);
 		}
 #else
 		if (how == ASCENDED) {
-			u.urscore += 500;
-			u.urscore *= 2L;
+			u.urscore = get_score_adjusted_for_ascension(u.urscore);
 		}
 #endif
 	}
@@ -1383,21 +1381,6 @@ boolean want_disp;
 		    destroy_nhwindow(klwin);
 	    }
 	}
-}
-
-
-int
-get_score_value()
-{
-	int deepest = deepest_lev_reached(FALSE);
-	if (deepest > 40) {
-		deepest = 40;
-	}
-	int score = u.urscore + 20 * (deepest-1);
-	if (score < 0) {
-		score = 0;
-	}
-	return score;
 }
 
 /*end.c*/

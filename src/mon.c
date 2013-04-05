@@ -1970,9 +1970,7 @@ cleanup:
 	/* give experience points */
 	int nr_killed = (int)mvitals[mndx].died;
 	more_experienced(experience(mtmp, nr_killed));
-	if (nr_killed == 1) {
-		more_points(1);
-	}
+	more_points(get_score_bonus_for_killing_monster(mndx));
 
 	/* adjust alignment points */
 	if (mtmp->m_id == quest_status.leader_m_id) {		/* REAL BAD! */
