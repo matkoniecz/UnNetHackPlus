@@ -3,7 +3,7 @@ baby worms
 http://nethackwiki.com/wiki/Cave_spider horse/warhorse (bri?)
 http://nethackwiki.com/wiki/Giant_bat
 
-(abcdefghiklmnoprqrstuvwyzAB monsters done http://nethackwiki.com/wiki/Monster ) http://nethackwiki.com/wiki/Spotted_jelly
+(abcdefghiklmnoprqrstuvwyzABC monsters done http://nethackwiki.com/wiki/Monster ) http://nethackwiki.com/wiki/Spotted_jelly
 
 
 A Song of Ice and Fire:
