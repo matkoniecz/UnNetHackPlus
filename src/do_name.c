@@ -1047,6 +1047,7 @@ static const char * const bogusmons[] = {
 	"questing beast",			/* King Arthur */
 	"Predator",				/* Movie */
 	"mother-in-law",			/* common pest */
+	
 	/* from NAO */
 	"one-winged dewinged stab-bat",		/* KoL */
 	"praying mantis",
@@ -1189,6 +1190,29 @@ static const char * const bogusmons[] = {
 	"winged grizzly",
 	"yellow wight",
 
+	/* http://www.alt.org/nethack/addmsgs/viewmsgs.php */
+	"lurker below",
+	"worthless yellowish-brown glass golem",
+	"writhing mass of primal chaos",
+	"hallucinatory monster",
+	"jumping brain",
+	"colorless green idea",
+	"floating ear",
+	"floating tongue",
+	"hallucinogen-distorted hallucination",
+	"mountain dwarf",
+	"were(random beast)",
+	"weremindflayer",
+	"wereplatypus",
+	"Gnome With the Wand of Death",
+	"arch-lichen",
+	"Baba Yaga",
+	"harmless protoplasm",
+	"badger",
+	"giant dwarf",
+	"magically animated Vorpal Blade",
+	"Legendary black beast of Arrrgh",
+
 	/* from UnNetHack */
 	"apostroph golem", "Bob the angry flower",
 	"bonsai-kitten", "Boxxy", "lonelygirl15",
@@ -1222,38 +1246,40 @@ static const char * const bogusmons[] = {
 	"dwerga nethackus", "dwerga castrum",	/* Ask ASCII Ponies */
 
 	/* from UnNetHackPlus */
-	"King Krakus",			/* Polish folklore */
-	"Topielec",				/* Slavic folklore */
-	"pink oliphaunt",			/* Lord of the Rings + silliness */
-	"Amphisbaena",			/* Greek mythology */
-	"phoenix",				/* Greek mythology */
-	"catoblepas",			/* Greek mythology */
-	"phantom kangaroo",		/* urban legend */
-	"echinemon",			/* from medieval literature, "enemy of the dragon" */
-	"Ratatoskr", 			/* Norse mythology */
-	"Twrch Trwyth", 			/* Arthurian legends */
-	"Unperson", 			/* Nineteen Eighty-Four */
-	"Somebody Else's Problem",	/* Douglas Adams */
-	"Armok",				/* Dwarf Fortress */
-	"Dwarf-Eating Carp", 		/* Dwarf Fortress */
-	"werecapybara",			/* Dwarf Fortress */
-	"Evil Otto", 			/* Berzerk - via GruntHack */
-	"P'lod",				/* Weekly World News */
+	"King Krakus",               /* Polish folklore */
+	"Topielec",                  /* Slavic folklore */
+	"pink oliphaunt",            /* Lord of the Rings + silliness */
+	"Amphisbaena",               /* Greek mythology */
+	"phoenix",                   /* Greek mythology */
+	"catoblepas",                /* Greek mythology */
+	"phantom kangaroo",          /* urban legend */
+	"echinemon",                 /* from medieval literature, "enemy of the dragon" */
+	"Ratatoskr",                 /* Norse mythology */
+	"Twrch Trwyth",              /* Arthurian legends */
+	"Unperson",                  /* Nineteen Eighty-Four */
+	"Somebody Else's Problem",   /* Douglas Adams */
+	"Armok",                     /* Dwarf Fortress */
+	"Dwarf-Eating Carp",         /* Dwarf Fortress */
+	"werecapybara",              /* Dwarf Fortress */
+	"Urist McDwarf",             /* Dwarf Fortress */
+	"Evil Otto",                 /* Berzerk - via GruntHack */
+	"P'lod",                     /* Weekly World News */
 	"mortgage golem", 
 	"dark matter golem", 
-	"giant orange brain",		/* Dungeon Crawl Stone Soup */
-	"ugly thing",			/* Dungeon Crawl Stone Soup */
-	"hellephant",			/* Dungeon Crawl Stone Soup */
-	"inept mimic",			/* Dungeon Crawl Stone Soup */
-	"hungry ghost",			/* Dungeon Crawl Stone Soup */
-	"unborn deep dwarf",		/* Dungeon Crawl Stone Soup */
-	"Wandering mushroom",		/* Dungeon Crawl Stone Soup */
+	"giant orange brain",        /* Dungeon Crawl Stone Soup */
+	"ugly thing",                /* Dungeon Crawl Stone Soup */
+	"hellephant",                /* Dungeon Crawl Stone Soup */
+	"inept mimic",               /* Dungeon Crawl Stone Soup */
+	"hungry ghost",              /* Dungeon Crawl Stone Soup */
+	"unborn deep dwarf",         /* Dungeon Crawl Stone Soup */
+	"Wandering mushroom",        /* Dungeon Crawl Stone Soup */
 	"Vlad the Inhaler",
 	"Delaunay tessellation field estimator",
-	"unnameable horror from beyond", /* NAO fruit name*/
+	"unnameable horror from beyond",/* NAO fruit name*/
 	"munchkin",
-	"shambling horror",		/* SporkHack */
-	"Grid Bug Mk. 2",			/* SLAS'EM (nickname of arc bugs) */
+	"shambling horror",          /* SporkHack */
+	"Grid Bug Mk. 2",            /* SLAS'EM (nickname of arc bugs) */
+	"killer tripe ration",       /* SLAS'EM */
 	"yet another D&D monster",
 	"kobold mage",
 	"hobbyte",
@@ -1266,22 +1292,22 @@ static const char * const bogusmons[] = {
 	"sphinx",
 	"spectre",
 	"lamassu",
-	"su-monster",			/* Dungeons & Dragons */
-	"shambling mound",		/* Dungeons & Dragons */
-	"sand elemental",			/* Dungeons & Dragons */
-	"rubber golem"			/* Dungeons & Dragons */
-	"remorhaz",				/* Dungeons & Dragons */
-	"otyugh",				/* Dungeons & Dragons */
+	"su-monster",                /* Dungeons & Dragons */
+	"shambling mound",           /* Dungeons & Dragons */
+	"sand elemental",            /* Dungeons & Dragons */
+	"rubber golem"               /* Dungeons & Dragons */
+	"remorhaz",                  /* Dungeons & Dragons */
+	"otyugh",                    /* Dungeons & Dragons */
 	"bacon elemental",
 	"roper",
 	"roc",
-	"peryton",				/* Jorge Luis Borges - Book of Imaginary Beings */
+	"peryton",                   /* Jorge Luis Borges - Book of Imaginary Beings */
 	"octopus",
-	"beer golem",			/* ProgressQuest */
-	"rice giant",			/* ProgressQuest */
-	"porn elemental",			/* ProgressQuest */
-	"demicanadian",			/* ProgressQuest */
-	"gyrognome",			/* ProgressQuest */
+	"beer golem",                /* ProgressQuest */
+	"rice giant",                /* ProgressQuest */
+	"porn elemental",            /* ProgressQuest */
+	"demicanadian",              /* ProgressQuest */
+	"gyrognome",                 /* ProgressQuest */
 	"cardboard golem",
 	"cheese elemental",
 	"dervish",
@@ -1289,9 +1315,16 @@ static const char * const bogusmons[] = {
 	"megalosaurus",
 	"organist",
 	/* end of monsters via ProgressQuest */
+	"Lucius Malfoy",             /* Harry Potter */
+	"Dumbledore",                /* Harry Potter */
+	"Harry Potter",              /* Harry Potter */
+	"Crumple-Horned Snorkack",   /* Harry Potter */
 #ifndef MAIL
 	"mail daemon",
 #endif
+	"Vaarsuvius",                /* The Order of the Stick */
+	"Durkon Thundershield",      /* The Order of the Stick */
+	"Roy Greenhilt",             /* The Order of the Stick */
 };
 
 

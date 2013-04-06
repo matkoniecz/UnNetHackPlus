@@ -66,6 +66,17 @@ static const char *random_mesg[] = {
 	"X <--- You are here.",
 	"You are the one millionth visitor to this place!  Please wait 200 turns for your wand of wishing.",
 
+	/* http://www.alt.org/nethack/addmsgs/viewmsgs.php */
+	"Badger badger badger badger badger badger MUSHROOM MUSHROOM!",
+	"Dig here for a +5 pair of Speed Boots!",
+	"If you find speed boots on this spot, consider yourself lucky.",
+	"Gandalf for president!",
+	"Fnord",
+	"\"Engrave a wise saying and your name will live forever.\" -- Anonymous",
+	"In Soviet Russia, the amulet ascends with you!",
+	"Need a light? Come visit the Minetown branch of Izchak's Lighting Store!",
+	"The Vibrating Square is NOT here",
+
 	/* From UnNetHack */
 	"She's watching you!", /* Portal */
 	"The cake is a lie!", /* Portal */
@@ -101,6 +112,14 @@ static const char *random_mesg[] = {
 	"That is not dead which can eternal lie, and with strange aeons even death may die.", /* H. P. Lovecraft */
 	"Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.", /* H. P. Lovecraft */
 	"Conducts are about player skill, not about obsessive-compulsive disorder", /* TJR on RGRN */
+	"That is not dead which can eternal lie, and with strange aeons even vanilla might get released.", /* bhaak on http://nhqdb.alt.org/?301 */
+	/* http://donjon.bin.sh/fantasy/random/#dungeon_graffiti */
+	"When song becomes silence, the Wand of Aether shall be destroyed",
+	"Upon the Night of Dweomers, when iron is made flesh and the Golden Scepter is wreathed in flames, the Copper Tower shall be restored",
+	"Run away!",
+	"<--",
+	"-->",
+	/* end of this source */
 };
 
 char *
@@ -1738,6 +1757,19 @@ static const char *epitaphs[] = {
 	"Yes Dear, just a few more minutes...",
 	"You said it wasn't poisonous!",
 
+	/* from http://www.alt.org/nethack/addmsgs/viewmsgs.php */
+	"Balin, son of Fundin, Lord of Moria",
+	"Memento mori",
+	"Help! I'm trapped in a gravestone factory!",
+	"This grave is reserved - for you!",
+	"This gravestone does not indicate a bones file.",
+	"This space for rent; go to http://www.alt.org/nethack/addmsgs/"
+	"Here lies Sgeo, killed while reading a gravestone.",
+	"Quidquid Latine dictum sit, altum videtur.",
+	"Death is but a door. Time is but a window. I'll be back!",
+	"The reports of my demise are completely accurate.",
+	"Bulk deals on gravestones - Die today!",
+
 	/* from UnNetHack */
 	"Hack 1984-1985",
 	"NetHack 1987-2003",
@@ -1745,6 +1777,7 @@ static const char *epitaphs[] = {
 	/* from UnNetHackPlus */
 	"SporkHack 2007-2010",
 	"SLASH'EM 1997-2006",
+	"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
 };
 
 /* Create a headstone at the given location.

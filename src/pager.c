@@ -721,6 +721,7 @@ static const char * const bogusobjects[] = {
 	"maximally subsentient emacs mode",
 	"bongard diagram",                  /* Intelligence test */
 	"git repository",
+	"server",
 
 	/* Historical */
 	"dead sea scroll",
@@ -757,6 +758,7 @@ static const char * const bogusobjects[] = {
 	"scroll of stupidity",
 	"spellbook of detect foot",
 	"spellbook of detect evil",
+	"Spellbook of wishing", /* http://www.alt.org/nethack/addmsgs/viewmsgs.php */
 	"heavily obfuscated spellbook",
 	"helm of telemetry",
 	"blue suede boots of charisma",
