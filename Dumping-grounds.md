@@ -90,11 +90,6 @@ False rumor	Help! I am being held captive in a fortune cookie factory!
 False rumor	Here lies Albert the... Oh no, this is a fortune cookie.
 False rumor	I heard that cockatrice corpses can't stone you if they're tinned.
 False rumor	I know what you did last summer...
-False rumor	I like corm.
-False rumor	I like your dress, it looks lovely!
-False rumor	I'm a song from the sixties.
-False rumor	I'm sorry, but the princess is in another dungeon!
-False rumor	IN BED! BAHAH!
 False rumor	If it looks like fruit juice and tastes like fruit juice... it is fruit juice.
 False rumor	If you eat a turtle corpse, you can swim.
 False rumor	If you engrave something with a wand of wishing, you add charges to it.
@@ -111,20 +106,16 @@ False rumor	You just got scammed out of a funny message.
 False rumor	You will die in 1289 turns.
 False rumor	Your lucky numbers are: 11 23 63 77 22
 True rumor	Do you have any blank paper for your magic marker?
-True rumor	Don't play drunk... unless you play better, then don't play sober.
 True rumor	Don't play tired.
 True rumor	If the lava looks blue, you're playing too fast.
 True rumor	If you can read this, you just broke illiterate.
 True rumor	It's never good to be held under one's own weight, especially when next to someone named Ken.
 True rumor	It's said that acid can help you out of some hard times.
 True rumor	Just because it is a d or f does NOT mean it is always peaceful.
-True rumor	Mail deamons can't be killed.
 True rumor	Most items in NetHack either start out useless or are useless by Dlvl:3
-True rumor	NetHack doesn't care if you live or die. Slash'EM wants you DEAD
 True rumor	Once you are dead and buried, a Rogue will dig you up and ascend with a tin of your corpse.
 True rumor	PROTIP: To defeat Demogorgon, hit it until it dies.
 True rumor	The gods appreciate honesty; only blessed things will always speak truth.
-True rumor	They say Gehennom is not for the light-hearted
 True rumor	They say that a hard hat will protect you from falling rocks.
 True rumor	They say that a magic lamp never burns out.
 True rumor	They say that a mirror will not frighten a nymph.
@@ -152,63 +143,27 @@ True rumor	They say that shopkeepers do not accept stolen credit cards.
 True rumor	They say that the Amulet of Yendor doesn't mind being called names.
 True rumor	They say that the Gods dislike cannaiblism, but they don't expect orcs and cavemen to know better
 True rumor	They say that the Horsemen of the Apocalypse are camera shy.
-True rumor	They say that the Oracle comes at a price...
-True rumor	They say that the Planes are somewhere up there.
-True rumor	They say that there is thunder on the Plane of Air.
-True rumor	They say that throwing a pick-axe straight up will only hurt yourself.
-True rumor	They say that watchmen hate it when you force open locked doors.
-True rumor	They say that writing diary entries in the dungeon is not productive.
-True rumor	They say that you can dig through traps
-True rumor	They say that you can kick a newt.
 True rumor	They say that you can train your dog with meatballs.
 True rumor	They say that you shouldn't kick a cockatrice without boots.
 True rumor	They say that you shouldn't saddle a cockatrice without gloves.
 True rumor	They say that you'll never lose a ring of searching in a sink.
 True rumor	They say there's no such thing as an invisible mummy.
-True rumor	They say you can add your own rumors to public servers.
-True rumor	They say you just shouldn't listen to rumors from public servers. Even this one.
 True rumor	They say you shouldn't kill Izchak.
 True rumor	They say you shouldn't sacrifice a unicorn on an altar of its own alignment.
-True rumor	This is a true rumor
 True rumor	Try reading a scroll of food detection while hallucinating
-True rumor	Trying to pwn Demogorgon will make slaying a black dragon look like slaying a grid bug.
-True rumor	Use a leash to get your pet to change into something greater.
-True rumor	Use a leash to help your pet find the polymorph trap.
-True rumor	Using a polypiling item for polyselfing can be dangerous... Or deadly.
 True rumor	What doesn't kill you, doesn't kill you.
-True rumor	What kind of stupid hacker zaps Death with a death ray?
 True rumor	When in doubt save and come back later.
-True rumor	Wishing won't make you a millionaire.
-True rumor	Wizards are good at spellcasting, especially when they're wearing light armor.
 True rumor	You are probably going to die down here.
-True rumor	You can uh, read stuff ya know.
-True rumor	You can't always get what you want... by wishing.
-True rumor	You need some heavy wizardry with the Wizard.
-True rumor	bnggg
-True rumor	fqjdoz
-True rumor	they say that killing a shopkeeper makes you up to 4000 z's richer.
 T-Shirt	"Kill, Maim, Burn..."
 T-Shirt	'$playername, I'm watching you, scum!' -- Wizard of Yendor
 T-Shirt	(This space for sale.)
 T-Shirt	*insert Monty Python quote here*
-T-Shirt	*insert pic of uboa here*
-T-Shirt	+5 sexterity vest
 T-Shirt	+<<*giant cave spider silk T-shirt*>>+
-T-Shirt	+Infinity Billion Cool Shirt of Awesomeness
-T-Shirt	- - - - - - CUT HERE - - - - - -
-T-Shirt	-----Fill up to here.-----
-T-Shirt	--More--
 T-Shirt	-export-a-crypto-system-sig -RSA-3-lines-PERL
 T-Shirt	/</tits/> /<//tits/>
 T-Shirt	100% goblin hair - do not wash
 T-Shirt	3.141592653589792636.......
-T-Shirt	666 420 Tongue Kiss Your Father
-T-Shirt	9/11
-T-Shirt	9/11, I'm In Heaven!
 T-Shirt	90% cotton, 10% polyester.
-T-Shirt	:-)
-T-Shirt	:-)
-T-Shirt	:-)
 T-Shirt	<tits> </tits>
 T-Shirt	Elbereth
 T-Shirt	Elvira's House O'Succubi, granting the gift of immorality!
@@ -216,22 +171,15 @@ T-Shirt	End Mercantile Opacity Discrimination Now: Let Invisible Customers Shop!
 T-Shirt	Ever did the cha-cha with a pit viper?
 T-Shirt	Ever did the waltz with a nymph?
 T-Shirt	Ever held hands with a cockatrice?
-T-Shirt	Ever let a water demon spank you?
-T-Shirt	FREE HUGS
-T-Shirt	FREE PUG AND NEWT!
 T-Shirt	Fhtagn!
 T-Shirt	Flooring inspector.
-T-Shirt	Frankie say: Ascend
 T-Shirt	Funny message goes here
 T-Shirt	Go Team Ant!
 T-Shirt	Go team 'a'!
 T-Shirt	I <3 Dungeon of Doom
 T-Shirt	I Am Not a Pack Rat – I Am a Collector
 T-Shirt	I ascended to demi-godhood, and all I got was this lousy T-Shirt!
-T-Shirt	I beat anorexia
 T-Shirt	I couldn't afford this T-shirt so I stole it!
-T-Shirt	I do not have the amulet of yendor YET !!!
-T-Shirt	I don't like your ringtone
 T-Shirt	I got zapped with a wand of polymorph and all I became was this stupid T-shirt.
 T-Shirt	I killed the Wizard and all I got was this stupid T-shirt!
 T-Shirt	I killed the wizard of Yendor, and all i got is this stupid t-shirt.
@@ -257,37 +205,16 @@ T-Shirt	If you can read this, I can hit you with my polearm
 T-Shirt	If you can read this, you are too close.
 T-Shirt	If you can read this, you're standing too close.
 T-Shirt	If you read this, your illiterate conduct is lost.
-T-Shirt	Im not emo!
-T-Shirt	Im with stupid -->
-T-Shirt	Iron Maiden
-T-Shirt	Ironica
-T-Shirt	It keeps happening!
-T-Shirt	Kobolds do it better
-T-Shirt	Kop Killaz
-T-Shirt	LOST IN THOUGHT - please send search party
 T-Shirt	Lichen Park
-T-Shirt	Linus Torvalds is my homeboy
-T-Shirt	Loser Pride
-T-Shirt	Make Love, Not War
-T-Shirt	Maxim 1: Pillage, then burn
-T-Shirt	Maybe if this shirt is witty enough, someone will finally love me.
-T-Shirt	Meat Is Mordor
 T-Shirt	Mind Flayers suck!
-T-Shirt	Minetown Better Business Bureau
-T-Shirt	Minetown Watch
-T-Shirt	My other armor is a blessed +5 gray dragon scale mail.
-T-Shirt	My other sword is a Vorpal Blade!
-T-Shirt	Neferet/Pelias '08
 T-Shirt	No, I will not fix your computer.
 T-Shirt	No, this is not a blessed +7 silver dragon scale mail. You must be crazy.
-T-Shirt	Nothing happens.
 T-Shirt	Occupy Fort Ludios
 T-Shirt	Only you can prevent forest fires.
 T-Shirt	Outlook not so good.
 T-Shirt	Overcharge me!
 T-Shirt	Romanes Eunt Domus
 T-Shirt	Romani Ite Domum
-T-Shirt	Save collapsing wavefunctions: don't look at me!
 T-Shirt	Scalding Lake
 T-Shirt	Seduce Me, Please.
 T-Shirt	Serial Ascender
@@ -305,55 +232,14 @@ T-Shirt	You feel geeky! You must be leading a sunless lifestyle.
 T-Shirt	You laugh because I'm different, I laugh because you're about to die
 Spam	Are YOU tired of the same old messages? Go to http://alt.org/nethack/addmsgs/ now!
 Spam	Badger badger badger badger badger badger MUSHROOM MUSHROOM!
-Spam	CONGRATULATIONS! you are now the proud owner of 40 newts.
-Spam	Christmas Greetings!
-Spam	Crush the enemy, see them driven before you, and hear the lamentations of their women!
-Spam	Dear Dudley, what would you say are your greatest weaknesses?
-Spam	Do you want to change that garter snake into a raging python?
-Spam	Engraving Moloch works as engraving Elbereth. Just see how that a turns to flee from here!
-Spam	Find a small token to represent your Owlbear
-Spam	HOT inside stock tip - Yendor Industries (YNDR) STRONG BUY!
-Spam	Has anyone really been far even as decided to use even go want to do look more like?
-Spam	Have you heard of a spell called Explosive Runes?
-Spam	Hello.
-Spam	How are you gentlemen?
-Spam	Hummmmmmmmmmmmmmmmmmmmmmm...
-Spam	I am Nigerian prince HORRE YED MOBUTU contacting you regarding the transfer of $10000000 zorkmids
-Spam	Scroll of punishment. Apply directly to the forehead.
-Spam	Send $5 to the return address, and get a free subscription to Thumbs magazine!
-Spam	Sword enlargement scrolls! Base price: 60 zorkmids!
-Spam	System shut down in 1 minute(s)
-Spam	TYPE 111 FOR HOT SUCCUBUS LOVIN'
-Spam	Thanx Maud
-Spam	The WOW starts now - http://www.microsoft.com/windowsvista/
-Spam	The best escort services! Meet the most intelligent succubi and incubi! Call 1-800-HOTDATE!
-Spam	This is Spam Enjoy!
-Spam	This mail complies with the Yendorian Anti-Spam Act (YASA).
-Spam	This message has been bounced. If you recieved this successfully, ignore this.
 Spam	This scroll was made with cockatrice leather. Have a nice day.
-Spam	This space intentionally left blank.
-Spam	Thou needst no longer toil with a mere quarterstaff!
-Spam	Try new magic Scroll! Up to three inches GUARANTEED!
 Spam	Watch out! The-Gnome-With-The-Wand-Of-Death is behind that door!
-Spam	YENDOR EATS CHEEZE WIZZ
-Spam	Yo Momma!
 Spam	You are about to die... so why not get a cheap LIFE INSURANCE?
 Spam	You are the 100 millionth person to read this message! Wait 500 turns for your FREE Iron Chain.
-Spam	You got mail. From AOL!
-Spam	You may already have won $1000!
-Spam	You're doing great! Keep up the good work!
-Spam	You've been pre-approved for the Platinum Yendorian Express card!
-Spam	Your Dad On A Sybian
-Spam	g3t bl3ss3d skrol1z of 3nch4n7 w34pon ch33p! add inchez to your Sword!
-Spam	http://www.tvtropes.org/
-Spam	qwertyuiopasdfghjklzxcvbnm
 Engraving	"Engrave a wise saying and your name will live forever." -- Anonymous
 Engraving	"You smite the vampire. It explodes! You seem unaffected by it."
 Engraving	"dilbert aint gay" - tupac
 Engraving	$playername sux!
-Engraving	+7 Magicbane. Do you want to kill monsters, or do you want to fool around?
-Engraving	--More--
-Engraving	/join #nethack
 Engraving	4, 8, 15, 16, 23, 42
 Engraving	666 420 Tongue Kiss Your Father
 Engraving	<-- Go that way!
