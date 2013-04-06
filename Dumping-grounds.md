@@ -4,34 +4,17 @@ Gravestone	$playername, demonstrating the value of not being seen.
 Gravestone	$playername, killed by a time-travel accident
 Gravestone	$playername, killed by an ambush, while reading
 Gravestone	$playername, killed by one-more-hit syndrome
-Gravestone	(This space for sale.)
 Gravestone	*Reserved for You*
-Gravestone	Aut neca aut necatis eris
 Gravestone	Bulk deals on gravestones - Die today!
-Gravestone	Death is but a door. Time is but a window. I'll be back!
-Gravestone	Death seeketh us all.
-Gravestone	Desynchronized...
 Gravestone	Did you know that death rays bounce?
-Gravestone	Dulce et decorum est pro patria mori
-Gravestone	Et in Arcadia ego
-Memento mori
 Gravestone	Eaten by a Grue
 Gravestone	Flooring inspector.
-Gravestone	Help! I'm trapped in a gravestone factory!
-Gravestone	Balin, son of Fundin, Lord of Moria
 Gravestone	Here lies Sgeo, killed while reading a gravestone.
 Gravestone	Here lies Urist McMiner, killed by falling multiple z-levels.
-Gravestone	Lorem Ipsum
-Gravestone	Oops.
 Gravestone	Quidquid Latine dictum sit, altum sonatur.
 Gravestone	Sic Transit Gloria Mundi
-Gravestone	That is not dead which can eternal lie, and in successful ascensions even Death may die.
-Gravestone	The reports of my demise are completely accurate.
-Gravestone	This grave is reserved - for you!
 Gravestone	This gravestone does not indicate a bones file.
-Gravestone	This headstone intentionally left blank.
 Gravestone	This space for rent; go to http://www.alt.org/nethack/addmsgs/
-Gravestone	This space intentionally left blank.
 Gravestone	Uisne Agnoscere Mercem?
 Angelic taunt	"<deity> have mercy on thee, for I shall not!"
 Angelic taunt	*In a bored, monotone voice* Repent, and thou shalt be saved.
@@ -48,7 +31,6 @@ Angelic taunt	My wrath is upon thee!
 Demonic taunt	Go away. I am in an angry mood today and I might kill you. Hey! That' a good idea!
 Demonic taunt	Hurry up and die already, I'm hungry!
 Demonic taunt	I shall bathe in thy blood! I shall taste of they flesh! And than...tea and crumpets we shall have!
-Demonic taunt	I shall cut out your heart and show it to you!
 Demonic taunt	If I had a zorkmid for every brain you did not have; I'd have one zorkmid.
 Demonic taunt	Is that a unicorn horn, or are you happy to see me?
 Demonic taunt	It hurts to be you!
@@ -179,8 +161,6 @@ Engraving	Here there be soldier ants.
 Engraving	Hoc est qui sumus.
 Engraving	If you find speed boots on this spot, consider yourself lucky.
 Engraving	In Soviet Russia, the amulet ascends with you!
-Engraving	It explodes!
-Engraving	Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut...
 Engraving	Maxim 1: Pillage, Then Burn
 Engraving	Need a light? Come visit the Minetown branch of Izchak's Lighting Store!
 Engraving	The Gnome-with-a-Wand-of-Death was here.
@@ -195,8 +175,6 @@ Hallucinatory Monster	Crumple-Horned Snorkack
 Hallucinatory Monster	Dumbledore
 Hallucinatory Monster	Flying Spaghetti Monster
 Hallucinatory Monster	Giant shoggoth
-Hallucinatory Monster	Giygas
-Hallucinatory Monster	Gizmo the Gremlin
 Hallucinatory Monster	Gnome With A Wand Of Death
 Hallucinatory Monster	Gnome-With-The-Wand-Of-Death
 Hallucinatory Monster	Hallucinatory Monster
@@ -213,8 +191,6 @@ Hallucinatory Monster	Spellbook of wishing
 Hallucinatory Monster	Urist McDwarf
 Hallucinatory Monster	arch-lichen
 Hallucinatory Monster	arch-pedant
-Hallucinatory Monster	archie the cockroach
-Hallucinatory Monster	armed bear
 Hallucinatory Monster	badger
 Hallucinatory Monster	baleen whale
 Hallucinatory Monster	bandersnatch
