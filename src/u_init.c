@@ -998,14 +998,11 @@ struct trobj *trop;
 				|| (otyp == SCR_ENCHANT_WEAPON &&
 				    Role_if(PM_MONK))
 				/* wizard patch -- they already have one */
-				|| (otyp == SPE_FORCE_BOLT &&
-				    Role_if(PM_WIZARD))
+				|| (otyp == SPE_FORCE_BOLT && Role_if(PM_WIZARD))
 				/* powerful spells are either useless to
 				   low level players or unbalancing; also
 				   spells in restricted skill categories */
-				|| (obj->oclass == SPBOOK_CLASS &&
-				    (objects[otyp].oc_level > 3 ||
-				    restricted_spell_discipline(otyp)))
+				|| (obj->oclass == SPBOOK_CLASS && (objects[otyp].oc_level > 3 || restricted_spell_discipline(otyp)))
 							) {
 				dealloc_obj(obj);
 				obj = mkobj(trop->trclass, FALSE);
