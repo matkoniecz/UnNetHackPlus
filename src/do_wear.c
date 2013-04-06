@@ -304,7 +304,7 @@ Helmet_on()
     switch(uarmh->otyp) {
 	case FEDORA:
 		if (Role_if(PM_ARCHEOLOGIST)) {
-			change_luck(2);
+			change_luck(get_luck_bonus_for_archeologist_wearing_fedora());
 		}
 		break;
 	case HELMET:
@@ -376,7 +376,7 @@ Helmet_off()
     switch(uarmh->otyp) {
 	case FEDORA:
 		if (Role_if(PM_ARCHEOLOGIST)) {
-			change_luck(-2);
+			change_luck(-get_luck_bonus_for_archeologist_wearing_fedora());
 		}
 		break;
 	case HELMET:
@@ -532,6 +532,13 @@ Shirt_off()
     takeoff_mask &= ~W_ARMU;
     setworn((struct obj *)0, W_ARMU);
     return 0;
+}
+
+
+int
+get_luck_bonus_for_archeologist_wearing_fedora()
+{
+	return 2;
 }
 
 /* This must be done in worn.c, because one of the possible intrinsics conferred

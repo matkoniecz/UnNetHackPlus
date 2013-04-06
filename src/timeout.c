@@ -173,7 +173,9 @@ nh_timeout()
 	if (flags.friday13) {
 		baseluck -= 1;
 	}
-
+	if (Role_if(PM_ARCHEOLOGIST) && uarmh && uarmh->otyp == FEDORA) {
+		baseluck += get_luck_bonus_for_archeologist_wearing_fedora();
+	}
 	if (u.uluck != baseluck && moves % (((u.uhave.amulet || u.ugangr) && u.uluck > 0) ? 300 : 600) == 0) {
 	/* Cursed luckstones stop bad luck from timing out; blessed luckstones
 	 * stop good luck from timing out; normal luckstones stop both;
