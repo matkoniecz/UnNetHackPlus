@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* #testarmorforAC
 *  save and bones files accepted from versions
 * http://nethackwiki.com/wiki/Key#Breakage
 * http://www.darkshire.net/jhkim/rpg/lordoftherings/names.pdf
