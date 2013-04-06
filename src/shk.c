@@ -3997,7 +3997,7 @@ const char* armor_wares[] = {
 };
 const char* scroll_wares[] = {
 	"Large print available!",
-	"'ere now, this isn't a library; get lost, you freeloader!",
+	"Mental magnificence for the scholarly IN-clined!",
 	"Waterproof ink upon request!  ... for a small surcharge.",
 	"Curses removed, gold detected, and weapons enchanted, at your whim!",
 	"If you can read, %s, you'll want some of these!"
@@ -4046,7 +4046,7 @@ const char* tool_wares[] = {
 };
 const char* book_wares[] = {
 	"Large print available!",
-	"'ere now, this isn't a library; get lost, you freeloader!",
+	"If you can read, %s, you'll want some of these!"
 	"Mental magnificence for the scholarly IN-clined!",
 	"Credit available for valued customers!",
 	"'Banned' section now open! (I.D. required)"
