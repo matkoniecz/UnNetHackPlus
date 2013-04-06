@@ -33,7 +33,6 @@ Gravestone	Quidquid Latine dictum sit, altum sonatur.
 Gravestone	SOLD
 Gravestone	Sic Transit Gloria Mundi
 Gravestone	That is not dead which can eternal lie, and in successful ascensions even Death may die.
-Gravestone	That is not dead which can eternal lie. And with strange aeons even death may die.
 Gravestone	The reports of my demise are completely accurate.
 Gravestone	This grave is reserved - for you!
 Gravestone	This gravestone does not indicate a bones file.
@@ -134,9 +133,6 @@ True rumor	They say that pets are reluctant to step on cursed items
 True rumor	They say that puddings are not vegetarian food.
 True rumor	They say that scrolls of fire are fireproof
 True rumor	They say that shopkeepers are dumb as rocks.
-True rumor	They say that shopkeepers do not accept stolen credit cards.
-True rumor	They say that the Amulet of Yendor doesn't mind being called names.
-True rumor	They say that the Gods dislike cannaiblism, but they don't expect orcs and cavemen to know better
 True rumor	They say that the Horsemen of the Apocalypse are camera shy.
 True rumor	They say that you can train your dog with meatballs.
 True rumor	They say that you shouldn't kick a cockatrice without boots.
@@ -150,77 +146,38 @@ True rumor	What doesn't kill you, doesn't kill you.
 True rumor	When in doubt save and come back later.
 True rumor	You are probably going to die down here.
 T-Shirt	"Kill, Maim, Burn..."
-T-Shirt	'$playername, I'm watching you, scum!' -- Wizard of Yendor
 T-Shirt	(This space for sale.)
 T-Shirt	*insert Monty Python quote here*
 T-Shirt	+<<*giant cave spider silk T-shirt*>>+
 T-Shirt	-export-a-crypto-system-sig -RSA-3-lines-PERL
 T-Shirt	/</tits/> /<//tits/>
-T-Shirt	100% goblin hair - do not wash
 T-Shirt	3.141592653589792636.......
 T-Shirt	90% cotton, 10% polyester.
 T-Shirt	<tits> </tits>
-T-Shirt	Elbereth
 T-Shirt	Elvira's House O'Succubi, granting the gift of immorality!
-T-Shirt	End Mercantile Opacity Discrimination Now: Let Invisible Customers Shop!
-T-Shirt	Ever did the cha-cha with a pit viper?
-T-Shirt	Ever did the waltz with a nymph?
-T-Shirt	Ever held hands with a cockatrice?
-T-Shirt	Fhtagn!
 T-Shirt	Flooring inspector.
 T-Shirt	Funny message goes here
-T-Shirt	Go Team Ant!
-T-Shirt	Go team 'a'!
-T-Shirt	I <3 Dungeon of Doom
-T-Shirt	I Am Not a Pack Rat – I Am a Collector
 T-Shirt	I ascended to demi-godhood, and all I got was this lousy T-Shirt!
 T-Shirt	I couldn't afford this T-shirt so I stole it!
 T-Shirt	I got zapped with a wand of polymorph and all I became was this stupid T-shirt.
 T-Shirt	I killed the Wizard and all I got was this stupid T-shirt!
 T-Shirt	I killed the wizard of Yendor, and all i got is this stupid t-shirt.
-T-Shirt	I prepared explosive runes this morning.
-T-Shirt	I scored with the princess
-T-Shirt	I want to live forever or die in the attempt.
 T-Shirt	I went into the Mazes of Menace and all I got was this stupid T-Shirt.
-T-Shirt	I wished for blessed +2 GDSM and all I got was this lousy T-shirt.
-T-Shirt	I won the nethack.alt.org June Tournament., and all I got was this lousy T-Shiry!
-T-Shirt	I'm Confused!
 T-Shirt	I'm back from the demigod bar!
-T-Shirt	I'm in ur base, killin ur doods
-T-Shirt	I'm like a superhero with no powers or motivation.
 T-Shirt	I'm not even supposed to be here today.
-T-Shirt	I'm not fat, I'm knocked up!
-T-Shirt	I'm not illiterate.
-T-Shirt	I'm selling these fine leather jackets
-T-Shirt	I'm with Stupid -->
-T-Shirt	I'm with a pet
-T-Shirt	I'm with stupid ->
-T-Shirt	I'm with stupid ->
-T-Shirt	If you can read this, I can hit you with my polearm
-T-Shirt	If you can read this, you are too close.
-T-Shirt	If you can read this, you're standing too close.
-T-Shirt	If you read this, your illiterate conduct is lost.
 T-Shirt	Lichen Park
 T-Shirt	Mind Flayers suck!
 T-Shirt	No, I will not fix your computer.
-T-Shirt	Only you can prevent forest fires.
 T-Shirt	Overcharge me!
 T-Shirt	Romanes Eunt Domus
 T-Shirt	Romani Ite Domum
 T-Shirt	Seduce Me, Please.
-T-Shirt	Serial Ascender
-T-Shirt	Shoot, and I'll move. In a flash.
-T-Shirt	Smile if you're not wearing underpants.
-T-Shirt	Sokoban Gym -- Get Strong or Die Trying
 T-Shirt	The Amulet of Yendor has been stolen by Moloch. Are you a bad enough dude to retrieve the Amulet?
-T-Shirt	Torso Awaregness intrinsic
 T-Shirt	Weapons don't kill people, I kill people
-T-Shirt	White Zombie
 T-Shirt	Xorn ate my +7 Stormbringer and +6 Grayswandir
 T-Shirt	Yet Another Stupid T-Shirt
-T-Shirt	You feel geeky! You must be leading a sunless lifestyle.
 T-Shirt	You laugh because I'm different, I laugh because you're about to die
-Spam	Are YOU tired of the same old engravings? Go to http://alt.org/nethack/addmsgs/ now!
+fortune cookie Are YOU tired of the same old messages? Go to http://alt.org/nethack/addmsgs/ now!
 Spam	Badger badger badger badger badger badger MUSHROOM MUSHROOM!
 Spam	This scroll was made with cockatrice leather. Have a nice day.
 Spam	Watch out! The-Gnome-With-The-Wand-Of-Death is behind that door!
