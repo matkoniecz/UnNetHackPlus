@@ -8,7 +8,6 @@ Gravestone	$playername, killed by an ambush, while reading
 Gravestone	$playername, killed by one-more-hit syndrome
 Gravestone	(This space for sale.)
 Gravestone	*Reserved for You*
-Gravestone	Applaud, my friends, the comedy is finished.
 Gravestone	Aut neca aut necatis eris
 Gravestone	Bulk deals on gravestones - Die today!
 Gravestone	Death is but a door. Time is but a window. I'll be back!
@@ -16,21 +15,17 @@ Gravestone	Death seeketh us all.
 Gravestone	Desynchronized...
 Gravestone	Did you know that death rays bounce?
 Gravestone	Dulce et decorum est pro patria mori
-Gravestone	EAT AT JOES
 Gravestone	Et in Arcadia ego
 Memento mori
 Gravestone	Eaten by a Grue
-Gravestone	Finally I am becoming stupider no more
 Gravestone	Flooring inspector.
 Gravestone	Help! I'm trapped in a gravestone factory!
-Gravestone	Here lies Balin, son of Fundin, Lord of Moria
+Gravestone	Balin, son of Fundin, Lord of Moria
 Gravestone	Here lies Sgeo, killed while reading a gravestone.
 Gravestone	Here lies Urist McMiner, killed by falling multiple z-levels.
-Gravestone	Here lies a hacker, buried alive.
 Gravestone	Lorem Ipsum
 Gravestone	Oops.
 Gravestone	Quidquid Latine dictum sit, altum sonatur.
-Gravestone	SOLD
 Gravestone	Sic Transit Gloria Mundi
 Gravestone	That is not dead which can eternal lie, and in successful ascensions even Death may die.
 Gravestone	The reports of my demise are completely accurate.
@@ -39,14 +34,9 @@ Gravestone	This gravestone does not indicate a bones file.
 Gravestone	This headstone intentionally left blank.
 Gravestone	This space for rent; go to http://www.alt.org/nethack/addmsgs/
 Gravestone	This space intentionally left blank.
-Gravestone	Tu quoque, Brute?
 Gravestone	Uisne Agnoscere Mercem?
-Gravestone	VACANCY
-Gravestone	You should see the other guy.
 Angelic taunt	"<deity> have mercy on thee, for I shall not!"
-Angelic taunt	"Engrave these words and i might let thy live: Elbereth"
 Angelic taunt	*In a bored, monotone voice* Repent, and thou shalt be saved.
-Angelic taunt	*sigh* Mondays...
 Angelic taunt	<deity> have mercy on thee, for I shall not!
 Angelic taunt	Abandon this arrogance and accept your mortality!
 Angelic taunt	Begone, or I shall taunt you!
@@ -54,8 +44,6 @@ Angelic taunt	Depart, thou accursed, into everlasting fire!
 Angelic taunt	Die monster, you don't belong in this world!
 Angelic taunt	Had your soul been worth saving They would not send me.
 Angelic taunt	Hast thee read the book of John? Then I must plunge thy head beneath the
-Angelic taunt	Hearken thee unto St. Tux, for he doth still eat fish.
-Angelic taunt	Heaven's net is wide, but it lets nothing through.
 Angelic taunt	Hold still for your smiting!
 Angelic taunt	I find your lack of faith disturbing.
 Angelic taunt	My wrath is upon thee!
@@ -79,10 +67,8 @@ Demonic taunt	You fight like a lame slug!
 Demonic taunt	You frog-eating surrender monkey!
 False rumor	Gods are offended by those who polymorph themselves too often.
 False rumor	Grave digging can be a good road to wealth
-False rumor	Has anyone really been far even as decided to use even go want to do look more like?
 False rumor	Having a hard time against Demogorgon? Try zapping him with a wand of death
 False rumor	Help! I am being held captive in a fortune cookie factory!
-False rumor	Here lies Albert the... Oh no, this is a fortune cookie.
 False rumor	I heard that cockatrice corpses can't stone you if they're tinned.
 False rumor	I know what you did last summer...
 False rumor	If it looks like fruit juice and tastes like fruit juice... it is fruit juice.
@@ -94,7 +80,6 @@ False rumor	Read your children a scroll of punishment.
 False rumor	The Wizard of Yendor exists in multiple dimensions simultaneously.
 False rumor	They say that beartraps, foocubi, and potions of confusion are a good combination.
 False rumor	They say that the Wizard of Yendor cannot be harmed by any mortal weapon.
-False rumor	They say that the magic word is "XYZZY"
 False rumor	They say that there is a djinni inside a wand of wishing.
 False rumor	They say that unicorn horns can't be polymorphed.
 False rumor	You just got scammed out of a funny message.
@@ -113,26 +98,18 @@ True rumor	The gods appreciate honesty; only blessed things will always speak tr
 True rumor	They say that a hard hat will protect you from falling rocks.
 True rumor	They say that a magic lamp never burns out.
 True rumor	They say that a mirror will not frighten a nymph.
-True rumor	They say that an amulet of change can change your life.
-True rumor	They say that being confused can help you make more friends.
 True rumor	They say that carving a message on an altar can be a bad thing.
 True rumor	They say that civilized people should not eat cats.
 True rumor	They say that civilized people should not eat dogs.
-True rumor	They say that eating Rodney might be good and bad at the same time ._.
 True rumor	They say that eating a leprechaun can make you jumpy.
 True rumor	They say that eating a newt may make you a more powerful wizard.
 True rumor	They say that eating a sprig of wolfsbane may help, if you have been bitten by a werewolf.
 True rumor	They say that even a dead cockatrice can be deadly.
 True rumor	They say that even a flint stone can be used to tell iron from leather.
-True rumor	They say that from a distance all traps look alike
-True rumor	They say that it is not good for your health to play after 02:00 am.
-True rumor	They say that it's bad luck to break a boulder in Sokoban.
 True rumor	They say that it's better to pay first if you might leave the shop unexpectedly.
-True rumor	They say that one with a rank level of 5 and is lawful can get Excalibur easily.
 True rumor	They say that pets are reluctant to step on cursed items
 True rumor	They say that puddings are not vegetarian food.
 True rumor	They say that scrolls of fire are fireproof
-True rumor	They say that shopkeepers are dumb as rocks.
 True rumor	They say that the Horsemen of the Apocalypse are camera shy.
 True rumor	They say that you can train your dog with meatballs.
 True rumor	They say that you shouldn't kick a cockatrice without boots.
@@ -182,11 +159,7 @@ Spam	Badger badger badger badger badger badger MUSHROOM MUSHROOM!
 Spam	This scroll was made with cockatrice leather. Have a nice day.
 Spam	Watch out! The-Gnome-With-The-Wand-Of-Death is behind that door!
 Spam	You are about to die... so why not get a cheap LIFE INSURANCE?
-Spam	You are the 100 millionth person to read this message! Wait 500 turns for your FREE Iron Chain.
 Engraving	"Engrave a wise saying and your name will live forever." -- Anonymous
-Engraving	"You smite the vampire. It explodes! You seem unaffected by it."
-Engraving	"dilbert aint gay" - tupac
-Engraving	$playername sux!
 Engraving	4, 8, 15, 16, 23, 42
 Engraving	<-- Go that way!
 Engraving	Dig here for a +5 pair of Speed Boots!
@@ -226,20 +199,11 @@ Hallucinatory Monster	Flying Spaghetti Monster
 Hallucinatory Monster	Giant shoggoth
 Hallucinatory Monster	Giygas
 Hallucinatory Monster	Gizmo the Gremlin
-Hallucinatory Monster	Glinda
 Hallucinatory Monster	Gnome With A Wand Of Death
 Hallucinatory Monster	Gnome-With-The-Wand-Of-Death
 Hallucinatory Monster	Hallucinatory Monster
-Hallucinatory Monster	Hamburglar
 Hallucinatory Monster	Harmless Protoplasm
 Hallucinatory Monster	Harry Potter
-Hallucinatory Monster	Hastur
-Hallucinatory Monster	Haxor
-Hallucinatory Monster	He-Man
-Hallucinatory Monster	Headcrab
-Hallucinatory Monster	Hell Baron
-Hallucinatory Monster	Here lies /usr/bin/nethack, killed by SIGSEGV.
-Hallucinatory Monster	Herobrine
 Hallucinatory Monster	Jumping brain
 Hallucinatory Monster	Killer tripe ration
 Hallucinatory Monster	Legendary black beast of Arrrgh
