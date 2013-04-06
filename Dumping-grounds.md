@@ -203,10 +203,7 @@ T-Shirt	If you read this, your illiterate conduct is lost.
 T-Shirt	Lichen Park
 T-Shirt	Mind Flayers suck!
 T-Shirt	No, I will not fix your computer.
-T-Shirt	No, this is not a blessed +7 silver dragon scale mail. You must be crazy.
-T-Shirt	Occupy Fort Ludios
 T-Shirt	Only you can prevent forest fires.
-T-Shirt	Outlook not so good.
 T-Shirt	Overcharge me!
 T-Shirt	Romanes Eunt Domus
 T-Shirt	Romani Ite Domum
@@ -217,14 +214,13 @@ T-Shirt	Smile if you're not wearing underpants.
 T-Shirt	Sokoban Gym -- Get Strong or Die Trying
 T-Shirt	The Amulet of Yendor has been stolen by Moloch. Are you a bad enough dude to retrieve the Amulet?
 T-Shirt	Torso Awaregness intrinsic
-T-Shirt	Tourists Be Gone!
 T-Shirt	Weapons don't kill people, I kill people
 T-Shirt	White Zombie
 T-Shirt	Xorn ate my +7 Stormbringer and +6 Grayswandir
 T-Shirt	Yet Another Stupid T-Shirt
 T-Shirt	You feel geeky! You must be leading a sunless lifestyle.
 T-Shirt	You laugh because I'm different, I laugh because you're about to die
-Spam	Are YOU tired of the same old messages? Go to http://alt.org/nethack/addmsgs/ now!
+Spam	Are YOU tired of the same old engravings? Go to http://alt.org/nethack/addmsgs/ now!
 Spam	Badger badger badger badger badger badger MUSHROOM MUSHROOM!
 Spam	This scroll was made with cockatrice leather. Have a nice day.
 Spam	Watch out! The-Gnome-With-The-Wand-Of-Death is behind that door!
@@ -235,15 +231,8 @@ Engraving	"You smite the vampire. It explodes! You seem unaffected by it."
 Engraving	"dilbert aint gay" - tupac
 Engraving	$playername sux!
 Engraving	4, 8, 15, 16, 23, 42
-Engraving	666 420 Tongue Kiss Your Father
 Engraving	<-- Go that way!
-Engraving	At last... the amulet ^n my grasp..... hidden in the sec+et room on th! %3rd level...
-Engraving	Bark!
-Engraving	Beware the exploding cow!
-Engraving	Blessed Greased +5 silver dragon scale mail buried here
-Engraving	Computers: Can't live with 'em, can't play Nethack without 'em.
-Engraving	Did you know the witch-woman jenka had a brother?
-Engraving	Dig Here for a +5 pair of Speed Boots!
+Engraving	Dig here for a +5 pair of Speed Boots!
 Engraving	Dig down!
 Engraving	Dig for Victory here
 Engraving	Dig here --- X
@@ -252,13 +241,8 @@ Engraving	Do not move forward
 Engraving	Don't Panic
 Engraving	Don't go that way.
 Engraving	Don't look behind you.
-Engraving	Duck!
-Engraving	Eat at Joe's
-Engraving	For a good time call 867-5309
 Engraving	For a good time, call 1-900-FOOCUBI!
-Engraving	Friendlydads.net friendliest dads on the Net!
 Engraving	Gaius Julius Primigenius was here. Why are you late?
-Engraving	Galadriel
 Engraving	Gandalf for president!
 Engraving	Go Left -->
 Engraving	He who is valiant and pure of spirit may find the Holy Grail in the Castle of Arrrgh
@@ -272,12 +256,9 @@ Engraving	Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusm
 Engraving	Maxim 1: Pillage, Then Burn
 Engraving	Need a light? Come visit the Minetown branch of Izchak's Lighting Store!
 Engraving	The Gnome-with-a-Wand-of-Death was here.
-Engraving	The Vibrating Square
 Engraving	The Vibrating Square is NOT here
 Engraving	This is not the dungeon you are looking for.
 Engraving	This message is false.
-Engraving	This space intentionally left blank.
-Engraving	This square deliberately left blank.
 Engraving	Vlad wasn't here
 Engraving	Watch out! The-Gnome-With-The-Wand-Of-Death is behind that door!
 Engraving	You aren't going to ascend by staring at your shoes.
@@ -333,10 +314,6 @@ Hallucinatory Monster	floating tongue
 Hallucinatory Monster	fnord
 Hallucinatory Monster	gazebo
 Hallucinatory Monster	gerbil
-Hallucinatory Monster	ghost of christmas past
-Hallucinatory Monster	ghost of christmas present
-Hallucinatory Monster	ghost of christmas yet to come
-Hallucinatory Monster	giant Chibi Maruko-chan on wheels
 Hallucinatory Monster	giant dwarf
 Hallucinatory Monster	giant enemy crab
 Hallucinatory Monster	giant gnome
