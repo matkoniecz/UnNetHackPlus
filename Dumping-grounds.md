@@ -1,5 +1,3 @@
-Gravestone	"Y'all watch this!"
-Gravestone	"You cal that a punch? I'll show you a punch--"
 Gravestone	$playername took war to Team Ant and bought this fine track of land as benefits.
 Gravestone	$playername, Hand of Elbereth
 Gravestone	$playername, demonstrating the value of not being seen.
