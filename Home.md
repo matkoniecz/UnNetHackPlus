@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* ask for help (exit_nhwindows("Be seeing you...");)
 * #testarmorforAC
 * autodetect enchantment of non-magical armor and weapon for knights and when polymorphed into mercenary
 *  save and bones files accepted from versions
