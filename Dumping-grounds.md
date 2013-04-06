@@ -115,38 +115,21 @@ T-Shirt	Elvira's House O'Succubi, granting the gift of immorality!
 T-Shirt	Flooring inspector.
 T-Shirt	Funny message goes here
 T-Shirt	I ascended to demi-godhood, and all I got was this lousy T-Shirt!
-T-Shirt	I couldn't afford this T-shirt so I stole it!
 T-Shirt	I got zapped with a wand of polymorph and all I became was this stupid T-shirt.
 T-Shirt	I killed the Wizard and all I got was this stupid T-shirt!
 T-Shirt	I killed the wizard of Yendor, and all i got is this stupid t-shirt.
 T-Shirt	I went into the Mazes of Menace and all I got was this stupid T-Shirt.
-T-Shirt	I'm back from the demigod bar!
-T-Shirt	I'm not even supposed to be here today.
-T-Shirt	Lichen Park
-T-Shirt	Mind Flayers suck!
-T-Shirt	No, I will not fix your computer.
-T-Shirt	Overcharge me!
 T-Shirt	Romanes Eunt Domus
 T-Shirt	Romani Ite Domum
-T-Shirt	Seduce Me, Please.
 T-Shirt	The Amulet of Yendor has been stolen by Moloch. Are you a bad enough dude to retrieve the Amulet?
-T-Shirt	Weapons don't kill people, I kill people
-T-Shirt	Xorn ate my +7 Stormbringer and +6 Grayswandir
-T-Shirt	Yet Another Stupid T-Shirt
-T-Shirt	You laugh because I'm different, I laugh because you're about to die
 fortune cookie Are YOU tired of the same old messages? Go to http://alt.org/nethack/addmsgs/ now!
-Spam	Badger badger badger badger badger badger MUSHROOM MUSHROOM!
 Spam	This scroll was made with cockatrice leather. Have a nice day.
 Spam	Watch out! The-Gnome-With-The-Wand-Of-Death is behind that door!
 Spam	You are about to die... so why not get a cheap LIFE INSURANCE?
 Engraving	"Engrave a wise saying and your name will live forever." -- Anonymous
 Engraving	4, 8, 15, 16, 23, 42
 Engraving	<-- Go that way!
-Engraving	Dig here for a +5 pair of Speed Boots!
 Engraving	Dig down!
-Engraving	Dig for Victory here
-Engraving	Dig here --- X
-Engraving	Dig here.
 Engraving	Do not move forward
 Engraving	Don't Panic
 Engraving	Don't go that way.
@@ -159,7 +142,6 @@ Engraving	He who is valiant and pure of spirit may find the Holy Grail in the Ca
 Engraving	Here be dragons.
 Engraving	Here there be soldier ants.
 Engraving	Hoc est qui sumus.
-Engraving	If you find speed boots on this spot, consider yourself lucky.
 Engraving	In Soviet Russia, the amulet ascends with you!
 Engraving	Maxim 1: Pillage, Then Burn
 Engraving	Need a light? Come visit the Minetown branch of Izchak's Lighting Store!
@@ -181,14 +163,8 @@ Hallucinatory Monster	Hallucinatory Monster
 Hallucinatory Monster	Harmless Protoplasm
 Hallucinatory Monster	Harry Potter
 Hallucinatory Monster	Jumping brain
-Hallucinatory Monster	Killer tripe ration
 Hallucinatory Monster	Legendary black beast of Arrrgh
-Hallucinatory Monster	Lucius Malfoy
 Hallucinatory Monster	Magically animated vorpal blade
-Hallucinatory Monster	Morgoth
-Item	Server
-Hallucinatory Monster	Spellbook of wishing
-Hallucinatory Monster	Urist McDwarf
 Hallucinatory Monster	arch-lichen
 Hallucinatory Monster	arch-pedant
 Hallucinatory Monster	badger
@@ -216,32 +192,20 @@ Hallucinatory Monster	golden goblin
 Hallucinatory Monster	golem made out of other golems
 Hallucinatory Monster	hallucinogen-distorted hallucination
 Hallucinatory Monster	inside joke
-Hallucinatory Monster	lurker below
-Hallucinatory Monster	master lichen
-Hallucinatory Monster	mehitabel the cat
 Hallucinatory Monster	mountain dwarf
 Hallucinatory Monster	mumak mummy
 Hallucinatory Monster	mummy zombie
 Hallucinatory Monster	munchkin
 Hallucinatory Monster	pope
 Hallucinatory Monster	rabid lawyer
-Hallucinatory Monster	rabid squirrel
 Hallucinatory Monster	random number generator
 Hallucinatory Monster	random number golem
 Hallucinatory Monster	the roots of Yggdrasil
-Hallucinatory Monster	thoroughly rusty thoroughly corroded iron golem
 Hallucinatory Monster	were(random beast)
 Hallucinatory Monster	werehorse
 Hallucinatory Monster	werehouse
-Hallucinatory Monster	werehuman
 Hallucinatory Monster	weremindflayer
-Hallucinatory Monster	weremold
-Hallucinatory Monster	weremouse
 Hallucinatory Monster	wereplatypus
-Hallucinatory Monster	worthless yellowish-brown glass golem
-Hallucinatory Monster	writhing mass of primal chaos
-Hallucinatory Monster	wumpus mummy
-Hallucinatory Monster	zergling
 
 http://donjon.bin.sh/fantasy/random/#dungeon_graffiti
 http://www.imdb.com/character/ch0002561/quotes done to  You fools! Do you think with your crosses and your wafers you can destroy me? Me! You do not know how many men have come against me. I am the king of my kind! 
