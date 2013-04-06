@@ -19,8 +19,6 @@ http://tvtropes.org/pmwiki/pmwiki.php/Main/TomeOfEldritchLore
 http://tvtropes.org/pmwiki/pmwiki.php/Main/AlienKudzu
 
 * "Once upon a midnight dreary, while I pondered, weak and weary, Over many a quaint and curious volume of forgotten lore..." — Edgar Allan Poe, The Raven 
-* "I can see you...
-* Beware of Dreams come true!
 * investigate SCORE_ON_BOTL
 * "checking whether to enable" in configure + autoconf.h + autoconf.hin
 * kill paging in guidebook
