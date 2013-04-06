@@ -1,5 +1,6 @@
 Plans for UnNetHackPlus
 * #testarmorforAC
+* autodetect enchantment of non-magical armor and weapon for knights and when polymorphed into mercenary
 *  save and bones files accepted from versions
 * http://nethackwiki.com/wiki/Key#Breakage
 * http://www.darkshire.net/jhkim/rpg/lordoftherings/names.pdf
