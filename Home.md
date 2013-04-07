@@ -195,7 +195,6 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * give levitation/teleport control to Sam with random chance (1/3?) to stop trivial ways to kill him
 * http://forum.rpg.net/showthread.php?466187-(Let-s-Play!)-Sporkhack/page79
 *  Mars grants Nefarious with the gift of Dragonbane, an artifact spear. As I've said before, vanilla bane artifacts are uniformly crap, but in Sporkhack Dragonbane in particular is startlingly good, especially early on. Wielding it grants fire, cold, poison, shock, sleep, acid, and disintegration resistance. No, that isn't a typo. You get all of them, and at 100%. Fantastic weapon for conducts. It also has the usual anti-dragon properties, like all bane weapons.
-* during the new moon the petrifying hiss of a cockatrice has a 100% chance to hit UNLESS you have a lizard corpse to cure it http://nethackwiki.com/wiki/Source:Mhitu.c#line1190
 * remove pet apport
 * identify projectiles - for Rangers http://nh.gmuf.com/ranger_ammo-343.diff
 * #chat - threats, confused dwarf talks about adamantine
