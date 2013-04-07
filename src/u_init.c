@@ -12,260 +12,50 @@ struct trobj {
 	Bitfield(trbless,2);
 };
 
+STATIC_DCL void FDECL(add_item,(int));
+STATIC_DCL void FDECL(add_item_there_is_no_overloading,(int, int));
+STATIC_DCL void FDECL(add_item_there_is_no_overloading_with_charge,(int, int, int));
+STATIC_DCL void FDECL(add_item_there_is_no_overloading_full,(int, int, int, int, int));
 STATIC_DCL void FDECL(ini_inv, (struct trobj *));
 STATIC_DCL void FDECL(knows_object,(int));
 STATIC_DCL void FDECL(knows_class,(CHAR_P));
 STATIC_DCL boolean FDECL(restricted_spell_discipline, (int));
 
-#define UNDEF_TYP	0
-#define UNDEF_SPE	'\177'
-#define UNDEF_BLESS	2
-
-/*
- *	Initial inventory for the various roles.
- */
-static struct trobj Archeologist[] = {
-#define A_POTION_OF_OBJECT_DETECTION	8
-#define A_SCROLL_OF_GOLD_DETECTION	9
-	/* if adventure has a name...  idea from tan@uvm-gen */
-	{ BULLWHIP, 2, WEAPON_CLASS, 1, UNDEF_BLESS },
-	{ LEATHER_JACKET, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
-	{ FEDORA, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
-	{ FOOD_RATION, 0, FOOD_CLASS, 3, 0 },
-	{ PICK_AXE, UNDEF_SPE, TOOL_CLASS, 1, UNDEF_BLESS },
-	{ TINNING_KIT, UNDEF_SPE, TOOL_CLASS, 1, UNDEF_BLESS },
-	{ TOUCHSTONE, 0, GEM_CLASS, 1, 0 },
-	{ SACK, 0, TOOL_CLASS, 1, 0 },
-	{ POT_OBJECT_DETECTION, 0, POTION_CLASS, 1, UNDEF_BLESS },	/* quan is variable */
-	{ SCR_GOLD_DETECTION, 0, SCROLL_CLASS, 1, UNDEF_BLESS },	/* quan is variable */
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj Barbarian[] = {
-#define B_MAJOR	0	/* two-handed sword or battle-axe  */
-#define B_MINOR	1	/* matched with axe or short sword */
-	{ TWO_HANDED_SWORD, 0, WEAPON_CLASS, 1, UNDEF_BLESS },
-	{ AXE, 0, WEAPON_CLASS, 1, UNDEF_BLESS },
-	{ RING_MAIL, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
-	{ FOOD_RATION, 0, FOOD_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj Cave_man[] = {
-#define C_AMMO	2
-	{ CLUB, 1, WEAPON_CLASS, 1, UNDEF_BLESS },
-	{ SLING, 2, WEAPON_CLASS, 1, UNDEF_BLESS },
-	{ FLINT, 0, GEM_CLASS, 15, UNDEF_BLESS },	/* quan is variable */
-	{ ROCK, 0, GEM_CLASS, 3, 0 },			/* yields 18..33 */
-	{ LEATHER_ARMOR, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj Healer[] = {
-	{ SCALPEL, 0, WEAPON_CLASS, 1, UNDEF_BLESS },
-	{ LEATHER_GLOVES, 1, ARMOR_CLASS, 1, UNDEF_BLESS },
-	{ STETHOSCOPE, 0, TOOL_CLASS, 1, 0 },
-	{ POT_HEALING, 0, POTION_CLASS, 4, UNDEF_BLESS },
-	{ POT_EXTRA_HEALING, 0, POTION_CLASS, 4, UNDEF_BLESS },
-	{ WAN_SLEEP, UNDEF_SPE, WAND_CLASS, 1, UNDEF_BLESS },
-	/* always blessed, so it's guaranteed readable */
-	{ SPE_HEALING, 0, SPBOOK_CLASS, 1, 1 },
-	{ SPE_EXTRA_HEALING, 0, SPBOOK_CLASS, 1, 1 },
-	{ SPE_STONE_TO_FLESH, 0, SPBOOK_CLASS, 1, 1 },
-	{ APPLE, 0, FOOD_CLASS, 5, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj Knight[] = {
-	{ LONG_SWORD, 1, WEAPON_CLASS, 1, UNDEF_BLESS },
-	{ LANCE, 1, WEAPON_CLASS, 1, UNDEF_BLESS },
-	{ RING_MAIL, 1, ARMOR_CLASS, 1, UNDEF_BLESS },
-	{ HELMET, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
-	{ SMALL_SHIELD, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
-	{ LEATHER_GLOVES, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
-	{ APPLE, 0, FOOD_CLASS, 10, 0 },
-	{ CARROT, 0, FOOD_CLASS, 10, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj Monk[] = {
-#define M_BOOK		2
-	{ LEATHER_GLOVES, 2, ARMOR_CLASS, 1, UNDEF_BLESS },
-	{ ROBE, 1, ARMOR_CLASS, 1, UNDEF_BLESS },
-	{ UNDEF_TYP, UNDEF_SPE, SPBOOK_CLASS, 1, 1 },
-	{ UNDEF_TYP, UNDEF_SPE, SCROLL_CLASS, 1, UNDEF_BLESS },
-	{ POT_HEALING, 0, POTION_CLASS, 3, UNDEF_BLESS },
-	{ FOOD_RATION, 0, FOOD_CLASS, 3, 0 },
-	{ APPLE, 0, FOOD_CLASS, 5, UNDEF_BLESS },
-	{ ORANGE, 0, FOOD_CLASS, 5, UNDEF_BLESS },
-	/* Yes, we know fortune cookies aren't really from China.  They were
-	 * invented by George Jung in Los Angeles, California, USA in 1916.
-	 */
-	{ FORTUNE_COOKIE, 0, FOOD_CLASS, 3, UNDEF_BLESS },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj Priest[] = {
-	{ MACE, 1, WEAPON_CLASS, 1, 1 },
-	{ ROBE, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
-	{ SMALL_SHIELD, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
-	{ POT_WATER, 0, POTION_CLASS, 4, 1 },	/* holy water */
-	{ CLOVE_OF_GARLIC, 0, FOOD_CLASS, 1, 0 },
-	{ SPRIG_OF_WOLFSBANE, 0, FOOD_CLASS, 1, 0 },
-	{ UNDEF_TYP, UNDEF_SPE, SPBOOK_CLASS, 2, UNDEF_BLESS },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj Ranger[] = {
-#define RAN_BOW			1
-#define RAN_TWO_ARROWS	2
-#define RAN_ZERO_ARROWS	3
-#define RAN_CLOAK 4
-	{ DAGGER, 1, WEAPON_CLASS, 1, UNDEF_BLESS },
-	{ BOW, 1, WEAPON_CLASS, 1, UNDEF_BLESS },
-	{ ARROW, 2, WEAPON_CLASS, 50, UNDEF_BLESS },
-	{ ARROW, 0, WEAPON_CLASS, 30, UNDEF_BLESS },
-	{ CLOAK_OF_DISPLACEMENT, 2, ARMOR_CLASS, 1, UNDEF_BLESS },
-	{ CRAM_RATION, 0, FOOD_CLASS, 4, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj Rogue[] = {
-#define R_DAGGERS	1
-	{ SHORT_SWORD, 0, WEAPON_CLASS, 1, UNDEF_BLESS },
-	{ DAGGER, 0, WEAPON_CLASS, 10, 0 },	/* quan is variable */
-	{ LEATHER_ARMOR, 1, ARMOR_CLASS, 1, UNDEF_BLESS },
-	{ POT_SICKNESS, 0, POTION_CLASS, 1, 0 },
-	{ LOCK_PICK, 9, TOOL_CLASS, 1, 0 },
-	{ SACK, 0, TOOL_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj Samurai[] = {
-#define S_ARROWS	3
-	{ KATANA, 0, WEAPON_CLASS, 1, UNDEF_BLESS },
-	{ SHORT_SWORD, 0, WEAPON_CLASS, 1, UNDEF_BLESS }, /* wakizashi */
-	{ YUMI, 0, WEAPON_CLASS, 1, UNDEF_BLESS },
-	{ YA, 0, WEAPON_CLASS, 25, UNDEF_BLESS }, /* variable quan */
-	{ SPLINT_MAIL, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj Tourist[] = {
-#define T_DARTS		0
-	{ DART, 2, WEAPON_CLASS, 25, UNDEF_BLESS },	/* quan is variable */
-	{ UNDEF_TYP, UNDEF_SPE, FOOD_CLASS, 10, 0 },
-	{ POT_EXTRA_HEALING, 0, POTION_CLASS, 2, UNDEF_BLESS },
-	{ SCR_MAGIC_MAPPING, 0, SCROLL_CLASS, 4, UNDEF_BLESS },
-	{ HAWAIIAN_SHIRT, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
-	{ EXPENSIVE_CAMERA, UNDEF_SPE, TOOL_CLASS, 1, 0 },
-	{ CREDIT_CARD, 0, TOOL_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj Valkyrie[] = {
-	{ LONG_SWORD, 1, WEAPON_CLASS, 1, UNDEF_BLESS },
-	{ DAGGER, 0, WEAPON_CLASS, 1, UNDEF_BLESS },
-	{ SMALL_SHIELD, 3, ARMOR_CLASS, 1, UNDEF_BLESS },
-	{ FOOD_RATION, 0, FOOD_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj Wizard[] = {
-#define W_CLOAK		1
-#define W_MULTSTART	2
-#define W_MULTEND	6
-	{ QUARTERSTAFF, 1, WEAPON_CLASS, 1, 1 },
-	{ UNDEF_TYP, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
-	{ UNDEF_TYP, UNDEF_SPE, WAND_CLASS, 1, UNDEF_BLESS },
-	{ UNDEF_TYP, UNDEF_SPE, RING_CLASS, 2, UNDEF_BLESS },
-	{ UNDEF_TYP, UNDEF_SPE, POTION_CLASS, 3, UNDEF_BLESS },
-	{ UNDEF_TYP, UNDEF_SPE, SCROLL_CLASS, 3, UNDEF_BLESS },
-	{ SPE_FORCE_BOLT, 0, SPBOOK_CLASS, 1, 1 },
-	{ UNDEF_TYP, UNDEF_SPE, SPBOOK_CLASS, 1, UNDEF_BLESS },
-	{ 0, 0, 0, 0, 0 }
-};
-
-/*
- *	Optional extra inventory items.
- */
-
-static struct trobj Tinopener[] = {
-	{ TIN_OPENER, 0, TOOL_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj Magicmarker[] = {
-	{ MAGIC_MARKER, UNDEF_SPE, TOOL_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj Lamp[] = {
-	{ OIL_LAMP, 1, TOOL_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj Blindfold[] = {
-	{ BLINDFOLD, 0, TOOL_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj Instrument[] = {
-	{ WOODEN_FLUTE, 0, TOOL_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj Xtra_food[] = {
-	{ UNDEF_TYP, UNDEF_SPE, FOOD_CLASS, 2, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj Poison[] = {
-	{ POT_SICKNESS, 0, POTION_CLASS, 2, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj Pickaxe[] = {
-	{ PICK_AXE, 0, TOOL_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj Candle[] = {
-	{ TALLOW_CANDLE, 0, TOOL_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj Leash[] = {
-	{ LEASH, 0, TOOL_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj Towel[] = {
-	{ TOWEL, 0, TOOL_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj Key[] = {
-	{ SKELETON_KEY, 0, TOOL_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-static struct trobj Wishing[] = {
-	{ WAN_WISHING, 3, WAND_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-#ifdef GOLDOBJ
-static struct trobj Money[] = {
-	{ GOLD_PIECE, 0 , COIN_CLASS, 1, 0 },
-	{ 0, 0, 0, 0, 0 }
-};
-#endif
+#define UNDEF_TYP		0
+#define UNDEF_SPE		'\177'
+#define U_INIT_BUC_UNDEF		2
+#define U_INIT_BUC_BLESSED		1
+#define U_INIT_BUC_UNCURSED	0
 
 /* race-based substitutions for initial inventory; */
 static struct inv_sub { short race_pm, item_otyp, subs_otyp; } inv_subs[] = {
-    { PM_ELF,	DAGGER,			ELVEN_DAGGER	      },
-    { PM_ELF,	SPEAR,			ELVEN_SPEAR	      },
-    { PM_ELF,	SHORT_SWORD,		ELVEN_SHORT_SWORD     },
-    { PM_ELF,	BOW,			ELVEN_BOW	      },
-    { PM_ELF,	ARROW,			ELVEN_ARROW	      },
-    { PM_ELF,	HELMET,			ELVEN_LEATHER_HELM    },
- /* { PM_ELF,	SMALL_SHIELD,		ELVEN_SHIELD	      }, */
-    { PM_ELF,	CRAM_RATION,		LEMBAS_WAFER	      },
-    { PM_ORC,	DAGGER,			ORCISH_DAGGER	      },
-    { PM_ORC,	SPEAR,			ORCISH_SPEAR	      },
-    { PM_ORC,	SHORT_SWORD,		ORCISH_SHORT_SWORD    },
-    { PM_ORC,	BOW,			ORCISH_BOW	      },
-    { PM_ORC,	ARROW,			ORCISH_ARROW	      },
-    { PM_ORC,	HELMET,			ORCISH_HELM	      },
-    { PM_ORC,	SMALL_SHIELD,		ORCISH_SHIELD	      },
-    { PM_ORC,	RING_MAIL,		ORCISH_RING_MAIL      },
-    { PM_ORC,	CHAIN_MAIL,		ORCISH_CHAIN_MAIL     },
-    { PM_DWARF, SPEAR,			DWARVISH_SPEAR	      },
-    { PM_DWARF, SHORT_SWORD,		DWARVISH_SHORT_SWORD  },
-    { PM_DWARF, HELMET,			DWARVISH_IRON_HELM    },
- /* { PM_DWARF, SMALL_SHIELD,		DWARVISH_ROUNDSHIELD  }, */
- /* { PM_DWARF, PICK_AXE,		DWARVISH_MATTOCK      }, */
-    { PM_GNOME, BOW,			CROSSBOW	      },
-    { PM_GNOME, ARROW,			CROSSBOW_BOLT	      },
-    { PM_VAMPIRE,	POT_FRUIT_JUICE,	POT_BLOOD	      },
-    { PM_VAMPIRE,	FOOD_RATION,		POT_VAMPIRE_BLOOD     },
-    { NON_PM,	STRANGE_OBJECT,		STRANGE_OBJECT	      }
+    { PM_ELF,     DAGGER,           ELVEN_DAGGER          },
+    { PM_ELF,     SPEAR,            ELVEN_SPEAR           },
+    { PM_ELF,     SHORT_SWORD,      ELVEN_SHORT_SWORD     },
+    { PM_ELF,     BOW,              ELVEN_BOW             },
+    { PM_ELF,     ARROW,            ELVEN_ARROW           },
+    { PM_ELF,     HELMET,           ELVEN_LEATHER_HELM    },
+ /* { PM_ELF,     SMALL_SHIELD,     ELVEN_SHIELD          },  */
+    { PM_ELF,     CRAM_RATION,      LEMBAS_WAFER          },
+    { PM_ORC,     DAGGER,           ORCISH_DAGGER         },
+    { PM_ORC,     SPEAR,            ORCISH_SPEAR          },
+    { PM_ORC,     SHORT_SWORD,      ORCISH_SHORT_SWORD    },
+    { PM_ORC,     BOW,              ORCISH_BOW            },
+    { PM_ORC,     ARROW,            ORCISH_ARROW          },
+    { PM_ORC,     HELMET,           ORCISH_HELM           },
+    { PM_ORC,     SMALL_SHIELD,     ORCISH_SHIELD         },
+    { PM_ORC,     RING_MAIL,        ORCISH_RING_MAIL      },
+    { PM_ORC,     CHAIN_MAIL,       ORCISH_CHAIN_MAIL     },
+    { PM_DWARF,   SPEAR,            DWARVISH_SPEAR        },
+    { PM_DWARF,   SHORT_SWORD,      DWARVISH_SHORT_SWORD  },
+    { PM_DWARF,   HELMET,           DWARVISH_IRON_HELM    },
+ /* { PM_DWARF,   SMALL_SHIELD,     DWARVISH_ROUNDSHIELD  },  */
+ /* { PM_DWARF,   PICK_AXE,         DWARVISH_MATTOCK      },  */
+    { PM_GNOME,   BOW,              CROSSBOW              },
+    { PM_GNOME,   ARROW,            CROSSBOW_BOLT         },
+    { PM_VAMPIRE, POT_FRUIT_JUICE,  POT_BLOOD             },
+    { PM_VAMPIRE, FOOD_RATION,      POT_VAMPIRE_BLOOD     },
+    { NON_PM,     STRANGE_OBJECT,   STRANGE_OBJECT        }
 };
 
 static const struct def_skill Skill_A[] = {
@@ -490,8 +280,7 @@ static const struct def_skill Skill_W[] = {
 
 
 STATIC_OVL void
-knows_object(obj)
-int obj;
+knows_object(int obj)
 {
 	discover_object(obj,TRUE,FALSE);
 	objects[obj].oc_pre_discovered = 1;	/* not a "discovery" */
@@ -501,14 +290,14 @@ int obj;
  * like all gems except the loadstone and luckstone.
  */
 STATIC_OVL void
-knows_class(sym)
-char sym;
+knows_class(char sym)
 {
 	int ct;
-	for (ct = 1; ct < NUM_OBJECTS; ct++)
-		if (objects[ct].oc_class == sym && !objects[ct].oc_magic &&
-		    !Is_dragon_armor(ct))
+	for (ct = 1; ct < NUM_OBJECTS; ct++) {
+		if (objects[ct].oc_class == sym && !objects[ct].oc_magic && !Is_dragon_armor(ct)) {
 			knows_object(ct);
+		}
+	}
 }
 
 void
@@ -563,10 +352,12 @@ u_init()
 	u.ulevel = 0;	/* set up some of the initial attributes */
 	u.uhp = u.uhpmax = newhp();
 	u.uenmax = urole.enadv.infix + urace.enadv.infix;
-	if (urole.enadv.inrnd > 0)
-	    u.uenmax += rnd(urole.enadv.inrnd);
-	if (urace.enadv.inrnd > 0)
-	    u.uenmax += rnd(urace.enadv.inrnd);
+	if (urole.enadv.inrnd > 0) {
+		u.uenmax += rnd(urole.enadv.inrnd);
+	}
+	if (urace.enadv.inrnd > 0) {
+		u.uenmax += rnd(urace.enadv.inrnd);
+	}
 	u.uen = u.uenmax;
 	u.uspellprot = 0;
 	adjabil(0,1);
@@ -580,20 +371,21 @@ u_init()
 	 * the initialisation has to be in front of food, alignment
 	 * and inventory.
 	 */
-	u.roleplay.ascet	= flags.ascet;
-	u.roleplay.atheist	= flags.atheist;
-	u.roleplay.blindfolded	= flags.blindfolded;
-	u.roleplay.illiterate	= flags.illiterate;
-	u.roleplay.pacifist	= flags.pacifist;
-	u.roleplay.nudist	= flags.nudist;
-	u.roleplay.vegan	= flags.vegan;
-	u.roleplay.vegetarian	= flags.vegetarian;
+	u.roleplay.ascet       = flags.ascet;
+	u.roleplay.atheist     = flags.atheist;
+	u.roleplay.blindfolded = flags.blindfolded;
+	u.roleplay.illiterate  = flags.illiterate;
+	u.roleplay.pacifist    = flags.pacifist;
+	u.roleplay.nudist      = flags.nudist;
+	u.roleplay.vegan       = flags.vegan;
+	u.roleplay.vegetarian  = flags.vegetarian;
 
 	init_uhunger();
-	for (i = 0; i <= MAXSPELL; i++) spl_book[i].sp_id = NO_SPELL;
-	u.ublesscnt = 300;			/* no prayers just yet */
-	u.ualignbase[A_CURRENT] = u.ualignbase[A_ORIGINAL] = u.ualign.type =
-			aligns[flags.initalign].value;
+	for (i = 0; i <= MAXSPELL; i++) {
+		spl_book[i].sp_id = NO_SPELL;
+	}
+	u.ublesscnt = 300; /* no prayers just yet */
+	u.ualignbase[A_CURRENT] = u.ualignbase[A_ORIGINAL] = u.ualign.type = aligns[flags.initalign].value;
 	u.ulycn = NON_PM;
 
 #if defined(BSD) && !defined(POSIX_TYPES)
@@ -619,31 +411,46 @@ u_init()
 	 * skew the results if we use rn2(2)...  --KAA
 	 */
 	case PM_ARCHEOLOGIST:
-		Archeologist[A_POTION_OF_OBJECT_DETECTION].trquan = rn2(3);
-		Archeologist[A_SCROLL_OF_GOLD_DETECTION].trquan = rn2(3);
-		ini_inv(Archeologist);
-		if(!rn2(10)) ini_inv(Tinopener);
-		if(!rn2(4)) ini_inv(Lamp);
-		if(!rn2(20)) ini_inv(Magicmarker);
-		ini_inv(Key);
+		/* if adventure has a name...  idea from tan@uvm-gen */
+		add_item_there_is_no_overloading_with_charge(BULLWHIP, 1, 2);
+		add_item(LEATHER_JACKET);
+		add_item(FEDORA);
+		add_item_there_is_no_overloading(FOOD_RATION, 3);
+		add_item(PICK_AXE);
+		add_item(TINNING_KIT);
+		add_item(TOUCHSTONE);
+		add_item(SACK);
+		add_item_there_is_no_overloading(POT_OBJECT_DETECTION, rn2(3));
+		add_item_there_is_no_overloading(SCR_GOLD_DETECTION, rn2(3));
+		if(!rn2(10)) add_item(TIN_OPENER);
+		if(!rn2(4)) add_item(OIL_LAMP);
+		if(!rn2(20)) add_item(MAGIC_MARKER);
+		add_item(SKELETON_KEY);
 		knows_object(SACK);
 		knows_object(TOUCHSTONE);
 		skill_init(Skill_A);
 		break;
 	case PM_BARBARIAN:
 		if (rn2(100) >= 50) {	/* see above comment */
-		    Barbarian[B_MAJOR].trotyp = BATTLE_AXE;
-		    Barbarian[B_MINOR].trotyp = SHORT_SWORD;
+			add_item(TWO_HANDED_SWORD);
+			add_item(AXE);
+		} else {
+			add_item(BATTLE_AXE);
+			add_item(SHORT_SWORD);
 		}
-		ini_inv(Barbarian);
-		if(!rn2(6)) ini_inv(Lamp);
+		add_item(RING_MAIL);
+		add_item(FOOD_RATION);
+		if(!rn2(6)) add_item(OIL_LAMP);
 		knows_class(WEAPON_CLASS);
 		knows_class(ARMOR_CLASS);
 		skill_init(Skill_B);
 		break;
 	case PM_CAVEMAN:
-		Cave_man[C_AMMO].trquan = rn1(11, 10);	/* 10..20 */
-		ini_inv(Cave_man);
+		add_item_there_is_no_overloading_with_charge(CLUB, 1, +1);
+		add_item_there_is_no_overloading_with_charge(SLING, 1, +2);
+		add_item_there_is_no_overloading(FLINT, rn1(11, 10)); /* 10..20 */
+		add_item_there_is_no_overloading(ROCK, 3); /* yields 18..33 */
+		add_item(LEATHER_ARMOR);
 		skill_init(Skill_C);
 		break;
 	case PM_HEALER:
@@ -652,13 +459,30 @@ u_init()
 #else
 		u.umoney0 = rn1(1000, 1001);
 #endif
-		ini_inv(Healer);
-		if(!rn2(25)) ini_inv(Lamp);
+		add_item(SCALPEL);
+		add_item_there_is_no_overloading_with_charge(LEATHER_GLOVES, 1, +1);
+		add_item(STETHOSCOPE);
+		add_item_there_is_no_overloading(POT_HEALING, 4);
+		add_item_there_is_no_overloading(POT_EXTRA_HEALING, 4);
+		add_item(WAN_SLEEP);
+		/* always blessed, so it's guaranteed readable */
+		add_item_there_is_no_overloading_full(SPE_HEALING, 1, 0, SPBOOK_CLASS, U_INIT_BUC_BLESSED);
+		add_item_there_is_no_overloading_full(SPE_EXTRA_HEALING, 1, 0, SPBOOK_CLASS, U_INIT_BUC_BLESSED);
+		add_item_there_is_no_overloading_full(SPE_STONE_TO_FLESH, 1, 0, SPBOOK_CLASS, U_INIT_BUC_BLESSED);
+		add_item_there_is_no_overloading(APPLE, 5);
+		if(!rn2(25)) add_item(OIL_LAMP);
 		knows_object(POT_FULL_HEALING);
 		skill_init(Skill_H);
 		break;
 	case PM_KNIGHT:
-		ini_inv(Knight);
+		add_item_there_is_no_overloading_with_charge(LONG_SWORD, 1, +1);
+		add_item_there_is_no_overloading_with_charge(LANCE, 1, +1);
+		add_item_there_is_no_overloading_with_charge(RING_MAIL, 1, +1);
+		add_item(HELMET);
+		add_item(SMALL_SHIELD);
+		add_item(LEATHER_GLOVES);
+		add_item_there_is_no_overloading(APPLE, 10);
+		add_item_there_is_no_overloading(CARROT, 10);
 		knows_class(WEAPON_CLASS);
 		knows_class(ARMOR_CLASS);
 		/* give knights chess-like mobility
@@ -667,21 +491,46 @@ u_init()
 		skill_init(Skill_K);
 		break;
 	case PM_MONK:
+		add_item_there_is_no_overloading_with_charge(LEATHER_GLOVES, 1, +2);
+		add_item_there_is_no_overloading_with_charge(ROBE, 1, +1);
+		int spellbook_type;
 		switch (rn2(90) / 30) {
-		case 0: Monk[M_BOOK].trotyp = SPE_HEALING; break;
-		case 1: Monk[M_BOOK].trotyp = SPE_PROTECTION; break;
-		case 2: Monk[M_BOOK].trotyp = SPE_SLEEP; break;
+			case 0: spellbook_type = SPE_HEALING; break;
+			case 1: spellbook_type = SPE_PROTECTION; break;
+			case 2: spellbook_type = SPE_SLEEP; break;
+			default: impossible("bad switch in u_init, PM_MONK"); break;
 		}
-		ini_inv(Monk);
-		if(!rn2(5)) ini_inv(Magicmarker);
-		else if(!rn2(10)) ini_inv(Lamp);
+		add_item_there_is_no_overloading_full(spellbook_type, 1, UNDEF_SPE, SPBOOK_CLASS, U_INIT_BUC_BLESSED);
+		add_item_there_is_no_overloading_full(UNDEF_TYP, 1, UNDEF_SPE, SCROLL_CLASS, U_INIT_BUC_UNDEF);
+		add_item_there_is_no_overloading(POT_HEALING, 3);
+		add_item_there_is_no_overloading(FOOD_RATION, 3);
+		add_item_there_is_no_overloading(APPLE, 5);
+		add_item_there_is_no_overloading(ORANGE, 5);
+		/* Yes, we know fortune cookies aren't really from China.  They were
+		 * invented by George Jung in Los Angeles, California, USA in 1916.
+		 */
+		add_item_there_is_no_overloading(FORTUNE_COOKIE, 3);
+		if (!rn2(5)) {
+			add_item(MAGIC_MARKER);
+		} else if(!rn2(10)) {
+			add_item(OIL_LAMP);
+		}
 		knows_class(ARMOR_CLASS);
 		skill_init(Skill_Mon);
 		break;
 	case PM_PRIEST:
-		ini_inv(Priest);
-		if(!rn2(10)) ini_inv(Magicmarker);
-		else if(!rn2(10)) ini_inv(Lamp);
+		add_item_there_is_no_overloading_full(MACE, 1, +1, WEAPON_CLASS, U_INIT_BUC_BLESSED);
+		add_item(ROBE);
+		add_item(SMALL_SHIELD);
+		add_item_there_is_no_overloading_full(POT_WATER, 4, 0, POTION_CLASS, U_INIT_BUC_BLESSED); /* holy water */
+		add_item(CLOVE_OF_GARLIC);
+		add_item(SPRIG_OF_WOLFSBANE);
+		add_item_there_is_no_overloading_full(UNDEF_TYP, 2, 0, SPBOOK_CLASS, U_INIT_BUC_UNDEF);
+		if (!rn2(10)) {
+			add_item(MAGIC_MARKER);
+		} else if(!rn2(10)) {
+			add_item(OIL_LAMP);
+		}
 		knows_object(POT_WATER);
 		skill_init(Skill_P);
 		/* KMH, conduct --
@@ -693,65 +542,119 @@ u_init()
 		 */
 		break;
 	case PM_RANGER:
-		Ranger[RAN_TWO_ARROWS].trquan = rn1(10, 50);
-		Ranger[RAN_ZERO_ARROWS].trquan = rn1(10, 30);
-		if(urace.malenum == PM_ELF) Ranger[RAN_CLOAK].trotyp = ELVEN_CLOAK; //they shoot better
-		ini_inv(Ranger);
+		add_item_there_is_no_overloading_with_charge(DAGGER, 1, +1);
+		add_item_there_is_no_overloading_with_charge(BOW, 1, +1);
+		add_item_there_is_no_overloading_with_charge(ARROW, rn1(10, 50), +2);
+		add_item_there_is_no_overloading_with_charge(ARROW, rn1(10, 30), +0);
+		if(urace.malenum == PM_ELF) {
+			add_item_there_is_no_overloading_with_charge(ELVEN_CLOAK, 1, +2); //they shoot better
+		} else {
+			add_item_there_is_no_overloading_with_charge(CLOAK_OF_DISPLACEMENT, 1, +2);
+		}
+		add_item_there_is_no_overloading(CRAM_RATION, 4);
 		skill_init(Skill_Ran);
-
 		break;
 	case PM_ROGUE:
-		Rogue[R_DAGGERS].trquan = rn1(10, 6);
 #ifndef GOLDOBJ
 		u.ugold = u.ugold0 = 0;
 #else
 		u.umoney0 = 0;
 #endif
-		ini_inv(Rogue);
-		if(!rn2(5)) ini_inv(Blindfold);
+		add_item(SHORT_SWORD);
+		add_item_there_is_no_overloading(DAGGER, rn1(10, 6));
+		add_item_there_is_no_overloading_with_charge(LEATHER_ARMOR, 1, +1);
+		add_item(POT_SICKNESS);
+		add_item(LOCK_PICK);
+		add_item(SACK);
+		if(!rn2(5)) {
+			add_item(BLINDFOLD);
+		}
 		knows_object(SACK);
 		skill_init(Skill_R);
 		break;
 	case PM_SAMURAI:
-		Samurai[S_ARROWS].trquan = rn1(20, 26);
-		ini_inv(Samurai);
-		if(!rn2(5)) ini_inv(Blindfold);
+		add_item_there_is_no_overloading(YA, rn1(20, 26));
+		add_item(KATANA);
+		add_item(YUMI);
+		add_item(SHORT_SWORD); /* wakizashi */
+		add_item(SPLINT_MAIL);
+		if(!rn2(5)) {
+			add_item(BLINDFOLD);
+		}
 		knows_class(WEAPON_CLASS);
 		knows_class(ARMOR_CLASS);
 		skill_init(Skill_S);
 		break;
 	case PM_TOURIST:
-		Tourist[T_DARTS].trquan = rn1(20, 21);
 #ifndef GOLDOBJ
 		u.ugold = u.ugold0 = rnd(1000);
 #else
 		u.umoney0 = rnd(1000);
 #endif
-		ini_inv(Tourist);
-		if(!rn2(25)) ini_inv(Tinopener);
-		else if(!rn2(25)) ini_inv(Leash);
-		else if(!rn2(25) && !towelday()) ini_inv(Towel);
-		else if(!rn2(25)) ini_inv(Magicmarker);
+		add_item_there_is_no_overloading_with_charge(DART, rn1(20, 21), +2);
+		add_item_there_is_no_overloading_full(UNDEF_TYP, 10, UNDEF_SPE, FOOD_CLASS, U_INIT_BUC_UNCURSED);
+		add_item_there_is_no_overloading(POT_EXTRA_HEALING, 2);
+		add_item_there_is_no_overloading(SCR_MAGIC_MAPPING, 4);
+		add_item(HAWAIIAN_SHIRT);
+		add_item(EXPENSIVE_CAMERA);
+		add_item(CREDIT_CARD);
+		if(!rn2(25)) {
+			add_item(TIN_OPENER);
+		} else if(!rn2(25)) {
+			add_item(LEASH);
+		} else if(!rn2(25) && !towelday()) {
+			add_item(TOWEL);
+		} else if(!rn2(25)) {
+			add_item(MAGIC_MARKER);
+		}
 		skill_init(Skill_T);
 		break;
 	case PM_VALKYRIE:
-		ini_inv(Valkyrie);
-		if(!rn2(6)) ini_inv(Lamp);
+		add_item_there_is_no_overloading_with_charge(LONG_SWORD, 1, +1);
+		add_item(DAGGER);
+		add_item_there_is_no_overloading_with_charge(SMALL_SHIELD, 1, +3);
+		add_item(FOOD_RATION);
+		if(!rn2(6)) {
+			add_item(OIL_LAMP);
+		}
 		knows_class(WEAPON_CLASS);
 		knows_class(ARMOR_CLASS);
 		skill_init(Skill_V);
 		break;
 	case PM_WIZARD:
-		Wizard[W_CLOAK].trotyp = CLOAK_OF_MAGIC_RESISTANCE;
-		if(!rn2(12)) Wizard[W_CLOAK].trotyp = CLOAK_OF_PROTECTION;
-		if(!rn2(12)) Wizard[W_CLOAK].trotyp = CLOAK_OF_DISPLACEMENT;
-		if(!rn2(12)) Wizard[W_CLOAK].trotyp = CLOAK_OF_INVISIBILITY;
-		if(!rn2(12)) Wizard[W_CLOAK].trotyp = OILSKIN_CLOAK;
-		if(!rn2(12)) Wizard[W_CLOAK].trotyp = ROBE;
-		if(!rn2(12)) Wizard[W_CLOAK].trotyp = ALCHEMY_SMOCK;
-		ini_inv(Wizard);
-		if(!rn2(5)) ini_inv(Magicmarker);
-		if(!rn2(5)) ini_inv(Blindfold);
+		add_item_there_is_no_overloading_full(QUARTERSTAFF, 1, +1, WEAPON_CLASS, U_INIT_BUC_BLESSED);
+		int cloak = CLOAK_OF_MAGIC_RESISTANCE;
+		if(!rn2(12)) {
+			cloak = ALCHEMY_SMOCK;
+		}
+		if(!rn2(12)) {
+			cloak = ROBE;
+		}
+		if(!rn2(12)) {
+			cloak = CLOAK_OF_DISPLACEMENT;
+		}
+		if(!rn2(12)) {
+			cloak = CLOAK_OF_INVISIBILITY;
+		}
+		if(!rn2(12)) {
+			cloak = OILSKIN_CLOAK;
+		}
+		if(!rn2(12)) {
+			cloak = CLOAK_OF_PROTECTION;
+		}
+		add_item(cloak);
+		add_item_there_is_no_overloading_full(UNDEF_TYP, 1, UNDEF_SPE, WAND_CLASS, U_INIT_BUC_UNDEF);
+		add_item_there_is_no_overloading_full(UNDEF_TYP, 2, UNDEF_SPE, RING_CLASS, U_INIT_BUC_UNDEF);
+		add_item_there_is_no_overloading_full(UNDEF_TYP, 3, UNDEF_SPE, POTION_CLASS, U_INIT_BUC_UNDEF);
+		add_item_there_is_no_overloading_full(UNDEF_TYP, 3, UNDEF_SPE, SCROLL_CLASS, U_INIT_BUC_UNDEF);
+		add_item_there_is_no_overloading_full(SPE_FORCE_BOLT, 1, UNDEF_SPE, SPBOOK_CLASS, U_INIT_BUC_BLESSED);
+		add_item_there_is_no_overloading_full(UNDEF_TYP, 1, UNDEF_SPE, SPBOOK_CLASS, U_INIT_BUC_UNDEF); /* after SPE_FORCE_BOLT to avoid generating duplicate*/
+		if(!rn2(5)) {
+			add_item(MAGIC_MARKER);
+		}
+		if(!rn2(5)) {
+			add_item(BLINDFOLD);
+		}
 		skill_init(Skill_W);
 		break;
 
@@ -764,86 +667,82 @@ u_init()
 	/*** Race-specific initializations ***/
 	switch (Race_switch) {
 	case PM_HUMAN:
-	    /* Nothing special */
-	    break;
+		/* Nothing special */
+		break;
 
 	case PM_ELF:
-	    /*
-	     * Elves are people of music and song, or they are warriors.
-	     * Non-warriors get an instrument.  We use a kludge to
-	     * get only non-magic instruments.
-	     */
-	    if (Role_if(PM_PRIEST) || Role_if(PM_WIZARD)) {
-		static int trotyp[] = {
-		    WOODEN_FLUTE, TOOLED_HORN, WOODEN_HARP,
-		    BELL, BUGLE, LEATHER_DRUM
-		};
-		Instrument[0].trotyp = trotyp[rn2(SIZE(trotyp))];
-		ini_inv(Instrument);
-	    }
-
-	    /* Elves can recognize all elvish objects */
-	    knows_object(ELVEN_SHORT_SWORD);
-	    knows_object(ELVEN_ARROW);
-	    knows_object(ELVEN_BOW);
-	    knows_object(ELVEN_SPEAR);
-	    knows_object(ELVEN_DAGGER);
-	    knows_object(ELVEN_BROADSWORD);
-	    knows_object(ELVEN_MITHRIL_COAT);
-	    knows_object(ELVEN_LEATHER_HELM);
-	    knows_object(ELVEN_SHIELD);
-	    knows_object(ELVEN_BOOTS);
-	    knows_object(ELVEN_CLOAK);
-	    break;
+		/*
+		 * Elves are people of music and song, or they are warriors.
+		 * Non-warriors get an instrument.  We use a kludge to
+		 * get only non-magic instruments.
+		 */
+		if (Role_if(PM_PRIEST) || Role_if(PM_WIZARD)) {
+			static int trotyp[] = {
+				WOODEN_FLUTE, TOOLED_HORN, WOODEN_HARP, BELL, BUGLE, LEATHER_DRUM
+			};
+			add_item(trotyp[rn2(SIZE(trotyp))]);
+		}
+		/* Elves can recognize all elvish objects */
+		knows_object(ELVEN_SHORT_SWORD);
+		knows_object(ELVEN_ARROW);
+		knows_object(ELVEN_BOW);
+		knows_object(ELVEN_SPEAR);
+		knows_object(ELVEN_DAGGER);
+		knows_object(ELVEN_BROADSWORD);
+		knows_object(ELVEN_MITHRIL_COAT);
+		knows_object(ELVEN_LEATHER_HELM);
+		knows_object(ELVEN_SHIELD);
+		knows_object(ELVEN_BOOTS);
+		knows_object(ELVEN_CLOAK);
+		break;
 
 	case PM_DWARF:
-	    /* Dwarves can recognize all dwarvish objects */
-	    knows_object(DWARVISH_SPEAR);
-	    knows_object(DWARVISH_SHORT_SWORD);
-	    knows_object(DWARVISH_MATTOCK);
-	    knows_object(DWARVISH_IRON_HELM);
-	    knows_object(DWARVISH_MITHRIL_COAT);
-	    knows_object(DWARVISH_CLOAK);
-	    knows_object(DWARVISH_ROUNDSHIELD);
-		 if (!rn2(4) && !Role_if(PM_ARCHEOLOGIST))
-		 {
-			 /* Wise dwarves bring their toy to the dungeons. */
-			 ini_inv(Pickaxe);
-		 }
-	    break;
+		/* Dwarves can recognize all dwarvish objects */
+		knows_object(DWARVISH_SPEAR);
+		knows_object(DWARVISH_SHORT_SWORD);
+		knows_object(DWARVISH_MATTOCK);
+		knows_object(DWARVISH_IRON_HELM);
+		knows_object(DWARVISH_MITHRIL_COAT);
+		knows_object(DWARVISH_CLOAK);
+		knows_object(DWARVISH_ROUNDSHIELD);
+		if (!rn2(4) && !Role_if(PM_ARCHEOLOGIST)) {
+			/* Wise dwarves bring their toy to the dungeons. */
+			add_item(PICK_AXE);
+		}
+		break;
 
 	case PM_GNOME:
-		 if (!rn2(15))
-		 {
-			 ini_inv(Candle);
-		 }
-	    break;
+		if (!rn2(15)) {
+			add_item(TALLOW_CANDLE);
+		}
+		break;
 
 	case PM_ORC:
-	    /* compensate for generally inferior equipment */
-	    if (!Role_if(PM_WIZARD))
-		ini_inv(Xtra_food);
-	    /* Orcs are naughty and carry poison */
-	    ini_inv(Poison);
-	    /* Orcs can recognize all orcish objects */
-	    knows_object(ORCISH_SHORT_SWORD);
-	    knows_object(ORCISH_ARROW);
-	    knows_object(ORCISH_BOW);
-	    knows_object(ORCISH_SPEAR);
-	    knows_object(ORCISH_DAGGER);
-	    knows_object(ORCISH_CHAIN_MAIL);
-	    knows_object(ORCISH_RING_MAIL);
-	    knows_object(ORCISH_HELM);
-	    knows_object(ORCISH_SHIELD);
-	    knows_object(URUK_HAI_SHIELD);
-	    knows_object(ORCISH_CLOAK);
-	    break;
+		/* compensate for generally inferior equipment */
+		if (!Role_if(PM_WIZARD)) {
+			add_item_there_is_no_overloading_full(UNDEF_TYP, 2, UNDEF_SPE, FOOD_CLASS, U_INIT_BUC_UNCURSED);
+		}
+		/* Orcs are naughty and carry poison */
+		add_item(POT_SICKNESS);
+		/* Orcs can recognize all orcish objects */
+		knows_object(ORCISH_SHORT_SWORD);
+		knows_object(ORCISH_ARROW);
+		knows_object(ORCISH_BOW);
+		knows_object(ORCISH_SPEAR);
+		knows_object(ORCISH_DAGGER);
+		knows_object(ORCISH_CHAIN_MAIL);
+		knows_object(ORCISH_RING_MAIL);
+		knows_object(ORCISH_HELM);
+		knows_object(ORCISH_SHIELD);
+		knows_object(URUK_HAI_SHIELD);
+		knows_object(ORCISH_CLOAK);
+		break;
 
 	case PM_VAMPIRE:
-	    /* Vampires start off with gods not as pleased, luck penalty */
-	    adjalign(-5); 
-	    change_luck(-1);
-	    break;
+		/* Vampires start off with gods not as pleased, luck penalty */
+		adjalign(-5); 
+		change_luck(-1);
+		break;
 
 	default:	/* impossible */
 		warning("u_init: unknown race %d", Race_switch);
@@ -851,31 +750,36 @@ u_init()
 	}
 
 	/* Towel Day: In Memoriam Douglas Adams */
-	if (towelday())
-		ini_inv(Towel);
+	if (towelday()) {
+		add_item(TOWEL);
+	}
 
 	/*** Conduct specific initialisation ***/
 
 	if (u.roleplay.blindfolded) {
-		if(!ublindf) ini_inv(Blindfold);
+		if(!ublindf) add_item(BLINDFOLD);
 	} else {
 		violated(CONDUCT_BLINDFOLDED);
 	}
-	if (u.roleplay.atheist) 
+	if (u.roleplay.atheist) {
 		u.ugangr++;
+	}
 
-	if (discover)
-		ini_inv(Wishing);
-
+	if (discover) {
+		add_item_there_is_no_overloading_with_charge(WAN_WISHING, 1, 3);
+	}
 #ifdef WIZARD
-	if (wizard)
+	if (wizard) {
 		read_wizkit();
+	}
 #endif
 
 #ifndef GOLDOBJ
 	u.ugold0 += hidden_gold();	/* in case sack has gold in it */
 #else
-	if (u.umoney0) ini_inv(Money);
+	if (u.umoney0) {
+		add_item_there_is_no_overloading_full(GOLD_PIECE, 1, 0, COIN_CLASS, U_INIT_BUC_UNCURSED)
+	}
 	u.umoney0 += hidden_gold();	/* in case sack has gold in it */
 #endif
 
@@ -885,17 +789,24 @@ u_init()
 /*
  *	Do we really need this?
  */
-	for(i = 0; i < A_MAX; i++)
-	    if(!rn2(20)) {
-		int xd = rn2(7) - 2;	/* biased variation */
-		(void) adjattrib(i, xd, TRUE);
-		if (ABASE(i) < AMAX(i)) AMAX(i) = ABASE(i);
-	    }
+	for(i = 0; i < A_MAX; i++) {
+		if(!rn2(20)) {
+			int xd = rn2(7) - 2;	/* biased variation */
+			(void) adjattrib(i, xd, TRUE);
+			if (ABASE(i) < AMAX(i)) {
+				AMAX(i) = ABASE(i);
+			}
+		}
+	}
 
 	/* make sure you can carry all you have - especially for Tourists */
 	while (inv_weight() > 0) {
-		if (adjattrib(A_STR, 1, TRUE)) continue;
-		if (adjattrib(A_CON, 1, TRUE)) continue;
+		if (adjattrib(A_STR, 1, TRUE)) {
+			continue;
+		}
+		if (adjattrib(A_CON, 1, TRUE)) {
+			continue;
+		}
 		/* only get here when didn't boost strength or constitution */
 		break;
 	}
@@ -905,135 +816,168 @@ u_init()
 
 /* skills aren't initialized, so we use the role-specific skill lists */
 STATIC_OVL boolean
-restricted_spell_discipline(otyp)
-int otyp;
+restricted_spell_discipline(int otyp)
 {
-    const struct def_skill *skills;
-    int this_skill = spell_skilltype(otyp);
+	const struct def_skill *skills;
+	int this_skill = spell_skilltype(otyp);
 
-    switch (Role_switch) {
-     case PM_ARCHEOLOGIST:	skills = Skill_A; break;
-     case PM_BARBARIAN:		skills = Skill_B; break;
-     case PM_CAVEMAN:		skills = Skill_C; break;
-     case PM_HEALER:		skills = Skill_H; break;
-     case PM_KNIGHT:		skills = Skill_K; break;
-     case PM_MONK:		skills = Skill_Mon; break;
-     case PM_PRIEST:		skills = Skill_P; break;
-     case PM_RANGER:		skills = Skill_Ran; break;
-     case PM_ROGUE:		skills = Skill_R; break;
-     case PM_SAMURAI:		skills = Skill_S; break;
-     case PM_TOURIST:		skills = Skill_T; break;
-     case PM_VALKYRIE:		skills = Skill_V; break;
-     case PM_WIZARD:		skills = Skill_W; break;
-     default:			skills = 0; break;	/* lint suppression */
-    }
+	switch (Role_switch) {
+		case PM_ARCHEOLOGIST:	skills = Skill_A; break;
+		case PM_BARBARIAN:		skills = Skill_B; break;
+		case PM_CAVEMAN:		skills = Skill_C; break;
+		case PM_HEALER:		skills = Skill_H; break;
+		case PM_KNIGHT:		skills = Skill_K; break;
+		case PM_MONK:		skills = Skill_Mon; break;
+		case PM_PRIEST:		skills = Skill_P; break;
+		case PM_RANGER:		skills = Skill_Ran; break;
+		case PM_ROGUE:		skills = Skill_R; break;
+		case PM_SAMURAI:		skills = Skill_S; break;
+		case PM_TOURIST:		skills = Skill_T; break;
+		case PM_VALKYRIE:		skills = Skill_V; break;
+		case PM_WIZARD:		skills = Skill_W; break;
+		default:			impossible("Role_switch failure in restricted_spell_discipline"); skills = 0; break;
+	}
 
-    while (skills->skill != P_NONE) {
-	if (skills->skill == this_skill) return FALSE;
-	++skills;
-    }
-    return TRUE;
+	while (skills->skill != P_NONE) {
+		if (skills->skill == this_skill) {
+			return FALSE;
+		}
+		skills++;
+	}
+	return TRUE;
 }
 
-STATIC_OVL void
-ini_inv(trop)
-struct trobj *trop;
+boolean
+is_forbidden_random_object(int otyp)
+{
+	/*
+	 * For random objects, do not create certain overly powerful
+	 * items: wand of wishing, ring of levitation, or the
+	 * polymorph/polymorph control combination.  Specific objects,
+	 * i.e. the discovery wishing, are still OK.
+	 * Also, don't get a couple of really useless items.  (Note:
+	 * punishment isn't "useless".  Some players who start out with
+	 * one will immediately read it and use the iron ball as a
+	 * weapon.)
+	 */
+	if (otyp == WAN_WISHING) {
+		return TRUE;
+	} else if ((objects[otyp].oc_class == RING_CLASS || objects[otyp].oc_class == SPBOOK_CLASS) && carrying(otyp)) {
+		return TRUE;
+	} else if ((otyp == RIN_POLYMORPH_CONTROL) && (carrying(RIN_POLYMORPH) || carrying(SPE_POLYMORPH) || carrying(POT_POLYMORPH) || carrying(WAN_POLYMORPH))) {
+		return TRUE;
+	} else if ((otyp == RIN_POLYMORPH) && (carrying(RIN_POLYMORPH_CONTROL))) {
+		return TRUE;
+	} else if ((otyp == SPE_POLYMORPH) && (carrying(RIN_POLYMORPH_CONTROL))) {
+		return TRUE;
+	} else if ((otyp == POT_POLYMORPH) && (carrying(RIN_POLYMORPH_CONTROL))) {
+		return TRUE;
+	} else if ((otyp == WAN_POLYMORPH) && (carrying(RIN_POLYMORPH_CONTROL))) {
+		return TRUE;
+#ifdef ELBERETH
+	} else if (otyp == RIN_LEVITATION) {
+		return TRUE;
+#endif
+				/* 'useless' items */
+	} else if (otyp == POT_HALLUCINATION) {
+		return TRUE;
+	} else if (otyp == POT_ACID) {
+		return TRUE;
+	} else if (otyp == SCR_FLOOD) {
+		return TRUE;
+	} else if (otyp == SCR_FIRE) {
+		return TRUE;
+	} else if (otyp == SCR_BLANK_PAPER) {
+		return TRUE;
+	} else if (otyp == SPE_BLANK_PAPER) {
+		return TRUE;
+	} else if (otyp == RIN_AGGRAVATE_MONSTER) {
+		return TRUE;
+	} else if (otyp == RIN_HUNGER) {
+		return TRUE;
+	} else if (otyp == WAN_NOTHING) {
+		return TRUE;
+	}
+	
+	/* Monks don't use weapons */
+	if (otyp == SCR_ENCHANT_WEAPON && Role_if(PM_MONK)) {
+		return TRUE;
+	}
+
+	/* powerful spells are either useless to
+	 * low level players or unbalancing; also
+	 * spells in restricted skill categories 
+	 */
+	if (objects[otyp].oc_class == SPBOOK_CLASS && (objects[otyp].oc_level > 3 || restricted_spell_discipline(otyp))) {
+		return TRUE;
+	}
+
+	return FALSE;
+}
+
+
+void
+add_item(int otyp)
+{
+	add_item_there_is_no_overloading(otyp, 1);
+}
+
+void
+add_item_there_is_no_overloading(int otyp, int count)
+{
+	int charge = 0;
+	if(objects[otyp].oc_charged) {
+		charge = UNDEF_SPE;
+	}
+	add_item_there_is_no_overloading_with_charge(otyp, count, charge);
+}
+
+void
+add_item_there_is_no_overloading_with_charge(int otyp, int count, int charge)
+{
+	add_item_there_is_no_overloading_full(otyp, count, charge, objects[otyp].oc_class, U_INIT_BUC_UNDEF);
+}
+
+void
+add_item_there_is_no_overloading_full(int otyp, int count, int charge, int class, int BUC_status)
+{
+	struct trobj new[] = {
+		{ otyp, charge, class, count, BUC_status},
+	};
+	ini_inv(new);
+}
+
+void
+ini_inv(struct trobj *trop)
 {
 	struct obj *obj;
 	int otyp, i;
 
-	while (trop->trclass) {
-		if(trop->trquan == 0) {
-			trop++;
-			continue;
-		}
+	while (trop->trquan > 0) {
 		if (trop->trotyp != UNDEF_TYP) {
 			otyp = (int)trop->trotyp;
 			if (urace.malenum != PM_HUMAN) {
-			    /* substitute specific items for generic ones */
-			    for (i = 0; inv_subs[i].race_pm != NON_PM; ++i)
-				if (inv_subs[i].race_pm == urace.malenum &&
-					otyp == inv_subs[i].item_otyp) {
-				    otyp = inv_subs[i].subs_otyp;
-				    break;
+				/* substitute specific items for generic ones */
+				for (i = 0; inv_subs[i].race_pm != NON_PM; ++i) {
+					if (inv_subs[i].race_pm == urace.malenum && otyp == inv_subs[i].item_otyp) {
+						otyp = inv_subs[i].subs_otyp;
+						break;
+					}
 				}
 			}
 			obj = mksobj(otyp, TRUE, FALSE);
 		} else {	/* UNDEF_TYP */
-			static NEARDATA short nocreate = STRANGE_OBJECT;
-			static NEARDATA short nocreate2 = STRANGE_OBJECT;
-			static NEARDATA short nocreate3 = STRANGE_OBJECT;
-			static NEARDATA short nocreate4 = STRANGE_OBJECT;
-		/*
-		 * For random objects, do not create certain overly powerful
-		 * items: wand of wishing, ring of levitation, or the
-		 * polymorph/polymorph control combination.  Specific objects,
-		 * i.e. the discovery wishing, are still OK.
-		 * Also, don't get a couple of really useless items.  (Note:
-		 * punishment isn't "useless".  Some players who start out with
-		 * one will immediately read it and use the iron ball as a
-		 * weapon.)
-		 */
 			obj = mkobj(trop->trclass, FALSE);
 			otyp = obj->otyp;
-			while (otyp == WAN_WISHING
-				|| otyp == nocreate
-				|| otyp == nocreate2
-				|| otyp == nocreate3
-				|| otyp == nocreate4
-#ifdef ELBERETH
-				|| otyp == RIN_LEVITATION
-#endif
-				/* 'useless' items */
-				|| otyp == POT_HALLUCINATION
-				|| otyp == POT_ACID
-				|| otyp == SCR_FLOOD
-				|| otyp == SCR_FIRE
-				|| otyp == SCR_BLANK_PAPER
-				|| otyp == SPE_BLANK_PAPER
-				|| otyp == RIN_AGGRAVATE_MONSTER
-				|| otyp == RIN_HUNGER
-				|| otyp == WAN_NOTHING
-				/* Monks don't use weapons */
-				|| (otyp == SCR_ENCHANT_WEAPON &&
-				    Role_if(PM_MONK))
-				/* wizard patch -- they already have one */
-				|| (otyp == SPE_FORCE_BOLT && Role_if(PM_WIZARD))
-				/* powerful spells are either useless to
-				   low level players or unbalancing; also
-				   spells in restricted skill categories */
-				|| (obj->oclass == SPBOOK_CLASS && (objects[otyp].oc_level > 3 || restricted_spell_discipline(otyp)))
-							) {
+			while (is_forbidden_random_object(otyp)) {
 				dealloc_obj(obj);
 				obj = mkobj(trop->trclass, FALSE);
 				otyp = obj->otyp;
 			}
-
 			/* Don't start with +0 or negative rings */
-			if (objects[otyp].oc_charged && obj->spe <= 0)
+			if (objects[otyp].oc_charged && obj->spe <= 0) {
 				obj->spe = rne(3);
-
-			/* Heavily relies on the fact that 1) we create wands
-			 * before rings, 2) that we create rings before
-			 * spellbooks, and that 3) not more than 1 object of a
-			 * particular symbol is to be prohibited.  (For more
-			 * objects, we need more nocreate variables...)
-			 */
-			switch (otyp) {
-			    case WAN_POLYMORPH:
-			    case RIN_POLYMORPH:
-			    case POT_POLYMORPH:
-				nocreate = RIN_POLYMORPH_CONTROL;
-				break;
-			    case RIN_POLYMORPH_CONTROL:
-				nocreate = RIN_POLYMORPH;
-				nocreate2 = SPE_POLYMORPH;
-				nocreate3 = POT_POLYMORPH;
 			}
-			/* Don't have 2 of the same ring or spellbook */
-			if (obj->oclass == RING_CLASS ||
-			    obj->oclass == SPBOOK_CLASS)
-				nocreate4 = otyp;
 		}
 
 #ifdef GOLDOBJ
@@ -1043,23 +987,26 @@ struct trobj *trop;
 		} else {
 #endif
 			obj->dknown = obj->bknown = obj->rknown = 1;
-			if (objects[otyp].oc_uses_known) obj->known = 1;
+			if (objects[otyp].oc_uses_known) {
+				obj->known = 1;
+			}
 			obj->oeroded = 0;
 			obj->cursed = 0;
-			if (obj->opoisoned && u.ualign.type != A_CHAOTIC)
-			    obj->opoisoned = 0;
-			if (obj->oclass == WEAPON_CLASS ||
-				obj->oclass == TOOL_CLASS) {
-			    obj->quan = (long) trop->trquan;
-			    trop->trquan = 1;
-			} else if (obj->oclass == GEM_CLASS &&
-				is_graystone(obj) && obj->otyp != FLINT) {
-			    obj->quan = 1L;
+			if (obj->opoisoned && u.ualign.type != A_CHAOTIC) {
+				obj->opoisoned = 0;
 			}
-			if (trop->trspe != UNDEF_SPE)
-			    obj->spe = trop->trspe;
-			if (trop->trbless != UNDEF_BLESS)
-			    obj->blessed = trop->trbless;
+			if (obj->oclass == WEAPON_CLASS || obj->oclass == TOOL_CLASS) {
+				obj->quan = (long) trop->trquan;
+				trop->trquan = 1;
+			} else if (obj->oclass == GEM_CLASS && is_graystone(obj) && obj->otyp != FLINT) {
+				obj->quan = 1L;
+			}
+			if (trop->trspe != UNDEF_SPE) {
+				obj->spe = trop->trspe;
+			}
+			if (trop->trbless != U_INIT_BUC_UNDEF) {
+				obj->blessed = trop->trbless;
+			}
 #ifdef GOLDOBJ
 		}
 #endif
@@ -1068,46 +1015,51 @@ struct trobj *trop;
 		obj = addinv(obj);
 
 		/* Make the type known if necessary */
-		if (OBJ_DESCR(objects[otyp]) && obj->known)
+		if (OBJ_DESCR(objects[otyp]) && obj->known) {
 			discover_object(otyp, TRUE, FALSE);
-		if (otyp == OIL_LAMP)
+		}
+		if (otyp == OIL_LAMP) {
 			discover_object(POT_OIL, TRUE, FALSE);
-
-		if((obj->oclass == ARMOR_CLASS && !u.roleplay.nudist)){
+		}
+		if((obj->oclass == ARMOR_CLASS && !u.roleplay.nudist)) {
 			if (is_shield(obj) && !uarms) {
 				setworn(obj, W_ARMS);
-				if (uswapwep) setuswapwep((struct obj *) 0);
-			} else if (is_helmet(obj) && !uarmh)
+				if (uswapwep) {
+					setuswapwep((struct obj *) 0);
+				}
+			} else if (is_helmet(obj) && !uarmh) {
 				setworn(obj, W_ARMH);
-			else if (is_gloves(obj) && !uarmg)
+			} else if (is_gloves(obj) && !uarmg) {
 				setworn(obj, W_ARMG);
-			else if (is_shirt(obj) && !uarmu)
+			} else if (is_shirt(obj) && !uarmu) {
 				setworn(obj, W_ARMU);
-			else if (is_cloak(obj) && !uarmc)
+			} else if (is_cloak(obj) && !uarmc) {
 				setworn(obj, W_ARMC);
-			else if (is_boots(obj) && !uarmf)
+			} else if (is_boots(obj) && !uarmf) {
 				setworn(obj, W_ARMF);
-			else if (is_suit(obj) && !uarm)
+			} else if (is_suit(obj) && !uarm) {
 				setworn(obj, W_ARM);
+			}
 		}
 
-		if (obj->oclass == WEAPON_CLASS || is_weptool(obj) ||
-			otyp == TIN_OPENER || otyp == FLINT || otyp == ROCK) {
-		    if (is_ammo(obj) || is_missile(obj)) {
-			if (!uquiver) setuqwep(obj);
-		    } else if ((!uwep) && !u.roleplay.pacifist) setuwep(obj);
-		    else if (!uswapwep) setuswapwep(obj);
+		if (obj->oclass == WEAPON_CLASS || is_weptool(obj) || otyp == TIN_OPENER || otyp == FLINT || otyp == ROCK) {
+			if (is_ammo(obj) || is_missile(obj)) {
+				if (!uquiver) setuqwep(obj);
+			} else if ((!uwep) && !u.roleplay.pacifist) {
+				setuwep(obj);
+			} else if (!uswapwep) {
+				setuswapwep(obj);
+			}
 		}
-		if (obj->oclass == SPBOOK_CLASS &&
-				obj->otyp != SPE_BLANK_PAPER)
-		    initialspell(obj);
+		if (obj->oclass == SPBOOK_CLASS && obj->otyp != SPE_BLANK_PAPER) {
+			initialspell(obj);
+		}
 
-		if ((obj->otyp == BLINDFOLD) && u.roleplay.blindfolded)
-				setworn(obj, W_TOOL);
+		if ((obj->otyp == BLINDFOLD) && u.roleplay.blindfolded) {
+			setworn(obj, W_TOOL);
+		}
 
-		if(--trop->trquan) continue;	/* make a similar object */
-
-		trop++;
+		trop->trquan -= 1;
 	}
 }
 
