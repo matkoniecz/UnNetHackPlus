@@ -828,8 +828,6 @@ char c;
 	for (i = LOW_PM; i < NUMMONS; i++)
 	    if (!class || class == mons[i].mlet)
 		if (!strcasecmp(s, mons[i].mname)) {
-		    if (be_verbose)
-			lc_warning("Monster type \"%s\" matches \"%s\".", s, mons[i].mname);
 		    return i;
 		}
 	return ERR;
