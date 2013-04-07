@@ -1,5 +1,7 @@
 Plans for UnNetHackPlus
-* "https://sourceforge.net/apps/trac/unnethack/ticket/58" https://sourceforge.net/apps/trac/unnethack/ticket/58
+* Double rooms (Sporkhack) https://sourceforge.net/apps/trac/unnethack/ticket/80
+* failing rock piercers - what about custom cause of dead description https://sourceforge.net/apps/trac/unnethack/ticket/132
+* " "you crawl to the edge of the pit" it is rather not suitable for vampires" https://sourceforge.net/apps/trac/unnethack/ticket/58
 * option to show also colours of identified potions in inventory - https://sourceforge.net/apps/trac/unnethack/ticket/126
 * add #call - https://sourceforge.net/apps/trac/unnethack/ticket/71
 * Repeat count for messages. In the example, all those lines about the cloak from the first turn could be condensed to "Your cloak of magic resistance is not affected (4x)." The hero cannot intervene anyway. - idea from https://sourceforge.net/apps/trac/unnethack/ticket/46
