@@ -1,5 +1,5 @@
 Plans for UnNetHackPlus
-* Sprintf(qbuf, "Which %s%s, Right or Left?",
+* Sprintf(qbuf, "Which %s%s, Right or Left?", |||||preferred ring option
 * Levitation + flying - https://sourceforge.net/apps/trac/unnethack/ticket/55
 * Double rooms (Sporkhack) https://sourceforge.net/apps/trac/unnethack/ticket/80
 * failing rock piercers - what about custom cause of dead description https://sourceforge.net/apps/trac/unnethack/ticket/132
