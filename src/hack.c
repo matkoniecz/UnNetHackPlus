@@ -2757,14 +2757,12 @@ showdmg(n,you)
 int n; /**< amount of damage inflicted */
 boolean you; /**< true, if you are hit */
 {
-#ifdef WIZARD
-	if (iflags.showdmg && wizard && n > 0) {
+	if (iflags.showdmg && n > 0) {
 		if (you)
 			pline("[%d pts.]", n);
 		else
 			pline("(%d pts.)", n);
 	}
-#endif
 }
 
 void
