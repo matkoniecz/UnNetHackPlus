@@ -7,8 +7,11 @@ Plans for UnNetHackPlus
 * http://www.darkshire.net/jhkim/rpg/lordoftherings/names.pdf
 * "It's time for you to die again." 
 * use 'spooky' flag
-* http://en.wikipedia.org/wiki/List_of_fictional_demons
-http://tvtropes.org/pmwiki/pmwiki.php/Main/BattleCry
+* Baruk Khazad! Khazad Ai-Menu!
+* Today is a good day for someone else to die!
+* "Prepare to be eviscerated! FOOL!" <^V http://tvtropes.org/pmwiki/pmwiki.php/Main/BattleCry
+* "Remember Tunnel Seventeen!" 
+* "I WILL CHOP YOUR HEAD OFF!" 
 http://tvtropes.org/pmwiki/pmwiki.php/Main/WrittenRoar
 http://tvtropes.org/pmwiki/pmwiki.php/Main/HorrorTropes
 http://tvtropes.org/pmwiki/pmwiki.php/Main/ThisIndexIsCursed
