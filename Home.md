@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* use enums instead of unholy mess of constant ints
 * http://nethackwiki.com/wiki/Autopickup_exception
 * Sprintf(qbuf, "Which %s%s, Right or Left?", |||||preferred ring option
 * Levitation + flying - https://sourceforge.net/apps/trac/unnethack/ticket/55
