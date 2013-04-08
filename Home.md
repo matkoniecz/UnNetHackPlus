@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* http://nethackwiki.com/wiki/Autopickup_exception
 * Sprintf(qbuf, "Which %s%s, Right or Left?", |||||preferred ring option
 * Levitation + flying - https://sourceforge.net/apps/trac/unnethack/ticket/55
 * Double rooms (Sporkhack) https://sourceforge.net/apps/trac/unnethack/ticket/80
