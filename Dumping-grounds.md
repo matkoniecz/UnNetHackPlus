@@ -8,7 +8,6 @@ Gravestone	*Reserved for You*
 Gravestone	Bulk deals on gravestones - Die today!
 Gravestone	Did you know that death rays bounce?
 Gravestone	Eaten by a Grue
-Gravestone	Flooring inspector.
 Gravestone	Here lies Sgeo, killed while reading a gravestone.
 Gravestone	Here lies Urist McMiner, killed by falling multiple z-levels.
 Gravestone	Quidquid Latine dictum sit, altum sonatur.
@@ -16,37 +15,29 @@ Gravestone	Sic Transit Gloria Mundi
 Gravestone	This gravestone does not indicate a bones file.
 Gravestone	This space for rent; go to http://www.alt.org/nethack/addmsgs/
 Gravestone	Uisne Agnoscere Mercem?
-Angelic taunt	"<deity> have mercy on thee, for I shall not!"
-Angelic taunt	*In a bored, monotone voice* Repent, and thou shalt be saved.
 Angelic taunt	<deity> have mercy on thee, for I shall not!
 Angelic taunt	Abandon this arrogance and accept your mortality!
-Angelic taunt	Begone, or I shall taunt you!
 Angelic taunt	Depart, thou accursed, into everlasting fire!
 Angelic taunt	Die monster, you don't belong in this world!
 Angelic taunt	Had your soul been worth saving They would not send me.
-Angelic taunt	Hast thee read the book of John? Then I must plunge thy head beneath the
 Angelic taunt	Hold still for your smiting!
-Angelic taunt	I find your lack of faith disturbing.
 Angelic taunt	My wrath is upon thee!
+Demonic taunt	Begone, or I shall taunt you!
 Demonic taunt	Go away. I am in an angry mood today and I might kill you. Hey! That' a good idea!
 Demonic taunt	Hurry up and die already, I'm hungry!
 Demonic taunt	I shall bathe in thy blood! I shall taste of they flesh! And than...tea and crumpets we shall have!
-Demonic taunt	If I had a zorkmid for every brain you did not have; I'd have one zorkmid.
 Demonic taunt	Is that a unicorn horn, or are you happy to see me?
 Demonic taunt	It hurts to be you!
 Demonic taunt	Ph'nglui mglw'nafh Cthulhu R'lyeh wagh'nagl fthagn!
 Demonic taunt	Rip and tear! Rip and tear thy innards!
 Demonic taunt	Sleep with this trauma that will leave you sleepless!
 Demonic taunt	Suck it!
-Demonic taunt	The next words out of your mouth better be some Mark Twain shit because it's going on your grave.
 Demonic taunt	Thou fightest as if thou were a farmer of dairy!
-Demonic taunt	Where is your God now?
-Demonic taunt	You are a mentally lumpish pain in the arse!
+Demonic taunt	Where is your god now?
 Demonic taunt	You are an explicitly recycled marketing person!
 Demonic taunt	You fight like a lame slug!
 Demonic taunt	You frog-eating surrender monkey!
 False rumor	Gods are offended by those who polymorph themselves too often.
-False rumor	Grave digging can be a good road to wealth
 False rumor	Having a hard time against Demogorgon? Try zapping him with a wand of death
 False rumor	Help! I am being held captive in a fortune cookie factory!
 False rumor	I heard that cockatrice corpses can't stone you if they're tinned.
@@ -115,7 +106,6 @@ T-Shirt	Elvira's House O'Succubi, granting the gift of immorality!
 T-Shirt	Flooring inspector.
 T-Shirt	Funny message goes here
 T-Shirt	I ascended to demi-godhood, and all I got was this lousy T-Shirt!
-T-Shirt	I got zapped with a wand of polymorph and all I became was this stupid T-shirt.
 T-Shirt	I killed the Wizard and all I got was this stupid T-shirt!
 T-Shirt	I killed the wizard of Yendor, and all i got is this stupid t-shirt.
 T-Shirt	I went into the Mazes of Menace and all I got was this stupid T-Shirt.
@@ -123,19 +113,16 @@ T-Shirt	Romanes Eunt Domus
 T-Shirt	Romani Ite Domum
 T-Shirt	The Amulet of Yendor has been stolen by Moloch. Are you a bad enough dude to retrieve the Amulet?
 fortune cookie Are YOU tired of the same old messages? Go to http://alt.org/nethack/addmsgs/ now!
-Spam	This scroll was made with cockatrice leather. Have a nice day.
-Spam	Watch out! The-Gnome-With-The-Wand-Of-Death is behind that door!
-Spam	You are about to die... so why not get a cheap LIFE INSURANCE?
+Engraving	Watch out! The-Gnome-With-The-Wand-Of-Death is behind that door!
+Engraving	You are about to die... so why not get a cheap LIFE INSURANCE?
 Engraving	"Engrave a wise saying and your name will live forever." -- Anonymous
 Engraving	4, 8, 15, 16, 23, 42
 Engraving	<-- Go that way!
 Engraving	Dig down!
 Engraving	Do not move forward
-Engraving	Don't Panic
 Engraving	Don't go that way.
 Engraving	Don't look behind you.
 Engraving	For a good time, call 1-900-FOOCUBI!
-Engraving	Gaius Julius Primigenius was here. Why are you late?
 Engraving	Gandalf for president!
 Engraving	Go Left -->
 Engraving	He who is valiant and pure of spirit may find the Holy Grail in the Castle of Arrrgh
@@ -152,19 +139,20 @@ Engraving	This message is false.
 Engraving	Vlad wasn't here
 Engraving	Watch out! The-Gnome-With-The-Wand-Of-Death is behind that door!
 Engraving	You aren't going to ascend by staring at your shoes.
+Engraving	Fnord
 Hallucinatory Monster	Baba Yaga
 Hallucinatory Monster	Crumple-Horned Snorkack
 Hallucinatory Monster	Dumbledore
+Hallucinatory Monster	Harry Potter
 Hallucinatory Monster	Flying Spaghetti Monster
 Hallucinatory Monster	Giant shoggoth
 Hallucinatory Monster	Gnome With A Wand Of Death
 Hallucinatory Monster	Gnome-With-The-Wand-Of-Death
-Hallucinatory Monster	Hallucinatory Monster
+Hallucinatory Monster	Hallucinatory monster
 Hallucinatory Monster	Harmless Protoplasm
-Hallucinatory Monster	Harry Potter
 Hallucinatory Monster	Jumping brain
 Hallucinatory Monster	Legendary black beast of Arrrgh
-Hallucinatory Monster	Magically animated vorpal blade
+Hallucinatory Monster	Magically animated Vorpal Blade
 Hallucinatory Monster	arch-lichen
 Hallucinatory Monster	arch-pedant
 Hallucinatory Monster	badger
@@ -182,7 +170,6 @@ Hallucinatory Monster	figment of your imagination
 Hallucinatory Monster	floating ear
 Hallucinatory Monster	floating nose
 Hallucinatory Monster	floating tongue
-Hallucinatory Monster	fnord
 Hallucinatory Monster	gazebo
 Hallucinatory Monster	gerbil
 Hallucinatory Monster	giant dwarf
