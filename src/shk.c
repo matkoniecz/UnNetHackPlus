@@ -3987,70 +3987,104 @@ struct monst *shkp;
 }
 
 const char* armor_wares[] = {
+	/* From SporHack */
 	"Any %s would love these!  Finest quality!",
 	"Fit for a Knight, but they'll last for weeks!",
 	"It's dangerous 'round here these days... better wear something safe!",
 	"Hey, %s, I've got something here that'll fit you perfectly!",
-	"Guaranteed safety or double your money back!"
+	"Guaranteed safety or double your money back!",
+	/* by pinkemma from reddit */
+	"Finest armour for sale, only worn once!",
+	"Cheap, light, tough. Choose any 2!",
+	/* by kzastle from reddit */
+	"If you die wearing our armor, we'll give you another set - free!",
 };
 const char* scroll_wares[] = {
+	/* From Sporhack */
 	"Large print available!",
 	"Mental magnificence for the scholarly IN-clined!",
 	"Waterproof ink upon request!  ... for a small surcharge.",
 	"Curses removed, gold detected, and weapons enchanted, at your whim!",
-	"If you can read, %s, you'll want some of these!"
+	"If you can read, %s, you'll want some of these!",
 };
 const char* potion_wares[] = {
+	/* From Sporhack */
 	"Booze on ice!  Getcher booze on ice!",
 	"Come on, %s.  You know you're thirsty.",
 	"Ahhh, it'll put hair on yer chest!",
-	"Lowest percentage of cursed items around!"
+	"Lowest percentage of cursed items around!",
+	/* by pinkemma from reddit */
+	"Red ones! Yellow ones! Take a gamble, who knows what they do!",
+	"Potions, guaranteed to work!",
+	"Heal your broken heart with our health potions!",
+	/* by kzastle from reddit */
+	"Welcome to Wide World of Potions. Of course - if the world is too wide we have a potion for that, too.",
 };
 const char* weapon_wares[] = {
+	/* From SporHack */
 	"Sharpest weapons around! On sale, today only!",
 	"We sell 'em, you stab 'em!",
 	"Guaranteed to not dull for ten fights or your money back!",
 	"Look, %s, with a face like that you'll be in a lot of fights.  Better buy something now.",
-	"You'll never slash the same again after one of ours!"
+	"You'll never slash the same again after one of ours!",
 };
 const char* food_wares[] = {
+	/* From SporHack */
 	"Gitchore luvverly orinjes!",
 	"Fresh fish! So fresh it'll grab yer naughty bits!",
 	"Sausage inna bun!  Hot sausage!",
-	"Genuine pig parts, these. So good most pigs don't even know they got 'em."
+	"Genuine pig parts, these. So good most pigs don't even know they got 'em.",
+	/* by kzastle from reddit */
+	"Our sausages are guaranteed 75% goblin-free!",
 };
 const char* ring_wares[] = {
+	/* From SporHack */
 	"Well, you seem like a fine, discerning young %s; come look at this.",
 	"Special sparklies for a special %s, perhaps?",
 	"Once you put one of ours on, you'll never want to take it off!",
 	"Our bands never break or melt!",
-	"Shiny, isn't it?"
+	"Shiny, isn't it?",
+	/* by kzastle from reddit */
+	"Come in and take a look at my rings! Aren't they precious?",
 };
 const char* wand_wares[] = {
+	/* From SporHack */
 	"Credit available for valued customers!",
 	"Straightest zaps anywhere!  100%% money back guarantee (less usage)!",
 	"Our wands explode less than all others!",
-	"New EZ-BREAK feature on these in case of emergency!"
+	"New EZ-BREAK feature on these in case of emergency!",
 };
 const char* tool_wares[] = {
+	/* From SporHack */
 	"Tins opened, faces wiped, gazes reflected; your one-stop shop!",
 	"How you gonna carry all your stuff without a bag, %s?",
 	"Must be hard kickin' all those doors down, I bet a key would help...",
-	"Only tools wouldn't buy our tools!"
+	"Only tools wouldn't buy our tools!",
+	/* by kzastle from reddit */
+	"Leashes, chains, whistles, and whips. We won't ask what you're buying them for.",
 };
 const char* book_wares[] = {
+	/* From SporHack */
 	"Large print available!",
 	"If you can read, %s, you'll want some of these!"
 	"Mental magnificence for the scholarly IN-clined!",
 	"Credit available for valued customers!",
-	"'Banned' section now open! (I.D. required)"
+	"'Banned' section now open! (I.D. required)",
 };
 const char* candle_wares[] = {
+	/* From SporHack */
 	"Hey, %s! Best candles in Minetown! You'll need 'em later, count on it!",
 	"You've got a long way down yet, %s.  Be sure you're ready.",
 	"Let us be the light in your darkness!",
 	"You know, I hear some of these old lamps might be... magic.",
-	"Be a shame if you missed anything because you didn't see it!"
+	"Be a shame if you missed anything because you didn't see it!",
+	/* by Coppershoe-Ironhill from reddit */
+	"Light up your day with a new lamp!",
+	"You'll never fear the dark after shopping here!",
+};
+const char* music_wares[] = {
+	/* by Coppershoe-Ironhill from reddit */
+	"It's a fine day for a tune, don't you think?",
 };
 
 void
@@ -4123,7 +4157,7 @@ struct monst* shkp;
 			//TODO
 			break;
 		case INSTRUMENTSHOP:
-			//TODO
+			verbalize(music_wares[rn2(SIZE(music_wares))],urace.noun);
 			break;
 		case PETSHOP:
 			//TODO
