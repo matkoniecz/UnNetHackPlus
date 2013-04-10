@@ -4,36 +4,10 @@ Gravestone	$playername, demonstrating the value of not being seen.
 Gravestone	$playername, killed by a time-travel accident
 Gravestone	$playername, killed by an ambush, while reading
 Gravestone	$playername, killed by one-more-hit syndrome
-Gravestone	*Reserved for You*
 Gravestone	Bulk deals on gravestones - Die today!
 Gravestone	Did you know that death rays bounce?
-Gravestone	Eaten by a Grue
-Gravestone	Here lies Sgeo, killed while reading a gravestone.
 Gravestone	Here lies Urist McMiner, killed by falling multiple z-levels.
-Gravestone	Quidquid Latine dictum sit, altum sonatur.
-Gravestone	Sic Transit Gloria Mundi
-Gravestone	This gravestone does not indicate a bones file.
-Gravestone	This space for rent; go to http://www.alt.org/nethack/addmsgs/
-Gravestone	Uisne Agnoscere Mercem?
-Angelic taunt	<deity> have mercy on thee, for I shall not!
-Angelic taunt	Abandon this arrogance and accept your mortality!
-Angelic taunt	Depart, thou accursed, into everlasting fire!
-Angelic taunt	Die monster, you don't belong in this world!
-Angelic taunt	Had your soul been worth saving They would not send me.
-Angelic taunt	Hold still for your smiting!
-Angelic taunt	My wrath is upon thee!
-Demonic taunt	Begone, or I shall taunt you!
 Demonic taunt	Go away. I am in an angry mood today and I might kill you. Hey! That' a good idea!
-Demonic taunt	Hurry up and die already, I'm hungry!
-Demonic taunt	I shall bathe in thy blood! I shall taste of they flesh! And than...tea and crumpets we shall have!
-Demonic taunt	Is that a unicorn horn, or are you happy to see me?
-Demonic taunt	It hurts to be you!
-Demonic taunt	Ph'nglui mglw'nafh Cthulhu R'lyeh wagh'nagl fthagn!
-Demonic taunt	Rip and tear! Rip and tear thy innards!
-Demonic taunt	Sleep with this trauma that will leave you sleepless!
-Demonic taunt	Suck it!
-Demonic taunt	Thou fightest as if thou were a farmer of dairy!
-Demonic taunt	Where is your god now?
 Demonic taunt	You are an explicitly recycled marketing person!
 Demonic taunt	You fight like a lame slug!
 Demonic taunt	You frog-eating surrender monkey!
@@ -87,44 +61,17 @@ True rumor	They say that you shouldn't kick a cockatrice without boots.
 True rumor	They say that you shouldn't saddle a cockatrice without gloves.
 True rumor	They say that you'll never lose a ring of searching in a sink.
 True rumor	They say there's no such thing as an invisible mummy.
-True rumor	They say you shouldn't kill Izchak.
 True rumor	They say you shouldn't sacrifice a unicorn on an altar of its own alignment.
-True rumor	Try reading a scroll of food detection while hallucinating
-True rumor	What doesn't kill you, doesn't kill you.
 True rumor	When in doubt save and come back later.
 True rumor	You are probably going to die down here.
-T-Shirt	"Kill, Maim, Burn..."
-T-Shirt	(This space for sale.)
-T-Shirt	*insert Monty Python quote here*
-T-Shirt	+<<*giant cave spider silk T-shirt*>>+
-T-Shirt	-export-a-crypto-system-sig -RSA-3-lines-PERL
-T-Shirt	/</tits/> /<//tits/>
-T-Shirt	3.141592653589792636.......
-T-Shirt	90% cotton, 10% polyester.
-T-Shirt	<tits> </tits>
-T-Shirt	Elvira's House O'Succubi, granting the gift of immorality!
-T-Shirt	Flooring inspector.
-T-Shirt	Funny message goes here
-T-Shirt	I ascended to demi-godhood, and all I got was this lousy T-Shirt!
-T-Shirt	I killed the Wizard and all I got was this stupid T-shirt!
-T-Shirt	I killed the wizard of Yendor, and all i got is this stupid t-shirt.
-T-Shirt	I went into the Mazes of Menace and all I got was this stupid T-Shirt.
-T-Shirt	Romanes Eunt Domus
-T-Shirt	Romani Ite Domum
-T-Shirt	The Amulet of Yendor has been stolen by Moloch. Are you a bad enough dude to retrieve the Amulet?
 fortune cookie Are YOU tired of the same old messages? Go to http://alt.org/nethack/addmsgs/ now!
 Engraving	Watch out! The-Gnome-With-The-Wand-Of-Death is behind that door!
-Engraving	You are about to die... so why not get a cheap LIFE INSURANCE?
 Engraving	"Engrave a wise saying and your name will live forever." -- Anonymous
 Engraving	4, 8, 15, 16, 23, 42
-Engraving	<-- Go that way!
 Engraving	Dig down!
 Engraving	Do not move forward
 Engraving	Don't go that way.
 Engraving	Don't look behind you.
-Engraving	For a good time, call 1-900-FOOCUBI!
-Engraving	Gandalf for president!
-Engraving	Go Left -->
 Engraving	He who is valiant and pure of spirit may find the Holy Grail in the Castle of Arrrgh
 Engraving	Here be dragons.
 Engraving	Here there be soldier ants.
@@ -134,65 +81,32 @@ Engraving	Maxim 1: Pillage, Then Burn
 Engraving	Need a light? Come visit the Minetown branch of Izchak's Lighting Store!
 Engraving	The Gnome-with-a-Wand-of-Death was here.
 Engraving	The Vibrating Square is NOT here
-Engraving	This is not the dungeon you are looking for.
-Engraving	This message is false.
-Engraving	Vlad wasn't here
 Engraving	Watch out! The-Gnome-With-The-Wand-Of-Death is behind that door!
 Engraving	You aren't going to ascend by staring at your shoes.
-Engraving	Fnord
 Hallucinatory Monster	Baba Yaga
 Hallucinatory Monster	Crumple-Horned Snorkack
 Hallucinatory Monster	Dumbledore
 Hallucinatory Monster	Harry Potter
-Hallucinatory Monster	Flying Spaghetti Monster
-Hallucinatory Monster	Giant shoggoth
-Hallucinatory Monster	Gnome With A Wand Of Death
-Hallucinatory Monster	Gnome-With-The-Wand-Of-Death
-Hallucinatory Monster	Hallucinatory monster
 Hallucinatory Monster	Harmless Protoplasm
-Hallucinatory Monster	Jumping brain
 Hallucinatory Monster	Legendary black beast of Arrrgh
 Hallucinatory Monster	Magically animated Vorpal Blade
 Hallucinatory Monster	arch-lichen
 Hallucinatory Monster	arch-pedant
 Hallucinatory Monster	badger
 Hallucinatory Monster	baleen whale
-Hallucinatory Monster	bandersnatch
 Hallucinatory Monster	banshee
-Hallucinatory item	candied kobold
 Hallucinatory Monster	collapsed mine golem
-Hallucinatory Monster	colorless green idea
 Hallucinatory Monster	district attorney
 Hallucinatory Monster	dwarven construct
 Hallucinatory Monster	elder xorn
 Hallucinatory Monster	emperor lich
-Hallucinatory Monster	figment of your imagination
-Hallucinatory Monster	floating ear
-Hallucinatory Monster	floating nose
-Hallucinatory Monster	floating tongue
-Hallucinatory Monster	gazebo
 Hallucinatory Monster	gerbil
 Hallucinatory Monster	giant dwarf
 Hallucinatory Monster	giant enemy crab
-Hallucinatory Monster	giant gnome
-Hallucinatory Monster	golden goblin
-Hallucinatory Monster	golem made out of other golems
-Hallucinatory Monster	hallucinogen-distorted hallucination
-Hallucinatory Monster	inside joke
-Hallucinatory Monster	mountain dwarf
 Hallucinatory Monster	mumak mummy
 Hallucinatory Monster	mummy zombie
-Hallucinatory Monster	munchkin
-Hallucinatory Monster	pope
 Hallucinatory Monster	rabid lawyer
-Hallucinatory Monster	random number generator
-Hallucinatory Monster	random number golem
-Hallucinatory Monster	the roots of Yggdrasil
-Hallucinatory Monster	were(random beast)
-Hallucinatory Monster	werehorse
-Hallucinatory Monster	werehouse
-Hallucinatory Monster	weremindflayer
-Hallucinatory Monster	wereplatypus
+
 
 http://donjon.bin.sh/fantasy/random/#dungeon_graffiti
 http://www.imdb.com/character/ch0002561/quotes done to  You fools! Do you think with your crosses and your wafers you can destroy me? Me! You do not know how many men have come against me. I am the king of my kind! 
@@ -225,4 +139,4 @@ http://rinkworks.com/namegen/
 
 The Order of the Stick
 
- Belkar Bitterleaf, Vaarsuvius, Elan, Haley Starshine, Durkon Thundershield, and Roy Greenhilt
+Belkar Bitterleaf, Vaarsuvius, Elan, Haley Starshine, Durkon Thundershield, and Roy Greenhilt
