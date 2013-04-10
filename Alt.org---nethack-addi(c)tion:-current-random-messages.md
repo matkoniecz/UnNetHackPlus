@@ -1,12 +1,13 @@
-http://www.alt.org/nethack/addmsgs/viewmsgs.php
 
 alt.org
 Current messages
 
 Back to the add-form
 
-Number of added messages: 2685
+Number of added messages: 2691
 Gravestone	"Don't be daft, they couldn't hit an elephant at this dist-"
+Gravestone	"I wonder what deleting 'system32' does?"
+Gravestone	"I wonder what deleting 'system32' does?"
 Gravestone	"If wizards can do the tengu shuffle, I bet tourists can do the fox-trot..."
 Gravestone	"So this is what it feels like to be buried alive." Last words of Indiana Jones 1889- 1946
 Gravestone	"Wonder what this mushroom does?..."
@@ -70,6 +71,7 @@ Gravestone	David Blaine 1973 -
 Gravestone	Dead Men Tell no Tales
 Gravestone	Death is but a door. Time is but a window. I'll be back!
 Gravestone	Death seeketh us all.
+Gravestone	Deleted system32
 Gravestone	Desynchronized...
 Gravestone	Did you know that death rays bounce?
 Gravestone	Die? [yn] (n)
@@ -382,6 +384,7 @@ Gravestone	never try to kill a shopkeeper who has a wand of sleep, it'll be the 
 Gravestone	njnm
 Gravestone	quit, on
 Gravestone	rest in peace dudley killed by a newt AGAIN!!!!
+Gravestone	romanes eunt domus
 Gravestone	test
 Gravestone	test test
 Gravestone	try #quit
@@ -1395,6 +1398,8 @@ Engraving	lol
 Engraving	mde.tv
 Engraving	mexican jumping beans
 Engraving	rerecord don't fade away
+Engraving	romanes eunt domus
+Engraving	romanes eunt domus
 Engraving	shawnz sux.
 Engraving	you are the one millionth visitor on this place! please wait 200 turns for a wand of wishing.
 Hallucinatory Monster	$cat
