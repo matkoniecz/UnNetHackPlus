@@ -1,4 +1,6 @@
 Plans for UnNetHackPlus
+* [[dumping grounds]]
+* http://www.reddit.com/r/roguelikedev/comments/kmf2r/100_rogues_developer_talks_about_roguelike_design/c2v8rbd
 * http://www.reddit.com/r/roguelikedev/comments/16dva9/dungeon_generation_not_done_yet_but_a_start/
 * A CONSTRAINED GROWTH METHOD FOR PROCEDURAL FLOOR PLAN GENERATION - http://graphics.tudelft.nl/~rval/papers/lopes.GAMEON10.pdf
 * demon name generator - http://dorophone.blogspot.com/2012/02/almost-pure-random-demon-name-generator.html
@@ -45,7 +47,6 @@ http://tvtropes.org/pmwiki/pmwiki.php/Main/AlienKudzu
 * kill paging in guidebook
 * #version
 * bars for timeout of levitation, speed, protection, confuse monster on melee attack
-* [[dumping grounds]]
 * search for "YAFM needed", "performance", "optimization"
 * exploded ring of levitation -> you float gently
 * reduce u.gold +hidden_gold
