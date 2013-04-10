@@ -1,4 +1,9 @@
 Plans for UnNetHackPlus
+* http://www.gruesomegames.com/blog/?p=198:
+* Auto stairs use
+* visual feedback instead of A misses X
+* remove all containers from game (??)
+* Restart Same Character / restart random character / new character
 * http://nethackwiki.com/wiki/Autopickup_exception
 * Sprintf(qbuf, "Which %s%s, Right or Left?", |||||preferred ring option
 * Levitation + flying - https://sourceforge.net/apps/trac/unnethack/ticket/55
