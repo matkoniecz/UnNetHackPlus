@@ -349,6 +349,7 @@ proud owner of a magic whistle.
 * deep orc color (black? white uruk-hai?)
 
 #recheck
+* [[http://alt.org/nethack/petnames.html]] http://alt.org/nethack/petnames.html
 * [[alt.org - NetHack Addi(c)tion: Current Random Messages]] http://www.alt.org/nethack/addmsgs/viewmsgs.php
 * https://gitorious.org/nitrohack/ais523/commits/nicehack
 * http://alt.org/nethack/naonh.php graves checked out 9 I - new hallucinatory monster names, random engravings, gravestones and T-shirt messages
