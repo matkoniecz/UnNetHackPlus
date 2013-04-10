@@ -11,25 +11,13 @@ Demonic taunt	Go away. I am in an angry mood today and I might kill you. Hey! Th
 Demonic taunt	You are an explicitly recycled marketing person!
 Demonic taunt	You fight like a lame slug!
 Demonic taunt	You frog-eating surrender monkey!
-False rumor	Gods are offended by those who polymorph themselves too often.
-False rumor	Having a hard time against Demogorgon? Try zapping him with a wand of death
-False rumor	Help! I am being held captive in a fortune cookie factory!
-False rumor	I heard that cockatrice corpses can't stone you if they're tinned.
 False rumor	I know what you did last summer...
-False rumor	If it looks like fruit juice and tastes like fruit juice... it is fruit juice.
 False rumor	If you eat a turtle corpse, you can swim.
 False rumor	If you engrave something with a wand of wishing, you add charges to it.
 False rumor	Lucky numbers: 10-14-15-28-56
 False rumor	Pets lose loyalty if they are not fed frequently.
-False rumor	Read your children a scroll of punishment.
 False rumor	The Wizard of Yendor exists in multiple dimensions simultaneously.
 False rumor	They say that beartraps, foocubi, and potions of confusion are a good combination.
-False rumor	They say that the Wizard of Yendor cannot be harmed by any mortal weapon.
-False rumor	They say that there is a djinni inside a wand of wishing.
-False rumor	They say that unicorn horns can't be polymorphed.
-False rumor	You just got scammed out of a funny message.
-False rumor	You will die in 1289 turns.
-False rumor	Your lucky numbers are: 11 23 63 77 22
 True rumor	Do you have any blank paper for your magic marker?
 True rumor	Don't play tired.
 True rumor	If the lava looks blue, you're playing too fast.
@@ -79,9 +67,7 @@ Engraving	Hoc est qui sumus.
 Engraving	In Soviet Russia, the amulet ascends with you!
 Engraving	Maxim 1: Pillage, Then Burn
 Engraving	Need a light? Come visit the Minetown branch of Izchak's Lighting Store!
-Engraving	The Gnome-with-a-Wand-of-Death was here.
 Engraving	The Vibrating Square is NOT here
-Engraving	Watch out! The-Gnome-With-The-Wand-Of-Death is behind that door!
 Engraving	You aren't going to ascend by staring at your shoes.
 Hallucinatory Monster	Baba Yaga
 Hallucinatory Monster	Crumple-Horned Snorkack
