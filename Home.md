@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* If you ever have a gameplay mechanic that's such a no brainer that it can be automated, it should be cut. http://www.gamasutra.com/view/feature/6490/radical_rethink_how_100_rogues_.php?print=1
 * [[dumping grounds]]
 * http://www.reddit.com/r/roguelikedev/comments/kmf2r/100_rogues_developer_talks_about_roguelike_design/c2v8rbd
 * http://www.reddit.com/r/roguelikedev/comments/16dva9/dungeon_generation_not_done_yet_but_a_start/
