@@ -1,4 +1,6 @@
 Plans for UnNetHackPlus
+* A CONSTRAINED GROWTH METHOD FOR PROCEDURAL FLOOR PLAN GENERATION - http://graphics.tudelft.nl/~rval/papers/lopes.GAMEON10.pdf
+* demon name generator - http://dorophone.blogspot.com/2012/02/almost-pure-random-demon-name-generator.html
 * http://www.gruesomegames.com/blog/?p=198:
 * Auto stairs use
 * visual feedback instead of A misses X
