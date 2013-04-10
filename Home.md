@@ -23,7 +23,7 @@ Plans for UnNetHackPlus
 * Repeat count for messages. In the example, all those lines about the cloak from the first turn could be condensed to "Your cloak of magic resistance is not affected (4x)." The hero cannot intervene anyway. - idea from https://sourceforge.net/apps/trac/unnethack/ticket/46
 * ask for help (exit_nhwindows("Be seeing you...");)
 
-I would welcome help in increasing variation of text used by shopkeepers, as currently their yells are quite repetitive. Ideas may be posted on https://github.com/Bulwersator/UnNetHackPlus/issues/9 (requires account on Github) or on http://www.reddit.com/r/roguelikes/comments/1bt3ip/ (requires account on Reddit). Thanks to anybody who would share his idea for new hollers!
+I would welcome help in increasing variation of text used by shopkeepers, as currently their yells are quite repetitive. Ideas may be posted on https://github.com/Bulwersator/UnNetHackPlus/issues/9 or on http://www.reddit.com/r/roguelikes/comments/1bt3ip/ . Thanks to anybody who would share his idea for new hollers!
 
 Bug tracker is located at https://github.com/Bulwersator/UnNetHackPlus/issues - both bug reports and help in dealing with listed issues is welcomed! 
 
