@@ -222,3 +222,7 @@ http://nine.frenchboys.net/fanname.html
 http://nine.frenchboys.net/medievalf.html
 http://nine.frenchboys.net/medievalm.html
 http://rinkworks.com/namegen/
+
+The Order of the Stick
+
+ Belkar Bitterleaf, Vaarsuvius, Elan, Haley Starshine, Durkon Thundershield, and Roy Greenhilt
