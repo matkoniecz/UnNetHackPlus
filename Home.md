@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* https://github.com/sgrunt/GruntHack/commit/aa718d95b38d6cab5dc80aed1ff7ccbc9fcfda90  Don't merge objects with different materials that are otherwise identical.
 * http://www.reddit.com/r/roguelikes/comments/187k8d/dcss_dungeon_crawl_tetris/ - tetris
 * random X turns of invulnerability - from god? From certain artefacts?
 * If you ever have a gameplay mechanic that's such a no brainer that it can be automated, it should be cut. http://www.gamasutra.com/view/feature/6490/radical_rethink_how_100_rogues_.php?print=1
