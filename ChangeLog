@@ -24,6 +24,7 @@
 		- C343-1 "At a pit the game can give messages with poor grammar." (fix by Tung Nguyen)
 		- Shopkeeper names lost in NetHack 2.2a reappear
 		- C343-345 "Display the plural form of the "You can't. They are cursed." message as opposed to the singular when trying to remove a cursed pair of lenses." (from GruntHack)
+		- C343-243 "Hero can throw without hands" (as polymorphed monster, for example killer bee) (from GruntHack)
 		Patches are linked at http://nethackwiki.com/wiki/User:Bulwersator/UnNetHackPlus_bug_tracking
 	* UnNetHack bug fixes
 		- Angered quest guardians will no longer go berserk.
