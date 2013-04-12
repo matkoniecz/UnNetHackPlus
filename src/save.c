@@ -67,6 +67,12 @@ extern gsl_rng *rng_state;
 /* need to preserve these during save to avoid accessing freed memory */
 static unsigned ustuck_id = 0, usteed_id = 0;
 
+char *
+get_goodbye_message()
+{
+	return "Be seeing you...\n\nI would welcome help in increasing variation of text used by shopkeepers, \nas currently their yells are quite repetitive. Ideas may be posted on\nhttps://github.com/Bulwersator/UnNetHackPlus/issues/9 or \non http://www.reddit.com/r/roguelikes/comments/1bt3ip/ .\nThanks to anybody who would share idea for new hollers!\n\nBug tracker is located at https://github.com/Bulwersator/UnNetHackPlus/issues\n- both bug reports and help in dealing with listed issues are welcomed! \n\n-- Bulwersator\n";
+}
+
 int
 dosave()
 {
@@ -88,7 +94,7 @@ dosave()
 			u.uhp = -1;		/* universal game's over indicator */
 			/* make sure they see the Saving message */
 			display_nhwindow(WIN_MESSAGE, TRUE);
-			exit_nhwindows("Be seeing you...");
+			exit_nhwindows(get_goodbye_message());
 			terminate(EXIT_SUCCESS);
 		} else (void)doredraw();
 	}

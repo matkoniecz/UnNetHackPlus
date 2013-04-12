@@ -1892,6 +1892,7 @@ E int FDECL(doconsult, (struct monst *));
 
 /* ### save.c ### */
 
+E char *NDECL(get_goodbye_message);
 E int NDECL(dosave);
 #if defined(UNIX) || defined(VMS) || defined(__EMX__) || defined(WIN32)
 E void FDECL(hangup, (int));

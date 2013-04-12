@@ -594,7 +594,7 @@ xchar ltmp;
 			return dorecover(fd);	/* 0 or 1 */
 		} else {
 # endif
-			pline("Be seeing you...");
+			pline(get_goodbye_message());
 			terminate(EXIT_SUCCESS);
 # ifndef AMIGA
 		}
