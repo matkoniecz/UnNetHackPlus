@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* player polymorphed in monsters that is neither herbivorous nor carnivorous may eat corpses and tins
 *  Have Medusa's passive gaze interact with monsters as it does with the player. (For fun, try bringing Medusa to bigroom for a lovely demonstration of this behaviour.) https://github.com/sgrunt/GruntHack/commit/ca041a03fed8e775f00daa1a78c8b60db490cee0
 * https://github.com/sgrunt/GruntHack/commit/aa718d95b38d6cab5dc80aed1ff7ccbc9fcfda90  Don't merge objects with different materials that are otherwise identical.
 * http://www.reddit.com/r/roguelikes/comments/187k8d/dcss_dungeon_crawl_tetris/ - tetris
