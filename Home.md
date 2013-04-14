@@ -237,17 +237,16 @@ proud owner of a magic whistle.
 * oversight: you can #chat while being choked by a rope golem ("strangulation seem to be handled okay)
 
 #savebreaking?
-* reduce amount of polearms
-* depaladinise knight - replace the Mirror with artifact lance/shield/saddle
 * http://bilious.alt.org/?63
 * remove grinding spells (create monster, polymorph, cancellation(?)) and introduce something interesting - see http://www.reddit.com/r/roguelikes/comments/18msat/is_there_a_roguelike_with_interesting_spells/ 
 * TRAPROOM from spork
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/d5f208b70d606071a5829526e4806dab0e87832a  Increase missile weapon range from properly fired missiles. 
 * http://bilious.alt.org/?271
-* revert UnDragons
 * fly monster spell - https://github.com/Bulwersator/CopyOfSporkHack/commit/d6ae5c1cba40bd5f04f11c2e6e6205ad1486992f + https://github.com/Bulwersator/CopyOfSporkHack/commit/cd5b178b692e2c34276486aa11032107263ca167
 
 #savebreaking
+* reduce amount of polearms
+* depaladinise knight - replace the Mirror with artifact lance/shield/saddle
 * http://www.statslab.cam.ac.uk/~eva/slashem/wands.html
 ** http://nethackwiki.com/wiki/Wand_of_fireball
 * spellbook of repair armor (spork?)
