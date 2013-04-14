@@ -1,6 +1,6 @@
 static const char *epitaphs_with_playername[] = {
 	/* from http://www.alt.org/nethack/addmsgs/viewmsgs.php */
-	"%s took war to Team Ant and bought this fine track of land as benefits.",
+	"%s took war to Team Ant and bought this fine trackt of land as benefits.",
 	"%s, Hand of Elbereth",
 	"%s, killed by a time-travel accident",
 	"%s, killed by an ambush, while reading",
