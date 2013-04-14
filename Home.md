@@ -1,4 +1,18 @@
 Plans for UnNetHackPlus
+* make #untrap less in need of repetition/spamming
+* blanking sickness should formally ID it and fruit juice (?)
+* a1 to light just one of a stack of candles
+* removing armour while wearing a cloak should give a better message than “You can’t take that off.”
+* you should also get YAFMs for throwing ring of levitation upwards
+* various appropriate YAFMs when you kill Vlad with a non-weapon object (GreyKnight is supposedly writing a patch for this)
+* occasionally substitute a “3.4.3 level” or “crawl level” for the rogue level
+* Eating an orange while fumbling or with greasy hands: “Segmentation fault.”
+* ID kicking boots when they make things reel
+* option to stop autoexplore with unexplored objects in LOS
+* name levels you aren’t on
+* list wishes in dumplog etc
+* warn on self-zaps of known dangerous wands
+* ID base types of wished-for items
 * attacking with polearms is utterly broken at interface level
 * player polymorphed in monsters that is neither herbivorous nor carnivorous may eat corpses and tins
 *  Have Medusa's passive gaze interact with monsters as it does with the player. (For fun, try bringing Medusa to bigroom for a lovely demonstration of this behaviour.) https://github.com/sgrunt/GruntHack/commit/ca041a03fed8e775f00daa1a78c8b60db490cee0 + https://github.com/sgrunt/GruntHack/commit/9ee62a54b5f99c36f1109bd6a3f37bc6e94f621b
