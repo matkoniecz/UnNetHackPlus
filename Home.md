@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* Ace hack code - http://patch-tag.com/r/ais523/acehack/snapshots/all/history
 * make #untrap less in need of repetition/spamming
 * blanking sickness should formally ID it and fruit juice (?)
 * a1 to light just one of a stack of candles
