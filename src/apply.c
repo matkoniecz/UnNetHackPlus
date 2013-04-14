@@ -2344,69 +2344,75 @@ static const char
 
 /* Distance attacks by pole-weapons */
 STATIC_OVL int
-use_pole (obj)
-	struct obj *obj;
+use_pole (struct obj *obj)
 {
 	int res = 0, typ, max_range = 4, min_range = 4;
 	coord cc;
 	struct monst *mtmp;
 
-
 	/* Are you allowed to use the pole? */
 	if (u.uswallow) {
-	    pline(not_enough_room);
-	    return (0);
+		pline(not_enough_room);
+		return (0);
 	}
 	if (obj != uwep) {
-	    if (!wield_tool(obj, "swing")) return(0);
-	    else res = 1;
+		if (!wield_tool(obj, "swing")) {
+			return(0);
+		} else {
+			res = 1;
+		}
 	}
-     /* assert(obj == uwep); */
+	/* assert(obj == uwep); */
 
 	/* Prompt for a location */
 	pline(where_to_hit);
 	cc.x = u.ux;
 	cc.y = u.uy;
-	if (getpos(&cc, TRUE, "the spot to hit") < 0)
-	    return 0;	/* user pressed ESC */
+	if (getpos(&cc, TRUE, "the spot to hit") < 0) {
+		return 0;	/* user pressed ESC */
+	}
 
 	/* Calculate range */
 	typ = uwep_skill_type();
-	if (typ == P_NONE || P_SKILL(typ) <= P_BASIC) max_range = 4;
-	else if (P_SKILL(typ) == P_SKILLED) max_range = 5;
-	else max_range = 8;
+	if (typ == P_NONE || P_SKILL(typ) <= P_BASIC) {
+		max_range = 4;
+	} else if (P_SKILL(typ) == P_SKILLED) {
+		max_range = 5;
+	} else {
+		max_range = 8;
+	}
 	if (distu(cc.x, cc.y) > max_range) {
-	    pline("Too far!");
-	    return (res);
+		pline("Too far!");
+		return (res);
 	} else if (distu(cc.x, cc.y) < min_range) {
-	    pline("Too close!");
-	    return (res);
-	} else if (!cansee(cc.x, cc.y) &&
-		   ((mtmp = m_at(cc.x, cc.y)) == (struct monst *)0 ||
-		    !canseemon(mtmp))) {
-	    You(cant_see_spot);
-	    return (res);
+		pline("Too close!");
+		return (res);
+	} else if (!cansee(cc.x, cc.y) && ((mtmp = m_at(cc.x, cc.y)) == (struct monst *)0 || !canseemon(mtmp))) {
+		You(cant_see_spot);
+		return (res);
 	} else if (!couldsee(cc.x, cc.y)) { /* Eyes of the Overworld */
-	    You(cant_reach);
-	    return res;
+		You(cant_reach);
+		return res;
 	}
 
 	/* Attack the monster there */
 	if ((mtmp = m_at(cc.x, cc.y)) != (struct monst *)0) {
-	    int oldhp = mtmp->mhp;
+		int oldhp = mtmp->mhp;
 
-	    bhitpos = cc;
-	    check_caitiff(mtmp);
-	    (void) thitmonst(mtmp, uwep);
-	    /* check the monster's HP because thitmonst() doesn't return
-	     * an indication of whether it hit.  Not perfect (what if it's a
-	     * non-silver weapon on a shade?)
-	     */
-	    if (mtmp->mhp < oldhp)
-		u.uconduct.weaphit++;
-	} else
-	    /* Now you know that nothing is there... */
-	    pline(nothing_happens);
+		bhitpos = cc;
+		check_caitiff(mtmp);
+		(void) thitmonst(mtmp, uwep);
+		/* check the monster's HP because thitmonst() doesn't return
+		 * an indication of whether it hit.  Not perfect (what if it's a
+		 * non-silver weapon on a shade?)
+		 */
+		if (mtmp->mhp < oldhp) {
+			u.uconduct.weaphit++;
+		}
+	} else {
+		/* Now you know that nothing is there... */
+		pline(nothing_happens);
+	}
 	return (1);
 }
 
