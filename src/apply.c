@@ -948,36 +948,46 @@ struct obj **optr;
 		safe_qbuf(qbuf, sizeof(" to ?"), the(xname(otmp)),
 			the(simple_typename(otmp->otyp)), "it"));
 	if(yn(qbuf) == 'n') {
-		if (!obj->lamplit)
-		    You("try to light %s...", the(xname(obj)));
+		if (!obj->lamplit) {
+			You("try to light %s...", the(xname(obj)));
+		}
 		use_lamp(obj);
 		return;
 	} else {
-		if ((long)otmp->spe + obj->quan > 7L)
-		    obj = splitobj(obj, 7L - (long)otmp->spe);
-		else *optr = 0;
+		if ((long)otmp->spe + obj->quan > 7L) {
+			obj = splitobj(obj, 7L - (long)otmp->spe);
+		} else {
+			*optr = 0;
+		}
 		You("attach %ld%s %s to %s.",
 		    obj->quan, !otmp->spe ? "" : " more",
 		    s, the(xname(otmp)));
-		if (!otmp->spe || otmp->age > obj->age)
-		    otmp->age = obj->age;
+		if (!otmp->spe || otmp->age > obj->age) {
+			otmp->age = obj->age;
+		}
 		otmp->spe += (int)obj->quan;
-		if (otmp->lamplit && !obj->lamplit)
-		    pline_The("new %s magically %s!", s, vtense(s, "ignite"));
-		else if (!otmp->lamplit && obj->lamplit)
-		    pline("%s out.", (obj->quan > 1L) ? "They go" : "It goes");
-		if (obj->unpaid)
-		    verbalize("You %s %s, you bought %s!",
+		if (otmp->lamplit && !obj->lamplit) {
+			pline_The("new %s magically %s!", s, vtense(s, "ignite"));
+		} else if (!otmp->lamplit && obj->lamplit) {
+			pline("%s out.", (obj->quan > 1L) ? "They go" : "It goes");
+		}
+		if (obj->unpaid) {
+			verbalize("You %s %s, you bought %s!",
 			      otmp->lamplit ? "burn" : "use",
 			      (obj->quan > 1L) ? "them" : "it",
 			      (obj->quan > 1L) ? "them" : "it");
-		if (obj->quan < 7L && otmp->spe == 7)
-		    pline("%s now has seven%s candles attached.",
-			  The(xname(otmp)), otmp->lamplit ? " lit" : "");
+		}
+		if (obj->quan < 7L && otmp->spe == 7) {
+			pline("%s now has seven%s candles attached.", The(xname(otmp)), otmp->lamplit ? " lit" : "");
+		}
 		/* candelabrum's light range might increase */
-		if (otmp->lamplit) obj_merge_light_sources(otmp, otmp);
+		if (otmp->lamplit) {
+			obj_merge_light_sources(otmp, otmp);
+		}
 		/* candles are no longer a separate light source */
-		if (obj->lamplit) end_burn(obj, TRUE);
+		if (obj->lamplit) {
+			end_burn(obj, TRUE);
+		}
 		/* candles are now gone */
 		useupall(obj);
 	}
@@ -1079,41 +1089,39 @@ struct obj *obj;
 		return;
 	}
 	if(obj->lamplit) {
-		if(obj->otyp == OIL_LAMP || obj->otyp == MAGIC_LAMP ||
-				obj->otyp == BRASS_LANTERN)
-		    pline("%s lamp is now off.", Shk_Your(buf, obj));
-		else
-		    You("snuff out %s.", yname(obj));
+		if(obj->otyp == OIL_LAMP || obj->otyp == MAGIC_LAMP || obj->otyp == BRASS_LANTERN) {
+			pline("%s lamp is now off.", Shk_Your(buf, obj));
+		} else {
+			You("snuff out %s.", yname(obj));
+		}
 		end_burn(obj, TRUE);
 		return;
 	}
 	/* magic lamps with an spe == 0 (wished for) cannot be lit */
-	if ((!Is_candle(obj) && obj->age == 0)
-			|| (obj->otyp == MAGIC_LAMP && obj->spe == 0)) {
-		if (obj->otyp == BRASS_LANTERN)
+	if ((!Is_candle(obj) && obj->age == 0) || (obj->otyp == MAGIC_LAMP && obj->spe == 0)) {
+		if (obj->otyp == BRASS_LANTERN) {
 			Your("lamp has run out of power.");
-		else pline("This %s has no oil.", xname(obj));
+		} else {
+			pline("This %s has no oil.", xname(obj));
+		}
 		return;
 	}
 	if (obj->cursed && !rn2(2)) {
-		pline("%s for a moment, then %s.",
-		      Tobjnam(obj, "flicker"), otense(obj, "die"));
+		pline("%s for a moment, then %s.", Tobjnam(obj, "flicker"), otense(obj, "die"));
 	} else {
-		if(obj->otyp == OIL_LAMP || obj->otyp == MAGIC_LAMP ||
-				obj->otyp == BRASS_LANTERN) {
-		    check_unpaid(obj);
-		    pline("%s lamp is now on.", Shk_Your(buf, obj));
+		if(obj->otyp == OIL_LAMP || obj->otyp == MAGIC_LAMP || obj->otyp == BRASS_LANTERN) {
+			check_unpaid(obj);
+			pline("%s lamp is now on.", Shk_Your(buf, obj));
 		} else {	/* candle(s) */
-		    pline("%s flame%s %s%s",
-			s_suffix(Yname2(obj)),
-			plur(obj->quan), otense(obj, "burn"),
-			Blind ? "." : " brightly!");
-		    if (obj->unpaid && costly_spot(u.ux, u.uy) &&
-			  obj->age == 20L * (long)objects[obj->otyp].oc_cost) {
-			const char *ithem = obj->quan > 1L ? "them" : "it";
-			verbalize("You burn %s, you bought %s!", ithem, ithem);
-			bill_dummy_object(obj);
-		    }
+			pline("%s flame%s %s%s",
+			    s_suffix(Yname2(obj)),
+			    plur(obj->quan), otense(obj, "burn"),
+			    Blind ? "." : " brightly!");
+			if (obj->unpaid && costly_spot(u.ux, u.uy) && obj->age == 20L * (long)objects[obj->otyp].oc_cost) {
+				const char *ithem = obj->quan > 1L ? "them" : "it";
+				verbalize("You burn %s, you bought %s!", ithem, ithem);
+				bill_dummy_object(obj);
+			}
 		}
 		begin_burn(obj, FALSE);
 	}
