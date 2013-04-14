@@ -1,9 +1,23 @@
-Gravestone	$playername took war to Team Ant and bought this fine track of land as benefits.
-Gravestone	$playername, Hand of Elbereth
-Gravestone	$playername, demonstrating the value of not being seen.
-Gravestone	$playername, killed by a time-travel accident
-Gravestone	$playername, killed by an ambush, while reading
-Gravestone	$playername, killed by one-more-hit syndrome
+static const char *epitaphs_with_playername[] = {
+	/* from http://www.alt.org/nethack/addmsgs/viewmsgs.php */
+	"%s took war to Team Ant and bought this fine track of land as benefits.",
+	"%s, Hand of Elbereth",
+	"%s, killed by a time-travel accident",
+	"%s, killed by an ambush, while reading",
+	"%s, killed by one-more-hit syndrome",
+};
+
+	if (!str) {
+		/* Engrave the headstone */
+		int number = rn2(SIZE(epitaphs) + SIZE(epitaphs_with_playername));
+		if (number < SIZE(epitaphs)) {
+			str = epitaphs[number];
+		} else {
+			Sprintf(str, epitaphs_with_playername[number - SIZE(epitaphs)], );
+		}
+	}
+
+
 Gravestone	Bulk deals on gravestones - Die today!
 Gravestone	Did you know that death rays bounce?
 Gravestone	Here lies Urist McMiner, killed by falling multiple z-levels.
