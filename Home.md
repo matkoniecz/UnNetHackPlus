@@ -237,6 +237,7 @@ proud owner of a magic whistle.
 * oversight: you can #chat while being choked by a rope golem ("strangulation seem to be handled okay)
 
 #savebreaking?
+* reduce amount of polearms
 * depaladinise knight - replace the Mirror with artifact lance/shield/saddle
 * http://bilious.alt.org/?63
 * remove grinding spells (create monster, polymorph, cancellation(?)) and introduce something interesting - see http://www.reddit.com/r/roguelikes/comments/18msat/is_there_a_roguelike_with_interesting_spells/ 
