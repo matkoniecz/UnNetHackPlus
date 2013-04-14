@@ -1,4 +1,8 @@
 Plans for UnNetHackPlus
+* The entrances to all branches and the dlvl 1 upstairs are now ladders,
+rather than stairs; additionally, stairs in the Mines have become
+ladders.  This is both for flavour, and to help the player distinguish
+normal stairs from branch entrances. (AceHack - maybe better than hardcoded yellow?)
 * Ace hack code - http://patch-tag.com/r/ais523/acehack/snapshots/all/history
 * make #untrap less in need of repetition/spamming
 * blanking sickness should formally ID it and fruit juice (?)
