@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* nice artifact but at cost of permahallu
 * ACEHACK CODED THINGS START
 * The Vibrating Square is now visible from a distance; it will always be
 marked if it's ever been in the player's LOS and is not covered by a
