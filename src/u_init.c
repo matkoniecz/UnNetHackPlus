@@ -1018,9 +1018,7 @@ ini_inv(struct trobj *trop)
 		if (OBJ_DESCR(objects[otyp]) && obj->known) {
 			discover_object(otyp, TRUE, FALSE);
 		}
-		if (otyp == OIL_LAMP) {
-			discover_object(POT_OIL, TRUE, FALSE);
-		}
+		discover_object(POT_OIL, TRUE, FALSE); //trivial to identify, in the name of reducing tedium it is autoidentified
 		if((obj->oclass == ARMOR_CLASS && !u.roleplay.nudist)) {
 			if (is_shield(obj) && !uarms) {
 				setworn(obj, W_ARMS);
