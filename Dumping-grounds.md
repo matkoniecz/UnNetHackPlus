@@ -20,14 +20,11 @@ static const char *epitaphs_with_playername[] = {
 
 False rumor	I know what you did last summer...
 False rumor	Pets lose loyalty if they are not fed frequently.
-False rumor	The Wizard of Yendor exists in multiple dimensions simultaneously.
 False rumor	They say that beartraps, foocubi, and potions of confusion are a good combination.
 True rumor	Don't play tired.
-True rumor	If the lava looks blue, you're playing too fast.
 True rumor	If you can read this, you just broke illiterate.
 True rumor	It's said that acid can help you out of some hard times.
 True rumor	Just because it is a d or f does NOT mean it is always peaceful.
-True rumor	Most items in NetHack either start out useless or are useless by Dlvl:3
 True rumor	Once you are dead and buried, a Rogue will dig you up and ascend with a tin of your corpse.
 True rumor	The gods appreciate honesty; only blessed things will always speak truth.
 True rumor	They say that a magic lamp never burns out.
@@ -38,7 +35,6 @@ True rumor	They say that even a dead cockatrice can be deadly.
 True rumor	They say that even a flint stone can be used to tell iron from leather.
 True rumor	They say that it's better to pay first if you might leave the shop unexpectedly.
 True rumor	They say that pets are reluctant to step on cursed items
-True rumor	They say that puddings are not vegetarian food.
 True rumor	They say that the Horsemen of the Apocalypse are camera shy.
 True rumor	They say that you can train your dog with meatballs.
 True rumor	They say that you shouldn't kick a cockatrice without boots.
@@ -54,13 +50,10 @@ Engraving	Don't go that way.
 Engraving	Here be dragons.
 Engraving	Here there be soldier ants.
 Engraving	Hoc est qui sumus.
-Engraving	You aren't going to ascend by staring at your shoes.
 Hallucinatory Monster	district attorney
 Hallucinatory Monster	dwarven construct
-Hallucinatory Monster	elder xorn
 Hallucinatory Monster	mummy zombie
 Hallucinatory Monster	rabid lawyer
-
 
 http://donjon.bin.sh/fantasy/random/#dungeon_graffiti
 http://www.imdb.com/character/ch0002561/quotes done to  You fools! Do you think with your crosses and your wafers you can destroy me? Me! You do not know how many men have come against me. I am the king of my kind! 
