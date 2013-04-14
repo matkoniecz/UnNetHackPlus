@@ -2398,7 +2398,9 @@ use_pole (struct obj *obj)
 	/* Attack the monster there */
 	if ((mtmp = m_at(cc.x, cc.y)) != (struct monst *)0) {
 		int oldhp = mtmp->mhp;
-
+		if (attack_checks(mtmp, obj)) {
+			return res;
+		}
 		bhitpos = cc;
 		check_caitiff(mtmp);
 		(void) thitmonst(mtmp, uwep);
