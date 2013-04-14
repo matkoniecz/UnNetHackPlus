@@ -1,8 +1,45 @@
 Plans for UnNetHackPlus
+* ACEHACK CODED THINGS START
+* The Vibrating Square is now visible from a distance; it will always be
+marked if it's ever been in the player's LOS and is not covered by a
+monster or object, due to it now giving off a visible glow.
 * The entrances to all branches and the dlvl 1 upstairs are now ladders,
 rather than stairs; additionally, stairs in the Mines have become
 ladders.  This is both for flavour, and to help the player distinguish
 normal stairs from branch entrances. (AceHack - maybe better than hardcoded yellow?)
+* Travel now handles traps more sensibly: it will go slightly out of its
+way to avoid walking through a trap, but if it's necessary to go
+through a trap, it will travel to just before the trap and then stop,
+allowing the player to choose to walk through it or continue.
+(Credits: Suggestion for the change by nht.)
+* It's no longer possible to fail to choose a direction for a spell;
+NetHack 3.4.3 just repeats the last direction (perhaps killing the
+player arbitrarily), AceHack 3.6.0 will keep prompting until a
+direction is given.  Similar fixes apply to all other direction
+prompts, which will keep prompting repeatedly until explicitly
+cancelled (as spellcasting always requires a direction, it'll keep
+prompting until one is given even /if/ explicitly cancelled).
+Targeting prompts are also a little more explicit in what input they
+want now, too.
+*The player is now prompted upon attempting to eat something that the
+character would know is dangerous even without magical aid (such as an
+old or poisonous corpse).
+*Instead of using engravings of the word "Elbereth" to protect against
+hostile monsters, instead a special engraving type, the "magic
+heptagram", is provided, which does the same thing and has the same
+properties, but is easier on the interface.  (To draw it, use E-h, or
+simply press .).  Unlike writing Elbereth, heptagrams do not exercise
+wisdom.
+*Cursed light-sources become marked as cursed when they fail to light
+as a result.  (Patch credits: patch by rawrmage).
+*Formally identifying light sources, or seeing them flicker, now makes
+their remaining burn time visible (much like charges on formally
+identified wands).
+*Monsters now have their background color changed to show various
+aspects of the monster (blue=tame, brown=peaceful, magenta=detected).
+*(more http://patch-tag.com/r/ais523/acehack/snapshot/current/content/raw/doc/fixes36.0)
+*underlined monsters
+* ACEHACK CODED THINGS END
 * Ace hack code - http://patch-tag.com/r/ais523/acehack/snapshots/all/history
 * make #untrap less in need of repetition/spamming
 * blanking sickness should formally ID it and fruit juice (?)
