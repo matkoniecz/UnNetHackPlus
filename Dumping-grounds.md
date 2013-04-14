@@ -18,13 +18,6 @@ static const char *epitaphs_with_playername[] = {
 	}
 
 
-Gravestone	Bulk deals on gravestones - Die today!
-Gravestone	Did you know that death rays bounce?
-Gravestone	Here lies Urist McMiner, killed by falling multiple z-levels.
-Demonic taunt	Go away. I am in an angry mood today and I might kill you. Hey! That' a good idea!
-Demonic taunt	You are an explicitly recycled marketing person!
-Demonic taunt	You fight like a lame slug!
-Demonic taunt	You frog-eating surrender monkey!
 False rumor	I know what you did last summer...
 False rumor	Pets lose loyalty if they are not fed frequently.
 False rumor	The Wizard of Yendor exists in multiple dimensions simultaneously.
