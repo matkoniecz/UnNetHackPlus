@@ -217,7 +217,6 @@ into mana/magic missile resistance (which gray DSM would confer), spell
 resistance, and death resistance. While spell resistance would remain a
 high priority, the others would be precautionary measures (much like
 acid resistance is now.) https://groups.google.com/forum/?fromgroups=#!topic/rec.games.roguelike.nethack/TrtHf-9b8SU 
-* warning on Cthulhu, 6 - terror, green - http://nethackwiki.com/wiki/Drawing.c#line192
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/a7a1de62a901e7f4521a5bdd2bf4474320315d2a (? - add modified code???)
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/70941c87feb74c63d0d4ca9bbd925ff909722117 -  Death's touch should hurt monsters/pets 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/8bd8d8b90a6f95344e3c4798a9f0ae802b6a35eb with https://github.com/Bulwersator/CopyOfSporkHack/commit/1f8b526808eeae0ed6472b2b3408743822e814d1
@@ -234,18 +233,9 @@ fix completely broken alignment, maybe also better gods
 * Eliminate tedious things
 * ban selling
 * Minetown non-diggable (to stop stupid dwarfs)
-* Gradual hallu
-
-G, h in gnomish mines shouldn't walk into their own ^
-
-* better sacrifice
-change sacgift to spork-type armor gift when normal one is useless (+ with 100% failure rate, lamebane etc)
-
-http://nethackwiki.com/wiki/User:SGrunt/GruntHack_vanilla_bug_tracking
-
-http://nethackwiki.com/wiki/Bugs_in_NetHack_4
-
-* spork shop messages
+* redraw resistant hallu
+* gradual hallu
+* G, h in gnomish mines shouldn't walk into their own ^
 * stinking cloud should be cyan something
 * http://i295.photobucket.com/albums/mm153/Kobold_Lord/Sporkhack%202/T29316.jpg
 * devastating Wand of Death, which would shave hit points off of Mouse's MAXIMUM every time it hits him even if his amulet reflects the killing charge
@@ -253,9 +243,9 @@ http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 *  Gems the unicorn keeps are worth +2 luck, and the unicorn doesn't care if they're diamonds or turquoise. If it becomes convenient later, you can bring a strong pet to withdraw your deposit from the Bank of Uni, but I don't always bother. (make only alive unicorns bring luck)
 * http://i295.photobucket.com/albums/mm153/Kobold_Lord/Sporkhack%202/T554883.jpg The Master of Assassins hasn't died yet (telewand)
 * http://i295.photobucket.com/albums/mm153/Kobold_Lord/Sporkhack%202/T63823.jpg
-*Enemies have a variety of taunts. It really makes me feel awesome when my character is killing stuff and there are two different leader-monsters making distinct sorts of conversation. It doesn't really have any numerical meaning, but I think it's a really nice touch as far as verisimilitude goes. "Why can't you fools kill him? He is only one man!"
+* verbalize("Get %s, you fools, or I'll have your figgin on a stick!",uhim());
+* taunts
 * http://i295.photobucket.com/albums/mm153/Kobold_Lord/Sporkhack%202/T645341.jpg http://i295.photobucket.com/albums/mm153/Kobold_Lord/Sporkhack%202/T645342.jpg This message is caused by a new divine monster spell. The hill giant shaman has just inflicted the cold vulnerability intrinsic on Mouse. It eventually wears off, but until then Mouse will take heavy damage from cold attacks even though he has 100% cold resistance. You REALLY do not want to get hit by cold attacks if you have cold vulnerability and 0% cold resistance.
-* Here's his frost spell. It's kind of sad. This spell is unique to Asmodeus, but PCs almost ALWAYS have perfect frost resistance by this point in the game
 *  This is the ideal place to settle in when clearing the Zoo at Fort Ludios. Doors have the interesting property that even when they are opened, you can only go through them straight on. The monsters have to single file through three tiles, and in the last of the three they'll stop to fight Spelunky. Until she kills the monster she faces, the others will get jammed behind it. None of them can line up to zap a wand, either, until they're already in melee with Spelunky. http://i295.photobucket.com/albums/mm153/Kobold_Lord/Sporkhack%203/T28982.jpg
 *  Formally identifying the Amulet of Yendor now. Wouldn't do to pick up one of the Wizard's fakes. In vanilla, there's an easy test: try putting it in your bag. The Amulet of Yendor will refuse to enter a container, but the fakes go in easily. That's been changed in Sporkhack, so bring a means of identification just in case. The #name trick still works.
 *  Angels are MUCH more dangerous in Sporkhack than in vanilla. Their most damaging attack in either version is a powerful stream of magic missiles. In vanilla, all magic missile attacks are completely nullified by either reflection or magic resistance, leaving the angels with only fairly ordinary attacks and magic. In Sporkhack, reflection and magic resistance only cut magic missile damage in half! So Spelunky will still take partial damage from all the angels pelting her from every angle, even as she faces Pestilence! The half spell damage from the Orb of Detection will still help, though… She will take 1/8 the normal damage of the attack each time. Most other roles will have a much tougher time keeping the angels away, since magic resistance and reflection combined is still 1/4 of a whole lot of damage.
@@ -293,7 +283,7 @@ proud owner of a magic whistle.
 * Dragons will never breath in melee combat.
 * Only your quest Nemeses will deliberately steal your quest artifact, other monsters may steal the amulet and invocation items. The quest artifact may of course be randomly stolen by nymphs and the like.  -Makes QA a dependable source of extrinsics, deepening differences between classes. -dnethack
 * oversight: you can #chat while being choked by a rope golem ("strangulation seem to be handled okay)
-
+* wounded legs, healing
 #savebreaking?
 * http://bilious.alt.org/?63
 * remove grinding spells (create monster, polymorph, cancellation(?)) and introduce something interesting - see http://www.reddit.com/r/roguelikes/comments/18msat/is_there_a_roguelike_with_interesting_spells/ 
