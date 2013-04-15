@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* Introduction http://nethackwiki.com/wiki/File:Vultures-eye-intro.gif
 * Shoplifters will be beaten, stabbed and stomped. Survivors will be prosecuted.
 * nice artifact but at cost of permahallu
 * ACEHACK CODED THINGS START
