@@ -1,6 +1,5 @@
 Plans for UnNetHackPlus
 * Introduction http://nethackwiki.com/wiki/File:Vultures-eye-intro.gif
-* Applying a stethoscope against a door will give a rough estimate of the amount of monsters in the room.  (ADOM)
 * nice artifact but at cost of permahallu
 * ACEHACK CODED THINGS START
 * The Vibrating Square is now visible from a distance; it will always be
