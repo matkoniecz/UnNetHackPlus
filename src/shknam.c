@@ -555,7 +555,7 @@ struct mkroom *sroom;
 	 * door get objects).
 	 */
 	int sx, sy, sh;
-	char buf[BUFSZ];
+	char buf[BUFSZ] = "";
 	int rmno = (sroom - rooms) + ROOMOFFSET;
 	const struct shclass *shp = &shtypes[shp_indx];
 
@@ -582,8 +582,12 @@ struct mkroom *sroom;
 		levl[sx][sy].doormask = D_LOCKED;
 	}
 	if(levl[sx][sy].doormask == D_LOCKED) {
+		Sprintf(buf, "Closed for inventory");
+	} else if (!rn2(40)){
+		Sprintf(buf, "Shoplifters will be beaten, stabbed and stomped. Survivors will be prosecuted.");
+	}
+	if(buf != "") {
 		int m = sx, n = sy;
-
 		if(inside_shop(sx+1,sy)) {
 			m--;
 		} else if(inside_shop(sx-1,sy)) {
@@ -594,7 +598,6 @@ struct mkroom *sroom;
 		} else if(inside_shop(sx,sy-1)) {
 			n++;
 		}
-		Sprintf(buf, "Closed for inventory");
 		make_engr_at(m, n, buf, 0L, DUST);
 	}
 
