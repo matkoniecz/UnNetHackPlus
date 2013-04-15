@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* Shoplifters will be beaten, stabbed and stomped. Survivors will be prosecuted.
 * nice artifact but at cost of permahallu
 * ACEHACK CODED THINGS START
 * The Vibrating Square is now visible from a distance; it will always be
