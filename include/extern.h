@@ -1034,8 +1034,6 @@ E boolean FDECL(peace_minded, (struct permonst *));
 E void FDECL(set_malign, (struct monst *));
 E void FDECL(set_mimic_sym, (struct monst *));
 E int FDECL(mbirth_limit, (int));
-E void FDECL(mimic_hit_msg, (struct monst *, SHORT_P));
-E struct permonst *FDECL(get_monster_index_after_stone_to_flesh, (struct permonst *));
 #ifdef GOLDOBJ
 E void FDECL(mkmonmoney, (struct monst *, long));
 #endif
@@ -1263,6 +1261,8 @@ E void FDECL(kill_monster_on_level, (int));
 E void FDECL(golemeffects, (struct monst *,int,int));
 E boolean FDECL(angry_guards, (BOOLEAN_P));
 E void NDECL(pacify_guards);
+E void FDECL(mimic_hit_msg, (struct monst *, SHORT_P));
+E struct permonst *FDECL(get_monster_index_after_stone_to_flesh, (struct permonst *));
 
 /* ### mondata.c ### */
 
