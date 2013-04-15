@@ -1221,8 +1221,12 @@ hitmu(struct monst *mtmp, struct attack *mattk)
 				if (noncorporeal(youmonst.data) || amorphous(youmonst.data)) {
 					pline("%s slices through your %s.", Monnam(mtmp), body_part(NECK));
 					break;
-				} 
-				pline("%s %ss you!", Monnam(mtmp), rn2(2) ? "behead" : "decapitate");
+				}
+				if(has_two_heads(youmonst.data)) {
+					pline("%s slices through both of your %ss!", Monnam(mtmp), body_part(NECK));
+				} else {
+					pline("%s %ss you!", Monnam(mtmp), rn2(2) ? "behead" : "decapitate");
+				}
 				if (Upolyd) {
 					rehumanize();
 				} else {

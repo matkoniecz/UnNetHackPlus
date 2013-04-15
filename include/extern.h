@@ -1263,6 +1263,7 @@ E boolean FDECL(angry_guards, (BOOLEAN_P));
 E void NDECL(pacify_guards);
 E void FDECL(mimic_hit_msg, (struct monst *, SHORT_P));
 E struct permonst *FDECL(get_monster_index_after_stone_to_flesh, (struct permonst *));
+E struct boolean *FDECL(has_two_heads, (struct permonst *));
 
 /* ### mondata.c ### */
 

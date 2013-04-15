@@ -2971,6 +2971,15 @@ get_monster_index_after_stone_to_flesh(struct permonst *mptr)
 	return mptr;
 }
 
+boolean
+has_two_heads(struct permonst *mptr)
+{
+	if(mptr == &mons[PM_ETTIN] || mptr == &mons[PM_ETTIN_ZOMBIE]) {
+		return TRUE;
+	}
+	return FALSE;
+}
+
 #endif /* OVLB */
 
 /*mon.c*/
