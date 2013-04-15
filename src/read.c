@@ -92,6 +92,7 @@ doread()
 			"Don't Panic",				/* HHGTTG */
 			"Furinkan High School Athletic Dept.",	/* Ranma 1/2 */
 			"Hel-LOOO, Nurse!",			/* Animaniacs */
+			
 			/* NAO */
 			"=^.^=",
 			"100% goblin hair - do not wash",
@@ -152,11 +153,25 @@ doread()
 			"I couldn't afford this T-shirt so I stole it!",
 			"End Mercantile Opacity Discrimination Now: Let Invisible Customers Shop!",
 			"Elvira's House O'Succubi, granting the gift of immorality!",
+
+			/* http://www.alt.org/nethack/addmsgs/viewmsgs.php */
+			"That is not dead which can eternal lie, and in successful ascensions even Death may die.",
+			"Yet Another Stupid T-Shirt",
+			"Xorn ate my +7 Stormbringer and +6 Grayswandir",
+			"Overcharge me!",
+			"Mind flayers suck!",
+			"Funny message goes here",
+			"3,14159 26535 89793 23846 26433 83279 50288 41971 69399 37510 58209 74944 59230 78164 06286 20899...",
+			"+<<*giant cave spider silk T-shirt*>>+",
+
 			/* UnNetHack */
 			"I made a NetHack fork and all I got was this lousy T-shirt!",	/* galehar */
+
 			/* UnNetHackPlus */
 			"not food",
 			"ingredients: oxygen 65%, Carbon 18%, Hydrogen 10%, Nitrogen 3%, Calcium 1,5%, Phosphorus 1%",
+			"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
+			"I made a UnNetHack fork and all I got was this lousy T-shirt!",	/* see UnNetHack section */
 		};
 	    char buf[BUFSZ];
 	    int erosion;
