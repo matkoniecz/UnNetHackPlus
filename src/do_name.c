@@ -1193,7 +1193,7 @@ static const char * const bogusmons[] = {
 	/* http://www.alt.org/nethack/addmsgs/viewmsgs.php */
 	"lurker below",
 	"worthless yellowish-brown glass golem",
-	"writhing mass of primal chaos",
+	"writhing mass of primal chaos", /* ADOM */
 	"hallucinatory monster",
 	"jumping brain",
 	"colorless green idea",
