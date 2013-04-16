@@ -2,10 +2,8 @@ Plans for UnNetHackPlus
 roast dunce cap amnesia
 u.umonnum == PM_WOOD_GOLEM || u.umonnum == PM_LEATHER_GOLEM
 u.umonnum == PM_IRON_GOLEM
-						if (!Stoned && !Stone_resistance && !(poly_when_stoned(youmonst.data) && polymon(PM_STONE_GOLEM))) { 
-												boolean moat =
 
-												<- functionify?
+moat =
 												
 u.uhave.questart) { /* carrying the Quest Artifact */ <- normaliza and unccoment name
 
