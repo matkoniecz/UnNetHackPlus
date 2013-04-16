@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* searches_for_item - collect slimes for !is_monster_slimeable
 * Introduction http://nethackwiki.com/wiki/File:Vultures-eye-intro.gif
 * nice artifact but at cost of permahallu
 * ACEHACK CODED THINGS START
