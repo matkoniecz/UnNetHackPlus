@@ -26,6 +26,7 @@
 		- C343-345 "Display the plural form of the "You can't. They are cursed." message as opposed to the singular when trying to remove a cursed pair of lenses." (from GruntHack)
 		- C343-243 "Hero can throw without hands" (as polymorphed monster, for example killer bee) (from GruntHack)
 		- C343-305 "Attacking with an applied polearm ignores the "confirm" option."  (from GruntHack)
+		- C343-81 "Ghosts can be slimed."
 		Patches are linked at http://nethackwiki.com/wiki/User:Bulwersator/UnNetHackPlus_bug_tracking
 	* UnNetHack bug fixes
 		- Angered quest guardians will no longer go berserk.

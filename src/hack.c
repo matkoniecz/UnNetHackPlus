@@ -2972,6 +2972,9 @@ is_monster_slimeable(struct permonst *mptr)
 	if (flaming(mptr)) {
 		return FALSE;
 	}
+	if (unsolid(mptr)) {
+		return FALSE;
+	}
 	if (mptr == &mons[PM_GREEN_SLIME]) {
 		return FALSE;
 	}
