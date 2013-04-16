@@ -2434,7 +2434,7 @@ uchar aatyp;
 			(protector == W_ARMF && !uarmf) ||
 			(protector == W_ARMH && !uarmh) ||
 			(protector == (W_ARMC|W_ARMG) && (!uarmc || !uarmg))) {
-		    if (!Stone_resistance && !(poly_when_stoned(youmonst.data) && polymon(PM_STONE_GOLEM))) {
+		    if (!Stone_resistance && !polymorph_player_instead_stoning()) {
 			You("turn to stone...");
 			done_in_by(mon);
 			return 2;

@@ -1250,7 +1250,7 @@ hitmu(struct monst *mtmp, struct attack *mattk)
 					}
 					if(!rn2(10) || (flags.moonphase == NEW_MOON && rn2(10))) {
  do_stone:
-						if (!Stoned && !Stone_resistance && !(poly_when_stoned(youmonst.data) && polymon(PM_STONE_GOLEM))) {
+						if (!Stoned && !Stone_resistance && !polymorph_player_instead_stoning()) {
 							Stoned = 5;
 							delayed_killer = mtmp->data->mname;
 							if (mtmp->data->geno & G_UNIQ) {
@@ -2151,7 +2151,7 @@ gazemu(mtmp, mattk)	/* monster gazes at you */
 		    !Stone_resistance) {
 		    You("meet %s gaze.", s_suffix(mon_nam(mtmp)));
 		    stop_occupation();
-		    if (poly_when_stoned(youmonst.data) && polymon(PM_STONE_GOLEM))
+		    if (polymorph_player_instead_stoning())
 			break;
 		    You("turn to stone...");
 		    killer_format = KILLED_BY;

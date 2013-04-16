@@ -559,7 +559,7 @@ int pm;
 {
 	(void) maybe_cannibal(pm,TRUE);
 	if (touch_petrifies(&mons[pm]) || pm == PM_MEDUSA) {
-	    if (!Stone_resistance && !(poly_when_stoned(youmonst.data) && polymon(PM_STONE_GOLEM))) {
+	    if (!Stone_resistance && !polymorph_player_instead_stoning()) {
 		Sprintf(killer_buf, "tasting %s meat", mons[pm].mname);
 		killer_format = KILLED_BY;
 		killer = killer_buf;
@@ -2001,7 +2001,7 @@ struct obj *otmp;
 		break;
 	    case EGG:
 		if (touch_petrifies(&mons[otmp->corpsenm])) {
-		    if (!Stone_resistance && !(poly_when_stoned(youmonst.data) && polymon(PM_STONE_GOLEM))) {
+		    if (!Stone_resistance && !polymorph_player_instead_stoning()) {
 			if (!Stoned) Stoned = 5;
 			killer_format = KILLED_BY_AN;
 			Sprintf(killer_buf, "%s egg", mons[otmp->corpsenm].mname);

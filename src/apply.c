@@ -2294,7 +2294,7 @@ struct obj *obj;
 		    /* right into your inventory */
 		    You("snatch %s %s!", s_suffix(mon_nam(mtmp)), onambuf);
 		    if (otmp->otyp == CORPSE &&
-			    touch_petrifies(&mons[otmp->corpsenm]) && !uarmg && !Stone_resistance && !(poly_when_stoned(youmonst.data) && polymon(PM_STONE_GOLEM))) {
+			    touch_petrifies(&mons[otmp->corpsenm]) && !uarmg && !Stone_resistance && !polymorph_player_instead_stoning()) {
 			char kbuf[BUFSZ];
 
 			Sprintf(kbuf, "%s corpse",

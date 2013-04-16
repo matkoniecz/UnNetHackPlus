@@ -1374,7 +1374,7 @@ boolean telekinesis;	/* not picking it up directly by hand */
 	} else if (obj->otyp == CORPSE) {
 	    if ( (touch_petrifies(&mons[obj->corpsenm])) && !uarmg
 				&& !Stone_resistance && !telekinesis) {
-		if (poly_when_stoned(youmonst.data) && polymon(PM_STONE_GOLEM))
+		if (polymorph_player_instead_stoning())
 		    display_nhwindow(WIN_MESSAGE, FALSE);
 		else {
 			char kbuf[BUFSZ];
@@ -1915,7 +1915,7 @@ struct obj *obj;
 	if (obj->otyp == CORPSE) {
 	    if ( (touch_petrifies(&mons[obj->corpsenm])) && !uarmg
 		 && !Stone_resistance) {
-		if (poly_when_stoned(youmonst.data) && polymon(PM_STONE_GOLEM))
+		if (polymorph_player_instead_stoning())
 		    display_nhwindow(WIN_MESSAGE, FALSE);
 		else {
 		    char kbuf[BUFSZ];
@@ -2036,7 +2036,7 @@ struct obj *obj;
 	if (obj->otyp == CORPSE) {
 	    if ( (touch_petrifies(&mons[obj->corpsenm])) && !uarmg
 		 && !Stone_resistance) {
-		if (poly_when_stoned(youmonst.data) && polymon(PM_STONE_GOLEM))
+		if (polymorph_player_instead_stoning())
 		    display_nhwindow(WIN_MESSAGE, FALSE);
 		else {
 		    char kbuf[BUFSZ];
