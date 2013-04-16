@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+eating death as mind flayer
 roast dunce cap amnesia
 u.umonnum == PM_WOOD_GOLEM || u.umonnum == PM_LEATHER_GOLEM
 u.umonnum == PM_IRON_GOLEM
@@ -19,8 +20,6 @@ u.uhave.questart) { /* carrying the Quest Artifact */ <- normaliza and unccoment
 						/* this condition must match the one in sounds.c for MS_NURSE */
 
 pull flags.botl to functions like make_sick - would require "change_hp"
-
-http://sourceforge.net/apps/trac/unnethack/browser/trunk/src/uhitm.c?rev=1300#L2252 <-> mind flayers
 
 int monnum (PM_STONE_GOLEM) - A
 
