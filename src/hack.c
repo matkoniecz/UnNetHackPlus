@@ -2954,4 +2954,28 @@ struct obj *otmp;
 #endif
 #endif /* OVLB */
 
+boolean
+is_player_slimeable()
+{
+	if (Slimed) {
+		return FALSE;
+	}
+	if (Unchanging) {
+		return FALSE;
+	}
+	return is_monster_slimeable(youmonst.data);
+}
+
+boolean
+is_monster_slimeable(struct permonst *mptr)
+{
+	if (flaming(mptr)) {
+		return FALSE;
+	}
+	if (mptr == &mons[PM_GREEN_SLIME]) {
+		return FALSE;
+	}
+	return TRUE;
+}
+
 /*hack.c*/

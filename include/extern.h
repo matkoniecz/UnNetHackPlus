@@ -786,6 +786,8 @@ E int NDECL(inv_cnt);
 #ifdef GOLDOBJ
 E long FDECL(money_cnt, (struct obj *));
 #endif
+E boolean NDECL(is_player_slimeable);
+E boolean FDECL(is_monster_slimeable, (struct permonst *));
 
 /* ### hacklib.c ### */
 

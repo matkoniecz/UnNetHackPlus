@@ -1609,8 +1609,7 @@ hitmu(struct monst *mtmp, struct attack *mattk)
 			if (flaming(youmonst.data)) {
 				pline_The("slime burns away!");
 				dmg = 0;
-			} else if (Unchanging ||
-				youmonst.data == &mons[PM_GREEN_SLIME]) {
+			} else if (Unchanging || youmonst.data == &mons[PM_GREEN_SLIME]) {
 				You("are unaffected.");
 				dmg = 0;
 			} else if (!Slimed) {

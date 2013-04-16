@@ -605,8 +605,7 @@ int pm;
 		    return;
 		}
 	    case PM_GREEN_SLIME:
-		if (!Slimed && !Unchanging && !flaming(youmonst.data) &&
-			youmonst.data != &mons[PM_GREEN_SLIME]) {
+		if (is_player_slimeable()) {
 		    You("don't feel very well.");
 		    Slimed = 10L;
 		    flags.botl = 1;
@@ -640,9 +639,7 @@ struct monst *mon;
 	    return TRUE;		/* lifesaved */
 
 	case PM_GREEN_SLIME:
-	    if (!Unchanging && youmonst.data != &mons[PM_FIRE_VORTEX] &&
-			    youmonst.data != &mons[PM_FIRE_ELEMENTAL] &&
-			    youmonst.data != &mons[PM_GREEN_SLIME]) {
+	    if (is_player_slimeable()) {
 		You("don't feel very well.");
 		Slimed = 10L;
 	    }
@@ -2057,7 +2054,7 @@ struct obj *otmp;
 				!poly_when_stoned(youmonst.data));
 
 		if (mnum == PM_GREEN_SLIME) {
-			deadly = (!Unchanging && !flaming(youmonst.data) && youmonst.data != &mons[PM_GREEN_SLIME]);
+			deadly = is_player_slimeable();
 		}
 		if (is_rider(&mons[mnum])) {
 			deadly = TRUE;
