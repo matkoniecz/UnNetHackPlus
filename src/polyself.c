@@ -418,7 +418,7 @@ int	mntmp;
 	}
 	if (Stoned && poly_when_stoned(&mons[mntmp])) {
 		You("turn to stone!");
-		mntmp = PM_STONE_GOLEM;
+		mntmp = get_potential_stoned_form_of_monster(mntmp);
 		Stoned = 0;
 		delayed_killer = 0;
 	}

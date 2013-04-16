@@ -2009,22 +2009,25 @@ cleanup:
 /* changes the monster into a stone monster of the same type */
 /* this should only be called when poly_when_stoned() is true */
 void
-mon_to_stone(mtmp)
-    struct monst *mtmp;
+mon_to_stone(struct monst *mtmp)
 {
-    if(mtmp->data->mlet == S_GOLEM) {
-	/* it's a golem, and not a stone golem */
-	if(canseemon(mtmp))
-	    pline("%s solidifies...", Monnam(mtmp));
-	if (newcham(mtmp, &mons[PM_STONE_GOLEM], FALSE, FALSE)) {
-	    if(canseemon(mtmp))
-		pline("Now it's %s.", an(mtmp->data->mname));
+	int new_form = get_potential_stoned_form_of_monster(monsndx(mtmp->data));
+	if (new_form != monsndx(mtmp->data)) {
+		if (canseemon(mtmp)) {
+			pline("%s solidifies...", Monnam(mtmp));
+		}
+		if (newcham(mtmp, &mons[new_form], FALSE, FALSE)) {
+			if (canseemon(mtmp)) {
+				pline("Now it's %s.", an(mtmp->data->mname));
+			}
+		} else {
+			if(canseemon(mtmp)) {
+				pline("... and returns to normal.");
+			}
+		}
 	} else {
-	    if(canseemon(mtmp))
-		pline("... and returns to normal.");
+		impossible("Can't polystone %s!", a_monnam(mtmp));
 	}
-    } else
-	impossible("Can't polystone %s!", a_monnam(mtmp));
 }
 
 void

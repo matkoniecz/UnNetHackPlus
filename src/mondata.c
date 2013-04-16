@@ -54,22 +54,31 @@ int atyp;
 #endif /* OVL0 */
 #ifdef OVLB
 
+int
+get_potential_stoned_form_of_monster(int monnum)
+{
+	if (is_golem(&mons[monnum])) {
+		return PM_STONE_GOLEM;
+	}
+	return monnum;
+}
+
 boolean
 poly_when_stoned(struct permonst *ptr)
 {
-	return((boolean)(is_golem(ptr) && ptr != &mons[PM_STONE_GOLEM]));
+	if(get_potential_stoned_form_of_monster(monsndx(ptr)) != monsndx(ptr)) {
+		return TRUE;
+	}
+	return FALSE;
 }
 
 boolean
 polymorph_player_instead_stoning()
 {
-	if (!is_golem(youmonst.data)) {
+	if (!poly_when_stoned(youmonst.data)) {
 		return FALSE;
 	}
-	if (youmonst.data == &mons[PM_STONE_GOLEM]) {
-		return FALSE;
-	}
-	if(!polymon(PM_STONE_GOLEM)) {
+	if(!polymon(get_potential_stoned_form_of_monster(monsndx(youmonst.data)))) {
 		killer_format = KILLED_BY;
 		killer = "self-genocide";
 		done(GENOCIDED);

@@ -1270,6 +1270,7 @@ E void FDECL(mimic_hit_msg, (struct monst *, SHORT_P));
 E void FDECL(set_mon_data, (struct monst *,struct permonst *,int));
 E struct attack *FDECL(attacktype_fordmg, (struct permonst *,int,int));
 E boolean FDECL(attacktype, (struct permonst *,int));
+E int FDECL(get_potential_stoned_form_of_monster, (int));
 E boolean FDECL(poly_when_stoned, (struct permonst *));
 E boolean NDECL(polymorph_player_instead_stoning);
 E boolean FDECL(resists_drli, (struct monst *));
