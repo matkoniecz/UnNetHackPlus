@@ -1264,8 +1264,6 @@ E void FDECL(golemeffects, (struct monst *,int,int));
 E boolean FDECL(angry_guards, (BOOLEAN_P));
 E void NDECL(pacify_guards);
 E void FDECL(mimic_hit_msg, (struct monst *, SHORT_P));
-E struct permonst *FDECL(get_monster_index_after_stone_to_flesh, (struct permonst *));
-E struct boolean *FDECL(has_two_heads, (struct permonst *));
 
 /* ### mondata.c ### */
 
@@ -1300,6 +1298,8 @@ E const char *FDECL(locomotion, (const struct permonst *,const char *));
 E const char *FDECL(stagger, (const struct permonst *,const char *));
 E const char *FDECL(on_fire, (struct permonst *,struct attack *));
 E const struct permonst *FDECL(raceptr, (struct monst *));
+E struct permonst *FDECL(get_monster_index_after_stone_to_flesh, (struct permonst *));
+E boolean FDECL(has_two_heads, (struct permonst *));
 
 /* ### monmove.c ### */
 
