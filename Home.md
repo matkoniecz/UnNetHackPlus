@@ -1,4 +1,37 @@
 Plans for UnNetHackPlus
+roast dunce cap amnesia
+u.umonnum == PM_WOOD_GOLEM || u.umonnum == PM_LEATHER_GOLEM
+u.umonnum == PM_IRON_GOLEM
+You_hear - should check soundok instead of iffing it around
+
+						if (!Stoned && !Stone_resistance && !(poly_when_stoned(youmonst.data) && polymon(PM_STONE_GOLEM))) { 
+												boolean moat =
+
+												<- functionify?
+												
+u.uhave.questart) { /* carrying the Quest Artifact */ <- normaliza and unccoment name
+
+
+				rehumanize();
+				break;
+			}
+			hurtarmor(AD_DCAY);
+
+			
+			why break
+			
+						/* this condition must match the one in sounds.c for MS_NURSE */
+
+pull flags.botl to functions like make_sick - would require "change_hp"
+
+http://sourceforge.net/apps/trac/unnethack/browser/trunk/src/uhitm.c?rev=1300#L2252 <-> mind flayers
+
+int monnum (PM_STONE_GOLEM) - A
+
+struct permonst * - B
+
+A -> B &mons[A]
+B -> A monsndx(A)
 * searches_for_item, munstone - collect slimes for !is_monster_slimeable
 * Introduction http://nethackwiki.com/wiki/File:Vultures-eye-intro.gif
 * nice artifact but at cost of permahallu
