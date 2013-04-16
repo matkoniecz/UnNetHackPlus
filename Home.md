@@ -2,8 +2,6 @@ Plans for UnNetHackPlus
 roast dunce cap amnesia
 u.umonnum == PM_WOOD_GOLEM || u.umonnum == PM_LEATHER_GOLEM
 u.umonnum == PM_IRON_GOLEM
-You_hear - should check soundok instead of iffing it around
-
 						if (!Stoned && !Stone_resistance && !(poly_when_stoned(youmonst.data) && polymon(PM_STONE_GOLEM))) { 
 												boolean moat =
 
