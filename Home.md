@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+
 eating death as mind flayer
 roast dunce cap amnesia
 u.umonnum == PM_WOOD_GOLEM || u.umonnum == PM_LEATHER_GOLEM
