@@ -57,9 +57,7 @@ int atyp;
 boolean
 poly_when_stoned(struct permonst *ptr)
 {
-	return((boolean)(is_golem(ptr) && ptr != &mons[PM_STONE_GOLEM] &&
-		!(mvitals[PM_STONE_GOLEM].mvflags & G_GENOD)));
-		/* allow G_EXTINCT */
+	return((boolean)(is_golem(ptr) && ptr != &mons[PM_STONE_GOLEM]));
 }
 
 boolean
@@ -71,7 +69,12 @@ polymorph_player_instead_stoning()
 	if (youmonst.data == &mons[PM_STONE_GOLEM]) {
 		return FALSE;
 	}
-	polymon(PM_STONE_GOLEM);
+	if(!polymon(PM_STONE_GOLEM)) {
+		killer_format = KILLED_BY;
+		killer = "self-genocide";
+		done(GENOCIDED);
+	}
+	return TRUE;
 }
 
 boolean
