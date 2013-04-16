@@ -2151,7 +2151,7 @@ gazemu(mtmp, mattk)	/* monster gazes at you */
 		    !Stone_resistance) {
 		    You("meet %s gaze.", s_suffix(mon_nam(mtmp)));
 		    stop_occupation();
-		    if(poly_when_stoned(youmonst.data) && polymon(PM_STONE_GOLEM))
+		    if (poly_when_stoned(youmonst.data) && polymon(PM_STONE_GOLEM))
 			break;
 		    You("turn to stone...");
 		    killer_format = KILLED_BY;

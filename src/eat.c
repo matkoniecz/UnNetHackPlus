@@ -559,8 +559,7 @@ int pm;
 {
 	(void) maybe_cannibal(pm,TRUE);
 	if (touch_petrifies(&mons[pm]) || pm == PM_MEDUSA) {
-	    if (!Stone_resistance &&
-		!(poly_when_stoned(youmonst.data) && polymon(PM_STONE_GOLEM))) {
+	    if (!Stone_resistance && !(poly_when_stoned(youmonst.data) && polymon(PM_STONE_GOLEM))) {
 		Sprintf(killer_buf, "tasting %s meat", mons[pm].mname);
 		killer_format = KILLED_BY;
 		killer = killer_buf;
@@ -1427,8 +1426,7 @@ eatcorpse(otmp)		/* called when a corpse is selected as food */
 	long rotted = 0L;
 	boolean uniq = !!(mons[mnum].geno & G_UNIQ);
 	int retcode = 0;
-	boolean stoneable = (touch_petrifies(&mons[mnum]) && !Stone_resistance &&
-				!poly_when_stoned(youmonst.data));
+	boolean stoneable = (touch_petrifies(&mons[mnum]) && !Stone_resistance && !poly_when_stoned(youmonst.data));
 
 	/* KMH, conduct */
 	/* eating a corpse breaks food-conducts here */
@@ -2003,8 +2001,7 @@ struct obj *otmp;
 		break;
 	    case EGG:
 		if (touch_petrifies(&mons[otmp->corpsenm])) {
-		    if (!Stone_resistance &&
-			!(poly_when_stoned(youmonst.data) && polymon(PM_STONE_GOLEM))) {
+		    if (!Stone_resistance && !(poly_when_stoned(youmonst.data) && polymon(PM_STONE_GOLEM))) {
 			if (!Stoned) Stoned = 5;
 			killer_format = KILLED_BY_AN;
 			Sprintf(killer_buf, "%s egg", mons[otmp->corpsenm].mname);
@@ -2049,9 +2046,7 @@ struct obj *otmp;
 
 	if (cadaver || otmp->otyp == EGG || otmp->otyp == TIN) {
 		/* These checks must match those in eatcorpse() */
-		deadly = (touch_petrifies(&mons[mnum]) &&
-				!Stone_resistance &&
-				!poly_when_stoned(youmonst.data));
+		deadly = (touch_petrifies(&mons[mnum]) && !Stone_resistance && !poly_when_stoned(youmonst.data));
 
 		if (mnum == PM_GREEN_SLIME) {
 			deadly = is_player_slimeable();
