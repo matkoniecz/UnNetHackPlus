@@ -2,25 +2,6 @@ Plans for UnNetHackPlus
 
 * http://bilious.alt.org/?224
 
-+  "\302uckaroo",  /* B. Banzai */
-+  "\304ick",      /* D. Feynman */
-+  "\305rwin",     /* E. Schroedinger */
-+  "\314ouis",     /* L. de Broglie */
-+  "\315ax",       /* M. Born, M. Planck */
-+  "\316iels",     /* N. Bohr */
-+  "\320ascual",   /* P. Jordan */
-+  "\320aul",      /* P. Dirac */
-+  "\323am",       /* S. Beckett */ 
-+  "\323atyen",    /* Satyendra Bose */
-+  "\323ephen",    /* S. Hawking */
-+  "\327erner",    /* W. Heisenberg */
-+  "\327olfgang",  /* W. Pauli */
-+  "\305nrico",    /* E. Fermi */  
-+
-+  "\315arie",     /* M. Curie */
-+  "\314ise",      /* L. Meitner */
-
-
 eating death as mind flayer
 roast dunce cap amnesia
 u.umonnum == PM_WOOD_GOLEM || u.umonnum == PM_LEATHER_GOLEM
