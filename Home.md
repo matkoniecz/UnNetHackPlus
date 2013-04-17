@@ -212,7 +212,7 @@ m_dowear_type
 * confused/stunned magic mapping causes you to forget current level (useful during search for vibrating square)
 * topten.c tt_oname - use names from NAO (?)
 * nethack.alt.org, there is an option (hilite_hidden_stairs) http://bilious.alt.org/?433
-* new level generator (moria, see newsgroup)
+* new level generator (moria, see newsgroup, http://imgur.com/d6NWagD)
 * the alignment system  a complete overhaul 
 * make stupid water noticeable different from stupid fountains
 * http://nethackwiki.com/wiki/W343-3
@@ -284,11 +284,12 @@ fix completely broken alignment, maybe also better gods
 * randomised valley from spork
 *  Got it! Giantslayer is an artifact sling. It does more damage than normal slings and provides warning against giants, but since slings suck that part is meaningless noise. The important feature of Giantslayer is that it provides near-giant strength when wielded… OR when it is set up as an alternate weapon. So as long as you're not planning to dual-wield (and monks like me clearly are not) you get an effect almost equivalent to slotless gauntlets of power. And unlike the gauntlets, Giantslayer does not interfere with spellcasting!
 * give levitation/teleport control to Sam with random chance (1/3?) to stop trivial ways to kill him
-* http://forum.rpg.net/showthread.php?466187-(Let-s-Play!)-Sporkhack/page79
+* force player to stay in polymorphed form rather than kill 
+* http://forum.rpg.net/showthread.php?466187-(Let-s-Play!)-Sporkhack/page81
+* split room from spork
 *  Mars grants Nefarious with the gift of Dragonbane, an artifact spear. As I've said before, vanilla bane artifacts are uniformly crap, but in Sporkhack Dragonbane in particular is startlingly good, especially early on. Wielding it grants fire, cold, poison, shock, sleep, acid, and disintegration resistance. No, that isn't a typo. You get all of them, and at 100%. Fantastic weapon for conducts. It also has the usual anti-dragon properties, like all bane weapons.
 * remove pet apport
 * identify projectiles - for Rangers http://nh.gmuf.com/ranger_ammo-343.diff
-* #chat - threats, confused dwarf talks about adamantine
 * nerf speed boots
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/b6bf67e56332fe1e4852cfad2b926da2f216559a
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/dbb7e37a081c6280d50d75cfd7b2e2e801a8354b 
