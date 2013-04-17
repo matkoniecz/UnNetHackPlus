@@ -3109,7 +3109,7 @@ struct trap *ttmp;
 	if (ttmp && ttmp->madeby_u) chance--;
 	if (Role_if(PM_ROGUE)) {
 	    if (rn2(2 * MAXULEV) < u.ulevel) chance--;
-	    if (u.uhave.questart && chance > 1) chance--;
+	    if (u.uhave.quest_artifact && chance > 1) chance--;
 	} else if (Role_if(PM_RANGER) && chance > 1) chance--;
 	return rn2(chance);
 }

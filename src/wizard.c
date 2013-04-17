@@ -208,7 +208,7 @@ you_have(mask)
 	    case M3_WANTSBELL:	return(boolean)(u.uhave.bell);
 	    case M3_WANTSCAND:	return(boolean)(u.uhave.menorah);
 	    case M3_WANTSBOOK:	return(boolean)(u.uhave.book);
-	    case M3_WANTSARTI:	return(boolean)(u.uhave.questart);
+	    case M3_WANTSARTI:	return(boolean)(u.uhave.quest_artifact);
 	    default:		break;
 	}
 	return(0);

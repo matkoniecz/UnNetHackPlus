@@ -290,9 +290,9 @@ struct obj *obj;
 #endif
 	} else if (obj->oartifact) {
 		if (is_quest_artifact(obj)) {
-		    if (u.uhave.questart)
+		    if (u.uhave.quest_artifact)
 			warning("already have quest artifact?");
-		    u.uhave.questart = 1;
+		    u.uhave.quest_artifact = 1;
 		    artitouch();
 		}
 		set_artifact_intrinsic(obj, 1, W_ART);
@@ -557,9 +557,9 @@ struct obj *obj;
 		u.uhave.book = 0;
 	} else if (obj->oartifact) {
 		if (is_quest_artifact(obj)) {
-		    if (!u.uhave.questart)
+		    if (!u.uhave.quest_artifact)
 			warning("don't have quest artifact?");
-		    u.uhave.questart = 0;
+		    u.uhave.quest_artifact = 0;
 		}
 		set_artifact_intrinsic(obj, 0, W_ART);
 	}

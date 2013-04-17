@@ -1389,7 +1389,7 @@ hitmu(struct monst *mtmp, struct attack *mattk)
 		case AD_SAMU:
 			hitmsg(mtmp, mattk);
 			/* when the Wiz hits, 1/20 steals the amulet */
-			if (u.uhave.amulet || u.uhave.bell || u.uhave.book || u.uhave.menorah || u.uhave.questart) { /* carrying the Quest Artifact */
+			if (u.uhave.amulet || u.uhave.bell || u.uhave.book || u.uhave.menorah || u.uhave.quest_artifact) {
 				if (!rn2(20)) {
 					stealamulet(mtmp);
 				}

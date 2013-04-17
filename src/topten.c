@@ -315,11 +315,11 @@ encode_carried()
 
   /* this encodes important items potentially owned by the player at the
      time of death */
-  if (u.uhave.amulet)   c |= 0x0001UL; /* real Amulet of Yendor */
-  if (u.uhave.bell)     c |= 0x0002UL; /* Bell of Opening */
-  if (u.uhave.book)     c |= 0x0004UL; /* Book of the Dead */
-  if (u.uhave.menorah)  c |= 0x0008UL; /* Candelabrum of Invocation */
-  if (u.uhave.questart) c |= 0x0010UL; /* own quest artifact */
+  if (u.uhave.amulet)         c |= 0x0001UL; /* real Amulet of Yendor */
+  if (u.uhave.bell)           c |= 0x0002UL; /* Bell of Opening */
+  if (u.uhave.book)           c |= 0x0004UL; /* Book of the Dead */
+  if (u.uhave.menorah)        c |= 0x0008UL; /* Candelabrum of Invocation */
+  if (u.uhave.quest_artifact) c |= 0x0010UL; /* own quest artifact */
 
   return c;
 }
