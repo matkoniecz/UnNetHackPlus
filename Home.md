@@ -1,5 +1,26 @@
 Plans for UnNetHackPlus
 
+* http://bilious.alt.org/?224
+
++  "\302uckaroo",  /* B. Banzai */
++  "\304ick",      /* D. Feynman */
++  "\305rwin",     /* E. Schroedinger */
++  "\314ouis",     /* L. de Broglie */
++  "\315ax",       /* M. Born, M. Planck */
++  "\316iels",     /* N. Bohr */
++  "\320ascual",   /* P. Jordan */
++  "\320aul",      /* P. Dirac */
++  "\323am",       /* S. Beckett */ 
++  "\323atyen",    /* Satyendra Bose */
++  "\323ephen",    /* S. Hawking */
++  "\327erner",    /* W. Heisenberg */
++  "\327olfgang",  /* W. Pauli */
++  "\305nrico",    /* E. Fermi */  
++
++  "\315arie",     /* M. Curie */
++  "\314ise",      /* L. Meitner */
+
+
 eating death as mind flayer
 roast dunce cap amnesia
 u.umonnum == PM_WOOD_GOLEM || u.umonnum == PM_LEATHER_GOLEM
@@ -144,7 +165,6 @@ http://tvtropes.org/pmwiki/pmwiki.php/Main/AlienKudzu
 * https://github.com/sgrunt/GruntHack/commit/00fac16b796e33189b8f542160fd49d9ff8d790c - magical items generated more frequently at deeper dungeon levels
 * kicking unidentified secret door
 * http://bilious.alt.org/?440
-* http://bilious.alt.org/?270
 * Allow looking at dungeon overview during level teleport prompt - from http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * revamp https://github.com/Bulwersator/UnNetHackPlus/blob/master/README.configure (z windowsem z msdna)
 * kill this 18/something strength
@@ -161,9 +181,6 @@ http://tvtropes.org/pmwiki/pmwiki.php/Main/AlienKudzu
 * king names
 * read state after spellbook name
 * success state as colour for wizards (symbol?)
-* 		if (Punished) {
-			u.bc_felt = 0;	/* forget felt ball&chain */
-		}
 * http://doryen.eptalys.net/articles/bsp-dungeon-generation/
 * http://doryen.eptalys.net/data/libtcod/doc/1.5.1/html2/namegen_file_4.html?c=false&cpp=false&cs=false&py=false&lua=false (king names)
 * introduce and use full unicode support (see http://doryen.eptalys.net/forum/index.php?topic=1473.0 for potential)
@@ -177,9 +194,7 @@ mon_reflects
 m_dowear_type
 * https://github.com/tung/NitroHack/commit/206f8427deefee0e87110c6f93f1df49fa31e9e3
 * https://github.com/Chris-plus-alphanumericgibberish/dnethack/commit/310da13976ab30e9db08f73e94aafab96ff1ac41
-* http://bilious.alt.org/?181
 * http://bilious.alt.org/?151
-* http://bilious.alt.org/?224
 * autotravel and stopping for engravings
 * monster with tele= resist \ of tele
 * https://github.com/tung/NitroHack/wiki - UnNetHack bug fixes (not already in UnNetHack)
@@ -230,7 +245,6 @@ m_dowear_type
 * do_wear.c dotakeoff function - merge RT
 * [[threats]]
 * turn throne in perks for gold object
-* see comments on http://bilious.alt.org/?216 http://bilious.alt.org/?51 
 * see Linley's Dungeon Crawl on nethackwiki
 * vaults - see crawl and https://github.com/Bulwersator/CopyOfSporkHack/commit/cd21033f22b5e9e7ef318ea1a1b9dd76c8351bfa
 * Stun_resistance from spork - see https://github.com/Bulwersator/UnNetHackPlus/commit/b2b61283f6040af63e454a880129a3c4c22e84a5
