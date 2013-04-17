@@ -1333,6 +1333,7 @@ E void NDECL(monstr_init);
 
 /* ### mplayer.c ### */
 
+E const char *FDECL(quantum_mechanic_name, (size_t,BOOLEAN_P));
 E const char *FDECL(gnome_name, (size_t,BOOLEAN_P));
 E const char *FDECL(fairy_name, (size_t,BOOLEAN_P));
 E const char *FDECL(orc_name, (size_t,BOOLEAN_P));

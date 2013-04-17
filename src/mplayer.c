@@ -98,6 +98,41 @@ char *nam;
 			    (boolean)mtmp->female));
 }
 
+/* return a randomly generated quantum mechanic name */
+const char *
+quantum_mechanic_name(size_t id, boolean female)
+{
+	static char buf[30];
+	static const char *female_name[] = {
+		"Marie",     /* M. Skłodowska-Curie */
+		"Lise",      /* L. Meitner */
+	};
+	static const char *male_name[] = {
+		"Buckaroo",  /* B. Banzai */
+		"Richard",   /* R. Feynman */
+		"Erwin",     /* E. Schroedinger */
+		"Louis",     /* L. de Broglie */
+		"Max",       /* M. Born, M. Planck */
+		"Niels",     /* N. Bohr */
+		"Pascual",   /* P. Jordan */
+		"Paul",      /* P. Dirac */
+		"Sam",       /* S. Beckett */ 
+		"Satyendra", /* S. Bose */
+		"Sephen",    /* S. Hawking */
+		"Werner",    /* W. Heisenberg */
+		"Wolfgang",  /* W. Pauli */
+		"Enrico",    /* E. Fermi */  
+	};
+	if(female) {
+		snprintf(buf, 30, "%s",
+			female_name[id % SIZE(female_name)]);
+	} else {
+		snprintf(buf, 30, "%s",
+			male_name[id % SIZE(male_name)]);
+	}
+	return buf;
+}
+
 /* return a randomly generated gnome name */
 const char *
 gnome_name(size_t id, boolean female)

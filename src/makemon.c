@@ -878,6 +878,12 @@ boolean ghostly;
 
 
 const char *
+random_quantum_mechanic_name(boolean female)
+{
+	return quantum_mechanic_name(rn2(10000), female);
+}
+
+const char *
 random_gnome_name(boolean female)
 {
 	return gnome_name(rn2(10000), female);
@@ -991,7 +997,7 @@ generate_name_for_this_monster(struct monst *mtmp)
 	} else if (s == S_OGRE) {
 		mtmp = christen_monst(mtmp, random_troll_name(mtmp->female)); //TODO
 	} else if (s == S_QUANTMECH) {
-		//TODO
+		mtmp = christen_monst(mtmp, random_quantum_mechanic_name(mtmp->female));
 	} else if (s == S_VAMPIRE) {
 		//TODO
 	} else if (s == S_WRAITH) {
