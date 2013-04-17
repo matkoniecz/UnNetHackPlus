@@ -7,9 +7,6 @@ u.umonnum == PM_IRON_GOLEM
 
 moat =
 												
-u.uhave.questart) { /* carrying the Quest Artifact */ <- normaliza and unccoment name
-
-
 				rehumanize();
 				break;
 			}
