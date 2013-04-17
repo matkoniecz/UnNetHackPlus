@@ -28,10 +28,9 @@ static const char *random_mesg[] = {
 	"Madam, in Eden, I'm Adam.", /* A palindrome */
 	"Two thumbs up!", /* Siskel & Ebert */
 	"Hello, World!", /* The First C Program */
-#ifdef MAIL
 	"You've got mail!", /* AOL */
-#endif
 	"As if!", /* Clueless */
+
 	/* From Slash'Em */
 	/* [Tom] added these */
 	"Y?v?l s??ks!", /* just kidding... */
@@ -44,6 +43,7 @@ static const char *random_mesg[] = {
 	"UY WUZ HERE", /* :] */
 	"I'll be back!", /* Terminator */
 	"That is not dead which can eternal lie.", /* HPL */
+
 	/* From NAO */
 	"Arooo!  Werewolves of Yendor!", /* gang tag */
 	"Dig for Victory here", /* pun, duh */
@@ -65,6 +65,18 @@ static const char *random_mesg[] = {
 	"X marks the spot",
 	"X <--- You are here.",
 	"You are the one millionth visitor to this place!  Please wait 200 turns for your wand of wishing.",
+
+	/* http://www.alt.org/nethack/addmsgs/viewmsgs.php */
+	"Badger badger badger badger badger badger MUSHROOM MUSHROOM!",
+	"Dig here for a +5 pair of Speed Boots!",
+	"If you find speed boots on this spot, consider yourself lucky.",
+	"Gandalf for president!",
+	"Fnord",
+	"\"Engrave a wise saying and your name will live forever.\" -- Anonymous",
+	"In Soviet Russia, the amulet ascends with you!",
+	"Need a light? Come visit the Minetown branch of Izchak's Lighting Store!",
+	"The Vibrating Square is NOT here",
+
 	/* From UnNetHack */
 	"She's watching you!", /* Portal */
 	"The cake is a lie!", /* Portal */
@@ -83,6 +95,31 @@ static const char *random_mesg[] = {
 	"Look behind you, a Three-Headed Monkey!", /* Monkey Island */
 	"Ifnkovhgroghprm", /* Kings Quest I */
 	"Cookies are delicious delicacies", /* Mozilla Firefox */
+
+	/* From UnNetHackPlus */
+	"Losing is fun!", /* Dwarf Fortress */
+	/* Murphy's laws */
+	"Cheer up, the worst is yet to come...",
+	"Computers let you waste time efficiently",
+	"If something cannot go wrong at all, it will go wrong in a very spectacular way.",
+	"If everything seems to be going well, you have obviously overlooked something",
+	"If anything can go wrong, it will",
+	"When things go from bad to worse, the cycle repeats.",
+	"Being dead right, won't make you any less dead.",
+	"If all else fails, hit it with a big hammer.",
+	"If many things can go wrong, they will all go wrong at the same time.",
+	/* end of Murphy's laws */
+	"That is not dead which can eternal lie, and with strange aeons even death may die.", /* H. P. Lovecraft */
+	"Ph'nglui mglw'nafh Cthulhu R'lyeh wgah'nagl fhtagn.", /* H. P. Lovecraft */
+	"Conducts are about player skill, not about obsessive-compulsive disorder", /* TJR on RGRN */
+	"That is not dead which can eternal lie, and with strange aeons even vanilla might get released.", /* bhaak on http://nhqdb.alt.org/?301 */
+	/* http://donjon.bin.sh/fantasy/random/#dungeon_graffiti */
+	"When song becomes silence, the Wand of Aether shall be destroyed",
+	"Upon the Night of Dweomers, when iron is made flesh and the Golden Scepter is wreathed in flames, the Copper Tower shall be restored",
+	"Run away!",
+	"<--",
+	"-->",
+	/* end of this source */
 };
 
 char *
@@ -93,10 +130,11 @@ char *outbuf;
 
 	/* a random engraving may come from the "rumors" file,
 	   or from the list above */
-	if (!rn2(4) || !(rumor = getrumor(0, outbuf, TRUE)) || !*rumor)
-	    Strcpy(outbuf, random_mesg[rn2(SIZE(random_mesg))]);
+	if (!rn2(4) || !(rumor = getrumor(0, outbuf, TRUE)) || !*rumor) {
+		Strcpy(outbuf, random_mesg[rn2(SIZE(random_mesg))]);
+	}
 
-	wipeout_text(outbuf, (int)(strlen(outbuf) / 4), 0);
+	wipeout_text(outbuf, rnl((int)(strlen(outbuf) / 6) + 1) + rn2((int)(strlen(outbuf) / 6) + 1), 0);
 	return outbuf;
 }
 
@@ -183,22 +221,26 @@ unsigned seed;		/* for semi-controlled randomization */
 boolean
 can_reach_floor()
 {
-	return (boolean)(!u.uswallow &&
-#ifdef STEED
-			/* Restricted/unskilled riders can't reach the floor */
-			!(u.usteed && P_SKILL(P_RIDING) < P_BASIC) &&
-#endif
-			 (!Levitation ||
-			  Is_airlevel(&u.uz) || Is_waterlevel(&u.uz)));
+	if (u.uswallow) {
+		return FALSE;
+	}
+	/* Restricted/unskilled riders can't reach the floor */
+	if (u.usteed && P_SKILL(P_RIDING) < P_BASIC) {
+		return FALSE;
+	}
+	if (Levitation && !(Is_airlevel(&u.uz) || Is_waterlevel(&u.uz))) {
+		return FALSE;
+	}
+	return TRUE;
 }
 #endif /* OVLB */
 #ifdef OVL0
 
 const char *
 surface(x, y)
-register int x, y;
+int x, y;
 {
-	register struct rm *lev = &levl[x][y];
+	struct rm *lev = &levl[x][y];
 
 	if ((x == u.ux) && (y == u.uy) && u.uswallow &&
 		is_animal(u.ustuck->data))
@@ -230,9 +272,9 @@ register int x, y;
 
 const char *
 ceiling(x, y)
-register int x, y;
+int x, y;
 {
-	register struct rm *lev = &levl[x][y];
+	struct rm *lev = &levl[x][y];
 	const char *what;
 
 	/* other room types will no longer exist when we're interested --
@@ -261,7 +303,7 @@ struct engr *
 engr_at(x, y)
 xchar x, y;
 {
-	register struct engr *ep = head_engr;
+	struct engr *ep = head_engr;
 
 	while(ep) {
 		if(x == ep->engr_x && y == ep->engr_y)
@@ -281,14 +323,13 @@ sengr_at(s, x, y)
 	const char *s;
 	xchar x, y;
 {
-	register struct engr *ep = engr_at(x,y);
+	struct engr *ep = engr_at(x,y);
 
 	return (ep && ep->engr_type != HEADSTONE &&
 		ep->engr_time <= moves && strstri(ep->engr_txt, s) != 0);
 }
 #endif /* ELBERETH */
 
-#ifdef ELBERETH_CONDUCT
 /** Return the number of distinct times Elbereth is engraved at
  * the specified location. Case insensitive.  Counts an engraving
  * as being present even if it's still being written: if you're
@@ -301,7 +342,7 @@ nengr_at(x, y)
 	xchar x, y;
 {
 	const char *s = "Elbereth";
-	register struct engr *ep = engr_at(x, y);
+	struct engr *ep = engr_at(x, y);
 	unsigned count = 0;
 	const char *p;
 	
@@ -316,14 +357,13 @@ nengr_at(x, y)
 
 	return count;
 }
-#endif /* ELBERETH_CONDUCT */
 
 #endif /* OVL0 */
 #ifdef OVL2
 
 void
 u_wipe_engr(cnt)
-register int cnt;
+int cnt;
 {
 	if (can_reach_floor())
 		wipe_engr_at(u.ux, u.uy, cnt);
@@ -334,9 +374,9 @@ register int cnt;
 
 void
 wipe_engr_at(x,y,cnt)
-register xchar x,y,cnt;
+xchar x,y,cnt;
 {
-	register struct engr *ep = engr_at(x,y);
+	struct engr *ep = engr_at(x,y);
 
 	/* Headstones are indelible */
 	if(ep && ep->engr_type != HEADSTONE){
@@ -357,10 +397,10 @@ register xchar x,y,cnt;
 
 void
 read_engr_at(x,y)
-register int x,y;
+int x,y;
 {
-	register struct engr *ep = engr_at(x,y);
-	register int	sensed = 0;
+	struct engr *ep = engr_at(x,y);
+	int	sensed = 0;
 	char buf[BUFSZ];
 	
 	/* Sensing an engraving does not require sight,
@@ -440,12 +480,12 @@ register int x,y;
 
 void
 make_engr_at(x,y,s,e_time,e_type)
-register int x,y;
-register const char *s;
-register long e_time;
-register xchar e_type;
+int x,y;
+const char *s;
+long e_time;
+xchar e_type;
 {
-	register struct engr *ep;
+	struct engr *ep;
 
 	if ((ep = engr_at(x,y)) != 0)
 	    del_engr(ep);
@@ -468,7 +508,7 @@ void
 del_engr_at(x, y)
 int x, y;
 {
-	register struct engr *ep = engr_at(x, y);
+	struct engr *ep = engr_at(x, y);
 
 	if (ep) del_engr(ep);
 }
@@ -1001,7 +1041,7 @@ boolean fingers;
 	 */
 
 	if (oep) {
-	    register char c = 'n';
+	    char c = 'n';
 
 	    /* Give player the choice to add to engraving. */
 
@@ -1239,7 +1279,6 @@ boolean fingers;
 
 	(void) strncat(buf, ebuf, (BUFSZ - (int)strlen(buf) - 1));
 
-#ifdef ELBERETH_CONDUCT
 	{
 		unsigned ecount1, ecount0 = nengr_at(u.ux, u.uy);
 		make_engr_at(u.ux, u.uy, buf, (moves - multi), type);
@@ -1247,9 +1286,6 @@ boolean fingers;
 		if (ecount1 > ecount0)
 			u.uconduct.elbereths += (ecount1 - ecount0);
 	}
-#else
-	make_engr_at(u.ux, u.uy, buf, (moves - multi), type);
-#endif
 
 	if (post_engr_text[0]) pline(post_engr_text);
 
@@ -1266,8 +1302,8 @@ void
 save_engravings(fd, mode)
 int fd, mode;
 {
-	register struct engr *ep = head_engr;
-	register struct engr *ep2;
+	struct engr *ep = head_engr;
+	struct engr *ep2;
 	unsigned no_more_engr = 0;
 
 	while (ep) {
@@ -1290,7 +1326,7 @@ void
 rest_engravings(fd)
 int fd;
 {
-	register struct engr *ep;
+	struct engr *ep;
 	unsigned lth;
 
 	head_engr = 0;
@@ -1311,12 +1347,12 @@ int fd;
 
 void
 del_engr(ep)
-register struct engr *ep;
+struct engr *ep;
 {
 	if (ep == head_engr) {
 		head_engr = ep->nxt_engr;
 	} else {
-		register struct engr *ept;
+		struct engr *ept;
 
 		for (ept = head_engr; ept; ept = ept->nxt_engr)
 		    if (ept->nxt_engr == ep) {
@@ -1381,353 +1417,367 @@ static const char *epitaphs[] = {
 	"Soon ripe. Soon rotten. Soon gone. But not forgotten.",
 	"Here lies the body of Jonathan Blake. Stepped on the gas instead of the brake.",
 	"Go away!",
-        "Alas fair Death, 'twas missed in life - some peace and quiet from my wife",
-        "Applaud, my friends, the comedy is finished.",
-        "At last... a nice long sleep.",
-        "Audi Partem Alteram",
-        "Basil, assaulted by bears",
-        "Burninated",
-        "Confusion will be my epitaph",
-        "Do not open until Christmas",
-        "Don't be daft, they couldn't hit an elephant at this dist-",
-        "Don't forget to stop and smell the roses",
-        "Don't let this happen to you!",
-        "Dulce et decorum est pro patria mori",
-        "Et in Arcadia ego",
-        "Fatty and skinny went to bed.  Fatty rolled over and skinny was dead.  Skinny Smith 1983-2000.",
-        "Finally I am becoming stupider no more",
-        "Follow me to hell",
-        "...for famous men have the whole earth as their memorial",
-        "Game over, man.  Game over.",
-        "Go away!  I'm trying to take a nap in here!  Bloody adventurers...",
-        "Gone fishin'",
-        "Good night, sweet prince: And flights of angels sing thee to thy rest!",
-        "Go Team Ant!",
-        "He farmed his way here",
-        "Here lies Lies. It's True",
-        "Here lies the left foot of Jack, killed by a land mine.  Let us know if you find any more of him",
-        "He waited too long",
-        "I'd rather be sailing",
-        "If a man's deeds do not outlive him, of what value is a mark in stone?",
-        "I'm gonna make it!",
-        "I took both pills!",
-        "I will survive!",
-        "Killed by a black dragon -- This grave is empty",
-        "Let me out of here!",
-        "Lookin' good, Medusa.",
-        "Mrs. Smith, choked on an apple.  She left behind grieving husband, daughter, and granddaughter.",
-        "Nobody believed her when she said her feet were killing her",
-        "No!  I don't want to see my damn conduct!",
-        "One corpse, sans head",
-        "On the whole, I'd rather be in Minetown",
-        "On vacation",
-        "Oops.",
-        "Out to Lunch",
-        "SOLD",
-        "Someone set us up the bomb!",
-        "Take my stuff, I don't need it anymore",
-        "Taking a year dead for tax reasons",
-        "The reports of my demise are completely accurate",
-        "(This space for sale)",
-        "This was actually just a pit, but since there was a corpse, we filled it",
-        "This way to the crypt",
-        "Tu quoque, Brute?",
-        "VACANCY",
-        "Welcome!",
-        "Wish you were here!",
-        "Yea, it got me too",
-        "You should see the other guy",
-        "...and they made me engrave my own headstone too!",
-        "<Expletive Deleted>",
-        "Adapt.  Enjoy.  Survive.",
-        "Adventure, hah!  Excitement, hah!",
-        "After all, what are friends for...",
-        "After this, nothing will shock me",
-        "Age and treachery will always overcome youth and skill",
-        "Ageing is not so bad.  The real killer is when you stop.",
-        "Ain't I a stinker?",
-        "Algernon",
-        "All else failed...",
-        "All hail RNG",
-        "All right, we'll call it a draw!",
-        "All's well that end well",
-        "Alone at last!",
-        "Always attack a floating eye from behind!",
-        "Am I having fun yet?",
-        "And I can still crawl, I'm not dead yet!",
-        "And all I wanted was a free lunch",
-        "And all of the signs were right there on your face",
-        "And don't give me that innocent look either!",
-        "And everyone died.  Boo hoo hoo.",
-        "And here I go again...",
-        "And nobody cares until somebody famous dies...",
-        "And so it ends?",
-        "And so... it begins.",
-        "And sometimes the bear eats you.",
-        "And then 'e nailed me 'ead to the floor!",
-        "And they said it couldn't be done!",
-        "And what do I look like?  The living?",
-        "And yes, it was ALL his fault!",
-        "And you said it was pretty here...",
-        "Another lost soul",
-        "Any day above ground is a good day!",
-        "Any more of this and I'll die of a stroke before I'm 30.",
-        "Anybody seen my head?",
-        "Anyone for deathmatch?",
-        "Anything for a change.",
-        "Anything that kills you makes you ... well, dead",
-        "Anything worth doing is worth overdoing.",
-        "Are unicorns supposedly peaceful if you're a virgin?  Hah!",
-        "Are we all being disintegrated, or is it just me?",
-        "At least I'm good at something",
-        "Attempted suicide",
-        "Auri sacra fames",
-        "Auribus teneo lupum",
-        "Be prepared",
-        "Beauty survives",
-        "Been Here. Now Gone. Had a Good Time.",
-        "Been through Hell, eh?  What did you bring me?",
-        "Beg your pardon, didn't recognize you, I've changed a lot.",
-        "Being dead builds character",
-        "Beloved daughter, a treasure, buried here.",
-        "Best friends come and go...  Mine just die.",
-        "Better be dead than a fat slave",
-        "Better luck next time",
-        "Beware the ...",
-        "Bloody Hell...",
-        "Bloody barbarians!",
-        "Buried the cat.  Took an hour.  Damn thing kept fighting.",
-        "But I disarmed the trap!",
-        "Can YOU fly?",
-        "Can you believe that thing is STILL moving?",
-        "Can you come up with some better ending for this?",
-        "Can you feel anything when I do this?",
-        "Can you give me mouth to mouth, you just took my breath away.",
-        "Can't I just have a LITTLE peril?",
-        "Can't eat, can't sleep, had to bury the husband here.",
-        "Can't you hit me?!",
-        "Chaos, panic and disorder.  My work here is done.",
-        "Check enclosed.",
-        "Check this out!  It's my brain!",
-        "Chivalry is only reasonably dead",
-        "Coffin for sale.  Lifetime guarantee.",
-        "Come Monday, I'll be all right.",
-        "Come and see the violence inherent in the system",
-        "Come back here!  I'll bite your bloody knees off!",
-        "Commodore Business Machines, Inc.   Died for our sins.",
-        "Complain to one who can help you",
-        "Confess my sins to god?  Which one?",
-        "Confusion will be my epitaph",
-        "Cooties?  Ain't no cooties on me!",
-        "Could somebody get this noose off me?",
-        "Could you check again?  My name MUST be there.",
-        "Could you please take a breath mint?",
-        "Couldn't I be sedated for this?",
-        "Courage is looking at your setbacks with serenity",
-        "Cover me, I'm going in!",
-        "Crash course in brain surgery",
-        "Cross my fingers for me.",
-        "Curse god and die",
-        "Dead Again?  Pardon me for not getting it right the first time!",
-        "Dead and loving every moment!",
-        "Dear wife of mine. Died of a broken heart, after I took it out of her.",
-        "Don't tread on me!",
-        "Dragon? What dragon?",
-        "Drawn and quartered",
-        "Either I'm dead or my watch has stopped.",
-        "Eliza -- Was I really alive, or did I just think I was?",
-        "Elvis",
-        "Enter not into the path of the wicked",
-        "Eris?  I don't need Eris",
-        "Eternal Damnation, Come and stay a long while!",
-        "Even The Dead pay taxes (and they aren't Grateful).",
-        "Even a tomb stone will say good things when you're down!",
-        "Ever notice that live is evil backwards?",
-        "Every day is starting to look like Monday",
-        "Every day, in every way, I am getting better and better.",
-        "Every survival kit should include a sense of humor",
-        "Evil I did dwell;  lewd did I live",
-        "Ex post fucto",
-        "Excellent day to have a rotten day.",
-        "Excuse me for not standing up.",
-        "Experience isn't everything. First, You've got to survive",
-        "First shalt thou pull out the Holy Pin",
-        "For a Breath, I Tarry...",
-        "For recreational use only.",
-        "For sale: One soul, slightly used. Asking for 3 wishes.",
-        "For some moments in life, there are no words.",
-        "Forget Disney World, I'm going to Hell!",
-        "Forget about the dog, Beware of my wife.",
-        "Funeral - Real fun.",
-        "Gawd, it's depressing in here, isn't it?",
-        "Genuine Exploding Gravestone.  (c)Acme Gravestones Inc.",
-        "Get back here!  I'm not finished yet...",
-        "Go ahead, I dare you to!",
-        "Go ahead, it's either you or him.",
-        "Goldilocks -- This casket is just right",
-        "Gone But Not Forgotten",
-        "Gone Underground For Good",
-        "Gone away owin' more than he could pay.",
-        "Gone, but not forgiven",
-        "Got a life. Didn't know what to do with it.",
-        "Grave?  But I was cremated!",
-        "Greetings from Hell - Wish you were here.",
-        "HELP! It's dark in here... Oh, my eyes are closed - sorry",
-        "Ha! I NEVER pay income tax!",
-        "Have you come to raise the dead?",
-        "Having a good time can be deadly.",
-        "Having a great time. Where am I exactly??",
-        "He died of the flux.",
-        "He died today... May we rest in peace!",
-        "He got the upside, I got the downside.",
-        "He lost his face when he was beheaded.",
-        "He missed me first.",
-        "He's not dead, he just smells that way.",
-        "Help! I've fallen and I can't get up!",
-        "Help, I can't wake up!",
-        "Here lies Pinocchio",
-        "Here lies the body of John Round. Lost at sea and never found.",
-        "Here there be dragons",
-        "Hey, I didn't write this stuff!",
-        "Hodie mihi, cras tibi",
-        "Hold my calls",
-        "Home Sweet Hell",
-        "I KNEW this would happen if I lived long enough.",
-        "I TOLD you I was sick!",
-        "I ain't broke but I am badly bent.",
-        "I ain't old. I'm chronologically advantaged.",
-        "I am NOT a vampire. I just like to bite..nibble, really!",
-        "I am here. Wish you were fine.",
-        "I am not dead yet, but watch for further reports.",
-        "I believe them bones are me.",
-        "I broke his brain.",
-        "I can feel it.  My mind.  It's going.  I can feel it.",
-        "I can't go to Hell. They're afraid I'm gonna take over!",
-        "I can't go to hell, they don't want me.",
-        "I didn't believe in reincarnation the last time, either.",
-        "I didn't mean it when I said 'Bite me'",
-        "I died laughing",
-        "I disbelieved in reincarnation in my last life, too.",
-        "I hacked myself to death",
-        "I have all the time in the world",
-        "I knew I'd find a use for this gravestone!",
-        "I know my mind. And it's around here someplace.",
-        "I lied!  I'll never be alright!",
-        "I like it better in the dark.",
-        "I like to be here when I can.",
-        "I may rise but I refuse to shine.",
-        "I never get any either.",
-        "I said hit HIM with the fireball, not me!",
-        "I told you I would never say goodbye.",
-        "I used to be amusing. Now I'm just disgusting.",
-        "I used up all my sick days, so now I'm calling in dead.",
-        "I was killed by <illegible scrawl>",
-        "I was somebody. Who, is no business of yours.",
-        "I will not go quietly.",
-        "I'd give you a piece of my mind... but I can't find it.",
-        "I'd rather be breathing",
-        "I'll be back!",
-        "I'll be mellow when I'm dead. For now, let's PARTY!",
-        "I'm doing this only for tax purposes.",
-        "I'm not afraid of Death!  What's he gonna do? Kill me?",
-        "I'm not getting enough money, so I'm not going to engrave anything useful here.",
-        "I'm not saying anything.",
-        "I'm weeth stupeed --->",
-        "If you thought you had problems...",
-        "Ignorance kills daily.",
-        "Ignore me... I'm just here for my looks!",
-        "Ilene Toofar -- Fell off a cliff",
-        "Is that all?",
-        "Is there life before Death?",
-        "Is this a joke, or a grave matter?",
-        "It happens sometimes. People just explode.",
-        "It must be Thursday. I never could get the hang of Thursdays.",
-        "It wasn't a fair fight",
-        "It wasn't so easy.",
-        "It's Loot, Pillage and THEN Burn...",
-        "Just doing my job here",
-        "Killed by diarrhea of mouth and constipation of brain.",
-        "Let her RIP",
-        "Let it be; I am dead.",
-        "Let's play Hide the Corpse",
-        "Life is NOT a dream",
-        "Madge Ination -- It wasn't all in my head",
-        "Meet me in Heaven",
-        "Move on, there's nothing to see here.",
-        "My heart is not in this",
-        "No one ever died from it",
-        "No, you want room 12A, next door.",
-        "Nope.  No trap on that chest.  I swear.",
-        "Not again!",
-        "Not every soil can bear all things",
-        "Now I have a life",
-        "Now I lay thee down to sleep... wanna join me?",
-        "Obesa Cantavit",
-        "Oh! An untimely death.",
-        "Oh, by the way, how was my funeral?",
-        "Oh, honey..I missed you! She said, and fired again.",
-        "Ok, so the light does go off. Now let me out of here.",
-        "One stone brain",
-        "Ooh! Somebody STOP me!",
-        "Oops!",
-        "Out for the night.  Leave a message.",
-        "Ow!  Do that again!",
-        "Pardon my dust.",
-        "Part of me still works.",
-        "Please, not in front of those orcs!",
-        "Prepare to meet me in Heaven",
-        "R2D2 -- Rest, Tin Piece",
-        "Relax.  Nothing ever happens on the first level.",
-        "Res omnia mea culpa est",
-        "Rest In Pieces",
-        "Rest, rest, perturbed spirit.",
-        "Rip Torn",
-        "She always said her feet were killing her but nobody believed her.",
-        "She died of a chest cold.",
-        "So let it be written, so let it be done!",
-        "So then I says, How do I know you're the real angel of death?",
-        "Some patients insist on dying.",
-        "Some people have it dead easy, don't they?",
-        "Some things are better left buried.",
-        "Sure, trust me, I'm a lawyer...",
-        "Thank God I wore my corset, because I think my sides have split.",
-        "That is all",
-        "The Gods DO have a sense of humor: I'm living proof!",
-        "This dungeon is a pushover",
-        "This elevator doesn't go to Heaven",
-        "This gravestone is shareware. To register, please send me 10 zorkmids",
-        "This gravestone provided by The Yendorian Grave Services Inc.",
-        "This is not an important part of my life.",
-        "This one's on me.",
-        "This side up",
-        "Tone it down a bit, I'm trying to get some rest here.",
-        "Virtually Alive",
-        "We Will Meet Again.",
-        "Weep not, he is at rest",
-        "Welcome to Dante's.  What level please?",
-        "Well, at least they listened to my sermon...",
-        "Went to be an angel.",
-        "What are you doing over there?",
-        "What are you smiling at?",
-        "What can you say, Death's got appeal...!",
-        "What pit?",
-        "When the gods want to punish you, they answer your prayers.",
-        "Where's my refund?",
-        "Will let you know for sure in a day or two...",
-        "Wizards are wimps",
-        "Worms at work, do not disturb!",
-        "Would you mind moving a bit?  I'm short of breath down here.",
-        "Would you quit being evil over my shoulder?",
-        "Yes Dear, just a few more minutes...",
-        "You said it wasn't poisonous!",
+	"Alas fair Death, 'twas missed in life - some peace and quiet from my wife",
+	"Applaud, my friends, the comedy is finished.",
+	"At last... a nice long sleep.",
+	"Audi Partem Alteram",
+	"Basil, assaulted by bears",
+	"Burninated",
+	"Confusion will be my epitaph",
+	"Do not open until Christmas",
+	"Don't be daft, they couldn't hit an elephant at this dist-",
+	"Don't forget to stop and smell the roses",
+	"Don't let this happen to you!",
+	"Dulce et decorum est pro patria mori",
+	"Et in Arcadia ego",
+	"Fatty and skinny went to bed.  Fatty rolled over and skinny was dead.  Skinny Smith 1983-2000.",
+	"Finally I am becoming stupider no more",
+	"Follow me to hell",
+	"...for famous men have the whole earth as their memorial",
+	"Game over, man.  Game over.",
+	"Go away!  I'm trying to take a nap in here!  Bloody adventurers...",
+	"Gone fishin'",
+	"Good night, sweet prince: And flights of angels sing thee to thy rest!",
+	"Go Team Ant!",
+	"He farmed his way here",
+	"Here lies Lies. It's True",
+	"Here lies the left foot of Jack, killed by a land mine.  Let us know if you find any more of him",
+	"He waited too long",
+	"I'd rather be sailing",
+	"If a man's deeds do not outlive him, of what value is a mark in stone?",
+	"I'm gonna make it!",
+	"I took both pills!",
+	"I will survive!",
+	"Killed by a black dragon -- This grave is empty",
+	"Let me out of here!",
+	"Lookin' good, Medusa.",
+	"Mrs. Smith, choked on an apple.  She left behind grieving husband, daughter, and granddaughter.",
+	"Nobody believed her when she said her feet were killing her",
+	"No!  I don't want to see my damn conduct!",
+	"One corpse, sans head",
+	"On the whole, I'd rather be in Minetown",
+	"On vacation",
+	"Oops.",
+	"Out to Lunch",
+	"SOLD",
+	"Someone set us up the bomb!",
+	"Take my stuff, I don't need it anymore",
+	"Taking a year dead for tax reasons",
+	"The reports of my demise are completely accurate",
+	"(This space for sale)",
+	"This was actually just a pit, but since there was a corpse, we filled it",
+	"This way to the crypt",
+	"Tu quoque, Brute?",
+	"VACANCY",
+	"Welcome!",
+	"Wish you were here!",
+	"Yea, it got me too",
+	"You should see the other guy",
+	"...and they made me engrave my own headstone too!",
+	"<Expletive Deleted>",
+	"Adapt. Enjoy. Survive.",
+	"Adventure, hah! Excitement, hah!",
+	"After all, what are friends for...",
+	"After this, nothing will shock me",
+	"Age and treachery will always overcome youth and skill",
+	"Ageing is not so bad.  The real killer is when you stop.",
+	"Ain't I a stinker?",
+	"Algernon",
+	"All else failed...",
+	"All hail RNG",
+	"All right, we'll call it a draw!",
+	"All's well that end well",
+	"Alone at last!",
+	"Always attack a floating eye from behind!",
+	"Am I having fun yet?",
+	"And I can still crawl, I'm not dead yet!",
+	"And all I wanted was a free lunch",
+	"And all of the signs were right there on your face",
+	"And don't give me that innocent look either!",
+	"And everyone died.  Boo hoo hoo.",
+	"And here I go again...",
+	"And nobody cares until somebody famous dies...",
+	"And so it ends?",
+	"And so... it begins.",
+	"And sometimes the bear eats you.",
+	"And then 'e nailed me 'ead to the floor!",
+	"And they said it couldn't be done!",
+	"And what do I look like?  The living?",
+	"And yes, it was ALL his fault!",
+	"And you said it was pretty here...",
+	"Another lost soul",
+	"Any day above ground is a good day!",
+	"Any more of this and I'll die of a stroke before I'm 30.",
+	"Anybody seen my head?",
+	"Anyone for deathmatch?",
+	"Anything for a change.",
+	"Anything that kills you makes you ... well, dead",
+	"Anything worth doing is worth overdoing.",
+	"Are unicorns supposedly peaceful if you're a virgin?  Hah!",
+	"Are we all being disintegrated, or is it just me?",
+	"At least I'm good at something",
+	"Attempted suicide",
+	"Auri sacra fames",
+	"Auribus teneo lupum",
+	"Be prepared",
+	"Beauty survives",
+	"Been Here. Now Gone. Had a Good Time.",
+	"Been through Hell, eh? What did you bring me?",
+	"Beg your pardon, didn't recognize you, I've changed a lot.",
+	"Being dead builds character",
+	"Beloved daughter, a treasure, buried here.",
+	"Best friends come and go...  Mine just die.",
+	"Better be dead than a fat slave",
+	"Better luck next time",
+	"Beware the ...",
+	"Bloody Hell...",
+	"Bloody barbarians!",
+	"Buried the cat.  Took an hour.  Damn thing kept fighting.",
+	"But I disarmed the trap!",
+	"Can YOU fly?",
+	"Can you believe that thing is STILL moving?",
+	"Can you come up with some better ending for this?",
+	"Can you feel anything when I do this?",
+	"Can you give me mouth to mouth, you just took my breath away.",
+	"Can't I just have a LITTLE peril?",
+	"Can't eat, can't sleep, had to bury the husband here.",
+	"Can't you hit me?!",
+	"Chaos, panic and disorder.  My work here is done.",
+	"Check enclosed.",
+	"Check this out!  It's my brain!",
+	"Chivalry is only reasonably dead",
+	"Coffin for sale.  Lifetime guarantee.",
+	"Come Monday, I'll be all right.",
+	"Come and see the violence inherent in the system",
+	"Come back here!  I'll bite your bloody knees off!",
+	"Commodore Business Machines, Inc.   Died for our sins.",
+	"Complain to one who can help you",
+	"Confess my sins to god?  Which one?",
+	"Confusion will be my epitaph",
+	"Cooties?  Ain't no cooties on me!",
+	"Could somebody get this noose off me?",
+	"Could you check again?  My name MUST be there.",
+	"Could you please take a breath mint?",
+	"Couldn't I be sedated for this?",
+	"Courage is looking at your setbacks with serenity",
+	"Cover me, I'm going in!",
+	"Crash course in brain surgery",
+	"Cross my fingers for me.",
+	"Curse god and die",
+	"Dead Again?  Pardon me for not getting it right the first time!",
+	"Dead and loving every moment!",
+	"Dear wife of mine. Died of a broken heart, after I took it out of her.",
+	"Don't tread on me!",
+	"Dragon? What dragon?",
+	"Drawn and quartered",
+	"Either I'm dead or my watch has stopped.",
+	"Eliza -- Was I really alive, or did I just think I was?",
+	"Elvis",
+	"Enter not into the path of the wicked",
+	"Eris?  I don't need Eris",
+	"Eternal Damnation, Come and stay a long while!",
+	"Even The Dead pay taxes (and they aren't Grateful).",
+	"Even a tomb stone will say good things when you're down!",
+	"Ever notice that live is evil backwards?",
+	"Every day is starting to look like Monday",
+	"Every day, in every way, I am getting better and better.",
+	"Every survival kit should include a sense of humor",
+	"Evil I did dwell;  lewd did I live",
+	"Ex post fucto",
+	"Excellent day to have a rotten day.",
+	"Excuse me for not standing up.",
+	"Experience isn't everything. First, You've got to survive",
+	"First shalt thou pull out the Holy Pin",
+	"For a Breath, I Tarry...",
+	"For recreational use only.",
+	"For sale: One soul, slightly used. Asking for 3 wishes.",
+	"For some moments in life, there are no words.",
+	"Forget Disney World, I'm going to Hell!",
+	"Forget about the dog, Beware of my wife.",
+	"Funeral - Real fun.",
+	"Gawd, it's depressing in here, isn't it?",
+	"Genuine Exploding Gravestone.  (c)Acme Gravestones Inc.",
+	"Get back here!  I'm not finished yet...",
+	"Go ahead, I dare you to!",
+	"Go ahead, it's either you or him.",
+	"Goldilocks -- This casket is just right",
+	"Gone But Not Forgotten",
+	"Gone Underground For Good",
+	"Gone away owin' more than he could pay.",
+	"Gone, but not forgiven",
+	"Got a life. Didn't know what to do with it.",
+	"Grave?  But I was cremated!",
+	"Greetings from Hell - Wish you were here.",
+	"HELP! It's dark in here... Oh, my eyes are closed - sorry",
+	"Ha! I NEVER pay income tax!",
+	"Have you come to raise the dead?",
+	"Having a good time can be deadly.",
+	"Having a great time. Where am I exactly??",
+	"He died of the flux.",
+	"He died today... May we rest in peace!",
+	"He got the upside, I got the downside.",
+	"He lost his face when he was beheaded.",
+	"He missed me first.",
+	"He's not dead, he just smells that way.",
+	"Help! I've fallen and I can't get up!",
+	"Help, I can't wake up!",
+	"Here lies Pinocchio",
+	"Here lies the body of John Round. Lost at sea and never found.",
+	"Here there be dragons",
+	"Hey, I didn't write this stuff!",
+	"Hodie mihi, cras tibi",
+	"Hold my calls",
+	"Home Sweet Hell",
+	"I KNEW this would happen if I lived long enough.",
+	"I TOLD you I was sick!",
+	"I ain't broke but I am badly bent.",
+	"I ain't old. I'm chronologically advantaged.",
+	"I am NOT a vampire. I just like to bite..nibble, really!",
+	"I am here. Wish you were fine.",
+	"I am not dead yet, but watch for further reports.",
+	"I believe them bones are me.",
+	"I broke his brain.",
+	"I can feel it.  My mind.  It's going.  I can feel it.",
+	"I can't go to Hell. They're afraid I'm gonna take over!",
+	"I can't go to hell, they don't want me.",
+	"I didn't believe in reincarnation the last time, either.",
+	"I didn't mean it when I said 'Bite me'",
+	"I died laughing",
+	"I disbelieved in reincarnation in my last life, too.",
+	"I hacked myself to death",
+	"I have all the time in the world",
+	"I knew I'd find a use for this gravestone!",
+	"I know my mind. And it's around here someplace.",
+	"I lied!  I'll never be alright!",
+	"I like it better in the dark.",
+	"I like to be here when I can.",
+	"I may rise but I refuse to shine.",
+	"I never get any either.",
+	"I said hit HIM with the fireball, not me!",
+	"I told you I would never say goodbye.",
+	"I used to be amusing. Now I'm just disgusting.",
+	"I used up all my sick days, so now I'm calling in dead.",
+	"I was killed by <illegible scrawl>",
+	"I was somebody. Who, is no business of yours.",
+	"I will not go quietly.",
+	"I'd give you a piece of my mind... but I can't find it.",
+	"I'd rather be breathing",
+	"I'll be back!",
+	"I'll be mellow when I'm dead. For now, let's PARTY!",
+	"I'm doing this only for tax purposes.",
+	"I'm not afraid of Death!  What's he gonna do? Kill me?",
+	"I'm not getting enough money, so I'm not going to engrave anything useful here.",
+	"I'm not saying anything.",
+	"I'm weeth stupeed --->",
+	"If you thought you had problems...",
+	"Ignorance kills daily.",
+	"Ignore me... I'm just here for my looks!",
+	"Ilene Toofar -- Fell off a cliff",
+	"Is that all?",
+	"Is there life before Death?",
+	"Is this a joke, or a grave matter?",
+	"It happens sometimes. People just explode.",
+	"It must be Thursday. I never could get the hang of Thursdays.",
+	"It wasn't a fair fight",
+	"It wasn't so easy.",
+	"It's Loot, Pillage and THEN Burn...",
+	"Just doing my job here",
+	"Killed by diarrhea of mouth and constipation of brain.",
+	"Let her RIP",
+	"Let it be; I am dead.",
+	"Let's play Hide the Corpse",
+	"Life is NOT a dream",
+	"Madge Ination -- It wasn't all in my head",
+	"Meet me in Heaven",
+	"Move on, there's nothing to see here.",
+	"My heart is not in this",
+	"No one ever died from it",
+	"No, you want room 12A, next door.",
+	"Nope.  No trap on that chest.  I swear.",
+	"Not again!",
+	"Not every soil can bear all things",
+	"Now I have a life",
+	"Now I lay thee down to sleep... wanna join me?",
+	"Obesa Cantavit",
+	"Oh! An untimely death.",
+	"Oh, by the way, how was my funeral?",
+	"Oh, honey..I missed you! She said, and fired again.",
+	"Ok, so the light does go off. Now let me out of here.",
+	"One stone brain",
+	"Ooh! Somebody STOP me!",
+	"Oops!",
+	"Out for the night.  Leave a message.",
+	"Ow!  Do that again!",
+	"Pardon my dust.",
+	"Part of me still works.",
+	"Please, not in front of those orcs!",
+	"Prepare to meet me in Heaven",
+	"R2D2 -- Rest, Tin Piece",
+	"Relax.  Nothing ever happens on the first level.",
+	"Res omnia mea culpa est",
+	"Rest In Pieces",
+	"Rest, rest, perturbed spirit.",
+	"Rip Torn",
+	"She always said her feet were killing her but nobody believed her.",
+	"She died of a chest cold.",
+	"So let it be written, so let it be done!",
+	"So then I says, How do I know you're the real angel of death?",
+	"Some patients insist on dying.",
+	"Some people have it dead easy, don't they?",
+	"Some things are better left buried.",
+	"Sure, trust me, I'm a lawyer...",
+	"Thank God I wore my corset, because I think my sides have split.",
+	"That is all",
+	"The Gods DO have a sense of humor: I'm living proof!",
+	"This dungeon is a pushover",
+	"This elevator doesn't go to Heaven",
+	"This gravestone is shareware. To register, please send me 10 zorkmids",
+	"This gravestone provided by The Yendorian Grave Services Inc.",
+	"This is not an important part of my life.",
+	"This one's on me.",
+	"This side up",
+	"Tone it down a bit, I'm trying to get some rest here.",
+	"Virtually Alive",
+	"We Will Meet Again.",
+	"Weep not, he is at rest",
+	"Welcome to Dante's.  What level please?",
+	"Well, at least they listened to my sermon...",
+	"Went to be an angel.",
+	"What are you doing over there?",
+	"What are you smiling at?",
+	"What can you say, Death's got appeal...!",
+	"What pit?",
+	"When the gods want to punish you, they answer your prayers.",
+	"Where's my refund?",
+	"Will let you know for sure in a day or two...",
+	"Wizards are wimps",
+	"Worms at work, do not disturb!",
+	"Would you mind moving a bit?  I'm short of breath down here.",
+	"Would you quit being evil over my shoulder?",
+	"Yes Dear, just a few more minutes...",
+	"You said it wasn't poisonous!",
 
-        /* from UnNetHack */
-        "Hack 1984-1985",
-        "NetHack 1987-2003",
+	/* from http://www.alt.org/nethack/addmsgs/viewmsgs.php */
+	"Balin, son of Fundin, Lord of Moria",
+	"Memento mori",
+	"Help! I'm trapped in a gravestone factory!",
+	"This grave is reserved - for you!",
+	"This gravestone does not indicate a bones file.",
+	"This space for rent; go to http://www.alt.org/nethack/addmsgs/"
+	"Here lies Sgeo, killed while reading a gravestone.",
+	"Quidquid Latine dictum sit, altum videtur.",
+	"Death is but a door. Time is but a window. I'll be back!",
+	"The reports of my demise are completely accurate.",
+	"Bulk deals on gravestones - Die today!",
 
-        /* from UnNetHackPlus */
-        "SporkHack 2007-2010",
-        "SLASH'EM 1997-2006",
+	/* from UnNetHack */
+	"Hack 1984-1985",
+	"NetHack 1987-2003",
+
+	/* from UnNetHackPlus */
+	"SporkHack 2007-2010",
+	"SLASH'EM 1997-2006",
+	"Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua.",
 };
 
 /* Create a headstone at the given location.

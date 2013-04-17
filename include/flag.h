@@ -72,9 +72,7 @@ struct flag {
 	boolean  pushweapon;	/* When wielding, push old weapon into second slot */
 	boolean  rest_on_space; /* space means rest */
 	boolean  safe_dog;	/* give complete protection to the dog */
-#ifdef EXP_ON_BOTL
 	boolean  showexp;	/* show experience points */
-#endif
 #ifdef SCORE_ON_BOTL
 	boolean  showscore;	/* show score */
 #endif
@@ -275,7 +273,6 @@ struct instance_flags {
 	boolean show_born;	/* show numbers of created monsters */
 #endif
 	boolean showdmg;	/* show damage */
-	/* only set when PARANOID is defined */
 	boolean paranoid_hit;	/* Ask for 'yes' when hitting peacefuls */
 	boolean paranoid_quit;	/* Ask for 'yes' when quitting */
 	boolean paranoid_remove; /* Always show menu for 'T' and 'R' */
@@ -360,9 +357,7 @@ struct instance_flags {
 #ifdef REALTIME_ON_BOTL
 	boolean  showrealtime; /* show actual elapsed time */
 #endif
-#ifdef AUTO_OPEN
 	boolean  autoopen;	/* open doors by walking into them */
-#endif
 	boolean  dark_room;	/* show shadows in lit rooms */
 	boolean  vanilla_ui_behavior;	/* fall back to vanilla behavior */
 	boolean  show_annotation;	/* level annotation when entering level */

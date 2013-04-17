@@ -24,6 +24,12 @@ LADDER:(11,05),down
 # The lord and his court
 MONSTER:('V',"Vlad the Impaler"),(06,05) {
   OBJECT:('(',"Candelabrum of Invocation")
+  IF [4%] {
+    OBJECT:('"',"amulet of reflection")
+  }
+  IF [50%] {
+    OBJECT:('!',"vampire blood")
+  }
 }
 MONSTER:'V',(03,09)
 MONSTER:'V',(07,09)

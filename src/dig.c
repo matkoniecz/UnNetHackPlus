@@ -29,7 +29,7 @@ STATIC_DCL void NDECL(dig_up_grave);
 STATIC_OVL boolean
 rm_waslit()
 {
-    register xchar x, y;
+    xchar x, y;
 
     if(levl[u.ux][u.uy].typ == ROOM && levl[u.ux][u.uy].waslit)
 	return(TRUE);
@@ -49,13 +49,13 @@ mkcavepos(x, y, dist, waslit, rockit)
     int dist;
     boolean waslit, rockit;
 {
-    register struct rm *lev;
+    struct rm *lev;
 
     if(!isok(x,y)) return;
     lev = &levl[x][y];
 
     if(rockit) {
-	register struct monst *mtmp;
+	struct monst *mtmp;
 
 	if(IS_ROCK(lev->typ)) return;
 	if(t_at(x, y)) return; /* don't cover the portal */
@@ -84,13 +84,13 @@ mkcavepos(x, y, dist, waslit, rockit)
 
 STATIC_OVL void
 mkcavearea(rockit)
-register boolean rockit;
+boolean rockit;
 {
     int dist;
     xchar xmin = u.ux, xmax = u.ux;
     xchar ymin = u.uy, ymax = u.uy;
-    register xchar i;
-    register boolean waslit = rm_waslit();
+    xchar i;
+    boolean waslit = rm_waslit();
 
     if(rockit) pline("Crash!  The ceiling collapses around you!");
     else pline("A mysterious force %s cave around you!",
@@ -208,9 +208,9 @@ dig_check(madeby, verbose, x, y)
 STATIC_OVL int
 dig()
 {
-	register struct rm *lev;
-	register xchar dpx = digging.pos.x, dpy = digging.pos.y;
-	register boolean ispick = uwep && is_pick(uwep);
+	struct rm *lev;
+	xchar dpx = digging.pos.x, dpy = digging.pos.y;
+	boolean ispick = uwep && is_pick(uwep);
 	const char *verb =
 	    (!uwep || is_pick(uwep)) ? "dig into" : "chop through";
 
@@ -241,21 +241,15 @@ dig()
 	    switch(rn2(3)) {
 	    case 0:
 		if(!welded(uwep)) {
-		    You("fumble and drop your %s.", xname(uwep));
-		    dropx(uwep);
+			You("fumble and drop your %s.", xname(uwep));
+			dropx(uwep);
 		} else {
-#ifdef STEED
-		    if (u.usteed)
-			Your("%s %s and %s %s!",
-			     xname(uwep),
-			     otense(uwep, "bounce"), otense(uwep, "hit"),
-			     mon_nam(u.usteed));
-		    else
-#endif
-			pline("Ouch!  Your %s %s and %s you!",
-			      xname(uwep),
-			      otense(uwep, "bounce"), otense(uwep, "hit"));
-		    set_wounded_legs(RIGHT_SIDE, 5 + rnd(5));
+			if (u.usteed) {
+				Your("%s %s and %s %s!", xname(uwep), otense(uwep, "bounce"), otense(uwep, "hit"), mon_nam(u.usteed));
+			} else {
+				pline("Ouch!  Your %s %s and %s you!", xname(uwep), otense(uwep, "bounce"), otense(uwep, "hit"));
+			}
+			set_wounded_legs(RIGHT_SIDE, 5 + rnd(5));
 		}
 		break;
 	    case 1:
@@ -275,7 +269,7 @@ dig()
 	if (lev->typ == DEADTREE)
 	    digging.effort *= 2;
 	if (digging.down) {
-		register struct trap *ttmp;
+		struct trap *ttmp;
 
 		if (digging.effort > 250) {
 		    (void) dighole(FALSE);
@@ -302,9 +296,9 @@ dig()
 	}
 
 	if (digging.effort > 100) {
-		register const char *digtxt, *dmgtxt = (const char*) 0;
-		register struct obj *obj;
-		register boolean shopedge = *in_rooms(dpx, dpy, SHOPBASE);
+		const char *digtxt, *dmgtxt = (const char*) 0;
+		struct obj *obj;
+		boolean shopedge = *in_rooms(dpx, dpy, SHOPBASE);
 
 		if ((obj = sobj_at(STATUE, dpx, dpy)) != 0) {
 			if (break_statue(obj))
@@ -386,7 +380,7 @@ dig()
 		    pay_for_damage(dmgtxt, FALSE);
 
 		if(Is_earthlevel(&u.uz) && !rn2(3)) {
-		    register struct monst *mtmp;
+		    struct monst *mtmp;
 
 		    switch(rn2(2)) {
 		      case 0:
@@ -447,7 +441,7 @@ schar
 fillholetyp(x,y)
 int x, y;
 {
-    register int x1, y1;
+    int x1, y1;
     int lo_x = max(1,x-1), hi_x = min(x+1,COLNO-1),
 	lo_y = max(0,y-1), hi_y = min(y+1,ROWNO-1);
     int pool_cnt = 0, moat_cnt = 0, lava_cnt = 0, swamp_cnt = 0;
@@ -485,12 +479,12 @@ int x, y;
 
 void
 digactualhole(x, y, madeby, ttyp)
-register int	x, y;
+int	x, y;
 struct monst	*madeby;
 int ttyp;
 {
 	struct obj *oldobjs, *newobjs;
-	register struct trap *ttmp;
+	struct trap *ttmp;
 	char surface_type[BUFSZ];
 	struct rm *lev = &levl[x][y];
 	boolean shopdoor;
@@ -556,7 +550,6 @@ int ttyp;
 
 	    if(at_u) {
 		if (!wont_fall) {
-		    if (!Passes_walls)
 			u.utrap = rn1(4,2);
 		    u.utraptype = TT_PIT;
 		    vision_full_recalc = 1;	/* vision limits change */
@@ -657,7 +650,7 @@ boolean
 dighole(pit_only)
 boolean pit_only;
 {
-	register struct trap *ttmp = t_at(u.ux, u.uy);
+	struct trap *ttmp = t_at(u.ux, u.uy);
 	struct rm *lev = &levl[u.ux][u.uy];
 	struct obj *boulder_here;
 	schar typ;
@@ -823,10 +816,10 @@ struct obj *obj;
 	boolean ispick;
 	char dirsyms[12];
 	char qbuf[QBUFSZ];
-	register char *dsp = dirsyms;
-	register int rx, ry;
+	char *dsp = dirsyms;
+	int rx, ry;
 	int res = 0;
-	register const char *sdp, *verb;
+	const char *sdp, *verb;
 
 	if(iflags.num_pad) sdp = ndir; else sdp = sdir;	/* DICE workaround */
 
@@ -873,8 +866,8 @@ int
 use_pick_axe2(obj) 
 struct obj *obj;
 {
-	register int rx, ry;
-	register struct rm *lev;
+	int rx, ry;
+	struct rm *lev;
 	int dig_target;
 	boolean ispick = is_pick(obj);
 	const char *verbing = ispick ? "digging" : "chopping";
@@ -1074,9 +1067,9 @@ watch_dig(mtmp, x, y, zap)
 /* Return TRUE if monster died, FALSE otherwise.  Called from m_move(). */
 boolean
 mdig_tunnel(mtmp)
-register struct monst *mtmp;
+struct monst *mtmp;
 {
-	register struct rm *here;
+	struct rm *here;
 	int pile = rnd(12);
 
 	here = &levl[mtmp->mx][mtmp->my];

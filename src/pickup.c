@@ -93,7 +93,7 @@ boolean here;		/* flag for type of obj list linkage */
 int
 collect_obj_classes(ilets, otmp, here, incl_gold, filter, itemcount)
 char ilets[];
-register struct obj *otmp;
+struct obj *otmp;
 boolean here, incl_gold;
 boolean FDECL((*filter),(OBJ_P));
 int *itemcount;
@@ -101,14 +101,14 @@ int *itemcount;
 int
 collect_obj_classes(ilets, otmp, here, filter, itemcount)
 char ilets[];
-register struct obj *otmp;
+struct obj *otmp;
 boolean here;
 boolean FDECL((*filter),(OBJ_P));
 int *itemcount;
 #endif
 {
-	register int iletct = 0;
-	register char c;
+	int iletct = 0;
+	char c;
 
 	*itemcount = 0;
 #ifndef GOLDOBJ
@@ -187,7 +187,7 @@ int *menu_on_demand;
 		}
 	} else  {	/* more than one choice available */
 		const char *where = 0;
-		register char sym, oc_of_sym, *p;
+		char sym, oc_of_sym, *p;
 		/* additional choices */
 		ilets[iletct++] = ' ';
 		ilets[iletct++] = 'a';
@@ -258,8 +258,8 @@ STATIC_OVL void
 check_here(picked_some)
 boolean picked_some;
 {
-	register struct obj *obj;
-	register int ct = 0;
+	struct obj *obj;
+	int ct = 0;
 
 	/* count the objects here */
 	for (obj = level.objects[u.ux][u.uy]; obj; obj = obj->nexthere) {
@@ -367,7 +367,7 @@ struct obj *obj;
 /* query_objlist callback: return TRUE if valid class and worn */
 boolean
 is_worn_by_type(otmp)
-register struct obj *otmp;
+struct obj *otmp;
 {
 	return((boolean)(!!(otmp->owornmask &
 			(W_ARMOR | W_RING | W_AMUL | W_TOOL | W_WEP | W_SWAPWEP | W_QUIVER)))
@@ -1374,7 +1374,7 @@ boolean telekinesis;	/* not picking it up directly by hand */
 	} else if (obj->otyp == CORPSE) {
 	    if ( (touch_petrifies(&mons[obj->corpsenm])) && !uarmg
 				&& !Stone_resistance && !telekinesis) {
-		if (poly_when_stoned(youmonst.data) && polymon(PM_STONE_GOLEM))
+		if (polymorph_player_instead_stoning())
 		    display_nhwindow(WIN_MESSAGE, FALSE);
 		else {
 			char kbuf[BUFSZ];
@@ -1540,12 +1540,11 @@ able_to_loot(x, y)
 int x, y;
 {
 	if (!can_reach_floor()) {
-#ifdef STEED
-		if (u.usteed && P_SKILL(P_RIDING) < P_BASIC)
+		if (u.usteed && P_SKILL(P_RIDING) < P_BASIC) {
 			rider_cant_reach(); /* not skilled enough to reach */
-		else
-#endif
+		} else {
 			You("cannot reach the %s.", surface(x, y));
+		}
 		return FALSE;
 	} else if (is_pool(x, y) || is_lava(x, y)) {
 		/* at present, can't loot in water even when Underwater */
@@ -1581,8 +1580,8 @@ int x, y;
 int
 doloot()	/* loot a container on the floor or loot saddle from mon. */
 {
-    register struct obj *cobj, *nobj;
-    register int c = -1;
+    struct obj *cobj, *nobj, *otmp;
+    int c = -1;
     int timepassed = 0;
     coord cc;
     boolean underfoot = TRUE;
@@ -1626,8 +1625,19 @@ lootcont:
 		any = TRUE;
 
 		if (cobj->olocked) {
-		    pline("Hmmm, it seems to be locked.");
-		    continue;
+			pline("Hmmm, it seems to be locked.");
+			if (flags.autounlock) {
+				if(cobj->otyp == IRON_SAFE) {
+					if(otmp = carrying(STETHOSCOPE)) {
+						pick_lock(otmp, cc.x, cc.y, TRUE);
+					}
+				} else {
+					if(((otmp = carrying(SKELETON_KEY)) || (otmp = carrying(CREDIT_CARD)) || (otmp = carrying(LOCK_PICK)))) {
+						pick_lock(otmp, cc.x, cc.y, TRUE);
+					}
+				}
+			}
+			continue;
 		}
 		if (cobj->otyp == BAG_OF_TRICKS && cobj->spe>0) {
 		    int tmp;
@@ -1765,7 +1775,6 @@ boolean *prev_loot;
 {
     int c = -1;
     int timepassed = 0;
-#ifdef STEED
     struct obj *otmp;
     char qbuf[QBUFSZ];
 
@@ -1804,7 +1813,6 @@ boolean *prev_loot;
 		return (0);
 	}
     }
-#endif	/* STEED */
     /* 3.4.0 introduced the ability to pick things up from within swallower's stomach */
     if (u.uswallow) {
 	int count = passed_info ? *passed_info : 0;
@@ -1848,7 +1856,7 @@ static NEARDATA struct obj *current_container;
 /* Returns: -1 to stop, 1 item was inserted, 0 item was not inserted. */
 STATIC_PTR int
 in_container(obj)
-register struct obj *obj;
+struct obj *obj;
 {
 	boolean floor_container = !carried(current_container);
 	boolean was_unpaid = FALSE;
@@ -1907,7 +1915,7 @@ register struct obj *obj;
 	if (obj->otyp == CORPSE) {
 	    if ( (touch_petrifies(&mons[obj->corpsenm])) && !uarmg
 		 && !Stone_resistance) {
-		if (poly_when_stoned(youmonst.data) && polymon(PM_STONE_GOLEM))
+		if (polymorph_player_instead_stoning())
 		    display_nhwindow(WIN_MESSAGE, FALSE);
 		else {
 		    char kbuf[BUFSZ];
@@ -2009,9 +2017,9 @@ struct obj *obj;
 /* Returns: -1 to stop, 1 item was removed, 0 item was not removed. */
 STATIC_PTR int
 out_container(obj)
-register struct obj *obj;
+struct obj *obj;
 {
-	register struct obj *otmp;
+	struct obj *otmp;
 	boolean is_gold = (obj->oclass == COIN_CLASS);
 	int res, loadlev;
 	long count;
@@ -2028,7 +2036,7 @@ register struct obj *obj;
 	if (obj->otyp == CORPSE) {
 	    if ( (touch_petrifies(&mons[obj->corpsenm])) && !uarmg
 		 && !Stone_resistance) {
-		if (poly_when_stoned(youmonst.data) && polymon(PM_STONE_GOLEM))
+		if (polymorph_player_instead_stoning())
 		    display_nhwindow(WIN_MESSAGE, FALSE);
 		else {
 		    char kbuf[BUFSZ];
@@ -2150,8 +2158,8 @@ struct obj *box;
 
 int
 use_container(obj, held)
-register struct obj *obj;
-register int held;
+struct obj *obj;
+int held;
 {
 	struct obj *curr, *otmp;
 #ifndef GOLDOBJ

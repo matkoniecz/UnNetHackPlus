@@ -330,9 +330,9 @@ char *xcrypt(str)
 const char *str;
 {				/* duplicated in src/hacklib.c */
 	static char buf[BUFSZ];
-	register const char *p;
-	register char *q;
-	register int bitmask;
+	const char *p;
+	char *q;
+	int bitmask;
 
 	for (bitmask = 1, p = str, q = buf; *p; q++) {
 		*q = *p++;
@@ -423,7 +423,7 @@ do_rumors()
 static void
 make_version()
 {
-	register int i;
+	int i;
 
 	/*
 	 * integer version number
@@ -441,15 +441,13 @@ make_version()
 	 */
 	version.feature_set = (unsigned long)(0L
 		/* levels and/or topology (0..4) */
-#ifdef REINCARNATION
 			| (1L <<  1)
-#endif
 #ifdef SINKS
 			| (1L <<  2)
 #endif
-#ifdef BLACKMARKET
+//#ifdef BLACKMARKET - enabled uncoditionally
 			| (1L <<  3)
-#endif
+//#endif
 		/* monsters (5..9) */
 #ifdef KOPS
 			| (1L <<  6)
@@ -458,12 +456,12 @@ make_version()
 			| (1L <<  7)
 #endif
 		/* objects (10..14) */
-#ifdef TOURIST
+//#ifdef TOURIST - enabled uncoditionally
 			| (1L << 10)
-#endif
-#ifdef STEED
+//#endif
+//#ifdef STEED - enabled uncoditionally
 			| (1L << 11)
-#endif
+//#endif
 #ifdef GOLDOBJ
 			| (1L << 12)
 #endif
@@ -477,9 +475,7 @@ make_version()
 #ifdef ELBERETH
 			| (1L << 19)
 #endif
-#ifdef EXP_ON_BOTL
 			| (1L << 20)
-#endif
 #ifdef SCORE_ON_BOTL
 			| (1L << 21)
 #endif
@@ -633,6 +629,20 @@ build_savebones_compat_string()
 #endif
 }
 
+static const char *build_pseudo_opts[] = {
+		"auto open doors",
+		"basic UnNetHack features",
+		"blackmarket level",
+		"dungeon map overview patch",
+		"experience points on status line",
+		"rogue level",
+		"saddles and riding",
+		"seduction",
+		"tourists",
+		"UnNetHackPlus features",
+		"UTF-8 glyphs",
+	};
+
 static const char *build_opts[] = {
 #ifdef AMIGA_WBENCH
 		"Amiga WorkBench support",
@@ -642,12 +652,6 @@ static const char *build_opts[] = {
 #endif
 #ifdef AUTOPICKUP_EXCEPTIONS
 		"autopickup_exceptions",
-#endif
-#ifdef AUTO_OPEN
-		"auto open doors",
-#endif
-#ifdef BLACKMARKET
-		"blackmarket level",
 #endif
 #ifdef TEXTCOLOR
 		"color",
@@ -667,12 +671,8 @@ static const char *build_opts[] = {
 #ifdef REALTIME_ON_BOTL
 		"elapsed time on status line",
 #endif
-		"dungeon map overview patch",
 #ifdef ELBERETH
 		"Elbereth",
-#endif
-#ifdef EXP_ON_BOTL
-		"experience points on status line",
 #endif
 #ifdef MFLOPPY
 		"floppy drive support",
@@ -725,15 +725,8 @@ static const char *build_opts[] = {
 #  endif
 # endif
 #endif
-		"pickup thrown objects",
 #ifdef REDO
 		"redo command",
-#endif
-#ifdef REINCARNATION
-		"rogue level",
-#endif
-#ifdef STEED
-		"saddles and riding",
 #endif
 #ifdef SCORE_ON_BOTL
 		"score on status line",
@@ -760,12 +753,6 @@ static const char *build_opts[] = {
 #  endif
 # endif
 #endif
-#ifdef SEDUCE
-		"seduction",
-#endif
-#ifdef SHELL
-		"shell command",
-#endif
 #ifdef SINKS
 		"sinks",
 #endif
@@ -781,12 +768,6 @@ static const char *build_opts[] = {
 #endif
 #ifdef TIMED_DELAY
 		"timed wait for display effects",
-#endif
-#ifdef TOURIST
-		"tourists",
-#endif
-#ifdef TOURIST
-		"UTF-8 glyphs",
 #endif
 #ifdef USER_SOUNDS
 # ifdef USER_SOUNDS_REGEX
@@ -832,7 +813,6 @@ static const char *build_opts[] = {
 		"record initial alignment in xlogfile",
 #endif
 		save_bones_compat_buf,
-		"basic UnNetHackPlus features"
 	};
 
 static const char *window_opts[] = {
@@ -872,8 +852,8 @@ static const char *window_opts[] = {
 void
 do_options()
 {
-	register int i, length;
-	register const char *str, *indent = "    ";
+	int i, length;
+	const char *str, *indent = "    ";
 	char versbuf[64];
 
 	filename[0]='\0';
@@ -906,6 +886,19 @@ do_options()
 		Fprintf(ofp," "),  length++;
 	    Fprintf(ofp,"%s", str),  length += strlen(str);
 	    Fprintf(ofp,(i < SIZE(build_opts) - 1) ? "," : "."),  length++;
+	}
+
+	Fprintf(ofp,"\n\nOptions enabled in all editions:\n");
+
+	length = COLNO + 1;	/* force 1st item onto new line */
+	for (i = 0; i < SIZE(build_pseudo_opts); i++) {
+	    str = build_pseudo_opts[i];
+	    if (length + strlen(str) > COLNO - 5)
+		Fprintf(ofp,"\n%s", indent),  length = strlen(indent);
+	    else
+		Fprintf(ofp," "),  length++;
+	    Fprintf(ofp,"%s", str),  length += strlen(str);
+	    Fprintf(ofp,(i < SIZE(build_pseudo_opts) - 1) ? "," : "."),  length++;
 	}
 
 	Fprintf(ofp,"\n\nSupported windowing systems:\n");
@@ -1108,7 +1101,7 @@ do_oracles()
 	boolean in_oracle, ok;
 	long	txt_offset, offset, fpos;
 	int	oracle_cnt;
-	register int i;
+	int i;
 
 	Sprintf(tempfile, DATA_TEMPLATE, "oracles.tmp");
 	filename[0]='\0';
@@ -1242,11 +1235,7 @@ static	struct deflist {
 	const char	*defname;
 	boolean	true_or_false;
 } deflist[] = {
-#ifdef REINCARNATION
 	      {	"REINCARNATION", TRUE },
-#else
-	      {	"REINCARNATION", FALSE },
-#endif
 	      { 0, 0 } };
 
 static int
@@ -1322,10 +1311,10 @@ recheck:
 
 static boolean
 ranged_attk(ptr)	/* returns TRUE if monster can attack at range */
-	register struct permonst *ptr;
+	struct permonst *ptr;
 {
-	register int	i, j;
-	register int atk_mask = (1<<AT_BREA) | (1<<AT_SPIT) | (1<<AT_GAZE);
+	int	i, j;
+	int atk_mask = (1<<AT_BREA) | (1<<AT_SPIT) | (1<<AT_GAZE);
 
 	for(i = 0; i < NATTK; i++) {
 	    if((j=ptr->mattk[i].aatyp) >= AT_WEAP || (atk_mask & (1<<j)))
@@ -1397,8 +1386,8 @@ struct permonst *ptr;
 void
 do_monstr()
 {
-    register struct permonst *ptr;
-    register int i, j;
+    struct permonst *ptr;
+    int i, j;
 
     /*
      * create the source file, "monstr.c"
@@ -1852,13 +1841,13 @@ do_objs()
 		    if (*c >= 'a' && *c <= 'z') *c -= (char)('a' - 'A');
 		    else if (*c < 'A' || *c > 'Z') *c = '_';
 
-		if (!strncmp(objnam, "THE_", 4))
+		if (!strncmp(objnam, "THE_", 4)) {
 			objnam += 4;
-#ifdef TOURIST
+		}
 		/* fudge _platinum_ YENDORIAN EXPRESS CARD */
-		if (!strncmp(objnam, "PLATINUM_", 9))
+		if (!strncmp(objnam, "PLATINUM_", 9)) {
 			objnam += 9;
-#endif
+		}
 		Fprintf(ofp,"#define\tART_%s\t%d\n", limit(objnam, 1), i);
 	}
 
@@ -2194,7 +2183,7 @@ clear_path(you_row,you_col,y2,x2)
     int you_row, you_col, y2, x2;
 {
     int dx, dy, s1, s2;
-    register int i, error, x, y, dxs, dys;
+    int i, error, x, y, dxs, dys;
 
     x  = you_col;		y  = you_row;
     dx = abs(x2-you_col);	dy = abs(y2-you_row);

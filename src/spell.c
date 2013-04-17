@@ -210,8 +210,8 @@ struct obj *book2;
     /* KMH -- Need ->known to avoid "_a_ Book of the Dead" */
     book2->known = 1;
     if(invocation_pos(u.ux, u.uy) && !On_stairs(u.ux, u.uy)) {
-	register struct obj *otmp;
-	register boolean arti1_primed = FALSE, arti2_primed = FALSE,
+	struct obj *otmp;
+	boolean arti1_primed = FALSE, arti2_primed = FALSE,
 			 arti_cursed = FALSE;
 
 	if(book2->cursed) {
@@ -392,10 +392,10 @@ learn()
 
 int
 study_book(spellbook)
-register struct obj *spellbook;
+struct obj *spellbook;
 {
-	register int	 booktype = spellbook->otyp;
-	register boolean confused = (Confusion != 0);
+	int	 booktype = spellbook->otyp;
+	boolean confused = (Confusion != 0);
 	boolean too_hard = FALSE;
 
 	if (delay && !confused && spellbook == book &&
@@ -1013,21 +1013,26 @@ throwspell()
 	}
 }
 
+/*
+* You forget 1d(known) spells. Forgotten spells are removed starting from the bottom of the spellcasting menu
+*/
 void
-losespells()
+forget_spells()
 {
-	boolean confused = (Confusion != 0);
 	int  n, nzap, i;
 
 	book = 0;
-	for (n = 0; n < MAXSPELL && spellid(n) != NO_SPELL; n++)
+	for (n = 0; n < MAXSPELL && spellid(n) != NO_SPELL; n++) {
 		continue;
+	}
 	if (n) {
-		nzap = rnd(n) + confused ? 1 : 0;
-		if (nzap > n) nzap = n;
+		nzap = rnd(n);
+		if (nzap > n) {
+			nzap = n;
+		}
 		for (i = n - nzap; i < n; i++) {
-		    spellid(i) = NO_SPELL;
-		    exercise(A_WIS, FALSE);	/* ouch! */
+			spellid(i) = NO_SPELL;
+			exercise(A_WIS, FALSE);	/* ouch! */
 		}
 	}
 }

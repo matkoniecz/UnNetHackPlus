@@ -371,13 +371,8 @@ ARMOR("plate mail", (char *)0,
 	1, 0, 1, 0,	44, 5, 450, 600,  3, 2, ARM_SUIT, IRON, HI_METAL),
 ARMOR("crystal plate mail", (char *)0,
 	1, 0, 1, 0,	10, 5, 450, 820,  3, 2, ARM_SUIT, GLASS, CLR_WHITE),
-#ifdef TOURIST
 ARMOR("bronze plate mail", (char *)0,
 	1, 0, 1, 0,	25, 5, 450, 400,  4, 0, ARM_SUIT, COPPER, HI_COPPER),
-#else
-ARMOR("bronze plate mail", (char *)0,
-	1, 0, 1, 0,	35, 5, 450, 400,  4, 0, ARM_SUIT, COPPER, HI_COPPER),
-#endif
 ARMOR("splint mail", (char *)0,
 	1, 0, 1, 0,	62, 5, 400,  80,  4, 1, ARM_SUIT, IRON, HI_METAL),
 ARMOR("banded mail", (char *)0,
@@ -403,13 +398,11 @@ ARMOR("leather armor", (char *)0,
 ARMOR("leather jacket", (char *)0,
 	1, 0, 0, 0,	12, 0,	30,  10,  9, 0, ARM_SUIT, LEATHER, CLR_BLACK),
 
-#ifdef TOURIST
 /* shirts */
 ARMOR("Hawaiian shirt", (char *)0,
 	1, 0, 0, 0,	 8, 0,	 5,   3, 10, 0, ARM_SHIRT, CLOTH, CLR_MAGENTA),
 ARMOR("T-shirt", (char *)0,
 	1, 0, 0, 0,	 2, 0,	 5,   2, 10, 0, ARM_SHIRT, CLOTH, CLR_WHITE),
-#endif
 
 /* cloaks */
 /*  'cope' is not a spelling mistake... leave it be */
@@ -556,31 +549,31 @@ RING((char *)0, 0, "citrine",                 0, 0, 0, 0, 6, GEMSTONE, CLR_ORANG
 RING((char *)0, 0, "amber",                   0, 0, 0, 0, 2, GEMSTONE, CLR_BROWN),
 RING((char *)0, 0, "jet",                     0, 0, 0, 0, 7, GEMSTONE, CLR_BLACK),
 RING((char *)0, 0, "chrysoberyl",             0, 0, 0, 0, 5, GEMSTONE, CLR_YELLOW),
-RING((char *)0, 0, "plastic",                 0, 0, 0, 0, 1, PLASTIC, CLR_WHITE),
+RING((char *)0, 0, "plastic",                 0, 0, 0, 0, 1, PLASTIC, CLR_RANDOM),
 
 #undef RING
 
 /* amulets ... - THE Amulet comes last because it is special */
-#define AMULET(name,desc,power,prob,material,color) OBJECT( \
-		OBJ(name,desc), BITS(0,0,0,0,1,0,0,0,0,0,0,P_NONE,material), power, \
-		AMULET_CLASS, prob, 0, 20, 150, 0, 0, 0, 0, 20, color )
+#define AMULET(name,desc,power,prob) OBJECT( \
+		OBJ(name,desc), BITS(0,0,0,0,1,0,0,0,0,0,0,P_NONE,IRON), power, \
+		AMULET_CLASS, prob, 0, 20, 150, 0, 0, 0, 0, 20, HI_METAL )
 
-AMULET("amulet of ESP",              "circular",   TELEPAT,          175, IRON,     HI_METAL),
-AMULET("amulet of life saving",      "spherical",  LIFESAVED,         75, GLASS,    HI_GLASS),
-AMULET("amulet of strangulation",    "oval",       STRANGLED,        135, IRON,     HI_METAL),
-AMULET("amulet of restful sleep",    "triangular", SLEEPING,         135, IRON,     HI_METAL),
-AMULET("amulet versus poison",       "pyramidal",  POISON_RES,       165, IRON,     HI_METAL),
-AMULET("amulet of change",           "square",     0,                130, IRON,     HI_METAL),
+AMULET("amulet of ESP",           "circular",   TELEPAT,    175),
+AMULET("amulet of life saving",   "spherical",  LIFESAVED,   75),
+AMULET("amulet of strangulation", "oval",       STRANGLED,  135),
+AMULET("amulet of restful sleep", "triangular", SLEEPING,   135),
+AMULET("amulet versus poison",    "pyramidal",  POISON_RES, 165),
+AMULET("amulet of change",        "square",     0,          130),
 						/* POLYMORPH */
-AMULET("amulet of unchanging",       "concave",    UNCHANGING,        45, IRON,     HI_METAL),
-AMULET("amulet of reflection",       "hexagonal",  REFLECTING,        75, PLATINUM, CLR_WHITE),
-AMULET("amulet of magical breathing","octagonal",  MAGICAL_BREATHING, 65, IRON,     HI_METAL),
-AMULET((char *)0,                    "warped",     0,                  0, PLASTIC,  CLR_BRIGHT_MAGENTA),
-AMULET((char *)0,                    "convex",     0,                  0, PLASTIC,  CLR_BRIGHT_GREEN),
-AMULET((char *)0,                    "lunate",     0,                  0, GOLD,     HI_GOLD),
-AMULET((char *)0,                    "spiked",     0,                  0, WOOD,     HI_WOOD),
-AMULET((char *)0,                    "rectangular",0,                  0, WOOD,     HI_WOOD),
-AMULET((char *)0,                    "elliptic",   0,                  0, WOOD,     HI_WOOD),
+AMULET("amulet of unchanging",    "concave",    UNCHANGING,	 45),
+AMULET("amulet of reflection",    "hexagonal",  REFLECTING,  75),
+AMULET("amulet of magical breathing", "octagonal",      MAGICAL_BREATHING, 65),
+AMULET((char *)0,                 "warped",     0, 0),
+AMULET((char *)0,                 "convex",     0, 0),
+AMULET((char *)0,                 "lunate",     0, 0),
+AMULET((char *)0,                 "spiked",     0, 0),
+AMULET((char *)0,                 "rectangular",0, 0),
+AMULET((char *)0,                 "elliptic",   0, 0),
 OBJECT(OBJ("cheap plastic imitation of the Amulet of Yendor",
 	"Amulet of Yendor"), BITS(0,0,1,0,0,0,0,0,0,0,0,0,PLASTIC), 0,
 	AMULET_CLASS, 0, 0, 20,    0, 0, 0, 0, 0,  1, HI_MITHRIL),
@@ -619,12 +612,8 @@ CONTAINER("bag of tricks", "bag",       0, 1, 1,  20, 15, 100, CLOTH, HI_CLOTH),
 
 /* lock opening tools */
 TOOL("skeleton key", "key",     0, 0, 0, 0,  80,  3,  10, IRON, HI_METAL),
-#ifdef TOURIST
 TOOL("lock pick", (char *)0,    1, 0, 0, 0,  60,  4,  20, IRON, HI_METAL),
 TOOL("credit card", (char *)0,  1, 0, 0, 0,  15,  1,  10, PLASTIC, CLR_WHITE),
-#else
-TOOL("lock pick", (char *)0,    1, 0, 0, 0,  75,  4,  20, IRON, HI_METAL),
-#endif
 /* light sources */
 TOOL("tallow candle", "candle", 0, 1, 0, 0,  20,  2,  10, WAX, CLR_WHITE),
 TOOL("wax candle", "candle",    0, 1, 0, 0,   5,  2,  20, WAX, CLR_WHITE),
@@ -632,24 +621,16 @@ TOOL("brass lantern", (char *)0,1, 0, 0, 0,  30, 30,  12, COPPER, CLR_YELLOW),
 TOOL("oil lamp", "lamp",        0, 0, 0, 0,  45, 20,  10, COPPER, CLR_YELLOW),
 TOOL("magic lamp", "lamp",      0, 0, 1, 0,  15, 20,  50, COPPER, CLR_YELLOW),
 /* other tools */
-#ifdef TOURIST
 TOOL("expensive camera", (char *)0,
 				1, 0, 0, 1,  15, 12, 200, PLASTIC, CLR_BLACK),
 TOOL("mirror", "looking glass", 0, 0, 0, 0,  45, 13,  10, GLASS, HI_SILVER),
-#else
-TOOL("mirror", "looking glass", 0, 0, 0, 0,  60, 13,  10, GLASS, HI_SILVER),
-#endif
 TOOL("crystal ball", "glass orb",
 				0, 0, 1, 1,  15,150,  60, GLASS, HI_GLASS),
 TOOL("lenses", (char *)0,	1, 0, 0, 0,   5,  3,  80, GLASS, HI_GLASS),
 TOOL("blindfold", (char *)0,    1, 0, 0, 0,  50,  2,  20, CLOTH, CLR_BLACK),
 TOOL("towel", (char *)0,        1, 0, 0, 0,  50,  2,  50, CLOTH, CLR_MAGENTA),
-#ifdef STEED
 TOOL("saddle", (char *)0,       1, 0, 0, 0,   5,200, 150, LEATHER, HI_LEATHER),
 TOOL("leash", (char *)0,        1, 0, 0, 0,  65, 12,  20, LEATHER, HI_LEATHER),
-#else
-TOOL("leash", (char *)0,        1, 0, 0, 0,  70, 12,  20, LEATHER, HI_LEATHER),
-#endif
 TOOL("stethoscope", (char *)0,  1, 0, 0, 0,  25,  4,  75, IRON, HI_METAL),
 TOOL("tinning kit", (char *)0,  1, 0, 0, 1,  15,100,  30, IRON, CLR_ORANGE),
 TOOL("tin opener", (char *)0,   1, 0, 0, 0,  35,  4,  30, IRON, HI_METAL),
@@ -657,8 +638,8 @@ TOOL("can of grease", (char *)0,1, 0, 0, 1,  15, 15,  20, IRON, CLR_BRIGHT_GREEN
 TOOL("figurine", (char *)0,     1, 0, 1, 0,  25, 50,  80, MINERAL, HI_MINERAL),
 TOOL("magic marker", (char *)0, 1, 0, 1, 1,  15,  2,  50, PLASTIC, CLR_RED),
 /* traps */
-TOOL("land mine",(char *)0,     1, 0, 0, 0,   0,300, 180, IRON, CLR_RED),
-TOOL("beartrap", (char *)0,     1, 0, 0, 0,   0,200,  60, IRON, HI_METAL),
+TOOL("land mine",(char *)0,     1, 0, 0, 0,   0,200, 180, IRON, CLR_RED),
+TOOL("beartrap", (char *)0,     1, 0, 0, 0,   0,100,  60, IRON, HI_METAL),
 /* instruments */
 /* some code in invent.c requires wooden flute .. drum of earthquake to be
    consecutive, with the wooden flute first and drum of earthquake last */
@@ -863,7 +844,7 @@ SPELL("cone of cold",    "dog eared",   P_ATTACK_SPELL, 10,  7, 4, 1, RAY,      
 SPELL("sleep",           "mottled",     P_ENCHANTMENT_SPELL, 50,  1, 1, 1, RAY,       HI_PAPER),
 SPELL("finger of death", "stained",     P_ATTACK_SPELL,  5, 10, 7, 1, RAY,       HI_PAPER),
 SPELL("light",           "cloth",       P_MATTER_SPELL, 45,  1, 1, 1, NODIR,     HI_CLOTH),
-SPELL("detect monsters", "leather",     P_DIVINATION_SPELL, 43,  1, 1, 1, NODIR,     HI_LEATHER),
+SPELL("detect monsters", "torn",        P_DIVINATION_SPELL, 43,  1, 1, 1, NODIR, CLR_GRAY),
 SPELL("healing",         "white",       P_HEALING_SPELL, 40,  2, 1, 1, IMMEDIATE, CLR_WHITE),
 SPELL("knock",           "pink",        P_MATTER_SPELL, 35,  1, 1, 1, IMMEDIATE, CLR_BRIGHT_MAGENTA),
 SPELL("force bolt",      "red",         P_ATTACK_SPELL, 35,  2, 1, 1, IMMEDIATE, CLR_RED),
@@ -900,7 +881,7 @@ SPELL("stone to flesh",  "thick",       P_HEALING_SPELL, 15,  1, 3, 1, IMMEDIATE
 SPELL("flame sphere",    "canvas",      P_MATTER_SPELL, 20,  2, 1, 1, NODIR, CLR_BROWN),
 SPELL("freeze sphere",   "hardcover",   P_MATTER_SPELL, 20,  2, 1, 1, NODIR, CLR_BROWN),
 #endif
-SPELL((char *)0,         "colorful",    P_NONE, 0, 0, 0, 1, 0, CLR_BRIGHT_GREEN),
+SPELL((char *)0,         "colorful",    P_NONE, 0, 0, 0, 1, 0, CLR_RANDOM),
 SPELL((char *)0,         "dark",        P_NONE, 0, 0, 0, 1, 0, CLR_BLACK),
 SPELL((char *)0,         "spotted",     P_NONE, 0, 0, 0, 1, 0, HI_PAPER),
 SPELL((char *)0,         "faded",       P_NONE, 0, 0, 0, 1, 0, CLR_GRAY),
@@ -939,7 +920,7 @@ WAND("secret door detection", "balsa",
                                    50, 150, 1, NODIR,     WOOD,     HI_WOOD),
 WAND("enlightenment",  "crystal",  15, 150, 1, NODIR,     GLASS,    HI_GLASS),
 WAND("create monster", "maple",    45, 200, 1, NODIR,     WOOD,     HI_WOOD),
-WAND("wishing",        "pine",      5, 500, 1, NODIR,     WOOD,     HI_WOOD),
+WAND("wishing",        "pine",      5, 8000,1, NODIR,     WOOD,     HI_WOOD),
 WAND("nothing",        "oak",      25, 100, 0, IMMEDIATE, WOOD,     HI_WOOD),
 WAND("striking",       "ebony",    75, 150, 1, IMMEDIATE, WOOD,     HI_WOOD),
 WAND("make invisible", "marble",   45, 150, 1, IMMEDIATE, MINERAL,  HI_MINERAL),
@@ -956,9 +937,9 @@ WAND("digging",        "iron",     55, 150, 1, RAY,       IRON,     HI_METAL),
 WAND("magic missile",  "steel",    50, 150, 1, RAY,       IRON,     HI_METAL),
 WAND("fire",           "hexagonal",40, 175, 1, RAY,       IRON,     HI_METAL),
 WAND("cold",           "short",    40, 175, 1, RAY,       IRON,     HI_METAL),
-WAND("sleep",          "runed",    50, 175, 1, RAY,       PLASTIC,  CLR_BRIGHT_MAGENTA),
-WAND("death",          "long",      5, 500, 1, RAY,       PLASTIC,  CLR_BLUE),
-WAND("lightning",      "curved",   40, 175, 1, RAY,       PLASTIC,  CLR_GREEN),
+WAND("sleep",          "runed",    50, 175, 1, RAY,       PLASTIC,  CLR_RANDOM),
+WAND("death",          "long",      5, 3000,1, RAY,       PLASTIC,  CLR_RANDOM),
+WAND("lightning",      "curved",   40, 175, 1, RAY,       PLASTIC,  CLR_RANDOM),
 WAND((char *)0,        "forked",    0, 150, 1, 0,         WOOD,     HI_WOOD),
 WAND((char *)0,        "spiked",    0, 150, 1, 0,         IRON,     HI_METAL),
 WAND((char *)0,        "jeweled",   0, 150, 1, 0,         GEMSTONE, HI_MINERAL),
@@ -979,7 +960,7 @@ WAND((char *)0,        "nickel",    0, 150, 1, 0,         METAL,    HI_METAL),
 WAND((char *)0,        "mithril",   0, 150, 1, 0,         MITHRIL,  HI_MITHRIL),
 WAND((char *)0,        "grooved",   0, 150, 1, 0,         WOOD,     HI_WOOD),
 WAND((char *)0,        "bent",      0, 150, 1, 0,         METAL,    CLR_BRIGHT_GREEN),
-WAND((char *)0,        "plastic",   0, 150, 1, 0,         PLASTIC,  CLR_BLACK),
+WAND((char *)0,        "plastic",   0, 150, 1, 0,         PLASTIC,  CLR_RANDOM),
 WAND((char *)0,        "bone",      0, 150, 1, 0,         BONE,     CLR_WHITE),
 WAND((char *)0,        "alabaster", 0, 150, 1, 0,         MINERAL,  CLR_BROWN),
 WAND((char *)0,        "orichalcum",0, 150, 1, 0,         METAL,    HI_METAL),

@@ -15,10 +15,7 @@ extern const struct shclass shtypes[];
 STATIC_DCL void FDECL(mkshobj_at, (const struct shclass *,int,int));
 STATIC_DCL void FDECL(nameshk, (struct monst *,const char * const *));
 STATIC_DCL int  FDECL(shkinit, (const struct shclass *,struct mkroom *));
-#ifdef BLACKMARKET
-STATIC_DCL void FDECL(stock_blkmar, 
-		  (const struct shclass *, struct mkroom *, int));
-#endif /* BLACKMARKET */
+STATIC_DCL void FDECL(stock_blkmar, (const struct shclass *, struct mkroom *, int));
 
 static const char * const shkliquors[] = {
     /* Ukraine */
@@ -41,6 +38,7 @@ static const char * const shkliquors[] = {
 static const char * const shkbooks[] = {
     /* Eire */
     "Skibbereen", "Kanturk", "Rath Luirc", "Ennistymon", "Lahinch",
+    "Loughrea", "Croagh", "Maumakeogh", "Ballyjamesduff",
     "Kinnegad", "Lugnaquillia", "Enniscorthy", "Gweebarra",
     "Kittamagh", "Nenagh", "Sneem", "Ballingeary", "Kilgarvan",
     "Cahersiveen", "Glenbeigh", "Kilmihil", "Kiltamagh",
@@ -182,7 +180,6 @@ static const char *shkmusic[] = {
     0
 };
 
-#ifdef BLACKMARKET
 static const char *shkblack[] = {
   "One-eyed Sam", "One-eyed Sam", "One-eyed Sam",
   "One-eyed Sam", "One-eyed Sam", "One-eyed Sam",
@@ -197,7 +194,6 @@ static const char *shkblack[] = {
   "One-eyed Sam", "One-eyed Sam", "One-eyed Sam",
   0
 };
-#endif /* BLACKMARKET */
 
 static const char *shkpet[] = {
     /* Albania */
@@ -273,18 +269,10 @@ const struct shclass shtypes[] = {
 	     {10, -WOODEN_HARP	}, { 3, -MAGIC_HARP	},
 	     {10, -BELL		}, {10, -BUGLE		},
 	     {10, -LEATHER_DRUM	}, { 2, -DRUM_OF_EARTHQUAKE},
-#ifdef TOURIST
 	     { 5, -T_SHIRT	}, { 5, -LOCK_PICK	},
-#else
-	     { 5, -TIN_WHISTLE	}, { 5, -LOCK_PICK	},
-#endif
 	     {0, 0}} , shkmusic},
 	{"pet store", FOOD_CLASS, 1, D_SHOP, {
-#ifdef STEED
 	    {67, -FIGURINE}, {5, -LEASH},{10, -TRIPE_RATION}, {5, -SADDLE},
-#else
-	    {72, -FIGURINE}, {5, -LEASH},{10, -TRIPE_RATION}, 
-#endif
 	    {10, -TIN_WHISTLE}, {3, -MAGIC_WHISTLE}}, shkpet},
 	/* Shops below this point are "unique".  That is they must all have a
 	 * probability of zero.  They are only created via the special level
@@ -293,10 +281,8 @@ const struct shclass shtypes[] = {
 	{"lighting store", TOOL_CLASS, 0, D_SHOP,
 	    {{32, -WAX_CANDLE}, {50, -TALLOW_CANDLE},
 	     {5, -BRASS_LANTERN}, {10, -OIL_LAMP}, {3, -MAGIC_LAMP}}, shklight},
-#ifdef BLACKMARKET
 	{"black market", RANDOM_CLASS, 0, D_SHOP,
 	   {{100, RANDOM_CLASS}, {0, 0}, {0, 0}}, shkblack},
-#endif /* BLACKMARKET */
 	{(char *)0, 0, 0, 0, {{0, 0}, {0, 0}, {0, 0}}, 0}
 };
 
@@ -305,7 +291,7 @@ const struct shclass shtypes[] = {
 void
 shop_selection_init()
 {
-	register int i, j, item_prob, shop_prob;
+	int i, j, item_prob, shop_prob;
 
 	for (shop_prob = 0, i = 0; i < SIZE(shtypes)-1; i++) {
 		shop_prob += shtypes[i].prob;
@@ -363,12 +349,6 @@ const char * const *nlp;
 	    /* special-case minetown lighting shk */
 	    shname = "Izchak";
 	    shk->female = FALSE;
-#ifdef BLACKMARKET
-	} else if (nlp == shkblack) {
-	    /* special-case black marketeer */
-	    shname = "One-eyed Sam";
-	    shk->female = TRUE;
-#endif /* BLACKMARKET */
 	} else {
 	    /* We want variation from game to game, without needing the save
 	       and restore support which would be necessary for randomization;
@@ -423,7 +403,7 @@ shkinit(shp, sroom)	/* create a new shopkeeper in the given room */
 const struct shclass	*shp;
 struct mkroom	*sroom;
 {
-	register int sh, sx, sy;
+	int sh, sx, sy;
 	struct monst *shk;
 	long shkmoney; /* Temporary placeholder for Shopkeeper's initial capital */
 
@@ -455,7 +435,7 @@ struct mkroom	*sroom;
 	    /* Said to happen sometimes, but I have never seen it. */
 	    /* Supposedly fixed by fdoor change in mklev.c */
 	    if(wizard) {
-		register int j = sroom->doorct;
+		int j = sroom->doorct;
 
 		pline("Where is shopdoor?");
 		pline("Room at (%d,%d),(%d,%d).",
@@ -477,7 +457,6 @@ struct mkroom	*sroom;
 
 	/* now initialize the shopkeeper monster structure */
 	  
-#ifdef BLACKMARKET
 	shk = 0;
 	if (Is_blackmarket(&u.uz)) {
 	  shk = makemon(&mons[PM_BLACK_MARKETEER], sx, sy, NO_MM_FLAGS);
@@ -486,10 +465,6 @@ struct mkroom	*sroom;
 	  if(!(shk = makemon(&mons[PM_SHOPKEEPER], sx, sy, NO_MM_FLAGS)))
 		return(-1);
 	}        
-#else  /* BLACKMARKET */
-	if(!(shk = makemon(&mons[PM_SHOPKEEPER], sx, sy, NO_MM_FLAGS)))
-		return(-1);
-#endif /* BLACKMARKET */
   
 	shk->isshk = shk->mpeaceful = 1;
 	set_malign(shk);
@@ -521,10 +496,9 @@ struct mkroom	*sroom;
 	    (void) mongets(shk, TOUCHSTONE);
 	nameshk(shk, shp->shknms);
 
-#ifdef BLACKMARKET
-	if (Is_blackmarket(&u.uz))
-    shkmoney = 7*shkmoney + rn2(3*shkmoney);
-#endif
+	if (Is_blackmarket(&u.uz)) {
+		shkmoney = 7*shkmoney + rn2(3*shkmoney);
+	}
 	/* it's a poor town */
 	if (Is_town_level(&u.uz)){
 		shkmoney /= 4;
@@ -540,9 +514,8 @@ struct mkroom	*sroom;
   mkmonmoney(shk, shkmoney);
 #endif
 
-#ifdef BLACKMARKET
 	if (Is_blackmarket(&u.uz)) {
-	  register struct obj *otmp;
+	  struct obj *otmp;
 /* make sure black marketeer can wield Thiefbane */
 	  shk->data->maligntyp = -1;
 /* black marketeer's equipment */
@@ -566,8 +539,6 @@ struct mkroom	*sroom;
 	  otmp = mksobj(SKELETON_KEY, FALSE, FALSE);
 	  mpickobj(shk, otmp);
 	}
-#endif /* BLACKMARKET */
-
 	return(sh);
 }
 
@@ -575,86 +546,97 @@ struct mkroom	*sroom;
 void
 stock_room(shp_indx, sroom)
 int shp_indx;
-register struct mkroom *sroom;
+struct mkroom *sroom;
 {
-    /*
-     * Someday soon we'll dispatch on the shdist field of shclass to do
-     * different placements in this routine. Currently it only supports
-     * shop-style placement (all squares except a row nearest the first
-     * door get objects).
-     */
-    register int sx, sy, sh;
-    char buf[BUFSZ];
-    int rmno = (sroom - rooms) + ROOMOFFSET;
-    const struct shclass *shp = &shtypes[shp_indx];
+	/*
+	 * Someday soon we'll dispatch on the shdist field of shclass to do
+	 * different placements in this routine. Currently it only supports
+	 * shop-style placement (all squares except a row nearest the first
+	 * door get objects).
+	 */
+	int sx, sy, sh;
+	char buf[BUFSZ] = "";
+	int rmno = (sroom - rooms) + ROOMOFFSET;
+	const struct shclass *shp = &shtypes[shp_indx];
 
-    /* first, try to place a shopkeeper in the room */
-    if ((sh = shkinit(shp, sroom)) < 0)
-	return;
-
-    /* make sure no doorways without doors, and no */
-    /* trapped doors, in shops.			   */
-    sx = doors[sroom->fdoor].x;
-    sy = doors[sroom->fdoor].y;
-
-    if(levl[sx][sy].doormask == D_NODOOR) {
-	    levl[sx][sy].doormask = D_ISOPEN;
-	    newsym(sx,sy);
-    }
-    if(levl[sx][sy].typ == SDOOR) {
-	    cvt_sdoor_to_door(&levl[sx][sy]);	/* .typ = DOOR */
-	    newsym(sx,sy);
-    }
-    if(levl[sx][sy].doormask & D_TRAPPED)
-	    levl[sx][sy].doormask = D_LOCKED;
-
-    if(levl[sx][sy].doormask == D_LOCKED) {
-	    register int m = sx, n = sy;
-
-	    if(inside_shop(sx+1,sy)) m--;
-	    else if(inside_shop(sx-1,sy)) m++;
-	    if(inside_shop(sx,sy+1)) n--;
-	    else if(inside_shop(sx,sy-1)) n++;
-	    Sprintf(buf, "Closed for inventory");
-	    make_engr_at(m, n, buf, 0L, DUST);
-    }
-
-#ifdef BLACKMARKET
-    if (Is_blackmarket(&u.uz)) {
-      stock_blkmar(shp, sroom, sh);
-      level.flags.has_shop = TRUE;
-      return;
-    }
-#endif /* BLACKMARKET */
-
-    for(sx = sroom->lx; sx <= sroom->hx; sx++)
-	for(sy = sroom->ly; sy <= sroom->hy; sy++) {
-	    if(sroom->irregular) {
-		if (levl[sx][sy].edge || (int) levl[sx][sy].roomno != rmno ||
-		   distmin(sx, sy, doors[sh].x, doors[sh].y) <= 1)
-		    continue;
-	    } else if((sx == sroom->lx && doors[sh].x == sx-1) ||
-		      (sx == sroom->hx && doors[sh].x == sx+1) ||
-		      (sy == sroom->ly && doors[sh].y == sy-1) ||
-		      (sy == sroom->hy && doors[sh].y == sy+1)) continue;
-	    mkshobj_at(shp, sx, sy);
+	/* first, try to place a shopkeeper in the room */
+	if ((sh = shkinit(shp, sroom)) < 0) {
+		return;
 	}
 
-    /*
-     * Special monster placements (if any) should go here: that way,
-     * monsters will sit on top of objects and not the other way around.
-     */
+	/* make sure no doorways without doors, and no
+	 * trapped doors, in shops
+	 */
+	sx = doors[sroom->fdoor].x;
+	sy = doors[sroom->fdoor].y;
 
-    level.flags.has_shop = TRUE;
+	if(levl[sx][sy].doormask == D_NODOOR) {
+		levl[sx][sy].doormask = D_ISOPEN;
+		newsym(sx,sy);
+	}
+	if(levl[sx][sy].typ == SDOOR) {
+		cvt_sdoor_to_door(&levl[sx][sy]);	/* .typ = DOOR */
+		newsym(sx,sy);
+	}
+	if(levl[sx][sy].doormask & D_TRAPPED) {
+		levl[sx][sy].doormask = D_LOCKED;
+	}
+	if(levl[sx][sy].doormask == D_LOCKED) {
+		Sprintf(buf, "Closed for inventory");
+	} else if (!rn2(40)){
+		Sprintf(buf, "Shoplifters will be beaten, stabbed and stomped. Survivors will be prosecuted.");
+	}
+	if(buf != "") {
+		int m = sx, n = sy;
+		if(inside_shop(sx+1,sy)) {
+			m--;
+		} else if(inside_shop(sx-1,sy)) {
+			m++;
+		}
+		if(inside_shop(sx,sy+1)) {
+			n--;
+		} else if(inside_shop(sx,sy-1)) {
+			n++;
+		}
+		make_engr_at(m, n, buf, 0L, DUST);
+	}
+
+	if (Is_blackmarket(&u.uz)) {
+		stock_blkmar(shp, sroom, sh);
+		level.flags.has_shop = TRUE;
+		return;
+	}
+
+	for(sx = sroom->lx; sx <= sroom->hx; sx++) {
+		for(sy = sroom->ly; sy <= sroom->hy; sy++) {
+			if(sroom->irregular) {
+				if (levl[sx][sy].edge || (int) levl[sx][sy].roomno != rmno || distmin(sx, sy, doors[sh].x, doors[sh].y) <= 1) {
+					continue;
+				}
+			} else if((sx == sroom->lx && doors[sh].x == sx-1) ||
+				(sx == sroom->hx && doors[sh].x == sx+1) ||
+				(sy == sroom->ly && doors[sh].y == sy-1) ||
+				(sy == sroom->hy && doors[sh].y == sy+1)) {
+				continue;
+			}
+			mkshobj_at(shp, sx, sy);
+		}
+	}
+
+	/*
+	 * Special monster placements (if any) should go here: that way,
+	 * monsters will sit on top of objects and not the other way around.
+	 */
+
+	level.flags.has_shop = TRUE;
 }
 
-#ifdef BLACKMARKET
 /* stock a newly-created black market with objects */
 static void
 stock_blkmar(shp, sroom, sh)
 const struct shclass *shp;
-register struct mkroom *sroom;
-register int sh;
+struct mkroom *sroom;
+int sh;
 {
     /*
      * Someday soon we'll dispatch on the shdist field of shclass to do
@@ -662,7 +644,7 @@ register int sh;
      * shop-style placement (all squares except a row nearest the first
      * door get objects).
      */
-    /* [max] removed register int cl,  char buf[bufsz] */
+    /* [max] removed int cl,  char buf[bufsz] */
     int i, sx, sy, first = 0, next = 0, total, partial, typ;
     struct obj *otmp;
     int blkmar_gen[NUM_OBJECTS+2];
@@ -752,7 +734,6 @@ register int sh;
      * monsters will sit on top of objects and not the other way around.
      */
 }
-#endif /* BLACKMARKET */
 
 #endif /* OVLB */
 #ifdef OVL0
@@ -781,7 +762,7 @@ get_shop_item(type)
 int type;
 {
 	const struct shclass *shp = shtypes+type;
-	register int i,j;
+	int i,j;
 
 	/* select an appropriate object type at random */
 	for(j = rnd(100), i = 0; (j -= shp->iprobs[i].iprob) > 0; i++)

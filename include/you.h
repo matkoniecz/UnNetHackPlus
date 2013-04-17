@@ -31,7 +31,7 @@ struct u_have {
 	Bitfield(bell,1);	/* carrying Bell	*/
 	Bitfield(book,1);	/* carrying Book	*/
 	Bitfield(menorah,1);	/* carrying Candelabrum */
-	Bitfield(questart,1);	/* carrying the Quest Artifact */
+	Bitfield(quest_artifact,1);	/* carrying the Quest Artifact */
 	Bitfield(unused,3);
 };
 
@@ -122,7 +122,7 @@ struct Role {
 	      ldrnum,		/* PM_ of quest leader (questpgr.c) */
 	      guardnum,		/* PM_ of quest guardians (questpgr.c) */
 	      neminum;		/* PM_ of quest nemesis (questpgr.c) */
-	short questarti;	/* index (ART_) of quest artifact (questpgr.c) */
+	short quest_artifact_index;	/* index (ART_) of quest artifact (questpgr.c) */
 
 	/*** Bitmasks ***/
 	short allow;		/* bit mask of allowed variations */
@@ -422,17 +422,15 @@ struct you {
 	long	usleep;		/* sleeping; monstermove you last started */
 	int uinvault;
 	struct monst *ustuck;
-#ifdef STEED
 	struct monst *usteed;
 	long ugallop;
 	int urideturns;
-#endif
 	int	umortality;		/* how many times you died */
 	int ugrave_arise; /* you die and become something aside from a ghost */
 	time_t	ubirthday;		/* real world time when game began */
 	time_t	udeathday;		/* real world time when game ended */
 
-	int	weapon_slots;		/* unused skill slots */
+	int	unused_skill_slots;
 	int	skills_advanced;		/* # of advances made so far */
 	xchar	skill_record[P_SKILL_LIMIT];	/* skill advancements */
 	struct skills weapon_skills[P_NUM_SKILLS];

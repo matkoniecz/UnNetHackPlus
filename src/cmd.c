@@ -184,7 +184,7 @@ popch() {
 
 char
 pgetchar() {		/* curtesy of aeb@cwi.nl */
-	register int ch;
+	int ch;
 
 	if(!(ch = popch()))
 		ch = nhgetch();
@@ -242,7 +242,7 @@ doextcmd()	/* here after # - now read a full-word command */
 int
 doextlist()	/* here after #? - now list all full-word commands */
 {
-	register const struct ext_func_tab *efp;
+	const struct ext_func_tab *efp;
 	char	 buf[BUFSZ];
 	winid datawin;
 
@@ -386,30 +386,51 @@ extcmd_via_menu()	/* here after # - now show pick-list of possible commands */
 STATIC_PTR int
 domonability()
 {
-	if (can_breathe(youmonst.data)) return dobreathe();
-	else if (attacktype(youmonst.data, AT_SPIT)) return dospit();
-	else if (youmonst.data->mlet == S_NYMPH) return doremove();
-	else if (attacktype(youmonst.data, AT_GAZE)) return dogaze();
-	else if (is_were(youmonst.data)) return dosummon();
-	else if (webmaker(youmonst.data)) return dospinweb();
-	else if (is_hider(youmonst.data)) return dohide();
-	else if (is_mind_flayer(youmonst.data)) return domindblast();
-	else if (u.umonnum == PM_GREMLIN) {
-	    if(IS_FOUNTAIN(levl[u.ux][u.uy].typ)) {
-		if (split_mon(&youmonst, (struct monst *)0))
-		    dryup(u.ux, u.uy, TRUE);
-	    } else There("is no fountain here.");
+	if (can_breathe(youmonst.data)) {
+		return dobreathe();
+	} else if (attacktype(youmonst.data, AT_SPIT)) {
+		return dospit();
+	} else if (youmonst.data->mlet == S_NYMPH) {
+		return doremove();
+	} else if (attacktype(youmonst.data, AT_GAZE)) {
+		return dogaze();
+	} else if (is_were(youmonst.data)) {
+		return dosummon();
+	} else if (webmaker(youmonst.data)) {
+		return dospinweb();
+	} else if (is_hider(youmonst.data)) {
+		return dohide();
+	} else if (is_mind_flayer(youmonst.data)) {
+		return domindblast();
+	} else if (u.umonnum == PM_GREMLIN) {
+		if (IS_FOUNTAIN(levl[u.ux][u.uy].typ)) {
+			if (!Levitation) {
+				if (split_mon(&youmonst, (struct monst *)0)) {
+					dryup(u.ux, u.uy, TRUE);
+					return 1;
+				}
+			} else {
+				floating_above("water");
+			}
+		} else {
+			There("is no fountain here.");
+		}
 	} else if (is_unicorn(youmonst.data)) {
-	    fix_attributes_and_properties((struct obj *)0,0);
-	    return 1;
+		fix_attributes_and_properties((struct obj *)0,0);
+		return 1;
 	} else if (youmonst.data->msound == MS_SHRIEK) {
-	    You("shriek.");
-	    if(u.uburied)
-		pline("Unfortunately sound does not carry well through rock.");
-	    else aggravate();
-	} else if (Upolyd)
+		You("shriek.");
+		if(u.uburied) {
+			pline("Unfortunately sound does not carry well through rock.");
+		} else {
+			aggravate();
+		}
+		return 1;
+	} else if (Upolyd) {
 		pline("Any special ability you may have is purely reflexive.");
-	else You("don't have a special ability in your normal form!");
+	} else {
+		You("don't have a special ability in your normal form!");
+	}
 	return 0;
 }
 
@@ -915,15 +936,11 @@ boolean want_disp;
 		you_have(buf);
 	}
 	if (Fumbling) enl_msg("You fumble", "", "d", "");
-	if (Wounded_legs
-#ifdef STEED
-	    && !u.usteed
-#endif
-			  ) {
+	if (Wounded_legs && !u.usteed) {
 		Sprintf(buf, "wounded %s", makeplural(body_part(LEG)));
 		you_have(buf);
 	}
-#if defined(WIZARD) && defined(STEED)
+#if defined(WIZARD)
 	if (Wounded_legs && u.usteed && (wizard || final)) {
 	    Strcpy(buf, x_monnam(u.usteed, ARTICLE_YOUR, (char *)0, 
 		    SUPPRESS_SADDLE | SUPPRESS_HALLUCINATION, FALSE));
@@ -995,7 +1012,6 @@ boolean want_disp;
 	if (Breathless) you_can("survive without air");
 	else if (Amphibious) you_can("breathe water");
 	if (Passes_walls) you_can("walk through walls");
-#ifdef STEED
 	/* If you die while dismounting, u.usteed is still set.  Since several
 	 * places in the done() sequence depend on u.usteed, just detect this
 	 * special case. */
@@ -1003,7 +1019,6 @@ boolean want_disp;
 	    Sprintf(buf, "riding %s", y_monnam(u.usteed));
 	    you_are(buf);
 	}
-#endif
 	if (u.uswallow) {
 	    Sprintf(buf, "swallowed by %s", a_monnam(u.ustuck));
 #ifdef WIZARD
@@ -1267,7 +1282,7 @@ int typ;
     anything any;
     menu_item *pick_list = NULL;
     int n;
-    register struct obj *obj;
+    struct obj *obj;
     char allowall[2];
     static NEARDATA const char callable[] = {
 	SCROLL_CLASS, POTION_CLASS, WAND_CLASS, RING_CLASS, AMULET_CLASS,
@@ -1492,7 +1507,6 @@ boolean want_disp;
 			" for any artifacts");
 	}
 
-#ifdef ELBERETH_CONDUCT
 #ifdef ELBERETH
 	/* no point displaying the conduct if Elbereth doesn't do anything */
 	if (u.uconduct.elbereths) {
@@ -1503,7 +1517,6 @@ boolean want_disp;
 		you_have_never("engraved Elbereth");
 	}
 #endif /* ELBERETH */
-#endif /* ELBERETH_CONDUCT */
 
 	if ((wizard || final) && !u.uconduct.bones) {
 	    you_have_never("encountered a bones level");
@@ -1633,9 +1646,6 @@ static const struct func_tab cmdlist[] = {
 	{'&', TRUE, dowhatdoes, NULL},
 	{'?', TRUE, dohelp, NULL},
 	{M('?'), TRUE, doextlist, NULL},
-#ifdef SHELL
-	{'!', TRUE, dosh, NULL},
-#endif
 	{'.', TRUE, donull, "waiting"},
 	{' ', TRUE, donull, "waiting"},
 	{',', FALSE, dopickup, NULL},
@@ -1676,9 +1686,7 @@ struct ext_func_tab extcmdlist[] = {
 	{"overview", "show an overview of the dungeon", dooverview, TRUE},
 	{"pray", "pray to the gods for help", dopray, TRUE},
 	{"quit", "exit without saving current game", done2, TRUE},
-#ifdef STEED
 	{"ride", "ride (or stop riding) a monster", doride, FALSE},
-#endif
 	{"rub", "rub a lamp or a stone", dorub, FALSE},
 #ifdef DUMP_LOG
 	{"screenshot", "output current map to a html file", dump_screenshot, FALSE},
@@ -2024,7 +2032,7 @@ wiz_migrate_mons()
 
 void
 rhack(cmd)
-register char *cmd;
+char *cmd;
 {
 	boolean do_walk, do_rush, prefix_seen, bad_command,
 		firsttime = (cmd == 0);
@@ -2171,7 +2179,7 @@ register char *cmd;
 
 	/* handle all other commands */
 	} else {
-	    register const struct func_tab *tlist;
+	    const struct func_tab *tlist;
 	    int res, NDECL((*func));
 #ifdef QWERTZ
 	    unsigned char cmdchar = *cmd & 0xff;
@@ -2212,7 +2220,7 @@ register char *cmd;
 
 	if (bad_command) {
 	    char expcmd[10];
-	    register char *cp = expcmd;
+	    char *cp = expcmd;
 
 	    while (*cmd && (int)(cp - expcmd) < (int)(sizeof expcmd - 3)) {
 		if (*cmd >= 040 && *cmd < 0177) {
@@ -2241,7 +2249,7 @@ int
 xytod(x, y)	/* convert an x,y pair into a direction code */
 schar x, y;
 {
-	register int dd;
+	int dd;
 
 	for(dd = 0; dd < 8; dd++)
 	    if(x == xdir[dd] && y == ydir[dd]) return dd;
@@ -2252,7 +2260,7 @@ schar x, y;
 void
 dtoxy(cc,dd)	/* convert a direction code into an x,y pair */
 coord *cc;
-register int dd;
+int dd;
 {
 	cc->x = xdir[dd];
 	cc->y = ydir[dd];
@@ -2263,8 +2271,8 @@ int
 movecmd(sym)	/* also sets u.dz, but returns false for <> */
 char sym;
 {
-	register const char *dp;
-	register const char *sdp;
+	const char *dp;
+	const char *sdp;
 	if(iflags.num_pad) sdp = ndir; else sdp = sdir;	/* DICE workaround */
 
 	u.dz = 0;
@@ -2439,7 +2447,7 @@ const char *msg;
 void
 confdir()
 {
-	register int x = (u.umonnum == PM_GRID_BUG) ? 2*rn2(4) : rn2(8);
+	int x = (u.umonnum == PM_GRID_BUG) ? 2*rn2(4) : rn2(8);
 	u.dx = xdir[x];
 	u.dy = ydir[x];
 	return;
@@ -2450,7 +2458,7 @@ confdir()
 
 int
 isok(x,y)
-register int x, y;
+int x, y;
 {
 	/* x corresponds to curx, so x==1 is the first column. Ach. %% */
 	return x >= 1 && x <= COLNO-1 && y >= 0 && y <= ROWNO-1;
@@ -2565,7 +2573,7 @@ STATIC_OVL char *
 parse()
 {
 	static char in_line[COLNO];
-	register int foo;
+	int foo;
 	boolean prezero = FALSE;
 
 	multi = 0;
@@ -2648,7 +2656,7 @@ end_of_input()
 char
 readchar()
 {
-	register int sym;
+	int sym;
 	int x = u.ux, y = u.uy, mod = 0;
 
 	if ( *readchar_queue )
@@ -2663,7 +2671,7 @@ readchar()
 #ifdef UNIX
 # ifdef NR_OF_EOFS
 	if (sym == EOF) {
-	    register int cnt = NR_OF_EOFS;
+	    int cnt = NR_OF_EOFS;
 	  /*
 	   * Some SYSV systems seem to return EOFs for various reasons
 	   * (?like when one hits break or for interrupted systemcalls?),

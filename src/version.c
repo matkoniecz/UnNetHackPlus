@@ -70,16 +70,11 @@ struct version_info *version_data;
 const char *filename;
 boolean complain;
 {
-	if (
-#ifdef VERSION_COMPATIBILITY
-	    version_data->incarnation < VERSION_COMPATIBILITY ||
-	    version_data->incarnation > VERSION_NUMBER
-#else
-	    version_data->incarnation != VERSION_NUMBER
-#endif
-	  ) {
-	    if (complain)
-		pline("Version mismatch for file \"%s\".", filename);
+	if ((version_data->incarnation < VERSION_COMPATIBILITY || version_data->incarnation > VERSION_NUMBER) &&
+	(version_data->incarnation < MIN_UN_VERSION_COMPATIBILITY || version_data->incarnation > MAX_UN_VERSION_COMPATIBILITY)){
+	    if (complain) {
+			pline("Version mismatch for file \"%s\" (incompatible version %X).", filename, version_data->incarnation);
+		}
 	    return FALSE;
 	} else if (
 #ifndef IGNORED_FEATURES

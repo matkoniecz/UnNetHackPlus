@@ -173,9 +173,7 @@ static struct {
 	{ "music shop",	 INSTRUMENTSHOP },
 	{ "candle shop", CANDLESHOP },
 	{ "pet shop",	 PETSHOP },	/* Stephen White */
-#ifdef BLACKMARKET
 	{ "black market", BLACKSHOP },
-#endif /* BLACKMARKET */
 	{ 0, 0 }
 };
 
@@ -784,7 +782,7 @@ int
 get_room_type(s)
 char *s;
 {
-	register int i;
+	int i;
 
 	SpinCursor(3);
 	for(i=0; room_types[i].name; i++)
@@ -800,7 +798,7 @@ int
 get_trap_type(s)
 char *s;
 {
-	register int i;
+	int i;
 
 	SpinCursor(3);
 	for (i=0; trap_types[i].name; i++)
@@ -817,7 +815,7 @@ get_monster_id(s, c)
 char *s;
 char c;
 {
-	register int i, class;
+	int i, class;
 
 	SpinCursor(3);
 	class = c ? def_char_to_monclass(c) : 0;
@@ -830,8 +828,6 @@ char c;
 	for (i = LOW_PM; i < NUMMONS; i++)
 	    if (!class || class == mons[i].mlet)
 		if (!strcasecmp(s, mons[i].mname)) {
-		    if (be_verbose)
-			lc_warning("Monster type \"%s\" matches \"%s\".", s, mons[i].mname);
 		    return i;
 		}
 	return ERR;
@@ -986,8 +982,8 @@ scan_map(map, sp)
 char *map;
 sp_lev *sp;
 {
-	register int i, len;
-	register char *s1, *s2;
+	int i, len;
+	char *s1, *s2;
 	long max_len = 0;
 	long max_hig = 0;
 	char *tmpmap[ROWNO];

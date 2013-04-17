@@ -82,7 +82,7 @@ STATIC_DCL int FDECL(ready_weapon, (struct obj *));
  */
 void
 setuwep(obj)
-register struct obj *obj;
+struct obj *obj;
 {
 	struct obj *olduwep = uwep;
 
@@ -103,9 +103,7 @@ register struct obj *obj;
 		unweapon = (obj->oclass == WEAPON_CLASS) ?
 				is_launcher(obj) || is_ammo(obj) ||
 				is_missile(obj) || (is_pole(obj)
-#ifdef STEED
 				&& !u.usteed
-#endif
 				) : !is_weptool(obj);
 	} else
 		unweapon = TRUE;	/* for "bare hands" message */
@@ -204,7 +202,7 @@ struct obj *wep;
 
 void
 setuqwep(obj)
-register struct obj *obj;
+struct obj *obj;
 {
 	setworn(obj, W_QUIVER);
 	update_inventory();
@@ -212,7 +210,7 @@ register struct obj *obj;
 
 void
 setuswapwep(obj)
-register struct obj *obj;
+struct obj *obj;
 {
 	setworn(obj, W_SWAPWEP);
 	update_inventory();
@@ -231,7 +229,7 @@ static NEARDATA const char bullets[] =	/* (note: different from dothrow.c) */
 int
 dowield()
 {
-	register struct obj *wep, *oldwep;
+	struct obj *wep, *oldwep;
 	int result;
 
 	/* May we attempt this? */
@@ -263,11 +261,7 @@ dowield()
 		return (doswapweapon());
 	else if (wep == uquiver)
 		setuqwep((struct obj *) 0);
-	else if (wep->owornmask & (W_ARMOR | W_RING | W_AMUL | W_TOOL
-#ifdef STEED
-			| W_SADDLE
-#endif
-			)) {
+	else if (wep->owornmask & (W_ARMOR | W_RING | W_AMUL | W_TOOL | W_SADDLE)) {
 		You("cannot wield that!");
 		return (0);
 	}
@@ -285,7 +279,7 @@ dowield()
 int
 doswapweapon()
 {
-	register struct obj *oldwep, *oldswap;
+	struct obj *oldwep, *oldswap;
 	int result = 0;
 
 
@@ -329,7 +323,7 @@ doswapweapon()
 int
 dowieldquiver()
 {
-	register struct obj *newquiver;
+	struct obj *newquiver;
 	const char *quivee_types = (uslinging() ||
 		  (uswapwep && objects[uswapwep->otyp].oc_skill == P_SLING)) ?
 				  bullets : ready_objs;
@@ -366,11 +360,7 @@ dowieldquiver()
 		pline("%s already being used as a weapon!",
 		      !is_plural(uwep) ? "That is" : "They are");
 		return(0);
-	} else if (newquiver->owornmask & (W_ARMOR | W_RING | W_AMUL | W_TOOL
-#ifdef STEED
-			| W_SADDLE
-#endif
-			)) {
+	} else if (newquiver->owornmask & (W_ARMOR | W_RING | W_AMUL | W_TOOL | W_SADDLE)) {
 		You("cannot ready that!");
 		return (0);
 	} else {
@@ -783,8 +773,8 @@ uchar damage_type;
 
 int
 chwepon(otmp, amount)
-register struct obj *otmp;
-register int amount;
+struct obj *otmp;
+int amount;
 {
 	const char *color = hcolor((amount < 0) ? NH_BLACK : NH_BLUE);
 	const char *xtime;
@@ -872,7 +862,7 @@ register int amount;
 
 int
 welded(obj)
-register struct obj *obj;
+struct obj *obj;
 {
 	if (obj && obj == uwep && will_weld(obj)) {
 		obj->bknown = TRUE;
@@ -883,7 +873,7 @@ register struct obj *obj;
 
 void
 weldmsg(obj)
-register struct obj *obj;
+struct obj *obj;
 {
 	long savewornmask;
 

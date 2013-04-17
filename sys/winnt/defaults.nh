@@ -1,4 +1,4 @@
-# Sample config file for win32 NetHack
+# Sample config file for win32 UnNetHackPlus
 # A '#' at the beginning of a line means the rest of the line is a comment.
 #
 # Some options MUST be set in this file, other options can be toggled while
@@ -47,21 +47,11 @@ OPTIONS=pickup_types:$"?!=/
 # Valid values are: unencumbered, burdened, stressed, strained, or overtaxed
 OPTIONS=pickup_burden:unencumbered
 
-# German keyboard layout users can uncomment following option
-# to swap the 'y' and 'z' keys:
-#OPTIONS=!qwertz_layout
-
 # Show descriptive dungeon names on bottom status line
 OPTIONS=show_dgn_name
 
 # some decent defaults
 OPTIONS=disclose:yiyayvygyc
-
-# Use DEC line-drawing characters. Won't work for all terminals.
-#OPTIONS=DECgraphics
-# Use IBM extended characters. Won't work for all terminals
-# http://nethack.wikia.com/wiki/IBMgraphics
-OPTIONS=IBMgraphics
 
 # Set the symbol used to display boulders. Default value is `
 OPTIONS=boulder:0
@@ -75,16 +65,156 @@ OPTIONS=hilite_pet
 # Always show the "uncursed" label on objects
 OPTIONS=showbuc
 
+###########
+# MSGTYPE #
+###########
+#-------------------------
+#| Contents of "MSGTYPE" |
+#---------------------------------------------------------------------------------------------------
+# MSGTYPE Mini-Spoiler    : What it sounds like.                                                   :
+# Delayed Instadeaths     : Stops when you are about to die so you don't blow through the message. :
+# Message Spam            : Eliminates messages you don't want to see.                             :
+# Miscellaneous           : Other customizations to messages.                                      :
+# --------------------------------------------------------------------------------------------------
+#------------------------
+#| MSGTYPE Mini-Spoiler |
+#------------------------
+# MSGTYPE is a patch that lets you control what messages you want to see.
+# Available options are:
+# MSGTYPE=stop   - Force a --More-- to appear after the message, to make it harder to blow through.
+# MSGTYPE=hide   - Don't display a message
+# MSGTYPE=norep  - Don't display a message twice in a row, only if another message is in between
+# MSGTYPE=show   - Display the message as normal; useful for exceptions
+#
+# You can use crude regex/wildcards:
+# * represents zero to infinity characters.
+# ? represents one character.
+#
+# Like menucolors, later entries take precedence, so exceptions should go last.
+# Part of suggested options is disabled by default, obviously good ones are enabled.
+#-----------------------
+#| Delayed Instadeaths |
+#-----------------------
+# Credits to stth, obtained via TjrWiz (username tjr2)
+MSGTYPE=stop "The couatl swings itself around you!"
+MSGTYPE=stop "The electric eel swings itself around you!"
+MSGTYPE=stop "The giant eel swings itself around you!"
+MSGTYPE=stop "The kraken swings itself around you!"
+MSGTYPE=stop "The python grabs you!"
+MSGTYPE=stop "You don't feel very well."
+MSGTYPE=stop "You are turning a little green."
+MSGTYPE=stop "Your limbs are getting oozy."
+MSGTYPE=stop "Your skin begins to peel away."
+MSGTYPE=stop "You are turning into a green slime."
+MSGTYPE=stop "You are slowing down."
+MSGTYPE=stop "Your limbs are stiffening."
+MSGTYPE=stop "It constricts your throat!"
+MSGTYPE=stop "You find it hard to breathe."
+MSGTYPE=stop "You're gasping for air."
+MSGTYPE=stop "Your blood is having trouble reaching your brain."
+MSGTYPE=stop "You can no longer breathe."
+MSGTYPE=stop "You're turning blue."
+MSGTYPE=stop "Your consciousness is fading."
+MSGTYPE=stop "You feel deathly sick."
+MSGTYPE=stop "You feel much worse."
+MSGTYPE=stop "You feel even worse."
+
+# Things that aren't dangerous by themselves but could kill you if you don't
+# notice.
+MSGTYPE=stop "You fail to cast the spell correctly."
+MSGTYPE=stop "You see here a cockatrice corpse."
+MSGTYPE=stop "You see here a chickatrice corpse."
+MSGTYPE=stop "You are beginning to feel weak."
+
+#----------------
+#| Message Spam |
+#----------------
+# NetHack gives you a lot of messages that you don't really need, or you don't
+# really need once you're an experienced player. Taking them out can save you
+# some typing and some messages you don't need to see.
+
+# Annoying spam when using poisoned weapons. Theoretically this removes useful
+# information, but I know what monsters are poison resistant and really don't
+# give a crap when they become unpoisoned, since I know they will eventually
+# and I can hit the 'i' key if I want to see how many I have left.
+#MSGTYPE=hide "The poison doesn't seem to affect the *."
+#MSGTYPE=hide "The poison doesn't seem to affect it."
+#MSGTYPE=hide "Your arrow*is no longer poisoned."
+#MSGTYPE=hide "Your dart*is no longer poisoned."
+
+# For dagger/arrowstorming. Displays individual hit messages
+# only if you miss or if you only threw one. Else you just get "You throw x
+# daggers" and "You kill the foo" (and "The poison was deadly...").
+# The one potential gotcha is that you get no feedback if your shot was actually
+# out of range, so it's wise to know your maximum shooting range.
+#      implicit                   # SHOW "You shoot [x] arrows."
+#MSGTYPE=show "The * hits the *"   # SHOW "the arrow hits the foo"
+#MSGTYPE=hide "The ??? ?*? hits *" # HIDE "the 1st/2nd/3rd/4th/5th arrow hits the foo"
+
+# Sokoban spam.
+#MSGTYPE=hide "With great effort you move the boulder."
+#MSGTYPE=hide "* moves the boulder." #riding
+#MSGTYPE=hide "You try to move the boulder, but in vain."
+#MSGTYPE=hide "* tries to move the boulder, but cannot." #riding
+
+# When a pet is slower than you, you have to listen to the game complain a lot.
+# It'll still make noise, but no need to see the same thing twice over.
+#MSGTYPE=hide "You pull on the leash."
+
+# The whole point of autoquiver is that you don't have to be bothered
+# with what's in your quiver.
+#MSGTYPE=hide "You fill your quiver*"
+
+# If you're like me and type fast, you'll get annoyed very quickly by
+# this message when you press the spacebar too many times.
+#MSGTYPE=hide "Unknown command ' '."
+
+#-----------------
+#| Miscellaneous |
+#-----------------
+
+# This message is easy to miss.
+MSGTYPE=stop "You feel more confident in your*skills."
+
+#warning about moster using bullwhip
+MSGTYPE=stop "The bullwhip wraps around * you're wielding!"
+
+#more info about MSGTYPE available at http://nethackwiki.com/wiki/MSGTYPE
+#this configuration is based on scorchgeek's rcfile: http://alt.org/nethack/userdata/s/scorchgeek/scorchgeek.nh343rc
+
+#MONSTERCOLOR allows changing color for a monster. 
+#Available colours: black, red, green, brown, blue, magenta, cyan, gray, orange, lightgreen, yellow, lightblue, lightmagenta, lightcyan, white. 
+#For example, uncommenting following options reverts changes introduced by UnNetHackPlus
+#MONSTERCOLOR=chickatrice:brown
+#MONSTERCOLOR=fox:red
+#MONSTERCOLOR=warg:brown
+#MONSTERCOLOR=mind flayer:magenta
+#MONSTERCOLOR=master mind flayer:magenta
+#MONSTERCOLOR=manes:red
+#MONSTERCOLOR=goblin:gray
+#MONSTERCOLOR=orc:red
+#MONSTERCOLOR=hill orc:yellow
+#MONSTERCOLOR=rabid rat:brown
+#MONSTERCOLOR=aleax:yellow
+#MONSTERCOLOR=giant bat:red
+#MONSTERCOLOR=vampire bat:black
+#MONSTERCOLOR=kop Lieutenant:cyan
+#MONSTERCOLOR=owlbear:brown
+#MONSTERCOLOR=Wizard of Yendor:magenta
+#MONSTERCOLOR=cthulhu:magenta
+#MONSTERCOLOR=giant beetle:black
+
 # Prevent alert notification messages about feature changes in a
 # (Un)NetHack version and the previous versions
 OPTIONS=suppress_alert=3.5.0
 
-#
+
 # General options.  You might also set "silent" so as not to attract
 # the boss's attention.
 #
 # number_pad option can have an optional value of 0 (off), 1 (on), 
 # or 2(on,legacy-mode) which causes 5='g', alt-5='G', alt-0='I'
+#
 OPTIONS=notime,noshowexp,number_pad:2
 #
 # Set some options to control graphical window-port (these will
@@ -109,6 +239,12 @@ OPTIONS=font_text:DejaVu Mono,font_size_text:13
 # Status window settings
 OPTIONS=font_status:DejaVu Mono,font_size_status:13
 
+# Use DEC line-drawing characters. Won't work for all terminals.
+#OPTIONS=DECgraphics
+# Use IBM extended characters. Won't work for all terminals
+# http://nethack.wikia.com/wiki/IBMgraphics
+OPTIONS=IBMgraphics
+
 # Status/message window colors
 # Possible color options include:
 # six digit hexadecimal RGB color value ("#8F8F8F"), black, red, green, brown,
@@ -128,6 +264,9 @@ OPTIONS=windowcolors:menu white/black message trueblack/#EEEEEE status trueblack
 #OPTIONS=subkeyvalue:180/36
 #OPTIONS=subkeyvalue:184/91
 #OPTIONS=subkeyvalue:188/124
+# German keyboard layout users can uncomment following option
+# to swap the 'y' and 'z' keys:
+#OPTIONS=!qwertz_layout
 
 #
 # *** CHARACTER GRAPHICS ***

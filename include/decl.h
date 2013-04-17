@@ -48,9 +48,7 @@ E NEARDATA int in_doagain;
 E struct dgn_topology {		/* special dungeon levels for speed */
     d_level	d_oracle_level;
     d_level	d_bigroom_level;	/* unused */
-#ifdef REINCARNATION
     d_level	d_rogue_level;
-#endif
     d_level	d_medusa_level;
     d_level	d_stronghold_level;
     d_level	d_valley_level;
@@ -78,18 +76,14 @@ E struct dgn_topology {		/* special dungeon levels for speed */
     d_level	d_mineend_level;
     d_level	d_sokoend_level;
 #endif
-#ifdef BLACKMARKET
     d_level     d_blackmarket_level;
-#endif /* BLACKMARKET */
     d_level	d_minetown_level;
     d_level	d_town_level;
 } dungeon_topology;
 /* macros for accesing the dungeon levels by their old names */
 #define oracle_level		(dungeon_topology.d_oracle_level)
 #define bigroom_level		(dungeon_topology.d_bigroom_level)
-#ifdef REINCARNATION
 #define rogue_level		(dungeon_topology.d_rogue_level)
-#endif
 #define medusa_level		(dungeon_topology.d_medusa_level)
 #define stronghold_level	(dungeon_topology.d_stronghold_level)
 #define valley_level		(dungeon_topology.d_valley_level)
@@ -120,9 +114,7 @@ E struct dgn_topology {		/* special dungeon levels for speed */
 #define mineend_level           (dungeon_topology.d_mineend_level)
 #define sokoend_level           (dungeon_topology.d_sokoend_level)
 #endif
-#ifdef BLACKMARKET
 #define blackmarket_level	(dungeon_topology.d_blackmarket_level)
-#endif /* BLACKMARKET */
 #define minetown_level		(dungeon_topology.d_minetown_level)
 #define town_level		(dungeon_topology.d_town_level)
 
@@ -281,10 +273,7 @@ E uchar monsyms[MAXMCLASSES];		/* current class symbols */
 
 #include "obj.h"
 E NEARDATA struct obj *invent,
-	*uarm, *uarmc, *uarmh, *uarms, *uarmg, *uarmf,
-#ifdef TOURIST
-	*uarmu,				/* under-wear, so to speak */
-#endif
+	*uarm, *uarmc, *uarmh, *uarms, *uarmg, *uarmf, *uarmu,
 	*uskin, *uamul, *uleft, *uright, *ublindf,
 	*uwep, *uswapwep, *uquiver;
 

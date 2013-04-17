@@ -256,7 +256,7 @@ boolean
 find_defensive(mtmp)
 struct monst *mtmp;
 {
-	register struct obj *obj = 0;
+	struct obj *obj = 0;
 	struct trap *t;
 	int x=mtmp->mx, y=mtmp->my;
 	boolean stuck = (mtmp == u.ustuck);
@@ -993,7 +993,7 @@ boolean
 find_offensive(mtmp)
 struct monst *mtmp;
 {
-	register struct obj *obj;
+	struct obj *obj;
 	boolean ranged_stuff = lined_up(mtmp);
 	boolean reflection_skip = (Reflecting && rn2(2));
 	struct obj *helmet = which_armor(mtmp, W_ARMH);
@@ -1005,11 +1005,7 @@ struct monst *mtmp;
 		return FALSE;
 	if (u.uswallow) return FALSE;
 	if (in_your_sanctuary(mtmp, 0, 0)) return FALSE;
-	if (dmgtype(mtmp->data, AD_HEAL) && !uwep
-#ifdef TOURIST
-	    && !uarmu
-#endif
-	    && !uarm && !uarmh && !uarms && !uarmg && !uarmc && !uarmf)
+	if (dmgtype(mtmp->data, AD_HEAL) && !uwep && !uarmu && !uarm && !uarmh && !uarms && !uarmg && !uarmc && !uarmf)
 		return FALSE;
 
 	if (!ranged_stuff) return FALSE;
@@ -1105,9 +1101,7 @@ struct monst *mtmp;
 				unsolid(mtmp->data) || !rn2(10))
 		       && dist2(mtmp->mx,mtmp->my,mtmp->mux,mtmp->muy) <= 2
 		       && mtmp->mcansee && haseyes(mtmp->data)
-#ifdef REINCARNATION
 		       && !Is_rogue_level(&u.uz)
-#endif
 		       && (!In_endgame(&u.uz) || Is_earthlevel(&u.uz))) {
 		    m.offensive = obj;
 		    m.has_offense = MUSE_SCR_EARTH;
@@ -1129,8 +1123,8 @@ struct monst *mtmp;
 STATIC_PTR
 int
 mbhitm(mtmp, otmp)
-register struct monst *mtmp;
-register struct obj *otmp;
+struct monst *mtmp;
+struct obj *otmp;
 {
 	int tmp;
 
@@ -1207,14 +1201,14 @@ register struct obj *otmp;
 STATIC_OVL void
 mbhit(mon,range,fhitm,fhito,obj)
 struct monst *mon;			/* monster shooting the wand */
-register int range;			/* direction and range */
+int range;			/* direction and range */
 int FDECL((*fhitm),(MONST_P,OBJ_P));
 int FDECL((*fhito),(OBJ_P,OBJ_P));	/* fns called when mon/obj hit */
 struct obj *obj;			/* 2nd arg to fhitm/fhito */
 {
-	register struct monst *mtmp;
-	register struct obj *otmp;
-	register uchar typ;
+	struct monst *mtmp;
+	struct obj *otmp;
+	uchar typ;
 	int ddx, ddy;
 
 	bhitpos.x = mon->mx;
@@ -1252,7 +1246,7 @@ struct obj *obj;			/* 2nd arg to fhitm/fhito */
 		/* modified by GAN to hit all objects */
 		if(fhito){
 		    int hitanything = 0;
-		    register struct obj *next_obj;
+		    struct obj *next_obj;
 
 		    for(otmp = level.objects[bhitpos.x][bhitpos.y];
 							otmp; otmp = next_obj) {
@@ -1352,7 +1346,7 @@ struct monst *mtmp;
 	case MUSE_SCR_EARTH:
 	    {
 		/* TODO: handle steeds */
-	    	register int x, y;
+	    	int x, y;
 		/* don't use monster fields after killing it */
 		boolean confused = (mtmp->mconf ? TRUE : FALSE);
 		int mmx = mtmp->mx, mmy = mtmp->my;
@@ -1379,9 +1373,7 @@ struct monst *mtmp;
 	    	    	if (isok(x, y) && !closed_door(x, y) &&
 	    	    			!IS_ROCK(levl[x][y].typ) &&
 	    	    			!IS_AIR(levl[x][y].typ) &&
-#ifdef BLACKMARKET
 	    	    			!(Is_blackmarket(&u.uz) && rn2(2)) &&
-#endif
 	    	    			(((x == mmx) && (y == mmy)) ?
 	    	    			    !otmp->blessed : !otmp->cursed) &&
 					(x != u.ux || y != u.uy)) {
@@ -1520,7 +1512,7 @@ boolean
 find_misc(mtmp)
 struct monst *mtmp;
 {
-	register struct obj *obj;
+	struct obj *obj;
 	struct permonst *mdat = mtmp->data;
 	int x = mtmp->mx, y = mtmp->my;
 	struct trap *t;
@@ -1663,7 +1655,7 @@ struct monst *mtmp;
 		mquaffmsg(mtmp, otmp);
 		if (otmp->cursed) {
 		    if (Can_rise_up(mtmp->mx, mtmp->my, &u.uz)) {
-			register int tolev = depth(&u.uz)-1;
+			int tolev = depth(&u.uz)-1;
 			d_level tolevel;
 
 			get_level(&tolevel, tolev);

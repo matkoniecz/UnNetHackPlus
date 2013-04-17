@@ -217,7 +217,7 @@ STATIC_OVL void
 chat_with_leader()
 {
 /*	Rule 0:	Cheater checks.					*/
-	if(u.uhave.questart && !Qstat(met_nemesis))
+	if(u.uhave.quest_artifact && !Qstat(met_nemesis))
 	    Qstat(cheater) = TRUE;
 
 /*	It is possible for you to get the amulet without completing
@@ -232,7 +232,7 @@ chat_with_leader()
 	}
 
 /*	Rule 3: You've got the artifact and are back to return it. */
-	  else if(u.uhave.questart) {
+	  else if(u.uhave.quest_artifact) {
 	    struct obj *otmp;
 
 	    for (otmp = invent; otmp; otmp = otmp->nobj)
@@ -286,7 +286,7 @@ chat_with_leader()
 
 void
 leader_speaks(mtmp)
-	register struct monst *mtmp;
+	struct monst *mtmp;
 {
 	/* maybe you attacked leader? */
 	if(!mtmp->mpeaceful) {
@@ -324,7 +324,7 @@ void
 nemesis_speaks()
 {
 	if(!Qstat(in_battle)) {
-	  if(u.uhave.questart) qt_pager(QT_NEMWANTSIT);
+	  if(u.uhave.quest_artifact) qt_pager(QT_NEMWANTSIT);
 	  else if(Qstat(made_goal) == 1 || !Qstat(met_nemesis))
 	      qt_pager(QT_FIRSTNEMESIS);
 	  else if(Qstat(made_goal) < 4) qt_pager(QT_NEXTNEMESIS);
@@ -340,7 +340,7 @@ STATIC_OVL void
 chat_with_guardian()
 {
 /*	These guys/gals really don't have much to say... */
-	if (u.uhave.questart && Qstat(killed_nemesis))
+	if (u.uhave.quest_artifact && Qstat(killed_nemesis))
 	    qt_pager(rn1(5, QT_GUARDTALK2));
 	else
 	    qt_pager(rn1(5, QT_GUARDTALK));
@@ -348,7 +348,7 @@ chat_with_guardian()
 
 STATIC_OVL void
 prisoner_speaks (mtmp)
-	register struct monst *mtmp;
+	struct monst *mtmp;
 {
 	if (mtmp->data == &mons[PM_PRISONER] &&
 			(mtmp->mstrategy & STRAT_WAITMASK)) {
@@ -370,7 +370,7 @@ prisoner_speaks (mtmp)
 
 void
 quest_chat(mtmp)
-	register struct monst *mtmp;
+	struct monst *mtmp;
 {
     if (mtmp->m_id == Qstat(leader_m_id)) {
 	chat_with_leader();
@@ -386,7 +386,7 @@ quest_chat(mtmp)
 
 void
 quest_talk(mtmp)
-	register struct monst *mtmp;
+	struct monst *mtmp;
 {
     if (mtmp->m_id == Qstat(leader_m_id)) {
 	leader_speaks(mtmp);

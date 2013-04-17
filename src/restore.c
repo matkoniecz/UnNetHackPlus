@@ -68,8 +68,8 @@ static NEARDATA long omoves;
 STATIC_OVL void
 find_lev_obj()
 {
-	register struct obj *fobjtmp = (struct obj *)0;
-	register struct obj *otmp;
+	struct obj *fobjtmp = (struct obj *)0;
+	struct obj *otmp;
 	int x,y;
 
 	for(x=0; x<COLNO; x++) for(y=0; y<ROWNO; y++)
@@ -102,7 +102,7 @@ void
 inven_inuse(quietly)
 boolean quietly;
 {
-	register struct obj *otmp, *otmp2;
+	struct obj *otmp, *otmp2;
 
 	for (otmp = invent; otmp; otmp = otmp2) {
 	    otmp2 = otmp->nobj;
@@ -126,7 +126,7 @@ boolean quietly;
 
 STATIC_OVL void
 restlevchn(fd)
-register int fd;
+int fd;
 {
 	int cnt;
 	s_level	*tmplev, *x;
@@ -192,7 +192,7 @@ boolean ghostly;
 
 struct lvl_sounds *
 rest_lvl_sounds(fd)
-register int fd;
+int fd;
 {
     int marker;
     struct lvl_sounds *or = NULL;
@@ -218,7 +218,7 @@ register int fd;
 
 struct mon_gen_override *
 rest_mongen_override(fd)
-register int fd;
+int fd;
 {
     int marker;
     struct mon_gen_override *or = NULL;
@@ -250,11 +250,11 @@ register int fd;
 
 STATIC_OVL struct obj *
 restobjchn(fd, ghostly, frozen)
-register int fd;
+int fd;
 boolean ghostly, frozen;
 {
-	register struct obj *otmp, *otmp2 = 0;
-	register struct obj *first = (struct obj *)0;
+	struct obj *otmp, *otmp2 = 0;
+	struct obj *first = (struct obj *)0;
 	int xl;
 
 	while(1) {
@@ -300,11 +300,11 @@ boolean ghostly, frozen;
 
 STATIC_OVL struct monst *
 restmonchn(fd, ghostly)
-register int fd;
+int fd;
 boolean ghostly;
 {
-	register struct monst *mtmp, *mtmp2 = 0;
-	register struct monst *first = (struct monst *)0;
+	struct monst *mtmp, *mtmp2 = 0;
+	struct monst *first = (struct monst *)0;
 	int xl;
 	struct permonst *monbegin;
 	boolean moved;
@@ -371,7 +371,7 @@ STATIC_OVL struct fruit *
 loadfruitchn(fd)
 int fd;
 {
-	register struct fruit *flist, *fnext;
+	struct fruit *flist, *fnext;
 
 	flist = 0;
 	while (fnext = newfruit(),
@@ -386,9 +386,9 @@ int fd;
 
 STATIC_OVL void
 freefruitchn(flist)
-register struct fruit *flist;
+struct fruit *flist;
 {
-	register struct fruit *fnext;
+	struct fruit *fnext;
 
 	while (flist) {
 	    fnext = flist->nextf;
@@ -399,9 +399,9 @@ register struct fruit *flist;
 
 STATIC_OVL void
 ghostfruit(otmp)
-register struct obj *otmp;
+struct obj *otmp;
 {
-	register struct fruit *oldf;
+	struct fruit *oldf;
 
 	for (oldf = oldfruit; oldf; oldf = oldf->nextf)
 		if (oldf->fid == otmp->spe) break;
@@ -413,8 +413,8 @@ register struct obj *otmp;
 STATIC_OVL
 boolean
 restgamestate(fd, stuckid, steedid)
-register int fd;
-unsigned int *stuckid, *steedid;	/* STEED */
+int fd;
+unsigned int *stuckid, *steedid;
 {
 	/* discover is actually flags.explore */
 	boolean remember_discover = discover;
@@ -490,10 +490,8 @@ unsigned int *stuckid, *steedid;	/* STEED */
 	restore_oracles(fd);
 	if (u.ustuck)
 		mread(fd, (genericptr_t) stuckid, sizeof (*stuckid));
-#ifdef STEED
 	if (u.usteed)
 		mread(fd, (genericptr_t) steedid, sizeof (*steedid));
-#endif
 	mread(fd, (genericptr_t) pl_tutorial, sizeof pl_tutorial);
 	mread(fd, (genericptr_t) pl_character, sizeof pl_character);
 
@@ -527,9 +525,9 @@ unsigned int *stuckid, *steedid;	/* STEED */
  */
 STATIC_OVL void
 restlevelstate(stuckid, steedid)
-unsigned int stuckid, steedid;	/* STEED */
+unsigned int stuckid, steedid;
 {
-	register struct monst *mtmp;
+	struct monst *mtmp;
 
 	if (stuckid) {
 		for (mtmp = fmon; mtmp; mtmp = mtmp->nmon)
@@ -537,7 +535,6 @@ unsigned int stuckid, steedid;	/* STEED */
 		if (!mtmp) panic("Cannot find the monster ustuck.");
 		u.ustuck = mtmp;
 	}
-#ifdef STEED
 	if (steedid) {
 		for (mtmp = fmon; mtmp; mtmp = mtmp->nmon)
 			if (mtmp->m_id == steedid) break;
@@ -545,19 +542,18 @@ unsigned int stuckid, steedid;	/* STEED */
 		u.usteed = mtmp;
 		remove_monster(mtmp->mx, mtmp->my);
 	}
-#endif
 }
 
 /*ARGSUSED*/	/* fd used in MFLOPPY only */
 STATIC_OVL int
 restlevelfile(fd, ltmp)
-register int fd;
+int fd;
 xchar ltmp;
 #if defined(macintosh) && (defined(__SC__) || defined(__MRC__))
 # pragma unused(fd)
 #endif
 {
-	register int nfd;
+	int nfd;
 	char whynot[BUFSZ];
 
 	nfd = create_levelfile(ltmp, whynot);
@@ -598,7 +594,7 @@ xchar ltmp;
 			return dorecover(fd);	/* 0 or 1 */
 		} else {
 # endif
-			pline("Be seeing you...");
+			pline(get_goodbye_message());
 			terminate(EXIT_SUCCESS);
 # ifndef AMIGA
 		}
@@ -613,9 +609,9 @@ xchar ltmp;
 
 int
 dorecover(fd)
-register int fd;
+int fd;
 {
-	unsigned int stuckid = 0, steedid = 0;	/* not a register */
+	unsigned int stuckid = 0, steedid = 0;
 	xchar ltmp;
 	int rtmp;
 	struct obj *otmp;
@@ -647,9 +643,7 @@ register int fd;
 	 * place_monster() on other levels
 	 */
 	u.ustuck = (struct monst *)0;
-#ifdef STEED
 	u.usteed = (struct monst *)0;
-#endif
 
 #ifdef MICRO
 # ifdef AMII_GRAPHICS
@@ -711,9 +705,7 @@ register int fd;
 
 	if (!wizard && !discover)
 		(void) delete_savefile();
-#ifdef REINCARNATION
 	if (Is_rogue_level(&u.uz)) assign_rogue_graphics(TRUE);
-#endif
 #ifdef USE_TILES
 	substitute_tiles(&u.uz);
 #endif
@@ -780,8 +772,8 @@ int fd, pid;
 xchar lev;
 boolean ghostly;
 {
-	register struct trap *trap;
-	register struct monst *mtmp;
+	struct trap *trap;
+	struct monst *mtmp;
 	branch *br;
 	int hpid;
 	xchar dlvl;
@@ -876,7 +868,7 @@ boolean ghostly;
 
 	/* regenerate animals while on another level */
 	if (u.uz.dlevel) {
-	    register struct monst *mtmp2;
+	    struct monst *mtmp2;
 
 	    for (mtmp = fmon; mtmp; mtmp = mtmp2) {
 		mtmp2 = mtmp->nmon;
@@ -958,7 +950,7 @@ boolean ghostly;
 		    break;		
 		case BR_PORTAL: /* max of 1 portal per level */
 		    {
-			register struct trap *ttmp;
+			struct trap *ttmp;
 			for(ttmp = ftrap; ttmp; ttmp = ttmp->ntrap)
 			    if (ttmp->ttyp == MAGIC_PORTAL)
 				break;
@@ -969,7 +961,7 @@ boolean ghostly;
 		}
 	    } else if (!br) {
 		/* Remove any dangling portals. */
-		register struct trap *ttmp;
+		struct trap *ttmp;
 		for (ttmp = ftrap; ttmp; ttmp = ttmp->ntrap)
 		    if (ttmp->ttyp == MAGIC_PORTAL) {
 			deltrap(ttmp);
@@ -1121,9 +1113,9 @@ int
 mread(fd, buf, len)
 int fd;
 genericptr_t buf;
-register unsigned len;
+unsigned len;
 {
-    /*register int readlen = 0;*/
+    /*int readlen = 0;*/
     if (fd < 0) error("Restore error; mread attempting to read file %d.", fd);
     mreadfd = fd;
     while (len--) {
@@ -1131,7 +1123,7 @@ register unsigned len;
 	    inrunlength--;
 	    *(*((char **)&buf))++ = '\0';
 	} else {
-	    register short ch = mgetc();
+	    short ch = mgetc();
 	    if (ch < 0) return -1; /*readlen;*/
 	    if ((*(*(char **)&buf)++ = (char)ch) == RLESC) {
 		inrunlength = mgetc();
@@ -1152,11 +1144,11 @@ minit()
 
 void
 mread(fd, buf, len)
-register int fd;
-register genericptr_t buf;
-register unsigned int len;
+int fd;
+genericptr_t buf;
+unsigned int len;
 {
-	register int rlen;
+	int rlen;
 
 #if defined(BSD) || defined(ULTRIX)
 	rlen = read(fd, buf, (int) len);

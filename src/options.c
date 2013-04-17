@@ -56,9 +56,7 @@ static struct Bool_Opt
 	{"asksavedisk", (boolean *)0, FALSE, SET_IN_FILE},
 #endif
 	{"autodig", &flags.autodig, FALSE, SET_IN_GAME},
-#ifdef AUTO_OPEN
 	{"autoopen", &iflags.autoopen, TRUE, SET_IN_GAME},
-#endif /* AUTO_OPEN */
 	{"autopickup", &flags.pickup, TRUE, SET_IN_GAME},
 	{"autoquiver", &flags.autoquiver, FALSE, SET_IN_GAME},
 	{"autounlock", &flags.autounlock, TRUE, SET_IN_GAME},
@@ -180,12 +178,10 @@ static struct Bool_Opt
 #else
 	{"page_wait", (boolean *)0, FALSE, SET_IN_FILE},
 #endif
-#ifdef PARANOID
 	{"paranoid_hit", &iflags.paranoid_hit, TRUE, SET_IN_FILE},
 	{"paranoid_quit", &iflags.paranoid_quit, TRUE, SET_IN_FILE},
 	{"paranoid_remove", &iflags.paranoid_remove, FALSE, SET_IN_FILE},
 	{"paranoid_trap", &iflags.paranoid_trap, FALSE, SET_IN_FILE},
-#endif
 	{"perm_invent", &flags.perm_invent, FALSE, SET_IN_GAME},
 	{"pickup_dropped", &flags.pickup_dropped, FALSE, SET_IN_GAME},
 	{"pickup_thrown", &flags.pickup_thrown, TRUE, SET_IN_GAME},
@@ -222,11 +218,7 @@ static struct Bool_Opt
 	{"showbuc", &iflags.show_buc, TRUE, SET_IN_GAME},
 	{"showdmg", &iflags.showdmg, FALSE, SET_IN_GAME},
 	{"show_dgn_name", &iflags.show_dgn_name, TRUE, SET_IN_GAME},
-#ifdef EXP_ON_BOTL
 	{"showexp", &flags.showexp, FALSE, SET_IN_GAME},
-#else
-	{"showexp", (boolean *)0, FALSE, SET_IN_FILE},
-#endif
 	{"showrace", &iflags.showrace, FALSE, SET_IN_GAME},
 #ifdef REALTIME_ON_BOTL
 	{"showrealtime", &iflags.showrealtime, FALSE, SET_IN_GAME},
@@ -387,11 +379,9 @@ static struct Comp_Opt
 # endif
 #endif
 	{ "petattr",  "attributes for highlighting pets", 12, SET_IN_FILE },
-#ifdef PARANOID
 	{ "paranoid", "the kind of actions you want to be paranoid about",
 						1, /* not needed */
 						SET_IN_GAME },
-#endif
 	{ "pettype",  "your preferred initial pet type", 4, DISP_IN_GAME },
 	{ "pickup_burden",  "maximum burden picked up before prompt",
 						20, SET_IN_GAME },
@@ -935,7 +925,7 @@ char *op;
 
 STATIC_OVL void
 graphics_opts(opts, optype, maxlen, offset)
-register char *opts;
+char *opts;
 const char *optype;
 int maxlen, offset;
 {
@@ -956,7 +946,7 @@ int maxlen, offset;
 
 STATIC_OVL void
 warning_opts(opts, optype)
-register char *opts;
+char *opts;
 const char *optype;
 {
 	uchar translate[MAXPCHARS+1];
@@ -977,7 +967,7 @@ const char *optype;
 
 void
 assign_warnings(graph_chars)
-register uchar *graph_chars;
+uchar *graph_chars;
 {
 	int i;
 	for (i = 0; i < WARNCOUNT; i++)
@@ -1562,7 +1552,7 @@ boolean negated;
 	/* check for "+option1 -option2" */
 	while (*op) {
 		boolean check = FALSE, value = FALSE;
-		register char c;
+		char c;
 		c = *op;
 		if (c == '+') {
 			check = TRUE;
@@ -1599,10 +1589,10 @@ boolean negated;
 
 void
 parseoptions(opts, tinitial, tfrom_file)
-register char *opts;
+char *opts;
 boolean tinitial, tfrom_file;
 {
-	register char *op;
+	char *op;
 	unsigned num;
 	boolean negated;
 	int i;
@@ -2479,7 +2469,7 @@ goodfruit:
 		num = 0;
 		prefix_val = -1;
 		while (*op && num < sizeof flags.end_disclose - 1) {
-			register char c, *dop;
+			char c, *dop;
 			static char valid_settings[] = {
 				DISCLOSE_PROMPT_DEFAULT_YES,
 				DISCLOSE_PROMPT_DEFAULT_NO,
@@ -2514,7 +2504,6 @@ goodfruit:
 		return;
 	}
 
-#ifdef PARANOID
 	fullname = "conducts";
 	if (match_optname(opts, fullname, 8, TRUE)) {
 		common_prefix_options_parser(fullname, opts, negated);
@@ -2526,7 +2515,6 @@ goodfruit:
 		common_prefix_options_parser(fullname, opts, negated);
 		return;
 	}
-#endif
 
 	/* scores:5t[op] 5a[round] o[wn] */
 	if (match_optname(opts, "scores", 4, TRUE)) {
@@ -2983,10 +2971,8 @@ goodfruit:
 				 || (boolopt[i].addr) == &iflags.UTF8graphics
 # endif
 				) {
-# ifdef REINCARNATION
 			    if (!initial && Is_rogue_level(&u.uz))
 				assign_rogue_graphics(FALSE);
-# endif
 			    need_redraw = TRUE;
 # ifdef TERMLIB
 			    if ((boolopt[i].addr) == &iflags.DECgraphics)
@@ -3013,10 +2999,8 @@ goodfruit:
 				switch_graphics(iflags.UTF8graphics ?
 						UTF8_GRAPHICS : ASCII_GRAPHICS);
 # endif
-# ifdef REINCARNATION
 			    if (!initial && Is_rogue_level(&u.uz))
 				assign_rogue_graphics(TRUE);
-# endif
 			}
 #endif /* TERMLIB || ASCIIGRAPH || MAC_GRAPHICS_ENV */
 
@@ -3024,9 +3008,7 @@ goodfruit:
 			if (initial) return;
 
 			if ((boolopt[i].addr) == &flags.time
-#ifdef EXP_ON_BOTL
 			 || (boolopt[i].addr) == &flags.showexp
-#endif
 #ifdef SCORE_ON_BOTL
 			 || (boolopt[i].addr) == &flags.showscore
 #endif
@@ -3459,7 +3441,6 @@ boolean setinitial,setfromfile;
 	/* parseoptions will prompt for the list of types */
 	parseoptions(strcpy(buf, "pickup_types"), setinitial, setfromfile);
 	retval = TRUE;
-#ifdef PARANOID
     } else if (!strcmp("paranoid", optname)) {
 	int pick_cnt, pick_idx, opt_idx;
 	menu_item *paranoid_category_pick = (menu_item *)0;
@@ -3501,7 +3482,6 @@ boolean setinitial,setfromfile;
 	iflags.paranoid_trap = paranoid_settings[3];
 
 	retval = TRUE;
-#endif
     } else if (!strcmp("disclose", optname)) {
 	int pick_cnt, pick_idx, opt_idx;
 	menu_item *disclosure_category_pick = (menu_item *)0;
@@ -4001,14 +3981,12 @@ char *buf;
 	else if (!strcmp(optname, "palette")) 
 		Sprintf(buf, "%s", get_color_string());
 #endif
-#ifdef PARANOID
 	else if (!strcmp(optname, "paranoid"))
 		Sprintf(buf, "%s%s %s%s %s%s %s%s",
 			iflags.paranoid_hit ? "+" : "-", "hit",
 			iflags.paranoid_quit ? "+" : "-", "quit",
 			iflags.paranoid_remove ? "+" : "-", "remove",
 			iflags.paranoid_trap ? "+" : "-", "trap");
-#endif
 	else if (!strcmp(optname, "pettype")) 
 		Sprintf(buf, "%s", (preferred_pet == 'c') ? "cat" :
 				(preferred_pet == 'd') ? "dog" :
@@ -4303,7 +4281,7 @@ void
 option_help()
 {
     char buf[BUFSZ], buf2[BUFSZ];
-    register int i;
+    int i;
     winid datawin;
 
     datawin = create_nhwindow(NHW_TEXT);
@@ -4387,8 +4365,8 @@ int
 fruitadd(str)
 char *str;
 {
-	register int i;
-	register struct fruit *f;
+	int i;
+	struct fruit *f;
 	struct fruit *lastf = 0;
 	int highest_fruit_id = 0;
 	char buf[PL_FSIZ];

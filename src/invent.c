@@ -48,11 +48,11 @@ static char venom_inv[] = { VENOM_CLASS, 0 };	/* (constant) */
 
 void
 assigninvlet(otmp)
-register struct obj *otmp;
+struct obj *otmp;
 {
 	boolean inuse[52];
-	register int i;
-	register struct obj *obj;
+	int i;
+	struct obj *obj;
 
 #ifdef GOLDOBJ
         /* There is only one of these in inventory... */        
@@ -160,7 +160,7 @@ int
 merged(potmp, pobj)
 struct obj **potmp, **pobj;
 {
-	register struct obj *otmp = *potmp, *obj = *pobj;
+	struct obj *otmp = *potmp, *obj = *pobj;
 
 	if(mergable(otmp, obj)) {
 		/* Approximate age: we do it this way because if we were to
@@ -290,9 +290,9 @@ struct obj *obj;
 #endif
 	} else if (obj->oartifact) {
 		if (is_quest_artifact(obj)) {
-		    if (u.uhave.questart)
+		    if (u.uhave.quest_artifact)
 			warning("already have quest artifact?");
-		    u.uhave.questart = 1;
+		    u.uhave.quest_artifact = 1;
 		    artitouch();
 		}
 		set_artifact_intrinsic(obj, 1, W_ART);
@@ -497,7 +497,7 @@ struct obj *obj;
 
 void
 useup(obj)
-register struct obj *obj;
+struct obj *obj;
 {
 	/*  Note:  This works correctly for containers because they */
 	/*	   (containers) don't merge.			    */
@@ -557,9 +557,9 @@ struct obj *obj;
 		u.uhave.book = 0;
 	} else if (obj->oartifact) {
 		if (is_quest_artifact(obj)) {
-		    if (!u.uhave.questart)
+		    if (!u.uhave.quest_artifact)
 			warning("don't have quest artifact?");
-		    u.uhave.questart = 0;
+		    u.uhave.quest_artifact = 0;
 		}
 		set_artifact_intrinsic(obj, 0, W_ART);
 	}
@@ -577,7 +577,7 @@ struct obj *obj;
 /* remove an object from the hero's inventory */
 void
 freeinv(obj)
-register struct obj *obj;
+struct obj *obj;
 {
 	extract_nobj(obj, &invent);
 	freeinv_core(obj);
@@ -607,7 +607,7 @@ int x, y;
 /* destroy object in fobj chain (if unpaid, it remains on the bill) */
 void
 delobj(obj)
-register struct obj *obj;
+struct obj *obj;
 {
 	boolean update_map;
 
@@ -633,9 +633,9 @@ register struct obj *obj;
 
 struct obj *
 sobj_at(n,x,y)
-register int n, x, y;
+int n, x, y;
 {
-	register struct obj *otmp;
+	struct obj *otmp;
 
 	for(otmp = level.objects[x][y]; otmp; otmp = otmp->nexthere)
 		if(otmp->otyp == n)
@@ -648,9 +648,9 @@ register int n, x, y;
 
 struct obj *
 carrying(type)
-register int type;
+int type;
 {
-	register struct obj *otmp;
+	struct obj *otmp;
 
 	for(otmp = invent; otmp; otmp = otmp->nobj)
 		if(otmp->otyp == type)
@@ -700,7 +700,7 @@ long amount;
 boolean
 have_lizard()
 {
-	register struct obj *otmp;
+	struct obj *otmp;
 
 	for(otmp = invent; otmp; otmp = otmp->nobj)
 		if(otmp->otyp == CORPSE && otmp->corpsenm == PM_LIZARD)
@@ -711,7 +711,7 @@ have_lizard()
 struct obj *
 o_on(id, objchn)
 unsigned int id;
-register struct obj *objchn;
+struct obj *objchn;
 {
 	struct obj *temp;
 
@@ -726,10 +726,10 @@ register struct obj *objchn;
 
 boolean
 obj_here(obj, x, y)
-register struct obj *obj;
+struct obj *obj;
 int x, y;
 {
-	register struct obj *otmp;
+	struct obj *otmp;
 
 	for(otmp = level.objects[x][y]; otmp; otmp = otmp->nexthere)
 		if(obj == otmp) return(TRUE);
@@ -741,9 +741,9 @@ int x, y;
 
 struct obj *
 g_at(x,y)
-register int x, y;
+int x, y;
 {
-	register struct obj *obj = level.objects[x][y];
+	struct obj *obj = level.objects[x][y];
 	while(obj) {
 	    if (obj->oclass == COIN_CLASS) return obj;
 	    obj = obj->nexthere;
@@ -757,9 +757,9 @@ register int x, y;
 /* Make a gold object from the hero's gold. */
 struct obj *
 mkgoldobj(q)
-register long q;
+long q;
 {
-	register struct obj *otmp;
+	struct obj *otmp;
 
 	otmp = mksobj(GOLD_PIECE, FALSE, FALSE);
 	u.ugold -= q;
@@ -774,11 +774,11 @@ register long q;
 
 STATIC_OVL void
 compactify(buf)
-register char *buf;
+char *buf;
 /* compact a string of inventory letters by dashing runs of letters */
 {
-	register int i1 = 1, i2 = 1;
-	register char ilet, ilet1, ilet2;
+	int i1 = 1, i2 = 1;
+	char ilet, ilet1, ilet2;
 
 	ilet2 = buf[0];
 	ilet1 = buf[1];
@@ -845,14 +845,14 @@ getnextgetobj()
  */
 struct obj *
 getobj(let,word)
-register const char *let,*word;
+const char *let,*word;
 {
-	register struct obj *otmp;
-	register char ilet;
+	struct obj *otmp;
+	char ilet;
 	char buf[BUFSZ], qbuf[QBUFSZ];
 	char lets[BUFSZ], altlets[BUFSZ], *ap;
-	register int foo = 0;
-	register char *bp = buf;
+	int foo = 0;
+	char *bp = buf;
 	xchar allowcnt = 0;	/* 0, 1 or 2 */
 #ifndef GOLDOBJ
 	boolean allowgold = FALSE;	/* can't use gold because they don't have any */
@@ -931,16 +931,14 @@ register const char *let,*word;
 #endif
 		|| (useboulder && otmp->otyp == BOULDER)
 		) {
-		register int otyp = otmp->otyp;
+		int otyp = otmp->otyp;
 		bp[foo++] = otmp->invlet;
 
 		/* ugly check: remove inappropriate things */
 		if ((taking_off(word) &&
 		    (!(otmp->owornmask & (W_ARMOR | W_RING | W_AMUL | W_TOOL))
 		     || (otmp==uarm && uarmc)
-#ifdef TOURIST
 		     || (otmp==uarmu && (uarm || uarmc))
-#endif
 		    ))
 		|| (putting_on(word) &&
 		     (otmp->owornmask & (W_ARMOR | W_RING | W_AMUL | W_TOOL)))
@@ -1029,10 +1027,8 @@ register const char *let,*word;
 			|| otmp->otyp == TIN
 			|| otmp->otyp == CAN_OF_GREASE
 			|| otmp->otyp == CANDY_BAR
-#ifdef TOURIST
 			|| otmp->otyp == T_SHIRT
 			|| otmp->otyp == CREDIT_CARD
-#endif
 			|| otmp->otyp == MAGIC_MARKER
 #ifdef GOLDOBJ
 			|| otmp->oclass == COIN_CLASS
@@ -1264,7 +1260,7 @@ struct obj *otmp;
 
 STATIC_PTR int
 ckvalidcat(otmp)
-register struct obj *otmp;
+struct obj *otmp;
 {
 	/* use allow_category() from pickup.c */
 	return((int)allow_category(otmp));
@@ -1272,7 +1268,7 @@ register struct obj *otmp;
 
 STATIC_PTR int
 ckunpaid(otmp)
-register struct obj *otmp;
+struct obj *otmp;
 {
 	return((int)(otmp->unpaid));
 }
@@ -1280,22 +1276,14 @@ register struct obj *otmp;
 boolean
 wearing_armor()
 {
-	return((boolean)(uarm || uarmc || uarmf || uarmg || uarmh || uarms
-#ifdef TOURIST
-		|| uarmu
-#endif
-		));
+	return((boolean)(uarm || uarmc || uarmf || uarmg || uarmh || uarms || uarmu));
 }
 
 boolean
 is_worn(otmp)
-register struct obj *otmp;
+struct obj *otmp;
 {
-    return((boolean)(!!(otmp->owornmask & (W_ARMOR | W_RING | W_AMUL | W_TOOL |
-#ifdef STEED
-			W_SADDLE |
-#endif
-			W_WEP | W_SWAPWEP | W_QUIVER))));
+    return((boolean)(!!(otmp->owornmask & (W_ARMOR | W_RING | W_AMUL | W_TOOL | W_SADDLE | W_WEP | W_SWAPWEP | W_QUIVER))));
 }
 
 static NEARDATA const char removeables[] =
@@ -1501,13 +1489,13 @@ unsigned *resultflags;
 int
 askchain(objchn, olets, allflag, fn, ckfn, mx, word)
 struct obj **objchn;
-register int allflag, mx;
-register const char *olets, *word;	/* olets is an Obj Class char array */
-register int FDECL((*fn),(OBJ_P)), FDECL((*ckfn),(OBJ_P));
+int allflag, mx;
+const char *olets, *word;	/* olets is an Obj Class char array */
+int FDECL((*fn),(OBJ_P)), FDECL((*ckfn),(OBJ_P));
 {
 	struct obj *otmp, *otmp2, *otmpo;
-	register char sym, ilet;
-	register int cnt = 0, dud = 0, tmp;
+	char sym, ilet;
+	int cnt = 0, dud = 0, tmp;
 	boolean takeoff, nodot, ident, ininv;
 	char qbuf[QBUFSZ];
 
@@ -1702,7 +1690,7 @@ int id_limit;
 
 STATIC_OVL char
 obj_to_let(obj)	/* should of course only be called for things in invent */
-register struct obj *obj;
+struct obj *obj;
 {
 #ifndef GOLDOBJ
 	if (obj->oclass == COIN_CLASS)
@@ -1722,7 +1710,7 @@ register struct obj *obj;
 void
 prinv(prefix, obj, quan)
 const char *prefix;
-register struct obj *obj;
+struct obj *obj;
 long quan;
 {
 	if (!prefix) prefix = "";
@@ -1839,11 +1827,7 @@ struct obj *obj;
 	else if (obj->otyp == CAN_OF_GREASE)
 		add_menu(win, NO_GLYPH, &any, 'a', 0, ATR_NONE,
 				"Use the can to grease an item", MENU_UNSELECTED);
-	else if (obj->otyp == LOCK_PICK ||
-#ifdef TOURIST
-			obj->otyp == CREDIT_CARD ||
-#endif
-			obj->otyp == SKELETON_KEY)
+	else if (obj->otyp == LOCK_PICK || obj->otyp == CREDIT_CARD || obj->otyp == SKELETON_KEY)
 		add_menu(win, NO_GLYPH, &any, 'a', 0, ATR_NONE,
 				"Use this tool to pick a lock", MENU_UNSELECTED);
 	else if (obj->otyp == TINNING_KIT)
@@ -1894,11 +1878,9 @@ struct obj *obj;
 				"Dip something into this potion", MENU_UNSELECTED);
 	}
 #endif
-#ifdef TOURIST
 	else if (obj->otyp == EXPENSIVE_CAMERA)
 		add_menu(win, NO_GLYPH, &any, 'a', 0, ATR_NONE,
 				"Take a photograph", MENU_UNSELECTED);
-#endif
 	else if (obj->otyp == TOWEL)
 		add_menu(win, NO_GLYPH, &any, 'a', 0, ATR_NONE,
 				"Clean yourself off with this towel", MENU_UNSELECTED);
@@ -2218,7 +2200,7 @@ struct obj *obj2;
  */
 static char
 display_pickinv(lets, want_reply, out_cnt, want_disp)
-register const char *lets;
+const char *lets;
 boolean want_reply;
 long* out_cnt;
 boolean want_disp;
@@ -2420,7 +2402,7 @@ nextclass:
  */
 char
 display_inventory(lets, want_reply)
-register const char *lets;
+const char *lets;
 boolean want_reply;
 {
 	return display_pickinv(lets, want_reply, (long *)0, TRUE);
@@ -2429,7 +2411,7 @@ boolean want_reply;
 /* See display_inventory. This is the same thing WITH dumpfile creation */
 char
 dump_inventory(lets, want_reply, want_disp)
-register const char *lets;
+const char *lets;
 boolean want_reply, want_disp;
 {
   return display_pickinv(lets, want_reply, (long *)0, want_disp);
@@ -2537,7 +2519,7 @@ dounpaid()
 {
     winid win;
     struct obj *otmp, *marker;
-    register char ilet;
+    char ilet;
     char *invlet = flags.inv_order;
     int classcount, count, num_so_far;
     int save_unpaid = 0;	/* lint init */
@@ -2986,7 +2968,7 @@ struct obj *obj;
 
 STATIC_OVL boolean
 mergable(otmp, obj)	/* returns TRUE if obj  & otmp can be merged */
-	register struct obj *otmp, *obj;
+	struct obj *otmp, *obj;
 {
 	if (obj->otyp != otmp->otyp) return FALSE;
 #ifdef GOLDOBJ
@@ -3103,16 +3085,10 @@ doprarm()
 	if(!wearing_armor())
 		You("are not wearing any armor.");
 	else {
-#ifdef TOURIST
 		char lets[8];
-#else
-		char lets[7];
-#endif
-		register int ct = 0;
+		int ct = 0;
 
-#ifdef TOURIST
 		if(uarmu) lets[ct++] = obj_to_let(uarmu);
-#endif
 		if(uarm) lets[ct++] = obj_to_let(uarm);
 		if(uarmc) lets[ct++] = obj_to_let(uarmc);
 		if(uarmh) lets[ct++] = obj_to_let(uarmh);
@@ -3132,7 +3108,7 @@ doprring()
 		You("are not wearing any rings.");
 	else {
 		char lets[3];
-		register int ct = 0;
+		int ct = 0;
 
 		if(uleft) lets[ct++] = obj_to_let(uleft);
 		if(uright) lets[ct++] = obj_to_let(uright);
@@ -3156,11 +3132,7 @@ STATIC_OVL boolean
 tool_in_use(obj)
 struct obj *obj;
 {
-	if ((obj->owornmask & (W_TOOL
-#ifdef STEED
-			| W_SADDLE
-#endif
-			)) != 0L) return TRUE;
+	if ((obj->owornmask & (W_TOOL | W_SADDLE)) != 0L) return TRUE;
 	if (obj->oclass != TOOL_CLASS) return FALSE;
 	return (boolean)(obj == uwep || obj->lamplit ||
 				(obj->otyp == LEASH && obj->leashmon));
@@ -3205,10 +3177,10 @@ doprinuse()
  */
 void
 useupf(obj, numused)
-register struct obj *obj;
+struct obj *obj;
 long numused;
 {
-	register struct obj *otmp;
+	struct obj *otmp;
 	boolean at_u = (obj->ox == u.ux && obj->oy == u.uy);
 
 	/* burn_floor_paper() keeps an object pointer that it tries to
@@ -3298,8 +3270,8 @@ free_invbuf()
 void
 reassign()
 {
-	register int i;
-	register struct obj *obj;
+	int i;
+	struct obj *obj;
 
 	for(obj = invent, i = 0; obj; obj = obj->nobj, i++)
 		obj->invlet = (i < 26) ? ('a'+i) : ('A'+i-26);
@@ -3313,27 +3285,18 @@ int
 doorganize()	/* inventory organizer by Del Lamb */
 {
 	struct obj *obj, *otmp;
-	register int ix, cur;
-	register char let;
+	int ix, cur;
+	char let;
 	char alphabet[52+1], buf[52+1];
 	char qbuf[QBUFSZ];
-#ifdef ADJSPLIT
 	char allowallcnt[3];
-#else
-	char allowall[2];
-#endif
 	const char *adj_type;
 
 	if (!flags.invlet_constant) reassign();
 	/* get a pointer to the object the user wants to organize */
-#ifdef ADJSPLIT
 	allowallcnt[0] = ALLOW_COUNT; allowallcnt[1] = ALL_CLASSES;
 	allowallcnt[2] = '\0';
 	if (!(obj = getobj(allowallcnt,"adjust"))) return(0);
-#else
-	allowall[0] = ALL_CLASSES; allowall[1] = '\0';
-	if (!(obj = getobj(allowall,"adjust"))) return(0);
-#endif
 
 	/* initialize the list with all upper and lower case letters */
 	for (let = 'a', ix = 0;  let <= 'z';) alphabet[ix++] = let++;
@@ -3362,11 +3325,7 @@ doorganize()	/* inventory organizer by Del Lamb */
 		let = yn_function(qbuf, (char *)0, '\0');
 		if(index(quitchars,let)) {
 			pline(Never_mind);
-#ifdef ADJSPLIT
 			goto cleansplit;
-#else
-			return(0);
-#endif
 		}
 		if (let == '@' || !letter(let))
 			pline("Select an inventory slot letter.");
@@ -3374,35 +3333,21 @@ doorganize()	/* inventory organizer by Del Lamb */
 			break;
 	}
 
-	/* change the inventory and print the resulting item */
-#ifndef ADJSPLIT
-	adj_type = "Moving:";
-#endif
-
-	/*
+	/* change the inventory and print the resulting item 
 	 * don't use freeinv/addinv to avoid double-touching artifacts,
 	 * dousing lamps, losing luck, cursing loadstone, etc.
 	 */
 	extract_nobj(obj, &invent);
 
-#ifdef ADJSPLIT
 	for (otmp = invent; otmp && otmp->invlet != let;)
 		otmp = otmp->nobj;
 	if (!otmp)
 		adj_type = "Moving:";
 	else if (merged(&otmp,&obj)) {
-#else
-	for (otmp = invent; otmp;)
-		if (merged(&otmp,&obj)) {
-#endif
 			adj_type = "Merging:";
 			obj = otmp;
-#ifndef ADJSPLIT
-			otmp = otmp->nobj;
-#endif
 			extract_nobj(obj, &invent);
 		} else {
-#ifdef ADJSPLIT
 		  struct obj *otmp2;
 		  for (otmp2 = invent; otmp2
 			 && otmp2->invlet != obj->invlet;)
@@ -3425,16 +3370,9 @@ doorganize()	/* inventory organizer by Del Lamb */
 				goto cleansplit;
 			}
 		  } else
-#else
-			if (otmp->invlet == let) {
-#endif
 				adj_type = "Swapping:";
 				otmp->invlet = obj->invlet;
 			}
-#ifndef ADJSPLIT
-			otmp = otmp->nobj;
-		}
-#endif
 
 	/* inline addinv (assuming flags.invlet_constant and !merged) */
 	obj->invlet = let;
@@ -3446,14 +3384,12 @@ doorganize()	/* inventory organizer by Del Lamb */
 	prinv(adj_type, obj, 0L);
 	update_inventory();
 	return(0);
-#ifdef ADJSPLIT
 cleansplit:
 	for (otmp = invent; otmp; otmp = otmp->nobj)
                 if (otmp != obj && otmp->invlet == obj->invlet)
                         merged( &otmp, &obj );
 
 	return 0;
-#endif
 }
 
 /* common to display_minventory and display_cinventory */
@@ -3503,7 +3439,7 @@ struct obj *obj;
  */
 struct obj *
 display_minventory(mon, dflags, title)
-register struct monst *mon;
+struct monst *mon;
 int dflags;
 char *title;
 {
@@ -3589,7 +3525,7 @@ char *title;
  */
 struct obj *
 display_cinventory(obj)
-register struct obj *obj;
+struct obj *obj;
 {
 	struct obj *ret;
 	char tmp[QBUFSZ];

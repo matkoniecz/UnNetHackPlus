@@ -706,15 +706,11 @@ struct level_map {
 	{ "fire",	&fire_level },
 	{ "juiblex",	&juiblex_level },
 	{ "knox",	&knox_level },
-#ifdef BLACKMARKET        
 	{ "blkmar",     &blackmarket_level },
-#endif /* BLACKMARKET */
 	{ "medusa",	&medusa_level },
 	{ "oracle",	&oracle_level },
 	{ "orcus",	&orcus_level },
-#ifdef REINCARNATION
 	{ "rogue",	&rogue_level },
-#endif
 	{ "sanctum",	&sanctum_level },
 	{ "valley",	&valley_level },
 	{ "water",	&water_level },
@@ -737,8 +733,8 @@ void
 init_dungeons()		/* initialize the "dungeon" structs */
 {
 	dlb	*dgn_file;
-	register int i, cl = 0, cb = 0;
-	register s_level *x;
+	int i, cl = 0, cb = 0;
+	s_level *x;
 	struct proto_dungeon pd;
 	struct level_map *lev_map;
 	struct version_info vers_info;
@@ -976,11 +972,6 @@ init_dungeons()		/* initialize the "dungeon" structs */
 	mines_dnum = dname_to_dnum("The Gnomish Mines");
 	tower_dnum = dname_to_dnum("Vlad's Tower");
 	mall_dnum = dname_to_dnum("Town");
-/*
-#ifdef BLACKMARKET
-	blackmarket_dnum = dname_to_dnum("The Black Market");
-#endif
-*/
 
 	/* one special fixup for dummy surface level */
 	if ((x = find_level("dummy")) != 0) {
@@ -1067,9 +1058,9 @@ boolean noquest;
 	 * calculation.  _However_ the Quest is a difficult dungeon, so we
 	 * include it in the factor of difficulty calculations.
 	 */
-	register int i;
+	int i;
 	d_level tmp;
-	register schar ret = 0;
+	schar ret = 0;
 
 	for(i = 0; i < n_dgns; i++) {
 	    if((tmp.dlevel = dungeons[i].dunlev_ureached) == 0) continue;
@@ -1112,7 +1103,7 @@ xchar
 ledger_to_dnum(ledgerno)
 xchar	ledgerno;
 {
-	register int i;
+	int i;
 
 	/* find i such that (i->base + 1) <= ledgerno <= (i->base + i->count) */
 	for (i = 0; i < n_dgns; i++)
@@ -1232,10 +1223,10 @@ int x, y;
 #ifdef CLIPPING
 	cliparound(u.ux, u.uy);
 #endif
-#ifdef STEED
 	/* ridden steed always shares hero's location */
-	if (u.usteed) u.usteed->mx = u.ux, u.usteed->my = u.uy;
-#endif
+	if (u.usteed) {
+		u.usteed->mx = u.ux, u.usteed->my = u.uy;
+	}
 }
 
 void
@@ -2161,10 +2152,8 @@ recalc_mapseen()
 	/* recalculate room knowledge: for now, just shops and temples
 	 * this could be extended to an array of 0..SHOPBASE
 	 */
-#ifdef BLACKMARKET
 	/* kludge for not recording the shop room on the blackmarket level */
 	if (!Is_blackmarket(&u.uz))
-#endif
 	for (x = 0; x < sizeof(mptr->rooms); x++) {
 		if (mptr->rooms[x] & MSR_SEEN) {
 			if (rooms[x].rtype >= SHOPBASE) {

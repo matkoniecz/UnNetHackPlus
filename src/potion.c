@@ -89,12 +89,11 @@ boolean talk;
 	}
 	if (xtime && !old) {
 		if (talk) {
-#ifdef STEED
-			if (u.usteed)
+			if (u.usteed) {
 				You("wobble in the saddle.");
-			else
-#endif
-			You("%s...", stagger(youmonst.data, "stagger"));
+			} else {
+				You("%s...", stagger(youmonst.data, "stagger"));
+			}
 		}
 	}
 	if ((!xtime && old) || (xtime && !old)) flags.botl = TRUE;
@@ -330,7 +329,7 @@ ghost_from_bottle()
 int
 dodrink()
 {
-	register struct obj *otmp;
+	struct obj *otmp;
 	const char *potion_descr;
 
 	if (Strangled) {
@@ -394,7 +393,7 @@ dodrink()
 
 int
 dopotion(otmp)
-register struct obj *otmp;
+struct obj *otmp;
 {
 	int retval;
 
@@ -420,9 +419,9 @@ register struct obj *otmp;
 
 int
 peffects(otmp)
-	register struct obj	*otmp;
+	struct obj	*otmp;
 {
-	register int i, ii, lim;
+	int i, ii, lim;
 
 	switch(otmp->otyp){
 	case POT_RESTORE_ABILITY:
@@ -651,10 +650,8 @@ peffects(otmp)
 			} else {
 				if (Levitation || Is_airlevel(&u.uz)||Is_waterlevel(&u.uz)) {
 					You("are motionlessly suspended.");
-#ifdef STEED
 				} else if (u.usteed) {
 					You("are frozen in place!");
-#endif
 				} else {
 					Your("%s are frozen to the %s!", makeplural(body_part(FOOT)), surface(u.ux, u.uy));
 				}
@@ -811,10 +808,7 @@ peffects(otmp)
 	case POT_SPEED:
 		{
 			if(Wounded_legs && !otmp->cursed
-#ifdef STEED
-			   && !u.usteed	/* heal_legs() would heal steeds legs */
-#endif
-							) {
+			   && !u.usteed) {	/* heal_legs() would heal steeds legs */
 				heal_legs();
 				unkn++;
 				break;
@@ -864,7 +858,7 @@ peffects(otmp)
 						goto_level(&earth_level, FALSE, FALSE, FALSE);
 #endif
 					} else {
-						register int newlev = depth(&u.uz)-1;
+						int newlev = depth(&u.uz)-1;
 						d_level newlevel;
 						get_level(&newlevel, newlev);
 						if(on_level(&newlevel, &u.uz)) {
@@ -985,7 +979,7 @@ peffects(otmp)
 		break;
 	case POT_GAIN_ENERGY:
 		{
-			register int num;
+			int num;
 			if(otmp->cursed) {
 				You_feel("lackluster.");
 			} else {
@@ -1119,7 +1113,7 @@ peffects(otmp)
 void
 healup(nhp, nxtra, curesick, cureblind)
 	int nhp, nxtra;
-	register boolean curesick, cureblind;
+	boolean curesick, cureblind;
 {
 	if (nhp) {
 		if (Upolyd) {
@@ -1138,8 +1132,8 @@ healup(nhp, nxtra, curesick, cureblind)
 
 void
 strange_feeling(obj,txt)
-register struct obj *obj;
-register const char *txt;
+struct obj *obj;
+const char *txt;
 {
 	if (flags.beginner || !txt)
 		You("have a %s feeling for a moment, then it passes.",
@@ -1160,28 +1154,32 @@ const char *bottlenames[] = {
 	"bottle", "phial", "flagon", "carafe", "flask", "jar", "vial"
 };
 
+const char *bogus_bottlenames[] = {
+	"jug", "pitcher", "bucket", "thermos", "amphora", "barrel", "ampoule"
+};
 
 const char *
 bottlename()
 {
+	if (Hallucination) {
+		return bogus_bottlenames[rn2(SIZE(bogus_bottlenames))];
+	}
 	return bottlenames[rn2(SIZE(bottlenames))];
 }
 
 void
 potionhit(mon, obj, your_fault)
-register struct monst *mon;
-register struct obj *obj;
+struct monst *mon;
+struct obj *obj;
 boolean your_fault;
 {
-	register const char *botlnam = bottlename();
+	const char *botlnam = bottlename();
 	boolean isyou = (mon == &youmonst);
 	int distance;
-#ifdef WEBB_DISINT
 	boolean disint = (touch_disintegrates(mon->data) && 
 	                  !oresist_disintegration(obj) &&
 	                  !mon->mcan &&
 	                   mon->mhp>6);
-#endif
 
 	if (isyou) {
 		distance = 0;
@@ -1190,12 +1188,9 @@ boolean your_fault;
 		losehp(rnd(2), "thrown potion", KILLED_BY_AN);
 	} else {
 		distance = distu(mon->mx,mon->my);
-#ifdef WEBB_DISINT
-		if (!cansee(mon->mx,mon->my)) pline(disint?"Vip!":"Crash!");
-#else
-		if (!cansee(mon->mx,mon->my)) pline("Crash!");
-#endif
-		else {
+		if (!cansee(mon->mx,mon->my)) {
+			pline(disint ? "Vip!" : "Crash!");
+		} else {
 		    char *mnam = mon_nam(mon);
 		    char buf[BUFSZ];
 
@@ -1206,24 +1201,15 @@ boolean your_fault;
 		    } else {
 			Strcpy(buf, mnam);
 		    }
-#ifdef WEBB_DISINT
 		    pline_The("%s crashes on %s and %s.",
-			   botlnam, buf, disint?"disintegrates":"breaks into shards");
-#else
-          pline_The("%s crashes on %s breaks into shards.",
-			   botlnam, buf);
-#endif
+			   botlnam, buf, disint ? "disintegrates" : "breaks into shards");
 		}
 		if(rn2(5) && mon->mhp > 1)
 			mon->mhp--;
 	}
 
 	/* oil doesn't instantly evaporate */
-	if (obj->otyp != POT_OIL && cansee(mon->mx,mon->my) 
-#ifdef WEBB_DISINT
-       && !disint
-#endif
-       )
+	if (obj->otyp != POT_OIL && cansee(mon->mx,mon->my) && !disint)
 		pline("%s.", Tobjnam(obj, "evaporate"));
 
     if (isyou) {
@@ -1249,10 +1235,7 @@ boolean your_fault;
 	boolean angermon = TRUE;
 
 	if (!your_fault) angermon = FALSE;
-#ifdef WEBB_DISINT
-	if (!disint)
-#endif
-     {
+	if (!disint) {
 	switch (obj->otyp) {
 	case POT_HEALING:
 	case POT_EXTRA_HEALING:
@@ -1317,7 +1300,7 @@ boolean your_fault;
 		break;
 	case POT_BLINDNESS:
 		if(haseyes(mon->data)) {
-		    register int btmp = 64 + rn2(32) +
+		    int btmp = 64 + rn2(32) +
 			rn2(32) * !resist(mon, POTION_CLASS, 0, NOTELL);
 		    btmp += mon->mblinded;
 		    mon->mblinded = min(btmp,127);
@@ -1385,28 +1368,23 @@ boolean your_fault;
 		break;
 */
 	}
-     }
+	}
 
 	if (angermon)
 	    wakeup(mon);
 	else
 	    mon->msleeping = 0;
     }
-#ifdef WEBB_DISINT
-    if (!disint)
-#endif 
-   {
-
-	/* Note: potionbreathe() does its own docall() */
-	if ((distance==0 || ((distance < 3) && rn2(5))) &&
-	    (!breathless(youmonst.data) || haseyes(youmonst.data)))
-		potionbreathe(obj);
-	else if (obj->dknown && !objects[obj->otyp].oc_name_known &&
-		   !objects[obj->otyp].oc_uname && cansee(mon->mx,mon->my))
-		docall(obj);
-   }
+	if (!disint) {
+		/* Note: potionbreathe() does its own docall() */
+		if ((distance==0 || ((distance < 3) && rn2(5))) && (!breathless(youmonst.data) || haseyes(youmonst.data))) {
+			potionbreathe(obj);
+		} else if (obj->dknown && !objects[obj->otyp].oc_name_known && !objects[obj->otyp].oc_uname && cansee(mon->mx,mon->my)) {
+			docall(obj);
+		}
+	}
 	if(*u.ushops && obj->unpaid) {
-	        register struct monst *shkp =
+	        struct monst *shkp =
 			shop_keeper(*in_rooms(u.ux, u.uy, SHOPBASE));
 
 		if(!shkp)
@@ -1423,9 +1401,9 @@ boolean your_fault;
 /* vapors are inhaled or get in your eyes */
 void
 potionbreathe(obj)
-register struct obj *obj;
+struct obj *obj;
 {
-	register int i, ii, kn = 0;
+	int i, ii, kn = 0;
 
 	switch(obj->otyp) {
 	case POT_RESTORE_ABILITY:
@@ -1679,7 +1657,7 @@ alchemy_init()
 /** Returns the potion type when object o1 is dipped into object o2 */
 STATIC_OVL short
 mixtype(o1, o2)
-register struct obj *o1, *o2;
+struct obj *o1, *o2;
 {
 	/* cut down on the number of cases below */
 	if (o1->oclass == POTION_CLASS &&
@@ -1773,7 +1751,7 @@ register struct obj *o1, *o2;
 
 boolean
 get_wet(obj)
-register struct obj *obj;
+struct obj *obj;
 /* returns TRUE if something happened (potion should be used up) */
 {
 	char Your_buf[BUFSZ];
@@ -1793,6 +1771,7 @@ register struct obj *obj;
 		if (obj->otyp == POT_ACID) {
 			pline("It boils vigorously!");
 			You("are caught in the explosion!");
+			wake_nearby();
 			losehp(Acid_resistance ? rnd(5) : rnd(10),
 			       "elementary chemistry", KILLED_BY);
 			makeknown(obj->otyp);
@@ -1881,7 +1860,7 @@ register struct obj *obj;
 int
 dodip()
 {
-	register struct obj *potion, *obj;
+	struct obj *potion, *obj;
 	const char *tmp;
 	uchar here;
 	char allowall[2];
@@ -1911,11 +1890,8 @@ dodip()
 		if (yn(qbuf) == 'y') {
 		    if (Levitation) {
 			floating_above(tmp);
-#ifdef STEED
-		    } else if (u.usteed && !is_swimmer(u.usteed->data) &&
-			    P_SKILL(P_RIDING) < P_BASIC) {
+		    } else if (u.usteed && !is_swimmer(u.usteed->data) && P_SKILL(P_RIDING) < P_BASIC) {
 			rider_cant_reach(); /* not skilled enough to reach */
-#endif
 		    } else {
 			(void) get_wet(obj);
 			if (obj->otyp == POT_ACID) useup(obj);
@@ -2066,6 +2042,7 @@ struct obj *potion, *obj;
 		/* KMH, balance patch -- acid is particularly unstable */
 		if (obj->cursed || obj->otyp == POT_ACID || potion->otyp == POT_ACID || !rn2(10)) {
 			pline("BOOM!  They explode!");
+			wake_nearby();
 			exercise(A_STR, FALSE);
 			if (!breathless(youmonst.data) || haseyes(youmonst.data)) {
 				potionbreathe(obj);
@@ -2144,12 +2121,19 @@ struct obj *potion, *obj;
 		return(1);
 	}
 #endif
-	if (potion->otyp == POT_ACID && obj->otyp == CORPSE && obj->corpsenm == PM_LICHEN && !Blind) {
-		pline("%s %s %s around the edges.", The(cxname(obj)),
-		  otense(obj, "turn"),
-		  potion->odiluted ? hcolor(NH_ORANGE) : hcolor(NH_RED));
-		potion->in_use = FALSE;	/* didn't go poof */
-		return(1);
+	if (potion->otyp == POT_ACID) {
+		if (obj->otyp == CORPSE && obj->corpsenm == PM_LICHEN && !Blind) {
+			pline("%s %s %s around the edges.", The(cxname(obj)), otense(obj, "turn"), potion->odiluted ? hcolor(NH_ORANGE) : hcolor(NH_RED));
+			makeknown(POT_ACID);
+			potion->in_use = FALSE;	/* didn't go poof */
+			return(1);
+		}
+		if (is_corrodeable(obj)) {
+			erode_obj(obj, AD_ACID);
+			makeknown(POT_ACID);
+			poof(potion);
+			return(1);
+		}
 	}
 
 	if(is_poisonable(obj)) {
@@ -2264,6 +2248,7 @@ struct obj *potion, *obj;
 		if (obj->lamplit || potion->lamplit) {
 			useup(potion);
 			explode(u.ux, u.uy, 11, d(6,6), 0, EXPL_FIERY);
+			wake_nearby();
 			exercise(A_WIS, FALSE);
 			return 1;
 		}
@@ -2372,7 +2357,7 @@ struct obj *potion, *obj;
 
 void
 djinni_from_bottle(obj)
-register struct obj *obj;
+struct obj *obj;
 {
 	struct monst *mtmp;
 	int chance;

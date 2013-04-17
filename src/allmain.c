@@ -102,13 +102,10 @@ moveloop()
 			(void) makemon((struct permonst *)0, 0, 0, NO_MM_FLAGS);
 
 		    /* calculate how much time passed. */
-#ifdef STEED
 		    if (u.usteed && u.umoved) {
 			/* your speed doesn't augment steed's speed */
 			moveamt = mcalcmove(u.usteed);
-		    } else
-#endif
-		    {
+		    } else {
 			moveamt = youmonst.data->mmove;
 
 			if (Very_fast) {	/* speed boots or potion */
@@ -456,8 +453,9 @@ void
 stop_occupation()
 {
 	if(occupation) {
-		if (!maybe_finished_meal(TRUE))
-		    You("stop %s.", occtxt);
+		if (!maybe_finished_meal(TRUE)) {
+			You("stop %s.", occtxt);
+		}
 		occupation = 0;
 		flags.botl = 1; /* in case u.uhs changed */
 /* fainting stops your occupation, there's no reason to sync.

@@ -364,7 +364,6 @@ int	mntmp;
 {
 	boolean sticky = sticks(youmonst.data) && u.ustuck && !u.uswallow,
 		was_blind = !!Blind, dochange = FALSE;
-	boolean could_pass_walls = Passes_walls;
 	int mlvl;
 
 	if (mvitals[mntmp].mvflags & G_GENOD) {	/* allow G_EXTINCT */
@@ -418,9 +417,8 @@ int	mntmp;
 			You_feel("like a new %s!", mons[mntmp].mname);
 	}
 	if (Stoned && poly_when_stoned(&mons[mntmp])) {
-		/* poly_when_stoned already checked stone golem genocide */
 		You("turn to stone!");
-		mntmp = PM_STONE_GOLEM;
+		mntmp = get_potential_stoned_form_of_monster(mntmp);
 		Stoned = 0;
 		delayed_killer = 0;
 	}
@@ -489,13 +487,6 @@ int	mntmp;
 	else
 		u.uundetected = 0;
 
-	if (u.utraptype == TT_PIT) {
-	    if (could_pass_walls && !Passes_walls) {
-		u.utrap = rn1(6,2);
-	    } else if (!could_pass_walls && Passes_walls) {
-		u.utrap = 0;
-	    }
-	}
 	if (was_blind && !Blind) {	/* previous form was eyeless */
 	    Blinded = 1L;
 	    make_blinded(0L, TRUE);	/* remove blindness */
@@ -504,7 +495,6 @@ int	mntmp;
 
 	if (!sticky && !u.uswallow && u.ustuck && sticks(youmonst.data)) u.ustuck = 0;
 	else if (sticky && !sticks(youmonst.data)) uunstick();
-#ifdef STEED
 	if (u.usteed) {
 	    if (touch_petrifies(u.usteed->data) &&
 	    		!Stone_resistance && rnl(3)) {
@@ -517,7 +507,6 @@ int	mntmp;
  	    }
 	    if (!can_ride(u.usteed)) dismount_steed(DISMOUNT_POLY);
 	}
-#endif
 
 	if (flags.verbose) {
 	    static const char use_thec[] = "Use the command #%s to %s.";
@@ -595,7 +584,7 @@ int	mntmp;
 STATIC_OVL void
 break_armor()
 {
-    register struct obj *otmp;
+    struct obj *otmp;
 
     if (breakarm(youmonst.data)) {
 	if ((otmp = uarm) != 0) {
@@ -616,12 +605,10 @@ break_armor()
 		useup(otmp);
 	    }
 	}
-#ifdef TOURIST
 	if (uarmu) {
 		Your("shirt rips to shreds!");
 		useup(uarmu);
 	}
-#endif
     } else if (sliparm(youmonst.data)) {
 	if (((otmp = uarm) != 0) && (racial_exception(&youmonst, otmp) < 1)) {
 		if (donning(otmp)) cancel_don();
@@ -636,7 +623,6 @@ break_armor()
 		(void) Cloak_off();
 		dropx(otmp);
 	}
-#ifdef TOURIST
 	if ((otmp = uarmu) != 0) {
 		if (is_whirly(youmonst.data))
 			You("seep right through your shirt!");
@@ -644,7 +630,6 @@ break_armor()
 		setworn((struct obj *)0, otmp->owornmask & W_ARMU);
 		dropx(otmp);
 	}
-#endif
     }
     if (has_horns(youmonst.data)) {
 	if ((otmp = uarmh) != 0) {
@@ -815,7 +800,7 @@ doremove()
 int
 dospinweb()
 {
-	register struct trap *ttmp = t_at(u.ux,u.uy);
+	struct trap *ttmp = t_at(u.ux,u.uy);
 
 	if (Levitation || Is_airlevel(&u.uz)
 	    || Underwater || Is_waterlevel(&u.uz)) {
@@ -949,7 +934,7 @@ dosummon()
 int
 dogaze()
 {
-	register struct monst *mtmp;
+	struct monst *mtmp;
 	int looked = 0;
 	char qbuf[QBUFSZ];
 	int i;

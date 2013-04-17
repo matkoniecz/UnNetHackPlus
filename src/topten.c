@@ -90,9 +90,7 @@ NEARDATA const char * const killed_by_prefix[] = {
 	"killed by ", "choked on ", "poisoned by ", "died of ", "drowned in ",
 	"burned by ", "dissolved in ", "crushed to death by ", "petrified by ",
 	"turned to slime by ", "killed by ", 
-#ifdef WEBB_DISINT
 	"disintegrated by ",
-#endif
 	"turned to slime by ", "killed by ",
 #ifdef ASTRAL_ESCAPE
    "",
@@ -317,11 +315,11 @@ encode_carried()
 
   /* this encodes important items potentially owned by the player at the
      time of death */
-  if (u.uhave.amulet)   c |= 0x0001UL; /* real Amulet of Yendor */
-  if (u.uhave.bell)     c |= 0x0002UL; /* Bell of Opening */
-  if (u.uhave.book)     c |= 0x0004UL; /* Book of the Dead */
-  if (u.uhave.menorah)  c |= 0x0008UL; /* Candelabrum of Invocation */
-  if (u.uhave.questart) c |= 0x0010UL; /* own quest artifact */
+  if (u.uhave.amulet)         c |= 0x0001UL; /* real Amulet of Yendor */
+  if (u.uhave.bell)           c |= 0x0002UL; /* Bell of Opening */
+  if (u.uhave.book)           c |= 0x0004UL; /* Book of the Dead */
+  if (u.uhave.menorah)        c |= 0x0008UL; /* Candelabrum of Invocation */
+  if (u.uhave.quest_artifact) c |= 0x0010UL; /* own quest artifact */
 
   return c;
 }
@@ -435,10 +433,10 @@ int how;
 	int uid = getuid();
 	int rank, rank0 = -1, rank1 = 0;
 	int occ_cnt = PERSMAX;
-	register struct toptenentry *t0, *tprev;
+	struct toptenentry *t0, *tprev;
 	struct toptenentry *t1;
 	FILE *rfile;
-	register int flg = 0;
+	int flg = 0;
 	boolean t0_used;
 #ifdef LOGFILE
 	FILE *lfile;
@@ -789,7 +787,7 @@ STATIC_OVL void
 outheader()
 {
 	char linebuf[BUFSZ];
-	register char *bp;
+	char *bp;
 
 	Strcpy(linebuf, " No  Points     Name");
 	bp = eos(linebuf);
@@ -1114,10 +1112,10 @@ char **argv;
 	const char **players;
 	int playerct, rank;
 	boolean current_ver = TRUE, init_done = FALSE;
-	register struct toptenentry *t1;
+	struct toptenentry *t1;
 	FILE *rfile;
 	boolean match_found = FALSE;
-	register int i;
+	int i;
 	char pbuf[BUFSZ];
 	int uid = -1;
 #ifndef PERS_IS_UID
@@ -1280,8 +1278,8 @@ tt_oname(otmp)
 struct obj *otmp;
 {
 	int rank;
-	register int i;
-	register struct toptenentry *tt;
+	int i;
+	struct toptenentry *tt;
 	FILE *rfile;
 	struct toptenentry tt_buf;
 

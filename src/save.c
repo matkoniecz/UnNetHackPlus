@@ -67,6 +67,12 @@ extern gsl_rng *rng_state;
 /* need to preserve these during save to avoid accessing freed memory */
 static unsigned ustuck_id = 0, usteed_id = 0;
 
+char *
+get_goodbye_message()
+{
+	return "Be seeing you...\n\nI would welcome help in increasing variation of text used by shopkeepers, \nas currently their yells are quite repetitive. Ideas may be posted on\nhttps://github.com/Bulwersator/UnNetHackPlus/issues/9 or \non http://www.reddit.com/r/roguelikes/comments/1bt3ip/ .\nThanks to anybody who would share idea for new hollers!\n\nBug tracker is located at https://github.com/Bulwersator/UnNetHackPlus/issues\n- both bug reports and help in dealing with listed issues are welcomed! \n\n-- Bulwersator\n";
+}
+
 int
 dosave()
 {
@@ -88,7 +94,7 @@ dosave()
 			u.uhp = -1;		/* universal game's over indicator */
 			/* make sure they see the Saving message */
 			display_nhwindow(WIN_MESSAGE, TRUE);
-			exit_nhwindows("Be seeing you...");
+			exit_nhwindows(get_goodbye_message());
 			terminate(EXIT_SUCCESS);
 		} else (void)doredraw();
 	}
@@ -132,7 +138,7 @@ int
 dosave0()
 {
 	const char *fq_save;
-	register int fd, ofd;
+	int fd, ofd;
 	xchar ltmp;
 	d_level uz_save;
 	char whynot[BUFSZ];
@@ -230,9 +236,7 @@ dosave0()
 	bwrite(fd, (genericptr_t) plname, PL_NSIZ);
 #endif
 	ustuck_id = (u.ustuck ? u.ustuck->m_id : 0);
-#ifdef STEED
 	usteed_id = (u.usteed ? u.usteed->m_id : 0);
-#endif
 
 	savelev(fd, ledger_no(&u.uz), WRITE_SAVE | FREE_SAVE);
 	savegamestate(fd, WRITE_SAVE | FREE_SAVE);
@@ -248,9 +252,7 @@ dosave0()
 	 * may mislead place_monster() on other levels
 	 */
 	u.ustuck = (struct monst *)0;
-#ifdef STEED
 	u.usteed = (struct monst *)0;
-#endif
 
 	for(ltmp = (xchar)1; ltmp <= maxledgerno(); ltmp++) {
 		if (ltmp == ledger_no(&uz_save)) continue;
@@ -295,7 +297,7 @@ dosave0()
 
 STATIC_OVL void
 savegamestate(fd, mode)
-register int fd, mode;
+int fd, mode;
 {
 	int uid;
 #if defined(RECORD_REALTIME) || defined(REALTIME_ON_BOTL)
@@ -337,11 +339,9 @@ register int fd, mode;
 	save_oracles(fd, mode);
 	if(ustuck_id)
 	    bwrite(fd, (genericptr_t) &ustuck_id, sizeof ustuck_id);
-#ifdef STEED
 	if(usteed_id)
 	    bwrite(fd, (genericptr_t) &usteed_id, sizeof usteed_id);
-#endif
-        bwrite(fd, (genericptr_t) pl_tutorial, sizeof pl_tutorial);
+	bwrite(fd, (genericptr_t) pl_tutorial, sizeof pl_tutorial);
 	bwrite(fd, (genericptr_t) pl_character, sizeof pl_character);
 	bwrite(fd, (genericptr_t) pl_fruit, sizeof pl_fruit);
 	bwrite(fd, (genericptr_t) &current_fruit, sizeof current_fruit);
@@ -424,9 +424,7 @@ savestateinlock()
 		    bwrite(fd, (genericptr_t) plname, PL_NSIZ);
 #endif
 		    ustuck_id = (u.ustuck ? u.ustuck->m_id : 0);
-#ifdef STEED
 		    usteed_id = (u.usteed ? u.usteed->m_id : 0);
-#endif
 		    savegamestate(fd, WRITE_SAVE);
 		}
 		bclose(fd);
@@ -664,7 +662,7 @@ int fd;
 
 void
 bflush(fd)  /* flush run and buffer */
-register int fd;
+int fd;
 {
     bwritefd = fd;
     if (outrunlength >= 0) {	/* flush run */
@@ -691,9 +689,9 @@ void
 bwrite(fd, loc, num)
 int fd;
 genericptr_t loc;
-register unsigned num;
+unsigned num;
 {
-    register unsigned char *bp = (unsigned char *)loc;
+    unsigned char *bp = (unsigned char *)loc;
 
     if (!compressing) {
 #ifdef MFLOPPY
@@ -777,9 +775,9 @@ bflush(fd)
 
 void
 bwrite(fd,loc,num)
-register int fd;
-register genericptr_t loc;
-register unsigned num;
+int fd;
+genericptr_t loc;
+unsigned num;
 {
 	boolean failed;
 
@@ -834,7 +832,7 @@ bclose(fd)
 
 STATIC_OVL void
 savelevchn(fd, mode)
-register int fd, mode;
+int fd, mode;
 {
 	s_level	*tmplev, *tmplev2;
 	int cnt = 0;
@@ -856,9 +854,9 @@ register int fd, mode;
 
 STATIC_OVL void
 savedamage(fd, mode)
-register int fd, mode;
+int fd, mode;
 {
-	register struct damage *damageptr, *tmp_dam;
+	struct damage *damageptr, *tmp_dam;
 	unsigned int xl = 0;
 
 	damageptr = level.damagelist;
@@ -881,8 +879,8 @@ register int fd, mode;
 
 void
 save_mongen_override(fd, or, mode)
-register int fd, mode;
-register struct mon_gen_override *or;
+int fd, mode;
+struct mon_gen_override *or;
 {
     struct mon_gen_tuple *mt;
     struct mon_gen_tuple *prev;
@@ -916,8 +914,8 @@ register struct mon_gen_override *or;
 
 void
 save_lvl_sounds(fd, or, mode)
-register int fd, mode;
-register struct lvl_sounds *or;
+int fd, mode;
+struct lvl_sounds *or;
 {
     int marker = 0;
     int i;
@@ -954,10 +952,10 @@ register struct lvl_sounds *or;
 
 STATIC_OVL void
 saveobjchn(fd, otmp, mode)
-register int fd, mode;
-register struct obj *otmp;
+int fd, mode;
+struct obj *otmp;
 {
-	register struct obj *otmp2;
+	struct obj *otmp2;
 	unsigned int xl;
 	int minusone = -1;
 
@@ -986,10 +984,10 @@ register struct obj *otmp;
 
 STATIC_OVL void
 savemonchn(fd, mtmp, mode)
-register int fd, mode;
-register struct monst *mtmp;
+int fd, mode;
+struct monst *mtmp;
 {
-	register struct monst *mtmp2;
+	struct monst *mtmp2;
 	unsigned int xl;
 	int minusone = -1;
 	struct permonst *monbegin = &mons[0];
@@ -1016,10 +1014,10 @@ register struct monst *mtmp;
 
 STATIC_OVL void
 savetrapchn(fd, trap, mode)
-register int fd, mode;
-register struct trap *trap;
+int fd, mode;
+struct trap *trap;
 {
-	register struct trap *trap2;
+	struct trap *trap2;
 
 	while (trap) {
 	    trap2 = trap->ntrap;
@@ -1040,9 +1038,9 @@ register struct trap *trap;
  */
 void
 savefruitchn(fd, mode)
-register int fd, mode;
+int fd, mode;
 {
-	register struct fruit *f2, *f1;
+	struct fruit *f2, *f1;
 
 	f1 = ffruit;
 	while (f1) {
