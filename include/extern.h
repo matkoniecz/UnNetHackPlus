@@ -1158,8 +1158,9 @@ E struct obj *FDECL(mkcorpstat,
 E struct obj *FDECL(obj_attach_mid, (struct obj *, unsigned));
 E struct monst *FDECL(get_mtraits, (struct obj *, BOOLEAN_P));
 E struct obj *FDECL(mk_tt_object, (int,int,int));
-E struct obj *FDECL(mk_named_object,
-			(int,struct permonst *,int,int,const char *));
+E struct obj *FDECL(mk_player_statue_on_Medusa_island, (int, int));
+E struct obj *FDECL(mk_monster_statue_on_Medusa_island, (int, int));
+E struct obj *FDECL(mk_named_object, (int,struct permonst *,int,int,const char *));
 E struct obj *FDECL(rnd_treefruit_at, (int, int));
 E void FDECL(rnd_treesticks_at, (int, int));
 E void FDECL(start_corpse_timeout, (struct obj *));

@@ -473,7 +473,7 @@ fixup_special()
 		if (rn2(2))
 			otmp = mk_player_statue_on_Medusa_island(somex(croom), somey(croom));
 		else 
-			otmp = mk_moster_statue_on_Medusa_island(somex(croom), somey(croom));
+			otmp = mk_monster_statue_on_Medusa_island(somex(croom), somey(croom));
 	} else if(Is_wiz1_level(&u.uz)) {
 		croom = search_special(MORGUE);
 		create_secret_door(croom, W_EAST|W_WEST);
