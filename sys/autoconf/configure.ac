@@ -402,17 +402,13 @@ NETHACK_ARG(kops,[Keystone Kops],KOPS,yes)
 # NETHACK_ARG(unpolypile,[Object unpolymorphing],UNPOLYPILE,yes)
 # NETHACK_ARG(wallet-o-p,[Perseus' Wallet],WALLET_O_P,yes)
 # NETHACK_ARG(lightsabers,[Lightsabers],LIGHTSABERS,yes)
-# NETHACK_ARG(d-saber,[Dimsabers],LIGHTSABERS,yes)
-# NETHACK_ARG(p-spoon,[Spoon],P_SPOON,yes)
 # NETHACK_ARG(firearms,[Guns and Bullets],FIREARMS,yes)
 # NETHACK_ARG(eaten-memory,[Remember which monsters have been eaten],
 #  EATEN_MEMORY,yes)
 NETHACK_ARG(randomized-planes,[Shuffling order of Elemental Planes],RANDOMIZED_PLANES,yes)
 # NETHACK_ARG(steed,[Ability to ride monsters],STEED,yes) - enabled uncoditionally
-# NETHACK_ARG(dwarf,[Dwarf race],DWARF,yes)
 # NETHACK_ARG(tourist,[Tourist class],TOURIST,yes) - enabled uncoditionally
 # NETHACK_ARG(yeoman,[Yeoman class],YEOMAN,yes)
-# NETHACK_ARG(zouthern,[Zoutherner class],ZOUTHERN,no)
 NETHACK_ARG(redo,[Redo last command],REDO,yes)
 NETHACK_ARG(clipping,[Allow smaller screens],CLIPPING,yes)
 NETHACK_ARG(menu-color,[TTY graphics menu color],MENU_COLOR,yes)
@@ -421,8 +417,6 @@ NETHACK_ARG(status-color,[TTY graphics status color],STATUS_COLORS,yes)
 fi
 # NETHACK_ARG(auto-open,[Open doors by walking into them],AUTO_OPEN,yes) - enabled uncoditionally
 NETHACK_ARG(elbereth,[Engraving the E-word repels monsters],ELBERETH,yes)
-# NETHACK_ARG(noartifactwish,[Prevent wishing for special artifacts],
-#  NOARTIFACTWISH,no)
 # NETHACK_ARG(no-bones,[Disable loading and saving bones levels],NO_BONES,no)
 if test $host_os != mingw32; then
  NETHACK_ARG(bones-pool,[Multiple bones per level],BONES_POOL,yes)
@@ -434,10 +428,7 @@ NETHACK_ARG(user-sounds,
 NETHACK_ARG(score-on-botl,[Show score on bottom line],SCORE_ON_BOTL,no)
 NETHACK_ARG(realtime-on-botl,[Show elapsed time on bottom line],REALTIME_ON_BOTL,no)
 NETHACK_ARG(high-score-comparison-by-uid,[Compare High Score entries by user id instead of user name],PERS_IS_UID,no)
-#NETHACK_ARG(borg,[Borg player (only under DOS)],BORG,no)
 # NETHACK_ARG(keep-save,[Keep save files after restore],KEEP_SAVE,no)
-# NETHACK_ARG(charon,[Charon's boat, enables Cerebus (not implemented)],CHARON,no)
-# NETHACK_ARG(show-dmg,[Display damage reports],SHOW_DMG,yes)
 # NETHACK_ARG(show-weight,[Display object weight],SHOW_WEIGHT,yes)
 # NETHACK_ARG(other-services,[Shopkeeper services],OTHER_SERVICES,yes)
 # NETHACK_ARG(paranoid,[Require some questions to be answered with 'yes' instead of 'y'],PARANOID,yes) - enabled uncoditionally
