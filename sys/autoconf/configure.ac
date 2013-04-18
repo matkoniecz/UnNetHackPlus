@@ -394,10 +394,10 @@ NETHACK_ARG(data-librarian,[Data librarian],DLB,auto,
 NETHACK_ARG(sinks,[Kitchen sinks],SINKS,yes)
 # NETHACK_ARG(light-src-spell,[Spells are light sources],LIGHT_SRC_SPELL,yes)
 NETHACK_ARG(wallified-maze,[Fancy mazes],WALLIFIED_MAZE,yes)
-NETHACK_ARG(reincarnation,[Special Rogue-like levels],REINCARNATION,yes)
-NETHACK_ARG(blackmarket,[Blackmarket],BLACKMARKET,yes)
+# NETHACK_ARG(reincarnation,[Special Rogue-like levels],REINCARNATION,yes) - enabled uncoditionally
+# NETHACK_ARG(blackmarket,[Blackmarket],BLACKMARKET,yes) - enabled uncoditionally
 NETHACK_ARG(kops,[Keystone Kops],KOPS,yes)
-NETHACK_ARG(seduce,[Succubi/incubi seduction],SEDUCE,yes)
+# NETHACK_ARG(seduce,[Succubi/incubi seduction],SEDUCE,yes) - enabled uncoditionally
 # NETHACK_ARG(invisible-objects,[Invisible objects],INVISIBLE_OBJECTS,yes)
 # NETHACK_ARG(unpolypile,[Object unpolymorphing],UNPOLYPILE,yes)
 # NETHACK_ARG(wallet-o-p,[Perseus' Wallet],WALLET_O_P,yes)
@@ -408,9 +408,9 @@ NETHACK_ARG(seduce,[Succubi/incubi seduction],SEDUCE,yes)
 # NETHACK_ARG(eaten-memory,[Remember which monsters have been eaten],
 #  EATEN_MEMORY,yes)
 NETHACK_ARG(randomized-planes,[Shuffling order of Elemental Planes],RANDOMIZED_PLANES,yes)
-NETHACK_ARG(steed,[Ability to ride monsters],STEED,yes)
+# NETHACK_ARG(steed,[Ability to ride monsters],STEED,yes) - enabled uncoditionally
 # NETHACK_ARG(dwarf,[Dwarf race],DWARF,yes)
-NETHACK_ARG(tourist,[Tourist class],TOURIST,yes)
+# NETHACK_ARG(tourist,[Tourist class],TOURIST,yes) - enabled uncoditionally
 # NETHACK_ARG(yeoman,[Yeoman class],YEOMAN,yes)
 # NETHACK_ARG(zouthern,[Zoutherner class],ZOUTHERN,no)
 NETHACK_ARG(redo,[Redo last command],REDO,yes)
@@ -419,7 +419,7 @@ NETHACK_ARG(menu-color,[TTY graphics menu color],MENU_COLOR,yes)
 if test "$enable_tty_graphics" != "no"; then
 NETHACK_ARG(status-color,[TTY graphics status color],STATUS_COLORS,yes)
 fi
-NETHACK_ARG(auto-open,[Open doors by walking into them],AUTO_OPEN,yes)
+# NETHACK_ARG(auto-open,[Open doors by walking into them],AUTO_OPEN,yes) - enabled uncoditionally
 NETHACK_ARG(elbereth,[Engraving the E-word repels monsters],ELBERETH,yes)
 # NETHACK_ARG(noartifactwish,[Prevent wishing for special artifacts],
 #  NOARTIFACTWISH,no)
@@ -430,7 +430,7 @@ fi
 NETHACK_ARG(user-sounds,
   [Allow user-defined mapping from messages to sounds)],
   USER_SOUNDS,no)
-NETHACK_ARG(exp-on-botl,[Show experience on bottom line],EXP_ON_BOTL,yes)
+# NETHACK_ARG(exp-on-botl,[Show experience on bottom line],EXP_ON_BOTL,yes) - enabled uncoditionally
 NETHACK_ARG(score-on-botl,[Show score on bottom line],SCORE_ON_BOTL,no)
 NETHACK_ARG(realtime-on-botl,[Show elapsed time on bottom line],REALTIME_ON_BOTL,no)
 NETHACK_ARG(high-score-comparison-by-uid,[Compare High Score entries by user id instead of user name],PERS_IS_UID,no)
@@ -440,7 +440,7 @@ NETHACK_ARG(high-score-comparison-by-uid,[Compare High Score entries by user id 
 # NETHACK_ARG(show-dmg,[Display damage reports],SHOW_DMG,yes)
 # NETHACK_ARG(show-weight,[Display object weight],SHOW_WEIGHT,yes)
 # NETHACK_ARG(other-services,[Shopkeeper services],OTHER_SERVICES,yes)
-NETHACK_ARG(paranoid,[Require some questions to be answered with 'yes' instead of 'y'],PARANOID,yes)
+# NETHACK_ARG(paranoid,[Require some questions to be answered with 'yes' instead of 'y'],PARANOID,yes) - enabled uncoditionally
 NETHACK_ARG(shell,[Start a shell from within the game],SHELL,no)
 NETHACK_ARG(show-born,[Display number of created monsters at the end of game],SHOW_BORN,yes)
 NETHACK_ARG(show-extinct,[Display extinct monsters at the end of game],SHOW_EXTINCT,yes)
