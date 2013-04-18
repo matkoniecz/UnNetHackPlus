@@ -1,5 +1,5 @@
 dnl	UNNETHACKPLUS autoconf template
-AC_INIT(UNNETHACKPLUS, 4.0.0, bulwersator@gmail.com)
+AC_INIT(UNNETHACKPLUS, 4.7.0, bulwersator@gmail.com)
 dnl Avoid AC_REVISION() because we check configure into CVS
 dnl and it will cause confusing revision numbers to be included
 dnl in configure if developers forget to check in configure.ac
