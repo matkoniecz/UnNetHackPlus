@@ -1429,13 +1429,12 @@ hitmu(struct monst *mtmp, struct attack *mattk)
 			if (mtmp->mcan) {
 				break;
 			}
+			hurtarmor(AD_DCAY);
 			if (u.umonnum == PM_WOOD_GOLEM || u.umonnum == PM_LEATHER_GOLEM) {
 				You("rot!");
 				/* KMH -- this is okay with unchanging */
 				rehumanize();
-				break;
 			}
-			hurtarmor(AD_DCAY);
 			break;
 		case AD_HEAL:
 			/* a cancelled nurse is just an ordinary monster */
