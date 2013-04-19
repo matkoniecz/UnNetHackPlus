@@ -1115,11 +1115,11 @@ hitmu(struct monst *mtmp, struct attack *mattk)
 					ABASE(A_INT) = ATTRMIN(A_INT) + 2;
 					You_feel("like a scarecrow.");
 				}
+				forget_skills();
+				forget_spells();
 			}
 			/* adjattrib gives dunce cap message when appropriate */
 			(void) adjattrib(A_INT, -rnd(2), FALSE);
-			forget_skills();
-			forget_spells();
 			exercise(A_WIS, FALSE);
 			break;
 		case AD_PLYS:
