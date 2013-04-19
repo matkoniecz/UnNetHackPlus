@@ -2,21 +2,11 @@ Plans for UnNetHackPlus
 
 * http://bilious.alt.org/?224
 
-eating death as mind flayer
-roast dunce cap amnesia
+roast
 u.umonnum == PM_WOOD_GOLEM || u.umonnum == PM_LEATHER_GOLEM
 u.umonnum == PM_IRON_GOLEM
 
-moat =
-												
-				rehumanize();
-				break;
-			}
-			hurtarmor(AD_DCAY);
-
-			
-			why break
-			
+										
 						/* this condition must match the one in sounds.c for MS_NURSE */
 
 pull flags.botl to functions like make_sick - would require "change_hp"
@@ -129,16 +119,11 @@ http://tvtropes.org/pmwiki/pmwiki.php/Main/HorrorTropes
 http://tvtropes.org/pmwiki/pmwiki.php/Main/ThisIndexIsCursed
 http://tvtropes.org/pmwiki/pmwiki.php/Main/AppliedPhlebotinum
 http://tvtropes.org/pmwiki/pmwiki.php/Main/PlotDevice
-http://tvtropes.org/pmwiki/pmwiki.php/Main/NarrativeDevices
-http://tvtropes.org/pmwiki/pmwiki.php/Main/ChekhovsGun
 http://tvtropes.org/pmwiki/pmwiki.php/Main/TomeOfEldritchLore
-http://tvtropes.org/pmwiki/pmwiki.php/Main/AlienKudzu
 
-* "Once upon a midnight dreary, while I pondered, weak and weary, Over many a quaint and curious volume of forgotten lore..." — Edgar Allan Poe, The Raven 
 * investigate SCORE_ON_BOTL
 * "checking whether to enable" in configure + autoconf.h + autoconf.hin
 * kill paging in guidebook
-* #version
 * bars for timeout of levitation, speed, protection, confuse monster on melee attack
 * search for "YAFM needed", "performance", "optimization"
 * exploded ring of levitation -> you float gently
@@ -188,15 +173,13 @@ m_dowear_type
 * death texts by quest nemesis are not case devteam thinks about everything, as they may be killed is some other way (also: picking up quest artifact with alive nemesis)
 * gold <-> trap detection
 * Ixoth will have reflection from the Magic Mirror, so there's no point in using attack wands or spells. In vanilla, he will have magic resistance instead of reflection, so those items and abilities might actually be worthwhile.
-*  Ixoth's stats are somewhat higher than they are in vanilla. In vanilla, Ixoth is physically substantially weaker than other dragons.
-* yellow dragon scale mail provides immunity to stunning and confusio
+* yellow dragon scale mail provides immunity to stunning and confusion
 * intrinsic_possible fully_identify_obj
 * [[encyclopedia]]
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/68be37ef17c95024eb28e25820b7534d43478166
 * MAGIC_MARKER as gift (type in object generator), later TRUE to initialize and TRUE to make artifact one :) http://nethackwiki.com/wiki/Source:Ref/mksobj#mksobj
 * http://nethackwiki.com/wiki/Source:Polyself.c#line629
 * fix cannibalism among sentient pets (BTW, scroll of taming affecting sentient creatures is quite disturbing) 
-* grunt (see bookmarks)
 * http://bilious.alt.org/?288 Confused Magic Whistle
 * mark E-square
 * http://nethackwiki.com/wiki/Pet#Armor_and_extrinsics http://nethackwiki.com/wiki/Armor#Monsters_.28pets.29_and_armor
@@ -327,7 +310,6 @@ proud owner of a magic whistle.
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/c89f6e57eb16e81bd37920096c6f64dfed725b03 (+later fix)
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/5d10dd556b1d511b248e67f5882b0d2ffaff580d (range for telepathy)
 * silver boots + https://github.com/Chris-plus-alphanumericgibberish/dnethack/commit/f167bb7bd5568288c1e54f7581ae34499d7945fd (dokick edit)
-* Sporkhack has added some racial equipment for gnomes to wear.
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/4bf67bd1aea2d321b8c90b3de0de5f4c269a2500
 * investigate helm of clarity from spork
 * save last enlightenment status
@@ -383,6 +365,7 @@ proud owner of a magic whistle.
 * on savegame mismatch game eats the save
 
 # no playtesting
+*  Ixoth's stats are somewhat higher than they are in vanilla. In vanilla, Ixoth is physically substantially weaker than other dragons.
 * http://www.reddit.com/r/roguelikes/comments/1bt3ip/i_would_welcome_help_in_increasing_variation_of/c9aafv2
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/cdb0add92fed422e61860b7c88711b347cd17b5f + https://github.com/Bulwersator/CopyOfSporkHack/commit/d25452bdea84850ada1674a7fefa343f66a9264c - time increases monster generation
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/cbc86197bf6a8d63532069fa153a946bbb5b946c
@@ -411,6 +394,9 @@ proud owner of a magic whistle.
 * http://l.j-factor.com/nethack/deathdrop.diff
 * https://github.com/sgrunt/GruntHack/commit/a06d2f7e3c734768f608df8d5a873fd583dfb394
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/794cc90b031ee1d5bfa71dca209797492441d927  Significantly upgrade the chance of a footrice's hissing attack starting the stoning process -- if it hits, of course.
+
+#na playtesting and savegame breaking
+* Sporkhack has added some racial equipment for gnomes to wear.
 
 #unable to test
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/4a6337948eb34e2c0dbf4ec2609316d6dafcf234
