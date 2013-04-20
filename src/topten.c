@@ -464,7 +464,7 @@ int how;
 	    toptenwin = create_nhwindow(NHW_TEXT);
 	}
 
-#if defined(UNIX) || defined(VMS) || defined(__EMX__)
+#if defined(UNIX) || defined(VMS)
 #define HUP	if (!program_state.done_hup)
 #else
 #define HUP

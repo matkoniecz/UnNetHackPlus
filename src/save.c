@@ -44,7 +44,7 @@ static long nulls[10];
 #define nulls nul
 #endif
 
-#if defined(UNIX) || defined(VMS) || defined(__EMX__) || defined(WIN32)
+#if defined(UNIX) || defined(VMS) || defined(WIN32)
 #define HUP	if (!program_state.done_hup)
 #else
 #define HUP
@@ -83,7 +83,7 @@ dosave()
 	} else {
 		clear_nhwindow(WIN_MESSAGE);
 		pline("Saving...");
-#if defined(UNIX) || defined(VMS) || defined(__EMX__)
+#if defined(UNIX) || defined(VMS)
 		program_state.done_hup = 0;
 #endif
 		if(dosave0()) {
@@ -102,7 +102,7 @@ dosave()
 }
 
 
-#if defined(UNIX) || defined(VMS) || defined (__EMX__) || defined(WIN32)
+#if defined(UNIX) || defined(VMS) || defined(WIN32)
 /*ARGSUSED*/
 void
 hangup(sig_unused)  /* called as signal() handler, so sent at least one arg */
@@ -674,7 +674,7 @@ int fd;
 
     if (outbufp) {
 	if (write(fd, outbuf, outbufp) != outbufp) {
-#if defined(UNIX) || defined(VMS) || defined(__EMX__)
+#if defined(UNIX) || defined(VMS)
 	    if (program_state.done_hup)
 		terminate(EXIT_FAILURE);
 	    else
@@ -699,7 +699,7 @@ unsigned num;
 	if (count_only) return;
 #endif
 	if ((unsigned) write(fd, loc, num) != num) {
-#if defined(UNIX) || defined(VMS) || defined(__EMX__)
+#if defined(UNIX) || defined(VMS)
 	    if (program_state.done_hup)
 		terminate(EXIT_FAILURE);
 	    else
@@ -804,7 +804,7 @@ unsigned num;
 	}
 
 	if (failed) {
-#if defined(UNIX) || defined(VMS) || defined(__EMX__)
+#if defined(UNIX) || defined(VMS)
 	    if (program_state.done_hup)
 		terminate(EXIT_FAILURE);
 	    else

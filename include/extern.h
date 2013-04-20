@@ -1900,7 +1900,7 @@ E int FDECL(doconsult, (struct monst *));
 
 E char *NDECL(get_goodbye_message);
 E int NDECL(dosave);
-#if defined(UNIX) || defined(VMS) || defined(__EMX__) || defined(WIN32)
+#if defined(UNIX) || defined(VMS) || defined(WIN32)
 E void FDECL(hangup, (int));
 #endif
 E int NDECL(dosave0);

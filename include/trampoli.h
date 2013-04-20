@@ -98,7 +98,7 @@
 #define done1(sig)  done1_(sig)
 #define done2()     done2_()
 #define done_intr(sig) done_intr_(sig)
-#if defined(UNIX) || defined (VMS) || defined(__EMX__)
+#if defined(UNIX) || defined (VMS)
 #define done_hangup(sig) done_hangup_(sig)
 #endif
 
@@ -214,7 +214,7 @@
 
 /* ### save.c ### */
 #define dosave() dosave_()
-#if defined(UNIX) || defined (VMS) || defined(__EMX__)
+#if defined(UNIX) || defined (VMS)
 #define hangup(sig) hangup_(sig)
 #endif
 

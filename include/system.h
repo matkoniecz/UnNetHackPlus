@@ -216,9 +216,7 @@ E int FDECL(open, (const char *,int));
 
 #if defined(MICRO)
 E int FDECL(close, (int));
-#ifndef __EMX__
 E int FDECL(read, (int,genericptr_t,unsigned int));
-#endif
 E int FDECL(open, (const char *,int,...));
 E int FDECL(dup2, (int, int));
 E int FDECL(setmode, (int,int));
@@ -227,13 +225,9 @@ E int NDECL(kbhit);
 #  if defined(__TURBOC__)
 E int FDECL(chdir, (const char *));
 #  else
-#   ifndef __EMX__
 E int FDECL(chdir, (char *));
-#   endif
 #  endif
-#  ifndef __EMX__
 E char *FDECL(getcwd, (char *,int));
-#  endif
 # endif /* !_DCC */
 #endif
 
