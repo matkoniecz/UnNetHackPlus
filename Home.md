@@ -263,7 +263,7 @@ fix completely broken alignment, maybe also better gods
 *  Got it! Giantslayer is an artifact sling. It does more damage than normal slings and provides warning against giants, but since slings suck that part is meaningless noise. The important feature of Giantslayer is that it provides near-giant strength when wielded… OR when it is set up as an alternate weapon. So as long as you're not planning to dual-wield (and monks like me clearly are not) you get an effect almost equivalent to slotless gauntlets of power. And unlike the gauntlets, Giantslayer does not interfere with spellcasting!
 * give levitation/teleport control to Sam with random chance (1/3?) to stop trivial ways to kill him
 * force player to stay in polymorphed form rather than kill 
-* http://forum.rpg.net/showthread.php?466187-(Let-s-Play!)-Sporkhack/page81
+* http://forum.rpg.net/showthread.php?466187-(Let-s-Play!)-Sporkhack/page82
 * split room from spork
 *  Mars grants Nefarious with the gift of Dragonbane, an artifact spear. As I've said before, vanilla bane artifacts are uniformly crap, but in Sporkhack Dragonbane in particular is startlingly good, especially early on. Wielding it grants fire, cold, poison, shock, sleep, acid, and disintegration resistance. No, that isn't a typo. You get all of them, and at 100%. Fantastic weapon for conducts. It also has the usual anti-dragon properties, like all bane weapons.
 * remove pet apport
@@ -290,7 +290,7 @@ proud owner of a magic whistle.
 * Dragons will never breath in melee combat.
 * Only your quest Nemeses will deliberately steal your quest artifact, other monsters may steal the amulet and invocation items. The quest artifact may of course be randomly stolen by nymphs and the like.  -Makes QA a dependable source of extrinsics, deepening differences between classes. -dnethack
 * oversight: you can #chat while being choked by a rope golem ("strangulation seem to be handled okay)
-* wounded legs, healing
+
 #savebreaking?
 * http://bilious.alt.org/?63
 * remove grinding spells (create monster, polymorph, cancellation(?)) and introduce something interesting - see http://www.reddit.com/r/roguelikes/comments/18msat/is_there_a_roguelike_with_interesting_spells/ 
