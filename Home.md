@@ -1,5 +1,5 @@
 Plans for UnNetHackPlus
-
+* kill NOTSTDC
 * http://bilious.alt.org/?224
 
 roast
