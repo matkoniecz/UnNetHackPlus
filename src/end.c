@@ -262,10 +262,6 @@ struct monst *mtmp;
 	return;
 }
 
-#if defined(WIN32)
-#define NOTIFY_NETHACK_BUGS
-#endif
-
 /*VARARGS1*/
 void
 panic VA_DECL(const char *, str)
@@ -287,24 +283,15 @@ panic VA_DECL(const char *, str)
 		  !program_state.something_worth_saving ?
 		  "Program initialization has failed." :
 		  "Suddenly, the dungeon collapses.");
-#if defined(WIZARD) && !defined(MICRO)
-# if defined(NOTIFY_NETHACK_BUGS)
+#if defined(WIZARD)
 	if (!wizard)
+#endif
 	    raw_printf("Report the following error to <https://github.com/Bulwersator/UnNetHackPlus/issues>.");
-	else if (program_state.something_worth_saving)
-	    raw_print("\nError save file being written.\n");
-# else
-	if (!wizard)
-	    raw_printf("Report error to \"%s\"%s.",
-			WIZARD,
-			!program_state.something_worth_saving ? "" :
-			" and it may be possible to rebuild.");
-# endif
 	if (program_state.something_worth_saving) {
+	    raw_print("\nError save file being written.\n");
 	    set_error_savefile();
 	    (void) dosave0();
 	}
-#endif
 	{
 	    char buf[BUFSZ];
 	    Vsprintf(buf,str,VA_ARGS);
