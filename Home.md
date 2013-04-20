@@ -348,7 +348,6 @@ proud owner of a magic whistle.
 * http://bilious.alt.org/?259
 * move bogus name generators to separate file
 * http://bilious.alt.org/?275
-* http://bilious.alt.org/?181 
 * http://bilious.alt.org/?92 http://bilious.alt.org/?184 http://bilious.alt.org/?259
 * http://bilious.alt.org/?433
 * http://l.j-factor.com/nethack/sphere.diff -     Flaming, freezing and shocking spheres now make nine-square explosions when they attack.     Blessed scrolls of fire do not harm the reader, and do more damage.     The source code for explode.c is substantially improved.
