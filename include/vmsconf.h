@@ -136,7 +136,7 @@
 /* # define FILENAME_CMP strcmpi */	/* case insensitive */
 #endif
 
-#if defined(VAXC) && !defined(ANCIENT_VAXC)
+#if defined(VAXC)
 # ifdef volatile
 #  undef volatile
 # endif

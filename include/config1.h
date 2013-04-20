@@ -149,19 +149,14 @@
 #  endif
 #  undef __HIDE_FORBIDDEN_NAMES /* need non-ANSI library support functions */
 # else
-#  ifdef VAXC	/* must use CC/DEFINE=ANCIENT_VAXC for vaxc v2.2 or older */
-#   ifdef ANCIENT_VAXC	/* vaxc v2.2 and earlier [lots of warnings to come] */
-#    define KR1ED	/* simulate defined() */
-#    define USE_VARARGS
-#   else		/* vaxc v2.3,2.4,or 3.x, or decc in vaxc mode */
-#     if defined(USE_PROTOTYPES) /* this breaks 2.2 (*forces* use of ANCIENT)*/
-#      define __STDC__ 0 /* vaxc is not yet ANSI compliant, but close enough */
-#      define signed	/* well, almost close enough */
+#  ifdef VAXC	/* vaxc v2.2 or older is not supported */
+#   if defined(USE_PROTOTYPES) /* this breaks 2.2 (*forces* use of ANCIENT)*/
+#    define __STDC__ 0 /* vaxc is not yet ANSI compliant, but close enough */
+#    define signed	/* well, almost close enough */
 #include <stddef.h>
-#      define UNWIDENED_PROTOTYPES
-#     endif
-#     define USE_STDARG
+#    define UNWIDENED_PROTOTYPES
 #   endif
+#   define USE_STDARG
 #  endif /*VAXC*/
 # endif /*__DECC*/
 # ifdef VERYOLD_VMS	/* v4.5 or earlier; no longer available for testing */

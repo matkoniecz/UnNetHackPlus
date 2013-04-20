@@ -36,7 +36,7 @@
 # endif
 #endif
 
-#if (defined(MICRO) && !defined(TOS)) || defined(ANCIENT_VAXC)
+#if defined(MICRO) && !defined(TOS)
 # if !defined(_SIZE_T) && !defined(__size_t) /* __size_t for CSet/2 */
 #  define _SIZE_T
 #  if !((defined(MSDOS) || defined(OS2)) && defined(_SIZE_T_DEFINED)) /* MSC 5.1 */
@@ -315,7 +315,7 @@ E long NDECL(fork);
 #include <string.h>
 #else
 #if defined(SYSV) || defined(VMS) || defined(MAC) || defined(SUNOS4)
-# if defined(NHSTDC) || (defined(VMS) && !defined(ANCIENT_VAXC))
+# if defined(NHSTDC) || defined(VMS)
 #  if !defined(_AIX32) && !(defined(SUNOS4) && defined(__STDC__))
 				/* Solaris unbundled cc (acc) */
 E int FDECL(memcmp, (const void *,const void *,size_t));
