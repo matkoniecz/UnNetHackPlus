@@ -351,7 +351,6 @@ proud owner of a magic whistle.
 * http://bilious.alt.org/?181 
 * http://bilious.alt.org/?92 http://bilious.alt.org/?184 http://bilious.alt.org/?259
 * http://bilious.alt.org/?433
-* http://bilious.alt.org/?194
 * http://l.j-factor.com/nethack/sphere.diff -     Flaming, freezing and shocking spheres now make nine-square explosions when they attack.     Blessed scrolls of fire do not harm the reader, and do more damage.     The source code for explode.c is substantially improved.
 * slash fungus growth
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/58ff6cbb1a8b9af427353d5e17d862100ca92cae and https://github.com/Bulwersator/CopyOfSporkHack/commit/8d7660680d447251a6eb5fe1160c83c514bfad2f - rusty tools can break
