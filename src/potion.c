@@ -1110,21 +1110,27 @@ peffects(otmp)
 }
 
 void
-healup(nhp, nxtra, curesick, cureblind)
-	int nhp, nxtra;
-	boolean curesick, cureblind;
+healup(int nhp, int nxtra, boolean cure_sick, boolean cure_blind)
 {
 	if (nhp) {
 		if (Upolyd) {
 			u.mh += nhp;
-			if (u.mh > u.mhmax) u.mh = (u.mhmax += nxtra);
+			if (u.mh > u.mhmax) {
+				u.mh = (u.mhmax += nxtra);
+			}
 		} else {
 			u.uhp += nhp;
-			if(u.uhp > u.uhpmax) u.uhp = (u.uhpmax += nxtra);
+			if(u.uhp > u.uhpmax) {
+				u.uhp = (u.uhpmax += nxtra);
+			}
 		}
 	}
-	if(cureblind)	make_blinded(0L,TRUE);
-	if(curesick)	make_sick(0L, (char *) 0, TRUE, SICK_ALL);
+	if(cure_blind) {
+		make_blinded(0L, TRUE);
+	}
+	if(cure_sick) {
+		make_sick(0L, (char *) 0, TRUE, SICK_ALL);
+	}
 	flags.botl = 1;
 	return;
 }
