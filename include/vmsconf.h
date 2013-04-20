@@ -32,17 +32,9 @@
 #ifdef WIZARD
 # undef WIZARD
 #endif
-#ifdef WIZARD_NAME
-# undef WIZARD_NAME
 #endif
 #define HACKDIR Local_HACKDIR
-#ifndef KR1ED
-# define WIZARD Local_WIZARD
-# define WIZARD_NAME WIZARD
-#else
-# define WIZARD 1
-# define WIZARD_NAME Local_WIZARD
-#endif
+#define WIZARD Local_WIZARD
 
 /* filenames require punctuation to avoid redirection via logical names */
 #undef RECORD

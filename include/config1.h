@@ -185,20 +185,4 @@
 # endif
 #endif
 
-#ifdef KR1ED		/* For compilers which cannot handle defined() */
-#define defined(x) (-x-1 != -1)
-/* Because:
- * #define FOO => FOO={} => defined( ) => (-1 != - - 1) => 1
- * #define FOO 1 or on command-line -DFOO
- *	=> defined(1) => (-1 != - 1 - 1) => 1
- * if FOO isn't defined, FOO=0. But some compilers default to 0 instead of 1
- * for -DFOO, oh well.
- *	=> defined(0) => (-1 != - 0 - 1) => 0
- *
- * But:
- * defined("") => (-1 != - "" - 1)
- *   [which is an unavoidable catastrophe.]
- */
-#endif
-
 #endif	/* CONFIG1_H */
