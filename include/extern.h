@@ -1689,7 +1689,7 @@ E boolean FDECL(make_hallucinated, (long,BOOLEAN_P,long));
 E int NDECL(dodrink);
 E int FDECL(dopotion, (struct obj *));
 E int FDECL(peffects, (struct obj *));
-E void FDECL(healup, (int,int,BOOLEAN_P,BOOLEAN_P));
+E void FDECL(healup, (int,int,BOOLEAN_P,BOOLEAN_P,BOOLEAN_P));
 E void FDECL(strange_feeling, (struct obj *,const char *));
 E void FDECL(potionhit, (struct monst *,struct obj *,BOOLEAN_P));
 E void FDECL(potionbreathe, (struct obj *));

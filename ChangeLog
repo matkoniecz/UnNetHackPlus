@@ -107,6 +107,7 @@
 	* New big room variant
 	* Better code (removal of useless #ifdefs for defines TOURIST, STEED etc, removal of pointless code like this related to SHELL, DUMB, STUPID defines, refactoring)
 	* Spellbook delivery is now more reliable in the Endgame (from GruntHack)
+	* Healing potions may fix wounded legs
 	Full list of changes available at https://github.com/Bulwersator/UnNetHackPlus/commits/master
 
 2012-04-01  UnNetHack 4.0.0
