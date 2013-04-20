@@ -5788,16 +5788,6 @@ fi
 fi
 
 fi
-ac_fn_c_check_type "$LINENO" "void" "ac_cv_type_void" "$ac_includes_default"
-if test "x$ac_cv_type_void" = xyes; then :
-
-else
-
-$as_echo "#define NOVOID /**/" >>confdefs.h
-
-fi
-
-
 
 ac_fn_c_check_decl "$LINENO" "strncmpi" "ac_cv_have_decl_strncmpi" "$ac_includes_default"
 if test "x$ac_cv_have_decl_strncmpi" = xyes; then :

@@ -327,8 +327,6 @@ if test "$have_regex_h" = "yes"; then
 	#include <regex.h>
       ])
 fi
-AC_CHECK_TYPE(void,,AC_DEFINE(NOVOID, [], [No void type available]))
-
 
 dnl  ----- Check for library functions
 AC_CHECK_DECLS([strncmpi, strnicmp], AC_DEFINE(STRNCMPI, [], [Use strncmpi]))
