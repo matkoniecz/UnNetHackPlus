@@ -84,7 +84,6 @@
 # undef UNIX
 # define DLB
 # define HACKDIR "NetHack:"
-# define NO_MACRO_CPATH
 #endif
 
 /*

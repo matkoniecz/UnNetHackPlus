@@ -316,18 +316,8 @@ typedef long glyph_t;
  * size, but runs slightly faster than the alternate algorithm.  (MSDOS in
  * particular cannot tolerate the increase in data size; other systems can
  * flip a coin weighted to local conditions.)
- *
- * If VISION_TABLES is not defined, things will be faster if you can use
- * MACRO_CPATH.  Some cpps, however, cannot deal with the size of the
- * functions that have been macroized.
  */
-
 /* #define VISION_TABLES */ /* use vision tables generated at compile time */
-#ifndef VISION_TABLES
-# ifndef NO_MACRO_CPATH
-#  define MACRO_CPATH	/* use clear_path macros instead of functions */
-# endif
-#endif
 
 /*
  * Section 4:  THE FUN STUFF!!!
