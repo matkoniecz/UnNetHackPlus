@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* Spork purple worms have also had their digest damage buffed so that they can plausibly kill you, rather than hoping you sit still until the delayed instadeath kicks in
 * kill NOTSTDC
 * http://bilious.alt.org/?224
 
@@ -263,7 +264,8 @@ fix completely broken alignment, maybe also better gods
 *  Got it! Giantslayer is an artifact sling. It does more damage than normal slings and provides warning against giants, but since slings suck that part is meaningless noise. The important feature of Giantslayer is that it provides near-giant strength when wielded… OR when it is set up as an alternate weapon. So as long as you're not planning to dual-wield (and monks like me clearly are not) you get an effect almost equivalent to slotless gauntlets of power. And unlike the gauntlets, Giantslayer does not interfere with spellcasting!
 * give levitation/teleport control to Sam with random chance (1/3?) to stop trivial ways to kill him
 * force player to stay in polymorphed form rather than kill 
-* http://forum.rpg.net/showthread.php?466187-(Let-s-Play!)-Sporkhack/page82
+* (Warning: Pregnant women, the elderly, and children under 10 should avoid prolonged exposure to Vibrating Square. If Vibrating Square begins to smoke, get away immediately. Seek shelter and cover head. Do not taunt Vibrating Square. http://forum.rpg.net/showthread.php?466187-(Let-s-Play!)-Sporkhack/page89
+* make healing potions useful for healing
 * split room from spork
 *  Mars grants Nefarious with the gift of Dragonbane, an artifact spear. As I've said before, vanilla bane artifacts are uniformly crap, but in Sporkhack Dragonbane in particular is startlingly good, especially early on. Wielding it grants fire, cold, poison, shock, sleep, acid, and disintegration resistance. No, that isn't a typo. You get all of them, and at 100%. Fantastic weapon for conducts. It also has the usual anti-dragon properties, like all bane weapons.
 * remove pet apport
@@ -449,6 +451,7 @@ proud owner of a magic whistle.
 * http://www.reddit.com/r/roguelikes/comments/1b3o9f/a_directory_of_directories_of_random_generators_a/
 
 #spam
+* http://forum.rpg.net/showthread.php?466187-(Let-s-Play!)-Sporkhack/page93
 * http://www.tt-forums.net/viewtopic.php?f=2&t=19187
 * rgrn
 * /r/nethack
