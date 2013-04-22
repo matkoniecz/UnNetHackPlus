@@ -1,5 +1,4 @@
 Plans for UnNetHackPlus
-* Spork purple worms have also had their digest damage buffed so that they can plausibly kill you, rather than hoping you sit still until the delayed instadeath kicks in
 * kill NOTSTDC
 * http://bilious.alt.org/?224
 
