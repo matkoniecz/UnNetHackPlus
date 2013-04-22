@@ -713,12 +713,13 @@ randomize(indices, count)
 	}
 }
 
-
+/* this function is currently unused */
 /* Forget % of known objects. */
 void
 forget_objects(percent)
 	int percent;
 {
+	warning("this function (forget_objects) is marked as unused");
 	int i, count;
 	int indices[NUM_OBJECTS];
 
