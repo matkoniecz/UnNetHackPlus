@@ -1865,14 +1865,9 @@ gulpmu(mtmp, mattk)	/* monster swallows you, or damage if u.uswallow */
 			/* Messages are handled below */
 			u.uswldtim = 0;
 			tmp = 0;
-		    } else if (u.uswldtim == 0) {
-			pline("%s totally digests you!", Monnam(mtmp));
-			tmp = u.uhp;
-			if (Half_physical_damage) tmp *= 2; /* sorry */
 		    } else {
-			pline("%s%s digests you!", Monnam(mtmp),
-			      (u.uswldtim == 2) ? " thoroughly" :
-			      (u.uswldtim == 1) ? " utterly" : "");
+			pline("%s digests you!", Monnam(mtmp));
+			tmp = u.uhp/5;
 			exercise(A_STR, FALSE);
 		    }
 		    break;
