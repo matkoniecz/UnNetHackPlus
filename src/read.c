@@ -723,23 +723,27 @@ forget_objects(percent)
 	int i, count;
 	int indices[NUM_OBJECTS];
 
-	if (percent == 0) return;
+	if (percent == 0) {
+		return;
+	}
 	if (percent <= 0 || percent > 100) {
 	    impossible("forget_objects: bad percent %d", percent);
 	    return;
 	}
 
-	for (count = 0, i = 1; i < NUM_OBJECTS; i++)
-	    if (OBJ_DESCR(objects[i]) &&
-		    (objects[i].oc_name_known || objects[i].oc_uname))
-		indices[count++] = i;
+	for (count = 0, i = 1; i < NUM_OBJECTS; i++) {
+		if (OBJ_DESCR(objects[i]) && (objects[i].oc_name_known || objects[i].oc_uname)) {
+			indices[count++] = i;
+		}
+	}
 
 	randomize(indices, count);
 
 	/* forget first % of randomized indices */
 	count = ((count * percent) + 50) / 100;
-	for (i = 0; i < count; i++)
-	    forget_single_object(indices[i]);
+	for (i = 0; i < count; i++) {
+		forget_single_object(indices[i]);
+	}
 }
 
 
