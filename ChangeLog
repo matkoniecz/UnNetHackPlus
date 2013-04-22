@@ -28,6 +28,7 @@
 		- C343-305 "Attacking with an applied polearm ignores the "confirm" option." (from GruntHack)
 		- C343-81 "Ghosts can be slimed."
 		- C343-118 "Some messages use "mirror" where they should use "looking glass."" (from GruntHack)
+		- C343-302 "Amnesia of object discoveries may forget to forget one thing."
 		Patches are linked at http://nethackwiki.com/wiki/User:Bulwersator/UnNetHackPlus_bug_tracking
 	* UnNetHack bug fixes
 		- Angered quest guardians will no longer go berserk.

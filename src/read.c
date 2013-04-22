@@ -720,7 +720,7 @@ forget_objects(percent)
 	int percent;
 {
 	warning("this function (forget_objects) is marked as unused");
-	int i, count;
+	int i, count, fractional_part;
 	int indices[NUM_OBJECTS];
 
 	if (percent == 0) {
@@ -740,7 +740,11 @@ forget_objects(percent)
 	randomize(indices, count);
 
 	/* forget first % of randomized indices */
-	count = ((count * percent) + 50) / 100;
+	fractional_part = (count * percent) % 100;
+	count = (count * percent) / 100;
+	if (rn2(100) < fractional_part) {
+		count++;
+	}
 	for (i = 0; i < count; i++) {
 		forget_single_object(indices[i]);
 	}
