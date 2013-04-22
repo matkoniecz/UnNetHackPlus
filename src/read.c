@@ -24,17 +24,13 @@ static NEARDATA const char readable[] =
 static const char all_count[] = { ALLOW_COUNT, ALL_CLASSES, 0 };
 
 static void FDECL(wand_explode, (struct obj *));
-#if 0
 static void NDECL(do_class_genocide);
-#endif
 static void FDECL(stripspe,(struct obj *));
 static void FDECL(p_glow1,(struct obj *));
 static void FDECL(p_glow2,(struct obj *,const char *));
 static void FDECL(randomize,(int *, int));
 static void FDECL(forget_single_object, (int));
-#if 0
 static void FDECL(forget, (int));
-#endif
 static void FDECL(maybe_tame, (struct monst *,struct obj *));
 
 STATIC_PTR void FDECL(do_flood, (int,int,genericptr_t));
@@ -686,19 +682,19 @@ forget_single_object(obj_id)
 }
 
 
-#if 0	/* here if anyone wants it.... */
+/* this function is currently unused */
 /* Forget everything known about a particular object class. */
 static void
 forget_objclass(oclass)
 	int oclass;
 {
+	warning("this function (forget_objclass) is marked as unused");
 	int i;
 
 	for (i=bases[oclass];
 		i < NUM_OBJECTS && objects[i].oc_class==oclass; i++)
 	    forget_single_object(i);
 }
-#endif
 
 
 /* randomize the given list of numbers  0 <= i < count */
@@ -1643,10 +1639,11 @@ do_it:
 	vision_full_recalc = 1;	/* delayed vision recalculation */
 }
 
-#if 0
+/* this function is currently unused */
 static void
 do_class_genocide()
 {
+	warning("this function (do_class_genocide) is marked as unused");
 	int i, j, immunecnt, gonecnt, goodcnt, class, feel_dead = 0;
 	char buf[BUFSZ];
 	boolean gameover = FALSE;	/* true iff killed self */
@@ -1796,7 +1793,6 @@ do_class_genocide()
 		return;
 	}
 }
-#endif
 
 #define REALLY 1
 #define PLAYER 2
