@@ -411,6 +411,7 @@ proud owner of a magic whistle.
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/4a6337948eb34e2c0dbf4ec2609316d6dafcf234
  
 #un synchronisation
+* nymph level activated
 * http://un.nethack.nu/ - new MENUCOLORS settings
 * switch punisher to red (?)
 * UnNH - (update through 1052 means enabling locust in data.base)
