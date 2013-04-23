@@ -1,4 +1,13 @@
 Plans for UnNetHackPlus
+wd_message
+process_options
+If they don't have a valid wizard name, it'll be
+if(!strcmp(plname, WIZARD)) {
+
+
+
+refactor can_advance
+* kill NEWS
 * kill NOTSTDC
 * http://bilious.alt.org/?224
 
