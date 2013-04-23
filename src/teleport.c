@@ -792,134 +792,140 @@ level_tele()
 						&& !wizard
 #endif
 							) {
-	    You_feel("very disoriented for a moment.");
-	    return;
+		You_feel("very disoriented for a moment.");
+		return;
 	}
 	if ((Teleport_control && !Stunned)
 #ifdef WIZARD
 	   || wizard
 #endif
 		) {
-	    char qbuf[BUFSZ];
-	    int trycnt = 0;
+		char qbuf[BUFSZ];
+		int trycnt = 0;
 
-	    Strcpy(qbuf, "To what level do you want to teleport?");
-	    do {
-		if (++trycnt == 2) {
+		Strcpy(qbuf, "To what level do you want to teleport?");
+		do {
+			if (++trycnt == 2) {
 #ifdef WIZARD
-			if (wizard) Strcat(qbuf, " [type a number or ? for a menu]");
-			else
+				if (wizard) Strcat(qbuf, " [type a number or ? for a menu]");
+				else
 #endif
-			Strcat(qbuf, " [type a number]");
-		}
-		getlin(qbuf, buf);
-		if (!strcmp(buf,"\033")) {	/* cancelled */
-		    if (Confusion && rnl(5)) {
-			pline("Oops...");
-			goto random_levtport;
-		    }
-		    return;
-		} else if (!strcmp(buf,"*")) {
-		    goto random_levtport;
-		} else if (Confusion && rnl(5)) {
-		    pline("Oops...");
-		    goto random_levtport;
-		}
-#ifdef WIZARD
-		if (wizard && !strcmp(buf,"?")) {
-		    schar destlev = 0;
-		    xchar destdnum = 0;
-
-		    if ((newlev = (int)print_dungeon(TRUE, &destlev, &destdnum))) {
-			newlevel.dnum = destdnum;
-			newlevel.dlevel = destlev;
-			if (In_endgame(&newlevel) && !In_endgame(&u.uz)) {
-				Sprintf(buf,
-#ifdef RANDOMIZED_PLANES
-				    "Destination is first elemental plane");
-#else
-				    "Destination is earth level");
-#endif
-				if (!u.uhave.amulet) {
-					struct obj *obj;
-					obj = mksobj(AMULET_OF_YENDOR,
-							TRUE, FALSE);
-					if (obj) {
-						obj = addinv(obj);
-						Strcat(buf, " with the amulet");
-					}
-				}
-#ifdef RANDOMIZED_PLANES
-				assign_level(&newlevel, get_first_elemental_plane());
-#else
-				assign_level(&newlevel, &earth_level);
-#endif
-				pline("%s.", buf);
+				Strcat(qbuf, " [type a number]");
 			}
-			force_dest = TRUE;
-		    } else return;
-		} else
-#endif
-		if ((newlev = lev_by_name(buf)) == 0) newlev = atoi(buf);
-	    } while (!newlev && !digit(buf[0]) &&
-		     (buf[0] != '-' || !digit(buf[1])) &&
-		     trycnt < 10);
-
-	    /* no dungeon escape via this route */
-	    if (newlev == 0) {
-		if (trycnt >= 10)
-		    goto random_levtport;
-		if (ynq("Go to Nowhere.  Are you sure?") != 'y') return;
-		You("%s in agony as your body begins to warp...",
-		    is_silent(youmonst.data) ? "writhe" : "scream");
-		display_nhwindow(WIN_MESSAGE, FALSE);
-		You("cease to exist.");
-		if (invent) Your("possessions land on the %s with a thud.",
-				surface(u.ux, u.uy));
-		killer_format = NO_KILLER_PREFIX;
-		killer = "committed suicide";
-		done(DIED);
-		pline("An energized cloud of dust begins to coalesce.");
-		Your("body rematerializes%s.", invent ?
-			", and you gather up all your possessions" : "");
-		return;
+			getlin(qbuf, buf);
+			if (!strcmp(buf, "\033")) {	/* cancelled */
+				if (Confusion && rnl(5)) {
+					pline("Oops...");
+					goto random_levtport;
+				}
+				return;
+			} else if (!strcmp(buf, "*")) {
+				goto random_levtport;
+			} else if (Confusion && rnl(5)) {
+				pline("Oops...");
+				goto random_levtport;
+			}
 #ifdef WIZARD
-	    /* allow only jump beyond the Dungeons of Doom branch */
-	    } else if (!wizard && newlev > 0 && u.uz.dnum != 0) {
-#else
-	    } else if (newlev > 0 && u.uz.dnum != 0) {
-#endif
-		/* random teleport for destination level outside of the current dungeon branch */
-		if (newlev > dungeons[u.uz.dnum].depth_start + dunlevs_in_dungeon(&u.uz)) {
-			You_feel("like bouncing off a solid wall!");
-			goto random_levtport;
-		}
-	    }
+			if (wizard && !strcmp(buf, "?")) {
+				schar destlev = 0;
+				xchar destdnum = 0;
 
-	    /* if in Knox and the requested level > 0, stay put.
-	     * we let negative values requests fall into the "heaven" loop.
-	     */
-	    if ((Is_knox(&u.uz) || Is_blackmarket(&u.uz)) && newlev > 0) {
-		You(shudder_for_moment);
-		return;
-	    }
-	    /* if in Quest, the player sees "Home 1", etc., on the status
-	     * line, instead of the logical depth of the level.  controlled
-	     * level teleport request is likely to be relativized to the
-	     * status line, and consequently it should be incremented to
-	     * the value of the logical depth of the target level.
-	     *
-	     * we let negative values requests fall into the "heaven" loop.
-	     */
-	    if (In_quest(&u.uz) && newlev > 0)
-		newlev = newlev + dungeons[u.uz.dnum].depth_start - 1;
+				if ((newlev = (int)print_dungeon(TRUE, &destlev, &destdnum))) {
+					newlevel.dnum = destdnum;
+					newlevel.dlevel = destlev;
+					if (In_endgame(&newlevel) && !In_endgame(&u.uz)) {
+						Sprintf(buf,
+#ifdef RANDOMIZED_PLANES
+							"Destination is first elemental plane");
+#else
+							"Destination is earth level");
+#endif
+						if (!u.uhave.amulet) {
+							struct obj *obj;
+							obj = mksobj(AMULET_OF_YENDOR, TRUE, FALSE);
+							if (obj) {
+								obj = addinv(obj);
+								Strcat(buf, " with the amulet");
+							}
+						}
+#ifdef RANDOMIZED_PLANES
+						assign_level(&newlevel, get_first_elemental_plane());
+#else
+						assign_level(&newlevel, &earth_level);
+#endif
+						pline("%s.", buf);
+					}
+					force_dest = TRUE;
+				} else {
+					return;
+				}
+			} else
+#endif
+			if ((newlev = lev_by_name(buf)) == 0) {
+				newlev = atoi(buf);
+			}
+		} while (!newlev && !digit(buf[0]) && (buf[0] != '-' || !digit(buf[1])) && trycnt < 10);
+
+		/* no dungeon escape via this route */
+		if (newlev == 0) {
+			if (trycnt >= 10) {
+				goto random_levtport;
+			}
+			if (ynq("Go to Nowhere.  Are you sure?") != 'y') {
+				return;
+			}
+			You("%s in agony as your body begins to warp...", is_silent(youmonst.data) ? "writhe" : "scream");
+			display_nhwindow(WIN_MESSAGE, FALSE);
+			You("cease to exist.");
+			if (invent) {
+				Your("possessions land on the %s with a thud.", surface(u.ux, u.uy));
+			}
+			killer_format = NO_KILLER_PREFIX;
+			killer = "committed suicide";
+			done(DIED);
+			pline("An energized cloud of dust begins to coalesce.");
+			Your("body rematerializes%s.", invent ? ", and you gather up all your possessions" : "");
+			return;
+		}
+#ifdef WIZARD
+		/* allow only jump beyond the Dungeons of Doom branch */
+		else if (!wizard && newlev > 0 && u.uz.dnum != 0)
+#else
+		else if (newlev > 0 && u.uz.dnum != 0)
+#endif
+		{
+			/* random teleport for destination level outside of the current dungeon branch */
+			if (newlev > dungeons[u.uz.dnum].depth_start + dunlevs_in_dungeon(&u.uz)) {
+				You_feel("like bouncing off a solid wall!");
+				goto random_levtport;
+			}
+		}
+
+		/* if in Knox and the requested level > 0, stay put.
+		 * we let negative values requests fall into the "heaven" loop.
+		 */
+		if ((Is_knox(&u.uz) || Is_blackmarket(&u.uz)) && newlev > 0) {
+			You(shudder_for_moment);
+			return;
+		}
+		/* if in Quest, the player sees "Home 1", etc., on the status
+		 * line, instead of the logical depth of the level.  controlled
+		 * level teleport request is likely to be relativized to the
+		 * status line, and consequently it should be incremented to
+		 * the value of the logical depth of the target level.
+		 *
+		 * we let negative values requests fall into the "heaven" loop.
+		 */
+		if (In_quest(&u.uz) && newlev > 0) {
+			newlev = newlev + dungeons[u.uz.dnum].depth_start - 1;
+		}
 	} else { /* involuntary level tele */
- random_levtport:
-	    newlev = random_teleport_level();
-	    if (newlev == depth(&u.uz)) {
-		You(shudder_for_moment);
-		return;
-	    }
+random_levtport:
+		newlev = random_teleport_level();
+		if (newlev == depth(&u.uz)) {
+			You(shudder_for_moment);
+			return;
+		}
 	}
 
 	if (!next_to_u()) {
@@ -927,30 +933,30 @@ level_tele()
 		return;
 	}
 #ifdef WIZARD
-	if (In_endgame(&u.uz)) {	/* must already be wizard */
-	    int llimit = dunlevs_in_dungeon(&u.uz);
+	if (In_endgame(&u.uz)) { /* must already be wizard */
+		int llimit = dunlevs_in_dungeon(&u.uz);
 
-	    if (newlev >= 0 || newlev <= -llimit) {
-		You_cant("get there from here.");
+		if (newlev >= 0 || newlev <= -llimit) {
+			You_cant("get there from here.");
+			return;
+		}
+		newlevel.dnum = u.uz.dnum;
+		newlevel.dlevel = llimit + newlev;
+		schedule_goto(&newlevel, FALSE, FALSE, 0, (char *)0, (char *)0);
 		return;
-	    }
-	    newlevel.dnum = u.uz.dnum;
-	    newlevel.dlevel = llimit + newlev;
-	    schedule_goto(&newlevel, FALSE, FALSE, 0, (char *)0, (char *)0);
-	    return;
 	}
 #endif
 
-	killer = 0;		/* still alive, so far... */
+	killer = 0; /* still alive, so far... */
 
 	if (newlev < 0 && !force_dest) {
 		if (*u.ushops0) {
-		    /* take unpaid inventory items off of shop bills */
-		    in_mklev = TRUE;	/* suppress map update */
-		    u_left_shop(u.ushops0, TRUE);
-		    /* you're now effectively out of the shop */
-		    *u.ushops0 = *u.ushops = '\0';
-		    in_mklev = FALSE;
+			/* take unpaid inventory items off of shop bills */
+			in_mklev = TRUE; /* suppress map update */
+			u_left_shop(u.ushops0, TRUE);
+			/* you're now effectively out of the shop */
+			*u.ushops0 = *u.ushops = '\0';
+			in_mklev = FALSE;
 		}
 		if (newlev <= -10) {
 			You("arrive in heaven.");
@@ -961,85 +967,85 @@ level_tele()
 			You_feel("deliriously happy. ");
 			pline("(In fact, you're on Cloud 9!) ");
 			display_nhwindow(WIN_MESSAGE, FALSE);
-		} else
+		} else {
 			You("are now high above the clouds...");
+		}
 
 		if (killer) {
-		    ;		/* arrival in heaven is pending */
+			; /* arrival in heaven is pending */
 		} else if (Levitation) {
-		    escape_by_flying = "float gently down to earth";
+			escape_by_flying = "float gently down to earth";
 		} else if (Flying) {
-		    escape_by_flying = "fly down to the ground";
+			escape_by_flying = "fly down to the ground";
 		} else {
-		    pline("Unfortunately, you don't know how to fly.");
-		    You("plummet a few thousand feet to your death.");
-		    Sprintf(buf,
-			  "teleported out of the dungeon and fell to %s death",
-			    uhis());
-		    killer = buf;
-		    killer_format = NO_KILLER_PREFIX;
+			pline("Unfortunately, you don't know how to fly.");
+			You("plummet a few thousand feet to your death.");
+			Sprintf(buf, "teleported out of the dungeon and fell to %s death", uhis());
+			killer = buf;
+			killer_format = NO_KILLER_PREFIX;
 		}
 	}
 
 	if (killer) {	/* the chosen destination was not survivable */
-	    d_level lsav;
+		d_level lsav;
 
-	    /* set specific death location; this also suppresses bones */
-	    lsav = u.uz;	/* save current level, see below */
-	    u.uz.dnum = 0;	/* main dungeon */
-	    u.uz.dlevel = (newlev <= -10) ? -10 : 0;	/* heaven or surface */
-	    done(DIED);
-	    /* can only get here via life-saving (or declining to die in
-	       explore|debug mode); the hero has now left the dungeon... */
-	    escape_by_flying = "find yourself back on the surface";
-	    u.uz = lsav;	/* restore u.uz so escape code works */
+		/* set specific death location; this also suppresses bones */
+		lsav = u.uz;   /* save current level, see below */
+		u.uz.dnum = 0; /* main dungeon */
+		u.uz.dlevel = (newlev <= -10) ? -10 : 0; /* heaven or surface */
+		done(DIED);
+		/* can only get here via life-saving (or declining to die in
+		 *explore|debug mode); the hero has now left the dungeon... 
+		 */
+		escape_by_flying = "find yourself back on the surface";
+		u.uz = lsav; /* restore u.uz so escape code works */
 	}
 
 	/* calls done(ESCAPED) if newlevel==0 */
 	if (escape_by_flying) {
-	    You("%s.", escape_by_flying);
-	    newlevel.dnum = 0;		/* specify main dungeon */
-	    newlevel.dlevel = 0;	/* escape the dungeon */
-	    /* [dlevel used to be set to 1, but it doesn't make sense to
-		teleport out of the dungeon and float or fly down to the
-		surface but then actually arrive back inside the dungeon] */
-	} else if (u.uz.dnum == medusa_level.dnum &&
-	    newlev >= dungeons[u.uz.dnum].depth_start +
-						dunlevs_in_dungeon(&u.uz)) {
+		You("%s.", escape_by_flying);
+		newlevel.dnum = 0;   /* specify main dungeon */
+		newlevel.dlevel = 0; /* escape the dungeon */
+		/* [dlevel used to be set to 1, but it doesn't make sense to
+		 * teleport out of the dungeon and float or fly down to the
+		 * surface but then actually arrive back inside the dungeon]
+		 */
+	} else if (u.uz.dnum == medusa_level.dnum && newlev >= dungeons[u.uz.dnum].depth_start + dunlevs_in_dungeon(&u.uz)) {
 #ifdef WIZARD
-	    if (!(wizard && force_dest))
+		if (!(wizard && force_dest))
 #endif
-	    find_hell(&newlevel);
+		find_hell(&newlevel);
 	} else {
-	    /* if invocation did not yet occur, teleporting into
-	     * the last level of Gehennom is forbidden.
-	     */
+		/* if invocation did not yet occur, teleporting into
+		 * the last level of Gehennom is forbidden.
+		 */
 #ifdef WIZARD
 		if (!wizard)
 #endif
-	    if (Inhell && !u.uevent.invoked &&
-			newlev >= (dungeons[u.uz.dnum].depth_start +
-					dunlevs_in_dungeon(&u.uz) - 1)) {
-		newlev = dungeons[u.uz.dnum].depth_start +
-					dunlevs_in_dungeon(&u.uz) - 2;
-		pline("Sorry...");
-	    }
-	    /* no teleporting out of quest dungeon */
-	    if (In_quest(&u.uz) && newlev < depth(&qstart_level))
-		newlev = depth(&qstart_level);
-	    /* the player thinks of levels purely in logical terms, so
-	     * we must translate newlev to a number relative to the
-	     * current dungeon.
-	     */
+			if (Inhell && !u.uevent.invoked && newlev >= (dungeons[u.uz.dnum].depth_start + dunlevs_in_dungeon(&u.uz) - 1)) {
+				newlev = dungeons[u.uz.dnum].depth_start + dunlevs_in_dungeon(&u.uz) - 2;
+				pline("Sorry...");
+			}
+		/* no teleporting out of quest dungeon */
+		if (In_quest(&u.uz) && newlev < depth(&qstart_level)) {
+			newlev = depth(&qstart_level);
+		}
+		/* the player thinks of levels purely in logical terms, so
+		 * we must translate newlev to a number relative to the
+		 * current dungeon.
+		 */
 #ifdef WIZARD
-	    if (!(wizard && force_dest))
+		if (!(wizard && force_dest))
 #endif
-	    get_level(&newlevel, newlev);
+		get_level(&newlevel, newlev);
 	}
 	schedule_goto(&newlevel, FALSE, FALSE, 0, (char *)0, (char *)0);
 	/* in case player just read a scroll and is about to be asked to
-	   call it something, we can't defer until the end of the turn */
-	if (u.utotype && !flags.mon_moving) deferred_goto();
+	 * call it something, we can't defer until the end of the turn
+	 */
+	if (u.utotype && !flags.mon_moving) {
+		deferred_goto();
+	}
 }
 
 void
