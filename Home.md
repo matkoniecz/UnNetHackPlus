@@ -3,6 +3,7 @@ wd_message
 process_options
 If they don't have a valid wizard name, it'll be
 if(!strcmp(plname, WIZARD)) {
+		Strcpy(plname, "wizard");
 
 
 
