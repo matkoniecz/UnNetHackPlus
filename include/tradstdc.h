@@ -218,30 +218,6 @@ typedef genericptr genericptr_t;	/* (void *) or (char *) */
 # endif
 #endif
 
-#if 0
-/* The problem below is still the case through 4.0.5F, but the suggested
- * compiler flags in the Makefiles suppress the nasty messages, so we don't
- * need to be quite so drastic.
- */
-#if defined(__sgi) && !defined(__GNUC__)
-/*
- * As of IRIX 4.0.1, /bin/cc claims to be an ANSI compiler, but it thinks
- * it's impossible for a prototype to match an old-style definition with
- * unwidened argument types.  Thus, we have to turn off all NetHack
- * prototypes, and avoid declaring several system functions, since the system
- * include files have prototypes and the compiler also complains that
- * prototyped and unprototyped declarations don't match.
- */
-# undef NDECL
-# undef FDECL
-# undef VDECL
-# define NDECL(f)	f()
-# define FDECL(f,p)	f()
-# define VDECL(f,p)	f()
-#endif
-#endif
-
-
 	/* MetaWare High-C defaults to unsigned chars */
 	/* AIX 3.2 needs this also */
 #if defined(__HC__) || defined(_AIX32)
