@@ -2728,7 +2728,7 @@ typfnd:
 	/* return a random dragon armor if user asks for an unknown
 	   dragon armor with its actual name */
 	if (typ && from_user && found_by_actualn && Is_dragon_armor(typ) && !objects[typ].oc_name_known) {
-		if(!wizard) {
+		if(!wizard || yn("Stop randomization of unknown dragon armor?") == 'n') {
 			if (Is_dragon_scales(typ)) {
 				typ = GRAY_DRAGON_SCALES;
 			} else {
