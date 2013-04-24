@@ -1,5 +1,5 @@
 Plans for UnNetHackPlus
-
+et wizards wish for trap
 why "no bones when swallowed"?
 
 /* ^O command - display dungeon layout */
