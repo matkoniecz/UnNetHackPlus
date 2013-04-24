@@ -8,6 +8,7 @@ if(!strcmp(plname, WIZARD)) {
 
 
 refactor can_advance
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/73b66b0217a8015ff1cbbce6813253b881f61009 - nerf Antimagic, power up Angels
 * kill NEWS
 * kill NOTSTDC
 * http://bilious.alt.org/?224
@@ -339,7 +340,8 @@ proud owner of a magic whistle.
 
 # redigest?
 * http://l.j-factor.com/nethack/colour.diff
-* http://bilious.alt.org/?352
+* http://bilious.alt.org/?352 + warning about conduct breaking + change to apply
+* http://bilious.alt.org/?37 - what about rogue player monster?
 
 # too complicated
 * http://bilious.alt.org/?183
@@ -351,9 +353,7 @@ proud owner of a magic whistle.
 * http://bilious.alt.org/?13 - unhappy about "Eggsucker" and "Bushwacker", samurai untested
 * http://bilious.alt.org/?241 (what about sokoban, rogue quest etc?)
 * http://bilious.alt.org/?211
-* http://bilious.alt.org/?222
 * http://bilious.alt.org/?297
-* http://bilious.alt.org/?37
 * http://bilious.alt.org/?248 - save/load not persistent, not loading from settings...
 * http://bilious.alt.org/?99
 * http://bilious.alt.org/?259
@@ -394,7 +394,6 @@ proud owner of a magic whistle.
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/b45d6547809b891a1b30533581f43520b32666eb (caveman gruntubugfix)
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/72c10822290cb4f1e6dac1230da0ebe5935455d0 - nerf Elbereth
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/dabb85b77535dff9825d56f77ffbc1d19494dcb3 -  MC3 reduced to 90% 
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/73b66b0217a8015ff1cbbce6813253b881f61009 - nerf Antimagic, power up Angels
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/92ea2514c68e84f30da79d471f2b5e3751471bd6 -  Make caveman quest levels have some more variance 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/11dec2a485b7319773840e6a0d76d239e0f0e1ab - nerf reflection
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/6d08cf5c7272d95b838fc3aefb616a773af24829 - more flee messages (wtf)
@@ -410,7 +409,8 @@ proud owner of a magic whistle.
 #unable to test
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/4a6337948eb34e2c0dbf4ec2609316d6dafcf234
  
-#un synchronisation
+#unnethack synchronisation
+* http://sourceforge.net/apps/trac/unnethack/changeset/1423
 * nymph level activated
 * http://un.nethack.nu/ - new MENUCOLORS settings
 * switch punisher to red (?)
@@ -436,21 +436,6 @@ proud owner of a magic whistle.
 
 #help!
 * Gargoyle weirdness (There are animated statues so it is logical that they are stone resistant. On the other hand their flesh is edible. I want to turn them into statue leaving monster like stone golem - but what should happen with stone monster hit by stone to flesh spell? Turn into meatball as for statues of monsters without corpses? Resist as their stone is also body? Do nothing? Eat significant part of HP (body of foo decays into twisted flesh)? Something else? )
-
-#make patches
-* pray.c
-* generate eroded items (latest: https://github.com/Bulwersator/UnNetHackPlus/commit/c771fadad677e8baaf34478f3961aae888a33685)
-* hallu
-* read/eat tins
-* encyclopedia
-* https://github.com/Bulwersator/UnNetHackPlus/commit/b84a4ea14b454c1f0bd6f4aef3e604166d7fc759 + https://github.com/Bulwersator/UnNetHackPlus/commit/171d80a650da06c947e32c2cfc3499907693ba8a -  player statues near Medusa based on real events 
-* sporky ToD, destroy armor
-* reduce sparkling - https://github.com/Bulwersator/UnNetHackPlus/commit/e3ea95833de16c3dfecc44f3c69058866961d32c
-* more maledictions - https://github.com/Bulwersator/UnNetHackPlus/commit/f0a4d9ec0471da9514909a6d565a30eee0c35408
-* https://github.com/Bulwersator/UnNetHackPlus/commit/a638a9d477800409998e1c9ec8a5b8c92ce95876  Nerf The Eye of the Aethiopica energy production 
-* https://github.com/Bulwersator/UnNetHackPlus/commit/1d9ff4a8f2b7c3c8da062d8e974a9f4f684607d9  Add the gnome king and wizard defending cellar 
-*  src/u_init.c 
-* autoidentify wands - https://github.com/Bulwersator/UnNetHackPlus/commit/46c2ddcb606a38d3d1e2c54de57a1c38f8a1eb1c
 
 #thanks
 * KoboldLord for http://forum.rpg.net/showthread.php?466187-%28Let-s-Play!%29-Sporkhack/page1
