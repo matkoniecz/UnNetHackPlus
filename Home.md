@@ -1,4 +1,6 @@
 Plans for UnNetHackPlus
+/* ^O command - display dungeon layout */
+
 wd_message
 process_options
 If they don't have a valid wizard name, it'll be
