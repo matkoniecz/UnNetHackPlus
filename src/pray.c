@@ -1825,7 +1825,6 @@ dopray()
     /* set up p_type and p_alignment */
     if (!can_pray(TRUE)) return 0;
 
-#ifdef WIZARD
     if (wizard && p_type >= 0) {
 	if (yn("Force the gods to be pleased?") == 'y') {
 	    u.ublesscnt = 0;
@@ -1835,7 +1834,6 @@ dopray()
 	    if(p_type < 2) p_type = 3;
 	}
     }
-#endif
     nomul(-3, "praying");
     nomovemsg = "You finish your prayer.";
     afternmv = prayer_done;

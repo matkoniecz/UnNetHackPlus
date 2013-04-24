@@ -40,9 +40,7 @@ extern void NDECL(init_linux_cons);
 #endif
 
 static void NDECL(wd_message);
-#ifdef WIZARD
 static boolean wiz_error_flag = FALSE;
-#endif
 
 int
 main(argc,argv)
@@ -189,11 +187,9 @@ char *argv[];
 #ifdef MAIL
 	getmailstatus();
 #endif
-#ifdef WIZARD
 	if (wizard)
 		Strcpy(plname, "wizard");
 	else
-#endif
 	if(!*plname) {
 		askname();
 	} else if (exact_username) {
@@ -207,9 +203,7 @@ char *argv[];
 	plnamesuffix();		/* strip suffix from name; calls askname() */
 				/* again if suffix was whole name */
 				/* accepts any suffix */
-#ifdef WIZARD
 	if(!wizard) {
-#endif
 		/*
 		 * check for multiple games under the same name
 		 * (if !locknum) or check max nr of players (otherwise)
@@ -219,12 +213,10 @@ char *argv[];
 		if(!locknum)
 			Sprintf(lock, "%d%s", (int)getuid(), plname);
 		getlock();
-#ifdef WIZARD
 	} else {
 		Sprintf(lock, "%d%s", (int)getuid(), plname);
 		getlock();
 	}
-#endif /* WIZARD */
 
 	dlb_init();	/* must be before newgame() */
 
@@ -248,12 +240,10 @@ char *argv[];
 	display_gamewindows();
 
 	if ((fd = restore_saved_game()) >= 0) {
-#ifdef WIZARD
 		/* Since wizard is actually flags.debug, restoring might
 		 * overwrite it.
 		 */
 		boolean remember_wiz_mode = wizard;
-#endif
 #ifndef FILE_AREAS
 		const char *fq_save = fqname(SAVEF, SAVEPREFIX, 1);
 
@@ -272,9 +262,9 @@ char *argv[];
 		mark_synch();	/* flush output */
 		if(!dorecover(fd))
 			goto not_recovered;
-#ifdef WIZARD
-		if(!wizard && remember_wiz_mode) wizard = TRUE;
-#endif
+		if(!wizard && remember_wiz_mode) {
+			wizard = TRUE;
+		}
 		check_special_room(FALSE);
 		wd_message();
 
@@ -325,7 +315,6 @@ char *argv[];
 		argc--;
 		switch(argv[0][1]){
 		case 'D':
-#ifdef WIZARD
 			{
 			  char *user;
 			  int uid;
@@ -354,7 +343,6 @@ char *argv[];
 			}
 			/* otherwise fall thru to discover */
 			wiz_error_flag = TRUE;
-#endif
 		case 'X':
 			discover = TRUE;
 			break;
@@ -523,14 +511,14 @@ port_help()
 static void
 wd_message()
 {
-#ifdef WIZARD
 	if (wiz_error_flag) {
 		pline("Only user \"%s\" may access debug (wizard) mode.", WIZARD);
 		pline("Entering discovery mode instead.");
-	} else
-#endif
-	if (discover)
-		You("are in non-scoring discovery mode.");
+	} else {
+		if (discover) {
+			You("are in non-scoring discovery mode.");
+		}
+	}
 }
 
 /*

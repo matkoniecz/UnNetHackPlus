@@ -807,9 +807,7 @@ boolean speedy;
 {
     return !P_RESTRICTED(skill)
 	    && P_SKILL(skill) < P_MAX_SKILL(skill) && (
-#ifdef WIZARD
 	    (wizard && speedy) ||
-#endif
 	    (P_ADVANCE(skill) >=
 		(unsigned) practice_needed_to_advance(P_SKILL(skill))
 	    && u.skills_advanced < P_SKILL_LIMIT
@@ -912,11 +910,11 @@ int enhance_skill(boolean want_dump)
     char buf2[BUFSZ];
     boolean logged = FALSE;
 
-#ifdef WIZARD
-	if (!want_dump)
-		if (wizard && yn("Advance skills without practice?") == 'y')
+	if (!want_dump) {
+		if (wizard && yn("Advance skills without practice?") == 'y') {
 			speedy = TRUE;
-#endif
+		}
+	}
 
 	do {
 	    /* find longest available skill name, count those that can advance */
@@ -1017,7 +1015,6 @@ int enhance_skill(boolean want_dump)
 		    prefix = (to_advance + eventually_advance +
 				maxxed_cnt > 0) ? "    " : "";
 		(void) skill_level_name(i, sklnambuf);
-#ifdef WIZARD
 		if (wizard) {
 		    if (!iflags.menu_tab_sep)
 			Sprintf(buf, " %s%-*s %-12s %5d(%4d)",
@@ -1029,9 +1026,7 @@ int enhance_skill(boolean want_dump)
 			    prefix, P_NAME(i), sklnambuf,
 			    P_ADVANCE(i),
 			    practice_needed_to_advance(P_SKILL(i)));
-		 } else
-#endif
-		{
+		 } else {
 		    if (!iflags.menu_tab_sep)
 			Sprintf(buf, " %s %-*s [%s]",
 			    prefix, longest, P_NAME(i), sklnambuf);
@@ -1047,11 +1042,9 @@ int enhance_skill(boolean want_dump)
 
 	    Strcpy(buf, (to_advance > 0) ? "Pick a skill to advance:" :
 					   "Current skills:");
-#ifdef WIZARD
-	    if (wizard && !speedy)
-		Sprintf(eos(buf), "  (%d slot%s available)",
-			u.unused_skill_slots, plur(u.unused_skill_slots));
-#endif
+	    if (wizard && !speedy) {
+		Sprintf(eos(buf), "  (%d slot%s available)", u.unused_skill_slots, plur(u.unused_skill_slots));
+	    }
 	    if (want_dump) {
 		dump_html("</table>\n", "");
 		dump("", "");

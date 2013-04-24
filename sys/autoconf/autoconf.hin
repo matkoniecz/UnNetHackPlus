@@ -284,9 +284,6 @@
 /* An MS-Windows system */
 #undef WIN32
 
-/* enable wizard mode for the specified user */
-#undef WIZARD
-
 /* X11 graphics */
 #undef X11_GRAPHICS
 

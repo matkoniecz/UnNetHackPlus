@@ -6,11 +6,7 @@
 /* #define DEBUG */	/* uncomment to enable code debugging */
 
 #ifdef DEBUG
-# ifdef WIZARD
 #define debugpline	if (wizard) pline
-# else
-#define debugpline	pline
-# endif
 #endif
 
 /* for UNIX, Rand #def'd to (long)lrand48() or (long)random() */
@@ -890,13 +886,12 @@ makelevel()
 	do {
 	    switch (rn2(15)) {
 	    default:
-#ifdef WIZARD
-	if(wizard && nh_getenv("SHOPTYPE")) mkroom(SHOPBASE); else
-#endif
-	if (u_depth > 1 &&
-	    u_depth < depth(&medusa_level) &&
-	    nroom >= room_threshold &&
-	    rn2(u_depth) < 3) { mkroom(SHOPBASE); break; }
+		if(wizard && nh_getenv("SHOPTYPE")) {
+			mkroom(SHOPBASE);
+		} else if (u_depth > 1 && u_depth < depth(&medusa_level) && nroom >= room_threshold && rn2(u_depth) < 3) {
+			mkroom(SHOPBASE); 
+			break; 
+		}
 	    case 0:
 		if (u_depth > 4 && !rn2(6)) { mkroom(COURT); break; }
 	    case 1:
@@ -1828,11 +1823,9 @@ xchar x, y;
 	}
 
 	/* Already set or 2/3 chance of deferring until a later level. */
-	if (source->dnum < n_dgns || (rn2(3)
-#ifdef WIZARD
-				      && !wizard
-#endif
-				      )) return;
+	if (source->dnum < n_dgns || (rn2(3))) {
+		return;
+	}
 
 	if (! (u.uz.dnum == oracle_level.dnum	    /* in main dungeon */
 		&& !at_dgn_entrance("The Quest")    /* but not Quest's entry */

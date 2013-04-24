@@ -145,15 +145,10 @@
 
 /*
  * Section 2:	Some global parameters and filenames.
- *		Commenting out WIZARD, LOGFILE, NEWS or PANICLOG removes that
- *		feature from the game; otherwise set the appropriate wizard
- *		name.  LOGFILE, NEWS and PANICLOG refer to files in the
- *		playground.
+ *		Commenting out LOGFILE, NEWS or PANICLOG removes that
+ *		feature from the game LOGFILE, NEWS and PANICLOG refer to 
+ *		files in the playground.
  */
-
-#ifndef WIZARD		/* allow for compile-time or Makefile changes */
-# define WIZARD  "wizard" /* the person allowed to use the -D option */
-#endif
 
 #define LOGFILE "logfile"	/* larger file for debugging purposes */
 #define LOGAREA FILE_AREA_VAR
@@ -453,6 +448,18 @@ typedef long glyph_t;
 #define REINCARNATION	/* Special Rogue-like levels */
 
 /* End of Section 7 */
+
+/*
+ * Section 8:  FICTIONAL DEFINES THAT MUST BE DEFINED
+ *
+ * Commenting these defines is not allowes, as #ifdef etc were removed from code 
+ * and features are incorporated into UnNetHackPlus without evil preprocessor instructions littering code
+ * these defines are also listed in build_pseudo_opts (util\makedefs.c)
+ * but these constants must be set to some value
+ */
+#define WIZARD  "wizard" /* the person allowed to use the -D option */
+
+/* End of Section 8 */
 
 #include "global.h"	/* Define everything else according to choices above */
 

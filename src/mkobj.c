@@ -10,10 +10,8 @@ STATIC_DCL void FDECL(obj_timer_checks,(struct obj *, XCHAR_P, XCHAR_P, int));
 #ifdef OVL1
 STATIC_DCL void FDECL(container_weight, (struct obj *));
 STATIC_DCL struct obj *FDECL(save_mtraits, (struct obj *, struct monst *));
-#ifdef WIZARD
 STATIC_DCL const char *FDECL(where_name, (int));
 STATIC_DCL void FDECL(check_contained, (struct obj *,const char *));
-#endif
 #endif /* OVL1 */
 
 extern struct obj *thrownobj;		/* defined in dothrow.c */
@@ -1597,7 +1595,6 @@ dealloc_obj(obj)
     free((genericptr_t) obj);
 }
 
-#ifdef WIZARD
 /* Check all object lists for consistency. */
 void
 obj_sanity_check()
@@ -1727,7 +1724,6 @@ check_contained(container, mesg)
 		fmt_ptr((genericptr_t)container, obj2_address));
     }
 }
-#endif /* WIZARD */
 
 #endif /* OVL1 */
 

@@ -36,7 +36,6 @@ STATIC_PTR int NDECL(domonability);
 STATIC_PTR int NDECL(dooverview_or_wiz_where);
 STATIC_PTR int NDECL(dotravel);
 STATIC_PTR int NDECL(doautoexplore);
-# ifdef WIZARD
 int NDECL(wiz_show_rooms);
 STATIC_PTR int NDECL(wiz_wish);
 STATIC_PTR int NDECL(wiz_identify);
@@ -75,7 +74,7 @@ STATIC_PTR int NDECL(wiz_show_stats);
 #  ifdef PORT_DEBUG
 STATIC_DCL int NDECL(wiz_port_debug);
 #  endif
-# else
+#if !defined(WIZARD)
 extern int NDECL(tutorial_redisplay);
 # endif
 STATIC_PTR int NDECL(enter_explore_mode);
@@ -456,16 +455,12 @@ STATIC_PTR int
 dooverview_or_wiz_where()
 {
 /*
-#ifdef WIZARD
 	if (wizard) return wiz_where();
 	else
-#endif
 */
 	dooverview();
 	return 0;
 }
-
-#ifdef WIZARD
 
 int
 wiz_show_rooms()
@@ -768,8 +763,6 @@ STATIC_PTR int wiz_showkills()		/* showborn patch */
 	return 0;
 }
 
-#endif /* WIZARD */
-
 
 /* -enlightenment and conduct- */
 static winid en_win;
@@ -815,11 +808,7 @@ char *outbuf;
 	char numbuf[24];
 	const char *modif, *bonus;
 
-	if (final
-#ifdef WIZARD
-		|| wizard
-#endif
-	  ) {
+	if (final || wizard) {
 	    Sprintf(numbuf, "%s%d",
 		    (incamt > 0) ? "+" : "", incamt);
 	    modif = (const char *) numbuf;
@@ -883,7 +872,6 @@ boolean want_disp;
 	else if (u.ualign.record >= -3)	you_have("strayed");
 	else if (u.ualign.record >= -8)	you_have("sinned");
 	else you_have("transgressed");
-#ifdef WIZARD
 	if (wizard || final) {
 		Sprintf(buf, " %d", u.uhunger);
 		enl_msg("Hunger level ", "is", "was", buf);
@@ -895,7 +883,6 @@ boolean want_disp;
 		Sprintf(buf, " %d", level_difficulty());
 		enl_msg("Level difficulty ", "is", "was", buf);
 	}
-#endif
 
 	/*** Resistances to troubles ***/
 	if (Fire_resistance) you_are("fire resistant");
@@ -940,14 +927,12 @@ boolean want_disp;
 		Sprintf(buf, "wounded %s", makeplural(body_part(LEG)));
 		you_have(buf);
 	}
-#if defined(WIZARD)
 	if (Wounded_legs && u.usteed && (wizard || final)) {
 	    Strcpy(buf, x_monnam(u.usteed, ARTICLE_YOUR, (char *)0, 
 		    SUPPRESS_SADDLE | SUPPRESS_HALLUCINATION, FALSE));
 	    *buf = highc(*buf);
 	    enl_msg(buf, " has", " had", " wounded legs");
 	}
-#endif
 	if (Sleeping) enl_msg("You ", "fall", "fell", " asleep");
 	if (Hunger) enl_msg("You hunger", "", "ed", " rapidly");
 
@@ -1021,9 +1006,9 @@ boolean want_disp;
 	}
 	if (u.uswallow) {
 	    Sprintf(buf, "swallowed by %s", a_monnam(u.ustuck));
-#ifdef WIZARD
-	    if (wizard || final) Sprintf(eos(buf), " (%u)", u.uswldtim);
-#endif
+	    if (wizard || final) {
+		Sprintf(eos(buf), " (%u)", u.uswldtim);
+	    }
 	    you_are(buf);
 	} else if (u.ustuck) {
 	    Sprintf(buf, "%s %s",
@@ -1063,9 +1048,9 @@ boolean want_disp;
 	if (Upolyd) {
 	    if (u.umonnum == u.ulycn) Strcpy(buf, "in beast form");
 	    else Sprintf(buf, "polymorphed into %s", an(youmonst.data->mname));
-#ifdef WIZARD
-	    if (wizard || final) Sprintf(eos(buf), " (%d)", u.mtimedone);
-#endif
+	    if (wizard || final) {
+		Sprintf(eos(buf), " (%d)", u.mtimedone);
+	    }
 	    you_are(buf);
 	}
 	if (Unchanging) you_can("not change from your current form");
@@ -1083,14 +1068,13 @@ boolean want_disp;
 	    Sprintf(buf, "%s%slucky",
 		    ltmp >= 10 ? "extremely " : ltmp >= 5 ? "very " : "",
 		    Luck < 0 ? "un" : "");
-#ifdef WIZARD
-	    if (wizard || final) Sprintf(eos(buf), " (%d)", Luck);
-#endif
+	    if (wizard || final) {
+		Sprintf(eos(buf), " (%d)", Luck);
+	    }
 	    you_are(buf);
+	} else if (wizard || final) {
+		enl_msg("Your luck ", "is", "was", " zero");
 	}
-#ifdef WIZARD
-	 else if (wizard || final) enl_msg("Your luck ", "is", "was", " zero");
-#endif
 	if (u.moreluck > 0) you_have("extra luck");
 	else if (u.moreluck < 0) you_have("reduced luck");
 	if (carrying(LUCKSTONE) || stone_luck(TRUE)) {
@@ -1104,9 +1088,9 @@ boolean want_disp;
 	if (u.ugangr) {
 	    Sprintf(buf, " %sangry with you",
 		    u.ugangr > 6 ? "extremely " : u.ugangr > 3 ? "very " : "");
-#ifdef WIZARD
-	    if (wizard || final) Sprintf(eos(buf), " (%d)", u.ugangr);
-#endif
+	    if (wizard || final) {
+		Sprintf(eos(buf), " (%d)", u.ugangr);
+	    }
 	    enl_msg(u_gname(), " is", " was", buf);
 	} else
 	    /*
@@ -1122,9 +1106,9 @@ boolean want_disp;
 #else
 	    Sprintf(buf, "%ssafely pray", can_pray(FALSE) ? "" : "not ");
 #endif
-#ifdef WIZARD
-	    if (wizard || final) Sprintf(eos(buf), " (%d)", u.ublesscnt);
-#endif
+	    if (wizard || final) {
+		Sprintf(eos(buf), " (%d)", u.ublesscnt);
+	    }
 	    you_can(buf);
 	}
 
@@ -1440,8 +1424,6 @@ boolean want_disp;
 		    u.uconduct.weaphit, plur(u.uconduct.weaphit));
 	    you_have_X(buf);
 	}
-
-#ifdef WIZARD
 	if ((wizard || final) && u.uconduct.literate){
 	    Sprintf(buf, "read items or engraved %ld time%s",
 		    u.uconduct.literate, plur(u.uconduct.literate));
@@ -1452,7 +1434,6 @@ boolean want_disp;
 		  u.uconduct.armoruses, plur(u.uconduct.armoruses));
 	    you_have_X(buf);
 	}
-#endif
 	if (!u.uconduct.non_racial_armor &&
 	    /* only show when armor was worn at all */
 	    u.uconduct.armoruses > 0) {
@@ -1469,25 +1450,20 @@ boolean want_disp;
 	    you_have_X(buf);
 	}
 
-	if (!u.uconduct.polypiles)
+	if (!u.uconduct.polypiles) {
 	    you_have_never("polymorphed an object");
-#ifdef WIZARD
-	else if (wizard || final) {
-	    Sprintf(buf, "polymorphed %ld item%s",
-		    u.uconduct.polypiles, plur(u.uconduct.polypiles));
+	} else if (wizard || final) {
+	    Sprintf(buf, "polymorphed %ld item%s", u.uconduct.polypiles, plur(u.uconduct.polypiles));
 	    you_have_X(buf);
 	}
-#endif
 
-	if (!u.uconduct.polyselfs)
+	if (!u.uconduct.polyselfs) {
 	    you_have_never("changed form");
-#ifdef WIZARD
-	else if (wizard || final) {
+	} else if (wizard || final) {
 	    Sprintf(buf, "changed form %ld time%s",
 		    u.uconduct.polyselfs, plur(u.uconduct.polyselfs));
 	    you_have_X(buf);
 	}
-#endif
 
 	if (!u.uconduct.wishes)
 	    you_have_X("used no wishes");
@@ -1553,21 +1529,18 @@ boolean want_disp;
 static const struct func_tab cmdlist[] = {
 	{C('d'), FALSE, dokick, NULL}, /* "D" is for door!...?  Msg is in dokick.c */
 	{C('e'), TRUE, doengrave_elbereth, NULL},
-#ifdef WIZARD
 	{C('f'), TRUE, wiz_map, NULL},
 	{C('g'), TRUE, wiz_genesis, NULL},
 	{C('i'), TRUE, wiz_identify, NULL},
-#endif
 	{C('l'), TRUE, doredraw, NULL}, /* if number_pad is set */
 	{C('n'), TRUE, donamelevel, NULL}, /* if number_pad is set */
 	{C('o'), TRUE, dooverview_or_wiz_where, NULL}, /* depending on wizard status */
 	{C('p'), TRUE, doprev_message, NULL},
 	{C('r'), TRUE, doredraw, NULL},
 	{C('t'), TRUE, dotele, NULL},
-#ifdef WIZARD
 	{C('v'), TRUE, wiz_level_tele, NULL},
 	{C('w'), TRUE, wiz_wish, NULL},
-#else
+#if !defined(WIZARD)
 	{C('v'), TRUE, tutorial_redisplay, NULL},
 #endif
 	{C('x'), TRUE, doattributes, NULL},
@@ -1703,7 +1676,6 @@ struct ext_func_tab extcmdlist[] = {
 	{"wipe", "wipe off your face", dowipe, FALSE},
 	{"xplore", "enter the explore mode", enter_explore_mode, TRUE},
 	{"?", "get this list of extended commands", doextlist, TRUE},
-#if defined(WIZARD)
 	/*
 	 * There must be a blank entry here for every entry in the table
 	 * below.
@@ -1730,11 +1702,9 @@ struct ext_func_tab extcmdlist[] = {
 	{(char *)0, (char *)0, donull, TRUE},
 #endif
 	{(char *)0, (char *)0, donull, TRUE},
-#endif
 	{(char *)0, (char *)0, donull, TRUE}	/* sentinel */
 };
 
-#if defined(WIZARD)
 static const struct ext_func_tab debug_extcmdlist[] = {
 	{"levelchange", "change experience level", wiz_level_change, TRUE},
 	{"lightsources", "show mobile light sources", wiz_light_sources, TRUE},
@@ -2023,8 +1993,6 @@ wiz_migrate_mons()
 	return 0;
 }
 #endif
-
-#endif /* WIZARD */
 
 #define unctrl(c)	((c) <= C('z') ? (0x60 | (c)) : (c))
 #define unmeta(c)	(0x7f & (c))
@@ -2381,12 +2349,7 @@ const char *msg;
 	if (letter(sym)) { 
 	    sym = highc(sym);
 	    ctrl = (sym - 'A') + 1;
-	    if ((expl = dowhatdoes_core(ctrl, buf2))
-		&& (!index(wiz_only_list, sym)
-#ifdef WIZARD
-		    || wizard
-#endif
-	                     )) {
+	    if ((expl = dowhatdoes_core(ctrl, buf2)) && (!index(wiz_only_list, sym) || wizard)) {
 		Sprintf(buf, "Are you trying to use ^%c%s?", sym,
 			index(wiz_only_list, sym) ? "" :
 			" as specified in the Guidebook");

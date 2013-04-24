@@ -628,6 +628,7 @@ static const char *build_pseudo_opts[] = {
 		"auto open doors",
 		"basic UnNetHack features",
 		"blackmarket level",
+		"debug mode",
 		"dungeon map overview patch",
 		"experience points on status line",
 		"rogue level",
@@ -659,9 +660,6 @@ static const char *build_opts[] = {
 #endif
 #ifdef DLB
 		"data librarian",
-#endif
-#ifdef WIZARD
-		"debug mode",
 #endif
 #ifdef REALTIME_ON_BOTL
 		"elapsed time on status line",

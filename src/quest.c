@@ -121,7 +121,6 @@ boolean talk;
     int purity;
     aligntyp original_alignment = u.ualignbase[A_ORIGINAL];
 
-#ifdef WIZARD
     if (wizard && talk) {
 	if (u.ualign.type != original_alignment) {
 	    You("are currently %s instead of %s.",
@@ -135,7 +134,7 @@ boolean talk;
 		u.ualign.record = MIN_QUEST_ALIGN;
 	}
     }
-#endif
+
     purity = (u.ualign.record >= MIN_QUEST_ALIGN &&
 	      u.ualign.type == original_alignment &&
 	/*      u.ualignbase[A_CURRENT].type == original_alignment.type) ?  1 : 0; */ /* CHECK TODO is this correct? */

@@ -577,7 +577,6 @@ struct obj *obj;
     return radius;
 }
 
-#ifdef WIZARD
 extern char *FDECL(fmt_ptr, (const genericptr, char *));  /* from alloc.c */
 
 int
@@ -618,8 +617,6 @@ wiz_light_sources()
 
     return 0;
 }
-
-#endif /* WIZARD */
 
 #endif /* OVL3 */
 

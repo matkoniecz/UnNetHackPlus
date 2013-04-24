@@ -477,7 +477,7 @@ fi
 
 NETHACK_ARG_WITH_PARAM(whereis-file,[Log information about running games],WHEREIS_FILE,no,FILE,[%n.whereis])
 
-NETHACK_ARG_WITH_PARAM(wizmode,[enable wizard mode for the specified user],WIZARD,yes,USER,[wizard])
+# NETHACK_ARG_WITH_PARAM(wizmode,[enable wizard mode for the specified user],WIZARD,yes,USER,[wizard]) - enabled uncoditionally
 
 if test "$CHOWN" != "true"; then
     AC_MSG_CHECKING([for owner of installed files])

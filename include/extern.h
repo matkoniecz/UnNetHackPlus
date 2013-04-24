@@ -154,7 +154,6 @@ E int NDECL(doprev_message);
 E int NDECL(timed_occupation);
 E int NDECL(wiz_attributes);
 E int NDECL(enter_explore_mode);
-# ifdef WIZARD
 E int NDECL(wiz_detect);
 E int NDECL(wiz_genesis);
 E int NDECL(wiz_identify);
@@ -162,7 +161,6 @@ E int NDECL(wiz_level_tele);
 E int NDECL(wiz_map);
 E int NDECL(wiz_where);
 E int NDECL(wiz_wish);
-# endif /* WIZARD */
 #endif /* USE_TRAMPOLI */
 E void NDECL(reset_occupations);
 E void FDECL(set_occupation, (int (*)(void),const char *,int));
@@ -171,9 +169,7 @@ E char NDECL(pgetchar);
 E void FDECL(pushch, (CHAR_P));
 E void FDECL(savech, (CHAR_P));
 #endif
-#ifdef WIZARD
 E void NDECL(add_debug_extended_commands);
-#endif /* WIZARD */
 E void FDECL(rhack, (char *));
 E int NDECL(doextlist);
 E int NDECL(extcmd_via_menu);
@@ -188,9 +184,7 @@ E int FDECL(isok, (int,int));
 E int FDECL(get_adjacent_loc, (const char *, const char *, XCHAR_P, XCHAR_P, coord *));
 E const char *FDECL(click_to_cmd, (int,int,int));
 E char NDECL(readchar);
-#ifdef WIZARD
 E void NDECL(sanity_check);
-#endif
 E char FDECL(yn_function, (const char *, const char *, CHAR_P));
 E char FDECL(paranoid_yn, (const char *, BOOLEAN_P));
 
@@ -555,9 +549,7 @@ E int FDECL(induced_align, (int));
 E boolean FDECL(Invocation_lev, (d_level *));
 E xchar NDECL(level_difficulty);
 E schar FDECL(lev_by_name, (const char *));
-#ifdef WIZARD
 E schar FDECL(print_dungeon, (BOOLEAN_P,schar *,xchar *));
-#endif
 E int NDECL(donamelevel);
 E int NDECL(dooverview);
 E void FDECL(forget_mapseen, (int));
@@ -695,7 +687,7 @@ E void NDECL(set_savefile_name);
 #ifdef INSURANCE
 E void FDECL(save_savefile_name, (int));
 #endif
-#if defined(WIZARD) && !defined(MICRO)
+#if !defined(MICRO)
 E void NDECL(set_error_savefile);
 #endif
 E int NDECL(create_savefile);
@@ -715,9 +707,7 @@ E boolean FDECL(can_read_file, (const char *));
 #endif
 E void FDECL(read_config_file, (const char *));
 E void FDECL(check_recordfile, (const char *));
-#if defined(WIZARD)
 E void NDECL(read_wizkit);
-#endif
 E void FDECL(paniclog, (const char *, const char *));
 E int FDECL(validate_prefix_locations, (char *));
 E char** NDECL(get_saved_games);
@@ -947,9 +937,7 @@ E boolean FDECL(obj_is_burning, (struct obj *));
 E void FDECL(obj_split_light_source, (struct obj *, struct obj *));
 E void FDECL(obj_merge_light_sources, (struct obj *,struct obj *));
 E int FDECL(candle_light_range, (struct obj *));
-#ifdef WIZARD
 E int NDECL(wiz_light_sources);
-#endif
 
 /* ### lock.c ### */
 
@@ -1183,9 +1171,7 @@ E void FDECL(add_to_buried, (struct obj *));
 E void FDECL(dealloc_obj, (struct obj *));
 E void FDECL(obj_ice_effects, (int, int, BOOLEAN_P));
 E long FDECL(peek_at_iced_corpse_age, (struct obj *));
-#ifdef WIZARD
 E void NDECL(obj_sanity_check);
-#endif
 
 /* ### mkroom.c ### */
 
@@ -1795,9 +1781,7 @@ E void FDECL(do_genocide, (int,BOOLEAN_P));
 E void FDECL(punish, (struct obj *));
 E void NDECL(unpunish);
 E boolean FDECL(cant_create, (int *, BOOLEAN_P));
-#ifdef WIZARD
 E boolean NDECL(create_particular);
-#endif
 E void FDECL(drop_boulder_on_player, (BOOLEAN_P, BOOLEAN_P, BOOLEAN_P, BOOLEAN_P));
 E int  FDECL(drop_boulder_on_monster, (int, int, BOOLEAN_P, BOOLEAN_P));
 
@@ -2144,10 +2128,8 @@ E boolean FDECL(obj_is_local, (struct obj *));
 E void FDECL(save_timers, (int,int,int));
 E void FDECL(restore_timers, (int,int,BOOLEAN_P,long));
 E void FDECL(relink_timers, (BOOLEAN_P));
-#ifdef WIZARD
 E int NDECL(wiz_timeout_queue);
 E void NDECL(timer_sanity_check);
-#endif
 
 /* ### topten.c ### */
 

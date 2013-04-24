@@ -634,7 +634,6 @@ FILE_AREA_VAR
 FILE_AREA_DOC
 GROUP
 OWNER
-WIZARD
 WHEREIS_FILE
 DUMP_HTML_CSS_FILE
 DUMPMSGS
@@ -786,7 +785,6 @@ enable_dump_html_css_file
 enable_dump_html_css_embedded
 enable_utf8_glyphs
 enable_whereis_file
-enable_wizmode
 with_owner
 with_group
 enable_file_areas
@@ -1496,8 +1494,6 @@ Optional Features:
   --enable-whereis-file=FILE
                           Log information about running games (default=no,
                           default file=[%n.whereis])
-  --enable-wizmode=USER   enable wizard mode for the specified user
-                          (default=yes, default user=[wizard])
   --enable-file-areas     Place files in different directories (default=yes)
 
 Optional Packages:
@@ -7012,34 +7008,6 @@ cat >>confdefs.h <<_ACEOF
 _ACEOF
 
       WHEREIS_FILE="$whereis_file"
-
-   else
-      { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5
-$as_echo "no" >&6; }
-   fi
-
-
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking whether to enable wizmode" >&5
-$as_echo_n "checking whether to enable wizmode... " >&6; }
-   # Check whether --enable-wizmode was given.
-if test "${enable_wizmode+set}" = set; then :
-  enableval=$enable_wizmode; if test "$enableval" != no; then enable_wizmode=yes;
-         if test "$enableval" != yes; then wizmode=$enableval;
-         else wizmode=wizard; fi;
-        else enable_wizmode=no; fi
-else
-  enable_wizmode=yes;wizmode=wizard
-fi
-
-   if test "$enable_wizmode" != "no" ; then
-      { $as_echo "$as_me:${as_lineno-$LINENO}: result: yes (user $wizmode)" >&5
-$as_echo "yes (user $wizmode)" >&6; }
-
-cat >>confdefs.h <<_ACEOF
-#define WIZARD                "$wizmode"
-_ACEOF
-
-      WIZARD="$wizmode"
 
    else
       { $as_echo "$as_me:${as_lineno-$LINENO}: result: no" >&5

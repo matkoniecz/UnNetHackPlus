@@ -140,7 +140,7 @@ done2()
 		}
 		return 0;
 	}
-#if defined(WIZARD) && (defined(UNIX) || defined(VMS) || defined(LATTICE))
+#if defined(UNIX) || defined(VMS) || defined(LATTICE)
 	if(wizard) {
 	    int c;
 # ifdef VMS
@@ -283,10 +283,9 @@ panic VA_DECL(const char *, str)
 		  !program_state.something_worth_saving ?
 		  "Program initialization has failed." :
 		  "Suddenly, the dungeon collapses.");
-#if defined(WIZARD)
-	if (!wizard)
-#endif
+	if (!wizard) {
 	    raw_printf("Report the following error to <https://github.com/Bulwersator/UnNetHackPlus/issues>.");
+	}
 	if (program_state.something_worth_saving) {
 	    raw_print("\nError save file being written.\n");
 	    set_error_savefile();
@@ -304,7 +303,7 @@ panic VA_DECL(const char *, str)
 #ifdef LIVELOGFILE
 	livelog_game_action("panicked");
 #endif
-#if defined(WIZARD) && (defined(UNIX) || defined(VMS) || defined(LATTICE) || defined(WIN32))
+#if defined(UNIX) || defined(VMS) || defined(LATTICE) || defined(WIN32)
 	if (wizard)
 	    NH_abort();	/* generate core dump */
 #endif
@@ -558,12 +557,10 @@ int how;
 		paniclog("trickery", killer);
 		killer = 0;
 	    }
-#ifdef WIZARD
 	    if (wizard) {
 		You("are a very tricky wizard, it seems.");
 		return;
 	    }
-#endif
 	}
 
 	/* kilbuf: used to copy killer in case it comes from something like
@@ -612,11 +609,7 @@ int how;
 			}
 		}
 	}
-	if ((
-#ifdef WIZARD
-			wizard ||
-#endif
-			discover) && (how <= MAX_SURVIVABLE_DEATH)) {
+	if ((wizard || discover) && (how <= MAX_SURVIVABLE_DEATH)) {
 		if(yn("Die?") == 'y') goto die;
 		pline("OK, so you don't %s.",
 			(how == CHOKING) ? "choke" : (how == DISINTEGRATED) ? "disintegrate" : "die");
@@ -806,10 +799,9 @@ die:
 	}
 
 	if (bones_ok) {
-#ifdef WIZARD
-	    if (!wizard || paranoid_yn("Save bones?", iflags.paranoid_quit) == 'y')
-#endif /* WIZARD */
-		savebones(corpse);
+	    if (!wizard || paranoid_yn("Save bones?", iflags.paranoid_quit) == 'y') {
+			savebones(corpse);
+	    }
 	    /* corpse may be invalid pointer now so
 		ensure that it isn't used again */
 	    corpse = (struct obj *)0;

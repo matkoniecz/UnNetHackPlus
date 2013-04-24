@@ -1705,7 +1705,7 @@ do_class_genocide()
 				(buf[0] == DEF_INVISIBLE && buf[1] == '\0'))
 	You("aren't permitted to genocide such monsters.");
 			else
-#ifdef WIZARD	/* to aid in topology testing; remove pesky monsters */
+			/* to aid in topology testing; remove pesky monsters */
 			  if (wizard && buf[0] == '*') {
 			    struct monst *mtmp, *mtmp2;
 
@@ -1719,7 +1719,6 @@ do_class_genocide()
 	pline("Eliminated %d monster%s.", gonecnt, plur(gonecnt));
 			    return;
 			} else
-#endif
 	pline("That symbol does not represent any monster.");
 			continue;
 		}
@@ -1848,7 +1847,7 @@ boolean only_on_level; /**< if TRUE only genocide monsters on current level,
 		    } else return;
 		}
 
-#ifdef WIZARD	/* to aid in topology testing; remove pesky monsters */
+		/* to aid in topology testing; remove pesky monsters */
 		/* copy from do_class_genocide */
 		if (wizard && buf[0] == '*') {
 			struct monst *mtmp, *mtmp2;
@@ -1863,7 +1862,6 @@ boolean only_on_level; /**< if TRUE only genocide monsters on current level,
 			pline("Eliminated %d monster%s.", gonecnt, plur(gonecnt));
 			return;
 		}
-#endif
 
 		mndx = name_to_mon(buf);
 		if (mndx == NON_PM || (mvitals[mndx].mvflags & G_GENOD)) {
@@ -2055,7 +2053,6 @@ boolean revival;
 	return FALSE;
 }
 
-#ifdef WIZARD
 /*
  * Make a new monster with the type controlled by the user.
  *
@@ -2131,7 +2128,6 @@ create_particular()
 	}
 	return madeany;
 }
-#endif /* WIZARD */
 
 #endif /* OVLB */
 

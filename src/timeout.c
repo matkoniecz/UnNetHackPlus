@@ -1303,10 +1303,8 @@ do_storms()
  *		Stop all timers attached to obj.
  */
 
-#ifdef WIZARD
 STATIC_DCL const char *FDECL(kind_name, (SHORT_P));
 STATIC_DCL void FDECL(print_queue, (winid, timer_element *));
-#endif
 STATIC_DCL void FDECL(insert_timer, (timer_element *));
 STATIC_DCL timer_element *FDECL(remove_timer, (timer_element **, SHORT_P,
 								genericptr_t));
@@ -1343,8 +1341,6 @@ static const ttable timeout_funcs[NUM_TIME_FUNCS] = {
 };
 #undef TTAB
 
-
-#if defined(WIZARD)
 
 STATIC_OVL const char *
 kind_name(kind)
@@ -1426,9 +1422,6 @@ timer_sanity_check()
 	    }
 	}
 }
-
-#endif /* WIZARD */
-
 
 /*
  * Pick off timeout elements from the global queue and call their functions.

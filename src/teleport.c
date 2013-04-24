@@ -615,36 +615,21 @@ tele()
 
 	/* Disable teleportation in stronghold && Vlad's Tower */
 	if (level.flags.noteleport) {
-#ifdef WIZARD
 		if (!wizard) {
-#endif
 		    pline("A mysterious force prevents you from teleporting!");
 		    return;
-#ifdef WIZARD
 		}
-#endif
 	}
 
 	/* don't show trap if "Sorry..." */
 	if (!Blinded) make_blinded(0L,FALSE);
 
-	if
-#ifdef WIZARD
-	(
-#endif
-	 (u.uhave.amulet || On_W_tower_level(&u.uz) || (u.usteed && mon_has_amulet(u.usteed)))
-#ifdef WIZARD
-	 && (!wizard) )
-#endif
+	if((u.uhave.amulet || On_W_tower_level(&u.uz) || (u.usteed && mon_has_amulet(u.usteed))) && (!wizard))
 	{
 		You_feel("disoriented for a moment.");
 		return;
 	}
-	if ((Teleport_control && !Stunned)
-#ifdef WIZARD
-			    || wizard
-#endif
-					) {
+	if ((Teleport_control && !Stunned) || wizard) {
 	    if (unconscious()) {
 		pline("Being unconscious, you cannot control your teleport.");
 	    } else {
@@ -706,40 +691,29 @@ dotele()
 				castit = TRUE;
 				break;
 			}
-#ifdef WIZARD
 		if (!wizard) {
-#endif
 		    if (!castit) {
 			if (!Teleportation)
 			    You("don't know that spell.");
 			else You("are not able to teleport at will.");
 			return(0);
 		    }
-#ifdef WIZARD
 		}
-#endif
 	    }
 
 	    if (u.uhunger <= 100 || ACURR(A_STR) < 6) {
-#ifdef WIZARD
 		if (!wizard) {
-#endif
 			You("lack the strength %s.",
 			    castit ? "for a teleport spell" : "to teleport");
 			return 1;
-#ifdef WIZARD
 		}
-#endif
 	    }
 
 	    energy = objects[SPE_TELEPORT_AWAY].oc_level * 7 / 2 - 2;
 	    if (u.uen <= energy) {
-#ifdef WIZARD
-		if (wizard)
+		if (wizard) {
 			energy = u.uen;
-		else
-#endif
-		{
+		} else {
 			You("lack the energy %s.",
 			    castit ? "for a teleport spell" : "to teleport");
 			return 1;
@@ -750,19 +724,17 @@ dotele()
 			"Your concentration falters from carrying so much."))
 		return 1;
 
-	    if (castit) {
-		exercise(A_WIS, TRUE);
-		if (spelleffects(sp_no, TRUE))
-			return(1);
-		else
-#ifdef WIZARD
-		    if (!wizard)
-#endif
-			return(0);
-	    } else {
-		u.uen -= energy;
-		flags.botl = 1;
-	    }
+		if (castit) {
+			exercise(A_WIS, TRUE);
+			if (spelleffects(sp_no, TRUE)) {
+				return(1);
+			} else if (!wizard) {
+				return(0);
+			}
+		} else {
+			u.uen -= energy;
+			flags.botl = 1;
+		}
 	}
 
 	if (next_to_u()) {
@@ -787,30 +759,22 @@ level_tele()
 	char buf[BUFSZ];
 	boolean force_dest = FALSE;
 
-	if ((u.uhave.amulet || In_endgame(&u.uz) || In_sokoban(&u.uz))
-#ifdef WIZARD
-						&& !wizard
-#endif
-							) {
+	if (!wizard && (u.uhave.amulet || In_endgame(&u.uz) || In_sokoban(&u.uz))) {
 		You_feel("very disoriented for a moment.");
 		return;
 	}
-	if ((Teleport_control && !Stunned)
-#ifdef WIZARD
-	   || wizard
-#endif
-		) {
+	if ((Teleport_control && !Stunned) || wizard) {
 		char qbuf[BUFSZ];
 		int trycnt = 0;
 
 		Strcpy(qbuf, "To what level do you want to teleport?");
 		do {
 			if (++trycnt == 2) {
-#ifdef WIZARD
-				if (wizard) Strcat(qbuf, " [type a number or ? for a menu]");
-				else
-#endif
-				Strcat(qbuf, " [type a number]");
+				if (wizard) {
+					Strcat(qbuf, " [type a number or ? for a menu]");
+				} else {
+					Strcat(qbuf, " [type a number]");
+				}
 			}
 			getlin(qbuf, buf);
 			if (!strcmp(buf, "\033")) {	/* cancelled */
@@ -825,7 +789,6 @@ level_tele()
 				pline("Oops...");
 				goto random_levtport;
 			}
-#ifdef WIZARD
 			if (wizard && !strcmp(buf, "?")) {
 				schar destlev = 0;
 				xchar destdnum = 0;
@@ -859,9 +822,7 @@ level_tele()
 				} else {
 					return;
 				}
-			} else
-#endif
-			if ((newlev = lev_by_name(buf)) == 0) {
+			} else if ((newlev = lev_by_name(buf)) == 0) {
 				newlev = atoi(buf);
 			}
 		} while (!newlev && !digit(buf[0]) && (buf[0] != '-' || !digit(buf[1])) && trycnt < 10);
@@ -886,14 +847,8 @@ level_tele()
 			pline("An energized cloud of dust begins to coalesce.");
 			Your("body rematerializes%s.", invent ? ", and you gather up all your possessions" : "");
 			return;
-		}
-#ifdef WIZARD
 		/* allow only jump beyond the Dungeons of Doom branch */
-		else if (!wizard && newlev > 0 && u.uz.dnum != 0)
-#else
-		else if (newlev > 0 && u.uz.dnum != 0)
-#endif
-		{
+		} else if (!wizard && newlev > 0 && u.uz.dnum != 0) {
 			/* random teleport for destination level outside of the current dungeon branch */
 			if (newlev > dungeons[u.uz.dnum].depth_start + dunlevs_in_dungeon(&u.uz)) {
 				You_feel("like bouncing off a solid wall!");
@@ -932,7 +887,6 @@ random_levtport:
 		You(shudder_for_moment);
 		return;
 	}
-#ifdef WIZARD
 	if (In_endgame(&u.uz)) { /* must already be wizard */
 		int llimit = dunlevs_in_dungeon(&u.uz);
 
@@ -945,7 +899,6 @@ random_levtport:
 		schedule_goto(&newlevel, FALSE, FALSE, 0, (char *)0, (char *)0);
 		return;
 	}
-#endif
 
 	killer = 0; /* still alive, so far... */
 
@@ -1011,21 +964,19 @@ random_levtport:
 		 * surface but then actually arrive back inside the dungeon]
 		 */
 	} else if (u.uz.dnum == medusa_level.dnum && newlev >= dungeons[u.uz.dnum].depth_start + dunlevs_in_dungeon(&u.uz)) {
-#ifdef WIZARD
-		if (!(wizard && force_dest))
-#endif
-		find_hell(&newlevel);
+		if (!(wizard && force_dest)) {
+			find_hell(&newlevel);
+		}
 	} else {
 		/* if invocation did not yet occur, teleporting into
 		 * the last level of Gehennom is forbidden.
 		 */
-#ifdef WIZARD
-		if (!wizard)
-#endif
+		if (!wizard) {
 			if (Inhell && !u.uevent.invoked && newlev >= (dungeons[u.uz.dnum].depth_start + dunlevs_in_dungeon(&u.uz) - 1)) {
 				newlev = dungeons[u.uz.dnum].depth_start + dunlevs_in_dungeon(&u.uz) - 2;
 				pline("Sorry...");
 			}
+		}
 		/* no teleporting out of quest dungeon */
 		if (In_quest(&u.uz) && newlev < depth(&qstart_level)) {
 			newlev = depth(&qstart_level);
@@ -1034,10 +985,9 @@ random_levtport:
 		 * we must translate newlev to a number relative to the
 		 * current dungeon.
 		 */
-#ifdef WIZARD
-		if (!(wizard && force_dest))
-#endif
-		get_level(&newlevel, newlev);
+		if (!(wizard && force_dest)) {
+			get_level(&newlevel, newlev);
+		}
 	}
 	schedule_goto(&newlevel, FALSE, FALSE, 0, (char *)0, (char *)0);
 	/* in case player just read a scroll and is about to be asked to

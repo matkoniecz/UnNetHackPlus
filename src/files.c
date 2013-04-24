@@ -121,11 +121,9 @@ boolean nethack_thinks_it_is_open;	/* Does NetHack think it's open?       */
 # endif
 #endif /*HOLD_LOCKFILE_OPEN*/
 
-#ifdef WIZARD
 #define WIZKIT_MAX 128
 static char wizkit[WIZKIT_MAX];
 STATIC_DCL FILE *NDECL(fopen_wizkit_file);
-#endif
 
 #ifdef AMIGA
 extern char PATH[];	/* see sys/amiga/amidos.c */
@@ -910,13 +908,11 @@ d_level *lev;
 	ret = rename(tempname, fq_bones);
 # endif
 #endif	/* FILE_AREAS */
-#ifdef WIZARD
 	if (wizard && ret != 0)
 #ifdef FILE_AREAS
 		pline("couldn't rename %s to %s.", tempname, bones);
 #else
 		pline("couldn't rename %s to %s.", tempname, fq_bones);
-#endif
 #endif
 }
 
@@ -1043,7 +1039,7 @@ int fd;
 #endif
 
 
-#if defined(WIZARD) && !defined(MICRO)
+#if !defined(MICRO)
 /* change pre-existing savefile name to indicate an error savefile */
 void
 set_error_savefile()
@@ -1418,9 +1414,7 @@ boolean uncomp;
 	(void) signal(SIGQUIT, SIG_IGN);
 	(void) wait((int *)&i);
 	(void) signal(SIGINT, (SIG_RET_TYPE) done1);
-# ifdef WIZARD
 	if (wizard) (void) signal(SIGQUIT, SIG_DFL);
-# endif
 	if (i == 0) {
 	    /* (un)compress succeeded: remove file left behind */
 	    if (uncomp)
@@ -2238,10 +2232,8 @@ boolean		recursive;
 	    (void) get_uchars(fp, buf, bufp, translate, FALSE,
 					WARNCOUNT, "WARNINGS");
 	    assign_warnings(translate);
-#ifdef WIZARD
 	} else if (match_varname(buf, "WIZKIT", 6)) {
 	    (void) strncpy(wizkit, bufp, WIZKIT_MAX-1);
-#endif
 #ifdef AMIGA
 	} else if (match_varname(buf, "FONT", 4)) {
 		char *t;
@@ -2453,7 +2445,6 @@ const char *filename;
 	return;
 }
 
-#ifdef WIZARD
 STATIC_OVL FILE *
 fopen_wizkit_file()
 {
@@ -2560,8 +2551,6 @@ read_wizkit()
 	(void) fclose(fp);
 	return;
 }
-
-#endif /*WIZARD*/
 
 /* ----------  END CONFIG FILE HANDLING ----------- */
 
