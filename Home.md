@@ -1,5 +1,7 @@
 Plans for UnNetHackPlus
 
+* WIDENED_PROTOTYPES (related to boolean mess)
+
 scrap "acceptable_quantify_request" - goldify
 
 aybe we want to add other monetary - NONONO
