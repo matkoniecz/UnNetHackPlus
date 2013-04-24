@@ -801,17 +801,27 @@ int skill;
 /* return true if this skill can be advanced */
 /*ARGSUSED*/
 STATIC_OVL boolean
-can_advance(skill, speedy)
-int skill;
-boolean speedy;
+can_advance(int skill, boolean speedy)
 {
-    return !P_RESTRICTED(skill)
-	    && P_SKILL(skill) < P_MAX_SKILL(skill) && (
-	    (wizard && speedy) ||
-	    (P_ADVANCE(skill) >=
-		(unsigned) practice_needed_to_advance(P_SKILL(skill))
-	    && u.skills_advanced < P_SKILL_LIMIT
-	    && u.unused_skill_slots >= slots_required(skill)));
+	if (P_RESTRICTED(skill)) {
+		return FALSE;
+	}
+	if (P_SKILL(skill) >= P_MAX_SKILL(skill)) {
+		return FALSE;
+	}
+	if (wizard && speedy) {
+		return TRUE;
+	}
+	if (P_ADVANCE(skill) < (unsigned) practice_needed_to_advance(P_SKILL(skill))) {
+		return FALSE;
+	}
+	if (u.skills_advanced >= P_SKILL_LIMIT) {
+		return FALSE;
+	}
+	if (u.unused_skill_slots < slots_required(skill)) {
+		return FALSE;
+	}
+	return TRUE;
 }
 
 /* return true if any skill can be advanced */
