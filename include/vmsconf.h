@@ -8,14 +8,11 @@
 
 /*
  * Edit these to choose values appropriate for your site.
- * WIZARD is the username allowed to use the debug option of nethack; no harm
- *   is done by leaving it as a username that doesn't exist at your site.
  * HACKDIR can be overridden at run-time with the logical name HACKDIR, as in
  *   $ define hackdir disk$users:[games.nethack]
  * Trailing NULs are present in the default values in order to make some
  *   extra room for patching longer values into an existing executable.
  */
-#define Local_WIZARD	"NHWIZARD\0\0\0\0"
 #define Local_HACKDIR	"DISK$USERS:[GAMES.NETHACK.3_4_X.PLAY]\0\0\0\0\0\0\0\0"
 
 /*
@@ -29,12 +26,6 @@
 #ifdef HACKDIR
 # undef HACKDIR
 #endif
-#ifdef WIZARD
-# undef WIZARD
-#endif
-#endif
-#define HACKDIR Local_HACKDIR
-#define WIZARD Local_WIZARD
 
 /* filenames require punctuation to avoid redirection via logical names */
 #undef RECORD

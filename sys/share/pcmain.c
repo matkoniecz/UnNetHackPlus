@@ -300,14 +300,7 @@ char *argv[];
 	plnamesuffix(); 	/* strip suffix from name; calls askname() */
 				/* again if suffix was whole name */
 				/* accepts any suffix */
-	if (wizard) {
-		if(!strcmp(plname, WIZARD)) {
-			Strcpy(plname, "wizard");
-		} else {
-			wizard = FALSE;
-			discover = TRUE;
-		}
-	}
+
 #if defined(PC_LOCKING)
 	/* 3.3.0 added this to support detection of multiple games
 	 * under the same plname on the same machine in a windowed
@@ -475,11 +468,6 @@ char *argv[];
 			}
 			break;
 		case 'D':
-			/* If they don't have a valid wizard name, it'll be
-			 * changed to discover later.  Cannot check for
-			 * validity of the name right now--it might have a
-			 * character class suffix, for instance.
-			 */
 			wizard = TRUE;
 			break;
 		case 'X':

@@ -452,12 +452,11 @@ typedef long glyph_t;
 /*
  * Section 8:  FICTIONAL DEFINES THAT MUST BE DEFINED
  *
- * Commenting these defines is not allowes, as #ifdef etc were removed from code 
+ * Commenting out these defines is not allowes, as #ifdef etc were removed from code 
  * and features are incorporated into UnNetHackPlus without evil preprocessor instructions littering code
- * these defines are also listed in build_pseudo_opts (util\makedefs.c)
- * but these constants must be set to some value
+ * and some potentialy useful code was included without this one
  */
-#define WIZARD  "wizard" /* the person allowed to use the -D option */
+#define WIZARD
 
 /* End of Section 8 */
 

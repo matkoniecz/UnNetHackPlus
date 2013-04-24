@@ -40,7 +40,7 @@ extern void NDECL(init_linux_cons);
 #endif
 
 static void NDECL(wd_message);
-static boolean wiz_error_flag = FALSE;
+static boolean wiz_error_flag = FALSE; //Unused
 
 int
 main(argc,argv)
@@ -187,9 +187,6 @@ char *argv[];
 #ifdef MAIL
 	getmailstatus();
 #endif
-	if (wizard)
-		Strcpy(plname, "wizard");
-	else
 	if(!*plname) {
 		askname();
 	} else if (exact_username) {
@@ -315,34 +312,8 @@ char *argv[];
 		argc--;
 		switch(argv[0][1]){
 		case 'D':
-			{
-			  char *user;
-			  int uid;
-			  struct passwd *pw = (struct passwd *)0;
-
-			  uid = getuid();
-			  user = getlogin();
-			  if (user) {
-			      pw = getpwnam(user);
-			      if (pw && (pw->pw_uid != uid)) pw = 0;
-			  }
-			  if (pw == 0) {
-			      user = nh_getenv("USER");
-			      if (user) {
-				  pw = getpwnam(user);
-				  if (pw && (pw->pw_uid != uid)) pw = 0;
-			      }
-			      if (pw == 0) {
-				  pw = getpwuid(uid);
-			      }
-			  }
-			  if (pw && !strcmp(pw->pw_name,WIZARD)) {
-			      wizard = TRUE;
-			      break;
-			  }
-			}
-			/* otherwise fall thru to discover */
-			wiz_error_flag = TRUE;
+			wizard = TRUE;
+			break;
 		case 'X':
 			discover = TRUE;
 			break;
@@ -511,13 +482,8 @@ port_help()
 static void
 wd_message()
 {
-	if (wiz_error_flag) {
-		pline("Only user \"%s\" may access debug (wizard) mode.", WIZARD);
-		pline("Entering discovery mode instead.");
-	} else {
-		if (discover) {
-			You("are in non-scoring discovery mode.");
-		}
+	if (discover) {
+		You("are in non-scoring discovery mode.");
 	}
 }
 
