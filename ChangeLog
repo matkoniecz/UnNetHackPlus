@@ -31,7 +31,7 @@
 		- C343-302 "Amnesia of object discoveries may forget to forget one thing."
 		Patches are linked at http://nethackwiki.com/wiki/User:Bulwersator/UnNetHackPlus_bug_tracking
 	* UnNetHack bug fixes
-		- Angered quest guardians will no longer go berserk.
+		- #143 Angered quest guardians will no longer go berserk.
 		- #152 Wishing for unknown dragon scales with its actual name results in dragon scale mail (outside of debug mode)
 	* Flavour stuff
 		- Far look during hallucination should be more amusing
