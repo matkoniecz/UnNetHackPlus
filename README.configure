@@ -8,7 +8,7 @@ On Linux and MacOSX for a single-user installation (a Linux Debian
  or Ubuntu system needs the packages gcc, flex, bison, make and
  libncurses5-dev installed):
 
- ./configure --prefix=$HOME/unnethackplus --with-owner=`id -un` --with-group=`id -gn` --enable-wizmode=`id -un` && make && make install
+ ./configure --prefix=$HOME/unnethackplus --with-owner=`id -un` --with-group=`id -gn` && make && make install
 
  The game will be started with ~/unnethackplus/bin/unnethackplus
 
