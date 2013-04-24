@@ -77,12 +77,10 @@ typedef schar	xchar;
  * Changing for compatibility with a MinGW header.
  * Should this be moved to config.h? Or modernized? --TC 2/8/07
  */
-#ifndef SKIP_BOOLEAN
-# ifndef __MINGW32__
+#ifndef __MINGW32__
 typedef xchar	boolean;		/* 0 or 1 */
-# else
+#else
 typedef uchar	boolean;		/* 0 or 1 */
-# endif
 #endif
 
 #ifndef TRUE		/* defined in some systems' native include files */
@@ -119,9 +117,7 @@ typedef uchar	boolean;		/* 0 or 1 */
 # define UCHAR_P uchar
 # define XCHAR_P xchar
 # define SHORT_P short
-#ifndef SKIP_BOOLEAN
 # define BOOLEAN_P boolean
-#endif
 # define ALIGNTYP_P aligntyp
 #else
 # ifdef WIDENED_PROTOTYPES
