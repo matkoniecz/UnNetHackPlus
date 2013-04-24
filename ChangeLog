@@ -65,6 +65,7 @@
 		- Smarter paranoid_trap
 		- automatically apply unlocking tool to containers during #loot-ing
 		- Mind flayers and vampires with sound mind will not attempt to eat during fight
+		- name is no longer checked on entering debug mode
 	* Grinding elimination
 		- Chance of wand wresting raised to 1/11
 		- Carrying digging tools to shop is no longer blocked
