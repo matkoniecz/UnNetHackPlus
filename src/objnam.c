@@ -2386,9 +2386,7 @@ boolean from_user;
 	}
 	/*
 	 * NOTE: Gold pieces are handled as objects nowadays, and therefore
-	 * this section should probably be reconsidered as well as the entire
-	 * gold/money concept.  Maybe we want to add other monetary units as
-	 * well in the future. (TH)
+	 * this section should probably be reconsidered as well
 	 */
 	if(!BSTRCMPI(bp, p-10, "gold piece") || !BSTRCMPI(bp, p-7, "zorkmid") ||
 	   !strcmpi(bp, "gold") || !strcmpi(bp, "money") ||
