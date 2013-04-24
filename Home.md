@@ -1,5 +1,7 @@
 Plans for UnNetHackPlus
 
+aybe we want to add other monetary
+
 unconditional enabling wizmode code + tweaks related to debug mode
 
 in UnNetHack the damage is only shown in -> name, argh
