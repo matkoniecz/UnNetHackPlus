@@ -2,25 +2,11 @@ Plans for UnNetHackPlus
 
 * WIDENED_PROTOTYPES (related to boolean mess)
 
-scrap "acceptable_quantify_request" - goldify
-
-aybe we want to add other monetary - NONONO
-
-in UnNetHack the damage is only shown in -> name, argh
 et wizards wish for trap -> open it!
 why "no bones when swallowed"?
 
 /* ^O command - display dungeon layout */
 
-wd_message
-process_options
-If they don't have a valid wizard name, it'll be
-if(!strcmp(plname, WIZARD)) {
-		Strcpy(plname, "wizard");
-
-
-
-refactor can_advance
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/73b66b0217a8015ff1cbbce6813253b881f61009 - nerf Antimagic, power up Angels
 * kill NEWS
 * kill NOTSTDC
