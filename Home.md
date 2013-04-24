@@ -1,6 +1,8 @@
 Plans for UnNetHackPlus
 
-aybe we want to add other monetary
+scrap "acceptable_quantify_request" - goldify
+
+aybe we want to add other monetary - NONONO
 
 unconditional enabling wizmode code + tweaks related to debug mode
 
