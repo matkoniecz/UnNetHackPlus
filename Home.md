@@ -1,4 +1,7 @@
 Plans for UnNetHackPlus
+
+why "no bones when swallowed"?
+
 /* ^O command - display dungeon layout */
 
 wd_message
