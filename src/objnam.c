@@ -2731,12 +2731,12 @@ typfnd:
 	   dragon armor with its actual name */
 	if (typ && from_user && found_by_actualn && Is_dragon_armor(typ) && !objects[typ].oc_name_known) {
 		if(!wizard) {
-			typ = rn2(YELLOW_DRAGON_SCALES-GRAY_DRAGON_SCALES);
 			if (Is_dragon_scales(typ)) {
-				typ += GRAY_DRAGON_SCALES;
+				typ = GRAY_DRAGON_SCALES;
 			} else {
-				typ += GRAY_DRAGON_SCALE_MAIL;
+				typ = GRAY_DRAGON_SCALE_MAIL;
 			}
+			typ += rn2(YELLOW_DRAGON_SCALES-GRAY_DRAGON_SCALES);
 		}
 	}
 
