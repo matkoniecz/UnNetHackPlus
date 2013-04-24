@@ -1,4 +1,7 @@
 Plans for UnNetHackPlus
+
+unconditional enabling wizmode code + tweaks related to debug mode
+
 in UnNetHack the damage is only shown in -> name, argh
 et wizards wish for trap -> open it!
 why "no bones when swallowed"?
