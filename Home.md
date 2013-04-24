@@ -1,5 +1,6 @@
 Plans for UnNetHackPlus
-et wizards wish for trap
+in UnNetHack the damage is only shown in -> name, argh
+et wizards wish for trap -> open it!
 why "no bones when swallowed"?
 
 /* ^O command - display dungeon layout */
