@@ -1823,7 +1823,7 @@ xchar x, y;
 	}
 
 	/* Already set or 2/3 chance of deferring until a later level. */
-	if (source->dnum < n_dgns || (rn2(3))) {
+	if (source->dnum < n_dgns || (rn2(3) && !wizard)) {
 		return;
 	}
 
