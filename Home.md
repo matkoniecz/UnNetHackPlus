@@ -7,7 +7,8 @@ why "no bones when swallowed"?
 
 /* ^O command - display dungeon layout */
 
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/73b66b0217a8015ff1cbbce6813253b881f61009 - nerf Antimagic, power up Angels
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/73b66b0217a8015ff1cbbce6813253b881f61009 - nerf Antimagic, Angels are imported
+
 * kill NEWS
 * kill NOTSTDC
 * http://bilious.alt.org/?224
