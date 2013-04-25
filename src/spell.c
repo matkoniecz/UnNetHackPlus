@@ -18,7 +18,7 @@ static NEARDATA struct obj *book;	/* last/current book being xscribed */
 #define spellev(spell)		spl_book[spell].sp_lev
 #define spellname(spell)	OBJ_NAME(objects[spellid(spell)])
 
-STATIC_DCL int FDECL(spell_let_to_idx, (CHAR_P));
+STATIC_DCL int FDECL(spell_let_to_idx, (char));
 STATIC_DCL boolean FDECL(cursed_book, (struct obj *bp));
 STATIC_DCL boolean FDECL(confused_book, (struct obj *));
 STATIC_DCL void FDECL(deadbook, (struct obj *));

@@ -36,9 +36,9 @@ STATIC_DCL int FDECL(use_cream_pie, (struct obj *));
 STATIC_DCL int FDECL(use_grapple, (struct obj *));
 STATIC_DCL int FDECL(do_break_wand, (struct obj *));
 STATIC_DCL boolean FDECL(figurine_location_checks,
-				(struct obj *, coord *, BOOLEAN_P));
+				(struct obj *, coord *, boolean));
 STATIC_DCL boolean NDECL(uhave_graystone);
-STATIC_DCL void FDECL(add_class, (char *, CHAR_P));
+STATIC_DCL void FDECL(add_class, (char *, char));
 
 #ifdef	AMIGA
 void FDECL( amii_speaker, ( struct obj *, char *, int ) );

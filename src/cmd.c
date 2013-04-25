@@ -57,7 +57,7 @@ STATIC_PTR int NDECL(wiz_mazewalkmap);
 extern char SpLev_Map[COLNO][ROWNO];
 STATIC_PTR int NDECL(wiz_showkills);	/* showborn patch */
 #ifdef SHOW_BORN
-extern void FDECL(list_vanquished, (int, BOOLEAN_P, BOOLEAN_P)); /* showborn patch */
+extern void FDECL(list_vanquished, (int, boolean, boolean)); /* showborn patch */
 #endif /* SHOW_BORN */
 #if defined(__BORLANDC__) && !defined(_WIN32)
 extern void FDECL(show_borlandc_stats, (winid));
@@ -65,7 +65,7 @@ extern void FDECL(show_borlandc_stats, (winid));
 #ifdef DEBUG_MIGRATING_MONS
 STATIC_PTR int NDECL(wiz_migrate_mons);
 #endif
-STATIC_DCL void FDECL(count_obj, (struct obj *, long *, long *, BOOLEAN_P, BOOLEAN_P));
+STATIC_DCL void FDECL(count_obj, (struct obj *, long *, long *, boolean, boolean));
 STATIC_DCL void FDECL(obj_chain, (winid, const char *, struct obj *, long *, long *));
 STATIC_DCL void FDECL(mon_invent_chain, (winid, const char *, struct monst *, long *, long *));
 STATIC_DCL void FDECL(mon_chain, (winid, const char *, struct monst *, long *, long *));
@@ -94,7 +94,7 @@ static const char* readchar_queue="";
 static char last_cmd_char='\0';
 
 STATIC_DCL char *NDECL(parse);
-STATIC_DCL boolean FDECL(help_dir, (CHAR_P,const char *));
+STATIC_DCL boolean FDECL(help_dir, (char,const char *));
 
 #ifdef OVL1
 

@@ -28,7 +28,7 @@ extern void FDECL(mkmap, (lev_init *));
 STATIC_DCL void FDECL(get_room_loc, (schar *, schar *, struct mkroom *));
 STATIC_DCL void FDECL(get_free_room_loc, (schar *, schar *, struct mkroom *));
 STATIC_DCL void FDECL(create_trap, (trap *, struct mkroom *));
-STATIC_DCL int FDECL(noncoalignment, (ALIGNTYP_P));
+STATIC_DCL int FDECL(noncoalignment, (aligntyp));
 STATIC_DCL void FDECL(create_monster, (monster *, struct mkroom *));
 STATIC_DCL void FDECL(create_object, (object *, struct mkroom *));
 STATIC_DCL void FDECL(create_engraving, (engraving *,struct mkroom *));
@@ -37,13 +37,13 @@ STATIC_DCL void FDECL(create_altar, (altar *, struct mkroom *));
 STATIC_DCL void FDECL(create_gold, (gold *, struct mkroom *));
 STATIC_DCL void FDECL(create_feature, (int,int,struct mkroom *,int));
 STATIC_DCL boolean FDECL(search_door, (struct mkroom *, xchar *, xchar *,
-					XCHAR_P, int));
+					xchar, int));
 STATIC_DCL void NDECL(fix_stair_rooms);
 STATIC_DCL void FDECL(create_corridor, (corridor *));
 STATIC_DCL void NDECL(count_features);
 
-STATIC_DCL boolean FDECL(create_subroom, (struct mkroom *, XCHAR_P, XCHAR_P,
-					XCHAR_P, XCHAR_P, XCHAR_P, XCHAR_P));
+STATIC_DCL boolean FDECL(create_subroom, (struct mkroom *, xchar, xchar,
+					xchar, xchar, xchar, xchar));
 
 #define LEFT	1
 #define H_LEFT	2
@@ -70,7 +70,7 @@ static aligntyp	ralign[3] = { AM_CHAOTIC, AM_NEUTRAL, AM_LAWFUL };
 static NEARDATA xchar xstart, ystart;
 static NEARDATA char xsize, ysize;
 
-STATIC_DCL void FDECL(set_wall_property, (XCHAR_P,XCHAR_P,XCHAR_P,XCHAR_P,int));
+STATIC_DCL void FDECL(set_wall_property, (xchar,xchar,xchar,xchar,int));
 STATIC_DCL int NDECL(rnddoor);
 STATIC_DCL int NDECL(rndtrap);
 STATIC_DCL void FDECL(get_location, (schar *,schar *,int, struct mkroom *));
@@ -835,7 +835,7 @@ rndtrap()
 #define DRY	0x1
 #define WET	0x2
 
-STATIC_DCL boolean FDECL(is_ok_location, (SCHAR_P, SCHAR_P, int));
+STATIC_DCL boolean FDECL(is_ok_location, (schar, schar, int));
 
 STATIC_OVL void
 get_location(x, y, humidity, croom)

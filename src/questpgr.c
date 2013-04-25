@@ -22,7 +22,7 @@ STATIC_DCL const char * NDECL(neminame);
 STATIC_DCL const char * NDECL(guardname);
 STATIC_DCL const char * NDECL(homebase);
 STATIC_DCL struct qtmsg * FDECL(msg_in, (struct qtmsg *,int));
-STATIC_DCL void FDECL(convert_arg, (CHAR_P));
+STATIC_DCL void FDECL(convert_arg, (char));
 STATIC_DCL void NDECL(convert_line);
 STATIC_DCL void FDECL(deliver_by_pline, (struct qtmsg *));
 STATIC_DCL void FDECL(deliver_by_window, (struct qtmsg *,int));

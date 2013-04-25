@@ -161,15 +161,15 @@ extern int n_dgns;		/* from dungeon.c */
 STATIC_DCL char *FDECL(set_bonesfile_name, (char *,d_level*));
 STATIC_DCL char *NDECL(set_bonestemp_name);
 #ifdef COMPRESS
-STATIC_DCL void FDECL(redirect, (const char *,const char *,const char *, FILE *,BOOLEAN_P));
-STATIC_DCL void FDECL(docompress_file, (const char *,const char *,BOOLEAN_P));
+STATIC_DCL void FDECL(redirect, (const char *,const char *,const char *, FILE *,boolean));
+STATIC_DCL void FDECL(docompress_file, (const char *,const char *,boolean));
 #endif
 #ifndef FILE_AREAS
 STATIC_DCL char *FDECL(make_lockname, (const char *,char *));
 #endif
 STATIC_DCL FILE *FDECL(fopen_config_file, (const char *));
-STATIC_DCL int FDECL(get_uchars, (FILE *,char *,char *,uchar *,BOOLEAN_P,int,const char *));
-int FDECL(parse_config_line, (FILE *,char *,char *,char *, BOOLEAN_P));
+STATIC_DCL int FDECL(get_uchars, (FILE *,char *,char *,uchar *,boolean,int,const char *));
+int FDECL(parse_config_line, (FILE *,char *,char *,char *, boolean));
 #ifdef NOCWD_ASSUMPTIONS
 STATIC_DCL void FDECL(adjust_prefix, (char *, int));
 #endif

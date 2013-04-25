@@ -20,7 +20,7 @@ STATIC_DCL boolean FDECL(putting_on, (const char *));
 STATIC_PTR int FDECL(ckunpaid,(struct obj *));
 STATIC_PTR int FDECL(ckvalidcat,(struct obj *));
 static char FDECL(display_pickinv,
-		 (const char *,BOOLEAN_P, long *, BOOLEAN_P));
+		 (const char *,boolean, long *, boolean));
 #ifdef OVLB
 STATIC_DCL boolean FDECL(this_type_only, (struct obj *));
 STATIC_DCL void NDECL(dounpaid);

@@ -13,7 +13,7 @@
 # endif
 extern char msgs[][BUFSZ];
 extern int lastmsg;
-void FDECL(do_vanquished, (int, BOOLEAN_P));
+void FDECL(do_vanquished, (int, boolean));
 #endif 
 
 #ifdef DUMP_LOG

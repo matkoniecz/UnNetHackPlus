@@ -14,12 +14,12 @@ static NEARDATA const char *gate_str;
 
 extern boolean notonhead;	/* for long worms */
 
-STATIC_DCL void FDECL(kickdmg, (struct monst *, BOOLEAN_P));
-STATIC_DCL void FDECL(kick_monster, (XCHAR_P, XCHAR_P));
-STATIC_DCL int FDECL(kick_object, (XCHAR_P, XCHAR_P));
+STATIC_DCL void FDECL(kickdmg, (struct monst *, boolean));
+STATIC_DCL void FDECL(kick_monster, (xchar, xchar));
+STATIC_DCL int FDECL(kick_object, (xchar, xchar));
 STATIC_DCL char *FDECL(kickstr, (char *));
-STATIC_DCL void FDECL(otransit_msg, (struct obj *, BOOLEAN_P, long));
-STATIC_DCL void FDECL(drop_to, (coord *,SCHAR_P));
+STATIC_DCL void FDECL(otransit_msg, (struct obj *, boolean, long));
+STATIC_DCL void FDECL(drop_to, (coord *,schar));
 
 static NEARDATA struct obj *kickobj;
 

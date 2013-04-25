@@ -1303,15 +1303,15 @@ do_storms()
  *		Stop all timers attached to obj.
  */
 
-STATIC_DCL const char *FDECL(kind_name, (SHORT_P));
+STATIC_DCL const char *FDECL(kind_name, (short));
 STATIC_DCL void FDECL(print_queue, (winid, timer_element *));
 STATIC_DCL void FDECL(insert_timer, (timer_element *));
-STATIC_DCL timer_element *FDECL(remove_timer, (timer_element **, SHORT_P,
+STATIC_DCL timer_element *FDECL(remove_timer, (timer_element **, short,
 								genericptr_t));
 STATIC_DCL void FDECL(write_timer, (int, timer_element *));
 STATIC_DCL boolean FDECL(mon_is_local, (struct monst *));
 STATIC_DCL boolean FDECL(timer_is_local, (timer_element *));
-STATIC_DCL int FDECL(maybe_write_timer, (int, int, BOOLEAN_P));
+STATIC_DCL int FDECL(maybe_write_timer, (int, int, boolean));
 
 /* ordered timer list */
 static timer_element *timer_base;		/* "active" */

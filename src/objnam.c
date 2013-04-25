@@ -11,10 +11,10 @@
 
 STATIC_DCL char *FDECL(strprepend,(char *,const char *));
 #ifdef OVLB
-static boolean FDECL(wishymatch, (const char *,const char *,BOOLEAN_P));
+static boolean FDECL(wishymatch, (const char *,const char *,boolean));
 #endif
 static char *NDECL(nextobuf);
-static void FDECL(add_erosion_words, (struct obj *, char *,BOOLEAN_P));
+static void FDECL(add_erosion_words, (struct obj *, char *,boolean));
 #ifdef SORTLOOT
 char * FDECL(xname2, (struct obj *, boolean));
 #endif

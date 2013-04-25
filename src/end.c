@@ -34,19 +34,19 @@ STATIC_PTR void FDECL(done_intr, (int));
 static void FDECL(done_hangup, (int));
 # endif
 #endif
-STATIC_DCL void FDECL(disclose,(int,BOOLEAN_P));
+STATIC_DCL void FDECL(disclose,(int,boolean));
 STATIC_DCL void FDECL(get_valuables, (struct obj *));
 STATIC_DCL void FDECL(sort_valuables, (struct valuable_data *,int));
-STATIC_DCL void FDECL(artifact_score, (struct obj *,BOOLEAN_P,winid));
+STATIC_DCL void FDECL(artifact_score, (struct obj *,boolean,winid));
 STATIC_DCL void FDECL(savelife, (int));
-void FDECL(list_vanquished, (CHAR_P,BOOLEAN_P));
+void FDECL(list_vanquished, (char,boolean));
 #ifdef DUMP_LOG
 extern char msgs[][BUFSZ];
 extern int msgs_count[];
 extern int lastmsg;
-void FDECL(do_vanquished, (int, BOOLEAN_P));
+void FDECL(do_vanquished, (int, boolean));
 #endif /* DUMP_LOG */
-STATIC_DCL void FDECL(list_genocided, (int, BOOLEAN_P, BOOLEAN_P));
+STATIC_DCL void FDECL(list_genocided, (int, boolean, boolean));
 STATIC_DCL boolean FDECL(should_query_disclose_option, (int,char *));
 
 #if defined(__BEOS__) || defined(MICRO) || defined(WIN32) || defined(OS2)
