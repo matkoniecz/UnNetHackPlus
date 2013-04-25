@@ -18,8 +18,7 @@
  * including MAC.
  #
  # The Metrowerks compiler defines __STDC__ (which sets NHSTC) and uses
- # WIDENED_PROTOTYPES (defined if UNWIDENED_PROTOTYPES is undefined and
- # NHSTDC is defined).
+ # WIDENED_PROTOTYPES (what is not supported by UnNetHackPlus and may result in problems).
  */
 
 #ifndef __powerc

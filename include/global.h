@@ -111,25 +111,14 @@ typedef uchar	boolean;		/* 0 or 1 */
 #define Bitfield(x,n)	uchar x
 #endif
 
-#ifdef UNWIDENED_PROTOTYPES
-# define CHAR_P char
-# define SCHAR_P schar
-# define UCHAR_P uchar
-# define XCHAR_P xchar
-# define SHORT_P short
-# define BOOLEAN_P boolean
-# define ALIGNTYP_P aligntyp
-#else
-# ifdef WIDENED_PROTOTYPES
-#  define CHAR_P int
-#  define SCHAR_P int
-#  define UCHAR_P int
-#  define XCHAR_P int
-#  define SHORT_P int
-#  define BOOLEAN_P int
-#  define ALIGNTYP_P int
-# endif
-#endif
+#define CHAR_P char
+#define SCHAR_P schar
+#define UCHAR_P uchar
+#define XCHAR_P xchar
+#define SHORT_P short
+#define BOOLEAN_P boolean
+#define ALIGNTYP_P aligntyp
+
 #if defined(ULTRIX_PROTO) && !defined(__STDC__)
 /* The ultrix 2.0 and 2.1 compilers (on Ultrix 4.0 and 4.2 respectively) can't
  * handle "struct obj *" constructs in prototypes.  Their bugs are different,

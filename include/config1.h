@@ -153,7 +153,6 @@
 #    define __STDC__ 0 /* vaxc is not yet ANSI compliant, but close enough */
 #    define signed	/* well, almost close enough */
 #include <stddef.h>
-#    define UNWIDENED_PROTOTYPES
 #   endif
 #   define USE_STDARG
 #  endif /*VAXC*/
