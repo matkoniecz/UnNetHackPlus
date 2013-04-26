@@ -1,14 +1,8 @@
 Plans for UnNetHackPlus
 
 * WIDENED_PROTOTYPES (related to boolean mess)
-
-et wizards wish for trap -> open it!
-why "no bones when swallowed"?
-
-/* ^O command - display dungeon layout */
-
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/73b66b0217a8015ff1cbbce6813253b881f61009 - nerf Antimagic, Angels are imported
-
+* why "no bones when swallowed"?
+* /* ^O command - display dungeon layout */
 * kill NEWS
 * kill NOTSTDC
 * http://bilious.alt.org/?224
@@ -166,6 +160,7 @@ http://tvtropes.org/pmwiki/pmwiki.php/Main/TomeOfEldritchLore
 * magic draining attack (cancellation???) - magic destroyer - yellow R (peaceful NPCish???)? - yellow V?
 * monsters are not getting poison resistance from worn dragon scale mail
 * merge uhitm, mhitm, mhitu etc
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/73b66b0217a8015ff1cbbce6813253b881f61009 - nerf Antimagic, Angels are imported
 * amulet versus poison searches_for_item
 mon_reflects
 m_dowear_type
