@@ -33,7 +33,7 @@ int explcolors[] = {
 #define warn_color(n) color = iflags.use_color ? def_warnsyms[n].color : NO_COLOR
 #define explode_color(n) color = iflags.use_color ? explcolors[n] : NO_COLOR
 #define sokoban_prize_color()  color = iflags.use_color ? CLR_BRIGHT_MAGENTA : NO_COLOR
-# if defined(REINCARNATION) && defined(ASCIIGRAPH)
+# if defined(ASCIIGRAPH)
 #  define ROGUE_COLOR
 # endif
 
@@ -66,7 +66,7 @@ int glyph, *ocolor, x, y;
 glyph_t *ochar;
 unsigned *ospecial;
 {
-	register int offset;
+	int offset;
 #if defined(TEXTCOLOR) || defined(ROGUE_COLOR)
 	int color = NO_COLOR;
 #endif
@@ -259,14 +259,10 @@ unsigned *ospecial;
 
 #ifdef TEXTCOLOR
     /* Turn off color if no color defined, or rogue level w/o PC graphics. */
-# ifdef REINCARNATION
-#  ifdef ASCIIGRAPH
+# ifdef ASCIIGRAPH
     if (!has_color(color) || (Is_rogue_level(&u.uz) && !HAS_ROGUE_IBM_GRAPHICS))
-#  else
-    if (!has_color(color) || Is_rogue_level(&u.uz))
-#  endif
 # else
-    if (!has_color(color))
+    if (!has_color(color) || Is_rogue_level(&u.uz))
 # endif
 	color = NO_COLOR;
 #endif

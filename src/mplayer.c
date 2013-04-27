@@ -6,7 +6,7 @@
 
 STATIC_DCL const char *NDECL(dev_name);
 STATIC_DCL void FDECL(get_mplname, (struct monst *, char *));
-STATIC_DCL void FDECL(mk_mplayer_armor, (struct monst *, SHORT_P));
+STATIC_DCL void FDECL(mk_mplayer_armor, (struct monst *, short));
 
 /* These are the names of those who
  * contributed to the development of NetHack 3.2/3.3/3.4.
@@ -44,6 +44,8 @@ static const char *developers[] = {
 	"Chris",
 	/* patches included in UnNetHackPlus ("L" - Leon Arnott) */
 	"Leon",
+	/* UnNetHackPlus */
+	"Mateusz",
 	""};
 
 
@@ -51,9 +53,9 @@ static const char *developers[] = {
 STATIC_OVL const char *
 dev_name()
 {
-	register int i, m = 0, n = SIZE(developers);
-	register struct monst *mtmp;
-	register boolean match;
+	int i, m = 0, n = SIZE(developers);
+	struct monst *mtmp;
+	boolean match;
 
 	do {
 	    match = FALSE;
@@ -75,7 +77,7 @@ dev_name()
 
 STATIC_OVL void
 get_mplname(mtmp, nam)
-register struct monst *mtmp;
+struct monst *mtmp;
 char *nam;
 {
 	boolean fmlkind = is_female(mtmp->data);
@@ -149,11 +151,11 @@ short typ;
 
 struct monst *
 mk_mplayer(ptr, x, y, special)
-register struct permonst *ptr;
+struct permonst *ptr;
 xchar x, y;
-register boolean special;
+boolean special;
 {
-	register struct monst *mtmp;
+	struct monst *mtmp;
 	char nam[PL_NSIZ];
 
 	if(!is_mplayer(ptr))
@@ -333,7 +335,7 @@ get_random_role()
  */
 void
 create_mplayers(num, special)
-register int num;
+int num;
 boolean special;
 {
 	int pm, x, y;
@@ -360,9 +362,9 @@ boolean special;
 	}
 }
 
-void
-mplayer_talk(mtmp)
-register struct monst *mtmp;
+int
+hostile_mplayer_talk(mtmp)
+struct monst *mtmp;
 {
 	static const char *same_class_msg[3] = {
 		"I can't win, and neither will you!",
@@ -374,12 +376,11 @@ register struct monst *mtmp;
 		"Here is what I have to say!",
 	};
 
-	if(mtmp->mpeaceful) return; /* will drop to humanoid talk */
-
 	pline("Talk? -- %s",
 		(mtmp->data == &mons[urole.malenum] ||
 		mtmp->data == &mons[urole.femalenum]) ?
 		same_class_msg[rn2(3)] : other_class_msg[rn2(3)]);
+	return 1;
 }
 
 /*mplayer.c*/

@@ -18,12 +18,6 @@
 #include <string.h>
 #endif
 
-#ifdef AZTEC_50
-#include <stdlib.h>
-# define AZTEC_C_WORKAROUND /* Bug which turns up in sounds.c. Bummer... */
-# define NO_SIGNAL	/* 5.0 signal handling doesn't like SIGINT... */
-#endif
-
 #ifdef _DCC
 #include <stdlib.h>
 # define _SIZE_T
@@ -126,19 +120,11 @@ extern char *FDECL(gets, (char *));
 #define msmsg		printf
 
 /*
- * If AZTEC_C  we can't use the long cpath in vision.c....
- */
-#ifdef AZTEC_C
-# undef MACRO_CPATH
-#endif
-
-/*
  *  (Possibly) configurable Amiga options:
  */
 
 #define TEXTCOLOR		/* Use colored monsters and objects */
 #define HACKFONT		/* Use special hack.font */
-#define SHELL			/* Have a shell escape command (!) */
 #define MAIL			/* Get mail at unexpected occasions */
 #define DEFAULT_ICON "NetHack:default.icon"	/* private icon */
 #define AMIFLUSH		/* toss typeahead (select flush in .cnf) */

@@ -35,8 +35,6 @@
 #define MFLOPPY		/* Support for floppy drives and ramdisks by dgk */
 # endif
 
-# define SHELL		/* via exec of COMMAND.COM */
-
 # ifdef __BORLANDC__
 #define PCMUSIC		/* Music option, enable very basic pc speaker music notes */
 # endif

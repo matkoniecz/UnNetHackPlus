@@ -40,9 +40,6 @@ static void onMSNH_HScroll(HWND hWnd, WPARAM wParam, LPARAM lParam);
 static void onPaint(HWND hWnd);
 static void onCreate(HWND hWnd, WPARAM wParam, LPARAM lParam);
 static void nhcoord2display(PNHMapWindow data, int x, int y, LPRECT lpOut);
-#if (VERSION_MAJOR < 4) && (VERSION_MINOR < 4) && (PATCHLEVEL < 2)
-static void nhglyph2charcolor(short glyph, uchar* ch, int* color);
-#endif
 static COLORREF nhcolor_to_RGB(int c);
 
 HWND mswin_init_map_window () {
@@ -543,12 +540,9 @@ void onPaint(HWND hWnd)
 		paint_rt.right = min(data->xPos + (ps.rcPaint.right - data->map_orig.x)/data->xScrTile+1, COLNO);
 		paint_rt.bottom = min(data->yPos + (ps.rcPaint.bottom - data->map_orig.y)/data->yScrTile+1, ROWNO);
 
-		if( data->bAsciiMode
-#ifdef REINCARNATION
-		    || Is_rogue_level(&u.uz) 
-			/* You enter a VERY primitive world! */
-#endif
-			) {
+		if( data->bAsciiMode || Is_rogue_level(&u.uz))
+		/* You enter a VERY primitive world! */
+			{
 			HGDIOBJ oldFont;
 
 			oldFont = SelectObject(hDC, data->hMapFont);
@@ -569,10 +563,6 @@ void onPaint(HWND hWnd)
 
 				nhcoord2display(data, i, j, &glyph_rect);
 
-#if (VERSION_MAJOR < 4) && (VERSION_MINOR < 4) && (PATCHLEVEL < 2)
-				nhglyph2charcolor(data->map[i][j], &ch, &color);
-				OldFg = SetTextColor (hDC, nhcolor_to_RGB(color) );
-#else
 				/* rely on NetHack core helper routine */
 				mapglyph(data->map[i][j], &mgch, &color,
 						&special, i, j);
@@ -594,7 +584,6 @@ void onPaint(HWND hWnd)
 				} else {
 					OldFg = SetTextColor (hDC, nhcolor_to_RGB(color) );
 				}
-#endif
 
 				DrawText(hDC, 
 						 NH_A2W(&ch, &wch, 1),
@@ -807,62 +796,6 @@ void nhcoord2display(PNHMapWindow data, int x, int y, LPRECT lpOut)
 	lpOut->right = lpOut->left + data->xScrTile;
 	lpOut->bottom = lpOut->top + data->yScrTile;
 }
-
-#if (VERSION_MAJOR < 4) && (VERSION_MINOR < 4) && (PATCHLEVEL < 2)
-/* map glyph to character/color combination */
-void nhglyph2charcolor(short g, uchar* ch, int* color)
-{
-	int offset;
-#ifdef TEXTCOLOR
-
-#define zap_color(n)  *color = iflags.use_color ? zapcolors[n] : NO_COLOR
-#define cmap_color(n) *color = iflags.use_color ? defsyms[n].color : NO_COLOR
-#define obj_color(n)  *color = iflags.use_color ? objects[n].oc_color : NO_COLOR
-#define mon_color(n)  *color = iflags.use_color ? mons[n].mcolor : NO_COLOR
-#define pet_color(n)  *color = iflags.use_color ? mons[n].mcolor : NO_COLOR
-#define warn_color(n) *color = iflags.use_color ? def_warnsyms[n].color : NO_COLOR
-
-# else /* no text color */
-
-#define zap_color(n)
-#define cmap_color(n)
-#define obj_color(n)
-#define mon_color(n)
-#define pet_color(c)
-#define warn_color(c)
-	*color = CLR_WHITE;
-#endif
-
-	if ((offset = (g - GLYPH_WARNING_OFF)) >= 0) { 	  /* a warning flash */
-		*ch = warnsyms[offset];
-		warn_color(offset);
-	} else if ((offset = (g - GLYPH_SWALLOW_OFF)) >= 0) {	/* swallow */
-		/* see swallow_to_glyph() in display.c */
-		*ch = (uchar) showsyms[S_sw_tl + (offset & 0x7)];
-		mon_color(offset >> 3);
-	} else if ((offset = (g - GLYPH_ZAP_OFF)) >= 0) {	/* zap beam */
-		/* see zapdir_to_glyph() in display.c */
-		*ch = showsyms[S_vbeam + (offset & 0x3)];
-		zap_color((offset >> 2));
-	} else if ((offset = (g - GLYPH_CMAP_OFF)) >= 0) {	/* cmap */
-		*ch = showsyms[offset];
-		cmap_color(offset);
-	} else if ((offset = (g - GLYPH_OBJ_OFF)) >= 0) {	/* object */
-		*ch = oc_syms[(int)objects[offset].oc_class];
-		obj_color(offset);
-	} else if ((offset = (g - GLYPH_BODY_OFF)) >= 0) {	/* a corpse */
-		*ch = oc_syms[(int)objects[CORPSE].oc_class];
-		mon_color(offset);
-	} else if ((offset = (g - GLYPH_PET_OFF)) >= 0) {	/* a pet */
-		*ch = monsyms[(int)mons[offset].mlet];
-		pet_color(offset);
-	} else {							/* a monster */
-		*ch = monsyms[(int)mons[g].mlet];
-		mon_color(g);
-	}	
-	// end of wintty code
-}
-#endif
 
 /* map nethack color to RGB */
 COLORREF nhcolor_to_RGB(int c)

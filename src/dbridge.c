@@ -26,7 +26,7 @@ STATIC_DCL const char *FDECL(E_phrase, (struct entity *, const char *));
 STATIC_DCL boolean FDECL(e_survives_at, (struct entity *, int, int));
 STATIC_DCL void FDECL(e_died, (struct entity *, int, int));
 STATIC_DCL boolean FDECL(automiss, (struct entity *));
-STATIC_DCL boolean FDECL(e_missed, (struct entity *, BOOLEAN_P));
+STATIC_DCL boolean FDECL(e_missed, (struct entity *, boolean));
 STATIC_DCL boolean FDECL(e_jumps, (struct entity *));
 STATIC_DCL void FDECL(do_entity, (struct entity *));
 #endif /* OVLB */
@@ -763,7 +763,7 @@ boolean
 close_drawbridge(x,y)
 int x,y;
 {
-	register struct rm *lev1, *lev2;
+	struct rm *lev1, *lev2;
 	struct trap *t;
 	int x2, y2;
 
@@ -825,7 +825,7 @@ void
 open_drawbridge(x,y)
 int x,y;
 {
-	register struct rm *lev1, *lev2;
+	struct rm *lev1, *lev2;
 	struct trap *t;
 	int x2, y2;
 
@@ -863,7 +863,7 @@ void
 destroy_drawbridge(x,y)
 int x,y;
 {
-	register struct rm *lev1, *lev2;
+	struct rm *lev1, *lev2;
 	struct trap *t;
 	int x2, y2;
 	int db_u;
