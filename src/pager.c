@@ -648,6 +648,8 @@ static const char * const bogusobjects[] = {
 	"fly ichor barrel",                 /* Dwarf Fortress */
 	"cat tallow roast",                 /* Dwarf Fortress */
 	"si",                               /* ADOM, it means "strange item" */
+	"Scroll of omnipotence",            /* ADOM */
+	"Scroll of vermin control",         /* ADOM */
 
 	/* fruit names from NAO - http://alt.org/nethack/petnames.html */
 	"!!+dimple cup stew+!!",            /* fruit name from NAO, inspired by Dwarf Fortress */
