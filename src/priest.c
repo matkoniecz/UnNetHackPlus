@@ -13,7 +13,7 @@
 
 #ifdef OVLB
 
-STATIC_DCL boolean FDECL(histemple_at,(struct monst *,XCHAR_P,XCHAR_P));
+STATIC_DCL boolean FDECL(histemple_at,(struct monst *,xchar,xchar));
 STATIC_DCL boolean FDECL(has_shrine,(struct monst *));
 
 /*

@@ -454,7 +454,7 @@ struct obj *otmp;
     "Only Amiga makes it possible.",
     "CATS have all the answers.",
 #endif
-    "Report bugs to <bulwersator@gmail.com>.",
+    "Report bugs to <https://github.com/Bulwersator/UnNetHackPlus/issues>.",
     "Invitation: Visit the NetHack web site at http://www.nethack.org!"
     };
 

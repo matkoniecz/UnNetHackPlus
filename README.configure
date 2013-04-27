@@ -8,7 +8,7 @@ On Linux and MacOSX for a single-user installation (a Linux Debian
  or Ubuntu system needs the packages gcc, flex, bison, make and
  libncurses5-dev installed):
 
- ./configure --prefix=$HOME/unnethackplus --with-owner=`id -un` --with-group=`id -gn` --enable-wizmode=`id -un` && make && make install
+ ./configure --prefix=$HOME/unnethackplus --with-owner=`id -un` --with-group=`id -gn` && make && make install
 
  The game will be started with ~/unnethackplus/bin/unnethackplus
 
@@ -31,7 +31,7 @@ or
  2) copy \dat\tiles.bmp to folder with compiled tile version
  3) in defaults.nh change "OPTIONS=tile_file:unchozo32b.bmp,tile_width:32,tile_height:32" to "OPTIONS=tile_file:tiles.bmp,tile_width:16,tile_height:16"
 
-Please direct bugs, questions or suggestions to <bulwersator@gmail.com> or post them to the
+Please direct bugs, questions or suggestions to <https://github.com/Bulwersator/UnNetHackPlus/issues> or post them to the
 http://www.reddit.com/r/nethack/.
 
 

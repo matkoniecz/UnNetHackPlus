@@ -45,7 +45,7 @@ STATIC_PTR int NDECL(Gloves_on);
 STATIC_PTR int NDECL(Shield_on);
 STATIC_PTR int NDECL(Shirt_on);
 STATIC_DCL void NDECL(Amulet_on);
-STATIC_DCL void FDECL(Ring_off_or_gone, (struct obj *, BOOLEAN_P));
+STATIC_DCL void FDECL(Ring_off_or_gone, (struct obj *, boolean));
 STATIC_PTR int FDECL(select_off, (struct obj *));
 STATIC_DCL struct obj *NDECL(do_takeoff);
 STATIC_PTR int NDECL(take_off);
@@ -1238,7 +1238,7 @@ struct obj *otmp;
 	/* Curses, like chickens, come home to roost. */
 	if((otmp == uwep) ? welded(otmp) : (int)otmp->cursed) {
 		You("can't.  %s cursed.",
-			(is_boots(otmp) || is_gloves(otmp) || otmp->quan > 1L)
+			(is_boots(otmp) || is_gloves(otmp) || otmp->otyp == LENSES || otmp->quan > 1L)
 			? "They are" : "It is");
 		otmp->bknown = TRUE;
 		return(1);

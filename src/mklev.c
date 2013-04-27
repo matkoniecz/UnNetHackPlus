@@ -6,11 +6,7 @@
 /* #define DEBUG */	/* uncomment to enable code debugging */
 
 #ifdef DEBUG
-# ifdef WIZARD
 #define debugpline	if (wizard) pline
-# else
-#define debugpline	pline
-# endif
 #endif
 
 /* for UNIX, Rand #def'd to (long)lrand48() or (long)random() */
@@ -28,23 +24,23 @@ STATIC_DCL void NDECL(makevtele);
 STATIC_DCL void NDECL(clear_level_structures);
 STATIC_DCL void NDECL(makelevel);
 STATIC_DCL void NDECL(mineralize);
-STATIC_DCL boolean FDECL(bydoor,(XCHAR_P,XCHAR_P));
+STATIC_DCL boolean FDECL(bydoor,(xchar,xchar));
 STATIC_DCL struct mkroom *FDECL(find_branch_room, (coord *));
-STATIC_DCL struct mkroom *FDECL(pos_to_room, (XCHAR_P, XCHAR_P));
+STATIC_DCL struct mkroom *FDECL(pos_to_room, (xchar, xchar));
 STATIC_DCL boolean FDECL(place_niche,(struct mkroom *,int*,int*,int*));
 STATIC_DCL void FDECL(makeniche,(int));
 STATIC_DCL void NDECL(make_niches);
 
 STATIC_PTR int FDECL( CFDECLSPEC do_comp,(const genericptr,const genericptr));
 
-STATIC_DCL void FDECL(dosdoor,(XCHAR_P,XCHAR_P,struct mkroom *,int));
-STATIC_DCL void FDECL(join,(int,int,BOOLEAN_P));
+STATIC_DCL void FDECL(dosdoor,(xchar,xchar,struct mkroom *,int));
+STATIC_DCL void FDECL(join,(int,int,boolean));
 STATIC_DCL void FDECL(do_room_or_subroom, (struct mkroom *,int,int,int,int,
-				       BOOLEAN_P,SCHAR_P,BOOLEAN_P,BOOLEAN_P));
+				       boolean,schar,boolean,boolean));
 STATIC_DCL void NDECL(makerooms);
-STATIC_DCL void FDECL(finddpos,(coord *,XCHAR_P,XCHAR_P,XCHAR_P,XCHAR_P));
-STATIC_DCL void FDECL(mkinvpos, (XCHAR_P,XCHAR_P,int));
-STATIC_DCL void FDECL(mk_knox_portal, (XCHAR_P,XCHAR_P));
+STATIC_DCL void FDECL(finddpos,(coord *,xchar,xchar,xchar,xchar));
+STATIC_DCL void FDECL(mkinvpos, (xchar,xchar,int));
+STATIC_DCL void FDECL(mk_knox_portal, (xchar,xchar));
 
 STATIC_DCL void NDECL(place_random_engravings);
 
@@ -890,13 +886,12 @@ makelevel()
 	do {
 	    switch (rn2(15)) {
 	    default:
-#ifdef WIZARD
-	if(wizard && nh_getenv("SHOPTYPE")) mkroom(SHOPBASE); else
-#endif
-	if (u_depth > 1 &&
-	    u_depth < depth(&medusa_level) &&
-	    nroom >= room_threshold &&
-	    rn2(u_depth) < 3) { mkroom(SHOPBASE); break; }
+		if(wizard && nh_getenv("SHOPTYPE")) {
+			mkroom(SHOPBASE);
+		} else if (u_depth > 1 && u_depth < depth(&medusa_level) && nroom >= room_threshold && rn2(u_depth) < 3) {
+			mkroom(SHOPBASE); 
+			break; 
+		}
 	    case 0:
 		if (u_depth > 4 && !rn2(6)) { mkroom(COURT); break; }
 	    case 1:
@@ -1828,11 +1823,9 @@ xchar x, y;
 	}
 
 	/* Already set or 2/3 chance of deferring until a later level. */
-	if (source->dnum < n_dgns || (rn2(3)
-#ifdef WIZARD
-				      && !wizard
-#endif
-				      )) return;
+	if (source->dnum < n_dgns || (rn2(3) && !wizard)) {
+		return;
+	}
 
 	if (! (u.uz.dnum == oracle_level.dnum	    /* in main dungeon */
 		&& !at_dgn_entrance("The Quest")    /* but not Quest's entry */

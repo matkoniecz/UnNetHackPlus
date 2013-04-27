@@ -92,10 +92,6 @@
 
 #include <fcntl.h>
 
-#ifdef __EMX__
-#include <unistd.h>
-#endif
-
 #ifndef REDO
 # undef	Getchar
 # define Getchar nhgetch

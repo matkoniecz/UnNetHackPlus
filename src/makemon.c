@@ -867,9 +867,10 @@ boolean ghostly;
 		 mvitals[mndx].born++;
 	if ((int) mvitals[mndx].born >= lim && !(mons[mndx].geno & G_NOGEN) &&
 		!(mvitals[mndx].mvflags & G_EXTINCT)) {
-#if defined(DEBUG) && defined(WIZARD)
-		if (wizard) pline("Automatically extinguished %s.",
-					makeplural(mons[mndx].mname));
+#if defined(DEBUG)
+		if (wizard) {
+			pline("Automatically extinguished %s.", makeplural(mons[mndx].mname));
+		}
 #endif
 		mvitals[mndx].mvflags |= G_EXTINCT;
 		reset_rndmonst(mndx);
@@ -937,7 +938,7 @@ int	mmflags;
 		/* if you are to make a specific monster and it has
 		   already been genocided, return */
 		if (mvitals[mndx].mvflags & G_GENOD) return((struct monst *) 0);
-#if defined(WIZARD) && defined(DEBUG)
+#if defined(DEBUG)
 		if (wizard && (mvitals[mndx].mvflags & G_EXTINCT))
 		    pline("Explicitly creating extinct monster %s.",
 			mons[mndx].mname);
@@ -1175,12 +1176,9 @@ struct permonst *mptr;		/* usually null; used for confused reading */
 	int x, y;
 	struct monst *mon;
 	boolean known = FALSE;
-#ifdef WIZARD
 	boolean ask = wizard;
-#endif
 
 	while (cnt--) {
-#ifdef WIZARD
 	    if (ask) {
 		if (create_particular()) {
 		    known = TRUE;
@@ -1188,7 +1186,6 @@ struct permonst *mptr;		/* usually null; used for confused reading */
 		}
 		else ask = FALSE;	/* ESC will shut off prompting */
 	    }
-#endif
 	    x = u.ux,  y = u.uy;
 	    /* if in water, try to encourage an aquatic monster
 	       by finding and then specifying another wet location */

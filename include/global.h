@@ -77,12 +77,10 @@ typedef schar	xchar;
  * Changing for compatibility with a MinGW header.
  * Should this be moved to config.h? Or modernized? --TC 2/8/07
  */
-#ifndef SKIP_BOOLEAN
-# ifndef __MINGW32__
+#ifndef __MINGW32__
 typedef xchar	boolean;		/* 0 or 1 */
-# else
+#else
 typedef uchar	boolean;		/* 0 or 1 */
-# endif
 #endif
 
 #ifndef TRUE		/* defined in some systems' native include files */
@@ -113,27 +111,6 @@ typedef uchar	boolean;		/* 0 or 1 */
 #define Bitfield(x,n)	uchar x
 #endif
 
-#ifdef UNWIDENED_PROTOTYPES
-# define CHAR_P char
-# define SCHAR_P schar
-# define UCHAR_P uchar
-# define XCHAR_P xchar
-# define SHORT_P short
-#ifndef SKIP_BOOLEAN
-# define BOOLEAN_P boolean
-#endif
-# define ALIGNTYP_P aligntyp
-#else
-# ifdef WIDENED_PROTOTYPES
-#  define CHAR_P int
-#  define SCHAR_P int
-#  define UCHAR_P int
-#  define XCHAR_P int
-#  define SHORT_P int
-#  define BOOLEAN_P int
-#  define ALIGNTYP_P int
-# endif
-#endif
 #if defined(ULTRIX_PROTO) && !defined(__STDC__)
 /* The ultrix 2.0 and 2.1 compilers (on Ultrix 4.0 and 4.2 respectively) can't
  * handle "struct obj *" constructs in prototypes.  Their bugs are different,
@@ -400,8 +377,7 @@ struct version_info {
 #define PL_NSIZ		32	/* name of player, ghost, shopkeeper */
 #define PL_CSIZ		32	/* sizeof pl_character */
 #define PL_FSIZ		32	/* fruit name */
-#define PL_PSIZ		63	/* player-given names for pets, other
-				 * monsters, objects */
+#define PL_PSIZ		63	/* player-given names for pets, other monsters, objects */
 
 #define MAXDUNGEON	16	/* current maximum number of dungeons */
 #define MAXLEVEL	32	/* max number of levels in one dungeon */

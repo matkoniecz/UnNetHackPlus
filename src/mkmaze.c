@@ -18,8 +18,8 @@ STATIC_DCL boolean FDECL(is_solid,(int,int));
 STATIC_DCL int FDECL(extend_spine, (int [3][3], int, int, int));
 STATIC_DCL boolean FDECL(okay,(int,int,int));
 STATIC_DCL void FDECL(maze0xy,(coord *));
-STATIC_DCL boolean FDECL(put_lregion_here,(XCHAR_P,XCHAR_P,XCHAR_P,
-	XCHAR_P,XCHAR_P,XCHAR_P,XCHAR_P,BOOLEAN_P,d_level *));
+STATIC_DCL boolean FDECL(put_lregion_here,(xchar,xchar,xchar,
+	xchar,xchar,xchar,xchar,boolean,d_level *));
 STATIC_DCL void NDECL(fixup_special);
 STATIC_DCL void FDECL(move, (int *,int *,int));
 STATIC_DCL void NDECL(setup_waterlevel);
@@ -473,7 +473,7 @@ fixup_special()
 		if (rn2(2))
 			otmp = mk_player_statue_on_Medusa_island(somex(croom), somey(croom));
 		else 
-			otmp = mk_moster_statue_on_Medusa_island(somex(croom), somey(croom));
+			otmp = mk_monster_statue_on_Medusa_island(somex(croom), somey(croom));
 	} else if(Is_wiz1_level(&u.uz)) {
 		croom = search_special(MORGUE);
 		create_secret_door(croom, W_EAST|W_WEST);
@@ -552,7 +552,6 @@ const char *s;
 
 	} else Strcpy(protofile, "");
 
-#ifdef WIZARD
 	/* SPLEVTYPE format is "level-choice,level-choice"... */
 	if (wizard && *protofile && sp && sp->rndlevs) {
 	    char *ep = getenv("SPLEVTYPE");	/* not nh_getenv */
@@ -574,7 +573,6 @@ const char *s;
 		}
 	    }
 	}
-#endif
 
 	if(*protofile) {
 	    Strcat(protofile, LEV_EXT);
@@ -967,7 +965,7 @@ static int xmin, ymin, xmax, ymax;	/* level boundaries */
 
 STATIC_DCL void NDECL(set_wportal);
 STATIC_DCL void FDECL(mk_bubble, (int,int,int));
-STATIC_DCL void FDECL(mv_bubble, (struct bubble *,int,int,BOOLEAN_P));
+STATIC_DCL void FDECL(mv_bubble, (struct bubble *,int,int,boolean));
 
 void
 movebubbles()

@@ -21,7 +21,7 @@ boolean m_using = FALSE;
 
 STATIC_DCL struct permonst *FDECL(muse_newcham_mon, (struct monst *));
 STATIC_DCL int FDECL(precheck, (struct monst *,struct obj *));
-STATIC_DCL void FDECL(mzapmsg, (struct monst *,struct obj *,BOOLEAN_P));
+STATIC_DCL void FDECL(mzapmsg, (struct monst *,struct obj *,boolean));
 STATIC_DCL void FDECL(mreadmsg, (struct monst *,struct obj *));
 STATIC_DCL void FDECL(mquaffmsg, (struct monst *,struct obj *));
 STATIC_PTR int FDECL(mbhitm, (struct monst *,struct obj *));
@@ -30,7 +30,7 @@ STATIC_DCL void FDECL(mbhit,
 	int FDECL((*),(OBJ_P,OBJ_P)),struct obj *));
 STATIC_DCL void FDECL(you_aggravate, (struct monst *));
 STATIC_DCL void FDECL(mon_consume_unstone, (struct monst *,struct obj *,
-	BOOLEAN_P,BOOLEAN_P));
+	boolean,boolean));
 
 static struct musable {
 	struct obj *offensive;

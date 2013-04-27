@@ -6,14 +6,12 @@
 #include "prop.h"
 
 STATIC_DCL void FDECL(mkbox_cnts,(struct obj *));
-STATIC_DCL void FDECL(obj_timer_checks,(struct obj *, XCHAR_P, XCHAR_P, int));
+STATIC_DCL void FDECL(obj_timer_checks,(struct obj *, xchar, xchar, int));
 #ifdef OVL1
 STATIC_DCL void FDECL(container_weight, (struct obj *));
 STATIC_DCL struct obj *FDECL(save_mtraits, (struct obj *, struct monst *));
-#ifdef WIZARD
 STATIC_DCL const char *FDECL(where_name, (int));
 STATIC_DCL void FDECL(check_contained, (struct obj *,const char *));
-#endif
 #endif /* OVL1 */
 
 extern struct obj *thrownobj;		/* defined in dothrow.c */
@@ -1114,9 +1112,9 @@ int x, y;
 /* Names from NAO (400 incidents) and http://un.nethack.nu/cause/petrified+by+Medusa (2) */
 /* Names may repeat, some players (DeathRobin and xaiph) managed to get killed 4 times in this way */
 /* Last update date: 27 I 2013 */
-static const char * const petrified_by_medusa [] = { "DeathRobin", "xaiph", "DeathRobin", "xaiph", "DeathRobin", "xaiph", "DeathRobin", "xaiph", "aardvarkj", "Tifa", "Triamis", "zem", "aardvarkj", "Tifa", "Triamis", "zem", "aardvarkj", "Tifa", "Triamis", "zem", "bebing", "bweir", "Cheeta", "clburke", "DoomTurtle", "DrPotato", "Eidolos", "fooquux", "Galdor", "heliogabal", "init", "Inkhoof", "jmaygarden", "jollysoldi", "korso", "KrO2", "liberty", "Lukano", "MehPlusRawr", "mercury5", "musicdemon", "Shreder0", "sparrow4", "Spazm", "subbawt", "VicViper", "zid", "bebing", "bweir", "Cheeta", "clburke", "DoomTurtle", "DrPotato", "Eidolos", "fooquux", "Galdor", "heliogabal", "init", "Inkhoof", "jmaygarden", "jollysoldi", "korso", "KrO2", "liberty", "Lukano", "MehPlusRawr", "mercury5", "musicdemon", "Shreder0", "sparrow4", "Spazm", "subbawt", "VicViper", "zid", "Aerobe", "AgentSei", "Aleron", "AlexD", "ALMSIVI", "Aloha", "Altwa", "androo", "antiparago", "anuite", "aRandomHero", "ArgonSloth", "arxanas", "ascend", "atsi", "axial", "Battlehave", "Bearhobag", "beh", "BEHiker57W", "Belacqui", "Betamax", "Bethrezen", "biodiesel", "Bishness", "blarrrg", "Blooddeath", "Blowfun", "bobbens", "bps", "brian0", "brn", "brooder", "broppy", "cdi", "Cephas", "Ch0Hag", "Che", "Chilliwack", "chomzee", "chrisn42", "Clanger", "clemux", "cognificen", "coolestbond", "cthulu", "D34dlyD34dly", "DainDwarf", "deathdruid", "DeathOnASt", "demirobin", "Dentarthurdent", "Diggy", "djanatyn", "djm", "dkritz", "Dogmaw", "Doh", "Dolphy", "Donna", "DoomChicken", "doytaeb", "dragonizer", "dredd", "drJebus", "DrMuscles", "dtype", "DukGalNamu", "dumdumcoo", "Eaven", "Eben", "efot", "elint", "Elliott", "entreri", "entro", "eragg0", "Erizzle", "Erokh", "escalated", "f00bar", "Fabian", "falzer", "feitd", "Fenix", "Feory", "Flyte", "fontpolice", "foobar", "foolishwtf", "fragmites", "Fredil", "fredward", "fry", "Futilius", "Garnam", "ghfdrvtsyup", "ghtadm", "gillbates", "Gilthir", "GL", "glisignoli", "gmenzel", "GmonSquare", "gneek", "Gorfiend", "goros", "Greybeard", "greycat", "Grimbaldou", "Grund", "Gueust", "Haggard", "hail", "haole", "Harudoku", "healthy", "hellstrom", "Helsbecter", "Hmgn", "hprx", "Impglein", "InstantLoser", "iopdude", "isquidy", "iwantmorepies", "ix", "j3", "Janyson", "Jaskaa", "jasonshalo", "jax82282", "jbmigel", "jejenum", "jessek", "jetblack", "jew2", "jmackellar", "JoeBob", "Jonadab", "jpeirce", "jspeed", "kante", "Kayos", "kcw12", "Kenneth", "kiroh", "knnn", "koitsu", "Krantnejie", "Kurshu", "Led", "LittleWhit", "Loch", "Lurchtoke", "mab", "madcowjim", "marlyn", "Masque", "Maud", "mcmanus", "medibot", "mee", "mfactor", "MikeyP", "Misha", "mistheist", "mithas", "monastic", "morakk", "Moriarty", "Mortuis", "Mossbot", "mr0t", "mrbill82", "Mushroomi", "nardo", "NardoLoopa", "Nebix", "neko", "nethack101", "neutron", "niabverte", "Nightgaunt", "Nightrippe", "nimsumzero", "NobbyNobbs", "Nockpoint", "nodog", "nooodl", "norton", "nremorse", "nunu", "Nybes", "Nyctoparros", "nykevin17", "oj7", "okyada", "omegaham", "orenbum", "Ortlinde", "OsirisBRD", "palla", "PaRaD0xx", "parre", "peters509", "petitchou", "phetus", "pilkington", "PingtheMer", "pizzle", "Planker", "pmcalpin", "potpie", "predakanga", "Presswt", "Price", "quinnr", "Quixel", "Qutri", "Razanul", "rcs", "realcool", "RedBandit", "rednuf", "reid", "Rhubarb", "richard", "ripjack", "rizi", "robq", "Rocknar", "Rocknlol", "rom", "rombus", "roskilde", "Roxus", "RS14", "rudi", "RuLavan", "SabreJon", "Sally", "samech", "sandis", "savagelich", "scm", "scottk", "seadog", "Seymor", "shimato", "shock", "shonuff", "Simokon", "sk9851", "skorm", "Skuzal", "snarius", "sneaker", "SoldierAntEater", "Somecallmetim", "SoulDragon", "soundnfury", "soze", "spaakko", "Spaceduck", "Splatypus", "spontiff", "Squishy", "srf", "Stathol", "stenno", "steveh", "stinkster2", "Stossel", "stumblySF", "SubG", "suzu", "swartzcr", "Tactii", "tapin", "Teabing", "Tenebrys", "Thaddeus", "Theta", "thn", "Thomag", "tmrykr", "topstone01", "Torsktrynet", "TotalNoob", "Trent", "tvm", "tweekeroo", "twitch", "TwiX", "Unctuous", "up", "valkerie", "VoiceOfRea", "warrenlynch", "wastrel", "weziman", "WILDMAN", "wirelesshero", "Wisski", "wisteria", "wizzomafiz", "Wonderin", "WoobleValk", "Xaphania", "Xavior", "xcpp", "Xizlqk", "Xlax", "XxPagxX", "Ybenk", "ylaruum", "Youyou", "yoz", "Yxskaft", "Zadir", "Zanthra", "zaq", "Zaus", "Zeshiro", "zste", "danguy", "Souljazz", };
+static char * const petrified_by_medusa [] = { "DeathRobin", "xaiph", "DeathRobin", "xaiph", "DeathRobin", "xaiph", "DeathRobin", "xaiph", "aardvarkj", "Tifa", "Triamis", "zem", "aardvarkj", "Tifa", "Triamis", "zem", "aardvarkj", "Tifa", "Triamis", "zem", "bebing", "bweir", "Cheeta", "clburke", "DoomTurtle", "DrPotato", "Eidolos", "fooquux", "Galdor", "heliogabal", "init", "Inkhoof", "jmaygarden", "jollysoldi", "korso", "KrO2", "liberty", "Lukano", "MehPlusRawr", "mercury5", "musicdemon", "Shreder0", "sparrow4", "Spazm", "subbawt", "VicViper", "zid", "bebing", "bweir", "Cheeta", "clburke", "DoomTurtle", "DrPotato", "Eidolos", "fooquux", "Galdor", "heliogabal", "init", "Inkhoof", "jmaygarden", "jollysoldi", "korso", "KrO2", "liberty", "Lukano", "MehPlusRawr", "mercury5", "musicdemon", "Shreder0", "sparrow4", "Spazm", "subbawt", "VicViper", "zid", "Aerobe", "AgentSei", "Aleron", "AlexD", "ALMSIVI", "Aloha", "Altwa", "androo", "antiparago", "anuite", "aRandomHero", "ArgonSloth", "arxanas", "ascend", "atsi", "axial", "Battlehave", "Bearhobag", "beh", "BEHiker57W", "Belacqui", "Betamax", "Bethrezen", "biodiesel", "Bishness", "blarrrg", "Blooddeath", "Blowfun", "bobbens", "bps", "brian0", "brn", "brooder", "broppy", "cdi", "Cephas", "Ch0Hag", "Che", "Chilliwack", "chomzee", "chrisn42", "Clanger", "clemux", "cognificen", "coolestbond", "cthulu", "D34dlyD34dly", "DainDwarf", "deathdruid", "DeathOnASt", "demirobin", "Dentarthurdent", "Diggy", "djanatyn", "djm", "dkritz", "Dogmaw", "Doh", "Dolphy", "Donna", "DoomChicken", "doytaeb", "dragonizer", "dredd", "drJebus", "DrMuscles", "dtype", "DukGalNamu", "dumdumcoo", "Eaven", "Eben", "efot", "elint", "Elliott", "entreri", "entro", "eragg0", "Erizzle", "Erokh", "escalated", "f00bar", "Fabian", "falzer", "feitd", "Fenix", "Feory", "Flyte", "fontpolice", "foobar", "foolishwtf", "fragmites", "Fredil", "fredward", "fry", "Futilius", "Garnam", "ghfdrvtsyup", "ghtadm", "gillbates", "Gilthir", "GL", "glisignoli", "gmenzel", "GmonSquare", "gneek", "Gorfiend", "goros", "Greybeard", "greycat", "Grimbaldou", "Grund", "Gueust", "Haggard", "hail", "haole", "Harudoku", "healthy", "hellstrom", "Helsbecter", "Hmgn", "hprx", "Impglein", "InstantLoser", "iopdude", "isquidy", "iwantmorepies", "ix", "j3", "Janyson", "Jaskaa", "jasonshalo", "jax82282", "jbmigel", "jejenum", "jessek", "jetblack", "jew2", "jmackellar", "JoeBob", "Jonadab", "jpeirce", "jspeed", "kante", "Kayos", "kcw12", "Kenneth", "kiroh", "knnn", "koitsu", "Krantnejie", "Kurshu", "Led", "LittleWhit", "Loch", "Lurchtoke", "mab", "madcowjim", "marlyn", "Masque", "Maud", "mcmanus", "medibot", "mee", "mfactor", "MikeyP", "Misha", "mistheist", "mithas", "monastic", "morakk", "Moriarty", "Mortuis", "Mossbot", "mr0t", "mrbill82", "Mushroomi", "nardo", "NardoLoopa", "Nebix", "neko", "nethack101", "neutron", "niabverte", "Nightgaunt", "Nightrippe", "nimsumzero", "NobbyNobbs", "Nockpoint", "nodog", "nooodl", "norton", "nremorse", "nunu", "Nybes", "Nyctoparros", "nykevin17", "oj7", "okyada", "omegaham", "orenbum", "Ortlinde", "OsirisBRD", "palla", "PaRaD0xx", "parre", "peters509", "petitchou", "phetus", "pilkington", "PingtheMer", "pizzle", "Planker", "pmcalpin", "potpie", "predakanga", "Presswt", "Price", "quinnr", "Quixel", "Qutri", "Razanul", "rcs", "realcool", "RedBandit", "rednuf", "reid", "Rhubarb", "richard", "ripjack", "rizi", "robq", "Rocknar", "Rocknlol", "rom", "rombus", "roskilde", "Roxus", "RS14", "rudi", "RuLavan", "SabreJon", "Sally", "samech", "sandis", "savagelich", "scm", "scottk", "seadog", "Seymor", "shimato", "shock", "shonuff", "Simokon", "sk9851", "skorm", "Skuzal", "snarius", "sneaker", "SoldierAntEater", "Somecallmetim", "SoulDragon", "soundnfury", "soze", "spaakko", "Spaceduck", "Splatypus", "spontiff", "Squishy", "srf", "Stathol", "stenno", "steveh", "stinkster2", "Stossel", "stumblySF", "SubG", "suzu", "swartzcr", "Tactii", "tapin", "Teabing", "Tenebrys", "Thaddeus", "Theta", "thn", "Thomag", "tmrykr", "topstone01", "Torsktrynet", "TotalNoob", "Trent", "tvm", "tweekeroo", "twitch", "TwiX", "Unctuous", "up", "valkerie", "VoiceOfRea", "warrenlynch", "wastrel", "weziman", "WILDMAN", "wirelesshero", "Wisski", "wisteria", "wizzomafiz", "Wonderin", "WoobleValk", "Xaphania", "Xavior", "xcpp", "Xizlqk", "Xlax", "XxPagxX", "Ybenk", "ylaruum", "Youyou", "yoz", "Yxskaft", "Zadir", "Zanthra", "zaq", "Zaus", "Zeshiro", "zste", "danguy", "Souljazz", };
 
-char *
+const char *
 get_player_name_petrified_by_Medusa_on_public_server()
 {
 	return petrified_by_medusa[rn2(SIZE(petrified_by_medusa))];
@@ -1130,7 +1128,7 @@ mk_player_statue_on_Medusa_island(int x, int y)
 }
 
 struct obj *
-mk_moster_statue_on_Medusa_island(int x, int y)
+mk_monster_statue_on_Medusa_island(int x, int y)
 {
 	/* Medusa statues don't contain books */
 	struct obj *otmp = mkcorpstat(STATUE, (struct monst *)0, (struct permonst *)0, x, y, FALSE);
@@ -1597,7 +1595,6 @@ dealloc_obj(obj)
     free((genericptr_t) obj);
 }
 
-#ifdef WIZARD
 /* Check all object lists for consistency. */
 void
 obj_sanity_check()
@@ -1727,7 +1724,6 @@ check_contained(container, mesg)
 		fmt_ptr((genericptr_t)container, obj2_address));
     }
 }
-#endif /* WIZARD */
 
 #endif /* OVL1 */
 

@@ -10,14 +10,14 @@
 STATIC_DCL void NDECL(maybe_wail);
 #endif /*OVL1*/
 STATIC_DCL int NDECL(moverock);
-STATIC_DCL int FDECL(still_chewing,(XCHAR_P,XCHAR_P));
+STATIC_DCL int FDECL(still_chewing,(xchar,xchar));
 #ifdef SINKS
 STATIC_DCL void NDECL(dosinkfall);
 #endif
 STATIC_DCL boolean FDECL(findtravelpath, (boolean(*)(int, int)));
 STATIC_DCL boolean FDECL(monstinroom, (struct permonst *,int));
 
-STATIC_DCL void FDECL(move_update, (BOOLEAN_P));
+STATIC_DCL void FDECL(move_update, (boolean));
 STATIC_DCL void FDECL(struggle_sub, (const char *));
 
 static boolean door_opened;	/* set to true if door was opened during test_move */
@@ -2749,8 +2749,7 @@ maybe_wail()
 }
 
 /** Print the amount n of damage inflicted.
- * In contrast to Slash'Em, in UnNetHack the damage is only shown in
- * Wizard mode.
+ * In contrast to Slash'Em, in UnNetHackPlus the damage is only shown in Wizard mode.
  */
 void
 showdmg(n,you)
@@ -2758,10 +2757,11 @@ int n; /**< amount of damage inflicted */
 boolean you; /**< true, if you are hit */
 {
 	if (iflags.showdmg && n > 0) {
-		if (you)
+		if (you) {
 			pline("[%d pts.]", n);
-		else
+		} else {
 			pline("(%d pts.)", n);
+		}
 	}
 }
 
@@ -2951,5 +2951,32 @@ struct obj *otmp;
 }
 #endif
 #endif /* OVLB */
+
+boolean
+is_player_slimeable()
+{
+	if (Slimed) {
+		return FALSE;
+	}
+	if (Unchanging) {
+		return FALSE;
+	}
+	return is_monster_slimeable(youmonst.data);
+}
+
+boolean
+is_monster_slimeable(struct permonst *mptr)
+{
+	if (flaming(mptr)) {
+		return FALSE;
+	}
+	if (unsolid(mptr)) {
+		return FALSE;
+	}
+	if (mptr == &mons[PM_GREEN_SLIME]) {
+		return FALSE;
+	}
+	return TRUE;
+}
 
 /*hack.c*/

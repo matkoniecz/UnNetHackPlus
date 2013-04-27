@@ -12,10 +12,10 @@ STATIC_DCL void NDECL(autoquiver);
 STATIC_DCL int FDECL(gem_accept, (struct monst *, struct obj *));
 STATIC_DCL void FDECL(tmiss, (struct obj *, struct monst *));
 STATIC_DCL int FDECL(throw_gold, (struct obj *));
-STATIC_DCL void FDECL(check_shop_obj, (struct obj *,XCHAR_P,XCHAR_P,BOOLEAN_P));
-STATIC_DCL void FDECL(breakobj, (struct obj *,XCHAR_P,XCHAR_P,BOOLEAN_P,BOOLEAN_P));
-STATIC_DCL void FDECL(breakmsg, (struct obj *,BOOLEAN_P));
-STATIC_DCL boolean FDECL(toss_up,(struct obj *, BOOLEAN_P));
+STATIC_DCL void FDECL(check_shop_obj, (struct obj *,xchar,xchar,boolean));
+STATIC_DCL void FDECL(breakobj, (struct obj *,xchar,xchar,boolean,boolean));
+STATIC_DCL void FDECL(breakmsg, (struct obj *,boolean));
+STATIC_DCL boolean FDECL(toss_up,(struct obj *, boolean));
 STATIC_DCL boolean FDECL(throwing_weapon, (struct obj *));
 STATIC_DCL void FDECL(sho_obj_return_to_u, (struct obj *obj));
 STATIC_DCL boolean FDECL(mhurtle_step, (genericptr_t,int,int));
@@ -203,7 +203,7 @@ dothrow()
 	shotlimit = (multi || save_cm) ? multi + 1 : 0;
 	multi = 0;		/* reset; it's been used up */
 
-	if (notake(youmonst.data)) {
+	if (notake(youmonst.data) || nohands(youmonst.data)) {
 	    You("are physically incapable of throwing anything.");
 	    return 0;
 	}
@@ -766,9 +766,7 @@ boolean hitsroof;
 	obj = 0;	/* it's now gone */
 	switch (otyp) {
 	case EGG:
-		if (touch_petrifies(&mons[ocorpsenm]) &&
-		    !uarmh && !Stone_resistance &&
-		    !(poly_when_stoned(youmonst.data) && polymon(PM_STONE_GOLEM)))
+		if (touch_petrifies(&mons[ocorpsenm]) && !uarmh && !Stone_resistance && !polymorph_player_instead_stoning())
 		goto petrify;
 	case CREAM_PIE:
 	case BLINDING_VENOM:
@@ -815,8 +813,7 @@ boolean hitsroof;
 		    !(obj->otyp == CORPSE && touch_petrifies(&mons[obj->corpsenm])))
 		Your("%s does not protect you.", xname(uarmh));
 	} else if (obj->otyp == CORPSE && touch_petrifies(&mons[obj->corpsenm])) {
-	    if (!Stone_resistance &&
-		    !(poly_when_stoned(youmonst.data) && polymon(PM_STONE_GOLEM))) {
+	    if (!Stone_resistance && !polymorph_player_instead_stoning()) {
  petrify:
 		killer_format = KILLED_BY;
 		killer = "elementary physics";	/* "what goes up..." */

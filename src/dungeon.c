@@ -43,7 +43,7 @@ static void FDECL(Fread, (genericptr_t, int, int, dlb *));
 STATIC_DCL xchar FDECL(dname_to_dnum, (const char *));
 STATIC_DCL int FDECL(find_branch, (const char *, struct proto_dungeon *));
 STATIC_DCL xchar FDECL(parent_dnum, (const char *, struct proto_dungeon *));
-STATIC_DCL int FDECL(level_range, (XCHAR_P,int,int,int,struct proto_dungeon *,int *));
+STATIC_DCL int FDECL(level_range, (xchar,int,int,int,struct proto_dungeon *,int *));
 STATIC_DCL xchar FDECL(parent_dlevel, (const char *, struct proto_dungeon *));
 STATIC_DCL int FDECL(correct_branch_type, (struct tmpbranch *));
 STATIC_DCL branch *FDECL(add_branch, (int, int, struct proto_dungeon *));
@@ -52,10 +52,8 @@ STATIC_DCL void FDECL(init_level, (int,int,struct proto_dungeon *));
 STATIC_DCL int FDECL(possible_places, (int, boolean *, struct proto_dungeon *));
 STATIC_DCL xchar FDECL(pick_level, (boolean *, int));
 STATIC_DCL boolean FDECL(place_level, (int, struct proto_dungeon *));
-#ifdef WIZARD
 STATIC_DCL const char *FDECL(br_string, (int));
-STATIC_DCL void FDECL(print_branch, (winid, int, int, int, BOOLEAN_P, struct lchoice *));
-#endif
+STATIC_DCL void FDECL(print_branch, (winid, int, int, int, boolean, struct lchoice *));
 #ifdef RANDOMIZED_PLANES
 STATIC_DCL void NDECL(shuffle_planes);
 #endif
@@ -562,11 +560,11 @@ init_level(dgn, proto_index, pd)
 	struct tmplevel *tlevel = &pd->tmplevel[proto_index];
 
 	pd->final_lev[proto_index] = (s_level *) 0; /* no "real" level */
-#ifdef WIZARD
-	if (!wizard)
-#endif
-	    if (tlevel->chance <= rn2(100)) return;
-
+	if (!wizard) {
+		if (tlevel->chance <= rn2(100)) {
+			return;
+		}
+	}
 	pd->final_lev[proto_index] = new_level =
 					(s_level *) alloc(sizeof(s_level));
 	/* load new level with data */
@@ -790,9 +788,7 @@ init_dungeons()		/* initialize the "dungeon" structs */
 	for (i = 0; i < n_dgns; i++) {
 	    Fread((genericptr_t)&pd.tmpdungeon[i],
 				    sizeof(struct tmpdungeon), 1, dgn_file);
-#ifdef WIZARD
-	    if(!wizard)
-#endif
+	    if(!wizard){
 	      if(pd.tmpdungeon[i].chance && (pd.tmpdungeon[i].chance <= rn2(100))) {
 		int j;
 
@@ -807,6 +803,7 @@ init_dungeons()		/* initialize the "dungeon" structs */
 		n_dgns--; i--;
 		continue;
 	      }
+	    }
 
 	    Strcpy(dungeons[i].dname, pd.tmpdungeon[i].name);
 	    Strcpy(dungeons[i].proto, pd.tmpdungeon[i].protoname);
@@ -1626,9 +1623,7 @@ const char *nam;
 		(u.uz.dnum == medusa_level.dnum &&
 			dlev.dnum == valley_level.dnum)) &&
 	    (	/* either wizard mode or else seen and not forgotten */
-#ifdef WIZARD
 	     wizard ||
-#endif
 		(level_info[idx].flags & (FORGOTTEN|VISITED)) == VISITED)) {
 	    lev = depth(&slev->dlevel);
 	}
@@ -1642,9 +1637,7 @@ const char *nam;
 	    idxtoo = (idx >> 8) & 0x00FF;
 	    idx &= 0x00FF;
 	    if (  /* either wizard mode, or else _both_ sides of branch seen */
-#ifdef WIZARD
 		wizard ||
-#endif
 		((level_info[idx].flags & (FORGOTTEN|VISITED)) == VISITED &&
 		 (level_info[idxtoo].flags & (FORGOTTEN|VISITED)) == VISITED)) {
 		if (ledger_to_dnum(idxtoo) == u.uz.dnum) idx = idxtoo;
@@ -1656,8 +1649,6 @@ const char *nam;
     }
     return lev;
 }
-
-#ifdef WIZARD
 
 /* Convert a branch type to a string usable by print_dungeon(). */
 STATIC_OVL const char *
@@ -1863,7 +1854,6 @@ xchar *rdgn;
     destroy_nhwindow(win);
     return 0;
 }
-#endif /* WIZARD */
 
 #endif /* OVL1 */
 
@@ -2474,14 +2464,12 @@ boolean final; /**< if game is finished */
 	else
 		Sprintf(buf, TAB "Level %d:", i);
 	
-#ifdef WIZARD
 	/* wizmode prints out proto dungeon names for clarity */
 	if (wizard || final) {
 		s_level *slev;
 		if ((slev = Is_special(&mptr->lev)))
 			Sprintf(eos(buf), " [%s]", slev->proto);
 	}
-#endif
 
 	if (mptr->custom)
 		Sprintf(eos(buf), " (%s)", mptr->custom);

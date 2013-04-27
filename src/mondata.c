@@ -54,13 +54,36 @@ int atyp;
 #endif /* OVL0 */
 #ifdef OVLB
 
-boolean
-poly_when_stoned(ptr)
-    struct permonst *ptr;
+int
+get_potential_stoned_form_of_monster(int monnum)
 {
-    return((boolean)(is_golem(ptr) && ptr != &mons[PM_STONE_GOLEM] &&
-	    !(mvitals[PM_STONE_GOLEM].mvflags & G_GENOD)));
-	    /* allow G_EXTINCT */
+	if (is_golem(&mons[monnum])) {
+		return PM_STONE_GOLEM;
+	}
+	return monnum;
+}
+
+boolean
+poly_when_stoned(struct permonst *ptr)
+{
+	if(get_potential_stoned_form_of_monster(monsndx(ptr)) != monsndx(ptr)) {
+		return TRUE;
+	}
+	return FALSE;
+}
+
+boolean
+polymorph_player_instead_stoning()
+{
+	if (!poly_when_stoned(youmonst.data)) {
+		return FALSE;
+	}
+	if(!polymon(get_potential_stoned_form_of_monster(monsndx(youmonst.data)))) {
+		killer_format = KILLED_BY;
+		killer = "self-genocide";
+		done(GENOCIDED);
+	}
+	return TRUE;
 }
 
 boolean
@@ -764,6 +787,25 @@ struct attack *mattk;
 	break;
     }
     return what;
+}
+
+struct permonst *
+get_monster_index_after_stone_to_flesh(struct permonst *mptr)
+{
+	/* any fleshified golem becomes flesh golem */
+	if (is_golem(mptr)) {
+		return &mons[PM_FLESH_GOLEM];
+	}
+	return mptr;
+}
+
+boolean
+has_two_heads(struct permonst *mptr)
+{
+	if(mptr == &mons[PM_ETTIN] || mptr == &mons[PM_ETTIN_ZOMBIE]) {
+		return TRUE;
+	}
+	return FALSE;
 }
 
 #endif /* OVLB */

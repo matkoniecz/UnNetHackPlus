@@ -756,8 +756,7 @@ int thrown;
 			break;
 		    case MIRROR:
 			if (breaktest(obj)) {
-			    You("break %s mirror.  That's bad luck!",
-				shk_your(yourbuf, obj));
+			    You("break %s %s.  That's bad luck!", shk_your(yourbuf, obj), simple_typename(obj->otyp));
 			    change_luck(-2);
 			    useup(obj);
 			    obj = (struct obj *) 0;
@@ -1718,11 +1717,9 @@ struct attack *mattk;
 		if (notonhead || !has_head(mdef->data)) {
 		    pline("%s doesn't seem harmed.", Monnam(mdef));
 		    tmp = 0;
-		    if (!Unchanging && mdef->data == &mons[PM_GREEN_SLIME]) {
-			if (!Slimed) {
+		    if (is_player_slimeable()) {
 			    You("suck in some slime and don't feel very well.");
 			    Slimed = 10L;
-			}
 		    }
 		    break;
 		}
@@ -1809,8 +1806,7 @@ struct attack *mattk;
 		break;
 	    case AD_SLIM:
 		if (negated) break;	/* physical damage only */
-		if (!rn2(4) && !flaming(mdef->data) &&
-				mdef->data != &mons[PM_GREEN_SLIME]) {
+		if (!rn2(4) && is_monster_slimeable(mdef->data)) {
 		    You("turn %s into slime.", mon_nam(mdef));
 		    (void) newcham(mdef, &mons[PM_GREEN_SLIME], FALSE, FALSE);
 		    tmp = 0;
@@ -2187,7 +2183,7 @@ use_weapon:
 		case AT_BITE:
 			/* [ALI] Vampires are also smart. They avoid biting
 			   monsters if doing so would be fatal */
-			if (i > 0 && is_vampire(youmonst.data) &&
+			if (i > 0 && is_vampire(youmonst.data) && !Confusion && !Hallucination && !Stunned &&
 				(is_rider(mon->data) ||
 				 touch_petrifies(mon->data) ||
 				 touch_disintegrates(mon->data) ||
@@ -2205,6 +2201,11 @@ use_weapon:
 			    break;
 		case AT_TENT:
 			if (i==0 && uwep && (youmonst.data->mlet==S_LICH)) goto use_weapon;
+			/* Mind flayers are also smart. They avoid biting monsters if doing so would be fatal */
+			if (!Confusion && !Hallucination && !Stunned && (youmonst.data == &mons[PM_MIND_FLAYER] || youmonst.data == &mons[PM_MASTER_MIND_FLAYER]) &&
+				(is_rider(mon->data) || touch_petrifies(mon->data) || touch_disintegrates(mon->data) || mon->data == &mons[PM_MEDUSA] || mon->data == &mons[PM_GREEN_SLIME])) {
+				break;
+			}
 			if ((dhit = (tmp > rnd(20) || u.uswallow)) != 0) {
 			    int compat;
 
@@ -2437,9 +2438,7 @@ uchar aatyp;
 			(protector == W_ARMF && !uarmf) ||
 			(protector == W_ARMH && !uarmh) ||
 			(protector == (W_ARMC|W_ARMG) && (!uarmc || !uarmg))) {
-		    if (!Stone_resistance &&
-			    !(poly_when_stoned(youmonst.data) &&
-				polymon(PM_STONE_GOLEM))) {
+		    if (!Stone_resistance && !polymorph_player_instead_stoning()) {
 			You("turn to stone...");
 			done_in_by(mon);
 			return 2;
