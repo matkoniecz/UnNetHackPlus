@@ -18,7 +18,7 @@ STATIC_DCL void FDECL(add_item_there_is_no_overloading_with_charge,(int, int, in
 STATIC_DCL void FDECL(add_item_there_is_no_overloading_full,(int, int, int, int, int));
 STATIC_DCL void FDECL(ini_inv, (struct trobj *));
 STATIC_DCL void FDECL(knows_object,(int));
-STATIC_DCL void FDECL(knows_class,(CHAR_P));
+STATIC_DCL void FDECL(knows_class,(char));
 STATIC_DCL boolean FDECL(restricted_spell_discipline, (int));
 
 #define UNDEF_TYP		0
@@ -768,11 +768,9 @@ u_init()
 	if (discover) {
 		add_item_there_is_no_overloading_with_charge(WAN_WISHING, 1, 3);
 	}
-#ifdef WIZARD
 	if (wizard) {
 		read_wizkit();
 	}
-#endif
 
 #ifndef GOLDOBJ
 	u.ugold0 += hidden_gold();	/* in case sack has gold in it */

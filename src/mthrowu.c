@@ -4,7 +4,7 @@
 
 #include "hack.h"
 
-STATIC_DCL int FDECL(drop_throw,(struct obj *,BOOLEAN_P,int,int));
+STATIC_DCL int FDECL(drop_throw,(struct obj *,boolean,int,int));
 
 #define URETREATING(x,y) (distmin(u.ux,u.uy,x,y) > distmin(u.ux0,u.uy0,x,y))
 
@@ -420,9 +420,7 @@ m_throw(mon, x, y, dx, dy, range, obj)
 			}
 		    }
 		    if (hitu && singleobj->otyp == EGG) {
-			if (!Stone_resistance
-			    && !(poly_when_stoned(youmonst.data) &&
-				 polymon(PM_STONE_GOLEM))) {
+			if (!Stone_resistance && !polymorph_player_instead_stoning()) {
 			    Stoned = 5;
 			    killer = (char *) 0;
 			}

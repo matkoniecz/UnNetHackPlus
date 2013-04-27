@@ -8,7 +8,7 @@ STATIC_PTR int NDECL(stealarm);
 
 #ifdef OVLB
 STATIC_DCL const char *FDECL(equipname, (struct obj *));
-STATIC_DCL void FDECL(mdrop_obj, (struct monst *,struct obj *,BOOLEAN_P));
+STATIC_DCL void FDECL(mdrop_obj, (struct monst *,struct obj *,boolean));
 
 STATIC_OVL const char *
 equipname(otmp)
@@ -474,7 +474,7 @@ struct monst *mtmp;
     if(u.uhave.amulet) {
 	real = AMULET_OF_YENDOR;
 	fake = FAKE_AMULET_OF_YENDOR;
-    } else if(u.uhave.questart) {
+    } else if(u.uhave.quest_artifact) {
 	for(otmp = invent; otmp; otmp = otmp->nobj)
 	    if(is_quest_artifact(otmp)) break;
 	if (!otmp) return;	/* should we panic instead? */

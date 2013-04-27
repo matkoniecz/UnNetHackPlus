@@ -15,7 +15,7 @@
 #endif
 
 STATIC_DCL void FDECL(redotoplin, (const char*));
-STATIC_DCL void FDECL(topl_putsym, (CHAR_P));
+STATIC_DCL void FDECL(topl_putsym, (char));
 STATIC_DCL void NDECL(remember_topl);
 STATIC_DCL void FDECL(removetopl, (int));
 

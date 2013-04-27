@@ -120,13 +120,6 @@ extern char *FDECL(gets, (char *));
 #define msmsg		printf
 
 /*
- * If AZTEC_C  we can't use the long cpath in vision.c....
- */
-#ifdef AZTEC_C
-# undef MACRO_CPATH
-#endif
-
-/*
  *  (Possibly) configurable Amiga options:
  */
 

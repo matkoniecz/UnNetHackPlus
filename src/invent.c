@@ -20,7 +20,7 @@ STATIC_DCL boolean FDECL(putting_on, (const char *));
 STATIC_PTR int FDECL(ckunpaid,(struct obj *));
 STATIC_PTR int FDECL(ckvalidcat,(struct obj *));
 static char FDECL(display_pickinv,
-		 (const char *,BOOLEAN_P, long *, BOOLEAN_P));
+		 (const char *,boolean, long *, boolean));
 #ifdef OVLB
 STATIC_DCL boolean FDECL(this_type_only, (struct obj *));
 STATIC_DCL void NDECL(dounpaid);
@@ -35,16 +35,14 @@ STATIC_DCL int FDECL(itemactions,(struct obj *));
 
 static int lastinvnr = 51;	/* 0 ... 51 (never saved&restored) */
 
-#ifdef WIZARD
-/* wizards can wish for venom, which will become an invisible inventory
+/* in debug mode it is possible to wish for venom, which will become an invisible inventory
  * item without this.  putting it in inv_order would mean venom would
  * suddenly become a choice for all the inventory-class commands, which
- * would probably cause mass confusion.  the test for inventory venom
- * is only WIZARD and not wizard because the wizard can leave venom lying
- * around on a bones level for normal players to find.
+ * would probably cause mass confusion. The test for inventory venom
+ * is not checking for wizard variable because the venom may be lying
+ * on a debug mode bones level and found by a normal player.
  */
 static char venom_inv[] = { VENOM_CLASS, 0 };	/* (constant) */
-#endif
 
 void
 assigninvlet(otmp)
@@ -290,9 +288,9 @@ struct obj *obj;
 #endif
 	} else if (obj->oartifact) {
 		if (is_quest_artifact(obj)) {
-		    if (u.uhave.questart)
+		    if (u.uhave.quest_artifact)
 			warning("already have quest artifact?");
-		    u.uhave.questart = 1;
+		    u.uhave.quest_artifact = 1;
 		    artitouch();
 		}
 		set_artifact_intrinsic(obj, 1, W_ART);
@@ -557,9 +555,9 @@ struct obj *obj;
 		u.uhave.book = 0;
 	} else if (obj->oartifact) {
 		if (is_quest_artifact(obj)) {
-		    if (!u.uhave.questart)
+		    if (!u.uhave.quest_artifact)
 			warning("don't have quest artifact?");
-		    u.uhave.questart = 0;
+		    u.uhave.quest_artifact = 0;
 		}
 		set_artifact_intrinsic(obj, 0, W_ART);
 	}
@@ -2367,12 +2365,10 @@ nextclass:
 #endif /* SORTLOOT */
 	if (flags.sortpack) {
 		if (*++invlet) goto nextclass;
-#ifdef WIZARD
 		if (--invlet != venom_inv) {
 			invlet = venom_inv;
 			goto nextclass;
 		}
-#endif
 	}
 #ifdef SORTLOOT
 	free(oarray);

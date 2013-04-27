@@ -6,7 +6,7 @@
 #include "lev.h"	/* save & restore info */
 
 STATIC_DCL void FDECL(setgemprobs, (d_level*));
-STATIC_DCL void FDECL(shuffle,(int,int,BOOLEAN_P));
+STATIC_DCL void FDECL(shuffle,(int,int,boolean));
 STATIC_DCL void NDECL(shuffle_all);
 STATIC_DCL boolean FDECL(interesting_to_discover,(int));
 STATIC_DCL void FDECL(swap_armor,(int, int, int));

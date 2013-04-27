@@ -11,9 +11,9 @@
 static NEARDATA boolean did_dig_msg;
 
 STATIC_DCL boolean NDECL(rm_waslit);
-STATIC_DCL void FDECL(mkcavepos, (XCHAR_P,XCHAR_P,int,BOOLEAN_P,BOOLEAN_P));
-STATIC_DCL void FDECL(mkcavearea, (BOOLEAN_P));
-STATIC_DCL int FDECL(dig_typ, (struct obj *,XCHAR_P,XCHAR_P));
+STATIC_DCL void FDECL(mkcavepos, (xchar,xchar,int,boolean,boolean));
+STATIC_DCL void FDECL(mkcavearea, (boolean));
+STATIC_DCL int FDECL(dig_typ, (struct obj *,xchar,xchar));
 STATIC_DCL int NDECL(dig);
 STATIC_DCL void NDECL(dig_up_grave);
 

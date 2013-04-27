@@ -226,15 +226,6 @@
  * The remainder of the file should not need to be changed.
  */
 
-#ifdef _AUX_SOURCE
-# ifdef AUX /* gcc ? */
-#  define _SYSV_SOURCE
-#  define _BSD_SOURCE
-#else
-#  define AUX
-# endif
-#endif /* _AUX_SOURCE */
-
 #if defined(LINUX) || defined(bsdi)
 # ifndef POSIX_TYPES
 #  define POSIX_TYPES

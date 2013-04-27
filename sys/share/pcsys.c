@@ -199,7 +199,8 @@ playwoRAMdisk()
 	ramdisk = FALSE;
 	c = tgetch(); if (c == 'Y') c = 'y';
 	if (c != 'y') {
-		settty("Be seeing you...\n");
+		setty(get_goodbye_message());
+		settty("\n");
 		nethack_exit(EXIT_SUCCESS);
 	}
 	set_lock_and_bones();
