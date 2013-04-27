@@ -824,6 +824,10 @@ SCROLL((char *)0,               "PHOL ENDE WODAN",      1,   0, 100), /* Mersebu
 SCROLL((char *)0,               "GHOTI",                1,   0, 100), /* pronounced as 'fish', George Bernard Shaw */
 SCROLL((char *)0,               "MAPIRO MAHAMA DIROMAT",1,   0, 100), /* Wizardry */
 SCROLL((char *)0,               "VAS CORP BET MANI",    1,   0, 100), /* Ultima */
+SCROLL((char *)0,               "MANANNANMACLIR",       1,   0, 100), /* ADOM */
+SCROLL((char *)0,               "MUNCH MUNCH",          1,   0, 100), /* ADOM */
+SCROLL((char *)0,               "HITME",                1,   0, 100), /* ADOM */
+SCROLL((char *)0,               "YIKES",                1,   0, 100), /* ADOM */
 
 	/* these must come last because they have special descriptions */
 #ifdef MAIL
