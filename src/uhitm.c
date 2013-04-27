@@ -92,7 +92,7 @@ int attk;
 /* FALSE means it's OK to attack */
 boolean
 attack_checks(mtmp, wep)
-register struct monst *mtmp;
+struct monst *mtmp;
 struct obj *wep;	/* uwep for attack(), null for kick_monster() */
 {
 	char qbuf[QBUFSZ];
@@ -225,7 +225,7 @@ struct monst *mtmp;
 
 schar
 find_roll_to_hit(mtmp)
-register struct monst *mtmp;
+struct monst *mtmp;
 {
 	schar tmp;
 	int tmp2,wepskill,twowepskill,useskill;
@@ -310,10 +310,10 @@ register struct monst *mtmp;
 /* u.dx and u.dy must be set */
 boolean
 attack(mtmp)
-register struct monst *mtmp;
+struct monst *mtmp;
 {
 	schar tmp;
-	register struct permonst *mdat = mtmp->data;
+	struct permonst *mdat = mtmp->data;
 
 	/* This section of code provides protection against accidentally
 	 * hitting peaceful (like '@') and tame (like 'd') monsters.
@@ -429,11 +429,11 @@ atk_done:
 
 STATIC_OVL boolean
 known_hitum(mon, mhit, uattk)	/* returns TRUE if monster still lives */
-register struct monst *mon;
-register int *mhit;
+struct monst *mon;
+int *mhit;
 struct attack *uattk;
 {
-	register boolean malive = TRUE;
+	boolean malive = TRUE;
 
 	if (override_confirmation) {
 	    /* this may need to be generalized if weapons other than
@@ -756,8 +756,7 @@ int thrown;
 			break;
 		    case MIRROR:
 			if (breaktest(obj)) {
-			    You("break %s mirror.  That's bad luck!",
-				shk_your(yourbuf, obj));
+			    You("break %s %s.  That's bad luck!", shk_your(yourbuf, obj), simple_typename(obj->otyp));
 			    change_luck(-2);
 			    useup(obj);
 			    obj = (struct obj *) 0;
@@ -1440,11 +1439,11 @@ struct attack *mattk;
 
 int
 damageum(mdef, mattk)
-register struct monst *mdef;
-register struct attack *mattk;
+struct monst *mdef;
+struct attack *mattk;
 {
-	register struct permonst *pd = mdef->data;
-	register int	tmp = d((int)mattk->damn, (int)mattk->damd);
+	struct permonst *pd = mdef->data;
+	int	tmp = d((int)mattk->damn, (int)mattk->damd);
 	int armpro;
 	boolean negated;
 
@@ -1718,11 +1717,9 @@ register struct attack *mattk;
 		if (notonhead || !has_head(mdef->data)) {
 		    pline("%s doesn't seem harmed.", Monnam(mdef));
 		    tmp = 0;
-		    if (!Unchanging && mdef->data == &mons[PM_GREEN_SLIME]) {
-			if (!Slimed) {
+		    if (is_player_slimeable()) {
 			    You("suck in some slime and don't feel very well.");
 			    Slimed = 10L;
-			}
 		    }
 		    break;
 		}
@@ -1809,8 +1806,7 @@ register struct attack *mattk;
 		break;
 	    case AD_SLIM:
 		if (negated) break;	/* physical damage only */
-		if (!rn2(4) && !flaming(mdef->data) &&
-				mdef->data != &mons[PM_GREEN_SLIME]) {
+		if (!rn2(4) && is_monster_slimeable(mdef->data)) {
 		    You("turn %s into slime.", mon_nam(mdef));
 		    (void) newcham(mdef, &mons[PM_GREEN_SLIME], FALSE, FALSE);
 		    tmp = 0;
@@ -1859,10 +1855,10 @@ register struct attack *mattk;
 
 STATIC_OVL int
 explum(mdef, mattk)
-register struct monst *mdef;
-register struct attack *mattk;
+struct monst *mdef;
+struct attack *mattk;
 {
-	register int tmp = d((int)mattk->damn, (int)mattk->damd);
+	int tmp = d((int)mattk->damn, (int)mattk->damd);
 
 	You("explode!");
 	switch(mattk->adtyp) {
@@ -1938,11 +1934,11 @@ end_engulf()
 
 STATIC_OVL int
 gulpum(mdef,mattk)
-register struct monst *mdef;
-register struct attack *mattk;
+struct monst *mdef;
+struct attack *mattk;
 {
-	register int tmp;
-	register int dam = d((int)mattk->damn, (int)mattk->damd);
+	int tmp;
+	int dam = d((int)mattk->damn, (int)mattk->damd);
 	struct obj *otmp;
 	/* Not totally the same as for real monsters.  Specifically, these
 	 * don't take multiple moves.  (It's just too hard, for too little
@@ -2117,8 +2113,8 @@ register struct attack *mattk;
 
 void
 missum(mdef,mattk)
-register struct monst *mdef;
-register struct attack *mattk;
+struct monst *mdef;
+struct attack *mattk;
 {
 	if (could_seduce(&youmonst, mdef, mattk))
 		You("pretend to be friendly to %s.", mon_nam(mdef));
@@ -2132,8 +2128,8 @@ register struct attack *mattk;
 
 STATIC_OVL boolean
 hmonas(mon, tmp)		/* attack monster as a monster. */
-register struct monst *mon;
-register int tmp;
+struct monst *mon;
+int tmp;
 {
 	struct attack *mattk, alt_attk;
 	int	i, sum[NATTK], hittmp = 0;
@@ -2187,7 +2183,7 @@ use_weapon:
 		case AT_BITE:
 			/* [ALI] Vampires are also smart. They avoid biting
 			   monsters if doing so would be fatal */
-			if (i > 0 && is_vampire(youmonst.data) &&
+			if (i > 0 && is_vampire(youmonst.data) && !Confusion && !Hallucination && !Stunned &&
 				(is_rider(mon->data) ||
 				 touch_petrifies(mon->data) ||
 				 touch_disintegrates(mon->data) ||
@@ -2205,6 +2201,11 @@ use_weapon:
 			    break;
 		case AT_TENT:
 			if (i==0 && uwep && (youmonst.data->mlet==S_LICH)) goto use_weapon;
+			/* Mind flayers are also smart. They avoid biting monsters if doing so would be fatal */
+			if (!Confusion && !Hallucination && !Stunned && (youmonst.data == &mons[PM_MIND_FLAYER] || youmonst.data == &mons[PM_MASTER_MIND_FLAYER]) &&
+				(is_rider(mon->data) || touch_petrifies(mon->data) || touch_disintegrates(mon->data) || mon->data == &mons[PM_MEDUSA] || mon->data == &mons[PM_GREEN_SLIME])) {
+				break;
+			}
 			if ((dhit = (tmp > rnd(20) || u.uswallow)) != 0) {
 			    int compat;
 
@@ -2376,13 +2377,13 @@ use_weapon:
 
 int
 passive(mon, mhit, malive, aatyp)
-register struct monst *mon;
-register boolean mhit;
-register int malive;
+struct monst *mon;
+boolean mhit;
+int malive;
 uchar aatyp;
 {
-	register struct permonst *ptr = mon->data;
-	register int i, tmp;
+	struct permonst *ptr = mon->data;
+	int i, tmp;
 
 	if (mhit && aatyp == AT_BITE && is_vampiric(youmonst.data)) {
 	    if (bite_monster(mon))
@@ -2437,9 +2438,7 @@ uchar aatyp;
 			(protector == W_ARMF && !uarmf) ||
 			(protector == W_ARMH && !uarmh) ||
 			(protector == (W_ARMC|W_ARMG) && (!uarmc || !uarmg))) {
-		    if (!Stone_resistance &&
-			    !(poly_when_stoned(youmonst.data) &&
-				polymon(PM_STONE_GOLEM))) {
+		    if (!Stone_resistance && !polymorph_player_instead_stoning()) {
 			You("turn to stone...");
 			done_in_by(mon);
 			return 2;
@@ -2589,12 +2588,12 @@ uchar aatyp;
  */
 void
 passive_obj(mon, obj, mattk)
-register struct monst *mon;
-register struct obj *obj;	/* null means pick uwep, uswapwep or uarmg */
+struct monst *mon;
+struct obj *obj;	/* null means pick uwep, uswapwep or uarmg */
 struct attack *mattk;		/* null means we find one internally */
 {
-	register struct permonst *ptr = mon->data;
-	register int i;
+	struct permonst *ptr = mon->data;
+	int i;
 
 	/* if caller hasn't specified an object, use uwep, uswapwep or uarmg */
 	if (!obj) {

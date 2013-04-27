@@ -30,7 +30,7 @@
 #define CLC_FIRE_PILLAR	 8
 #define CLC_GEYSER	 9
 
-STATIC_DCL void FDECL(cursetxt,(struct monst *,BOOLEAN_P));
+STATIC_DCL void FDECL(cursetxt,(struct monst *,boolean));
 STATIC_DCL int FDECL(choose_magic_spell, (int));
 STATIC_DCL int FDECL(choose_clerical_spell, (int));
 STATIC_DCL void FDECL(cast_wizard_spell,(struct monst *, int,int));
@@ -160,8 +160,8 @@ int spellnum;
  */
 int
 castmu(mtmp, mattk, thinks_it_foundyou, foundyou)
-	register struct monst *mtmp;
-	register struct attack *mattk;
+	struct monst *mtmp;
+	struct attack *mattk;
 	boolean thinks_it_foundyou;
 	boolean foundyou;
 {
@@ -785,8 +785,8 @@ int spellnum;
 
 int
 buzzmu(mtmp, mattk)		/* monster uses spell (ranged) */
-	register struct monst *mtmp;
-	register struct attack  *mattk;
+	struct monst *mtmp;
+	struct attack  *mattk;
 {
 	/* don't print constant stream of curse messages for 'normal'
 	   spellcasting monsters at range */

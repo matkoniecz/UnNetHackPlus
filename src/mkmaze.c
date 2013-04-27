@@ -18,8 +18,8 @@ STATIC_DCL boolean FDECL(is_solid,(int,int));
 STATIC_DCL int FDECL(extend_spine, (int [3][3], int, int, int));
 STATIC_DCL boolean FDECL(okay,(int,int,int));
 STATIC_DCL void FDECL(maze0xy,(coord *));
-STATIC_DCL boolean FDECL(put_lregion_here,(XCHAR_P,XCHAR_P,XCHAR_P,
-	XCHAR_P,XCHAR_P,XCHAR_P,XCHAR_P,BOOLEAN_P,d_level *));
+STATIC_DCL boolean FDECL(put_lregion_here,(xchar,xchar,xchar,
+	xchar,xchar,xchar,xchar,boolean,d_level *));
 STATIC_DCL void NDECL(fixup_special);
 STATIC_DCL void FDECL(move, (int *,int *,int));
 STATIC_DCL void NDECL(setup_waterlevel);
@@ -30,7 +30,7 @@ STATIC_OVL boolean
 iswall(x,y)
 int x,y;
 {
-    register int type;
+    int type;
 
     if (!isok(x,y)) return FALSE;
     type = levl[x][y].typ;
@@ -42,7 +42,7 @@ STATIC_OVL boolean
 iswall_or_stone(x,y)
     int x,y;
 {
-    register int type;
+    int type;
 
     /* out of bounds = stone */
     if (!isok(x,y)) return TRUE;
@@ -123,7 +123,7 @@ wallification(x1, y1, x2, y2)
 int x1, y1, x2, y2;
 {
 	uchar type;
-	register int x,y;
+	int x,y;
 	struct rm *lev;
 
 	/* sanity check on incoming variables */
@@ -156,7 +156,7 @@ wall_extends(x1, y1, x2, y2)
 int x1, y1, x2, y2;
 {
 	uchar type;
-	register int x,y;
+	int x,y;
 	struct rm *lev;
 	int bits;
 	int locale[3][3];	/* rock or wall status surrounding positions */
@@ -209,7 +209,7 @@ int x1, y1, x2, y2;
 STATIC_OVL boolean
 okay(x,y,dir)
 int x,y;
-register int dir;
+int dir;
 {
 	move(&x,&y,dir);
 	move(&x,&y,dir);
@@ -345,9 +345,9 @@ static boolean was_waterlevel; /* ugh... this shouldn't be needed */
 STATIC_OVL void
 fixup_special()
 {
-	register lev_region *r = lregions;
+	lev_region *r = lregions;
 	struct d_level lev;
-	register int x, y;
+	int x, y;
 	struct mkroom *croom;
 	boolean added_branch = FALSE;
 
@@ -430,7 +430,7 @@ fixup_special()
 		/* randomize Sokoban prize */
 		if (dunlev(&u.uz)==1) {
 			int price=0;
-			register struct engr *ep;
+			struct engr *ep;
 			for (ep = head_engr; ep; ep = ep->nxt_engr) {
 				/* Sokoban top levels have no random, burned engravings */
 				if (ep && ep->engr_txt[0] && ep->engr_type == BURN &&
@@ -473,7 +473,7 @@ fixup_special()
 		if (rn2(2))
 			otmp = mk_player_statue_on_Medusa_island(somex(croom), somey(croom));
 		else 
-			otmp = mk_moster_statue_on_Medusa_island(somex(croom), somey(croom));
+			otmp = mk_monster_statue_on_Medusa_island(somex(croom), somey(croom));
 	} else if(Is_wiz1_level(&u.uz)) {
 		croom = search_special(MORGUE);
 		create_secret_door(croom, W_EAST|W_WEST);
@@ -498,7 +498,7 @@ fixup_special()
 
 		create_secret_door(croom, W_ANY);
 	} else if(on_level(&u.uz, &orcus_level)) {
-		register struct monst *mtmp, *mtmp2;
+		struct monst *mtmp, *mtmp2;
 
 		/* it's a ghost town, get rid of shopkeepers */
 		for(mtmp = fmon; mtmp; mtmp = mtmp2) {
@@ -526,7 +526,7 @@ fixup_special()
 
 void
 makemaz(s)
-register const char *s;
+const char *s;
 {
 	int x,y;
 	char protofile[20];
@@ -552,7 +552,6 @@ register const char *s;
 
 	} else Strcpy(protofile, "");
 
-#ifdef WIZARD
 	/* SPLEVTYPE format is "level-choice,level-choice"... */
 	if (wizard && *protofile && sp && sp->rndlevs) {
 	    char *ep = getenv("SPLEVTYPE");	/* not nh_getenv */
@@ -574,7 +573,6 @@ register const char *s;
 		}
 	    }
 	}
-#endif
 
 	if(*protofile) {
 	    Strcat(protofile, LEV_EXT);
@@ -749,7 +747,7 @@ walkfrom(x,y,typ)
 int x,y;
 schar typ;
 {
-	register int q,a,dir;
+	int q,a,dir;
 	int dirs[4];
 
 #ifndef WALLIFIED_MAZE
@@ -783,8 +781,8 @@ schar typ;
 
 STATIC_OVL void
 move(x,y,dir)
-register int *x, *y;
-register int dir;
+int *x, *y;
+int dir;
 {
 	switch(dir){
 		case 0: --(*y); break;
@@ -814,7 +812,7 @@ mazexy(cc)	/* find random point in generated corridors,
 #endif
 		);
 	if (cpt >= 100) {
-		register int x, y;
+		int x, y;
 		/* last try */
 		for (x = 0; x < (x_maze_max>>1) - 1; x++)
 		    for (y = 0; y < (y_maze_max>>1) - 1; y++) {
@@ -846,9 +844,9 @@ bound_digging()
  * that provides a window of abuse for WALLIFIED_MAZE special levels
  */
 {
-	register int x,y;
-	register unsigned typ;
-	register struct rm *lev;
+	int x,y;
+	unsigned typ;
+	struct rm *lev;
 	boolean found, nonwall;
 	int xmin,xmax,ymin,ymax;
 
@@ -922,11 +920,11 @@ bound_digging()
 
 void
 mkportal(x, y, todnum, todlevel)
-register xchar x, y, todnum, todlevel;
+xchar x, y, todnum, todlevel;
 {
 	/* a portal "trap" must be matched by a */
 	/* portal in the destination dungeon/dlevel */
-	register struct trap *ttmp = maketrap(x, y, MAGIC_PORTAL);
+	struct trap *ttmp = maketrap(x, y, MAGIC_PORTAL);
 
 	if (!ttmp) {
 		impossible("portal on top of portal??");
@@ -950,7 +948,6 @@ register xchar x, y, todnum, todlevel;
 
 /* to ease the work of debuggers at this stage */
 #define register
-
 #define CONS_OBJ   0
 #define CONS_MON   1
 #define CONS_HERO  2
@@ -968,14 +965,14 @@ static int xmin, ymin, xmax, ymax;	/* level boundaries */
 
 STATIC_DCL void NDECL(set_wportal);
 STATIC_DCL void FDECL(mk_bubble, (int,int,int));
-STATIC_DCL void FDECL(mv_bubble, (struct bubble *,int,int,BOOLEAN_P));
+STATIC_DCL void FDECL(mv_bubble, (struct bubble *,int,int,boolean));
 
 void
 movebubbles()
 {
 	static boolean up;
-	register struct bubble *b;
-	register int x, y, i, j;
+	struct bubble *b;
+	int x, y, i, j;
 	struct trap *btrap;
 	static const struct rm water_pos =
 		{ cmap_to_glyph(S_water), WATER, 0, 0, 0, 0, 0, 0, 0 };
@@ -1081,7 +1078,7 @@ movebubbles()
 
 	up = !up;
 	for (b = up ? bbubbles : ebubbles; b; b = up ? b->next : b->prev) {
-		register int rx = rn2(3), ry = rn2(3);
+		int rx = rn2(3), ry = rn2(3);
 
 		mv_bubble(b,b->dx + 1 - (!b->dx ? rx : (rx ? 1 : 0)),
 			    b->dy + 1 - (!b->dy ? ry : (ry ? 1 : 0)),
@@ -1097,8 +1094,8 @@ movebubbles()
 void
 water_friction()
 {
-	register int x, y, dx, dy;
-	register boolean eff = FALSE;
+	int x, y, dx, dy;
+	boolean eff = FALSE;
 
 	if (Swimming && rn2(4))
 		return;		/* natural swimmers have advantage */
@@ -1131,7 +1128,7 @@ void
 save_waterlevel(fd, mode)
 int fd, mode;
 {
-	register struct bubble *b;
+	struct bubble *b;
 
 	if (!Is_waterlevel(&u.uz)) return;
 
@@ -1152,10 +1149,10 @@ int fd, mode;
 
 void
 restore_waterlevel(fd)
-register int fd;
+int fd;
 {
-	register struct bubble *b = (struct bubble *)0, *btmp;
-	register int i;
+	struct bubble *b = (struct bubble *)0, *btmp;
+	int i;
 	int n;
 
 	if (!Is_waterlevel(&u.uz)) return;
@@ -1187,7 +1184,7 @@ register int fd;
 const char *waterbody_name(x, y)
 xchar x,y;
 {
-	register struct rm *lev;
+	struct rm *lev;
 	schar ltyp;
 
 	if (!isok(x,y)) {
@@ -1228,9 +1225,9 @@ set_wportal()
 STATIC_OVL void
 setup_waterlevel()
 {
-	register int x, y;
-	register int xskip, yskip;
-	register int water_glyph = cmap_to_glyph(S_water);
+	int x, y;
+	int xskip, yskip;
+	int water_glyph = cmap_to_glyph(S_water);
 
 	/* ouch, hardcoded... */
 
@@ -1257,7 +1254,7 @@ setup_waterlevel()
 STATIC_OVL void
 unsetup_waterlevel()
 {
-	register struct bubble *b, *bb;
+	struct bubble *b, *bb;
 
 	/* free bubbles */
 
@@ -1270,7 +1267,7 @@ unsetup_waterlevel()
 
 STATIC_OVL void
 mk_bubble(x,y,n)
-register int x, y, n;
+int x, y, n;
 {
 	/*
 	 * These bit masks make visually pleasing bubbles on a normal aspect
@@ -1289,7 +1286,7 @@ register int x, y, n;
 		bm8[] = {8,4,0x7e,0xff,0xff,0x7e},
 		*bmask[] = {bm2,bm3,bm4,bm5,bm6,bm7,bm8};
 
-	register struct bubble *b;
+	struct bubble *b;
 
 	if (x >= bxmax || y >= bymax) return;
 	if (n >= SIZE(bmask)) {
@@ -1327,11 +1324,11 @@ register int x, y, n;
  */
 STATIC_OVL void
 mv_bubble(b,dx,dy,ini)
-register struct bubble *b;
-register int dx, dy;
-register boolean ini;
+struct bubble *b;
+int dx, dy;
+boolean ini;
 {
-	register int x, y, i, j, colli = 0;
+	int x, y, i, j, colli = 0;
 	struct container *cons, *ctemp;
 
 	/* move bubble */

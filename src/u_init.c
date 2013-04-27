@@ -14,7 +14,7 @@ struct trobj {
 
 STATIC_DCL void FDECL(ini_inv, (struct trobj *));
 STATIC_DCL void FDECL(knows_object,(int));
-STATIC_DCL void FDECL(knows_class,(CHAR_P));
+STATIC_DCL void FDECL(knows_class,(char));
 STATIC_DCL boolean FDECL(restricted_spell_discipline, (int));
 
 #define UNDEF_TYP	0
@@ -24,8 +24,9 @@ STATIC_DCL boolean FDECL(restricted_spell_discipline, (int));
 /*
  *	Initial inventory for the various roles.
  */
-
 static struct trobj Archeologist[] = {
+#define A_POTION_OF_OBJECT_DETECTION	8
+#define A_SCROLL_OF_GOLD_DETECTION	9
 	/* if adventure has a name...  idea from tan@uvm-gen */
 	{ BULLWHIP, 2, WEAPON_CLASS, 1, UNDEF_BLESS },
 	{ LEATHER_JACKET, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
@@ -35,6 +36,8 @@ static struct trobj Archeologist[] = {
 	{ TINNING_KIT, UNDEF_SPE, TOOL_CLASS, 1, UNDEF_BLESS },
 	{ TOUCHSTONE, 0, GEM_CLASS, 1, 0 },
 	{ SACK, 0, TOOL_CLASS, 1, 0 },
+	{ POT_OBJECT_DETECTION, 0, POTION_CLASS, 1, UNDEF_BLESS },	/* quan is variable */
+	{ SCR_GOLD_DETECTION, 0, SCROLL_CLASS, 1, UNDEF_BLESS },	/* quan is variable */
 	{ 0, 0, 0, 0, 0 }
 };
 static struct trobj Barbarian[] = {
@@ -217,6 +220,10 @@ static struct trobj Leash[] = {
 };
 static struct trobj Towel[] = {
 	{ TOWEL, 0, TOOL_CLASS, 1, 0 },
+	{ 0, 0, 0, 0, 0 }
+};
+static struct trobj Key[] = {
+	{ SKELETON_KEY, 0, TOOL_CLASS, 1, 0 },
 	{ 0, 0, 0, 0, 0 }
 };
 static struct trobj Wishing[] = {
@@ -484,7 +491,7 @@ static const struct def_skill Skill_W[] = {
 
 STATIC_OVL void
 knows_object(obj)
-register int obj;
+int obj;
 {
 	discover_object(obj,TRUE,FALSE);
 	objects[obj].oc_pre_discovered = 1;	/* not a "discovery" */
@@ -495,9 +502,9 @@ register int obj;
  */
 STATIC_OVL void
 knows_class(sym)
-register char sym;
+char sym;
 {
-	register int ct;
+	int ct;
 	for (ct = 1; ct < NUM_OBJECTS; ct++)
 		if (objects[ct].oc_class == sym && !objects[ct].oc_magic &&
 		    !Is_dragon_armor(ct))
@@ -507,7 +514,7 @@ register char sym;
 void
 u_init()
 {
-	register int i;
+	int i;
 
 	flags.female = flags.initgend;
 	flags.beginner = 1;
@@ -612,10 +619,13 @@ u_init()
 	 * skew the results if we use rn2(2)...  --KAA
 	 */
 	case PM_ARCHEOLOGIST:
+		Archeologist[A_POTION_OF_OBJECT_DETECTION].trquan = rn2(3);
+		Archeologist[A_SCROLL_OF_GOLD_DETECTION].trquan = rn2(3);
 		ini_inv(Archeologist);
 		if(!rn2(10)) ini_inv(Tinopener);
-		else if(!rn2(4)) ini_inv(Lamp);
-		else if(!rn2(10)) ini_inv(Magicmarker);
+		if(!rn2(4)) ini_inv(Lamp);
+		if(!rn2(20)) ini_inv(Magicmarker);
+		ini_inv(Key);
 		knows_object(SACK);
 		knows_object(TOUCHSTONE);
 		skill_init(Skill_A);
@@ -857,11 +867,9 @@ u_init()
 	if (discover)
 		ini_inv(Wishing);
 
-#ifdef WIZARD
-	if (wizard)
+	if (wizard) {
 		read_wizkit();
-#endif
-
+	}
 #ifndef GOLDOBJ
 	u.ugold0 += hidden_gold();	/* in case sack has gold in it */
 #else
@@ -877,7 +885,7 @@ u_init()
  */
 	for(i = 0; i < A_MAX; i++)
 	    if(!rn2(20)) {
-		register int xd = rn2(7) - 2;	/* biased variation */
+		int xd = rn2(7) - 2;	/* biased variation */
 		(void) adjattrib(i, xd, TRUE);
 		if (ABASE(i) < AMAX(i)) AMAX(i) = ABASE(i);
 	    }
@@ -927,12 +935,16 @@ int otyp;
 
 STATIC_OVL void
 ini_inv(trop)
-register struct trobj *trop;
+struct trobj *trop;
 {
 	struct obj *obj;
 	int otyp, i;
 
 	while (trop->trclass) {
+		if(trop->trquan == 0) {
+			trop++;
+			continue;
+		}
 		if (trop->trotyp != UNDEF_TYP) {
 			otyp = (int)trop->trotyp;
 			if (urace.malenum != PM_HUMAN) {
@@ -984,14 +996,11 @@ register struct trobj *trop;
 				|| (otyp == SCR_ENCHANT_WEAPON &&
 				    Role_if(PM_MONK))
 				/* wizard patch -- they already have one */
-				|| (otyp == SPE_FORCE_BOLT &&
-				    Role_if(PM_WIZARD))
+				|| (otyp == SPE_FORCE_BOLT && Role_if(PM_WIZARD))
 				/* powerful spells are either useless to
 				   low level players or unbalancing; also
 				   spells in restricted skill categories */
-				|| (obj->oclass == SPBOOK_CLASS &&
-				    (objects[otyp].oc_level > 3 ||
-				    restricted_spell_discipline(otyp)))
+				|| (obj->oclass == SPBOOK_CLASS && (objects[otyp].oc_level > 3 || restricted_spell_discipline(otyp)))
 							) {
 				dealloc_obj(obj);
 				obj = mkobj(trop->trclass, FALSE);
@@ -1094,15 +1103,8 @@ register struct trobj *trop;
 		if ((obj->otyp == BLINDFOLD) && u.roleplay.blindfolded)
 				setworn(obj, W_TOOL);
 
-#if !defined(PYRAMID_BUG) && !defined(MAC)
 		if(--trop->trquan) continue;	/* make a similar object */
-#else
-		if(trop->trquan) {		/* check if zero first */
-			--trop->trquan;
-			if(trop->trquan)
-				continue;	/* make a similar object */
-		}
-#endif
+
 		trop++;
 	}
 }

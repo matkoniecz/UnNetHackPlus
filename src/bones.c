@@ -11,8 +11,9 @@ extern long bytes_counted;
 #endif
 
 STATIC_DCL boolean FDECL(no_bones_level, (d_level *));
+STATIC_DCL boolean FDECL(is_special_monster, (struct permonst *));
 STATIC_DCL void FDECL(goodfruit, (int));
-STATIC_DCL void FDECL(resetobjs,(struct obj *,BOOLEAN_P));
+STATIC_DCL void FDECL(resetobjs,(struct obj *,boolean));
 STATIC_DCL void FDECL(drop_upon_death, (struct monst *, struct obj *));
 
 STATIC_OVL boolean
@@ -43,7 +44,7 @@ STATIC_OVL void
 goodfruit(id)
 int id;
 {
-	register struct fruit *f;
+	struct fruit *f;
 
 	for(f=ffruit; f; f=f->nextf) {
 		if(f->fid == -id) {
@@ -148,7 +149,7 @@ int prob2;
 			 * associated light source if these are gold and get
 			 * removed. */
 			if (!(otmp == uskin && Is_dragon_armor(uskin->otyp))) {
-#if defined(DEBUG) && defined(WIZARD)
+#if defined(DEBUG)
 				if (wizard)
 					pline("trim_contents: %s just disappeared", doname(otmp));
 #endif
@@ -158,7 +159,7 @@ int prob2;
 			}
 		}
 	}
-#if defined(DEBUG) && defined(WIZARD)
+#if defined(DEBUG)
 	if (wizard)
 		pline("trim_contents: %d objects obfree'd", disappeared);
 #endif
@@ -216,7 +217,7 @@ struct obj *cont;
 boolean
 can_make_bones()
 {
-	register struct trap *ttmp;
+	struct trap *ttmp;
 
 	if (ledger_no(&u.uz) <= 0 || ledger_no(&u.uz) > maxledgerno())
 	    return FALSE;
@@ -231,16 +232,36 @@ can_make_bones()
 		if (ttmp->ttyp == MAGIC_PORTAL) return FALSE;
 	}
 
-	if(depth(&u.uz) <= 0 ||		/* bulletproofing for endgame */
-	   (!rn2(1 + (depth(&u.uz)>>2))	/* fewer ghosts on low levels */
-#ifdef WIZARD
-		&& !wizard
-#endif
-		)) return FALSE;
+	if (depth(&u.uz) <= 0 ) { /* bulletproofing for endgame */
+		return FALSE;
+	}
+	if (!rn2(1 + (depth(&u.uz)>>2) && !wizard)) { /* fewer bone levels on low levels */
+		return FALSE;
+	}
 	/* don't let multiple restarts generate multiple copies of objects
 	 * in bones files */
 	if (discover) return FALSE;
 	return TRUE;
+}
+
+/* is it a special monster that should be removed from bones */
+boolean
+is_special_monster(struct permonst *mptr)
+{
+	if (mptr == &mons[PM_WIZARD_OF_YENDOR]){
+		return TRUE;
+	} else if (mptr == &mons[PM_MEDUSA]){
+		return TRUE;
+	} else if (mptr->msound == MS_NEMESIS){
+		return TRUE;
+	} else if (mptr->msound == MS_LEADER){
+		return TRUE;
+	} else if (mptr == &mons[PM_VLAD_THE_IMPALER]){
+		return TRUE;
+	} else if (mptr == &mons[PM_CTHULHU]){
+		return TRUE;
+	}
+	return FALSE;
 }
 
 /* save bones and possessions of a deceased adventurer */
@@ -263,29 +284,22 @@ struct obj *corpse;
 	if (fd >= 0) {
 		(void) close(fd);
 		compress_bonesfile();
-#ifdef WIZARD
 		if (wizard) {
 		    if (yn("Bones file already exists.  Replace it?") == 'y') {
 			if (delete_bonesfile(&u.uz)) goto make_bones;
 			else pline("Cannot unlink old bones.");
 		    }
 		}
-#endif
 		return;
 	}
 
-#ifdef WIZARD
- make_bones:
-#endif
+make_bones:
 	unleash_all();
 	/* in case these characters are not in their home bases */
 	for (mtmp = fmon; mtmp; mtmp = mtmp->nmon) {
 	    if (DEADMONSTER(mtmp)) continue;
 	    mptr = mtmp->data;
-	    if (mtmp->iswiz || mptr == &mons[PM_MEDUSA] ||
-		    mptr->msound == MS_NEMESIS || mptr->msound == MS_LEADER ||
-		    mptr == &mons[PM_VLAD_THE_IMPALER] ||
-		    mptr == &mons[PM_CTHULHU]) {
+	    if (is_special_monster(mptr)) {
 		mongone(mtmp);
 	    }
 	}
@@ -387,10 +401,9 @@ struct obj *corpse;
 
 	fd = create_bonesfile(&u.uz, &bonesid, whynot);
 	if(fd < 0) {
-#ifdef WIZARD
-		if(wizard)
+		if(wizard) {
 			pline("%s", whynot);
-#endif
+		}
 		/* bones file creation problems are silent to the player.
 		 * Keep it that way, but place a clue into the paniclog.
 		 */
@@ -418,10 +431,9 @@ struct obj *corpse;
 	    savefruitchn(fd, COUNT_SAVE);
 	    bflush(fd);
 	    if (bytes_counted > freediskspace(bones)) { /* not enough room */
-# ifdef WIZARD
-		if (wizard)
+		if (wizard) {
 			pline("Insufficient space to create bones file.");
-# endif
+		}
 		(void) close(fd);
 		cancel_bonesfile();
 		return;
@@ -444,32 +456,24 @@ struct obj *corpse;
 int
 getbones()
 {
-	register int fd;
-	register int ok;
+	int fd;
+	int ok;
 	char c, *bonesid, oldbonesid[10];
 
 	if(discover)		/* save bones files for real games */
 		return(0);
 
-	/* wizard check added by GAN 02/05/87 */
-	if(rn2(3)	/* only once in three times do we find bones */
-#ifdef WIZARD
-		&& !wizard
-#endif
-		) return(0);
-
+	if(rn2(3) && !wizard) { /* only once in three times do we find bones */
+		return(0);
+	}
 	if (!flags.bones) return(0);
 	if(no_bones_level(&u.uz)) return(0);
 	fd = open_bonesfile(&u.uz, &bonesid);
 	if (fd < 0) return(0);
 
 	if ((ok = uptodate(fd, bones)) == 0) {
-#ifdef WIZARD
-	    if (!wizard)
-#endif
 		pline("Discarding unuseable bones; no need to panic...");
 	} else {
-#ifdef WIZARD
 		if(wizard)  {
 			if(yn("Get bones?") == 'n') {
 				(void) close(fd);
@@ -477,7 +481,6 @@ getbones()
 				return(0);
 			}
 		}
-#endif
 		mread(fd, (genericptr_t) &c, sizeof c);	/* length incl. '\0' */
 		mread(fd, (genericptr_t) oldbonesid, (unsigned) c); /* DD.nnn */
 		if (strcmp(bonesid, oldbonesid) != 0) {
@@ -485,15 +488,13 @@ getbones()
 
 			Sprintf(errbuf, "This is bones level '%s', not '%s'!",
 				oldbonesid, bonesid);
-#ifdef WIZARD
 			if (wizard) {
 				pline("%s", errbuf);
 				ok = FALSE;	/* won't die of trickery */
 			}
-#endif
 			trickery(errbuf);
 		} else {
-			register struct monst *mtmp;
+			struct monst *mtmp;
 
 			getlev(fd, 0, 0, TRUE);
 
@@ -506,10 +507,10 @@ getbones()
 			 */
 			for(mtmp = fmon; mtmp; mtmp = mtmp->nmon) {
 			    if (mtmp->mhpmax == DEFUNCT_MONSTER) {
-#if defined(DEBUG) && defined(WIZARD)
-				if (wizard)
-				    pline("Removing defunct monster %s from bones.",
-					mtmp->data->mname);
+#if defined(DEBUG)
+				if (wizard) {
+					pline("Removing defunct monster %s from bones.", mtmp->data->mname);
+				}
 #endif
 				mongone(mtmp);
 			    } else
@@ -522,7 +523,6 @@ getbones()
 	}
 	(void) close(fd);
 
-#ifdef WIZARD
 	if(wizard) {
 		if(yn("Unlink bones?") == 'n') {
 			compress_bonesfile();
@@ -531,7 +531,6 @@ getbones()
 			return(ok);
 		}
 	}
-#endif
 	if (!delete_bonesfile(&u.uz)) {
 		/* When N games try to simultaneously restore the same
 		 * bones file, N-1 of them will fail to delete it

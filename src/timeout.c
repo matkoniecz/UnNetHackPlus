@@ -28,7 +28,7 @@ static NEARDATA const char * const stoned_texts[] = {
 STATIC_OVL void
 stoned_dialogue()
 {
-	register long i = (Stoned & TIMEOUT);
+	long i = (Stoned & TIMEOUT);
 
 	if (i > 0L && i <= SIZE(stoned_texts)) {
 		pline(stoned_texts[SIZE(stoned_texts) - i]);
@@ -53,7 +53,7 @@ static NEARDATA const char * const vomiting_texts[] = {
 STATIC_OVL void
 vomiting_dialogue()
 {
-	register long i = (Vomiting & TIMEOUT) / 3L;
+	long i = (Vomiting & TIMEOUT) / 3L;
 
 	if ((((Vomiting & TIMEOUT) % 3L) == 2) && (i >= 0)
 	    && (i < SIZE(vomiting_texts)))
@@ -93,7 +93,7 @@ static NEARDATA const char * const choke_texts2[] = {
 STATIC_OVL void
 choke_dialogue()
 {
-	register long i = (Strangled & TIMEOUT);
+	long i = (Strangled & TIMEOUT);
 
 	if(i > 0 && i <= SIZE(choke_texts)) {
 	    if (Breathless || !rn2(50))
@@ -121,7 +121,7 @@ static NEARDATA const char * const slime_texts[] = {
 STATIC_OVL void
 slime_dialogue()
 {
-	register long i = (Slimed & TIMEOUT) / 2L;
+	long i = (Slimed & TIMEOUT) / 2L;
 
 	if (((Slimed & TIMEOUT) % 2L) && i >= 0L
 		&& i < SIZE(slime_texts)) {
@@ -162,7 +162,7 @@ burn_away_slime()
 void
 nh_timeout()
 {
-	register struct prop *upp;
+	struct prop *upp;
 	int sleeptime;
 	int m_idx;
 	int baseluck = 0;
@@ -173,14 +173,16 @@ nh_timeout()
 	if (flags.friday13) {
 		baseluck -= 1;
 	}
-
+	if (Role_if(PM_ARCHEOLOGIST) && uarmh && uarmh->otyp == FEDORA) {
+		baseluck += get_luck_bonus_for_archeologist_wearing_fedora();
+	}
 	if (u.uluck != baseluck && moves % (((u.uhave.amulet || u.ugangr) && u.uluck > 0) ? 300 : 600) == 0) {
 	/* Cursed luckstones stop bad luck from timing out; blessed luckstones
 	 * stop good luck from timing out; normal luckstones stop both;
 	 * neither is stopped if you don't have a luckstone.
 	 * Luck is based at 0 usually, +1 if a full moon and -1 on Friday 13th
 	 */
-		register int time_luck = stone_luck(FALSE);
+		int time_luck = stone_luck(FALSE);
 		boolean nostone = !carrying(LUCKSTONE) && !stone_luck(TRUE);
 
 		if(u.uluck > baseluck && (nostone || time_luck < 0)) {
@@ -1223,7 +1225,7 @@ void
 do_storms()
 {
     int nstrike;
-    register int x, y;
+    int x, y;
     int dirx, diry;
     int count;
 
@@ -1315,17 +1317,15 @@ do_storms()
  *		Stop all timers attached to obj.
  */
 
-#ifdef WIZARD
-STATIC_DCL const char *FDECL(kind_name, (SHORT_P));
+STATIC_DCL const char *FDECL(kind_name, (short));
 STATIC_DCL void FDECL(print_queue, (winid, timer_element *));
-#endif
 STATIC_DCL void FDECL(insert_timer, (timer_element *));
-STATIC_DCL timer_element *FDECL(remove_timer, (timer_element **, SHORT_P,
+STATIC_DCL timer_element *FDECL(remove_timer, (timer_element **, short,
 								genericptr_t));
 STATIC_DCL void FDECL(write_timer, (int, timer_element *));
 STATIC_DCL boolean FDECL(mon_is_local, (struct monst *));
 STATIC_DCL boolean FDECL(timer_is_local, (timer_element *));
-STATIC_DCL int FDECL(maybe_write_timer, (int, int, BOOLEAN_P));
+STATIC_DCL int FDECL(maybe_write_timer, (int, int, boolean));
 
 /* ordered timer list */
 static timer_element *timer_base;		/* "active" */
@@ -1355,8 +1355,6 @@ static const ttable timeout_funcs[NUM_TIME_FUNCS] = {
 };
 #undef TTAB
 
-
-#if defined(WIZARD)
 
 STATIC_OVL const char *
 kind_name(kind)
@@ -1438,9 +1436,6 @@ timer_sanity_check()
 	    }
 	}
 }
-
-#endif /* WIZARD */
-
 
 /*
  * Pick off timeout elements from the global queue and call their functions.

@@ -12,10 +12,10 @@ STATIC_DCL void NDECL(autoquiver);
 STATIC_DCL int FDECL(gem_accept, (struct monst *, struct obj *));
 STATIC_DCL void FDECL(tmiss, (struct obj *, struct monst *));
 STATIC_DCL int FDECL(throw_gold, (struct obj *));
-STATIC_DCL void FDECL(check_shop_obj, (struct obj *,XCHAR_P,XCHAR_P,BOOLEAN_P));
-STATIC_DCL void FDECL(breakobj, (struct obj *,XCHAR_P,XCHAR_P,BOOLEAN_P,BOOLEAN_P));
-STATIC_DCL void FDECL(breakmsg, (struct obj *,BOOLEAN_P));
-STATIC_DCL boolean FDECL(toss_up,(struct obj *, BOOLEAN_P));
+STATIC_DCL void FDECL(check_shop_obj, (struct obj *,xchar,xchar,boolean));
+STATIC_DCL void FDECL(breakobj, (struct obj *,xchar,xchar,boolean,boolean));
+STATIC_DCL void FDECL(breakmsg, (struct obj *,boolean));
+STATIC_DCL boolean FDECL(toss_up,(struct obj *, boolean));
 STATIC_DCL boolean FDECL(throwing_weapon, (struct obj *));
 STATIC_DCL void FDECL(sho_obj_return_to_u, (struct obj *obj));
 STATIC_DCL boolean FDECL(mhurtle_step, (genericptr_t,int,int));
@@ -187,7 +187,7 @@ int shotlimit;
 int
 dothrow()
 {
-	register struct obj *obj;
+	struct obj *obj;
 	int shotlimit;
 
 	/*
@@ -203,7 +203,7 @@ dothrow()
 	shotlimit = (multi || save_cm) ? multi + 1 : 0;
 	multi = 0;		/* reset; it's been used up */
 
-	if (notake(youmonst.data)) {
+	if (notake(youmonst.data) || nohands(youmonst.data)) {
 	    You("are physically incapable of throwing anything.");
 	    return 0;
 	}
@@ -346,7 +346,7 @@ dofire()
  */
 void
 hitfloor(obj)
-register struct obj *obj;
+struct obj *obj;
 {
 	if (IS_SOFT(levl[u.ux][u.uy].typ) || u.uinwater) {
 		dropy(obj);
@@ -447,130 +447,127 @@ walk_path(src_cc, dest_cc, check_proc, arg)
  * your movements at the time.
  *
  * Possible additions/changes:
- *	o really attack monster if we hit one
- *	o set stunned if we hit a wall or door
  *	o reset nomul when we stop
  *	o creepy feeling if pass through monster (if ever implemented...)
- *	o bounce off walls
- *	o let jumps go over boulders
  */
 boolean
-hurtle_step(arg, x, y)
-    genericptr_t arg;
-    int x, y;
+hurtle_step(genericptr_t arg, int x, int y)
 {
-    int ox, oy, *range = (int *)arg;
-    struct obj *obj;
-    struct monst *mon;
-    boolean may_pass = TRUE;
-    struct trap *ttmp;
-    
-    if (!isok(x,y)) {
-	You_feel("the spirits holding you back.");
-	return FALSE;
-    } else if (!in_out_region(x, y)) {
-	return FALSE;
-    } else if (*range == 0) {
-	return FALSE;			/* previous step wants to stop now */
-    }
+	int ox, oy, *range = (int *)arg;
+	struct obj *obj;
+	struct monst *mon;
+	boolean may_pass = TRUE;
+	struct trap *ttmp;
 
-    if (!Passes_walls || !(may_pass = may_passwall(x, y))) {
-	if (IS_ROCK(levl[x][y].typ) || closed_door(x,y)) {
-	    const char *s;
-
-	    pline("Ouch!");
-	    if (IS_TREES(levl[x][y].typ))
-		s = "bumping into a tree";
-	    else if (IS_ROCK(levl[x][y].typ))
-		s = "bumping into a wall";
-	    else
-		s = "bumping into a door";
-	    losehp(rnd(2+*range), s, KILLED_BY);
-	    return FALSE;
-	}
-	if (levl[x][y].typ == IRONBARS) {
-	    You("crash into some iron bars.  Ouch!");
-	    losehp(rnd(2+*range), "crashing into iron bars", KILLED_BY);
-	    return FALSE;
-	}
-	if ((obj = sobj_at(BOULDER,x,y)) != 0) {
-	    You("bump into a %s.  Ouch!", xname(obj));
-	    losehp(rnd(2+*range), "bumping into a boulder", KILLED_BY);
-	    return FALSE;
-	}
-	if (!may_pass) {
-	    /* did we hit a no-dig non-wall position? */
-	    You("smack into something!");
-	    losehp(rnd(2+*range), "touching the edge of the universe", KILLED_BY);
-	    return FALSE;
-	}
-	if ((u.ux - x) && (u.uy - y) &&
-		bad_rock(youmonst.data,u.ux,y) && bad_rock(youmonst.data,x,u.uy)) {
-	    boolean too_much = (invent && (inv_weight() + weight_cap() > 600));
-	    /* Move at a diagonal. */
-	    if (bigmonst(youmonst.data) || too_much) {
-		You("%sget forcefully wedged into a crevice.",
-			too_much ? "and all your belongings " : "");
-		losehp(rnd(2+*range), "wedging into a narrow crevice", KILLED_BY);
+	if (!isok(x,y)) {
+		You_feel("the spirits holding you back.");
 		return FALSE;
-	    }
+	} else if (!in_out_region(x, y)) {
+		return FALSE;
+	} else if (*range == 0) {
+		return FALSE; /* previous step wants to stop now */
 	}
-    }
 
-    if ((mon = m_at(x, y)) != 0) {
-	You("bump into %s.", a_monnam(mon));
-	wakeup(mon);
-	return FALSE;
-    }
-    if ((u.ux - x) && (u.uy - y) &&
-	bad_rock(youmonst.data,u.ux,y) && bad_rock(youmonst.data,x,u.uy)) {
-	/* Move at a diagonal. */
-	if (In_sokoban(&u.uz)) {
-	    You("come to an abrupt halt!");
-	    return FALSE;
+	if (!Passes_walls || !(may_pass = may_passwall(x, y))) {
+		if (IS_ROCK(levl[x][y].typ) || closed_door(x,y)) {
+			const char *s;
+
+			pline("Ouch!");
+			if (IS_TREES(levl[x][y].typ)) {
+				s = "bumping into a tree";
+			} else if (IS_ROCK(levl[x][y].typ)) {
+				s = "bumping into a wall";
+			} else {
+				s = "bumping into a door";
+			}
+			losehp(rnd(2+*range), s, KILLED_BY);
+			make_stunned(HStun + 5+*range, TRUE);
+			return FALSE;
+		}
+		if (levl[x][y].typ == IRONBARS) {
+			You("crash into some iron bars.  Ouch!");
+			losehp(rnd(2+*range), "crashing into iron bars", KILLED_BY);
+			make_stunned(HStun + 5+*range, TRUE);
+			return FALSE;
+		}
+		if ((obj = sobj_at(BOULDER,x,y)) != 0) {
+			You("bump into a %s.  Ouch!", xname(obj));
+			losehp(rnd(2+*range), "bumping into a boulder", KILLED_BY);
+			make_stunned(HStun + 5+*range, TRUE);
+			return FALSE;
+		}
+		if (!may_pass) {
+			/* did we hit a no-dig non-wall position? */
+			You("smack into something!");
+			losehp(rnd(2+*range), "touching the edge of the universe", KILLED_BY);
+			make_stunned(HStun + 5+*range, TRUE);
+			return FALSE;
+		}
+		if ((u.ux - x) && (u.uy - y) && bad_rock(youmonst.data,u.ux,y) && bad_rock(youmonst.data,x,u.uy)) {
+			boolean too_much = (invent && (inv_weight() + weight_cap() > 600));
+			/* Move at a diagonal. */
+			if (bigmonst(youmonst.data) || too_much) {
+				You("%sget forcefully wedged into a crevice.", too_much ? "and all your belongings " : "");
+				losehp(rnd(2+*range), "wedging into a narrow crevice", KILLED_BY);
+				return FALSE;
+			}
+		}
 	}
-    }
 
-    ox = u.ux;
-    oy = u.uy;
-    u.ux = x;
-    u.uy = y;
-    newsym(ox, oy);		/* update old position */
-    vision_recalc(1);		/* update for new position */
-    flush_screen(1);
-    /* FIXME:
-     * Each trap should really trigger on the recoil if
-     * it would trigger during normal movement. However,
-     * not all the possible side-effects of this are
-     * tested [as of 3.4.0] so we trigger those that
-     * we have tested, and offer a message for the
-     * ones that we have not yet tested.
-     */
-    if ((ttmp = t_at(x, y)) != 0) {
-    	if (ttmp->ttyp == MAGIC_PORTAL) {
-    		dotrap(ttmp,0);
-    		return FALSE;
-	} else if (ttmp->ttyp == FIRE_TRAP) {
-    		dotrap(ttmp,0);
-	} else if ((ttmp->ttyp == PIT || ttmp->ttyp == SPIKED_PIT ||
-		    ttmp->ttyp == HOLE || ttmp->ttyp == TRAPDOOR) &&
-		   In_sokoban(&u.uz)) {
-		/* Air currents overcome the recoil */
-    		dotrap(ttmp,0);
+	if ((mon = m_at(x, y)) != 0) {
+		You("bump into %s.", a_monnam(mon));
+		wakeup(mon);
+		make_stunned(HStun + 5+*range, TRUE);
+		return FALSE;
+	}
+
+	if ((u.ux - x) && (u.uy - y) && bad_rock(youmonst.data,u.ux,y) && bad_rock(youmonst.data,x,u.uy)) {
+		/* Move at a diagonal. */
+		if (In_sokoban(&u.uz)) {
+			You("come to an abrupt halt!");
+			return FALSE;
+		}
+	}
+
+	ox = u.ux;
+	oy = u.uy;
+	u.ux = x;
+	u.uy = y;
+	newsym(ox, oy);		/* update old position */
+	vision_recalc(1);		/* update for new position */
+	flush_screen(1);
+	/* FIXME:
+	 * Each trap should really trigger on the recoil if
+	 * it would trigger during normal movement. However,
+	 * not all the possible side-effects of this are
+	 * tested [as of 3.4.0] so we trigger those that
+	 * we have tested, and offer a message for the
+	 * ones that we have not yet tested.
+	 */
+	if ((ttmp = t_at(x, y)) != 0) {
+		if (ttmp->ttyp == MAGIC_PORTAL) {
+			dotrap(ttmp,0);
+			return FALSE;
+		} else if (ttmp->ttyp == FIRE_TRAP) {
+			dotrap(ttmp,0);
+		} else if (In_sokoban(&u.uz) && (ttmp->ttyp == PIT || ttmp->ttyp == SPIKED_PIT || ttmp->ttyp == HOLE || ttmp->ttyp == TRAPDOOR)) {
+			/* Air currents overcome the recoil */
+			dotrap(ttmp,0);
+			*range = 0;
+			return TRUE;
+		} else {
+			if (ttmp->tseen)
+				You("pass right over %s %s.",
+					(ttmp->ttyp == ARROW_TRAP) ? "an" : "a",
+					defsyms[trap_to_defsym(ttmp->ttyp)].explanation);
+		}
+	}
+	if (--*range < 0) { /* make sure our range never goes negative */
 		*range = 0;
-		return TRUE;
-    	} else {
-		if (ttmp->tseen)
-		    You("pass right over %s %s.",
-		    	(ttmp->ttyp == ARROW_TRAP) ? "an" : "a",
-		    	defsyms[trap_to_defsym(ttmp->ttyp)].explanation);
-    	}
-    }
-    if (--*range < 0)		/* make sure our range never goes negative */
-	*range = 0;
-    if (*range != 0)
-	delay_output();
-    return TRUE;
+	} if (*range != 0) {
+		delay_output();
+	}
+	return TRUE;
 }
 
 STATIC_OVL boolean
@@ -690,9 +687,9 @@ mhurtle(mon, dx, dy, range)
 
 STATIC_OVL void
 check_shop_obj(obj, x, y, broken)
-register struct obj *obj;
-register xchar x, y;
-register boolean broken;
+struct obj *obj;
+xchar x, y;
+boolean broken;
 {
 	struct monst *shkp = shop_keeper(*u.ushops);
 
@@ -769,9 +766,7 @@ boolean hitsroof;
 	obj = 0;	/* it's now gone */
 	switch (otyp) {
 	case EGG:
-		if (touch_petrifies(&mons[ocorpsenm]) &&
-		    !uarmh && !Stone_resistance &&
-		    !(poly_when_stoned(youmonst.data) && polymon(PM_STONE_GOLEM)))
+		if (touch_petrifies(&mons[ocorpsenm]) && !uarmh && !Stone_resistance && !polymorph_player_instead_stoning())
 		goto petrify;
 	case CREAM_PIE:
 	case BLINDING_VENOM:
@@ -818,8 +813,7 @@ boolean hitsroof;
 		    !(obj->otyp == CORPSE && touch_petrifies(&mons[obj->corpsenm])))
 		Your("%s does not protect you.", xname(uarmh));
 	} else if (obj->otyp == CORPSE && touch_petrifies(&mons[obj->corpsenm])) {
-	    if (!Stone_resistance &&
-		    !(poly_when_stoned(youmonst.data) && polymon(PM_STONE_GOLEM))) {
+	    if (!Stone_resistance && !polymorph_player_instead_stoning()) {
  petrify:
 		killer_format = KILLED_BY;
 		killer = "elementary physics";	/* "what goes up..." */
@@ -869,12 +863,12 @@ struct obj *obj;
 
 void
 throwit(obj, wep_mask, twoweap)
-register struct obj *obj;
+struct obj *obj;
 long wep_mask;	/* used to re-equip returning boomerang */
 boolean twoweap; /* used to restore twoweapon mode if wielded weapon returns */
 {
-	register struct monst *mon;
-	register int range, urange;
+	struct monst *mon;
+	int range, urange;
 	boolean impaired = (Confusion || Stunned || Blind ||
 			   Hallucination || Fumbling);
 
@@ -1199,11 +1193,11 @@ struct monst *mon;
  */
 int
 thitmonst(mon, obj)
-register struct monst *mon;
-register struct obj   *obj;
+struct monst *mon;
+struct obj   *obj;
 {
-	register int	tmp; /* Base chance to hit */
-	register int	disttmp; /* distance modifier */
+	int	tmp; /* Base chance to hit */
+	int	disttmp; /* distance modifier */
 	int otyp = obj->otyp;
 	boolean guaranteed_hit = (u.uswallow && mon == u.ustuck);
 	boolean obj_disint = (touch_disintegrates(mon->data) &&
@@ -1476,8 +1470,8 @@ register struct obj   *obj;
 
 STATIC_OVL int
 gem_accept(mon, obj)
-register struct monst *mon;
-register struct obj *obj;
+struct monst *mon;
+struct obj *obj;
 {
 	char buf[BUFSZ];
 	boolean is_buddy = sgn(mon->data->maligntyp) == sgn(u.ualign.type);
@@ -1789,7 +1783,7 @@ struct obj *obj;
 #ifndef GOLDOBJ
 	long zorks = obj->quan;
 #endif
-	register struct monst *mon;
+	struct monst *mon;
 
 	if(!u.dx && !u.dy && !u.dz) {
 #ifndef GOLDOBJ

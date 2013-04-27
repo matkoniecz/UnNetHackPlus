@@ -1,4 +1,4 @@
-                Instructions for installing UnNetHack
+              Instructions for installing UnNetHackPlus
                  on a GNU autoconf supported system
                 =====================================
 
@@ -25,7 +25,7 @@
     installation instructions in the relevent subdirectory of sys.
 
 4.  If you think you've found a bug in the automatic configuration system,
-    then please report it to <bhaak@gmx.net>.
+    then please report it to <https://github.com/Bulwersator/UnNetHackPlus/issues>.
     If the problem is that configure exited with an error then, as well as
     a cut & paste of the error message, please attach the relevant section
     of config.log (or the whole thing if you're not sure).

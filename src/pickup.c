@@ -8,15 +8,15 @@
 
 #include "hack.h"
 
-STATIC_DCL void FDECL(simple_look, (struct obj *,BOOLEAN_P));
+STATIC_DCL void FDECL(simple_look, (struct obj *,boolean));
 #ifndef GOLDOBJ
 STATIC_DCL boolean FDECL(query_classes, (char *,boolean *,boolean *,
-		const char *,struct obj *,BOOLEAN_P,BOOLEAN_P,int *));
+		const char *,struct obj *,boolean,boolean,int *));
 #else
 STATIC_DCL boolean FDECL(query_classes, (char *,boolean *,boolean *,
-		const char *,struct obj *,BOOLEAN_P,int *));
+		const char *,struct obj *,boolean,int *));
 #endif
-STATIC_DCL void FDECL(check_here, (BOOLEAN_P));
+STATIC_DCL void FDECL(check_here, (boolean));
 STATIC_DCL boolean FDECL(n_or_more, (struct obj *));
 STATIC_DCL boolean FDECL(all_but_uchain, (struct obj *));
 #if 0 /* not used */
@@ -25,20 +25,20 @@ STATIC_DCL boolean FDECL(allow_cat_no_uchain, (struct obj *));
 STATIC_DCL int FDECL(autopick, (struct obj*, int, menu_item **));
 STATIC_DCL int FDECL(count_categories, (struct obj *,int));
 STATIC_DCL long FDECL(carry_count,
-		      (struct obj *,struct obj *,long,BOOLEAN_P,int *,int *));
-STATIC_DCL int FDECL(lift_object, (struct obj *,struct obj *,long *,BOOLEAN_P));
+		      (struct obj *,struct obj *,long,boolean,int *,int *));
+STATIC_DCL int FDECL(lift_object, (struct obj *,struct obj *,long *,boolean));
 STATIC_DCL boolean FDECL(mbag_explodes, (struct obj *,int));
 STATIC_PTR int FDECL(in_container,(struct obj *));
 STATIC_PTR int FDECL(ck_bag,(struct obj *));
 STATIC_PTR int FDECL(out_container,(struct obj *));
 STATIC_DCL long FDECL(mbag_item_gone, (int,struct obj *));
 STATIC_DCL void FDECL(observe_quantum_cat, (struct obj *));
-STATIC_DCL int FDECL(menu_loot, (int, struct obj *, BOOLEAN_P));
-STATIC_DCL int FDECL(in_or_out_menu, (const char *,struct obj *, BOOLEAN_P, BOOLEAN_P));
-STATIC_DCL int FDECL(container_at, (int, int, BOOLEAN_P));
+STATIC_DCL int FDECL(menu_loot, (int, struct obj *, boolean));
+STATIC_DCL int FDECL(in_or_out_menu, (const char *,struct obj *, boolean, boolean));
+STATIC_DCL int FDECL(container_at, (int, int, boolean));
 STATIC_DCL boolean FDECL(able_to_loot, (int, int));
 STATIC_DCL boolean FDECL(mon_beside, (int, int));
-STATIC_DCL int FDECL(dump_container, (struct obj*, BOOLEAN_P));
+STATIC_DCL int FDECL(dump_container, (struct obj*, boolean));
 STATIC_DCL void NDECL(del_sokoprize);
 
 /* define for query_objlist() and autopickup() */
@@ -93,7 +93,7 @@ boolean here;		/* flag for type of obj list linkage */
 int
 collect_obj_classes(ilets, otmp, here, incl_gold, filter, itemcount)
 char ilets[];
-register struct obj *otmp;
+struct obj *otmp;
 boolean here, incl_gold;
 boolean FDECL((*filter),(OBJ_P));
 int *itemcount;
@@ -101,14 +101,14 @@ int *itemcount;
 int
 collect_obj_classes(ilets, otmp, here, filter, itemcount)
 char ilets[];
-register struct obj *otmp;
+struct obj *otmp;
 boolean here;
 boolean FDECL((*filter),(OBJ_P));
 int *itemcount;
 #endif
 {
-	register int iletct = 0;
-	register char c;
+	int iletct = 0;
+	char c;
 
 	*itemcount = 0;
 #ifndef GOLDOBJ
@@ -187,7 +187,7 @@ int *menu_on_demand;
 		}
 	} else  {	/* more than one choice available */
 		const char *where = 0;
-		register char sym, oc_of_sym, *p;
+		char sym, oc_of_sym, *p;
 		/* additional choices */
 		ilets[iletct++] = ' ';
 		ilets[iletct++] = 'a';
@@ -258,8 +258,8 @@ STATIC_OVL void
 check_here(picked_some)
 boolean picked_some;
 {
-	register struct obj *obj;
-	register int ct = 0;
+	struct obj *obj;
+	int ct = 0;
 
 	/* count the objects here */
 	for (obj = level.objects[u.ux][u.uy]; obj; obj = obj->nexthere) {
@@ -367,7 +367,7 @@ struct obj *obj;
 /* query_objlist callback: return TRUE if valid class and worn */
 boolean
 is_worn_by_type(otmp)
-register struct obj *otmp;
+struct obj *otmp;
 {
 	return((boolean)(!!(otmp->owornmask &
 			(W_ARMOR | W_RING | W_AMUL | W_TOOL | W_WEP | W_SWAPWEP | W_QUIVER)))
@@ -1374,7 +1374,7 @@ boolean telekinesis;	/* not picking it up directly by hand */
 	} else if (obj->otyp == CORPSE) {
 	    if ( (touch_petrifies(&mons[obj->corpsenm])) && !uarmg
 				&& !Stone_resistance && !telekinesis) {
-		if (poly_when_stoned(youmonst.data) && polymon(PM_STONE_GOLEM))
+		if (polymorph_player_instead_stoning())
 		    display_nhwindow(WIN_MESSAGE, FALSE);
 		else {
 			char kbuf[BUFSZ];
@@ -1580,8 +1580,8 @@ int x, y;
 int
 doloot()	/* loot a container on the floor or loot saddle from mon. */
 {
-    register struct obj *cobj, *nobj;
-    register int c = -1;
+    struct obj *cobj, *nobj, *otmp;
+    int c = -1;
     int timepassed = 0;
     coord cc;
     boolean underfoot = TRUE;
@@ -1625,8 +1625,19 @@ lootcont:
 		any = TRUE;
 
 		if (cobj->olocked) {
-		    pline("Hmmm, it seems to be locked.");
-		    continue;
+			pline("Hmmm, it seems to be locked.");
+			if (flags.autounlock) {
+				if(cobj->otyp == IRON_SAFE) {
+					if(otmp = carrying(STETHOSCOPE)) {
+						pick_lock(otmp, cc.x, cc.y, TRUE);
+					}
+				} else {
+					if(((otmp = carrying(SKELETON_KEY)) || (otmp = carrying(CREDIT_CARD)) || (otmp = carrying(LOCK_PICK)))) {
+						pick_lock(otmp, cc.x, cc.y, TRUE);
+					}
+				}
+			}
+			continue;
 		}
 		if (cobj->otyp == BAG_OF_TRICKS && cobj->spe>0) {
 		    int tmp;
@@ -1845,7 +1856,7 @@ static NEARDATA struct obj *current_container;
 /* Returns: -1 to stop, 1 item was inserted, 0 item was not inserted. */
 STATIC_PTR int
 in_container(obj)
-register struct obj *obj;
+struct obj *obj;
 {
 	boolean floor_container = !carried(current_container);
 	boolean was_unpaid = FALSE;
@@ -1904,7 +1915,7 @@ register struct obj *obj;
 	if (obj->otyp == CORPSE) {
 	    if ( (touch_petrifies(&mons[obj->corpsenm])) && !uarmg
 		 && !Stone_resistance) {
-		if (poly_when_stoned(youmonst.data) && polymon(PM_STONE_GOLEM))
+		if (polymorph_player_instead_stoning())
 		    display_nhwindow(WIN_MESSAGE, FALSE);
 		else {
 		    char kbuf[BUFSZ];
@@ -2006,9 +2017,9 @@ struct obj *obj;
 /* Returns: -1 to stop, 1 item was removed, 0 item was not removed. */
 STATIC_PTR int
 out_container(obj)
-register struct obj *obj;
+struct obj *obj;
 {
-	register struct obj *otmp;
+	struct obj *otmp;
 	boolean is_gold = (obj->oclass == COIN_CLASS);
 	int res, loadlev;
 	long count;
@@ -2025,7 +2036,7 @@ register struct obj *obj;
 	if (obj->otyp == CORPSE) {
 	    if ( (touch_petrifies(&mons[obj->corpsenm])) && !uarmg
 		 && !Stone_resistance) {
-		if (poly_when_stoned(youmonst.data) && polymon(PM_STONE_GOLEM))
+		if (polymorph_player_instead_stoning())
 		    display_nhwindow(WIN_MESSAGE, FALSE);
 		else {
 		    char kbuf[BUFSZ];
@@ -2147,8 +2158,8 @@ struct obj *box;
 
 int
 use_container(obj, held)
-register struct obj *obj;
-register int held;
+struct obj *obj;
+int held;
 {
 	struct obj *curr, *otmp;
 #ifndef GOLDOBJ
@@ -2503,7 +2514,7 @@ boolean outokay, inokay;
 int
 dump_container(container, destroy_after)
 struct obj* container;
-BOOLEAN_P destroy_after;
+boolean destroy_after;
 {
 	struct obj* otmp,*otmp2;
 	int ret = 0;

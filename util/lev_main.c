@@ -77,14 +77,14 @@ int  FDECL (main, (int, char **));
 void FDECL (yyerror, (const char *));
 void FDECL (yywarning, (const char *));
 int  NDECL (yywrap);
-int FDECL(get_floor_type, (CHAR_P));
+int FDECL(get_floor_type, (char));
 int FDECL(get_room_type, (char *));
 int FDECL(get_trap_type, (char *));
-int FDECL(get_monster_id, (char *,CHAR_P));
-int FDECL(get_object_id, (char *,CHAR_P));
-boolean FDECL(check_monster_char, (CHAR_P));
-boolean FDECL(check_object_char, (CHAR_P));
-char FDECL(what_map_char, (CHAR_P));
+int FDECL(get_monster_id, (char *,char));
+int FDECL(get_object_id, (char *,char));
+boolean FDECL(check_monster_char, (char));
+boolean FDECL(check_object_char, (char));
+char FDECL(what_map_char, (char));
 void FDECL(scan_map, (char *, sp_lev *));
 boolean FDECL(check_subrooms, (sp_lev *));
 boolean FDECL(write_level_file, (char *,sp_lev *));
@@ -782,7 +782,7 @@ int
 get_room_type(s)
 char *s;
 {
-	register int i;
+	int i;
 
 	SpinCursor(3);
 	for(i=0; room_types[i].name; i++)
@@ -798,7 +798,7 @@ int
 get_trap_type(s)
 char *s;
 {
-	register int i;
+	int i;
 
 	SpinCursor(3);
 	for (i=0; trap_types[i].name; i++)
@@ -815,7 +815,7 @@ get_monster_id(s, c)
 char *s;
 char c;
 {
-	register int i, class;
+	int i, class;
 
 	SpinCursor(3);
 	class = c ? def_char_to_monclass(c) : 0;
@@ -828,8 +828,6 @@ char c;
 	for (i = LOW_PM; i < NUMMONS; i++)
 	    if (!class || class == mons[i].mlet)
 		if (!strcasecmp(s, mons[i].mname)) {
-		    if (be_verbose)
-			lc_warning("Monster type \"%s\" matches \"%s\".", s, mons[i].mname);
 		    return i;
 		}
 	return ERR;
@@ -984,8 +982,8 @@ scan_map(map, sp)
 char *map;
 sp_lev *sp;
 {
-	register int i, len;
-	register char *s1, *s2;
+	int i, len;
+	char *s1, *s2;
 	long max_len = 0;
 	long max_hig = 0;
 	char *tmpmap[ROWNO];

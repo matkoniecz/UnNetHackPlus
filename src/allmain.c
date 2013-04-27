@@ -53,10 +53,9 @@ moveloop()
     dragons_init();
     shop_selection_init();
 
-#ifdef WIZARD
-    if (wizard) add_debug_extended_commands();
-#endif
-
+    if (wizard) {
+	add_debug_extended_commands();
+    }
     (void) encumber_msg(); /* in case they auto-picked up something */
 
     u.uz0.dlevel = u.uz.dlevel;
@@ -394,10 +393,8 @@ moveloop()
 	    !(moves % 15) && !rn2(2))
 		do_vicinity_map();
 
-#ifdef WIZARD
 	if (iflags.sanity_check)
 	    sanity_check();
-#endif
 
 #ifdef CLIPPING
 	/* just before rhack */
@@ -453,8 +450,9 @@ void
 stop_occupation()
 {
 	if(occupation) {
-		if (!maybe_finished_meal(TRUE))
-		    You("stop %s.", occtxt);
+		if (!maybe_finished_meal(TRUE)) {
+			You("stop %s.", occtxt);
+		}
 		occupation = 0;
 		flags.botl = 1; /* in case u.uhs changed */
 /* fainting stops your occupation, there's no reason to sync.
