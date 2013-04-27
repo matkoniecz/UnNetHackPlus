@@ -16,15 +16,15 @@ STATIC_DCL int FDECL(dog_invent,(struct monst *,struct edog *,int));
 STATIC_DCL int FDECL(dog_goal,(struct monst *,struct edog *,int,int,int));
 
 STATIC_DCL struct obj *FDECL(DROPPABLES, (struct monst *));
-STATIC_DCL boolean FDECL(can_reach_location,(struct monst *,XCHAR_P,XCHAR_P,
-    XCHAR_P,XCHAR_P));
-STATIC_DCL boolean FDECL(could_reach_item,(struct monst *, XCHAR_P,XCHAR_P));
+STATIC_DCL boolean FDECL(can_reach_location,(struct monst *,xchar,xchar,
+    xchar,xchar));
+STATIC_DCL boolean FDECL(could_reach_item,(struct monst *, xchar,xchar));
 
 STATIC_OVL struct obj *
 DROPPABLES(mon)
-register struct monst *mon;
+struct monst *mon;
 {
-	register struct obj *obj;
+	struct obj *obj;
 	struct obj *wep = MON_WEP(mon);
 	boolean item1 = FALSE, item2 = FALSE;
 
@@ -121,12 +121,12 @@ struct obj *obj;
 /* returns 2 if pet dies, otherwise 1 */
 int
 dog_eat(mtmp, obj, x, y, devour)
-register struct monst *mtmp;
-register struct obj * obj;
+struct monst *mtmp;
+struct obj * obj;
 int x, y;
 boolean devour;
 {
-	register struct edog *edog = EDOG(mtmp);
+	struct edog *edog = EDOG(mtmp);
 	boolean poly = FALSE, grow = FALSE, heal = FALSE;
 	int nutrit;
 	boolean vampiric = is_vampiric(mtmp->data);
@@ -239,8 +239,8 @@ boolean devour;
 /* hunger effects -- returns TRUE on starvation */
 STATIC_OVL boolean
 dog_hunger(mtmp, edog)
-register struct monst *mtmp;
-register struct edog *edog;
+struct monst *mtmp;
+struct edog *edog;
 {
 	if (monstermoves > edog->hungrytime + 500) {
 	    if (!carnivorous(mtmp->data) && !herbivorous(mtmp->data)) {
@@ -264,17 +264,13 @@ register struct edog *edog;
 		stop_occupation();
 	    } else if (monstermoves > edog->hungrytime + 750 || mtmp->mhp < 1) {
  dog_died:
-		if (mtmp->mleashed
-#ifdef STEED
-		    && mtmp != u.usteed
-#endif
-		    )
-		    Your("leash goes slack.");
-		else if (cansee(mtmp->mx, mtmp->my))
-		    pline("%s starves.", Monnam(mtmp));
-		else
-		    You_feel("%s for a moment.",
-			Hallucination ? "bummed" : "sad");
+		if (mtmp->mleashed && mtmp != u.usteed) {
+			Your("leash goes slack.");
+		} else if (cansee(mtmp->mx, mtmp->my)) {
+			pline("%s starves.", Monnam(mtmp));
+		} else {
+			You_feel("%s for a moment.", Hallucination ? "bummed" : "sad");
+		}
 		mondied(mtmp);
 		return(TRUE);
 	    }
@@ -287,11 +283,11 @@ register struct edog *edog;
  */
 STATIC_OVL int
 dog_invent(mtmp, edog, udist)
-register struct monst *mtmp;
-register struct edog *edog;
+struct monst *mtmp;
+struct edog *edog;
 int udist;
 {
-	register int omx, omy;
+	int omx, omy;
 	struct obj *obj;
 
 	if (mtmp->msleeping || !mtmp->mcanmove) return(0);
@@ -358,21 +354,20 @@ int udist;
  */
 STATIC_OVL int
 dog_goal(mtmp, edog, after, udist, whappr)
-register struct monst *mtmp;
+struct monst *mtmp;
 struct edog *edog;
 int after, udist, whappr;
 {
-	register int omx, omy;
+	int omx, omy;
 	boolean in_masters_sight, dog_has_minvent;
-	register struct obj *obj;
+	struct obj *obj;
 	xchar otyp;
 	int appr;
 
-#ifdef STEED
 	/* Steeds don't move on their own will */
-	if (mtmp == u.usteed)
+	if (mtmp == u.usteed) {
 		return (-2);
-#endif
+	}
 
 	omx = mtmp->mx;
 	omy = mtmp->my;
@@ -388,7 +383,7 @@ int after, udist, whappr;
 #define DDIST(x,y) (dist2(x,y,omx,omy))
 #define SQSRCHRADIUS 5
 	    int min_x, max_x, min_y, max_y;
-	    register int nx, ny;
+	    int nx, ny;
 
 	    gtyp = UNDEF;	/* no goal as yet */
 	    gx = gy = 0;	/* suppress 'used before set' message */
@@ -467,7 +462,7 @@ int after, udist, whappr;
 
 #define FARAWAY (COLNO + 2)		/* position outside screen */
 	if (gx == u.ux && gy == u.uy && !in_masters_sight) {
-	    register coord *cp;
+	    coord *cp;
 
 	    cp = gettrack(omx,omy);
 	    if (cp) {
@@ -506,18 +501,18 @@ int after, udist, whappr;
 /* return 0 (no move), 1 (move) or 2 (dead) */
 int
 dog_move(mtmp, after)
-register struct monst *mtmp;
-register int after;	/* this is extra fast monster movement */
+struct monst *mtmp;
+int after;	/* this is extra fast monster movement */
 {
 	int omx, omy;		/* original mtmp position */
 	int appr, whappr, udist;
 	int i, j, k;
-	register struct edog *edog = EDOG(mtmp);
+	struct edog *edog = EDOG(mtmp);
 	struct obj *obj = (struct obj *) 0;
 	xchar otyp;
 	boolean has_edog, cursemsg[9], do_eat = FALSE;
 	xchar nix, niy;		/* position mtmp is (considering) moving to */
-	register int nx, ny;	/* temporary coordinates */
+	int nx, ny;	/* temporary coordinates */
 	xchar cnt, uncursedcnt, chcnt;
 	int chi = -1, nidist, ndist;
 	coord poss[9];
@@ -538,7 +533,6 @@ register int after;	/* this is extra fast monster movement */
 	if (has_edog && dog_hunger(mtmp, edog)) return(2);	/* starved */
 
 	udist = distu(omx,omy);
-#ifdef STEED
 	/* Let steeds eat and maybe throw rider during Conflict */
 	if (mtmp == u.usteed) {
 	    if (Conflict && !resist(mtmp, RING_CLASS, 0, 0)) {
@@ -546,10 +540,9 @@ register int after;	/* this is extra fast monster movement */
 		return (1);
 	    }
 	    udist = 1;
-	} else
-#endif
-	/* maybe we tamed him while being swallowed --jgm */
-	if (!udist) return(0);
+	} else if (!udist) { /* maybe we tamed him while being swallowed */
+		return(0);
+	}
 
 	nix = omx;	/* set before newdogpos */
 	niy = omy;
@@ -640,25 +633,17 @@ register int after;	/* this is extra fast monster movement */
 
 		if ((info[i] & ALLOW_M) && MON_AT(nx, ny)) {
 		    int mstatus;
-		    register struct monst *mtmp2 = m_at(nx,ny);
+		    struct monst *mtmp2 = m_at(nx,ny);
 
-		    if ((int)mtmp2->m_lev >= (int)mtmp->m_lev+2 ||
-			(mtmp2->data == &mons[PM_FLOATING_EYE] && rn2(10) &&
-			 mtmp->mcansee && haseyes(mtmp->data) && mtmp2->mcansee
-			 && (perceives(mtmp->data) || !mtmp2->minvis)) ||
-			(mtmp2->data==&mons[PM_GELATINOUS_CUBE] && rn2(10)) ||
-			(max_passive_dmg(mtmp2, mtmp) >= mtmp->mhp) ||
-			((mtmp->mhp*4 < mtmp->mhpmax
-			  || mtmp2->data->msound == MS_GUARDIAN
-			  || mtmp2->data->msound == MS_LEADER) &&
-			 mtmp2->mpeaceful && !Conflict) ||
-#ifdef WEBB_DISINT
-			(touch_disintegrates(mtmp2->data) &&
-			 !resists_disint(mtmp)) ||
-#endif
-			   (touch_petrifies(mtmp2->data) &&
-				!resists_ston(mtmp)))
-			continue;
+		    if ((int)mtmp2->m_lev >= (int)mtmp->m_lev+2) continue;
+		    if (mtmp2->data == &mons[PM_FLOATING_EYE] && rn2(10))
+			    if(mtmp->mcansee && haseyes(mtmp->data) && mtmp2->mcansee && (perceives(mtmp->data) || !mtmp2->minvis)) continue;
+		    if (mtmp2->data == &mons[PM_GELATINOUS_CUBE] && rn2(10)) continue;
+		    if (max_passive_dmg(mtmp2, mtmp) >= mtmp->mhp) continue;
+		    if (mtmp->mhp*4 < mtmp->mhpmax || mtmp2->data->msound == MS_GUARDIAN || mtmp2->data->msound == MS_LEADER)
+			    if(mtmp2->mpeaceful && !Conflict) continue;
+		    if (touch_disintegrates(mtmp2->data) && !resists_disint(mtmp)) continue;
+		    if (touch_petrifies(mtmp2->data) && !resists_ston(mtmp)) continue;
 
 		    if (after) return(0); /* hit only once each move */
 

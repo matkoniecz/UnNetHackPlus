@@ -10,9 +10,7 @@
 #define EXTERN_H	/* comment line for pre-compiled headers */
 #include "config.h"
 
-#if defined(MONITOR_HEAP) || defined(WIZARD)
 char *FDECL(fmt_ptr, (const genericptr,char *));
-#endif
 
 #ifdef MONITOR_HEAP
 #undef alloc
@@ -30,9 +28,9 @@ extern void VDECL(panic, (const char *,...)) PRINTF_F(1,2);
 
 long *
 alloc(lth)
-register unsigned int lth;
+unsigned int lth;
 {
-	register genericptr_t ptr;
+	genericptr_t ptr;
 
 	ptr = malloc(lth);
 #ifndef MONITOR_HEAP
@@ -41,8 +39,6 @@ register unsigned int lth;
 	return((long *) ptr);
 }
 
-
-#if defined(MONITOR_HEAP) || defined(WIZARD)
 
 # if defined(MICRO) || defined(WIN32)
 /* we actually want to know which systems have an ANSI run-time library
@@ -72,8 +68,6 @@ char *buf;
 	Sprintf(buf, PTR_FMT, (PTR_TYP)ptr);
 	return buf;
 }
-
-#endif
 
 #ifdef MONITOR_HEAP
 

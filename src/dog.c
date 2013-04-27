@@ -11,7 +11,7 @@ STATIC_DCL int NDECL(pet_type);
 
 void
 initedog(mtmp)
-register struct monst *mtmp;
+struct monst *mtmp;
 {
 	mtmp->mtame = is_domestic(mtmp->data) ? 10 : 5;
 	mtmp->mpeaceful = 1;
@@ -48,11 +48,9 @@ pet_type()
 	else if ((Role_if(PM_RANGER) || Role_if(PM_CAVEMAN)) &&
 	         ((preferred_pet == 'e') || (!rn2(3))))
 		return (rn2(4) ? PM_WOLF : PM_WINTER_WOLF_CUB);
-# ifdef TOURIST
 	else if (Role_if(PM_TOURIST) &&
 	          ((preferred_pet == 'e') || (!rn2(3))))
 		return (PM_BABY_CROCODILE);
-# endif
 #endif
 	else
 	    return (rn2(2) ? PM_KITTEN : PM_LITTLE_DOG);
@@ -60,7 +58,7 @@ pet_type()
 
 struct monst *
 make_familiar(otmp,x,y,quietly)
-register struct obj *otmp;
+struct obj *otmp;
 xchar x, y;
 boolean quietly;
 {
@@ -140,10 +138,8 @@ boolean quietly;
 struct monst *
 makedog()
 {
-	register struct monst *mtmp;
-#ifdef STEED
-	register struct obj *otmp;
-#endif
+	struct monst *mtmp;
+	struct obj *otmp;
 	const char *petname;
 	int   pettype;
 	static int petname_used = 0;
@@ -198,7 +194,6 @@ makedog()
 	}
 #endif
 
-#ifdef STEED
 	/* Horses already wear a saddle */
 	if (pettype == PM_PONY && !!(otmp = mksobj(SADDLE, TRUE, FALSE))) {
 	    if (mpickobj(mtmp, otmp))
@@ -209,7 +204,6 @@ makedog()
 	    otmp->leashmon = mtmp->m_id;
 	    update_mon_intrinsics(mtmp, otmp, TRUE, TRUE);
 	}
-#endif
 
 	if (!petname_used++ && *petname)
 		mtmp = christen_monst(mtmp, petname);
@@ -234,7 +228,7 @@ update_mlstmv()
 void
 losedogs()
 {
-	register struct monst *mtmp, *mtmp0 = 0, *mtmp2;
+	struct monst *mtmp, *mtmp0 = 0, *mtmp2;
 
 	while ((mtmp = mydogs) != 0) {
 		mydogs = mtmp->nmon;
@@ -295,10 +289,9 @@ boolean with_you;
 	mtmp->mtrack[0].x = mtmp->mtrack[0].y = 0;
 	mtmp->mtrack[1].x = mtmp->mtrack[1].y = 0;
 
-#ifdef STEED
-	if (mtmp == u.usteed)
-	    return;	/* don't place steed on the map */
-#endif
+	if (mtmp == u.usteed) {
+		return;	/* don't place steed on the map */
+	}
 	if (with_you) {
 	    /* When a monster accompanies you, sometimes it will arrive
 	       at your intended destination and you'll end up next to
@@ -524,33 +517,25 @@ void
 keepdogs(pets_only)
 boolean pets_only;	/* true for ascension or final escape */
 {
-	register struct monst *mtmp, *mtmp2;
-	register struct obj *obj;
+	struct monst *mtmp, *mtmp2;
+	struct obj *obj;
 	int num_segs;
 	boolean stay_behind;
-#ifdef BLACKMARKET
 	extern d_level new_dlevel;	/* in do.c */
-#endif /* BLACKMARKET */
 
 	for (mtmp = fmon; mtmp; mtmp = mtmp2) {
 	    mtmp2 = mtmp->nmon;
 	    if (DEADMONSTER(mtmp)) continue;
 	    if (pets_only && !mtmp->mtame) continue;
-	    if (((monnear(mtmp, u.ux, u.uy) && levl_follower(mtmp)) ||
-#ifdef STEED
-			(mtmp == u.usteed) ||
-#endif
+	    if (((monnear(mtmp, u.ux, u.uy) && levl_follower(mtmp)) || (mtmp == u.usteed) ||
 		/* the wiz will level t-port from anywhere to chase
 		   the amulet; if you don't have it, will chase you
 		   only if in range. -3. */
 			(u.uhave.amulet && mtmp->iswiz))
 		&& ((!mtmp->msleeping && mtmp->mcanmove)
-#ifdef STEED
 		    /* eg if level teleport or new trap, steed has no control
 		       to avoid following */
-		    || (mtmp == u.usteed)
-#endif
-		    )
+		    || (mtmp == u.usteed))
 		/* monster won't follow if it hasn't noticed you yet */
 		&& !(mtmp->mstrategy & STRAT_WAITFORU)) {
 		stay_behind = FALSE;
@@ -558,14 +543,12 @@ boolean pets_only;	/* true for ascension or final escape */
 			if (canseemon(mtmp))
 			    pline("%s is still eating.", Monnam(mtmp));
 			stay_behind = TRUE;
-#ifdef BLACKMARKET                
 		} else if (mtmp->mtame && 
 		    (Is_blackmarket(&new_dlevel) || Is_blackmarket(&u.uz))) {
 			pline("%s can't follow you %s.",
 			      Monnam(mtmp), Is_blackmarket(&u.uz) ?
 			      "through the portal" : "into the Black Market");
 			stay_behind = TRUE;
-#endif /* BLACKMARKET */
 		} else if (mon_has_amulet(mtmp)) {
 			if (canseemon(mtmp))
 			    pline("%s seems very disoriented for a moment.",
@@ -576,9 +559,9 @@ boolean pets_only;	/* true for ascension or final escape */
 			    pline("%s is still trapped.", Monnam(mtmp));
 			stay_behind = TRUE;
 		}
-#ifdef STEED
-		if (mtmp == u.usteed) stay_behind = FALSE;
-#endif
+		if (mtmp == u.usteed) {
+			stay_behind = FALSE;
+		}
 		if (stay_behind) {
 			if (mtmp->mleashed) {
 				pline("%s leash suddenly comes loose.",
@@ -593,7 +576,7 @@ boolean pets_only;	/* true for ascension or final escape */
 			set_residency(mtmp, TRUE);
 
 		if (mtmp->wormno) {
-		    register int cnt;
+		    int cnt;
 		    /* NOTE: worm is truncated to # segs = max wormno size */
 		    cnt = count_wsegs(mtmp);
 		    num_segs = min(cnt, MAX_NUM_WORMS - 1);
@@ -634,12 +617,12 @@ boolean pets_only;	/* true for ascension or final escape */
 
 void
 migrate_to_level(mtmp, tolev, xyloc, cc)
-	register struct monst *mtmp;
+	struct monst *mtmp;
 	xchar tolev;	/* destination level */
 	xchar xyloc;	/* MIGR_xxx destination xy location: */
 	coord *cc;	/* optional destination coordinates */
 {
-	register struct obj *obj;
+	struct obj *obj;
 	d_level new_lev;
 	xchar xyflags;
 	int num_segs = 0;	/* count of worm segments */
@@ -648,7 +631,7 @@ migrate_to_level(mtmp, tolev, xyloc, cc)
 	    set_residency(mtmp, TRUE);
 
 	if (mtmp->wormno) {
-	    register int cnt;
+	    int cnt;
 	  /* **** NOTE: worm is truncated to # segs = max wormno size **** */
 	    cnt = count_wsegs(mtmp);
 	    num_segs = min(cnt, MAX_NUM_WORMS - 1);
@@ -696,7 +679,7 @@ migrate_to_level(mtmp, tolev, xyloc, cc)
 int
 dogfood(mon,obj)
 struct monst *mon;
-register struct obj *obj;
+struct obj *obj;
 {
 	boolean carni = carnivorous(mon->data);
 	boolean herbi = herbivorous(mon->data);
@@ -803,10 +786,10 @@ register struct obj *obj;
 
 struct monst *
 tamedog(mtmp, obj)
-register struct monst *mtmp;
-register struct obj *obj;
+struct monst *mtmp;
+struct obj *obj;
 {
-	register struct monst *mtmp2;
+	struct monst *mtmp2;
 
 	/* The Wiz, Medusa and the quest nemeses aren't even made peaceful. */
 	if (mtmp->iswiz || mtmp->data == &mons[PM_MEDUSA]

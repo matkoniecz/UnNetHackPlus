@@ -39,16 +39,14 @@ int
 dosit()
 {
 	static const char sit_message[] = "sit on the %s.";
-	register struct trap *trap;
-	register int typ = levl[u.ux][u.uy].typ;
+	struct trap *trap;
+	int typ = levl[u.ux][u.uy].typ;
 
 
-#ifdef STEED
 	if (u.usteed) {
 	    You("are already sitting on %s.", mon_nam(u.usteed));
 	    return (0);
 	}
-#endif
 
 	if(!can_reach_floor())	{
 	    if (Levitation)
@@ -61,7 +59,7 @@ dosit()
 	}
 
 	if(OBJ_AT(u.ux, u.uy)) {
-	    register struct obj *obj;
+	    struct obj *obj;
 
 	    obj = level.objects[u.ux][u.uy];
 	    You("sit on %s.", the(xname(obj)));
@@ -205,7 +203,7 @@ dosit()
 			break;
 		    case 7:
 			{
-			register int cnt = rnd(10);
+			int cnt = rnd(10);
 
 			pline("A voice echoes:");
 			verbalize("Thy audience hath been summoned, %s!",
@@ -367,7 +365,6 @@ rndcurse()			/* curse a few inventory items at random! */
 	    update_inventory();
 	}
 
-#ifdef STEED
 	/* treat steed's saddle as extended part of hero's inventory */
 	if (u.usteed && !rn2(4) &&
 		(otmp = which_armor(u.usteed, W_SADDLE)) != 0 &&
@@ -384,7 +381,6 @@ rndcurse()			/* curse a few inventory items at random! */
 		otmp->bknown = TRUE;
 	    }
 	}
-#endif	/*STEED*/
 }
 
 void

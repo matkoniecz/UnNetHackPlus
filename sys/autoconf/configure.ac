@@ -1,5 +1,5 @@
-dnl	UNNETHACK autoconf template
-AC_INIT(UNNETHACK, 4.0.0, bhaak@gmx.net)
+dnl	UNNETHACKPLUS autoconf template
+AC_INIT(UNNETHACKPLUS, 4.7.0, https://github.com/Bulwersator/UnNetHackPlus/issues)
 dnl Avoid AC_REVISION() because we check configure into CVS
 dnl and it will cause confusing revision numbers to be included
 dnl in configure if developers forget to check in configure.ac
@@ -84,14 +84,14 @@ if test $host_os = mingw32; then
     CFLAGS="$CFLAGS -mno-cygwin -isystem /usr/include/mingw"
     LFLAGS="$LDFLAGS -mno-cygwin -L/usr/lib/mingw"
 
-    AC_MSG_CHECKING([for how to build UnNetHack key dynamic libraries])
+    AC_MSG_CHECKING([for how to build UnNetHackPlus key dynamic libraries])
     if test "$GCC" = yes; then
 	AC_MSG_RESULT([gcc])
 	AC_SUBST(NHKEYDLL_GCC,[])
     else
 	AC_MSG_RESULT([unknown])
 	if test "$enable_tty_graphics" = yes; then
-	    AC_MSG_ERROR([Don't know how to build UnNetHack key DLLs with $CC])
+	    AC_MSG_ERROR([Don't know how to build UnNetHackPlus key DLLs with $CC])
 	else
 	    AC_MSG_WARN([Can't enable tty graphics (key dynamic libraries)])
 	    NETHACK_AUTO_WIN_DISABLE(tty)
@@ -327,8 +327,6 @@ if test "$have_regex_h" = "yes"; then
 	#include <regex.h>
       ])
 fi
-AC_CHECK_TYPE(void,,AC_DEFINE(NOVOID, [], [No void type available]))
-
 
 dnl  ----- Check for library functions
 AC_CHECK_DECLS([strncmpi, strnicmp], AC_DEFINE(STRNCMPI, [], [Use strncmpi]))
@@ -394,35 +392,29 @@ NETHACK_ARG(data-librarian,[Data librarian],DLB,auto,
 NETHACK_ARG(sinks,[Kitchen sinks],SINKS,yes)
 # NETHACK_ARG(light-src-spell,[Spells are light sources],LIGHT_SRC_SPELL,yes)
 NETHACK_ARG(wallified-maze,[Fancy mazes],WALLIFIED_MAZE,yes)
-NETHACK_ARG(reincarnation,[Special Rogue-like levels],REINCARNATION,yes)
-NETHACK_ARG(blackmarket,[Blackmarket],BLACKMARKET,yes)
+# NETHACK_ARG(reincarnation,[Special Rogue-like levels],REINCARNATION,yes) - enabled uncoditionally
+# NETHACK_ARG(blackmarket,[Blackmarket],BLACKMARKET,yes) - enabled uncoditionally
 NETHACK_ARG(kops,[Keystone Kops],KOPS,yes)
-NETHACK_ARG(seduce,[Succubi/incubi seduction],SEDUCE,yes)
+# NETHACK_ARG(seduce,[Succubi/incubi seduction],SEDUCE,yes) - enabled uncoditionally
 # NETHACK_ARG(invisible-objects,[Invisible objects],INVISIBLE_OBJECTS,yes)
 # NETHACK_ARG(unpolypile,[Object unpolymorphing],UNPOLYPILE,yes)
 # NETHACK_ARG(wallet-o-p,[Perseus' Wallet],WALLET_O_P,yes)
 # NETHACK_ARG(lightsabers,[Lightsabers],LIGHTSABERS,yes)
-# NETHACK_ARG(d-saber,[Dimsabers],LIGHTSABERS,yes)
-# NETHACK_ARG(p-spoon,[Spoon],P_SPOON,yes)
 # NETHACK_ARG(firearms,[Guns and Bullets],FIREARMS,yes)
 # NETHACK_ARG(eaten-memory,[Remember which monsters have been eaten],
 #  EATEN_MEMORY,yes)
 NETHACK_ARG(randomized-planes,[Shuffling order of Elemental Planes],RANDOMIZED_PLANES,yes)
-NETHACK_ARG(steed,[Ability to ride monsters],STEED,yes)
-# NETHACK_ARG(dwarf,[Dwarf race],DWARF,yes)
-NETHACK_ARG(tourist,[Tourist class],TOURIST,yes)
+# NETHACK_ARG(steed,[Ability to ride monsters],STEED,yes) - enabled uncoditionally
+# NETHACK_ARG(tourist,[Tourist class],TOURIST,yes) - enabled uncoditionally
 # NETHACK_ARG(yeoman,[Yeoman class],YEOMAN,yes)
-# NETHACK_ARG(zouthern,[Zoutherner class],ZOUTHERN,no)
 NETHACK_ARG(redo,[Redo last command],REDO,yes)
 NETHACK_ARG(clipping,[Allow smaller screens],CLIPPING,yes)
 NETHACK_ARG(menu-color,[TTY graphics menu color],MENU_COLOR,yes)
 if test "$enable_tty_graphics" != "no"; then
 NETHACK_ARG(status-color,[TTY graphics status color],STATUS_COLORS,yes)
 fi
-NETHACK_ARG(auto-open,[Open doors by walking into them],AUTO_OPEN,yes)
+# NETHACK_ARG(auto-open,[Open doors by walking into them],AUTO_OPEN,yes) - enabled uncoditionally
 NETHACK_ARG(elbereth,[Engraving the E-word repels monsters],ELBERETH,yes)
-# NETHACK_ARG(noartifactwish,[Prevent wishing for special artifacts],
-#  NOARTIFACTWISH,no)
 # NETHACK_ARG(no-bones,[Disable loading and saving bones levels],NO_BONES,no)
 if test $host_os != mingw32; then
  NETHACK_ARG(bones-pool,[Multiple bones per level],BONES_POOL,yes)
@@ -430,17 +422,14 @@ fi
 NETHACK_ARG(user-sounds,
   [Allow user-defined mapping from messages to sounds)],
   USER_SOUNDS,no)
-NETHACK_ARG(exp-on-botl,[Show experience on bottom line],EXP_ON_BOTL,yes)
+# NETHACK_ARG(exp-on-botl,[Show experience on bottom line],EXP_ON_BOTL,yes) - enabled uncoditionally
 NETHACK_ARG(score-on-botl,[Show score on bottom line],SCORE_ON_BOTL,no)
 NETHACK_ARG(realtime-on-botl,[Show elapsed time on bottom line],REALTIME_ON_BOTL,no)
 NETHACK_ARG(high-score-comparison-by-uid,[Compare High Score entries by user id instead of user name],PERS_IS_UID,no)
-#NETHACK_ARG(borg,[Borg player (only under DOS)],BORG,no)
 # NETHACK_ARG(keep-save,[Keep save files after restore],KEEP_SAVE,no)
-# NETHACK_ARG(charon,[Charon's boat, enables Cerebus (not implemented)],CHARON,no)
-# NETHACK_ARG(show-dmg,[Display damage reports],SHOW_DMG,yes)
 # NETHACK_ARG(show-weight,[Display object weight],SHOW_WEIGHT,yes)
 # NETHACK_ARG(other-services,[Shopkeeper services],OTHER_SERVICES,yes)
-NETHACK_ARG(paranoid,[Require some questions to be answered with 'yes' instead of 'y'],PARANOID,yes)
+# NETHACK_ARG(paranoid,[Require some questions to be answered with 'yes' instead of 'y'],PARANOID,yes) - enabled uncoditionally
 NETHACK_ARG(shell,[Start a shell from within the game],SHELL,no)
 NETHACK_ARG(show-born,[Display number of created monsters at the end of game],SHOW_BORN,yes)
 NETHACK_ARG(show-extinct,[Display extinct monsters at the end of game],SHOW_EXTINCT,yes)
@@ -488,7 +477,7 @@ fi
 
 NETHACK_ARG_WITH_PARAM(whereis-file,[Log information about running games],WHEREIS_FILE,no,FILE,[%n.whereis])
 
-NETHACK_ARG_WITH_PARAM(wizmode,[enable wizard mode for the specified user],WIZARD,yes,USER,[wizard])
+# NETHACK_ARG_WITH_PARAM(wizmode,[enable wizard mode for the specified user],WIZARD,yes,USER,[wizard]) - enabled uncoditionally
 
 if test "$CHOWN" != "true"; then
     AC_MSG_CHECKING([for owner of installed files])
@@ -540,9 +529,9 @@ AC_DEFUN([NETHACK_DIR_SET],
    else
      # set default value if FILE_AREAS is not defined
      if test "$6" != "FILE_AREA_SAVE" ; then
-       tmp_installdir=[${datadir}/unnethack]
+       tmp_installdir=[${datadir}/unnethackplus]
      else
-       tmp_installdir=[${datadir}/unnethack/save]
+       tmp_installdir=[${datadir}/unnethackplus/save]
      fi
      AC_SUBST($6,[${tmp_installdir}])
      AC_MSG_RESULT([default value: ${tmp_installdir}])
@@ -551,17 +540,17 @@ AC_DEFUN([NETHACK_DIR_SET],
 
 # set doc directory manually
 if test "$enable_file_areas" != "no" ; then
-  AC_SUBST(FILE_AREA_DOC,[${docdir}/unnethack])
-  AC_DEFINE_UNQUOTED(FILE_AREA_DOC, [AUTOCONF_DOCDIR"/unnethack"],
+  AC_SUBST(FILE_AREA_DOC,[${docdir}/unnethackplus])
+  AC_DEFINE_UNQUOTED(FILE_AREA_DOC, [AUTOCONF_DOCDIR"/unnethackplus"],
     [Location of human-readable documentation])
 else
   # ignore ${docdir} if FILE_AREAS is not defined
-  AC_SUBST(FILE_AREA_DOC,[${datadir}/unnethack])
+  AC_SUBST(FILE_AREA_DOC,[${datadir}/unnethackplus])
 fi
 
-NETHACK_DIR_SET(gamesdir, gamesdir, [LOCALSTATEDIR/unnethack],
-		[${localstatedir}/unnethack],
-		[AUTOCONF_LOCALSTATEDIR"/unnethack"],
+NETHACK_DIR_SET(gamesdir, gamesdir, [LOCALSTATEDIR/unnethackplus],
+		[${localstatedir}/unnethackplus],
+		[AUTOCONF_LOCALSTATEDIR"/unnethackplus"],
 		FILE_AREA_VAR, [Location of other files which may be modified])
 
 NETHACK_DIR_SET(bonesdir, bones, [GAMESDIR/bones],
@@ -579,14 +568,14 @@ NETHACK_DIR_SET(leveldir, level, [GAMESDIR/level],
 		[FILE_AREA_VAR"/level"],
 		FILE_AREA_LEVL, [Location of level files (r/w)])
 
-NETHACK_DIR_SET(sharedir, share, [DATADIR/unnethack],
-		[${datadir}/unnethack],
-		[AUTOCONF_DATADIR"/unnethack"],
+NETHACK_DIR_SET(sharedir, share, [DATADIR/unnethackplus],
+		[${datadir}/unnethackplus],
+		[AUTOCONF_DATADIR"/unnethackplus"],
 		FILE_AREA_SHARE, [For read-only, architechure independent, files])
 
-NETHACK_DIR_SET(unsharedir, unshare, [DATADIR/unnethack],
-		[${datadir}/unnethack],
-		[AUTOCONF_DATADIR"/unnethack"],
+NETHACK_DIR_SET(unsharedir, unshare, [DATADIR/unnethackplus],
+		[${datadir}/unnethackplus],
+		[AUTOCONF_DATADIR"/unnethackplus"],
 		FILE_AREA_UNSHARE, [For read-only, architechure dependent, files])
 
 

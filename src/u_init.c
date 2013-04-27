@@ -14,7 +14,7 @@ struct trobj {
 
 STATIC_DCL void FDECL(ini_inv, (struct trobj *));
 STATIC_DCL void FDECL(knows_object,(int));
-STATIC_DCL void FDECL(knows_class,(CHAR_P));
+STATIC_DCL void FDECL(knows_class,(char));
 STATIC_DCL boolean FDECL(restricted_spell_discipline, (int));
 
 #define UNDEF_TYP	0
@@ -24,8 +24,9 @@ STATIC_DCL boolean FDECL(restricted_spell_discipline, (int));
 /*
  *	Initial inventory for the various roles.
  */
-
 static struct trobj Archeologist[] = {
+#define A_POTION_OF_OBJECT_DETECTION	8
+#define A_SCROLL_OF_GOLD_DETECTION	9
 	/* if adventure has a name...  idea from tan@uvm-gen */
 	{ BULLWHIP, 2, WEAPON_CLASS, 1, UNDEF_BLESS },
 	{ LEATHER_JACKET, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
@@ -35,6 +36,8 @@ static struct trobj Archeologist[] = {
 	{ TINNING_KIT, UNDEF_SPE, TOOL_CLASS, 1, UNDEF_BLESS },
 	{ TOUCHSTONE, 0, GEM_CLASS, 1, 0 },
 	{ SACK, 0, TOOL_CLASS, 1, 0 },
+	{ POT_OBJECT_DETECTION, 0, POTION_CLASS, 1, UNDEF_BLESS },	/* quan is variable */
+	{ SCR_GOLD_DETECTION, 0, SCROLL_CLASS, 1, UNDEF_BLESS },	/* quan is variable */
 	{ 0, 0, 0, 0, 0 }
 };
 static struct trobj Barbarian[] = {
@@ -138,7 +141,6 @@ static struct trobj Samurai[] = {
 	{ SPLINT_MAIL, 0, ARMOR_CLASS, 1, UNDEF_BLESS },
 	{ 0, 0, 0, 0, 0 }
 };
-#ifdef TOURIST
 static struct trobj Tourist[] = {
 #define T_DARTS		0
 	{ DART, 2, WEAPON_CLASS, 25, UNDEF_BLESS },	/* quan is variable */
@@ -150,7 +152,6 @@ static struct trobj Tourist[] = {
 	{ CREDIT_CARD, 0, TOOL_CLASS, 1, 0 },
 	{ 0, 0, 0, 0, 0 }
 };
-#endif
 static struct trobj Valkyrie[] = {
 	{ LONG_SWORD, 1, WEAPON_CLASS, 1, UNDEF_BLESS },
 	{ DAGGER, 0, WEAPON_CLASS, 1, UNDEF_BLESS },
@@ -213,7 +214,6 @@ static struct trobj Candle[] = {
 	{ TALLOW_CANDLE, 0, TOOL_CLASS, 1, 0 },
 	{ 0, 0, 0, 0, 0 }
 };
-#ifdef TOURIST
 static struct trobj Leash[] = {
 	{ LEASH, 0, TOOL_CLASS, 1, 0 },
 	{ 0, 0, 0, 0, 0 }
@@ -222,7 +222,10 @@ static struct trobj Towel[] = {
 	{ TOWEL, 0, TOOL_CLASS, 1, 0 },
 	{ 0, 0, 0, 0, 0 }
 };
-#endif	/* TOURIST */
+static struct trobj Key[] = {
+	{ SKELETON_KEY, 0, TOOL_CLASS, 1, 0 },
+	{ 0, 0, 0, 0, 0 }
+};
 static struct trobj Wishing[] = {
 	{ WAN_WISHING, 3, WAND_CLASS, 1, 0 },
 	{ 0, 0, 0, 0, 0 }
@@ -275,9 +278,7 @@ static const struct def_skill Skill_A[] = {
     { P_UNICORN_HORN, P_SKILLED },
     { P_ATTACK_SPELL, P_BASIC },	{ P_HEALING_SPELL, P_BASIC },
     { P_DIVINATION_SPELL, P_EXPERT},	{ P_MATTER_SPELL, P_BASIC},
-#ifdef STEED
     { P_RIDING, P_BASIC },
-#endif
     { P_TWO_WEAPON_COMBAT, P_BASIC },
     { P_BARE_HANDED_COMBAT, P_EXPERT },
     { P_NONE, 0 }
@@ -294,9 +295,7 @@ static const struct def_skill Skill_B[] = {
     { P_QUARTERSTAFF, P_BASIC },	{ P_SPEAR, P_SKILLED },
     { P_TRIDENT, P_SKILLED },		{ P_BOW, P_BASIC },
     { P_ATTACK_SPELL, P_SKILLED },
-#ifdef STEED
     { P_RIDING, P_BASIC },
-#endif
     { P_TWO_WEAPON_COMBAT, P_BASIC },
     { P_BARE_HANDED_COMBAT, P_MASTER },
     { P_NONE, 0 }
@@ -345,9 +344,7 @@ static const struct def_skill Skill_K[] = {
     { P_BOW, P_BASIC },			{ P_CROSSBOW, P_SKILLED },
     { P_ATTACK_SPELL, P_SKILLED },	{ P_HEALING_SPELL, P_SKILLED },
     { P_CLERIC_SPELL, P_SKILLED },
-#ifdef STEED
     { P_RIDING, P_EXPERT },
-#endif
     { P_TWO_WEAPON_COMBAT, P_SKILLED },
     { P_BARE_HANDED_COMBAT, P_EXPERT },
     { P_NONE, 0 }
@@ -393,9 +390,7 @@ static const struct def_skill Skill_R[] = {
     { P_DART, P_EXPERT },		{ P_SHURIKEN, P_SKILLED },
     { P_DIVINATION_SPELL, P_SKILLED },	{ P_ESCAPE_SPELL, P_SKILLED },
     { P_MATTER_SPELL, P_SKILLED },
-#ifdef STEED
     { P_RIDING, P_BASIC },
-#endif
     { P_TWO_WEAPON_COMBAT, P_EXPERT },
     { P_BARE_HANDED_COMBAT, P_EXPERT },
     { P_NONE, 0 }
@@ -415,9 +410,7 @@ static const struct def_skill Skill_Ran[] = {
     { P_HEALING_SPELL, P_BASIC },
     { P_DIVINATION_SPELL, P_EXPERT },
     { P_ESCAPE_SPELL, P_BASIC },
-#ifdef STEED
     { P_RIDING, P_BASIC },
-#endif
     { P_BARE_HANDED_COMBAT, P_BASIC },
     { P_NONE, 0 }
 };
@@ -432,15 +425,12 @@ static const struct def_skill Skill_S[] = {
     { P_JAVELIN, P_BASIC },		{ P_LANCE, P_SKILLED },
     { P_BOW, P_EXPERT },		{ P_SHURIKEN, P_EXPERT },
     { P_ATTACK_SPELL, P_SKILLED },	{ P_CLERIC_SPELL, P_SKILLED },
-#ifdef STEED
     { P_RIDING, P_SKILLED },
-#endif
     { P_TWO_WEAPON_COMBAT, P_EXPERT },
     { P_MARTIAL_ARTS, P_MASTER },
     { P_NONE, 0 }
 };
 
-#ifdef TOURIST
 static const struct def_skill Skill_T[] = {
     { P_DAGGER, P_EXPERT },		{ P_KNIFE,  P_SKILLED },
     { P_AXE, P_BASIC },			{ P_PICK_AXE, P_BASIC },
@@ -458,14 +448,11 @@ static const struct def_skill Skill_T[] = {
     { P_WHIP, P_BASIC },		{ P_UNICORN_HORN, P_SKILLED },
     { P_DIVINATION_SPELL, P_BASIC },	{ P_ENCHANTMENT_SPELL, P_BASIC },
     { P_ESCAPE_SPELL, P_SKILLED },
-#ifdef STEED
     { P_RIDING, P_BASIC },
-#endif
     { P_TWO_WEAPON_COMBAT, P_SKILLED },
     { P_BARE_HANDED_COMBAT, P_SKILLED },
     { P_NONE, 0 }
 };
-#endif /* TOURIST */
 
 static const struct def_skill Skill_V[] = {
     { P_DAGGER, P_EXPERT },		{ P_AXE, P_EXPERT },
@@ -478,9 +465,7 @@ static const struct def_skill Skill_V[] = {
     { P_TRIDENT, P_BASIC },		{ P_LANCE, P_SKILLED },
     { P_SLING, P_BASIC },
     { P_ATTACK_SPELL, P_BASIC },	{ P_ESCAPE_SPELL, P_BASIC },
-#ifdef STEED
     { P_RIDING, P_SKILLED },
-#endif
     { P_TWO_WEAPON_COMBAT, P_SKILLED },
     { P_BARE_HANDED_COMBAT, P_EXPERT },
     { P_NONE, 0 }
@@ -498,9 +483,7 @@ static const struct def_skill Skill_W[] = {
     { P_DIVINATION_SPELL, P_EXPERT },	{ P_ENCHANTMENT_SPELL, P_SKILLED },
     { P_CLERIC_SPELL, P_SKILLED },	{ P_ESCAPE_SPELL, P_EXPERT },
     { P_MATTER_SPELL, P_EXPERT },
-#ifdef STEED
     { P_RIDING, P_BASIC },
-#endif
     { P_BARE_HANDED_COMBAT, P_BASIC },
     { P_NONE, 0 }
 };
@@ -508,7 +491,7 @@ static const struct def_skill Skill_W[] = {
 
 STATIC_OVL void
 knows_object(obj)
-register int obj;
+int obj;
 {
 	discover_object(obj,TRUE,FALSE);
 	objects[obj].oc_pre_discovered = 1;	/* not a "discovery" */
@@ -519,9 +502,9 @@ register int obj;
  */
 STATIC_OVL void
 knows_class(sym)
-register char sym;
+char sym;
 {
-	register int ct;
+	int ct;
 	for (ct = 1; ct < NUM_OBJECTS; ct++)
 		if (objects[ct].oc_class == sym && !objects[ct].oc_magic &&
 		    !Is_dragon_armor(ct))
@@ -531,7 +514,7 @@ register char sym;
 void
 u_init()
 {
-	register int i;
+	int i;
 
 	flags.female = flags.initgend;
 	flags.beginner = 1;
@@ -544,9 +527,7 @@ u_init()
 #if 0	/* documentation of more zero values as desirable */
 	u.usick_cause[0] = 0;
 	u.uluck  = u.moreluck = 0;
-# ifdef TOURIST
 	uarmu = 0;
-# endif
 	uarm = uarmc = uarmh = uarms = uarmg = uarmf = 0;
 	uwep = uball = uchain = uleft = uright = 0;
 	uswapwep = uquiver = 0;
@@ -638,10 +619,13 @@ u_init()
 	 * skew the results if we use rn2(2)...  --KAA
 	 */
 	case PM_ARCHEOLOGIST:
+		Archeologist[A_POTION_OF_OBJECT_DETECTION].trquan = rn2(3);
+		Archeologist[A_SCROLL_OF_GOLD_DETECTION].trquan = rn2(3);
 		ini_inv(Archeologist);
 		if(!rn2(10)) ini_inv(Tinopener);
-		else if(!rn2(4)) ini_inv(Lamp);
-		else if(!rn2(10)) ini_inv(Magicmarker);
+		if(!rn2(4)) ini_inv(Lamp);
+		if(!rn2(20)) ini_inv(Magicmarker);
+		ini_inv(Key);
 		knows_object(SACK);
 		knows_object(TOUCHSTONE);
 		skill_init(Skill_A);
@@ -736,7 +720,6 @@ u_init()
 		knows_class(ARMOR_CLASS);
 		skill_init(Skill_S);
 		break;
-#ifdef TOURIST
 	case PM_TOURIST:
 		Tourist[T_DARTS].trquan = rn1(20, 21);
 #ifndef GOLDOBJ
@@ -751,7 +734,6 @@ u_init()
 		else if(!rn2(25)) ini_inv(Magicmarker);
 		skill_init(Skill_T);
 		break;
-#endif
 	case PM_VALKYRIE:
 		ini_inv(Valkyrie);
 		if(!rn2(6)) ini_inv(Lamp);
@@ -868,11 +850,9 @@ u_init()
 		break;
 	}
 
-#ifdef TOURIST
 	/* Towel Day: In Memoriam Douglas Adams */
 	if (towelday())
 		ini_inv(Towel);
-#endif
 
 	/*** Conduct specific initialisation ***/
 
@@ -887,11 +867,9 @@ u_init()
 	if (discover)
 		ini_inv(Wishing);
 
-#ifdef WIZARD
-	if (wizard)
+	if (wizard) {
 		read_wizkit();
-#endif
-
+	}
 #ifndef GOLDOBJ
 	u.ugold0 += hidden_gold();	/* in case sack has gold in it */
 #else
@@ -907,7 +885,7 @@ u_init()
  */
 	for(i = 0; i < A_MAX; i++)
 	    if(!rn2(20)) {
-		register int xd = rn2(7) - 2;	/* biased variation */
+		int xd = rn2(7) - 2;	/* biased variation */
 		(void) adjattrib(i, xd, TRUE);
 		if (ABASE(i) < AMAX(i)) AMAX(i) = ABASE(i);
 	    }
@@ -942,9 +920,7 @@ int otyp;
      case PM_RANGER:		skills = Skill_Ran; break;
      case PM_ROGUE:		skills = Skill_R; break;
      case PM_SAMURAI:		skills = Skill_S; break;
-#ifdef TOURIST
      case PM_TOURIST:		skills = Skill_T; break;
-#endif
      case PM_VALKYRIE:		skills = Skill_V; break;
      case PM_WIZARD:		skills = Skill_W; break;
      default:			skills = 0; break;	/* lint suppression */
@@ -959,12 +935,16 @@ int otyp;
 
 STATIC_OVL void
 ini_inv(trop)
-register struct trobj *trop;
+struct trobj *trop;
 {
 	struct obj *obj;
 	int otyp, i;
 
 	while (trop->trclass) {
+		if(trop->trquan == 0) {
+			trop++;
+			continue;
+		}
 		if (trop->trotyp != UNDEF_TYP) {
 			otyp = (int)trop->trotyp;
 			if (urace.malenum != PM_HUMAN) {
@@ -1016,14 +996,11 @@ register struct trobj *trop;
 				|| (otyp == SCR_ENCHANT_WEAPON &&
 				    Role_if(PM_MONK))
 				/* wizard patch -- they already have one */
-				|| (otyp == SPE_FORCE_BOLT &&
-				    Role_if(PM_WIZARD))
+				|| (otyp == SPE_FORCE_BOLT && Role_if(PM_WIZARD))
 				/* powerful spells are either useless to
 				   low level players or unbalancing; also
 				   spells in restricted skill categories */
-				|| (obj->oclass == SPBOOK_CLASS &&
-				    (objects[otyp].oc_level > 3 ||
-				    restricted_spell_discipline(otyp)))
+				|| (obj->oclass == SPBOOK_CLASS && (objects[otyp].oc_level > 3 || restricted_spell_discipline(otyp)))
 							) {
 				dealloc_obj(obj);
 				obj = mkobj(trop->trclass, FALSE);
@@ -1102,10 +1079,8 @@ register struct trobj *trop;
 				setworn(obj, W_ARMH);
 			else if (is_gloves(obj) && !uarmg)
 				setworn(obj, W_ARMG);
-#ifdef TOURIST
 			else if (is_shirt(obj) && !uarmu)
 				setworn(obj, W_ARMU);
-#endif
 			else if (is_cloak(obj) && !uarmc)
 				setworn(obj, W_ARMC);
 			else if (is_boots(obj) && !uarmf)
@@ -1128,15 +1103,8 @@ register struct trobj *trop;
 		if ((obj->otyp == BLINDFOLD) && u.roleplay.blindfolded)
 				setworn(obj, W_TOOL);
 
-#if !defined(PYRAMID_BUG) && !defined(MAC)
 		if(--trop->trquan) continue;	/* make a similar object */
-#else
-		if(trop->trquan) {		/* check if zero first */
-			--trop->trquan;
-			if(trop->trquan)
-				continue;	/* make a similar object */
-		}
-#endif
+
 		trop++;
 	}
 }

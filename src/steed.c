@@ -5,8 +5,6 @@
 #include "hack.h"
 
 
-#ifdef STEED
-
 /* Monsters that might be ridden */
 static NEARDATA const char steeds[] = {
 	S_QUADRUPED, S_UNICORN, S_ANGEL, S_CENTAUR, S_DRAGON, S_JABBERWOCK, '\0'
@@ -83,12 +81,11 @@ use_saddle(otmp)
 	    char kbuf[BUFSZ];
 
 	    You("touch %s.", mon_nam(mtmp));
- 	    if (!(poly_when_stoned(youmonst.data) && polymon(PM_STONE_GOLEM))) {
+ 	    if (!polymorph_player_instead_stoning()) {
 		Sprintf(kbuf, "attempting to saddle %s", an(mtmp->data->mname));
 		instapetrify(kbuf);
  	    }
 	}
-#ifdef WEBB_DISINT
 	if (touch_disintegrates(ptr)){
 		char kbuf[BUFSZ];
 		if(!oresist_disintegration(otmp)){
@@ -98,7 +95,6 @@ use_saddle(otmp)
 		Sprintf(kbuf,"attempting to saddle %s", a_monnam(mtmp));
 		instadisintegrate(kbuf);
 	}
-#endif
 
 	if (ptr == &mons[PM_INCUBUS] || ptr == &mons[PM_SUCCUBUS]) {
 	    pline("Shame on you!");
@@ -184,16 +180,16 @@ doride()
 {
 	boolean forcemount = FALSE;
 
-	if (u.usteed)
-	    dismount_steed(DISMOUNT_BYCHOICE);
-	else if (getdir((char *)0) && isok(u.ux+u.dx, u.uy+u.dy)) {
-#ifdef WIZARD
-	if (wizard && yn("Force the mount to succeed?") == 'y')
-		forcemount = TRUE;
-#endif
-	    return (mount_steed(m_at(u.ux+u.dx, u.uy+u.dy), forcemount));
-	} else
-	    return 0;
+	if (u.usteed) {
+		dismount_steed(DISMOUNT_BYCHOICE);
+	} else if (getdir((char *)0) && isok(u.ux+u.dx, u.uy+u.dy)) {
+		if (wizard && yn("Force the mount to succeed?") == 'y') {
+			forcemount = TRUE;
+		}
+		return (mount_steed(m_at(u.ux+u.dx, u.uy+u.dy), forcemount));
+	} else {
+		return 0;
+	}
 	return 1;
 }
 
@@ -231,12 +227,11 @@ mount_steed(mtmp, force)
 	 */
 	if (Wounded_legs) {
 	    Your("%s are in no shape for riding.", makeplural(body_part(LEG)));
-#ifdef WIZARD
-	    if (force && wizard && yn("Heal your legs?") == 'y')
+	    if (force && wizard && yn("Heal your legs?") == 'y') {
 		HWounded_legs = EWounded_legs = 0;
-	    else
-#endif
-	    return (FALSE);
+	    } else {
+		return (FALSE);
+	    }
 	}
 
 	if (Upolyd && (!humanoid(youmonst.data) || verysmall(youmonst.data) ||
@@ -649,7 +644,5 @@ int x, y;
     if (mon->data == &mons[PM_GIANT_TURTLE] && (!mon->minvis || See_invisible))
 	block_point(x,y);
 }
-
-#endif /* STEED */
 
 /*steed.c*/

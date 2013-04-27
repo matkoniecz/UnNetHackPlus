@@ -14,12 +14,12 @@ static NEARDATA const char *gate_str;
 
 extern boolean notonhead;	/* for long worms */
 
-STATIC_DCL void FDECL(kickdmg, (struct monst *, BOOLEAN_P));
-STATIC_DCL void FDECL(kick_monster, (XCHAR_P, XCHAR_P));
-STATIC_DCL int FDECL(kick_object, (XCHAR_P, XCHAR_P));
+STATIC_DCL void FDECL(kickdmg, (struct monst *, boolean));
+STATIC_DCL void FDECL(kick_monster, (xchar, xchar));
+STATIC_DCL int FDECL(kick_object, (xchar, xchar));
 STATIC_DCL char *FDECL(kickstr, (char *));
-STATIC_DCL void FDECL(otransit_msg, (struct obj *, BOOLEAN_P, long));
-STATIC_DCL void FDECL(drop_to, (coord *,SCHAR_P));
+STATIC_DCL void FDECL(otransit_msg, (struct obj *, boolean, long));
+STATIC_DCL void FDECL(drop_to, (coord *,schar));
 
 static NEARDATA struct obj *kickobj;
 
@@ -27,11 +27,11 @@ static const char kick_passes_thru[] = "kick passes harmlessly through";
 
 STATIC_OVL void
 kickdmg(mon, clumsy)
-register struct monst *mon;
-register boolean clumsy;
+struct monst *mon;
+boolean clumsy;
 {
-	register int mdx, mdy;
-	register int dmg = ( ACURRSTR + ACURR(A_DEX) + ACURR(A_CON) )/ 15;
+	int mdx, mdy;
+	int dmg = ( ACURRSTR + ACURR(A_DEX) + ACURR(A_CON) )/ 15;
 	int kick_skill = P_NONE;
 	int blessed_foot_damage = 0;
 	boolean trapkilled = FALSE;
@@ -118,11 +118,11 @@ register boolean clumsy;
 
 STATIC_OVL void
 kick_monster(x, y)
-register xchar x, y;
+xchar x, y;
 {
-	register boolean clumsy = FALSE;
-	register struct monst *mon = m_at(x, y);
-	register int i, j;
+	boolean clumsy = FALSE;
+	struct monst *mon = m_at(x, y);
+	int i, j;
 
 	bhitpos.x = x;
 	bhitpos.y = y;
@@ -149,7 +149,6 @@ register xchar x, y;
 		/* we only care about kicking attacks here */
 		if (uattk->aatyp != AT_KICK) continue;
 
-#ifdef WEBB_DISINT
 		if (touch_disintegrates(mon->data) && !mon->mcan && mon->mhp>6){
 			if(uarmf) {
 				if(!oresist_disintegration(uarmf)){
@@ -166,9 +165,7 @@ register xchar x, y;
 				dis_dmg = instadisintegrate(kbuf);
 				break;
 			}
-		} else
-#endif
-		if (mon->data == &mons[PM_SHADE] &&
+		} else if (mon->data == &mons[PM_SHADE] &&
 			(!uarmf || !uarmf->blessed)) {
 		    /* doesn't matter whether it would have hit or missed,
 		       and shades have no passive counterattack */
@@ -255,11 +252,10 @@ doit:
  */
 boolean
 ghitm(mtmp, gold)
-register struct monst *mtmp;
-register struct obj *gold;
+struct monst *mtmp;
+struct obj *gold;
 {
 	boolean msg_given = FALSE;
-#ifdef WEBB_DISINT
 	if (touch_disintegrates(mtmp->data) && !mtmp->mcan && mtmp->mhp >6 &&
 # ifdef GOLDOBJ
 	   !oresist_disintegration(gold)
@@ -272,7 +268,6 @@ register struct obj *gold;
 		dealloc_obj(gold);
 		return TRUE;
 	}
-#endif
 
 	if(!likes_gold(mtmp->data) && !mtmp->isshk && !mtmp->ispriest
 			&& !is_mercenary(mtmp->data)) {
@@ -440,7 +435,7 @@ kick_object(x, y)
 xchar x, y;
 {
 	int range;
-	register struct monst *mon, *shkp;
+	struct monst *mon, *shkp;
 	struct trap *trap;
 	char bhitroom;
 	boolean costly, isgold, slide = FALSE;
@@ -475,7 +470,7 @@ xchar x, y;
 
 	    You("kick the %s with your bare %s.",
 		corpse_xname(kickobj, TRUE), makeplural(body_part(FOOT)));
-	    if (!(poly_when_stoned(youmonst.data) && polymon(PM_STONE_GOLEM))) {
+	    if (!polymorph_player_instead_stoning()) {
 		You("turn to stone...");
 		killer_format = KILLED_BY;
 		/* KMH -- otmp should be kickobj */
@@ -667,7 +662,7 @@ dokick()
 {
 	int x, y;
 	int avrg_attrib;
-	register struct monst *mtmp;
+	struct monst *mtmp;
 	boolean no_kick = FALSE;
 	char buf[BUFSZ];
 
@@ -677,7 +672,6 @@ dokick()
 	} else if (verysmall(youmonst.data)) {
 		You("are too small to do any kicking.");
 		no_kick = TRUE;
-#ifdef STEED
 	} else if (u.usteed) {
 		if (yn_function("Kick your steed?", ynchars, 'y') == 'y') {
 		    You("kick %s.", mon_nam(u.usteed));
@@ -686,7 +680,6 @@ dokick()
 		} else {
 		    return 0;
 		}
-#endif
 	} else if (Wounded_legs) {
 		/* note: jump() has similar code */
 		long wl = (EWounded_legs & BOTH_SIDES);
@@ -870,7 +863,7 @@ dokick()
 		    } else goto ouch;
 		}
 		if(IS_THRONE(maploc->typ)) {
-		    register int i;
+		    int i;
 		    if(Levitation) goto dumb;
 		    if((Luck < 0 || maploc->doormask) && !rn2(3)) {
 			maploc->typ = ROOM;
@@ -1220,8 +1213,8 @@ struct obj *missile;
 xchar x, y, dlev;
 {
 	schar toloc;
-	register struct obj *obj, *obj2;
-	register struct monst *shkp;
+	struct obj *obj, *obj2;
+	struct monst *shkp;
 	long oct, dct, price, debit, robbed;
 	boolean angry, costly, isrock;
 	coord cc;
@@ -1413,11 +1406,7 @@ boolean shop_floor_obj;
 	if (breaktest(otmp)) {
 	    const char *result;
 
-	    if (objects[otmp->otyp].oc_material == GLASS
-#ifdef TOURIST
-		|| otmp->otyp == EXPENSIVE_CAMERA
-#endif
-		) {
+	    if (objects[otmp->otyp].oc_material == GLASS || otmp->otyp == EXPENSIVE_CAMERA) {
 		if (otmp->otyp == MIRROR)
 		    change_luck(-2);
 		result = "crash";
@@ -1459,8 +1448,8 @@ boolean shop_floor_obj;
 void
 obj_delivery()
 {
-	register struct obj *otmp, *otmp2;
-	register int nx, ny;
+	struct obj *otmp, *otmp2;
+	int nx, ny;
 	long where;
 
 	for (otmp = migrating_objs; otmp; otmp = otmp2) {
@@ -1499,8 +1488,8 @@ obj_delivery()
 
 STATIC_OVL void
 otransit_msg(otmp, nodrop, num)
-register struct obj *otmp;
-register boolean nodrop;
+struct obj *otmp;
+boolean nodrop;
 long num;
 {
 	char obuf[BUFSZ];

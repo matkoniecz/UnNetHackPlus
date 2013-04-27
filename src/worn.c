@@ -5,7 +5,7 @@
 #include "hack.h"
 
 STATIC_DCL void FDECL(m_lose_armor, (struct monst *,struct obj *));
-STATIC_DCL void FDECL(m_dowear_type, (struct monst *,long, BOOLEAN_P, BOOLEAN_P));
+STATIC_DCL void FDECL(m_dowear_type, (struct monst *,long, boolean, boolean));
 STATIC_DCL int FDECL(extra_pref, (struct monst *, struct obj *));
 
 const struct worn {
@@ -18,9 +18,7 @@ const struct worn {
 	{ W_ARMS, &uarms },
 	{ W_ARMG, &uarmg },
 	{ W_ARMF, &uarmf },
-#ifdef TOURIST
 	{ W_ARMU, &uarmu },
-#endif
 	{ W_RINGL, &uleft },
 	{ W_RINGR, &uright },
 	{ W_WEP, &uwep },
@@ -46,12 +44,12 @@ const struct worn {
 /* Updated to use the extrinsic and blocked fields. */
 void
 setworn(obj, mask)
-register struct obj *obj;
+struct obj *obj;
 long mask;
 {
-	register const struct worn *wp;
-	register struct obj *oobj;
-	register int p;
+	const struct worn *wp;
+	struct obj *oobj;
+	int p;
 
 	if ((mask & (W_ARM|I_SPECIAL)) == (W_ARM|I_SPECIAL)) {
 	    /* restoring saved game; no properties are conferred via skin */
@@ -122,10 +120,10 @@ long mask;
 /* Updated to use the extrinsic and blocked fields. */
 void
 setnotworn(obj)
-register struct obj *obj;
+struct obj *obj;
 {
-	register const struct worn *wp;
-	register int p;
+	const struct worn *wp;
+	int p;
 
 	if (!obj) return;
 	if (obj == uwep || obj == uswapwep) u.twoweap = 0;
@@ -344,10 +342,9 @@ boolean on, silently;
 	break;
     }
 
-#ifdef STEED
-	if (!on && mon == u.usteed && obj->otyp == SADDLE)
-	    dismount_steed(DISMOUNT_FELL);
-#endif
+	if (!on && mon == u.usteed && obj->otyp == SADDLE) {
+		dismount_steed(DISMOUNT_FELL);
+	}
 
     /* if couldn't see it but now can, or vice versa, update display */
     if (!silently && (unseen ^ !canseemon(mon)))
@@ -356,9 +353,9 @@ boolean on, silently;
 
 int
 find_mac(mon)
-register struct monst *mon;
+struct monst *mon;
 {
-	register struct obj *obj;
+	struct obj *obj;
 	int base = mon->data->ac;
 	long mwflags = mon->misc_worn_check;
 
@@ -387,7 +384,7 @@ register struct monst *mon;
  */
 void
 m_dowear(mon, creation)
-register struct monst *mon;
+struct monst *mon;
 boolean creation;
 {
 #define RACE_EXCEPTION TRUE
@@ -404,11 +401,9 @@ boolean creation;
 		return;
 
 	m_dowear_type(mon, W_AMUL, creation, FALSE);
-#ifdef TOURIST
 	/* can't put on shirt if already wearing suit */
 	if (!cantweararm(mon->data) || (mon->misc_worn_check & W_ARM))
 	    m_dowear_type(mon, W_ARMU, creation, FALSE);
-#endif
 	/* treating small as a special case allows
 	   hobbits, gnomes, and kobolds to wear cloaks */
 	if (!cantweararm(mon->data) || mon->data->msize == MZ_SMALL)
@@ -456,11 +451,9 @@ boolean racialexception;
 			continue;
 		    best = obj;
 		    goto outer_break; /* no such thing as better amulets */
-#ifdef TOURIST
 		case W_ARMU:
 		    if (!is_shirt(obj)) continue;
 		    break;
-#endif
 		case W_ARMC:
 		    if (!is_cloak(obj)) continue;
 		    break;
@@ -499,11 +492,7 @@ outer_break:
 
 	/* if wearing a cloak, account for the time spent removing
 	   and re-wearing it when putting on a suit or shirt */
-	if ((flag == W_ARM
-#ifdef TOURIST
-	  || flag == W_ARMU
-#endif
-			  ) && (mon->misc_worn_check & W_ARMC))
+	if ((flag == W_ARM || flag == W_ARMU) && (mon->misc_worn_check & W_ARMC))
 	    m_delay += 2;
 	/* when upgrading a piece of armor, account for time spent
 	   taking off current one */
@@ -547,7 +536,7 @@ which_armor(mon, flag)
 struct monst *mon;
 long flag;
 {
-	register struct obj *obj;
+	struct obj *obj;
 
 	for(obj = mon->minvent; obj; obj = obj->nobj)
 		if (obj->owornmask & flag) return obj;
@@ -625,7 +614,7 @@ mon_break_armor(mon, polyspot)
 struct monst *mon;
 boolean polyspot;
 {
-	register struct obj *otmp;
+	struct obj *otmp;
 	struct permonst *mdat = mon->data;
 	boolean vis = cansee(mon->mx, mon->my);
 	boolean handless_or_tiny = (nohands(mdat) || verysmall(mdat));
@@ -662,15 +651,14 @@ boolean polyspot;
 		    m_useup(mon, otmp);
 		}
 	    }
-#ifdef TOURIST
 	    if ((otmp = which_armor(mon, W_ARMU)) != 0) {
-		if (vis)
+		if (vis) {
 		    pline("%s shirt rips to shreds!", s_suffix(Monnam(mon)));
-		else
+		} else {
 		    You_hear("a ripping sound.");
+		}
 		m_useup(mon, otmp);
 	    }
-#endif
 	} else if (sliparm(mdat)) {
 	    if ((otmp = which_armor(mon, W_ARM)) != 0) {
 		if (vis)
@@ -693,7 +681,6 @@ boolean polyspot;
 		if (polyspot) bypass_obj(otmp);
 		m_lose_armor(mon, otmp);
 	    }
-#ifdef TOURIST
 	    if ((otmp = which_armor(mon, W_ARMU)) != 0) {
 		if (vis) {
 		    if (sliparm(mon->data))
@@ -706,7 +693,6 @@ boolean polyspot;
 		if (polyspot) bypass_obj(otmp);
 		m_lose_armor(mon, otmp);
 	    }
-#endif
 	}
 	if (handless_or_tiny) {
 	    /* [caller needs to handle weapon checks] */
@@ -754,7 +740,6 @@ boolean polyspot;
 		m_lose_armor(mon, otmp);
 	    }
 	}
-#ifdef STEED
 	if (!can_saddle(mon)) {
 	    if ((otmp = which_armor(mon, W_SADDLE)) != 0) {
 		if (polyspot) bypass_obj(otmp);
@@ -778,7 +763,6 @@ boolean polyspot;
 	    }
 	    dismount_steed(DISMOUNT_FELL);
 	}
-#endif
 	return;
 }
 

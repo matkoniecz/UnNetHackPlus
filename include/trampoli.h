@@ -26,7 +26,6 @@
 #define doprev_message() doprev_message_()
 #define timed_occupation() timed_occupation_()
 #define wiz_attributes()   wiz_attributes_()
-#ifdef WIZARD
 #define wiz_detect()	   wiz_detect_()
 #define wiz_genesis()	   wiz_genesis_()
 #define wiz_identify()	   wiz_identify_()
@@ -34,7 +33,6 @@
 #define wiz_map()	   wiz_map_()
 #define wiz_where()	   wiz_where_()
 #define wiz_wish()	   wiz_wish_()
-#endif
 
 /* ### display.c ### */
 #define doredraw() doredraw_()
@@ -98,7 +96,7 @@
 #define done1(sig)  done1_(sig)
 #define done2()     done2_()
 #define done_intr(sig) done_intr_(sig)
-#if defined(UNIX) || defined (VMS) || defined(__EMX__)
+#if defined(UNIX) || defined (VMS)
 #define done_hangup(sig) done_hangup_(sig)
 #endif
 
@@ -184,12 +182,6 @@
 #define doquickwhatis()   doquickwhatis_()
 
 
-/* ### pcsys.c ### */
-#ifdef SHELL
-#define dosh()	     dosh_()
-#endif /* SHELL */
-
-
 /* ### pickup.c ### */
 #define ck_bag(x)	 ck_bag_(x)
 #define doloot()	 doloot_()
@@ -220,7 +212,7 @@
 
 /* ### save.c ### */
 #define dosave() dosave_()
-#if defined(UNIX) || defined (VMS) || defined(__EMX__)
+#if defined(UNIX) || defined (VMS)
 #define hangup(sig) hangup_(sig)
 #endif
 

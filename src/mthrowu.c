@@ -4,7 +4,7 @@
 
 #include "hack.h"
 
-STATIC_DCL int FDECL(drop_throw,(struct obj *,BOOLEAN_P,int,int));
+STATIC_DCL int FDECL(drop_throw,(struct obj *,boolean,int,int));
 
 #define URETREATING(x,y) (distmin(u.ux,u.uy,x,y) > distmin(u.ux0,u.uy0,x,y))
 
@@ -94,7 +94,7 @@ const char *name;	/* if null, then format `obj' */
 
 STATIC_OVL int
 drop_throw(obj, ohit, x, y)
-register struct obj *obj;
+struct obj *obj;
 boolean ohit;
 int x,y;
 {
@@ -178,7 +178,6 @@ boolean verbose;  /* give message(s) even when you can't see what happened */
 	    if (vis) hit(distant_name(otmp,mshot_xname), mtmp, exclam(damage));
 	    else if (verbose) pline("%s is hit%s", Monnam(mtmp), exclam(damage));
 
-#ifdef WEBB_DISINT
 	    if (touch_disintegrates(mtmp->data) && !mtmp->mcan && mtmp->mhp>6 &&
 		!oresist_disintegration(otmp)){
 		    damage = otmp->owt;
@@ -189,7 +188,6 @@ boolean verbose;  /* give message(s) even when you can't see what happened */
 		    obfree(otmp, (struct obj*) 0);
 		    return 1;
 	    }
-#endif
 	    if (otmp->opoisoned && is_poisonable(otmp)) {
 		if (resists_poison(mtmp)) {
 		    if (vis) pline_The("poison doesn't seem to affect %s.",
@@ -255,11 +253,11 @@ boolean verbose;  /* give message(s) even when you can't see what happened */
 
 void
 m_throw(mon, x, y, dx, dy, range, obj)
-	register struct monst *mon;
-	register int x,y,dx,dy,range;		/* direction and range */
-	register struct obj *obj;
+	struct monst *mon;
+	int x,y,dx,dy,range;		/* direction and range */
+	struct obj *obj;
 {
-	register struct monst *mtmp;
+	struct monst *mtmp;
 	struct obj *singleobj;
 	char sym = obj->oclass;
 	int hitu, blindinc = 0;
@@ -422,9 +420,7 @@ m_throw(mon, x, y, dx, dy, range, obj)
 			}
 		    }
 		    if (hitu && singleobj->otyp == EGG) {
-			if (!Stone_resistance
-			    && !(poly_when_stoned(youmonst.data) &&
-				 polymon(PM_STONE_GOLEM))) {
+			if (!Stone_resistance && !polymorph_player_instead_stoning()) {
 			    Stoned = 5;
 			    killer = (char *) 0;
 			}
@@ -629,10 +625,10 @@ struct monst *mtmp;
 
 int
 spitmu(mtmp, mattk)		/* monster spits substance at you */
-register struct monst *mtmp;
-register struct attack *mattk;
+struct monst *mtmp;
+struct attack *mattk;
 {
-	register struct obj *otmp;
+	struct obj *otmp;
 
 	if(mtmp->mcan) {
 
@@ -671,8 +667,8 @@ register struct attack *mattk;
 
 int
 breamu(mtmp, mattk)			/* monster breathes at you (ranged) */
-	register struct monst *mtmp;
-	register struct attack  *mattk;
+	struct monst *mtmp;
+	struct attack  *mattk;
 {
 	/* if new breath types are added, change AD_ACID to max type */
 	int typ = (mattk->adtyp == AD_RBRE) ? rnd(AD_ACID) : mattk->adtyp ;
@@ -713,7 +709,7 @@ breamu(mtmp, mattk)			/* monster breathes at you (ranged) */
 
 boolean
 linedup(ax, ay, bx, by)
-register xchar ax, ay, bx, by;
+xchar ax, ay, bx, by;
 {
 	tbx = ax - bx;	/* These two values are set for use */
 	tby = ay - by;	/* after successful return.	    */
@@ -732,7 +728,7 @@ register xchar ax, ay, bx, by;
 
 boolean
 lined_up(mtmp)		/* is mtmp in position to use ranged attack? */
-	register struct monst *mtmp;
+	struct monst *mtmp;
 {
 	return(linedup(mtmp->mux,mtmp->muy,mtmp->mx,mtmp->my));
 }
@@ -747,7 +743,7 @@ m_carrying(mtmp, type)
 struct monst *mtmp;
 int type;
 {
-	register struct obj *otmp;
+	struct obj *otmp;
 
 	for(otmp = mtmp->minvent; otmp; otmp = otmp->nobj)
 		if(otmp->otyp == type)
@@ -785,9 +781,7 @@ int whodidit;	/* 1==hero, 0=other, -1==just check whether it'll pass thru */
 	case TOOL_CLASS:
 		hits = (obj_type != SKELETON_KEY &&
 			obj_type != LOCK_PICK &&
-#ifdef TOURIST
 			obj_type != CREDIT_CARD &&
-#endif
 			obj_type != TALLOW_CANDLE &&
 			obj_type != WAX_CANDLE &&
 			obj_type != LENSES &&

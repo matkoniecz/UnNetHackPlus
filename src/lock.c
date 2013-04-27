@@ -63,10 +63,8 @@ lock_action()
 	/* otherwise we're trying to unlock it */
 	else if (xlock.picktyp == LOCK_PICK)
 		return actions[4];	/* "picking the lock" */
-#ifdef TOURIST
 	else if (xlock.picktyp == CREDIT_CARD)
 		return actions[4];	/* same as lock_pick */
-#endif
 	else if (xlock.door)
 		return actions[0];	/* "unlocking the door" */
 	else
@@ -136,7 +134,7 @@ int
 forcelock()	/* try to force a locked chest */
 {
 
-	register struct obj *otmp;
+	struct obj *otmp;
 
 	if((xlock.box->ox != u.ux) || (xlock.box->oy != u.uy))
 		return((xlock.usedtime = 0));		/* you or it moved */
@@ -229,7 +227,7 @@ reset_pick()
 
 int
 pick_lock(pick,rx,ry,explicit) /* pick a lock with a given object */
-register struct	obj	*pick;
+struct	obj	*pick;
 int rx,ry;
 boolean explicit; /**< Mentioning tool when (un)locking doors? */
 {
@@ -248,9 +246,7 @@ boolean explicit; /**< Mentioning tool when (un)locking doors? */
 
 	    if (nohands(youmonst.data)) {
 		const char *what = (picktyp == LOCK_PICK) ? "pick" : "key";
-#ifdef TOURIST
 		if (picktyp == CREDIT_CARD) what = "card";
-#endif
 		if (picktyp == STETHOSCOPE) what = "stethoscope";
 
 		pline(no_longer, "hold the", what);
@@ -273,11 +269,7 @@ boolean explicit; /**< Mentioning tool when (un)locking doors? */
 		return(0);
 	}
 
-	if ((picktyp != LOCK_PICK && picktyp != STETHOSCOPE &&
-#ifdef TOURIST
-	    picktyp != CREDIT_CARD &&
-#endif
-	    picktyp != SKELETON_KEY)) {
+	if ((picktyp != LOCK_PICK && picktyp != STETHOSCOPE && picktyp != CREDIT_CARD && picktyp != SKELETON_KEY)) {
 		warning("picking lock with object %d?", picktyp);
 		return(0);
 	}
@@ -346,19 +338,15 @@ boolean explicit; /**< Mentioning tool when (un)locking doors? */
 				You_cant("fix its broken lock with %s.", doname(pick));
 				return 0;
 		    }
-#ifdef TOURIST
 		    else if (picktyp == CREDIT_CARD && !otmp->olocked) {
 			/* credit cards are only good for unlocking */
 			You_cant("do that with %s.", doname(pick));
 			return 0;
 		    }
-#endif
 		    switch(picktyp) {
-#ifdef TOURIST
 			case CREDIT_CARD:
 			    ch = ACURR(A_DEX) + 20*Role_if(PM_ROGUE);
 			    break;
-#endif
 			case LOCK_PICK:
 			    ch = 4*ACURR(A_DEX) + 25*Role_if(PM_ROGUE);
 			    break;
@@ -394,12 +382,10 @@ boolean explicit; /**< Mentioning tool when (un)locking doors? */
 	    if ((mtmp = m_at(cc.x, cc.y)) && canseemon(mtmp)
 			&& mtmp->m_ap_type != M_AP_FURNITURE
 			&& mtmp->m_ap_type != M_AP_OBJECT) {
-#ifdef TOURIST
 		if (picktyp == CREDIT_CARD &&
 		    (mtmp->isshk || mtmp->data == &mons[PM_ORACLE]))
 		    verbalize("No checks, no credit, no problem.");
 		else
-#endif
 		    pline("I don't think %s would appreciate that.", mon_nam(mtmp));
 		return(0);
 	    }
@@ -423,13 +409,11 @@ boolean explicit; /**< Mentioning tool when (un)locking doors? */
 		    pline("This door is broken.");
 		    return(0);
 		default:
-#ifdef TOURIST
 		    /* credit cards are only good for unlocking */
 		    if(picktyp == CREDIT_CARD && !(door->doormask & D_LOCKED)) {
 			You_cant("lock a door with a credit card.");
 			return(0);
 		    }
-#endif
 		
 		    Sprintf(qbuf,"%sock it%s%s?",
 			(door->doormask & D_LOCKED) ? "Unl" : "L",
@@ -440,11 +424,9 @@ boolean explicit; /**< Mentioning tool when (un)locking doors? */
 		    if(c == 'n') return(0);
 
 		    switch(picktyp) {
-#ifdef TOURIST
 			case CREDIT_CARD:
 			    ch = 2*ACURR(A_DEX) + 20*Role_if(PM_ROGUE);
 			    break;
-#endif
 			case LOCK_PICK:
 			    ch = 3*ACURR(A_DEX) + 30*Role_if(PM_ROGUE);
 			    break;
@@ -468,8 +450,8 @@ boolean explicit; /**< Mentioning tool when (un)locking doors? */
 int
 doforce()		/* try to force a chest with your weapon */
 {
-	register struct obj *otmp;
-	register int c, picktyp;
+	struct obj *otmp;
+	int c, picktyp;
 	char qbuf[QBUFSZ];
 
 	if(!uwep ||	/* proper type test */
@@ -535,7 +517,6 @@ doforce()		/* try to force a chest with your weapon */
 int
 doopen()		/* try to open a door */
 {
-#ifdef AUTO_OPEN
 	return doopen_indir(0, 0);
 }
 
@@ -543,9 +524,8 @@ int
 doopen_indir(x, y)		/* try to open a door in direction u.dx/u.dy */
 	int x, y;		/* if true, prompt for direction */
 {
-#endif /* AUTO_OPEN */
 	coord cc;
-	register struct rm *door;
+	struct rm *door;
 	struct monst *mtmp;
 
 	if (nohands(youmonst.data)) {
@@ -558,13 +538,11 @@ doopen_indir(x, y)		/* try to open a door in direction u.dx/u.dy */
 	    return 0;
 	}
 
-#ifdef AUTO_OPEN
 	if (x > 0 && y > 0) {
 	    cc.x = x;
 	    cc.y = y;
 	}
 	else
-#endif
 	if(!get_adjacent_loc((char *)0, (char *)0, u.ux, u.uy, &cc)) return(0);
 
 	if((cc.x == u.ux) && (cc.y == u.uy)) return(0);
@@ -640,9 +618,9 @@ doopen_indir(x, y)		/* try to open a door in direction u.dx/u.dy */
 STATIC_OVL
 boolean
 obstructed(x,y)
-register int x, y;
+int x, y;
 {
-	register struct monst *mtmp = m_at(x, y);
+	struct monst *mtmp = m_at(x, y);
 
 	if(mtmp && mtmp->m_ap_type != M_AP_FURNITURE) {
 		if (mtmp->m_ap_type == M_AP_OBJECT) goto objhere;
@@ -662,8 +640,8 @@ objhere:	pline("%s's in the way.", Something);
 int
 doclose()		/* try to close a door */
 {
-	register int x, y;
-	register struct rm *door;
+	int x, y;
+	struct rm *door;
 	struct monst *mtmp;
 
 	if (nohands(youmonst.data)) {
@@ -724,19 +702,11 @@ doclose()		/* try to close a door */
 	}
 
 	if(door->doormask == D_ISOPEN) {
-	    if(verysmall(youmonst.data)
-#ifdef STEED
-		&& !u.usteed
-#endif
-		) {
+	    if(verysmall(youmonst.data) && !u.usteed) {
 		 pline("You're too small to push the door closed.");
 		 return(0);
 	    }
-	    if (
-#ifdef STEED
-		 u.usteed ||
-#endif
-		rn2(25) < (ACURRSTR+ACURR(A_DEX)+ACURR(A_CON))/3) {
+	    if (u.usteed || rn2(25) < (ACURRSTR+ACURR(A_DEX)+ACURR(A_CON))/3) {
 		pline_The("door closes.");
 		door->doormask = D_CLOSED;
 		if (Blind)
@@ -756,9 +726,9 @@ doclose()		/* try to close a door */
 
 boolean			/* box obj was hit with spell effect otmp */
 boxlock(obj, otmp)	/* returns true if something happened */
-register struct obj *obj, *otmp;	/* obj *is* a box */
+struct obj *obj, *otmp;	/* obj *is* a box */
 {
-	register boolean res = 0;
+	boolean res = 0;
 
 	switch(otmp->otyp) {
 	case WAN_LOCKING:
@@ -795,7 +765,7 @@ doorlock(otmp,x,y)	/* returns true if something happened */
 struct obj *otmp;
 int x, y;
 {
-	register struct rm *door = &levl[x][y];
+	struct rm *door = &levl[x][y];
 	boolean res = TRUE;
 	int loudness = 0;
 	const char *msg = (const char *)0;
@@ -825,7 +795,6 @@ int x, y;
 	switch(otmp->otyp) {
 	case WAN_LOCKING:
 	case SPE_WIZARD_LOCK:
-#ifdef REINCARNATION
 	    if (Is_rogue_level(&u.uz)) {
 	    	boolean vis = cansee(x,y);
 		/* Can't have real locking in Rogue, so just hide doorway */
@@ -843,7 +812,6 @@ int x, y;
 		newsym(x,y);
 		return TRUE;
 	    }
-#endif
 	    if (obstructed(x,y)) return FALSE;
 	    /* Don't allow doors to close over traps.  This is for pits */
 	    /* & trap doors, but is it ever OK for anything else? */

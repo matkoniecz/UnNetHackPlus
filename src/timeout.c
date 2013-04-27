@@ -28,7 +28,7 @@ static NEARDATA const char * const stoned_texts[] = {
 STATIC_OVL void
 stoned_dialogue()
 {
-	register long i = (Stoned & TIMEOUT);
+	long i = (Stoned & TIMEOUT);
 
 	if (i > 0L && i <= SIZE(stoned_texts)) {
 		pline(stoned_texts[SIZE(stoned_texts) - i]);
@@ -53,7 +53,7 @@ static NEARDATA const char * const vomiting_texts[] = {
 STATIC_OVL void
 vomiting_dialogue()
 {
-	register long i = (Vomiting & TIMEOUT) / 3L;
+	long i = (Vomiting & TIMEOUT) / 3L;
 
 	if ((((Vomiting & TIMEOUT) % 3L) == 2) && (i >= 0)
 	    && (i < SIZE(vomiting_texts)))
@@ -93,7 +93,7 @@ static NEARDATA const char * const choke_texts2[] = {
 STATIC_OVL void
 choke_dialogue()
 {
-	register long i = (Strangled & TIMEOUT);
+	long i = (Strangled & TIMEOUT);
 
 	if(i > 0 && i <= SIZE(choke_texts)) {
 	    if (Breathless || !rn2(50))
@@ -121,7 +121,7 @@ static NEARDATA const char * const slime_texts[] = {
 STATIC_OVL void
 slime_dialogue()
 {
-	register long i = (Slimed & TIMEOUT) / 2L;
+	long i = (Slimed & TIMEOUT) / 2L;
 
 	if (((Slimed & TIMEOUT) % 2L) && i >= 0L
 		&& i < SIZE(slime_texts)) {
@@ -162,196 +162,217 @@ burn_away_slime()
 void
 nh_timeout()
 {
-	register struct prop *upp;
+	struct prop *upp;
 	int sleeptime;
 	int m_idx;
-	int baseluck = (flags.moonphase == FULL_MOON) ? 1 : 0;
+	int baseluck = 0;
 
-	if (flags.friday13) baseluck -= 1;
-
-	if (u.uluck != baseluck &&
-		moves % (u.uhave.amulet || u.ugangr ? 300 : 600) == 0) {
+	if (flags.moonphase == FULL_MOON) {
+		baseluck += 1;
+	}
+	if (flags.friday13) {
+		baseluck -= 1;
+	}
+	if (Role_if(PM_ARCHEOLOGIST) && uarmh && uarmh->otyp == FEDORA) {
+		baseluck += get_luck_bonus_for_archeologist_wearing_fedora();
+	}
+	if (u.uluck != baseluck && moves % (((u.uhave.amulet || u.ugangr) && u.uluck > 0) ? 300 : 600) == 0) {
 	/* Cursed luckstones stop bad luck from timing out; blessed luckstones
 	 * stop good luck from timing out; normal luckstones stop both;
 	 * neither is stopped if you don't have a luckstone.
 	 * Luck is based at 0 usually, +1 if a full moon and -1 on Friday 13th
 	 */
-	    register int time_luck = stone_luck(FALSE);
-	    boolean nostone = !carrying(LUCKSTONE) && !stone_luck(TRUE);
+		int time_luck = stone_luck(FALSE);
+		boolean nostone = !carrying(LUCKSTONE) && !stone_luck(TRUE);
 
-	    if(u.uluck > baseluck && (nostone || time_luck < 0))
-		u.uluck--;
-	    else if(u.uluck < baseluck && (nostone || time_luck > 0))
-		u.uluck++;
+		if(u.uluck > baseluck && (nostone || time_luck < 0)) {
+			u.uluck--;
+		} else if(u.uluck < baseluck && (nostone || time_luck > 0)) {
+			u.uluck++;
+		}
 	}
-	if(u.uinvulnerable) return; /* things past this point could kill you */
-	if(Stoned) stoned_dialogue();
-	if(Slimed) slime_dialogue();
-	if(Vomiting) vomiting_dialogue();
-	if(Strangled) choke_dialogue();
+	if(u.uinvulnerable) {
+		return; /* things past this point could kill you */
+	}
+	if(Stoned) {
+		stoned_dialogue();
+	}
+	if(Slimed) {
+		slime_dialogue();
+	}
+	if(Vomiting) {
+		vomiting_dialogue();
+	}
+	if(Strangled) {
+		choke_dialogue();
+	}
 	if(u.mtimedone && !--u.mtimedone) {
-		if (Unchanging)
+		if (Unchanging) {
 			u.mtimedone = rnd(100*youmonst.data->mlevel + 1);
-		else
+		} else {
 			rehumanize();
+		}
 	}
-	if(u.ucreamed) u.ucreamed--;
+	if(u.ucreamed) {
+		u.ucreamed--;
+	}
 
 	/* Dissipate spell-based protection. */
 	if (u.usptime) {
-	    if (--u.usptime == 0 && u.uspellprot) {
-		u.usptime = u.uspmtime;
-		u.uspellprot--;
-		find_ac();
-		if (!Blind)
-		    Norep("The %s haze around you %s.", hcolor(NH_GOLDEN),
-			  u.uspellprot ? "becomes less dense" : "disappears");
-	    }
-	}
-
-#ifdef STEED
-	if (u.ugallop) {
-	    if (--u.ugallop == 0L && u.usteed)
-	    	pline("%s stops galloping.", Monnam(u.usteed));
-	}
-#endif
-
-	for(upp = u.uprops; upp < u.uprops+SIZE(u.uprops); upp++)
-	    if((upp->intrinsic & TIMEOUT) && !(--upp->intrinsic & TIMEOUT)) {
-		switch(upp - u.uprops){
-		case STONED:
-			if (delayed_killer && !killer) {
-				killer = delayed_killer;
-				delayed_killer = 0;
+		if (--u.usptime == 0 && u.uspellprot) {
+			u.usptime = u.uspmtime;
+			u.uspellprot--;
+			find_ac();
+			if (!Blind) {
+				Norep("The %s haze around you %s.", hcolor(NH_GOLDEN), u.uspellprot ? "becomes less dense" : "disappears");
 			}
-			if (!killer) {
-				/* leaving killer_format would make it
-				   "petrified by petrification" */
-				killer_format = NO_KILLER_PREFIX;
-				killer = "killed by petrification";
-			}
-			done(STONING);
-			break;
-		case SLIMED:
-			if (delayed_killer && !killer) {
-				killer = delayed_killer;
-				delayed_killer = 0;
-			}
-			if (!killer) {
-				killer_format = NO_KILLER_PREFIX;
-				killer = "turned into green slime";
-			}
-			done(TURNED_SLIME);
-			break;
-		case VOMITING:
-			make_vomiting(0L, TRUE);
-			break;
-		case SICK:
-			You("die from your illness.");
-			killer_format = KILLED_BY_AN;
-			killer = u.usick_cause;
-			if ((m_idx = name_to_mon(killer)) >= LOW_PM) {
-			    if (type_is_pname(&mons[m_idx])) {
-				killer_format = KILLED_BY;
-			    } else if (mons[m_idx].geno & G_UNIQ) {
-				killer = the(killer);
-				Strcpy(u.usick_cause, killer);
-				killer_format = KILLED_BY;
-			    }
-			}
-			u.usick_type = 0;
-			done(POISONING);
-			break;
-		case FAST:
-			if (!Very_fast)
-				You_feel("yourself slowing down%s.",
-							Fast ? " a bit" : "");
-			break;
-		case CONFUSION:
-			HConfusion = 1; /* So make_confused works properly */
-			make_confused(0L, TRUE);
-			stop_occupation();
-			break;
-		case STUNNED:
-			HStun = 1;
-			make_stunned(0L, TRUE);
-			stop_occupation();
-			break;
-		case BLINDED:
-			Blinded = 1;
-			make_blinded(0L, TRUE);
-			stop_occupation();
-			break;
-		case INVIS:
-			newsym(u.ux,u.uy);
-			if (!Invis && !BInvis && !Blind) {
-			    You(!See_invisible ?
-				    "are no longer invisible." :
-				    "can no longer see through yourself.");
-			    stop_occupation();
-			}
-			break;
-		case SEE_INVIS:
-			set_mimic_blocking(); /* do special mimic handling */
-			see_monsters();		/* make invis mons appear */
-			newsym(u.ux,u.uy);	/* make self appear */
-			stop_occupation();
-			break;
-		case WOUNDED_LEGS:
-			heal_legs();
-			stop_occupation();
-			break;
-		case HALLUC:
-			HHallucination = 1;
-			(void) make_hallucinated(0L, TRUE, 0L);
-			stop_occupation();
-			break;
-		case SLEEPING:
-			if (unconscious() || Sleep_resistance)
-				HSleeping += rnd(100);
-			else if (Sleeping) {
-				You("fall asleep.");
-				sleeptime = rnd(20);
-				fall_asleep(-sleeptime, TRUE);
-				HSleeping += sleeptime + rnd(100);
-			}
-			break;
-		case LEVITATION:
-			(void) float_down(I_SPECIAL|TIMEOUT, 0L);
-			break;
-		case STRANGLED:
-			killer_format = KILLED_BY;
-			killer = (u.uburied) ? "suffocation" : "strangulation";
-			done(DIED);
-			break;
-		case FUMBLING:
-			/* call this only when a move took place.  */
-			/* otherwise handle fumbling msgs locally. */
-			if (u.umoved && !Levitation) {
-			    slip_or_trip();
-			    nomul(-2, "fumbling");
-			    nomovemsg = "";
-			    /* The more you are carrying the more likely you
-			     * are to make noise when you fumble.  Adjustments
-			     * to this number must be thoroughly play tested.
-			     */
-			    if ((inv_weight() > -500)) {
-				You("make a lot of noise!");
-				wake_nearby();
-			    }
-			}
-			/* from outside means slippery ice; don't reset
-			   counter if that's the only fumble reason */
-			HFumbling &= ~FROMOUTSIDE;
-			if (Fumbling)
-			    HFumbling += rnd(20);
-			break;
-		case DETECT_MONSTERS:
-			see_monsters();
-			break;
 		}
 	}
 
+	if (u.ugallop) {
+		if (--u.ugallop == 0L && u.usteed) {
+			pline("%s stops galloping.", Monnam(u.usteed));
+		}
+	}
+
+	for(upp = u.uprops; upp < u.uprops+SIZE(u.uprops); upp++) {
+		if((upp->intrinsic & TIMEOUT) && !(--upp->intrinsic & TIMEOUT)) {
+			switch(upp - u.uprops){
+			case STONED:
+				if (delayed_killer && !killer) {
+					killer = delayed_killer;
+					delayed_killer = 0;
+				}
+				if (!killer) {
+					/* leaving killer_format would make it
+					   "petrified by petrification" */
+					killer_format = NO_KILLER_PREFIX;
+					killer = "killed by petrification";
+				}
+				done(STONING);
+				break;
+			case SLIMED:
+				if (delayed_killer && !killer) {
+					killer = delayed_killer;
+					delayed_killer = 0;
+				}
+				if (!killer) {
+					killer_format = NO_KILLER_PREFIX;
+					killer = "turned into green slime";
+				}
+				done(TURNED_SLIME);
+				break;
+			case VOMITING:
+				make_vomiting(0L, TRUE);
+				break;
+			case SICK:
+				You("die from your illness.");
+				killer_format = KILLED_BY_AN;
+				killer = u.usick_cause;
+				if ((m_idx = name_to_mon(killer)) >= LOW_PM) {
+					if (type_is_pname(&mons[m_idx])) {
+						killer_format = KILLED_BY;
+					} else if (mons[m_idx].geno & G_UNIQ) {
+						killer = the(killer);
+						Strcpy(u.usick_cause, killer);
+						killer_format = KILLED_BY;
+					}
+				}
+				u.usick_type = 0;
+				done(POISONING);
+				break;
+			case FAST:
+				if (!Very_fast) {
+					You_feel("yourself slowing down%s.", Fast ? " a bit" : "");
+				}
+				break;
+			case CONFUSION:
+				HConfusion = 1; /* So make_confused works properly */
+				make_confused(0L, TRUE);
+				stop_occupation();
+				break;
+			case STUNNED:
+				HStun = 1;
+				make_stunned(0L, TRUE);
+				stop_occupation();
+				break;
+			case BLINDED:
+				Blinded = 1;
+				make_blinded(0L, TRUE);
+				stop_occupation();
+				break;
+			case INVIS:
+				newsym(u.ux,u.uy);
+				if (!Invis && !BInvis && !Blind) {
+					You(!See_invisible ?
+						"are no longer invisible." :
+						"can no longer see through yourself.");
+					stop_occupation();
+				}
+				break;
+			case SEE_INVIS:
+				set_mimic_blocking(); /* do special mimic handling */
+				see_monsters();		/* make invis mons appear */
+				newsym(u.ux,u.uy);	/* make self appear */
+				stop_occupation();
+				break;
+			case WOUNDED_LEGS:
+				heal_legs();
+				stop_occupation();
+				break;
+			case HALLUC:
+				HHallucination = 1;
+				(void) make_hallucinated(0L, TRUE, 0L);
+				stop_occupation();
+				break;
+			case SLEEPING:
+				if (unconscious() || Sleep_resistance) {
+					HSleeping += rnd(100);
+				} else if (Sleeping) {
+					You("fall asleep.");
+					sleeptime = rnd(20);
+					fall_asleep(-sleeptime, TRUE);
+					HSleeping += sleeptime + rnd(100);
+				}
+				break;
+			case LEVITATION:
+				(void) float_down(I_SPECIAL|TIMEOUT, 0L);
+				break;
+			case STRANGLED:
+				killer_format = KILLED_BY;
+				killer = (u.uburied) ? "suffocation" : "strangulation";
+				done(DIED);
+				break;
+			case FUMBLING:
+				/* call this only when a move took place.  */
+				/* otherwise handle fumbling msgs locally. */
+				if (u.umoved && !Levitation) {
+					slip_or_trip();
+					nomul(-2, "fumbling");
+					nomovemsg = "";
+					/* The more you are carrying the more likely you
+					 * are to make noise when you fumble.  Adjustments
+					 * to this number must be thoroughly play tested.
+					 */
+					if ((inv_weight() > -500)) {
+						You("make a lot of noise!");
+						wake_nearby();
+					}
+				}
+				/* from outside means slippery ice; don't reset
+				 * counter if that's the only fumble reason
+				 */
+				HFumbling &= ~FROMOUTSIDE;
+				if (Fumbling) {
+					HFumbling += rnd(20);
+				}
+				break;
+			case DETECT_MONSTERS:
+				see_monsters();
+				break;
+			}
+		}
+	}
 	run_timers();
 }
 
@@ -622,10 +643,9 @@ slip_or_trip()
 	const char *what, *pronoun;
 	char buf[BUFSZ];
 	boolean on_foot = TRUE;
-#ifdef STEED
-	if (u.usteed) on_foot = FALSE;
-#endif
-
+	if (u.usteed) {
+		on_foot = FALSE;
+	}
 	if (otmp && on_foot && !u.uinwater && is_pool(u.ux, u.uy)) otmp = 0;
 
 	if (otmp && on_foot) {		/* trip over something in particular */
@@ -652,11 +672,9 @@ slip_or_trip()
 	    }
 	} else if (rn2(3) && is_ice(u.ux, u.uy)) {
 	    pline("%s %s%s on the ice.",
-#ifdef STEED
 		u.usteed ? upstart(x_monnam(u.usteed,
 				u.usteed->mnamelth ? ARTICLE_NONE : ARTICLE_THE,
 				(char *)0, SUPPRESS_SADDLE, FALSE)) :
-#endif
 		"You", rn2(2) ? "slip" : "slide", on_foot ? "" : "s");
 	} else {
 	    if (on_foot) {
@@ -677,7 +695,6 @@ slip_or_trip()
 			break;
 		}
 	    }
-#ifdef STEED
 	    else {
 		switch (rn2(4)) {
 		  case 1:
@@ -695,7 +712,6 @@ slip_or_trip()
 		}
 		dismount_steed(DISMOUNT_FELL);
 	    }
-#endif
 	}
 }
 
@@ -1195,7 +1211,7 @@ void
 do_storms()
 {
     int nstrike;
-    register int x, y;
+    int x, y;
     int dirx, diry;
     int count;
 
@@ -1287,17 +1303,15 @@ do_storms()
  *		Stop all timers attached to obj.
  */
 
-#ifdef WIZARD
-STATIC_DCL const char *FDECL(kind_name, (SHORT_P));
+STATIC_DCL const char *FDECL(kind_name, (short));
 STATIC_DCL void FDECL(print_queue, (winid, timer_element *));
-#endif
 STATIC_DCL void FDECL(insert_timer, (timer_element *));
-STATIC_DCL timer_element *FDECL(remove_timer, (timer_element **, SHORT_P,
+STATIC_DCL timer_element *FDECL(remove_timer, (timer_element **, short,
 								genericptr_t));
 STATIC_DCL void FDECL(write_timer, (int, timer_element *));
 STATIC_DCL boolean FDECL(mon_is_local, (struct monst *));
 STATIC_DCL boolean FDECL(timer_is_local, (timer_element *));
-STATIC_DCL int FDECL(maybe_write_timer, (int, int, BOOLEAN_P));
+STATIC_DCL int FDECL(maybe_write_timer, (int, int, boolean));
 
 /* ordered timer list */
 static timer_element *timer_base;		/* "active" */
@@ -1327,8 +1341,6 @@ static const ttable timeout_funcs[NUM_TIME_FUNCS] = {
 };
 #undef TTAB
 
-
-#if defined(WIZARD)
 
 STATIC_OVL const char *
 kind_name(kind)
@@ -1410,9 +1422,6 @@ timer_sanity_check()
 	    }
 	}
 }
-
-#endif /* WIZARD */
-
 
 /*
  * Pick off timeout elements from the global queue and call their functions.

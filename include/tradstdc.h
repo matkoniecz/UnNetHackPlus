@@ -5,10 +5,6 @@
 #ifndef TRADSTDC_H
 #define TRADSTDC_H
 
-#ifdef NOVOID
-#define void int
-#endif
-
 /*
  * Borland C provides enough ANSI C compatibility in its Borland C++
  * mode to warrant this.  But it does not set __STDC__ unless it compiles
@@ -184,70 +180,10 @@
 typedef genericptr genericptr_t;	/* (void *) or (char *) */
 #endif
 
+/* WIDENED_PROTOTYPES is not supported by UnNetHackPlus and may result in problems */
 
-/*
- * According to ANSI, prototypes for old-style declarations must widen the
- * arguments to int.  However, the MSDOS compilers accept shorter arguments
- * (char, short, etc.) in prototypes and do typechecking with them.  Therefore
- * this mess to allow the better typechecking while also allowing some
- * prototypes for the ANSI compilers so people quit trying to fix the
- * prototypes to match the standard and thus lose the typechecking.
- */
-#if defined(MSDOS) && !defined(__GO32__)
-#define UNWIDENED_PROTOTYPES
-#endif
-#if defined(AMIGA) && !defined(AZTEC_50)
-#define UNWIDENED_PROTOTYPES
-#endif
-#if defined(macintosh) && (defined(__SC__) || defined(__MRC__))
-#define WIDENED_PROTOTYPES
-#endif
-#if defined(__MWERKS__) && defined(__BEOS__)
-#define UNWIDENED_PROTOTYPES
-#endif
-#if defined(WIN32)
-#define UNWIDENED_PROTOTYPES
-#endif
-
-#if defined(ULTRIX_PROTO) && defined(ULTRIX_CC20)
-#define UNWIDENED_PROTOTYPES
-#endif
-#if defined(apollo)
-#define UNWIDENED_PROTOTYPES
-#endif
-
-#ifndef UNWIDENED_PROTOTYPES
-# if defined(NHSTDC) || defined(ULTRIX_PROTO) || defined(THINK_C)
-# define WIDENED_PROTOTYPES
-# endif
-#endif
-
-#if 0
-/* The problem below is still the case through 4.0.5F, but the suggested
- * compiler flags in the Makefiles suppress the nasty messages, so we don't
- * need to be quite so drastic.
- */
-#if defined(__sgi) && !defined(__GNUC__)
-/*
- * As of IRIX 4.0.1, /bin/cc claims to be an ANSI compiler, but it thinks
- * it's impossible for a prototype to match an old-style definition with
- * unwidened argument types.  Thus, we have to turn off all NetHack
- * prototypes, and avoid declaring several system functions, since the system
- * include files have prototypes and the compiler also complains that
- * prototyped and unprototyped declarations don't match.
- */
-# undef NDECL
-# undef FDECL
-# undef VDECL
-# define NDECL(f)	f()
-# define FDECL(f,p)	f()
-# define VDECL(f,p)	f()
-#endif
-#endif
-
-
-	/* MetaWare High-C defaults to unsigned chars */
-	/* AIX 3.2 needs this also */
+/* MetaWare High-C defaults to unsigned chars */
+/* AIX 3.2 needs this also */
 #if defined(__HC__) || defined(_AIX32)
 # undef signed
 #endif

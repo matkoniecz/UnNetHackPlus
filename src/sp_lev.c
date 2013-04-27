@@ -14,11 +14,7 @@
 /* #define DEBUG */	/* uncomment to enable code debugging */
 
 #ifdef DEBUG
-# ifdef WIZARD
 #define debugpline	if (wizard) pline
-# else
-#define debugpline	pline
-# endif
 #endif
 
 #include "sp_lev.h"
@@ -32,7 +28,7 @@ extern void FDECL(mkmap, (lev_init *));
 STATIC_DCL void FDECL(get_room_loc, (schar *, schar *, struct mkroom *));
 STATIC_DCL void FDECL(get_free_room_loc, (schar *, schar *, struct mkroom *));
 STATIC_DCL void FDECL(create_trap, (trap *, struct mkroom *));
-STATIC_DCL int FDECL(noncoalignment, (ALIGNTYP_P));
+STATIC_DCL int FDECL(noncoalignment, (aligntyp));
 STATIC_DCL void FDECL(create_monster, (monster *, struct mkroom *));
 STATIC_DCL void FDECL(create_object, (object *, struct mkroom *));
 STATIC_DCL void FDECL(create_engraving, (engraving *,struct mkroom *));
@@ -41,13 +37,13 @@ STATIC_DCL void FDECL(create_altar, (altar *, struct mkroom *));
 STATIC_DCL void FDECL(create_gold, (gold *, struct mkroom *));
 STATIC_DCL void FDECL(create_feature, (int,int,struct mkroom *,int));
 STATIC_DCL boolean FDECL(search_door, (struct mkroom *, xchar *, xchar *,
-					XCHAR_P, int));
+					xchar, int));
 STATIC_DCL void NDECL(fix_stair_rooms);
 STATIC_DCL void FDECL(create_corridor, (corridor *));
 STATIC_DCL void NDECL(count_features);
 
-STATIC_DCL boolean FDECL(create_subroom, (struct mkroom *, XCHAR_P, XCHAR_P,
-					XCHAR_P, XCHAR_P, XCHAR_P, XCHAR_P));
+STATIC_DCL boolean FDECL(create_subroom, (struct mkroom *, xchar, xchar,
+					xchar, xchar, xchar, xchar));
 
 #define LEFT	1
 #define H_LEFT	2
@@ -74,7 +70,7 @@ static aligntyp	ralign[3] = { AM_CHAOTIC, AM_NEUTRAL, AM_LAWFUL };
 static NEARDATA xchar xstart, ystart;
 static NEARDATA char xsize, ysize;
 
-STATIC_DCL void FDECL(set_wall_property, (XCHAR_P,XCHAR_P,XCHAR_P,XCHAR_P,int));
+STATIC_DCL void FDECL(set_wall_property, (xchar,xchar,xchar,xchar,int));
 STATIC_DCL int NDECL(rnddoor);
 STATIC_DCL int NDECL(rndtrap);
 STATIC_DCL void FDECL(get_location, (schar *,schar *,int, struct mkroom *));
@@ -717,7 +713,7 @@ set_wall_property(x1,y1,x2,y2, prop)
 xchar x1, y1, x2, y2;
 int prop;
 {
-	register xchar x, y;
+	xchar x, y;
 
 	for(y = y1; y <= y2; y++)
 	    for(x = x1; x <= x2; x++)
@@ -839,7 +835,7 @@ rndtrap()
 #define DRY	0x1
 #define WET	0x2
 
-STATIC_DCL boolean FDECL(is_ok_location, (SCHAR_P, SCHAR_P, int));
+STATIC_DCL boolean FDECL(is_ok_location, (schar, schar, int));
 
 STATIC_OVL void
 get_location(x, y, humidity, croom)
@@ -879,7 +875,7 @@ struct mkroom *croom;
 		if (is_ok_location(*x,*y,humidity)) break;
 	    } while (++cpt < 100);
 	    if (cpt >= 100) {
-		register int xx, yy;
+		int xx, yy;
 		/* last try */
 		for (xx = 0; xx < sx; xx++)
 		    for (yy = 0; yy < sy; yy++) {
@@ -900,10 +896,10 @@ found_it:;
 
 STATIC_OVL boolean
 is_ok_location(x, y, humidity)
-register schar x, y;
-register int humidity;
+schar x, y;
+int humidity;
 {
-	register int typ;
+	int typ;
 
 	if (Is_waterlevel(&u.uz)) return TRUE;	/* accept any spot */
 
@@ -959,7 +955,7 @@ schar		*x, *y;
 struct mkroom	*croom;
 {
 	schar try_x, try_y;
-	register int trycnt = 0;
+	int trycnt = 0;
 
         try_x = *x,  try_y = *y;
 
@@ -981,8 +977,8 @@ check_room(lowx, ddx, lowy, ddy, vault)
 xchar *lowx, *ddx, *lowy, *ddy;
 boolean vault;
 {
-	register int x,y,hix = *lowx + *ddx, hiy = *lowy + *ddy;
-	register struct rm *lev;
+	int x,y,hix = *lowx + *ddx, hiy = *lowy + *ddy;
+	struct rm *lev;
 	int xlim, ylim, ymax;
 
 	xlim = XLIM + (vault ? 1 : 0);
@@ -1284,7 +1280,7 @@ struct mkroom *broom;
 	}
 
 	do {
-		register int dwall, dpos;
+		int dwall, dpos;
 
 		dwall = dd->wall;
 		if (dwall == -1)	/* The wall is RANDOM */
@@ -2156,9 +2152,9 @@ coord *org, *dest;
 boolean nxcor;
 schar ftyp, btyp;
 {
-	register int dx=0, dy=0, dix, diy, cct;
-	register struct rm *crm;
-	register int tx, ty, xx, yy;
+	int dx=0, dy=0, dix, diy, cct;
+	struct rm *crm;
+	int tx, ty, xx, yy;
 
 	xx = org->x;  yy = org->y;
 	tx = dest->x; ty = dest->y;
@@ -2211,7 +2207,7 @@ schar ftyp, btyp;
 
 	    /* do we have to change direction ? */
 	    if(dy && dix > diy) {
-		register int ddx = (xx > tx) ? -1 : 1;
+		int ddx = (xx > tx) ? -1 : 1;
 
 		crm = &levl[xx+ddx][yy];
 		if(crm->typ == btyp || crm->typ == ftyp || crm->typ == SCORR) {
@@ -2220,7 +2216,7 @@ schar ftyp, btyp;
 		    continue;
 		}
 	    } else if(dx && diy > dix) {
-		register int ddy = (yy > ty) ? -1 : 1;
+		int ddy = (yy > ty) ? -1 : 1;
 
 		crm = &levl[xx][yy+ddy];
 		if(crm->typ == btyp || crm->typ == ftyp || crm->typ == SCORR) {
@@ -2448,10 +2444,10 @@ STATIC_OVL void
 light_region(tmpregion)
     region  *tmpregion;
 {
-    register boolean litstate = tmpregion->rlit ? 1 : 0;
-    register int hiy = tmpregion->y2;
-    register int x, y;
-    register struct rm *lev;
+    boolean litstate = tmpregion->rlit ? 1 : 0;
+    int hiy = tmpregion->y2;
+    int x, y;
+    struct rm *lev;
     int lowy = tmpregion->y1;
     int lowx = tmpregion->x1, hix = tmpregion->x2;
 
@@ -2583,7 +2579,7 @@ maze1xy(m, humidity)
 coord *m;
 int humidity;
 {
-	register int x, y, tryct = 2000;
+	int x, y, tryct = 2000;
 	/* tryct:  normally it won't take more than ten or so tries due
 	   to the circumstances under which we'll be called, but the
 	   `humidity' screening might drastically change the chances */
@@ -4304,7 +4300,7 @@ spo_region(coder)
 {
     struct opvar *rtype, *rlit, *rirreg, *area;
     xchar dx1,dy1,dx2,dy2;
-    register struct mkroom *troom;
+    struct mkroom *troom;
     boolean prefilled, room_not_needed;
 
     if (!OV_pop_i(rirreg) ||

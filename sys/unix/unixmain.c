@@ -25,7 +25,7 @@ extern struct passwd *FDECL(getpwuid,(int));
 #endif
 extern struct passwd *FDECL(getpwnam,(const char *));
 #ifdef CHDIR
-static void FDECL(chdirx, (const char *,BOOLEAN_P));
+static void FDECL(chdirx, (const char *,boolean));
 #endif /* CHDIR */
 static boolean NDECL(whoami);
 static void FDECL(process_options, (int, char **));
@@ -40,18 +40,16 @@ extern void NDECL(init_linux_cons);
 #endif
 
 static void NDECL(wd_message);
-#ifdef WIZARD
-static boolean wiz_error_flag = FALSE;
-#endif
+static boolean wiz_error_flag = FALSE; //Unused
 
 int
 main(argc,argv)
 int argc;
 char *argv[];
 {
-	register int fd;
+	int fd;
 #ifdef CHDIR
-	register char *dir;
+	char *dir;
 #endif
 	boolean exact_username;
 #ifdef SIMPLE_MAIL
@@ -189,11 +187,6 @@ char *argv[];
 #ifdef MAIL
 	getmailstatus();
 #endif
-#ifdef WIZARD
-	if (wizard)
-		Strcpy(plname, "wizard");
-	else
-#endif
 	if(!*plname) {
 		askname();
 	} else if (exact_username) {
@@ -207,9 +200,7 @@ char *argv[];
 	plnamesuffix();		/* strip suffix from name; calls askname() */
 				/* again if suffix was whole name */
 				/* accepts any suffix */
-#ifdef WIZARD
 	if(!wizard) {
-#endif
 		/*
 		 * check for multiple games under the same name
 		 * (if !locknum) or check max nr of players (otherwise)
@@ -219,12 +210,10 @@ char *argv[];
 		if(!locknum)
 			Sprintf(lock, "%d%s", (int)getuid(), plname);
 		getlock();
-#ifdef WIZARD
 	} else {
 		Sprintf(lock, "%d%s", (int)getuid(), plname);
 		getlock();
 	}
-#endif /* WIZARD */
 
 	dlb_init();	/* must be before newgame() */
 
@@ -248,12 +237,10 @@ char *argv[];
 	display_gamewindows();
 
 	if ((fd = restore_saved_game()) >= 0) {
-#ifdef WIZARD
 		/* Since wizard is actually flags.debug, restoring might
 		 * overwrite it.
 		 */
 		boolean remember_wiz_mode = wizard;
-#endif
 #ifndef FILE_AREAS
 		const char *fq_save = fqname(SAVEF, SAVEPREFIX, 1);
 
@@ -272,9 +259,9 @@ char *argv[];
 		mark_synch();	/* flush output */
 		if(!dorecover(fd))
 			goto not_recovered;
-#ifdef WIZARD
-		if(!wizard && remember_wiz_mode) wizard = TRUE;
-#endif
+		if(!wizard && remember_wiz_mode) {
+			wizard = TRUE;
+		}
 		check_special_room(FALSE);
 		wd_message();
 
@@ -325,36 +312,8 @@ char *argv[];
 		argc--;
 		switch(argv[0][1]){
 		case 'D':
-#ifdef WIZARD
-			{
-			  char *user;
-			  int uid;
-			  struct passwd *pw = (struct passwd *)0;
-
-			  uid = getuid();
-			  user = getlogin();
-			  if (user) {
-			      pw = getpwnam(user);
-			      if (pw && (pw->pw_uid != uid)) pw = 0;
-			  }
-			  if (pw == 0) {
-			      user = nh_getenv("USER");
-			      if (user) {
-				  pw = getpwnam(user);
-				  if (pw && (pw->pw_uid != uid)) pw = 0;
-			      }
-			      if (pw == 0) {
-				  pw = getpwuid(uid);
-			      }
-			  }
-			  if (pw && !strcmp(pw->pw_name,WIZARD)) {
-			      wizard = TRUE;
-			      break;
-			  }
-			}
-			/* otherwise fall thru to discover */
-			wiz_error_flag = TRUE;
-#endif
+			wizard = TRUE;
+			break;
 		case 'X':
 			discover = TRUE;
 			break;
@@ -496,7 +455,7 @@ whoami() {
 	 * Note that we trust the user here; it is possible to play under
 	 * somebody else's name.
 	 */
-	register char *s;
+	char *s;
 
 	if (*plname) return FALSE;
 	if(/* !*plname && */ (s = nh_getenv("USER")))
@@ -523,19 +482,9 @@ port_help()
 static void
 wd_message()
 {
-#ifdef WIZARD
-	if (wiz_error_flag) {
-		pline("Only user \"%s\" may access debug (wizard) mode.",
-# ifndef KR1ED
-			WIZARD);
-# else
-			WIZARD_NAME);
-# endif
-		pline("Entering discovery mode instead.");
-	} else
-#endif
-	if (discover)
+	if (discover) {
 		You("are in non-scoring discovery mode.");
+	}
 }
 
 /*

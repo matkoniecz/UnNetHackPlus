@@ -1393,7 +1393,6 @@ IF [50%] {
   MONSTER:random,random,hostile
 }
 IF [66%] {
-# could be a snark now, so up the percentage a bit
   MONSTER:'J',random,hostile
 } ELSE {
   MONSTER:random,random,hostile
