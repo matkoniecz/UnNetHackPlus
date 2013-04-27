@@ -12,7 +12,7 @@ STATIC_DCL struct monst *NDECL(findgd);
 
 #ifdef OVLB
 
-STATIC_DCL boolean FDECL(clear_fcorr, (struct monst *,BOOLEAN_P));
+STATIC_DCL boolean FDECL(clear_fcorr, (struct monst *,boolean));
 STATIC_DCL void FDECL(restfakecorr,(struct monst *));
 STATIC_DCL boolean FDECL(in_fcorridor, (struct monst *,int,int));
 STATIC_DCL void FDECL(move_gold,(struct obj *,int));

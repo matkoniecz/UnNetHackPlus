@@ -23,7 +23,7 @@ STATIC_DCL int FDECL(menu_drop, (int));
 #ifdef OVL2
 STATIC_DCL int NDECL(currentlevel_rewrite);
 STATIC_DCL void NDECL(final_level);
-/* static boolean FDECL(badspot, (XCHAR_P,XCHAR_P)); */
+/* static boolean FDECL(badspot, (xchar,xchar)); */
 #endif
 
 #ifdef OVLB

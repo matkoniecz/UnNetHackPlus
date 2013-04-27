@@ -67,6 +67,7 @@ a.exe
 # /src/
 /src/*.o
 /src/unnethackplus.exe
+/src/unnethackplus
 /src/Makefile
 /src/Sysunix
 /src/Syswinnt

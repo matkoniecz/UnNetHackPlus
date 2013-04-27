@@ -16,8 +16,8 @@ STATIC_DCL void NDECL(on_start);
 STATIC_DCL void NDECL(on_locate);
 STATIC_DCL void NDECL(on_goal);
 STATIC_DCL boolean NDECL(not_capable);
-STATIC_DCL int FDECL(is_pure, (BOOLEAN_P));
-STATIC_DCL void FDECL(expulsion, (BOOLEAN_P));
+STATIC_DCL int FDECL(is_pure, (boolean));
+STATIC_DCL void FDECL(expulsion, (boolean));
 STATIC_DCL void NDECL(chat_with_leader);
 STATIC_DCL void NDECL(chat_with_nemesis);
 STATIC_DCL void NDECL(chat_with_guardian);
@@ -121,7 +121,6 @@ boolean talk;
     int purity;
     aligntyp original_alignment = u.ualignbase[A_ORIGINAL];
 
-#ifdef WIZARD
     if (wizard && talk) {
 	if (u.ualign.type != original_alignment) {
 	    You("are currently %s instead of %s.",
@@ -135,7 +134,7 @@ boolean talk;
 		u.ualign.record = MIN_QUEST_ALIGN;
 	}
     }
-#endif
+
     purity = (u.ualign.record >= MIN_QUEST_ALIGN &&
 	      u.ualign.type == original_alignment &&
 	/*      u.ualignbase[A_CURRENT].type == original_alignment.type) ?  1 : 0; */ /* CHECK TODO is this correct? */
@@ -217,7 +216,7 @@ STATIC_OVL void
 chat_with_leader()
 {
 /*	Rule 0:	Cheater checks.					*/
-	if(u.uhave.questart && !Qstat(met_nemesis))
+	if(u.uhave.quest_artifact && !Qstat(met_nemesis))
 	    Qstat(cheater) = TRUE;
 
 /*	It is possible for you to get the amulet without completing
@@ -232,7 +231,7 @@ chat_with_leader()
 	}
 
 /*	Rule 3: You've got the artifact and are back to return it. */
-	  else if(u.uhave.questart) {
+	  else if(u.uhave.quest_artifact) {
 	    struct obj *otmp;
 
 	    for (otmp = invent; otmp; otmp = otmp->nobj)
@@ -324,7 +323,7 @@ void
 nemesis_speaks()
 {
 	if(!Qstat(in_battle)) {
-	  if(u.uhave.questart) qt_pager(QT_NEMWANTSIT);
+	  if(u.uhave.quest_artifact) qt_pager(QT_NEMWANTSIT);
 	  else if(Qstat(made_goal) == 1 || !Qstat(met_nemesis))
 	      qt_pager(QT_FIRSTNEMESIS);
 	  else if(Qstat(made_goal) < 4) qt_pager(QT_NEXTNEMESIS);
@@ -340,7 +339,7 @@ STATIC_OVL void
 chat_with_guardian()
 {
 /*	These guys/gals really don't have much to say... */
-	if (u.uhave.questart && Qstat(killed_nemesis))
+	if (u.uhave.quest_artifact && Qstat(killed_nemesis))
 	    qt_pager(rn1(5, QT_GUARDTALK2));
 	else
 	    qt_pager(rn1(5, QT_GUARDTALK));

@@ -417,9 +417,8 @@ int	mntmp;
 			You_feel("like a new %s!", mons[mntmp].mname);
 	}
 	if (Stoned && poly_when_stoned(&mons[mntmp])) {
-		/* poly_when_stoned already checked stone golem genocide */
 		You("turn to stone!");
-		mntmp = PM_STONE_GOLEM;
+		mntmp = get_potential_stoned_form_of_monster(mntmp);
 		Stoned = 0;
 		delayed_killer = 0;
 	}

@@ -495,7 +495,7 @@ peffects(otmp)
 					losehp(d(2,6), "potion of holy water", KILLED_BY_AN);
 				} else if(otmp->cursed) {
 					You_feel("quite proud of yourself.");
-					healup(d(2,6),0,0,0);
+					healup(d(2,6), 0, FALSE, FALSE, FALSE);
 					if (u.ulycn >= LOW_PM && !Upolyd) {
 						you_were();
 					}
@@ -536,7 +536,7 @@ peffects(otmp)
 			}
 			/* the whiskey makes us feel better */
 			if (!otmp->odiluted) {
-				healup(1, 0, FALSE, FALSE);
+				healup(1, 0, FALSE, FALSE, FALSE);
 			}
 			u.uhunger += 10 * (2 + bcsign(otmp));
 			newuhs(FALSE);
@@ -807,8 +807,7 @@ peffects(otmp)
 		break;
 	case POT_SPEED:
 		{
-			if(Wounded_legs && !otmp->cursed
-			   && !u.usteed) {	/* heal_legs() would heal steeds legs */
+			if(Wounded_legs && !otmp->cursed && !u.usteed) { /* heal_legs() would heal steeds legs */
 				heal_legs();
 				unkn++;
 				break;
@@ -890,11 +889,12 @@ peffects(otmp)
 			int increase_max_hp = !otmp->cursed ? 1 : 0;
 			boolean cure_sick = otmp->blessed;
 			boolean cure_blind = !otmp->cursed;
+			boolean cure_wounded_legs =  !otmp->odiluted && otmp->blessed;
 			if(otmp->odiluted) {
 				heal_hp /= 2;
 				increase_max_hp /= 2;
 			}
-			healup(heal_hp, increase_max_hp, cure_sick, cure_blind);
+			healup(heal_hp, increase_max_hp, cure_sick, cure_blind, cure_wounded_legs);
 			exercise(A_CON, TRUE);
 		}
 		break;
@@ -905,11 +905,12 @@ peffects(otmp)
 			int increase_max_hp = otmp->blessed ? 5 : !otmp->cursed ? 2 : 0;
 			boolean cure_sick = !otmp->cursed;
 			boolean cure_blind = TRUE;
+			boolean cure_wounded_legs =  !otmp->odiluted && !otmp->cursed;
 			if(otmp->odiluted) {
 				heal_hp /= 2;
 				increase_max_hp /= 2;
 			}
-			healup(heal_hp, increase_max_hp, cure_sick, cure_blind);
+			healup(heal_hp, increase_max_hp, cure_sick, cure_blind, cure_wounded_legs);
 			(void) make_hallucinated(0L,TRUE,0L);
 			exercise(A_CON, TRUE);
 			exercise(A_STR, TRUE);
@@ -922,11 +923,12 @@ peffects(otmp)
 			int increase_max_hp = 4+4*bcsign(otmp);
 			boolean cure_sick = !otmp->cursed;
 			boolean cure_blind = TRUE;
+			boolean cure_wounded_legs = !otmp->cursed;
 			if(otmp->odiluted) {
 				heal_hp /= 2;
 				increase_max_hp /= 2;
 			}
-			healup(heal_hp, increase_max_hp, cure_sick, cure_blind);
+			healup(heal_hp, increase_max_hp, cure_sick, cure_blind, cure_wounded_legs);
 			/* Restore one lost level if blessed */
 			if (otmp->blessed && u.ulevel < u.ulevelmax) {
 				/* when multiple levels have been lost, drinking
@@ -1111,21 +1113,31 @@ peffects(otmp)
 }
 
 void
-healup(nhp, nxtra, curesick, cureblind)
-	int nhp, nxtra;
-	boolean curesick, cureblind;
+healup(int nhp, int nxtra, boolean cure_sick, boolean cure_blind, boolean cure_wounded_legs)
 {
 	if (nhp) {
 		if (Upolyd) {
 			u.mh += nhp;
-			if (u.mh > u.mhmax) u.mh = (u.mhmax += nxtra);
+			if (u.mh > u.mhmax) {
+				u.mh = (u.mhmax += nxtra);
+			}
 		} else {
 			u.uhp += nhp;
-			if(u.uhp > u.uhpmax) u.uhp = (u.uhpmax += nxtra);
+			if(u.uhp > u.uhpmax) {
+				u.uhp = (u.uhpmax += nxtra);
+			}
 		}
 	}
-	if(cureblind)	make_blinded(0L,TRUE);
-	if(curesick)	make_sick(0L, (char *) 0, TRUE, SICK_ALL);
+	if(cure_blind) {
+		make_blinded(0L, TRUE);
+	}
+	if(cure_sick) {
+		make_sick(0L, (char *) 0, TRUE, SICK_ALL);
+	}
+	if(Wounded_legs && cure_wounded_legs && !u.usteed) { /* heal_legs() would heal steeds legs */
+		heal_legs();
+		unkn++;
+	} 
 	flags.botl = 1;
 	return;
 }

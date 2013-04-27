@@ -20,11 +20,19 @@
 		- C343-17 "After polymorphing into a xorn and returning to human form, player can be stuck in a pit that isn't there."
 		- "Player polymorphed into Xorn is not trapped by pits but (s)he receives "You fall into a pit!" message" and other related buggy behaviours
 		- "Statues/figurines of golems hit with stone-to-flesh spell are supposed (see Trap.c, line 423 of vanilia source code) to turn into flesh golems, not meatballs."
-		- C343-109 "There is a grammar error in the Tourist leader's greeting."
-		- C343-1 "At a pit the game can give messages with poor grammar."
+		- C343-109 "There is a grammar error in the Tourist leader's greeting."(from GruntHack)
+		- C343-1 "At a pit the game can give messages with poor grammar." (fix by Tung Nguyen)
+		- Shopkeeper names lost in NetHack 2.2a reappear
+		- C343-345 "Display the plural form of the "You can't. They are cursed." message as opposed to the singular when trying to remove a cursed pair of lenses." (from GruntHack)
+		- C343-243 "Hero can throw without hands" (as polymorphed monster, for example killer bee) (from GruntHack)
+		- C343-305 "Attacking with an applied polearm ignores the "confirm" option." (from GruntHack)
+		- C343-81 "Ghosts can be slimed."
+		- C343-118 "Some messages use "mirror" where they should use "looking glass."" (from GruntHack)
+		- C343-302 "Amnesia of object discoveries may forget to forget one thing."
 		Patches are linked at http://nethackwiki.com/wiki/User:Bulwersator/UnNetHackPlus_bug_tracking
 	* UnNetHack bug fixes
-		- Angered quest guardians will no longer go berserk.
+		- #143 Angered quest guardians will no longer go berserk.
+		- #152 Wishing for unknown dragon scales with its actual name results in dragon scale mail (outside of debug mode)
 	* Flavour stuff
 		- Far look during hallucination should be more amusing
 		- New hallucinatory monsters, monster sounds (original ones and from NAO) and bottle types
@@ -41,6 +49,7 @@
 		- Wizards may start with cloak of protection/invisibility/displacement/robe/oilskin cloak/alchemy smock (based on idea from Sporkhack)
 		- Scroll of identify universally known (from SporkHack)
 		- Wearing fedora increases luck of archaeologists
+		- Archaeologists start with key and may start with potions of object detection, scrolls of gold detection, chances for other equipment tweaked a bit
 	* Nerfing
 		- Increase chances of getting a golem from polypiling (idea from SporkHack)
 		- The Eye of the Aethiopica energy production is no longer completely insane
@@ -53,7 +62,10 @@
 		- Bear trap is no longer ineffective on diagonals
 		- Better default config file - MSGTYPE and MONSTERCOLOR are mentioned, obvious MSGTYPE settings are appplied.
 		- PARANOID define enabled
-		- Smarter warning player before walking into known traps
+		- Smarter paranoid_trap
+		- automatically apply unlocking tool to containers during #loot-ing
+		- Mind flayers and vampires with sound mind will not attempt to eat during fight
+		- name is no longer checked on entering debug mode
 	* Grinding elimination
 		- Chance of wand wresting raised to 1/11
 		- Carrying digging tools to shop is no longer blocked
@@ -78,6 +90,7 @@
 		- generated objects may be eroded or fixed
 		- reduced amount of food on lower levels
 	* Rework amnesia - mind flayers now destroy spells and skills
+	* Dunce cap protects again mind flayer amnesia
 	* Poison gas blasts leave a trail of stinking clouds (based on work by "L" - Leon Arnott)
 	* Assorted YAFMs 1.0 by Adam Borowski, slightly modified
 	* Cursed musical instruments will work only in 50% of cases, blessed ones are more effective
@@ -98,7 +111,7 @@
 	* New big room variant
 	* Better code (removal of useless #ifdefs for defines TOURIST, STEED etc, removal of pointless code like this related to SHELL, DUMB, STUPID defines, refactoring)
 	* Spellbook delivery is now more reliable in the Endgame (from GruntHack)
-
+	* Healing potions may fix wounded legs
 	Full list of changes available at https://github.com/Bulwersator/UnNetHackPlus/commits/master
 
 2012-04-01  UnNetHack 4.0.0

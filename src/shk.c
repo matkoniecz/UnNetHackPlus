@@ -15,9 +15,9 @@
 
 #ifdef KOPS
 STATIC_DCL void FDECL(makekops, (coord *));
-STATIC_DCL void FDECL(call_kops, (struct monst *,BOOLEAN_P));
+STATIC_DCL void FDECL(call_kops, (struct monst *,boolean));
 # ifdef OVLB
-STATIC_DCL void FDECL(kops_gone, (BOOLEAN_P));
+STATIC_DCL void FDECL(kops_gone, (boolean));
 # endif /* OVLB */
 #endif /* KOPS */
 
@@ -31,8 +31,8 @@ STATIC_VAR NEARDATA long int followmsg;	/* last time of follow message */
 STATIC_DCL void FDECL(setpaid, (struct monst *));
 STATIC_DCL long FDECL(addupbill, (struct monst *));
 STATIC_DCL void FDECL(pacify_shk, (struct monst *));
-STATIC_DCL struct bill_x *FDECL(onbill, (struct obj *, struct monst *, BOOLEAN_P));
-STATIC_DCL struct monst *FDECL(next_shkp, (struct monst *, BOOLEAN_P));
+STATIC_DCL struct bill_x *FDECL(onbill, (struct obj *, struct monst *, boolean));
+STATIC_DCL struct monst *FDECL(next_shkp, (struct monst *, boolean));
 STATIC_DCL long FDECL(shop_debt, (struct eshk *));
 STATIC_DCL char *FDECL(shk_owns, (char *,struct obj *));
 STATIC_DCL char *FDECL(mon_owns, (char *,struct obj *));
@@ -42,13 +42,13 @@ STATIC_DCL void FDECL(pay, (long, struct monst *));
 STATIC_DCL long FDECL(get_cost, (struct obj *, struct monst *));
 STATIC_DCL long FDECL(set_cost, (struct obj *, struct monst *));
 STATIC_DCL const char *FDECL(shk_embellish, (struct obj *, long));
-STATIC_DCL long FDECL(cost_per_charge, (struct monst *,struct obj *,BOOLEAN_P));
+STATIC_DCL long FDECL(cost_per_charge, (struct monst *,struct obj *,boolean));
 STATIC_DCL long FDECL(cheapest_item, (struct monst *));
 STATIC_DCL int FDECL(dopayobj, (struct monst *, struct bill_x *,
-			    struct obj **, int, BOOLEAN_P));
+			    struct obj **, int, boolean));
 STATIC_DCL long FDECL(stolen_container, (struct obj *, struct monst *, long,
-				     BOOLEAN_P));
-STATIC_DCL long FDECL(getprice, (struct obj *,BOOLEAN_P));
+				     boolean));
+STATIC_DCL long FDECL(getprice, (struct obj *,boolean));
 STATIC_DCL void FDECL(shk_names_obj,
 		 (struct monst *,struct obj *,const char *,long,const char *));
 STATIC_DCL void FDECL(append_honorific, (char *));
@@ -57,14 +57,14 @@ STATIC_DCL boolean FDECL(inherits, (struct monst *,int,int));
 STATIC_DCL void FDECL(set_repo_loc, (struct eshk *));
 STATIC_DCL boolean NDECL(angry_shk_exists);
 STATIC_DCL void FDECL(rile_shk, (struct monst *));
-STATIC_DCL void FDECL(rouse_shk, (struct monst *,BOOLEAN_P));
-STATIC_DCL void FDECL(remove_damage, (struct monst *, BOOLEAN_P));
+STATIC_DCL void FDECL(rouse_shk, (struct monst *,boolean));
+STATIC_DCL void FDECL(remove_damage, (struct monst *, boolean));
 STATIC_DCL void FDECL(sub_one_frombill, (struct obj *, struct monst *));
-STATIC_DCL void FDECL(add_one_tobill, (struct obj *, BOOLEAN_P));
+STATIC_DCL void FDECL(add_one_tobill, (struct obj *, boolean));
 STATIC_DCL void FDECL(dropped_container, (struct obj *, struct monst *,
-				      BOOLEAN_P));
+				      boolean));
 STATIC_DCL void FDECL(add_to_billobjs, (struct obj *));
-STATIC_DCL void FDECL(bill_box_content, (struct obj *, BOOLEAN_P, BOOLEAN_P,
+STATIC_DCL void FDECL(bill_box_content, (struct obj *, boolean, boolean,
 				     struct monst *));
 #ifdef OVL1
 static boolean FDECL(rob_shop, (struct monst *));
@@ -2669,14 +2669,18 @@ xchar x, y;
 	boolean isgold = (obj->oclass == COIN_CLASS);
 	boolean only_partially_your_contents = FALSE;
 
-	if(!(shkp = shop_keeper(*in_rooms(x, y, SHOPBASE))) ||
-	   !inhishop(shkp)) return;
-	if(!costly_spot(x, y))	return;
-	if(!*u.ushops) return;
-
+	if(!(shkp = shop_keeper(*in_rooms(x, y, SHOPBASE))) || !inhishop(shkp)) {
+		return;
+	}
+	if(!costly_spot(x, y)) {
+		return;
+	}
+	if(!*u.ushops) {
+		return;
+	}
 	if(obj->unpaid && !container && !isgold) {
-	    sub_one_frombill(obj, shkp);
-	    return;
+		sub_one_frombill(obj, shkp);
+		return;
 	}
 	if(container) {
 		/* find the price of content before subfrombill */
@@ -2687,27 +2691,29 @@ xchar x, y;
 	}
 
 	saleitem = saleable(shkp, obj);
-	if(!isgold && !obj->unpaid && saleitem)
-	    ltmp = set_cost(obj, shkp);
+	if(!isgold && !obj->unpaid && saleitem) {
+		ltmp = set_cost(obj, shkp);
+	}
 
 	offer = ltmp + cltmp;
 
 	/* get one case out of the way: nothing to sell, and no gold */
-	if(!isgold &&
-	   ((offer + gltmp) == 0L || sell_how == SELL_DONTSELL)) {
-		boolean unpaid = (obj->unpaid ||
-				  (container && count_unpaid(obj->cobj)));
-
+	if(!isgold && ((offer + gltmp) == 0L || sell_how == SELL_DONTSELL)) {
+		boolean unpaid = (obj->unpaid || (container && count_unpaid(obj->cobj)));
 		if(container) {
 			dropped_container(obj, shkp, FALSE);
-			if(!obj->unpaid && !saleitem)
-			    obj->no_charge = 1;
-			if(obj->unpaid || count_unpaid(obj->cobj))
-			    subfrombill(obj, shkp);
-		} else obj->no_charge = 1;
-
-		if(!unpaid && (sell_how != SELL_DONTSELL))
-		    pline("%s seems uninterested.", Monnam(shkp));
+			if(!obj->unpaid && !saleitem) {
+				obj->no_charge = 1;
+			}
+			if(obj->unpaid || count_unpaid(obj->cobj)) {
+				subfrombill(obj, shkp);
+			}
+		} else {
+			obj->no_charge = 1;
+		}
+		if(!unpaid && (sell_how != SELL_DONTSELL)) {
+			pline("%s seems uninterested.", Monnam(shkp));
+		}
 		return;
 	}
 
@@ -2722,49 +2728,59 @@ xchar x, y;
 	}
 
 	if(eshkp->robbed) {  /* shkp is not angry? */
-		if(isgold) offer = obj->quan;
-		else if(cgold) offer += cgold;
-		if((eshkp->robbed -= offer < 0L))
+		if(isgold) {
+			offer = obj->quan;
+		} else if(cgold) {
+			offer += cgold;
+		}
+		if((eshkp->robbed -= offer < 0L)) {
 			eshkp->robbed = 0L;
-		if(offer) verbalize(
-  "Thank you for your contribution to restock this recently plundered shop.");
+		}
+		if(offer) {
+			verbalize("Thank you for your contribution to restock this recently plundered shop.");
+		}
 		subfrombill(obj, shkp);
 		return;
 	}
 
 	if(isgold || cgold) {
-		if(!cgold) gltmp = obj->quan;
-
-		if(eshkp->debit >= gltmp) {
-		    if(eshkp->loan) { /* you carry shop's gold */
-			 if(eshkp->loan >= gltmp)
-			     eshkp->loan -= gltmp;
-			 else eshkp->loan = 0L;
-		    }
-		    eshkp->debit -= gltmp;
-		    Your("debt is %spaid off.",
-				eshkp->debit ? "partially " : "");
-		} else {
-		    long delta = gltmp - eshkp->debit;
-
-		    eshkp->credit += delta;
-		    if(eshkp->debit) {
-			eshkp->debit = 0L;
-			eshkp->loan = 0L;
-			Your("debt is paid off.");
-		    }
-		    pline("%ld %s %s added to your credit.",
-				delta, currency(delta), delta > 1L ? "are" : "is");
+		if(!cgold) {
+			gltmp = obj->quan;
 		}
-		if(offer) goto move_on;
-		else {
-		    if(!isgold) {
-			if (container)
-			    dropped_container(obj, shkp, FALSE);
-			if (!obj->unpaid && !saleitem) obj->no_charge = 1;
-			subfrombill(obj, shkp);
-		    }
-		    return;
+		if(eshkp->debit >= gltmp) {
+			if(eshkp->loan) { /* you carry shop's gold */
+				if(eshkp->loan >= gltmp) {
+					eshkp->loan -= gltmp;
+				} else {
+					eshkp->loan = 0L;
+				}
+			}
+			eshkp->debit -= gltmp;
+			Your("debt is %spaid off.", eshkp->debit ? "partially " : "");
+		} else {
+			long delta = gltmp - eshkp->debit;
+
+			eshkp->credit += delta;
+			if(eshkp->debit) {
+				eshkp->debit = 0L;
+				eshkp->loan = 0L;
+				Your("debt is paid off.");
+			}
+			pline("%ld %s %s added to your credit.", delta, currency(delta), delta > 1L ? "are" : "is");
+		}
+		if(offer) {
+			goto move_on;
+		} else {
+			if(!isgold) {
+				if (container) {
+					dropped_container(obj, shkp, FALSE);
+				}
+				if (!obj->unpaid && !saleitem) {
+					obj->no_charge = 1;
+				}
+				subfrombill(obj, shkp);
+			}
+			return;
 		}
 	}
 move_on:
@@ -2777,8 +2793,9 @@ move_on:
 		   obj->age < 20L * (long)objects[obj->otyp].oc_cost)) {
 		pline("%s seems uninterested%s.", Monnam(shkp),
 			cgold ? " in the rest" : "");
-		if (container)
-		    dropped_container(obj, shkp, FALSE);
+		if (container) {
+			dropped_container(obj, shkp, FALSE);
+		}
 		obj->no_charge = 1;
 		return;
 	}
@@ -2792,54 +2809,59 @@ move_on:
 		long tmpcr = ((offer * 9L) / 10L) + (offer <= 1L);
 
 		if (sell_how == SELL_NORMAL || auto_credit) {
-		    c = sell_response = 'y';
+			c = sell_response = 'y';
 		} else if (sell_response != 'n') {
-		    pline("%s cannot pay you at present.", Monnam(shkp));
-		    Sprintf(qbuf,
+			pline("%s cannot pay you at present.", Monnam(shkp));
+			Sprintf(qbuf,
 			    "Will you accept %ld %s in credit for %s?",
 			    tmpcr, currency(tmpcr), doname(obj));
-		    /* won't accept 'a' response here */
-		    /* KLY - 3/2000 yes, we will, it's a damn nuisance
-                       to have to constantly hit 'y' to sell for credit */
-		    c = ynaq(qbuf);
-		    if (c == 'a') {
-			c = 'y';
-			auto_credit = TRUE;
-		    }
-		} else		/* previously specified "quit" */
-		    c = 'n';
-
+			c = ynaq(qbuf);
+			if (c == 'a') {
+				c = 'y';
+				auto_credit = TRUE;
+			}
+		} else { /* previously specified "quit" */
+			c = 'n';
+		}
+		
 		if (c == 'y') {
-		    shk_names_obj(shkp, obj, (sell_how != SELL_NORMAL) ?
+			shk_names_obj(shkp, obj, (sell_how != SELL_NORMAL) ?
 			    "traded %s for %ld zorkmid%s in %scredit." :
-			"relinquish %s and acquire %ld zorkmid%s in %scredit.",
+			    "relinquish %s and acquire %ld zorkmid%s in %scredit.",
 			    tmpcr,
 			    (eshkp->credit > 0L) ? "additional " : "");
-		    eshkp->credit += tmpcr;
-		    subfrombill(obj, shkp);
+			eshkp->credit += tmpcr;
+			subfrombill(obj, shkp);
 		} else {
-		    if (c == 'q') sell_response = 'n';
-		    if (container)
-			dropped_container(obj, shkp, FALSE);
-		    if (!obj->unpaid) obj->no_charge = 1;
-		    subfrombill(obj, shkp);
+			if (c == 'q') {
+				sell_response = 'n';
+			}
+			if (container) {
+				dropped_container(obj, shkp, FALSE);
+			}
+			if (!obj->unpaid) {
+				obj->no_charge = 1;
+			}
+			subfrombill(obj, shkp);
 		}
 	} else {
 		char qbuf[BUFSZ];
 #ifndef GOLDOBJ
 		boolean short_funds = (offer > shkp->mgold);
-		if (short_funds) offer = shkp->mgold;
+		if (short_funds) {
+			offer = shkp->mgold;
+		}
 #else
-                long shkmoney = money_cnt(shkp->minvent);
+		long shkmoney = money_cnt(shkp->minvent);
 		boolean short_funds = (offer > shkmoney);
-		if (short_funds) offer = shkmoney;
+		if (short_funds) {
+			offer = shkmoney;
+		}
 #endif
 		if (!sell_response) {
-		    only_partially_your_contents =
-			(contained_cost(obj, shkp, 0L, FALSE, FALSE) !=
-			 contained_cost(obj, shkp, 0L, FALSE, TRUE));
-		    Sprintf(qbuf,
-			 "%s offers%s %ld gold piece%s for%s %s %s.  Sell %s?",
+			only_partially_your_contents = (contained_cost(obj, shkp, 0L, FALSE, FALSE) != contained_cost(obj, shkp, 0L, FALSE, TRUE));
+			Sprintf(qbuf,
+			    "%s offers%s %ld gold piece%s for%s %s %s.  Sell %s?",
 			    Monnam(shkp), short_funds ? " only" : "",
 			    offer, plur(offer),
 			    (!ltmp && cltmp && only_partially_your_contents) ?
@@ -2848,12 +2870,14 @@ move_on:
 			    (obj->quan == 1L &&
 			    !(!ltmp && cltmp && only_partially_your_contents)) ?
 			    "it" : "them");
-		} else  qbuf[0] = '\0';		/* just to pacify lint */
+		} else  {
+			qbuf[0] = '\0';		/* just to pacify lint */
+		}
 
 		switch (sell_response ? sell_response : ynaq(qbuf)) {
 		 case 'q':  sell_response = 'n';
 		 case 'n':  if (container)
-				dropped_container(obj, shkp, FALSE);
+			    dropped_container(obj, shkp, FALSE);
 			    if (!obj->unpaid) obj->no_charge = 1;
 			    subfrombill(obj, shkp);
 			    break;
@@ -3962,77 +3986,105 @@ struct monst *shkp;
 		pline("%s talks about the problem of shoplifters.",shkname(shkp));
 }
 
-#define CRYNUMBER 5
-
 const char* armor_wares[] = {
+	/* From SporHack */
 	"Any %s would love these!  Finest quality!",
 	"Fit for a Knight, but they'll last for weeks!",
 	"It's dangerous 'round here these days... better wear something safe!",
 	"Hey, %s, I've got something here that'll fit you perfectly!",
-	"Guaranteed safety or double your money back!"
+	"Guaranteed safety or double your money back!",
+	/* by pinkemma from reddit */
+	"Finest armour for sale, only worn once!",
+	"Cheap, light, tough. Choose any 2!",
+	/* by kzastle from reddit */
+	"If you die wearing our armor, we'll give you another set - free!",
 };
 const char* scroll_wares[] = {
+	/* From Sporhack */
 	"Large print available!",
-	"'ere now, this isn't a library; get lost, you freeloader!",
+	"Mental magnificence for the scholarly IN-clined!",
 	"Waterproof ink upon request!  ... for a small surcharge.",
 	"Curses removed, gold detected, and weapons enchanted, at your whim!",
-	"If you can read, %s, you'll want some of these!"
+	"If you can read, %s, you'll want some of these!",
 };
 const char* potion_wares[] = {
-	"Bugger off, you filthy little %s. Don't come begging around here!",
+	/* From Sporhack */
 	"Booze on ice!  Getcher booze on ice!",
 	"Come on, %s.  You know you're thirsty.",
 	"Ahhh, it'll put hair on yer chest!",
-	"Lowest percentage of cursed items around!"
+	"Lowest percentage of cursed items around!",
+	/* by pinkemma from reddit */
+	"Red ones! Yellow ones! Take a gamble, who knows what they do!",
+	"Potions, guaranteed to work!",
+	"Heal your broken heart with our health potions!",
+	/* by kzastle from reddit */
+	"Welcome to Wide World of Potions. Of course - if the world is too wide we have a potion for that, too.",
 };
 const char* weapon_wares[] = {
+	/* From SporHack */
 	"Sharpest weapons around! On sale, today only!",
 	"We sell 'em, you stab 'em!",
 	"Guaranteed to not dull for ten fights or your money back!",
 	"Look, %s, with a face like that you'll be in a lot of fights.  Better buy something now.",
-	"You'll never slash the same again after one of ours!"
+	"You'll never slash the same again after one of ours!",
 };
 const char* food_wares[] = {
+	/* From SporHack */
 	"Gitchore luvverly orinjes!",
 	"Fresh fish! So fresh it'll grab yer naughty bits!",
 	"Sausage inna bun!  Hot sausage!",
-	"Bugger off, you filthy little %s. Don't come begging around here!",
-	"Genuine pig parts, these. So good most pigs don't even know they got 'em."
+	"Genuine pig parts, these. So good most pigs don't even know they got 'em.",
+	/* by kzastle from reddit */
+	"Our sausages are guaranteed 75% goblin-free!",
 };
 const char* ring_wares[] = {
+	/* From SporHack */
 	"Well, you seem like a fine, discerning young %s; come look at this.",
 	"Special sparklies for a special %s, perhaps?",
 	"Once you put one of ours on, you'll never want to take it off!",
 	"Our bands never break or melt!",
-	"Shiny, isn't it?"
+	"Shiny, isn't it?",
+	/* by kzastle from reddit */
+	"Come in and take a look at my rings! Aren't they precious?",
 };
 const char* wand_wares[] = {
+	/* From SporHack */
 	"Credit available for valued customers!",
-	"Bugger off, you filthy little %s. Don't come begging around here!",
 	"Straightest zaps anywhere!  100%% money back guarantee (less usage)!",
 	"Our wands explode less than all others!",
-	"New EZ-BREAK feature on these in case of emergency!"
+	"New EZ-BREAK feature on these in case of emergency!",
 };
 const char* tool_wares[] = {
-	"Bugger off, you filthy little %s. Don't come begging around here!",
+	/* From SporHack */
 	"Tins opened, faces wiped, gazes reflected; your one-stop shop!",
 	"How you gonna carry all your stuff without a bag, %s?",
 	"Must be hard kickin' all those doors down, I bet a key would help...",
-	"Only tools wouldn't buy our tools!"
+	"Only tools wouldn't buy our tools!",
+	/* by kzastle from reddit */
+	"Leashes, chains, whistles, and whips. We won't ask what you're buying them for.",
 };
 const char* book_wares[] = {
+	/* From SporHack */
 	"Large print available!",
-	"'ere now, this isn't a library; get lost, you freeloader!",
+	"If you can read, %s, you'll want some of these!"
 	"Mental magnificence for the scholarly IN-clined!",
 	"Credit available for valued customers!",
-	"'Banned' section now open! (I.D. required)"
+	"'Banned' section now open! (I.D. required)",
 };
 const char* candle_wares[] = {
+	/* From SporHack */
 	"Hey, %s! Best candles in Minetown! You'll need 'em later, count on it!",
 	"You've got a long way down yet, %s.  Be sure you're ready.",
 	"Let us be the light in your darkness!",
 	"You know, I hear some of these old lamps might be... magic.",
-	"Be a shame if you missed anything because you didn't see it!"
+	"Be a shame if you missed anything because you didn't see it!",
+	/* by Coppershoe-Ironhill from reddit */
+	"Light up your day with a new lamp!",
+	"You'll never fear the dark after shopping here!",
+};
+const char* music_wares[] = {
+	/* by Coppershoe-Ironhill from reddit */
+	"It's a fine day for a tune, don't you think?",
 };
 
 void
@@ -4041,60 +4093,60 @@ struct monst* shkp;
 {
 	switch (ESHK(shkp)->shoptype) {
 		case ARMORSHOP:
-			verbalize(armor_wares[rn2(CRYNUMBER)],urace.noun);
+			verbalize(armor_wares[rn2(SIZE(armor_wares))], urace.noun);
 			break;
 		case SCROLLSHOP:
-			verbalize(scroll_wares[rn2(CRYNUMBER)],urace.noun);
+			verbalize(scroll_wares[rn2(SIZE(scroll_wares))], urace.noun);
 			break;
 		case POTIONSHOP:
-			verbalize(potion_wares[rn2(CRYNUMBER)],urace.noun);
+			verbalize(potion_wares[rn2(SIZE(potion_wares))], urace.noun);
 			break;
 		case WEAPONSHOP:
-			verbalize(weapon_wares[rn2(CRYNUMBER)],urace.noun);
+			verbalize(weapon_wares[rn2(SIZE(weapon_wares))], urace.noun);
 			break;
 		case FOODSHOP:
-			verbalize(food_wares[rn2(CRYNUMBER)],urace.noun);
+			verbalize(food_wares[rn2(SIZE(food_wares))], urace.noun);
 			break;
 		case RINGSHOP:
-			verbalize(ring_wares[rn2(CRYNUMBER)],urace.noun);
+			verbalize(ring_wares[rn2(SIZE(ring_wares))], urace.noun);
 			break;
 		case WANDSHOP:
-			verbalize(wand_wares[rn2(CRYNUMBER)],urace.noun);
+			verbalize(wand_wares[rn2(SIZE(wand_wares))], urace.noun);
 			break;
 		case TOOLSHOP:
-			verbalize(tool_wares[rn2(CRYNUMBER)],urace.noun);
+			verbalize(tool_wares[rn2(SIZE(tool_wares))], urace.noun);
 			break;
 		case BOOKSHOP:
-			verbalize(book_wares[rn2(CRYNUMBER)],urace.noun);
+			verbalize(book_wares[rn2(SIZE(book_wares))], urace.noun);
 			break;
 		case SHOPBASE: //general shop
 			switch (rn2(9)) {
 			case 0:
-				verbalize(armor_wares[rn2(CRYNUMBER)],urace.noun);
+				verbalize(armor_wares[rn2(SIZE(armor_wares))], urace.noun);
 				break;
 			case 1:
-				verbalize(scroll_wares[rn2(CRYNUMBER)],urace.noun);
+				verbalize(scroll_wares[rn2(SIZE(scroll_wares))], urace.noun);
 				break;
 			case 2:
-				verbalize(potion_wares[rn2(CRYNUMBER)],urace.noun);
+				verbalize(potion_wares[rn2(SIZE(potion_wares))], urace.noun);
 				break;
 			case 3:
-				verbalize(weapon_wares[rn2(CRYNUMBER)],urace.noun);
+				verbalize(weapon_wares[rn2(SIZE(weapon_wares))], urace.noun);
 				break;
 			case 4:
-				verbalize(food_wares[rn2(CRYNUMBER)],urace.noun);
+				verbalize(food_wares[rn2(SIZE(food_wares))], urace.noun);
 				break;
 			case 5:
-				verbalize(ring_wares[rn2(CRYNUMBER)],urace.noun);
+				verbalize(ring_wares[rn2(SIZE(ring_wares))], urace.noun);
 				break;
 			case 6:
-				verbalize(wand_wares[rn2(CRYNUMBER)],urace.noun);
+				verbalize(wand_wares[rn2(SIZE(wand_wares))], urace.noun);
 				break;
 			case 7:
-				verbalize(tool_wares[rn2(CRYNUMBER)],urace.noun);
+				verbalize(candle_wares[rn2(SIZE(candle_wares))], urace.noun);
 				break;
 			case 8:
-				verbalize(book_wares[rn2(CRYNUMBER)],urace.noun);
+				verbalize(book_wares[rn2(SIZE(book_wares))], urace.noun);
 				break;
 			default:
 				warning("impossible yell roll");
@@ -4105,13 +4157,13 @@ struct monst* shkp;
 			//TODO
 			break;
 		case INSTRUMENTSHOP:
-			//TODO
+			verbalize(music_wares[rn2(SIZE(music_wares))], urace.noun);
 			break;
 		case PETSHOP:
 			//TODO
 			break;
 		case CANDLESHOP:
-			verbalize(candle_wares[rn2(CRYNUMBER)],urace.noun);
+			verbalize(candle_wares[rn2(SIZE(wand_wares))], urace.noun);
 			break;
 		case BLACKSHOP: /* Not necessary */
 			break;

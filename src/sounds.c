@@ -634,10 +634,11 @@ grunt_chat(struct monst *mtmp)
 			"Bite ME will ye? Chew on THIS ye syphilitic panty waist cockroach!",
 			"Lemme spell out the rules for ye. I win. YOU LOSE! ye potato faced bug chewin' gutless kidneywipe!",
 			"Go ahead an' run! I LIKE a movin' target ye worm livered panty waist wiggly maggot!",
-			"Ba ba ba-ba ba you’re gonna get murdered",
+			"Ba ba ba-ba ba you're gonna get murdered",
 			"Have a face full o' boot ye bloated rat spawned chunk O' bat spit!",
+			"Ye can surrender after I kill yer sorry ass ye worm!",
+			"Have a meal of me fist ye rabid spider lovin' greasey dingo buttwipe!",
 			/* end of this source */
-			
 			"WARGHLBARGLEARGLEBARGLE!", // from http://forum.rpg.net/showthread.php?466187-%28Let-s-Play!%29-Sporkhack/page46
 		};
 		return produce_random_spoken_response_from_this_list(mtmp, orc_insults_msgs, SIZE(orc_insults_msgs));
@@ -671,7 +672,27 @@ humanoid_chat(struct monst *mtmp)
 			}
 		}
 		if(is_dwarf(youmonst.data) && !is_dwarf((mtmp->data))) {
-			verbl_msg = "I don't talk with minerals."; //by vadia from bay12forums
+			char *adjectives[] = {
+				"tunnel-dwelling", //by el_brio from reddit
+				/* by Azba from reddit */
+				"short",
+				"fat", 
+				"barbaric",
+				"uncultured",
+				"alcoholic",
+				"stupid",
+				"greedy",
+				"hairy",
+				"smelly",
+			};
+			char verbuf[BUFSZ];
+			Sprintf(verbuf, "I'm gonna eat your beard for lunch you %s rodent!", adjectives[rn2(SIZE(adjectives))]); //by el_brio from reddit
+			char *insult_dwarf_msgs[] = {
+				"I don't talk with minerals.", //by vadia from bay12forums
+				"Your life will be as short as you!", //by holomanga from reddit
+				verbuf
+			};
+			return produce_random_spoken_response_from_this_list(mtmp, insult_dwarf_msgs, SIZE(insult_dwarf_msgs));
 		}
 		return 0;	/* no sound */
 	}

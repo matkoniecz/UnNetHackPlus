@@ -188,14 +188,12 @@ const char * const monexplain[MAXMCLASSES] = {
 };
 
 const struct symdef def_warnsyms[WARNCOUNT] = {
-	{'0', "unknown creature causing you worry", C(CLR_WHITE)},  	/* white warning  */
-	{'1', "unknown creature causing you concern", C(CLR_RED)},	/* pink warning   */
-	{'2', "unknown creature causing you anxiety", C(CLR_RED)},	/* red warning    */
-	{'3', "unknown creature causing you disquiet", C(CLR_RED)},	/* ruby warning   */
-	{'4', "unknown creature causing you alarm",
-						C(CLR_MAGENTA)},        /* purple warning */
-	{'5', "unknown creature causing you dread",
-						C(CLR_BRIGHT_MAGENTA)}	/* black warning  */
+	{'0', "unknown creature causing you worry",    C(CLR_WHITE)},
+	{'1', "unknown creature causing you concern",  C(CLR_RED)},
+	{'2', "unknown creature causing you anxiety",  C(CLR_RED)},
+	{'3', "unknown creature causing you disquiet", C(CLR_RED)},
+	{'4', "unknown creature causing you alarm",    C(CLR_MAGENTA)},
+	{'5', "unknown creature causing you dread",    C(CLR_BRIGHT_MAGENTA)}
 };
 
 /*
