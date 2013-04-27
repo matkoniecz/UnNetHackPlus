@@ -7,10 +7,6 @@
 #ifndef BECONF_H
 #define BECONF_H
 
-/*
- * We must use UNWIDENED_PROTOTYPES because we mix C++ and C.
- */
-
 #define index strchr
 #define rindex strrchr
 #define Rand rand	/* Be should have a better rand function! */

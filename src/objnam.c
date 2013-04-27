@@ -11,10 +11,10 @@
 
 STATIC_DCL char *FDECL(strprepend,(char *,const char *));
 #ifdef OVLB
-static boolean FDECL(wishymatch, (const char *,const char *,BOOLEAN_P));
+static boolean FDECL(wishymatch, (const char *,const char *,boolean));
 #endif
 static char *NDECL(nextobuf);
-static void FDECL(add_erosion_words, (struct obj *, char *,BOOLEAN_P));
+static void FDECL(add_erosion_words, (struct obj *, char *,boolean));
 #ifdef SORTLOOT
 char * FDECL(xname2, (struct obj *, boolean));
 #endif
@@ -25,12 +25,32 @@ struct Jitem {
 };
 
 /* true for gems/rocks that should have " stone" appended to their names */
-#define GemStone(typ)	(typ == FLINT ||				\
-			 (objects[typ].oc_material == GEMSTONE &&	\
-			  (typ != DILITHIUM_CRYSTAL && typ != RUBY &&	\
-			   typ != DIAMOND && typ != SAPPHIRE &&		\
-			   typ != BLACK_OPAL && 	\
-			   typ != EMERALD && typ != OPAL)))
+boolean
+GemStone(int typ)
+{
+	if (typ == FLINT) {
+		return TRUE;
+	}
+	if (objects[typ].oc_material == GEMSTONE) {
+		if (typ == DILITHIUM_CRYSTAL) {
+			return FALSE;
+		} else if (typ == RUBY) {
+			return FALSE;
+		} else if (typ == DIAMOND) {
+			return FALSE;
+		} else if (typ == SAPPHIRE) {
+			return FALSE;
+		} else if (typ == BLACK_OPAL) {
+			return FALSE;
+		} else if (typ == EMERALD) {
+			return FALSE;
+		} else if (typ == OPAL) {
+			return FALSE;
+		}
+		return TRUE;
+	}
+	return FALSE;
+}
 
 #ifndef OVLB
 
@@ -62,10 +82,10 @@ STATIC_DCL const char *FDECL(Japanese_item_name,(int i));
 
 STATIC_OVL char *
 strprepend(s,pref)
-register char *s;
-register const char *pref;
+char *s;
+const char *pref;
 {
-	register int i = (int)strlen(pref);
+	int i = (int)strlen(pref);
 
 	if(i > PREFIX) {
 		warning("PREFIX too short (for %d).", i);
@@ -92,14 +112,14 @@ nextobuf()
 
 char *
 obj_typename(otyp)
-register int otyp;
+int otyp;
 {
 	char *buf = nextobuf();
-	register struct objclass *ocl = &objects[otyp];
-	register const char *actualn = OBJ_NAME(*ocl);
-	register const char *dn = OBJ_DESCR(*ocl);
-	register const char *un = ocl->oc_uname;
-	register int nn = ocl->oc_name_known;
+	struct objclass *ocl = &objects[otyp];
+	const char *actualn = OBJ_NAME(*ocl);
+	const char *dn = OBJ_DESCR(*ocl);
+	const char *un = ocl->oc_uname;
+	int nn = ocl->oc_name_known;
 
 	if (Role_if(PM_SAMURAI) && Japanese_item_name(otyp))
 		actualn = Japanese_item_name(otyp);
@@ -197,7 +217,7 @@ int otyp;
 
 boolean
 obj_is_pname(obj)
-register struct obj *obj;
+struct obj *obj;
 {
     return((boolean)(obj->dknown && obj->known && obj->onamelth &&
 		     /* Since there aren't any objects which are both
@@ -214,7 +234,7 @@ register struct obj *obj;
  */
 char *
 distant_name(obj, func)
-register struct obj *obj;
+struct obj *obj;
 char *FDECL((*func), (OBJ_P));
 {
 	char *str;
@@ -249,29 +269,29 @@ boolean juice;	/* whether or not to append " juice" to the name */
 
 char *
 xname(obj)
-register struct obj *obj;
+struct obj *obj;
 #ifdef SORTLOOT
 {
 	return xname2(obj, FALSE);
 }
 char *
 xname2(obj, ignore_oquan)
-register struct obj *obj;
+struct obj *obj;
 boolean ignore_oquan;
 #endif
 {
-	register char *buf;
-	register int typ = obj->otyp;
-	register struct objclass *ocl = &objects[typ];
-	register int nn = ocl->oc_name_known ||
+	char *buf;
+	int typ = obj->otyp;
+	struct objclass *ocl = &objects[typ];
+	int nn = ocl->oc_name_known ||
 		/* only reveal Sokoban prizes when in sight */
 		(Is_sokoprize(obj) &&
 		 (cansee(obj->ox, obj->oy) ||
 		  /* even reveal when Sokoban prize only felt */
 		  (u.ux == obj->ox && u.uy == obj->oy)));
-	register const char *actualn = OBJ_NAME(*ocl);
-	register const char *dn = OBJ_DESCR(*ocl);
-	register const char *un = ocl->oc_uname;
+	const char *actualn = OBJ_NAME(*ocl);
+	const char *dn = OBJ_DESCR(*ocl);
+	const char *un = ocl->oc_uname;
 
 	buf = nextobuf() + PREFIX;	/* leave room for "17 -3 " */
 	if (Role_if(PM_SAMURAI) && Japanese_item_name(typ))
@@ -373,7 +393,7 @@ boolean ignore_oquan;
 		break;
 	    case FOOD_CLASS:
 		if (typ == SLIME_MOLD) {
-			register struct fruit *f;
+			struct fruit *f;
 
 			for(f=ffruit; f; f = f->nextf) {
 				if(f->fid == obj->spe) {
@@ -554,7 +574,7 @@ struct obj *obj;
 /* used for naming "the unique_item" instead of "a unique_item" */
 boolean
 the_unique_obj(obj)
-register struct obj *obj;
+struct obj *obj;
 {
     if (!obj->dknown)
 	return FALSE;
@@ -617,7 +637,7 @@ boolean in_final_dump;
 
 static char *
 doname_base(obj, with_price)
-register struct obj *obj;
+struct obj *obj;
 boolean with_price;
 {
 	boolean ispoisoned = FALSE;
@@ -626,7 +646,7 @@ boolean with_price;
 	/* when we have to add something at the start of prefix instead of the
 	 * end (Strcat is used on the end)
 	 */
-	register char *bp = xname(obj), *tmp;
+	char *bp = xname(obj), *tmp;
 
 	int dump_ID_flag = program_state.gameover;
 	/* display ID in addition to appearance */
@@ -920,13 +940,11 @@ ring:
 			else if (mayberot > 5L) Strcat(prefix, "[rotten] ");
 		}
 		if (obj->otyp == CORPSE && obj->odrained) {
-#ifdef WIZARD
-		    if (wizard && obj->oeaten < drainlevel(obj))
+		    if (wizard && obj->oeaten < drainlevel(obj)) {
 			Strcpy(tmpbuf, "over-drained ");
-		    else
-#endif
-		    Sprintf(tmpbuf, "%sdrained ",
-		      (obj->oeaten > drainlevel(obj)) ? "partly " : "");
+		    } else {
+			Sprintf(tmpbuf, "%sdrained ", (obj->oeaten > drainlevel(obj)) ? "partly " : "");
+		    }
 		}
 		else if (obj->oeaten)
 		    Strcpy(tmpbuf, "partly eaten ");
@@ -1038,7 +1056,7 @@ ring:
 /** Wrapper function for vanilla behaviour. */
 char *
 doname(obj)
-register struct obj *obj;
+struct obj *obj;
 {
 	return doname_base(obj, FALSE);
 }
@@ -1046,7 +1064,7 @@ register struct obj *obj;
 /** Name of object including price. */
 char *
 doname_with_price(obj)
-register struct obj *obj;
+struct obj *obj;
 {
 	return doname_base(obj, TRUE);
 }
@@ -1057,7 +1075,7 @@ register struct obj *obj;
 /* used from invent.c */
 boolean
 not_fully_identified(otmp)
-register struct obj *otmp;
+struct obj *otmp;
 {
 #ifdef GOLDOBJ
     /* gold doesn't have any interesting attributes [yet?] */
@@ -1172,7 +1190,7 @@ struct obj *obj;
  */
 const char *
 singular(otmp, func)
-register struct obj *otmp;
+struct obj *otmp;
 char *FDECL((*func), (OBJ_P));
 {
 	long savequan;
@@ -1191,7 +1209,7 @@ char *FDECL((*func), (OBJ_P));
 
 char *
 an(str)
-register const char *str;
+const char *str;
 {
 	char *buf = nextobuf();
 
@@ -1221,7 +1239,7 @@ char *
 An(str)
 const char *str;
 {
-	register char *tmp = an(str);
+	char *tmp = an(str);
 	*tmp = highc(*tmp);
 	return tmp;
 }
@@ -1246,7 +1264,7 @@ const char *str;
 	    insert_the = TRUE;
 	} else {
 	    /* Probably a proper name, might not need an article */
-	    register char *tmp, *named, *called;
+	    char *tmp, *named, *called;
 	    int l;
 
 	    /* some objects have capitalized adjectives in their names */
@@ -1281,7 +1299,7 @@ char *
 The(str)
 const char *str;
 {
-    register char *tmp = the(str);
+    char *tmp = the(str);
     *tmp = highc(*tmp);
     return tmp;
 }
@@ -1289,10 +1307,10 @@ const char *str;
 /* returns "count cxname(otmp)" or just cxname(otmp) if count == 1 */
 char *
 aobjnam(otmp,verb)
-register struct obj *otmp;
-register const char *verb;
+struct obj *otmp;
+const char *verb;
 {
-	register char *bp = cxname(otmp);
+	char *bp = cxname(otmp);
 	char prefix[PREFIX];
 
 	if(otmp->quan != 1L) {
@@ -1310,8 +1328,8 @@ register const char *verb;
 /* like aobjnam, but prepend "The", not count, and use xname */
 char *
 Tobjnam(otmp, verb)
-register struct obj *otmp;
-register const char *verb;
+struct obj *otmp;
+const char *verb;
 {
 	char *bp = The(xname(otmp));
 
@@ -1325,8 +1343,8 @@ register const char *verb;
 /* return form of the verb (input plural) if xname(otmp) were the subject */
 char *
 otense(otmp, verb)
-register struct obj *otmp;
-register const char *verb;
+struct obj *otmp;
+const char *verb;
 {
 	char *buf;
 
@@ -1359,8 +1377,8 @@ static const char * const special_subjs[] = {
 /* return form of the verb (input plural) for present tense 3rd person subj */
 char *
 vtense(subj, verb)
-register const char *subj;
-register const char *verb;
+const char *subj;
+const char *verb;
 {
 	char *buf = nextobuf();
 	int len, ltmp;
@@ -1454,9 +1472,9 @@ register const char *verb;
 /* capitalized variant of doname() */
 char *
 Doname2(obj)
-register struct obj *obj;
+struct obj *obj;
 {
-	register char *s = doname(obj);
+	char *s = doname(obj);
 
 	*s = highc(*s);
 	return(s);
@@ -1542,7 +1560,7 @@ makeplural(oldstr)
 const char *oldstr;
 {
 	/* Note: cannot use strcmpi here -- it'd give MATZot, CAVEMeN,... */
-	register char *spot;
+	char *spot;
 	char *str = nextobuf();
 	const char *excess = (char *)0;
 	int len;
@@ -1786,9 +1804,7 @@ STATIC_OVL NEARDATA const struct o_range o_ranges[] = {
 	{ "dragon scale mail",
 			ARMOR_CLASS,  GRAY_DRAGON_SCALE_MAIL, YELLOW_DRAGON_SCALE_MAIL },
 	{ "sword",	WEAPON_CLASS, SHORT_SWORD,    KATANA },
-#ifdef WIZARD
 	{ "venom",	VENOM_CLASS,  BLINDING_VENOM, ACID_VENOM },
-#endif
 	{ "gray stone",	GEM_CLASS,    LUCKSTONE,      FLINT },
 	{ "grey stone",	GEM_CLASS,    LUCKSTONE,      FLINT },
 };
@@ -1807,7 +1823,7 @@ char *
 makesingular(oldstr)
 const char *oldstr;
 {
-	register char *p, *bp;
+	char *p, *bp;
 	char *str = nextobuf();
 
 	if (!oldstr || !*oldstr) {
@@ -1882,9 +1898,7 @@ const char *oldstr;
 			   !BSTRCMP(bp, p-15, "detect monsters") ||
 			   !BSTRCMPI(bp, p-11, "Aesculapius") || /* staff */
 			   !BSTRCMP(bp, p-10, "eucalyptus") ||
-#ifdef WIZARD
 			   !BSTRCMP(bp, p-9, "iron bars") ||
-#endif
 			   !BSTRCMP(bp, p-5, "aklys") ||
 			   !BSTRCMP(bp, p-6, "fungus"))
 				return bp;
@@ -1919,10 +1933,8 @@ boolean retry_inverted;	/* optional extra "of" handling */
 	 * and the trap is "bear trap", so to let wizards wish for both we
 	 * must not fuzzymatch.
 	 */
-#ifdef WIZARD
 	if (wizard && !strcmp(o_str, "beartrap"))
 	    return !strncmpi(o_str, u_str, 8);
-#endif
 
 	/* ignore spaces & hyphens and upper/lower case when comparing */
 	if (fuzzymatch(u_str, o_str, " -", TRUE)) return TRUE;
@@ -2019,13 +2031,13 @@ struct alt_spellings {
  */
 struct obj *
 readobjnam(bp, no_wish, from_user)
-register char *bp;
+char *bp;
 struct obj *no_wish;
 boolean from_user;
 {
-	register char *p;
-	register int i;
-	register struct obj *otmp;
+	char *p;
+	int i;
+	struct obj *otmp;
 	int cnt, spe, spesgn, typ, very, rechrg;
 	int blessed, uncursed, iscursed, ispoisoned, isgreased, isdrained;
 	int eroded, eroded2, erodeproof;
@@ -2086,7 +2098,7 @@ boolean from_user;
 	Strcpy(fruitbuf, bp);
 
 	for(;;) {
-		register int l;
+		int l;
 
 		if (!bp || !*bp) goto any;
 		if (!strncmpi(bp, "an ", l=3) ||
@@ -2136,11 +2148,7 @@ boolean from_user;
 			   !strncmpi(bp,"unlabelled ", l=11) ||
 			   !strncmpi(bp,"blank ", l=6)) {
 			unlabeled = 1;
-		} else if(!strncmpi(bp, "poisoned ",l=9)
-#ifdef WIZARD
-			  || (wizard && !strncmpi(bp, "trapped ",l=8))
-#endif
-			  ) {
+		} else if(!strncmpi(bp, "poisoned ",l=9) || !strncmpi(bp, "trapped ",l=8)) {
 			ispoisoned=1;
 		} else if(!strncmpi(bp, "greased ",l=8)) {
 			isgreased=1;
@@ -2378,18 +2386,14 @@ boolean from_user;
 	}
 	/*
 	 * NOTE: Gold pieces are handled as objects nowadays, and therefore
-	 * this section should probably be reconsidered as well as the entire
-	 * gold/money concept.  Maybe we want to add other monetary units as
-	 * well in the future. (TH)
+	 * this section should probably be reconsidered as well
 	 */
 	if(!BSTRCMPI(bp, p-10, "gold piece") || !BSTRCMPI(bp, p-7, "zorkmid") ||
 	   !strcmpi(bp, "gold") || !strcmpi(bp, "money") ||
 	   !strcmpi(bp, "coin") || *bp == GOLD_SYM) {
-			if (cnt > 5000
-#ifdef WIZARD
-					&& !wizard
-#endif
-						) cnt=5000;
+			if (cnt > 5000	&& !wizard) {
+				cnt=5000;
+			}
 		if (cnt < 1) cnt=1;
 #ifndef GOLDOBJ
 		if (from_user)
@@ -2405,14 +2409,7 @@ boolean from_user;
 		return (otmp);
 #endif
 	}
-	if (strlen(bp) == 1 &&
-	   (i = def_char_to_objclass(*bp)) < MAXOCLASSES && i > ILLOBJ_CLASS
-#ifdef WIZARD
-	    && (wizard || i != VENOM_CLASS)
-#else
-	    && i != VENOM_CLASS
-#endif
-	    ) {
+	if (strlen(bp) == 1 && (i = def_char_to_objclass(*bp)) < MAXOCLASSES && i > ILLOBJ_CLASS && (wizard || i != VENOM_CLASS)) {
 		oclass = i;
 		goto any;
 	}
@@ -2430,7 +2427,7 @@ boolean from_user;
 	   strncmpi(bp, "meat ring", 9)
 	)
 	for (i = 0; i < (int)(sizeof wrpsym); i++) {
-		register int j = strlen(wrp[i]);
+		int j = strlen(wrp[i]);
 		if(!strncmpi(bp, wrp[i], j)){
 			oclass = wrpsym[i];
 			if(oclass != AMULET_CLASS) {
@@ -2466,7 +2463,7 @@ boolean from_user;
 	} else if (!strcmpi(bp, "looking glass")) {
 		;	/* avoid false hit on "* glass" */
 	} else if (!BSTRCMPI(bp, p-6, " glass") || !strcmpi(bp, "glass")) {
-		register char *g = bp;
+		char *g = bp;
 		if (strstri(g, "broken")) return (struct obj *)0;
 		if (!strncmpi(g, "worthless ", 10)) g += 10;
 		if (!strncmpi(g, "piece of ", 9)) g += 9;
@@ -2491,7 +2488,7 @@ srch:
 	/* check real names of gems first */
 	if(!oclass && actualn) {
 	    for(i = bases[GEM_CLASS]; i <= LAST_GEM; i++) {
-		register const char *zn;
+		const char *zn;
 
 		if((zn = OBJ_NAME(objects[i])) && !strcmpi(actualn, zn)) {
 		    typ = i;
@@ -2501,7 +2498,7 @@ srch:
 	}
 	i = oclass ? bases[(int)oclass] : 1;
 	while(i < NUM_OBJECTS && (!oclass || objects[i].oc_class == oclass)){
-		register const char *zn;
+		const char *zn;
 
 		if (actualn && (zn = OBJ_NAME(objects[i])) != 0 &&
 			    wishymatch(actualn, zn, TRUE)) {
@@ -2598,7 +2595,6 @@ srch:
 		goto typfnd;
 	    }
 	}
-#ifdef WIZARD
 	/* Let wizards wish for traps --KAA */
 	/* must come after objects check so wizards can still wish for
 	 * trap objects like beartraps
@@ -2723,7 +2719,6 @@ srch:
 		    return &zeroobj;
 		}
 	}
-#endif
 	if(!oclass) return((struct obj *)0);
 any:
 	if(!oclass) oclass = wrpsym[rn2((int)sizeof(wrpsym))];
@@ -2732,49 +2727,42 @@ typfnd:
 
 	/* return a random dragon armor if user asks for an unknown
 	   dragon armor with its actual name */
-	if (typ && from_user && found_by_actualn &&
-	    Is_dragon_armor(typ) &&
-#ifdef WIZARD
-	    !wizard &&
-#endif
-	    !objects[typ].oc_name_known) {
-		typ = rn2(YELLOW_DRAGON_SCALES-GRAY_DRAGON_SCALES);
-		if (Is_dragon_scales(typ))
-			typ += GRAY_DRAGON_SCALES;
-		else
-			typ += GRAY_DRAGON_SCALE_MAIL;
+	if (typ && from_user && found_by_actualn && Is_dragon_armor(typ) && !objects[typ].oc_name_known) {
+		if(!wizard || yn("Stop randomization of unknown dragon armor?") == 'n') {
+			if (Is_dragon_scales(typ)) {
+				typ = GRAY_DRAGON_SCALES;
+			} else {
+				typ = GRAY_DRAGON_SCALE_MAIL;
+			}
+			typ += rn2(YELLOW_DRAGON_SCALES-GRAY_DRAGON_SCALES);
+		}
 	}
 
 	/* check for some objects that are not allowed */
 	if (typ && objects[typ].oc_unique) {
-#ifdef WIZARD
-	    if (wizard)
-		;	/* allow unique objects */
-	    else
-#endif
-	    switch (typ) {
-		case AMULET_OF_YENDOR:
-		    typ = FAKE_AMULET_OF_YENDOR;
-		    break;
-		case CANDELABRUM_OF_INVOCATION:
-		    typ = rnd_class(TALLOW_CANDLE, WAX_CANDLE);
-		    break;
-		case BELL_OF_OPENING:
-		    typ = BELL;
-		    break;
-		case SPE_BOOK_OF_THE_DEAD:
-		    typ = SPE_BLANK_PAPER;
-		    break;
-	    }
+		/* allow unique objects in debug mode*/
+		if (!wizard) {
+			switch (typ) {
+				case AMULET_OF_YENDOR:
+					typ = FAKE_AMULET_OF_YENDOR;
+					break;
+				case CANDELABRUM_OF_INVOCATION:
+					typ = rnd_class(TALLOW_CANDLE, WAX_CANDLE);
+					break;
+				case BELL_OF_OPENING:
+					typ = BELL;
+					break;
+				case SPE_BOOK_OF_THE_DEAD:
+					typ = SPE_BLANK_PAPER;
+					break;
+			}
+		}
 	}
 
 	/* catch any other non-wishable objects */
-	if (objects[typ].oc_nowish
-#ifdef WIZARD
-	    && !wizard
-#endif
-	    )
-	    return((struct obj *)0);
+	if (objects[typ].oc_nowish && !wizard) {
+		return((struct obj *)0);
+	}
 
 	if(typ) {
 		otmp = mksobj(typ, TRUE, FALSE);
@@ -2791,26 +2779,33 @@ typfnd:
 	    obj_extract_self(otmp);	 /* now release it for caller's use */
 	}
 
-	if(cnt > 0 && objects[typ].oc_merge && oclass != SPBOOK_CLASS &&
-		(cnt < rnd(6) ||
-#ifdef WIZARD
-		wizard ||
-#endif
-		 (cnt <= 7 && Is_candle(otmp)) ||
-		 (cnt <= 100 && ((oclass == WEAPON_CLASS && is_ammo(otmp)) || typ == ROCK || is_missile(otmp)))))
+	if(cnt > 0 && objects[typ].oc_merge && oclass != SPBOOK_CLASS) {
+		boolean acceptable_quantify_request = FALSE;
+		if( wizard ) {
+			acceptable_quantify_request = TRUE;
+		}
+		if( cnt < rnd(6) ) {
+			acceptable_quantify_request = TRUE;
+		}
+		if( cnt <= 7 && Is_candle(otmp) ) {
+			acceptable_quantify_request = TRUE;
+		}
+		if( cnt <= 100 && ((oclass == WEAPON_CLASS && is_ammo(otmp)) || typ == ROCK || is_missile(otmp)) ) {
+			acceptable_quantify_request = TRUE;
+		}
+		if( acceptable_quantify_request ) {
 			otmp->quan = (long) cnt;
+		}
+	}
 
-#ifdef WIZARD
-	if (oclass == VENOM_CLASS) otmp->spe = 1;
-#endif
+	if (oclass == VENOM_CLASS) {
+		otmp->spe = 1;
+	}
 
 	if (spesgn == 0) spe = otmp->spe;
-#ifdef WIZARD
-	else if (wizard) /* no alteration to spe */ ;
-#endif
-	else if (oclass == ARMOR_CLASS || oclass == WEAPON_CLASS ||
-		 is_weptool(otmp) ||
-			(oclass==RING_CLASS && objects[typ].oc_charged)) {
+	else if (wizard) {/* no alteration to spe */
+		;
+	} else if (oclass == ARMOR_CLASS || oclass == WEAPON_CLASS || is_weptool(otmp) || (oclass==RING_CLASS && objects[typ].oc_charged)) {
 		if(spe > rnd(5) && spe > otmp->spe) spe = 0;
 		if(spe > 2 && Luck < 0) spesgn = -1;
 	} else {
@@ -2844,15 +2839,11 @@ typfnd:
 		case SCR_MAIL: otmp->spe = 1; break;
 #endif
 		case WAN_WISHING:
-#ifdef WIZARD
 			if (!wizard) {
-#endif
 				otmp->spe = (rn2(10) ? -1 : 0);
 				break;
-#ifdef WIZARD
 			}
 			/* fall through, if wizard */
-#endif
 		default: otmp->spe = spe;
 	}
 
@@ -2886,7 +2877,6 @@ typfnd:
 			break;
 		case FIGURINE:
 			if (!(mons[mntmp].geno & G_UNIQ)
-			    && !is_human(&mons[mntmp])
 #ifdef MAIL
 			    && mntmp != PM_MAIL_DAEMON
 #endif
@@ -2933,22 +2923,10 @@ typfnd:
 		curse(otmp);
 	} else if (uncursed) {
 		otmp->blessed = 0;
-		otmp->cursed = (Luck < 0
-#ifdef WIZARD
-					 && !wizard
-#endif
-							);
+		otmp->cursed = (Luck < 0 && !wizard);
 	} else if (blessed) {
-		otmp->blessed = (Luck >= 0
-#ifdef WIZARD
-					 || wizard
-#endif
-							);
-		otmp->cursed = (Luck < 0
-#ifdef WIZARD
-					 && !wizard
-#endif
-							);
+		otmp->blessed = (Luck >= 0 || wizard);
+		otmp->cursed = (Luck < 0 && !wizard);
 	} else if (spesgn < 0) {
 		curse(otmp);
 	}
@@ -2967,11 +2945,7 @@ typfnd:
 	
 	/* set erodeproof */
 	if (erodeproof){
-		otmp->oerodeproof = (Luck >= 0
-#ifdef WIZARD
-					|| wizard
-#endif
-				);
+		otmp->oerodeproof = (Luck >= 0 || wizard);
 	} else {
 		otmp->oerodeproof = erodeproof;
 	}
@@ -2979,11 +2953,9 @@ typfnd:
 	/* set otmp->recharged */
 	if (oclass == WAND_CLASS) {
 	    /* prevent wishing abuse */
-	    if (otmp->otyp == WAN_WISHING
-#ifdef WIZARD
-		    && !wizard
-#endif
-		) rechrg = 1;
+	    if (!wizard && otmp->otyp == WAN_WISHING) {
+		rechrg = 1;
+	    }
 	    otmp->recharged = (unsigned)rechrg;
 	}
 
@@ -3021,13 +2993,7 @@ typfnd:
 
 	/* more wishing abuse: don't allow wishing for certain artifacts */
 	/* and make them pay; charge them for the wish anyway! */
-	if ((is_quest_artifact(otmp) ||
-	     (otmp->oartifact && otmp->oartifact == ART_THIEFBANE) ||
-	     (otmp->oartifact && rn2(nartifact_exist()) > 1))
-#ifdef WIZARD
-	    && !wizard
-#endif
-	    ) {
+	if (!wizard && (is_quest_artifact(otmp) || (otmp->oartifact && otmp->oartifact == ART_THIEFBANE) || (otmp->oartifact && rn2(nartifact_exist()) > 1))) {
 	    artifact_exists(otmp, ONAME(otmp), FALSE);
 	    obfree(otmp, (struct obj *) 0);
 	    otmp = &zeroobj;

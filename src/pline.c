@@ -5,10 +5,8 @@
 #define NEED_VARARGS /* Uses ... */	/* comment line for pre-compiled headers */
 #include "hack.h"
 #include "epri.h"
-#ifdef WIZARD
 #include "edog.h"
 #include "eshk.h"
-#endif
 
 #ifdef OVLB
 
@@ -358,7 +356,7 @@ align_str(alignment)
 
 void
 mstatusline(mtmp)
-register struct monst *mtmp;
+struct monst *mtmp;
 {
 	aligntyp alignment;
 	char info[BUFSZ], monnambuf[BUFSZ];
@@ -381,7 +379,6 @@ register struct monst *mtmp;
 	info[0] = 0;
 	if (mtmp->mtame) {
 		Strcat(info, ", tame");
-#ifdef WIZARD
 		if (wizard) {
 			Sprintf(eos(info), " (%d", mtmp->mtame);
 			if (!mtmp->isminion) {
@@ -389,7 +386,6 @@ register struct monst *mtmp;
 			}
 			Strcat(info, ")");
 		}
-#endif
 	} else if (mtmp->mpeaceful) {
 		Strcat(info, ", peaceful");
 	}
@@ -449,12 +445,11 @@ register struct monst *mtmp;
 	if (mtmp == u.usteed) {
 		Strcat(info, ", carrying you");
 	}
-#ifdef WIZARD
-	if (wizard &&
-	    mtmp->isshk && ESHK(mtmp)->cheapskate) {
-		Strcat(info, ", cheapskate");
+	if (wizard) {
+		if(mtmp->isshk && ESHK(mtmp)->cheapskate) {
+			Strcat(info, ", cheapskate");
+		}
 	}
-#endif
 
 	/* avoid "Status of the invisible newt ..., invisible" */
 	/* and unlike a normal mon_nam, use "saddled" even if it has a name */

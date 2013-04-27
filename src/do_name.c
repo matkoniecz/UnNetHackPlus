@@ -6,7 +6,7 @@
 
 #ifdef OVLB
 
-static void FDECL(getpos_help, (BOOLEAN_P,const char *));
+static void FDECL(getpos_help, (boolean,const char *));
 
 extern const char what_is_an_unknown_object[];		/* from pager.c */
 
@@ -344,8 +344,8 @@ do_mname()
 {
 	char buf[BUFSZ];
 	coord cc;
-	register int cx,cy;
-	register struct monst *mtmp;
+	int cx,cy;
+	struct monst *mtmp;
 	char qbuf[QBUFSZ];
 
 	if (Hallucination) {
@@ -399,7 +399,7 @@ do_mname()
  */
 void
 do_oname(obj)
-register struct obj *obj;
+struct obj *obj;
 {
 	char buf[BUFSZ], qbuf[QBUFSZ];
 	const char *aname;
@@ -424,7 +424,7 @@ register struct obj *obj;
 		return;
 	} else if (restrict_name(obj, buf, FALSE) || exist_artifact(obj->otyp, buf)) {
 		int n = rn2((int)strlen(buf));
-		register char c1, c2;
+		char c1, c2;
 
 		c1 = lowc(buf[n]);
 		do c2 = 'a' + rn2('z'-'a'); while (c1 == c2);
@@ -555,7 +555,7 @@ static NEARDATA const char callable[] = {
 int
 ddocall()
 {
-	register struct obj *obj;
+	struct obj *obj;
 #ifdef REDO
 	char	ch;
 #endif
@@ -600,11 +600,11 @@ ddocall()
 
 void
 docall(obj)
-register struct obj *obj;
+struct obj *obj;
 {
 	char buf[BUFSZ], qbuf[QBUFSZ];
 	struct obj otemp;
-	register char **str1;
+	char **str1;
 
 	if (!obj->dknown) return; /* probably blind */
 	check_tutorial_message(QT_T_CALLITEM);
@@ -681,7 +681,7 @@ rndghostname()
  */
 char *
 x_monnam(mtmp, article, adjective, suppress, called)
-register struct monst *mtmp;
+struct monst *mtmp;
 int article;
 /* ARTICLE_NONE, ARTICLE_THE, ARTICLE_A: obvious
  * ARTICLE_YOUR: "your" on pets, "the" on everything else
@@ -869,7 +869,7 @@ boolean called;
 
 char *
 l_monnam(mtmp)
-register struct monst *mtmp;
+struct monst *mtmp;
 {
 	return(x_monnam(mtmp, ARTICLE_NONE, (char *)0, 
 		mtmp->mnamelth ? SUPPRESS_SADDLE : 0, TRUE));
@@ -880,7 +880,7 @@ register struct monst *mtmp;
 
 char *
 mon_nam(mtmp)
-register struct monst *mtmp;
+struct monst *mtmp;
 {
 	return(x_monnam(mtmp, ARTICLE_THE, (char *)0,
 		mtmp->mnamelth ? SUPPRESS_SADDLE : 0, FALSE));
@@ -892,7 +892,7 @@ register struct monst *mtmp;
  */
 char *
 noit_mon_nam(mtmp)
-register struct monst *mtmp;
+struct monst *mtmp;
 {
 	return(x_monnam(mtmp, ARTICLE_THE, (char *)0,
 		mtmp->mnamelth ? (SUPPRESS_SADDLE|SUPPRESS_IT) :
@@ -901,9 +901,9 @@ register struct monst *mtmp;
 
 char *
 Monnam(mtmp)
-register struct monst *mtmp;
+struct monst *mtmp;
 {
-	register char *bp = mon_nam(mtmp);
+	char *bp = mon_nam(mtmp);
 
 	*bp = highc(*bp);
 	return(bp);
@@ -911,9 +911,9 @@ register struct monst *mtmp;
 
 char *
 noit_Monnam(mtmp)
-register struct monst *mtmp;
+struct monst *mtmp;
 {
-	register char *bp = noit_mon_nam(mtmp);
+	char *bp = noit_mon_nam(mtmp);
 
 	*bp = highc(*bp);
 	return(bp);
@@ -946,10 +946,10 @@ struct monst *mtmp;
 
 char *
 Adjmonnam(mtmp, adj)
-register struct monst *mtmp;
-register const char *adj;
+struct monst *mtmp;
+const char *adj;
 {
-	register char *bp = x_monnam(mtmp, ARTICLE_THE, adj,
+	char *bp = x_monnam(mtmp, ARTICLE_THE, adj,
 		mtmp->mnamelth ? SUPPRESS_SADDLE : 0, FALSE);
 
 	*bp = highc(*bp);
@@ -958,7 +958,7 @@ register const char *adj;
 
 char *
 a_monnam(mtmp)
-register struct monst *mtmp;
+struct monst *mtmp;
 {
 	return x_monnam(mtmp, ARTICLE_A, (char *)0,
 		mtmp->mnamelth ? SUPPRESS_SADDLE : 0, FALSE);
@@ -966,9 +966,9 @@ register struct monst *mtmp;
 
 char *
 Amonnam(mtmp)
-register struct monst *mtmp;
+struct monst *mtmp;
 {
-	register char *bp = a_monnam(mtmp);
+	char *bp = a_monnam(mtmp);
 
 	*bp = highc(*bp);
 	return(bp);
@@ -1047,6 +1047,7 @@ static const char * const bogusmons[] = {
 	"questing beast",			/* King Arthur */
 	"Predator",				/* Movie */
 	"mother-in-law",			/* common pest */
+	
 	/* from NAO */
 	"one-winged dewinged stab-bat",		/* KoL */
 	"praying mantis",
@@ -1189,6 +1190,29 @@ static const char * const bogusmons[] = {
 	"winged grizzly",
 	"yellow wight",
 
+	/* http://www.alt.org/nethack/addmsgs/viewmsgs.php */
+	"lurker below",
+	"worthless yellowish-brown glass golem",
+	"writhing mass of primal chaos", /* ADOM */
+	"hallucinatory monster",
+	"jumping brain",
+	"colorless green idea",
+	"floating ear",
+	"floating tongue",
+	"hallucinogen-distorted hallucination",
+	"mountain dwarf",
+	"were(random beast)",
+	"weremindflayer",
+	"wereplatypus",
+	"Gnome With the Wand of Death",
+	"arch-lichen",
+	"Baba Yaga",
+	"harmless protoplasm",
+	"badger",
+	"giant dwarf",
+	"magically animated Vorpal Blade",
+	"Legendary black beast of Arrrgh",
+
 	/* from UnNetHack */
 	"apostroph golem", "Bob the angry flower",
 	"bonsai-kitten", "Boxxy", "lonelygirl15",
@@ -1222,38 +1246,40 @@ static const char * const bogusmons[] = {
 	"dwerga nethackus", "dwerga castrum",	/* Ask ASCII Ponies */
 
 	/* from UnNetHackPlus */
-	"King Krakus",			/* Polish folklore */
-	"Topielec",				/* Slavic folklore */
-	"pink oliphaunt",			/* Lord of the Rings + silliness */
-	"Amphisbaena",			/* Greek mythology */
-	"phoenix",				/* Greek mythology */
-	"catoblepas",			/* Greek mythology */
-	"phantom kangaroo",		/* urban legend */
-	"echinemon",			/* from medieval literature, "enemy of the dragon" */
-	"Ratatoskr", 			/* Norse mythology */
-	"Twrch Trwyth", 			/* Arthurian legends */
-	"Unperson", 			/* Nineteen Eighty-Four */
-	"Somebody Else's Problem",	/* Douglas Adams */
-	"Armok",				/* Dwarf Fortress */
-	"Dwarf-Eating Carp", 		/* Dwarf Fortress */
-	"werecapybara",			/* Dwarf Fortress */
-	"Evil Otto", 			/* Berzerk - via GruntHack */
-	"P'lod",				/* Weekly World News */
+	"King Krakus",               /* Polish folklore */
+	"Topielec",                  /* Slavic folklore */
+	"pink oliphaunt",            /* Lord of the Rings + silliness */
+	"Amphisbaena",               /* Greek mythology */
+	"phoenix",                   /* Greek mythology */
+	"catoblepas",                /* Greek mythology */
+	"phantom kangaroo",          /* urban legend */
+	"echinemon",                 /* from medieval literature, "enemy of the dragon" */
+	"Ratatoskr",                 /* Norse mythology */
+	"Twrch Trwyth",              /* Arthurian legends */
+	"Unperson",                  /* Nineteen Eighty-Four */
+	"Somebody Else's Problem",   /* Douglas Adams */
+	"Armok",                     /* Dwarf Fortress */
+	"Dwarf-Eating Carp",         /* Dwarf Fortress */
+	"werecapybara",              /* Dwarf Fortress */
+	"Urist McDwarf",             /* Dwarf Fortress */
+	"Evil Otto",                 /* Berzerk - via GruntHack */
+	"P'lod",                     /* Weekly World News */
 	"mortgage golem", 
 	"dark matter golem", 
-	"giant orange brain",		/* Dungeon Crawl Stone Soup */
-	"ugly thing",			/* Dungeon Crawl Stone Soup */
-	"hellephant",			/* Dungeon Crawl Stone Soup */
-	"inept mimic",			/* Dungeon Crawl Stone Soup */
-	"hungry ghost",			/* Dungeon Crawl Stone Soup */
-	"unborn deep dwarf",		/* Dungeon Crawl Stone Soup */
-	"Wandering mushroom",		/* Dungeon Crawl Stone Soup */
+	"giant orange brain",        /* Dungeon Crawl Stone Soup */
+	"ugly thing",                /* Dungeon Crawl Stone Soup */
+	"hellephant",                /* Dungeon Crawl Stone Soup */
+	"inept mimic",               /* Dungeon Crawl Stone Soup */
+	"hungry ghost",              /* Dungeon Crawl Stone Soup */
+	"unborn deep dwarf",         /* Dungeon Crawl Stone Soup */
+	"Wandering mushroom",        /* Dungeon Crawl Stone Soup */
 	"Vlad the Inhaler",
 	"Delaunay tessellation field estimator",
-	"unnameable horror from beyond", /* NAO fruit name*/
+	"unnameable horror from beyond",/* NAO fruit name*/
 	"munchkin",
-	"shambling horror",		/* SporkHack */
-	"Grid Bug Mk. 2",			/* SLAS'EM (nickname of arc bugs) */
+	"shambling horror",          /* SporkHack */
+	"Grid Bug Mk. 2",            /* SLAS'EM (nickname of arc bugs) */
+	"killer tripe ration",       /* SLAS'EM */
 	"yet another D&D monster",
 	"kobold mage",
 	"hobbyte",
@@ -1266,22 +1292,22 @@ static const char * const bogusmons[] = {
 	"sphinx",
 	"spectre",
 	"lamassu",
-	"su-monster",			/* Dungeons & Dragons */
-	"shambling mound",		/* Dungeons & Dragons */
-	"sand elemental",			/* Dungeons & Dragons */
-	"rubber golem"			/* Dungeons & Dragons */
-	"remorhaz",				/* Dungeons & Dragons */
-	"otyugh",				/* Dungeons & Dragons */
+	"su-monster",                /* Dungeons & Dragons */
+	"shambling mound",           /* Dungeons & Dragons */
+	"sand elemental",            /* Dungeons & Dragons */
+	"rubber golem"               /* Dungeons & Dragons */
+	"remorhaz",                  /* Dungeons & Dragons */
+	"otyugh",                    /* Dungeons & Dragons */
 	"bacon elemental",
 	"roper",
 	"roc",
-	"peryton",				/* Jorge Luis Borges - Book of Imaginary Beings */
+	"peryton",                   /* Jorge Luis Borges - Book of Imaginary Beings */
 	"octopus",
-	"beer golem",			/* ProgressQuest */
-	"rice giant",			/* ProgressQuest */
-	"porn elemental",			/* ProgressQuest */
-	"demicanadian",			/* ProgressQuest */
-	"gyrognome",			/* ProgressQuest */
+	"beer golem",                /* ProgressQuest */
+	"rice giant",                /* ProgressQuest */
+	"porn elemental",            /* ProgressQuest */
+	"demicanadian",              /* ProgressQuest */
+	"gyrognome",                 /* ProgressQuest */
 	"cardboard golem",
 	"cheese elemental",
 	"dervish",
@@ -1289,9 +1315,16 @@ static const char * const bogusmons[] = {
 	"megalosaurus",
 	"organist",
 	/* end of monsters via ProgressQuest */
+	"Lucius Malfoy",             /* Harry Potter */
+	"Dumbledore",                /* Harry Potter */
+	"Harry Potter",              /* Harry Potter */
+	"Crumple-Horned Snorkack",   /* Harry Potter */
 #ifndef MAIL
 	"mail daemon",
 #endif
+	"Vaarsuvius",                /* The Order of the Stick */
+	"Durkon Thundershield",      /* The Order of the Stick */
+	"Roy Greenhilt",             /* The Order of the Stick */
 };
 
 
@@ -1314,7 +1347,6 @@ rndmonnam()
 	return mons[name].mname;
 }
 
-#ifdef REINCARNATION
 const char *
 roguename() /* Name of a Rogue player */
 {
@@ -1332,7 +1364,6 @@ roguename() /* Name of a Rogue player */
 	return rn2(3) ? (rn2(2) ? "Michael Toy" : "Kenneth Arnold")
 		: "Glenn Wichman";
 }
-#endif /* REINCARNATION */
 #endif /* OVLB */
 
 #ifdef OVL2

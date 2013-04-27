@@ -12,10 +12,10 @@ STATIC_DCL void NDECL(autoquiver);
 STATIC_DCL int FDECL(gem_accept, (struct monst *, struct obj *));
 STATIC_DCL void FDECL(tmiss, (struct obj *, struct monst *));
 STATIC_DCL int FDECL(throw_gold, (struct obj *));
-STATIC_DCL void FDECL(check_shop_obj, (struct obj *,XCHAR_P,XCHAR_P,BOOLEAN_P));
-STATIC_DCL void FDECL(breakobj, (struct obj *,XCHAR_P,XCHAR_P,BOOLEAN_P,BOOLEAN_P));
-STATIC_DCL void FDECL(breakmsg, (struct obj *,BOOLEAN_P));
-STATIC_DCL boolean FDECL(toss_up,(struct obj *, BOOLEAN_P));
+STATIC_DCL void FDECL(check_shop_obj, (struct obj *,xchar,xchar,boolean));
+STATIC_DCL void FDECL(breakobj, (struct obj *,xchar,xchar,boolean,boolean));
+STATIC_DCL void FDECL(breakmsg, (struct obj *,boolean));
+STATIC_DCL boolean FDECL(toss_up,(struct obj *, boolean));
 STATIC_DCL boolean FDECL(throwing_weapon, (struct obj *));
 STATIC_DCL void FDECL(sho_obj_return_to_u, (struct obj *obj));
 STATIC_DCL boolean FDECL(mhurtle_step, (genericptr_t,int,int));
@@ -187,7 +187,7 @@ int shotlimit;
 int
 dothrow()
 {
-	register struct obj *obj;
+	struct obj *obj;
 	int shotlimit;
 
 	/*
@@ -203,7 +203,7 @@ dothrow()
 	shotlimit = (multi || save_cm) ? multi + 1 : 0;
 	multi = 0;		/* reset; it's been used up */
 
-	if (notake(youmonst.data)) {
+	if (notake(youmonst.data) || nohands(youmonst.data)) {
 	    You("are physically incapable of throwing anything.");
 	    return 0;
 	}
@@ -346,7 +346,7 @@ dofire()
  */
 void
 hitfloor(obj)
-register struct obj *obj;
+struct obj *obj;
 {
 	if (IS_SOFT(levl[u.ux][u.uy].typ) || u.uinwater) {
 		dropy(obj);
@@ -687,9 +687,9 @@ mhurtle(mon, dx, dy, range)
 
 STATIC_OVL void
 check_shop_obj(obj, x, y, broken)
-register struct obj *obj;
-register xchar x, y;
-register boolean broken;
+struct obj *obj;
+xchar x, y;
+boolean broken;
 {
 	struct monst *shkp = shop_keeper(*u.ushops);
 
@@ -766,9 +766,7 @@ boolean hitsroof;
 	obj = 0;	/* it's now gone */
 	switch (otyp) {
 	case EGG:
-		if (touch_petrifies(&mons[ocorpsenm]) &&
-		    !uarmh && !Stone_resistance &&
-		    !(poly_when_stoned(youmonst.data) && polymon(PM_STONE_GOLEM)))
+		if (touch_petrifies(&mons[ocorpsenm]) && !uarmh && !Stone_resistance && !polymorph_player_instead_stoning())
 		goto petrify;
 	case CREAM_PIE:
 	case BLINDING_VENOM:
@@ -815,8 +813,7 @@ boolean hitsroof;
 		    !(obj->otyp == CORPSE && touch_petrifies(&mons[obj->corpsenm])))
 		Your("%s does not protect you.", xname(uarmh));
 	} else if (obj->otyp == CORPSE && touch_petrifies(&mons[obj->corpsenm])) {
-	    if (!Stone_resistance &&
-		    !(poly_when_stoned(youmonst.data) && polymon(PM_STONE_GOLEM))) {
+	    if (!Stone_resistance && !polymorph_player_instead_stoning()) {
  petrify:
 		killer_format = KILLED_BY;
 		killer = "elementary physics";	/* "what goes up..." */
@@ -866,12 +863,12 @@ struct obj *obj;
 
 void
 throwit(obj, wep_mask, twoweap)
-register struct obj *obj;
+struct obj *obj;
 long wep_mask;	/* used to re-equip returning boomerang */
 boolean twoweap; /* used to restore twoweapon mode if wielded weapon returns */
 {
-	register struct monst *mon;
-	register int range, urange;
+	struct monst *mon;
+	int range, urange;
 	boolean impaired = (Confusion || Stunned || Blind ||
 			   Hallucination || Fumbling);
 
@@ -1196,11 +1193,11 @@ struct monst *mon;
  */
 int
 thitmonst(mon, obj)
-register struct monst *mon;
-register struct obj   *obj;
+struct monst *mon;
+struct obj   *obj;
 {
-	register int	tmp; /* Base chance to hit */
-	register int	disttmp; /* distance modifier */
+	int	tmp; /* Base chance to hit */
+	int	disttmp; /* distance modifier */
 	int otyp = obj->otyp;
 	boolean guaranteed_hit = (u.uswallow && mon == u.ustuck);
 	boolean obj_disint = (touch_disintegrates(mon->data) &&
@@ -1473,8 +1470,8 @@ register struct obj   *obj;
 
 STATIC_OVL int
 gem_accept(mon, obj)
-register struct monst *mon;
-register struct obj *obj;
+struct monst *mon;
+struct obj *obj;
 {
 	char buf[BUFSZ];
 	boolean is_buddy = sgn(mon->data->maligntyp) == sgn(u.ualign.type);
@@ -1786,7 +1783,7 @@ struct obj *obj;
 #ifndef GOLDOBJ
 	long zorks = obj->quan;
 #endif
-	register struct monst *mon;
+	struct monst *mon;
 
 	if(!u.dx && !u.dy && !u.dz) {
 #ifndef GOLDOBJ

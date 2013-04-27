@@ -804,7 +804,6 @@ void curses_update_stats(boolean redraw)
     }
 
     /* Experience */
-#ifdef EXP_ON_BOTL
     if (prevexp.display != flags.showexp)   /* Setting has changed */
     {
         prevexp.display = flags.showexp;
@@ -865,7 +864,6 @@ void curses_update_stats(boolean redraw)
     }
     
     prevexp.value = u.uexp; /* Track it even when it's not displayed */
-#endif  /* EXP_ON_BOTL */
 
     /* Level */
     if (u.mtimedone)    /* Currently polymorphed - show monster HD */
@@ -1594,7 +1592,6 @@ void curses_decrement_highlight()
             unhighlight = TRUE;
         }
     }
-#ifdef EXP_ON_BOTL
     if (prevexp.highlight_turns > 0)
     {
         prevexp.highlight_turns--;
@@ -1603,7 +1600,6 @@ void curses_decrement_highlight()
             unhighlight = TRUE;
         }
     }
-#endif
     if (prevtime.highlight_turns > 0)
     {
         prevtime.highlight_turns--;
@@ -1935,7 +1931,6 @@ static void init_stats()
     set_stat_color(&prevac);
 
     /* Experience */
-#ifdef EXP_ON_BOTL
     prevexp.value = u.uexp;
     sprintf(buf, "%ld", u.uexp);
     prevexp.txt = curses_copy_of(buf);
@@ -1944,7 +1939,6 @@ static void init_stats()
     prevexp.label = NULL;
     prevexp.id = "xp";
     set_stat_color(&prevexp);
-#endif
 
     /* Level */
     prevlevel.label = NULL;
@@ -2223,14 +2217,12 @@ static void set_labels(int label_width)
             }
             prevac.label = curses_copy_of("AC:");
             
-#ifdef EXP_ON_BOTL            
             /* Experience */
             if (prevexp.label)
             {
                 free (prevexp.label);
             }
             prevexp.label = curses_copy_of("XP:");
-#endif            
 
             /* Level */            
             if (prevlevel.label)
@@ -2357,14 +2349,12 @@ static void set_labels(int label_width)
             }
             prevac.label = curses_copy_of("AC:");
             
-#ifdef EXP_ON_BOTL            
             /* Experience */
             if (prevexp.label)
             {
                 free (prevexp.label);
             }
             prevexp.label = curses_copy_of("XP:");
-#endif            
 
             /* Level */            
             if (prevlevel.label)
@@ -2491,14 +2481,12 @@ static void set_labels(int label_width)
             }
             prevac.label = curses_copy_of("Armor Class:   ");
             
-#ifdef EXP_ON_BOTL            
             /* Experience */
             if (prevexp.label)
             {
                 free (prevexp.label);
             }
             prevexp.label = curses_copy_of("Experience:    ");
-#endif            
 
             /* Level */            
             if (prevlevel.label)

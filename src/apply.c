@@ -36,9 +36,9 @@ STATIC_DCL int FDECL(use_cream_pie, (struct obj *));
 STATIC_DCL int FDECL(use_grapple, (struct obj *));
 STATIC_DCL int FDECL(do_break_wand, (struct obj *));
 STATIC_DCL boolean FDECL(figurine_location_checks,
-				(struct obj *, coord *, BOOLEAN_P));
+				(struct obj *, coord *, boolean));
 STATIC_DCL boolean NDECL(uhave_graystone);
-STATIC_DCL void FDECL(add_class, (char *, CHAR_P));
+STATIC_DCL void FDECL(add_class, (char *, char));
 
 #ifdef	AMIGA
 void FDECL( amii_speaker, ( struct obj *, char *, int ) );
@@ -50,7 +50,7 @@ STATIC_OVL int
 use_camera(obj)
 	struct obj *obj;
 {
-	register struct monst *mtmp;
+	struct monst *mtmp;
 
 	if(Underwater) {
 		pline("Using your camera underwater would void the warranty.");
@@ -224,7 +224,7 @@ static const char hollow_str[] = "a hollow sound.  This must be a secret %s!";
    uses up the turn; this makes curse status have a tangible effect. */
 STATIC_OVL int
 use_stethoscope(obj)
-	register struct obj *obj;
+	struct obj *obj;
 {
 	static long last_used_move = -1;
 	static short last_used_movement = 0;
@@ -340,7 +340,7 @@ STATIC_OVL void
 use_magic_whistle(obj)
 struct obj *obj;
 {
-	register struct monst *mtmp, *nextmon;
+	struct monst *mtmp, *nextmon;
 
 	if(obj->cursed && !rn2(2)) {
 		You("produce a high-pitched humming noise.");
@@ -368,7 +368,7 @@ struct obj *obj;
 
 boolean
 um_dist(x,y,n)
-register xchar x, y, n;
+xchar x, y, n;
 {
 	return((boolean)(abs(u.ux - x) > n  || abs(u.uy - y) > n));
 }
@@ -376,8 +376,8 @@ register xchar x, y, n;
 int
 number_leashed()
 {
-	register int i = 0;
-	register struct obj *obj;
+	int i = 0;
+	struct obj *obj;
 
 	for(obj = invent; obj; obj = obj->nobj)
 		if(obj->otyp == LEASH && obj->leashmon != 0) i++;
@@ -386,9 +386,9 @@ number_leashed()
 
 void
 o_unleash(otmp)		/* otmp is about to be destroyed or stolen */
-register struct obj *otmp;
+struct obj *otmp;
 {
-	register struct monst *mtmp;
+	struct monst *mtmp;
 
 	for(mtmp = fmon; mtmp; mtmp = mtmp->nmon)
 		if(mtmp->m_id == (unsigned)otmp->leashmon)
@@ -398,10 +398,10 @@ register struct obj *otmp;
 
 void
 m_unleash(mtmp, feedback)	/* mtmp is about to die, or become untame */
-register struct monst *mtmp;
+struct monst *mtmp;
 boolean feedback;
 {
-	register struct obj *otmp;
+	struct obj *otmp;
 
 	if (feedback) {
 	    if (canseemon(mtmp))
@@ -419,8 +419,8 @@ boolean feedback;
 void
 unleash_all()		/* player is about to die (for bones) */
 {
-	register struct obj *otmp;
-	register struct monst *mtmp;
+	struct obj *otmp;
+	struct monst *mtmp;
 
 	for(otmp = invent; otmp; otmp = otmp->nobj)
 		if(otmp->otyp == LEASH) otmp->leashmon = 0;
@@ -436,7 +436,7 @@ use_leash(obj)
 struct obj *obj;
 {
 	coord cc;
-	register struct monst *mtmp;
+	struct monst *mtmp;
 	int spotmon;
 
 	if(!obj->leashmon && number_leashed() >= MAXLEASHED) {
@@ -503,9 +503,9 @@ struct obj *obj;
 
 struct obj *
 get_mleash(mtmp)	/* assuming mtmp->mleashed has been checked */
-register struct monst *mtmp;
+struct monst *mtmp;
 {
-	register struct obj *otmp;
+	struct obj *otmp;
 
 	otmp = invent;
 	while(otmp) {
@@ -522,8 +522,8 @@ register struct monst *mtmp;
 boolean
 next_to_u()
 {
-	register struct monst *mtmp;
-	register struct obj *otmp;
+	struct monst *mtmp;
+	struct obj *otmp;
 
 	for(mtmp = fmon; mtmp; mtmp = mtmp->nmon) {
 		if (DEADMONSTER(mtmp)) continue;
@@ -554,10 +554,10 @@ next_to_u()
 
 void
 check_leash(x, y)
-register xchar x, y;
+xchar x, y;
 {
-	register struct obj *otmp;
-	register struct monst *mtmp;
+	struct obj *otmp;
+	struct monst *mtmp;
 
 	for (otmp = invent; otmp; otmp = otmp->nobj) {
 	    if (otmp->otyp != LEASH || otmp->leashmon == 0) continue;
@@ -618,134 +618,143 @@ register xchar x, y;
 static const char look_str[] = "look %s.";
 
 STATIC_OVL int
-use_mirror(obj)
-struct obj *obj;
+use_mirror(struct obj *obj)
 {
-	register struct monst *mtmp;
-	register char mlet;
+	struct monst *mtmp;
+	char mlet;
 	boolean vis;
 
 	if(!getdir((char *)0)) return 0;
 	if(obj->cursed && !rn2(2)) {
-		if (!Blind)
-			pline_The("mirror fogs up and doesn't reflect!");
+		if (!Blind) {
+			pline_The("%s fogs up and doesn't reflect!", simple_typename(obj->otyp));
+		}
 		return 1;
 	}
 	if(!u.dx && !u.dy && !u.dz) {
 		if(!Blind && !Invisible) {
-		    if (u.umonnum == PM_FLOATING_EYE) {
-			if (!Free_action) {
-			pline(Hallucination ?
-			      "Yow!  The mirror stares back!" :
-			      "Yikes!  You've frozen yourself!");
-			nomul(-rnd((MAXULEV+6) - u.ulevel), "gazing into a mirror");
-			} else You("stiffen momentarily under your gaze.");
-		    } else if (is_vampire(youmonst.data))
-			You("don't have a reflection.");
-		    else if (u.umonnum == PM_UMBER_HULK) {
-			pline("Huh?  That doesn't look like you!");
-			make_confused(HConfusion + d(3,4),FALSE);
-		    } else if (Hallucination)
-			You(look_str, hcolor((char *)0));
-		    else if (Sick)
-			You(look_str, "peaked");
-		    else if (u.uhs >= WEAK)
-			You(look_str, "undernourished");
-		    else You("look as %s as ever.",
-				beautiful());
+			 if (is_vampire(youmonst.data)) {
+				You("don't have a reflection.");
+			} else if (u.umonnum == PM_FLOATING_EYE) {
+				if (!Free_action) {
+					pline(Hallucination ? "Yow!  The %s stares back!" : "Yikes!  You've frozen yourself!", simple_typename(obj->otyp));
+					nomul(-rnd((MAXULEV+6) - u.ulevel), "gazing into a mirror");
+				} else {
+					You("stiffen momentarily under your gaze.");
+				}
+			} else if (u.umonnum == PM_UMBER_HULK) {
+				pline("Huh?  That doesn't look like you!");
+				make_confused(HConfusion + d(3,4),FALSE);
+			} else if (Hallucination) {
+				You(look_str, hcolor((char *)0));
+			} else if (Sick) {
+				You(look_str, "peaked");
+			} else if (u.uhs >= WEAK) {
+				You(look_str, "undernourished");
+			} else {
+				You("look as %s as ever.", beautiful());
+			}
 		} else {
-			You_cant("see your %s %s.",
-				beautiful(),
-				body_part(FACE));
+			You_cant("see your %s %s.", beautiful(), body_part(FACE));
 		}
 		return 1;
 	}
 	if(u.uswallow) {
-		if (!Blind) You("reflect %s %s.", s_suffix(mon_nam(u.ustuck)),
-		    mbodypart(u.ustuck, STOMACH));
+		if (!Blind) {
+			You("reflect %s %s.", s_suffix(mon_nam(u.ustuck)), mbodypart(u.ustuck, STOMACH));
+		}
 		return 1;
 	}
 	if(Underwater) {
-		You(Hallucination ?
-		    "give the fish a chance to fix their makeup." :
-		    "reflect the murky water.");
+		You(Hallucination ? "give the fish a chance to fix their makeup." : "reflect the murky water.");
 		return 1;
 	}
 	if(u.dz) {
-		if (!Blind)
-		    You("reflect the %s.",
-			(u.dz > 0) ? surface(u.ux,u.uy) : ceiling(u.ux,u.uy));
+		if (!Blind) {
+			You("reflect the %s.", (u.dz > 0) ? surface(u.ux,u.uy) : ceiling(u.ux,u.uy));
+		}
 		return 1;
 	}
 	mtmp = bhit(u.dx, u.dy, COLNO, INVIS_BEAM,
 		    (int FDECL((*),(MONST_P,OBJ_P)))0,
 		    (int FDECL((*),(OBJ_P,OBJ_P)))0,
 		    obj, NULL);
-	if (!mtmp || !haseyes(mtmp->data))
+	if (!mtmp || !haseyes(mtmp->data)) {
 		return 1;
+	}
 
 	vis = canseemon(mtmp);
 	mlet = mtmp->data->mlet;
 	if (mtmp->msleeping) {
-		if (vis)
-		    pline ("%s is too tired to look at your mirror.",
-			    Monnam(mtmp));
+		if (vis) {
+			pline ("%s is too tired to look at your %s.", Monnam(mtmp), simple_typename(obj->otyp));
+		}
 	} else if (!mtmp->mcansee) {
-	    if (vis)
-		pline("%s can't see anything right now.", Monnam(mtmp));
+		if (vis) {
+			pline("%s can't see anything right now.", Monnam(mtmp));
+		}
 	/* some monsters do special things */
 	} else if (is_vampire(mtmp->data) || mlet == S_GHOST) {
-	    if (vis)
-		pline ("%s doesn't have a reflection.", Monnam(mtmp));
-	} else if(!mtmp->mcan && !mtmp->minvis &&
-					mtmp->data == &mons[PM_MEDUSA]) {
-		if (mon_reflects(mtmp, "The gaze is reflected away by %s %s!"))
+		if (vis) {
+			pline ("%s doesn't have a reflection.", Monnam(mtmp));
+		}
+	} else if(!mtmp->mcan && !mtmp->minvis && mtmp->data == &mons[PM_MEDUSA]) {
+		if (mon_reflects(mtmp, "The gaze is reflected away by %s %s!")) {
 			return 1;
-		if (vis)
+		}
+		if (vis) {
 			pline("%s is turned to stone!", Monnam(mtmp));
+		}
 		stoned = TRUE;
 		killed(mtmp);
-	} else if(!mtmp->mcan && !mtmp->minvis &&
-					mtmp->data == &mons[PM_FLOATING_EYE]) {
+	} else if(!mtmp->mcan && !mtmp->minvis && mtmp->data == &mons[PM_FLOATING_EYE]) {
 		int tmp = d((int)mtmp->m_lev, (int)mtmp->data->mattk[0].damd);
-		if (!rn2(4)) tmp = 120;
-		if (vis)
-			pline("%s is frozen by its reflection.", Monnam(mtmp));
-		else You_hear("%s stop moving.",something);
-		mtmp->mcanmove = 0;
-		if ( (int) mtmp->mfrozen + tmp > 127)
-			mtmp->mfrozen = 127;
-		else mtmp->mfrozen += tmp;
-	} else if(!mtmp->mcan && !mtmp->minvis &&
-					mtmp->data == &mons[PM_UMBER_HULK]) {
-		if (vis)
-			pline ("%s confuses itself!", Monnam(mtmp));
-		mtmp->mconf = 1;
-	} else if(!mtmp->mcan && !mtmp->minvis && (mlet == S_NYMPH
-				     || mtmp->data==&mons[PM_SUCCUBUS])) {
+		if (!rn2(4)) {
+			tmp = 120;
+		}
 		if (vis) {
-		    pline ("%s admires herself in your mirror.", Monnam(mtmp));
-		    pline ("She takes it!");
-		} else pline ("It steals your mirror!");
+			pline("%s is frozen by its reflection.", Monnam(mtmp));
+		}
+		else {
+			You_hear("%s stop moving.", something);
+		}
+		mtmp->mcanmove = 0;
+		if ( (int) mtmp->mfrozen + tmp > 127) {
+			mtmp->mfrozen = 127;
+		} else {
+			mtmp->mfrozen += tmp;
+		}
+	} else if(!mtmp->mcan && !mtmp->minvis && mtmp->data == &mons[PM_UMBER_HULK]) {
+		if (vis) {
+			pline ("%s confuses itself!", Monnam(mtmp));
+		}
+		mtmp->mconf = 1;
+	} else if(!mtmp->mcan && !mtmp->minvis && (mlet == S_NYMPH || mtmp->data==&mons[PM_SUCCUBUS])) {
+		if (vis) {
+			pline ("%s admires herself in your %s.", Monnam(mtmp), simple_typename(obj->otyp));
+			pline ("She takes it!");
+		} else {
+			pline ("It steals your %s!", simple_typename(obj->otyp));
+		}
 		setnotworn(obj); /* in case mirror was wielded */
 		freeinv(obj);
 		(void) mpickobj(mtmp,obj);
-		if (!tele_restrict(mtmp)) (void) rloc(mtmp, FALSE);
-	} else if (!is_unicorn(mtmp->data) && !humanoid(mtmp->data) &&
-			(!mtmp->minvis || perceives(mtmp->data)) && rn2(5)) {
-		if (vis)
-		    pline("%s is frightened by its reflection.", Monnam(mtmp));
+		if (!tele_restrict(mtmp)) {
+			(void) rloc(mtmp, FALSE);
+		}
+	} else if (!is_unicorn(mtmp->data) && !humanoid(mtmp->data) && (!mtmp->minvis || perceives(mtmp->data)) && rn2(5)) {
+		if (vis) {
+			pline("%s is frightened by its reflection.", Monnam(mtmp));
+		}
 		monflee(mtmp, d(2,4), FALSE, FALSE);
 	} else if (!Blind) {
-		if (mtmp->minvis && !See_invisible)
-		    ;
-		else if ((mtmp->minvis && !perceives(mtmp->data))
-			 || !haseyes(mtmp->data))
-		    pline("%s doesn't seem to notice its reflection.",
-			Monnam(mtmp));
-		else
-		    pline("%s ignores %s reflection.",
-			  Monnam(mtmp), mhis(mtmp));
+		if (mtmp->minvis && !See_invisible) {
+			;
+		} else if ((mtmp->minvis && !perceives(mtmp->data)) || !haseyes(mtmp->data)) {
+			pline("%s doesn't seem to notice its reflection.", Monnam(mtmp));
+		} else {
+			pline("%s ignores %s reflection.", Monnam(mtmp), mhis(mtmp));
+		}
 	}
 	return 1;
 }
@@ -754,7 +763,7 @@ STATIC_OVL void
 use_bell(optr)
 struct obj **optr;
 {
-	register struct obj *obj = *optr;
+	struct obj *obj = *optr;
 	struct monst *mtmp;
 	boolean wakem = FALSE, learno = FALSE,
 		ordinary = (obj->otyp != BELL_OF_OPENING || !obj->spe),
@@ -870,7 +879,7 @@ struct obj **optr;
 
 STATIC_OVL void
 use_candelabrum(obj)
-register struct obj *obj;
+struct obj *obj;
 {
 	const char *s = (obj->spe != 1) ? "candles" : "candle";
 
@@ -923,8 +932,8 @@ STATIC_OVL void
 use_candle(optr)
 struct obj **optr;
 {
-	register struct obj *obj = *optr;
-	register struct obj *otmp;
+	struct obj *obj = *optr;
+	struct obj *otmp;
 	const char *s = (obj->quan != 1) ? "candles" : "candle";
 	char qbuf[QBUFSZ];
 
@@ -948,36 +957,46 @@ struct obj **optr;
 		safe_qbuf(qbuf, sizeof(" to ?"), the(xname(otmp)),
 			the(simple_typename(otmp->otyp)), "it"));
 	if(yn(qbuf) == 'n') {
-		if (!obj->lamplit)
-		    You("try to light %s...", the(xname(obj)));
+		if (!obj->lamplit) {
+			You("try to light %s...", the(xname(obj)));
+		}
 		use_lamp(obj);
 		return;
 	} else {
-		if ((long)otmp->spe + obj->quan > 7L)
-		    obj = splitobj(obj, 7L - (long)otmp->spe);
-		else *optr = 0;
+		if ((long)otmp->spe + obj->quan > 7L) {
+			obj = splitobj(obj, 7L - (long)otmp->spe);
+		} else {
+			*optr = 0;
+		}
 		You("attach %ld%s %s to %s.",
 		    obj->quan, !otmp->spe ? "" : " more",
 		    s, the(xname(otmp)));
-		if (!otmp->spe || otmp->age > obj->age)
-		    otmp->age = obj->age;
+		if (!otmp->spe || otmp->age > obj->age) {
+			otmp->age = obj->age;
+		}
 		otmp->spe += (int)obj->quan;
-		if (otmp->lamplit && !obj->lamplit)
-		    pline_The("new %s magically %s!", s, vtense(s, "ignite"));
-		else if (!otmp->lamplit && obj->lamplit)
-		    pline("%s out.", (obj->quan > 1L) ? "They go" : "It goes");
-		if (obj->unpaid)
-		    verbalize("You %s %s, you bought %s!",
+		if (otmp->lamplit && !obj->lamplit) {
+			pline_The("new %s magically %s!", s, vtense(s, "ignite"));
+		} else if (!otmp->lamplit && obj->lamplit) {
+			pline("%s out.", (obj->quan > 1L) ? "They go" : "It goes");
+		}
+		if (obj->unpaid) {
+			verbalize("You %s %s, you bought %s!",
 			      otmp->lamplit ? "burn" : "use",
 			      (obj->quan > 1L) ? "them" : "it",
 			      (obj->quan > 1L) ? "them" : "it");
-		if (obj->quan < 7L && otmp->spe == 7)
-		    pline("%s now has seven%s candles attached.",
-			  The(xname(otmp)), otmp->lamplit ? " lit" : "");
+		}
+		if (obj->quan < 7L && otmp->spe == 7) {
+			pline("%s now has seven%s candles attached.", The(xname(otmp)), otmp->lamplit ? " lit" : "");
+		}
 		/* candelabrum's light range might increase */
-		if (otmp->lamplit) obj_merge_light_sources(otmp, otmp);
+		if (otmp->lamplit) {
+			obj_merge_light_sources(otmp, otmp);
+		}
 		/* candles are no longer a separate light source */
-		if (obj->lamplit) end_burn(obj, TRUE);
+		if (obj->lamplit) {
+			end_burn(obj, TRUE);
+		}
 		/* candles are now gone */
 		useupall(obj);
 	}
@@ -985,15 +1004,15 @@ struct obj **optr;
 
 boolean
 snuff_candle(otmp)  /* call in drop, throw, and put in box, etc. */
-register struct obj *otmp;
+struct obj *otmp;
 {
-	register boolean candle = Is_candle(otmp);
+	boolean candle = Is_candle(otmp);
 
 	if ((candle || otmp->otyp == CANDELABRUM_OF_INVOCATION) &&
 		otmp->lamplit) {
 	    char buf[BUFSZ];
 	    xchar x, y;
-	    register boolean many = candle ? otmp->quan > 1L : otmp->spe > 1;
+	    boolean many = candle ? otmp->quan > 1L : otmp->spe > 1;
 
 	    (void) get_obj_location(otmp, &x, &y, 0);
 	    if (otmp->where == OBJ_MINVENT ? cansee(x,y) : !Blind)
@@ -1079,41 +1098,39 @@ struct obj *obj;
 		return;
 	}
 	if(obj->lamplit) {
-		if(obj->otyp == OIL_LAMP || obj->otyp == MAGIC_LAMP ||
-				obj->otyp == BRASS_LANTERN)
-		    pline("%s lamp is now off.", Shk_Your(buf, obj));
-		else
-		    You("snuff out %s.", yname(obj));
+		if(obj->otyp == OIL_LAMP || obj->otyp == MAGIC_LAMP || obj->otyp == BRASS_LANTERN) {
+			pline("%s lamp is now off.", Shk_Your(buf, obj));
+		} else {
+			You("snuff out %s.", yname(obj));
+		}
 		end_burn(obj, TRUE);
 		return;
 	}
 	/* magic lamps with an spe == 0 (wished for) cannot be lit */
-	if ((!Is_candle(obj) && obj->age == 0)
-			|| (obj->otyp == MAGIC_LAMP && obj->spe == 0)) {
-		if (obj->otyp == BRASS_LANTERN)
+	if ((!Is_candle(obj) && obj->age == 0) || (obj->otyp == MAGIC_LAMP && obj->spe == 0)) {
+		if (obj->otyp == BRASS_LANTERN) {
 			Your("lamp has run out of power.");
-		else pline("This %s has no oil.", xname(obj));
+		} else {
+			pline("This %s has no oil.", xname(obj));
+		}
 		return;
 	}
 	if (obj->cursed && !rn2(2)) {
-		pline("%s for a moment, then %s.",
-		      Tobjnam(obj, "flicker"), otense(obj, "die"));
+		pline("%s for a moment, then %s.", Tobjnam(obj, "flicker"), otense(obj, "die"));
 	} else {
-		if(obj->otyp == OIL_LAMP || obj->otyp == MAGIC_LAMP ||
-				obj->otyp == BRASS_LANTERN) {
-		    check_unpaid(obj);
-		    pline("%s lamp is now on.", Shk_Your(buf, obj));
+		if(obj->otyp == OIL_LAMP || obj->otyp == MAGIC_LAMP || obj->otyp == BRASS_LANTERN) {
+			check_unpaid(obj);
+			pline("%s lamp is now on.", Shk_Your(buf, obj));
 		} else {	/* candle(s) */
-		    pline("%s flame%s %s%s",
-			s_suffix(Yname2(obj)),
-			plur(obj->quan), otense(obj, "burn"),
-			Blind ? "." : " brightly!");
-		    if (obj->unpaid && costly_spot(u.ux, u.uy) &&
-			  obj->age == 20L * (long)objects[obj->otyp].oc_cost) {
-			const char *ithem = obj->quan > 1L ? "them" : "it";
-			verbalize("You burn %s, you bought %s!", ithem, ithem);
-			bill_dummy_object(obj);
-		    }
+			pline("%s flame%s %s%s",
+			    s_suffix(Yname2(obj)),
+			    plur(obj->quan), otense(obj, "burn"),
+			    Blind ? "." : " brightly!");
+			if (obj->unpaid && costly_spot(u.ux, u.uy) && obj->age == 20L * (long)objects[obj->otyp].oc_cost) {
+				const char *ithem = obj->quan > 1L ? "them" : "it";
+				verbalize("You burn %s, you bought %s!", ithem, ithem);
+				bill_dummy_object(obj);
+			}
 		}
 		begin_burn(obj, FALSE);
 	}
@@ -1318,7 +1335,7 @@ int magic; /* 0=Physical, otherwise skill level */
 	    if(u.utrap)
 		switch(u.utraptype) {
 		case TT_BEARTRAP: {
-		    register long side = rn2(3) ? LEFT_SIDE : RIGHT_SIDE;
+		    long side = rn2(3) ? LEFT_SIDE : RIGHT_SIDE;
 		    You("rip yourself free of the bear trap!  Ouch!");
 		    losehp(rnd(10), "jumping out of a bear trap", KILLED_BY);
 		    set_wounded_legs(side, rn1(1000,500));
@@ -1384,9 +1401,9 @@ struct obj *corpse;
 
 STATIC_OVL void
 use_tinning_kit(obj)
-register struct obj *obj;
+struct obj *obj;
 {
-	register struct obj *corpse, *can;
+	struct obj *corpse, *can;
 
 	/* This takes only 1 move.  If this is to be changed to take many
 	 * moves, we've got to deal with decaying corpses...
@@ -1728,7 +1745,7 @@ STATIC_OVL void
 use_figurine(optr)
 struct obj **optr;
 {
-	register struct obj *obj = *optr;
+	struct obj *obj = *optr;
 	xchar x, y;
 	coord cc;
 
@@ -2286,10 +2303,7 @@ struct obj *obj;
 		    /* right into your inventory */
 		    You("snatch %s %s!", s_suffix(mon_nam(mtmp)), onambuf);
 		    if (otmp->otyp == CORPSE &&
-			    touch_petrifies(&mons[otmp->corpsenm]) &&
-			    !uarmg && !Stone_resistance &&
-			    !(poly_when_stoned(youmonst.data) &&
-				polymon(PM_STONE_GOLEM))) {
+			    touch_petrifies(&mons[otmp->corpsenm]) && !uarmg && !Stone_resistance && !polymorph_player_instead_stoning()) {
 			char kbuf[BUFSZ];
 
 			Sprintf(kbuf, "%s corpse",
@@ -2344,69 +2358,77 @@ static const char
 
 /* Distance attacks by pole-weapons */
 STATIC_OVL int
-use_pole (obj)
-	struct obj *obj;
+use_pole (struct obj *obj)
 {
 	int res = 0, typ, max_range = 4, min_range = 4;
 	coord cc;
 	struct monst *mtmp;
 
-
 	/* Are you allowed to use the pole? */
 	if (u.uswallow) {
-	    pline(not_enough_room);
-	    return (0);
+		pline(not_enough_room);
+		return (0);
 	}
 	if (obj != uwep) {
-	    if (!wield_tool(obj, "swing")) return(0);
-	    else res = 1;
+		if (!wield_tool(obj, "swing")) {
+			return(0);
+		} else {
+			res = 1;
+		}
 	}
-     /* assert(obj == uwep); */
+	/* assert(obj == uwep); */
 
 	/* Prompt for a location */
 	pline(where_to_hit);
 	cc.x = u.ux;
 	cc.y = u.uy;
-	if (getpos(&cc, TRUE, "the spot to hit") < 0)
-	    return 0;	/* user pressed ESC */
+	if (getpos(&cc, TRUE, "the spot to hit") < 0) {
+		return 0;	/* user pressed ESC */
+	}
 
 	/* Calculate range */
 	typ = uwep_skill_type();
-	if (typ == P_NONE || P_SKILL(typ) <= P_BASIC) max_range = 4;
-	else if (P_SKILL(typ) == P_SKILLED) max_range = 5;
-	else max_range = 8;
+	if (typ == P_NONE || P_SKILL(typ) <= P_BASIC) {
+		max_range = 4;
+	} else if (P_SKILL(typ) == P_SKILLED) {
+		max_range = 5;
+	} else {
+		max_range = 8;
+	}
 	if (distu(cc.x, cc.y) > max_range) {
-	    pline("Too far!");
-	    return (res);
+		pline("Too far!");
+		return (res);
 	} else if (distu(cc.x, cc.y) < min_range) {
-	    pline("Too close!");
-	    return (res);
-	} else if (!cansee(cc.x, cc.y) &&
-		   ((mtmp = m_at(cc.x, cc.y)) == (struct monst *)0 ||
-		    !canseemon(mtmp))) {
-	    You(cant_see_spot);
-	    return (res);
+		pline("Too close!");
+		return (res);
+	} else if (!cansee(cc.x, cc.y) && ((mtmp = m_at(cc.x, cc.y)) == (struct monst *)0 || !canseemon(mtmp))) {
+		You(cant_see_spot);
+		return (res);
 	} else if (!couldsee(cc.x, cc.y)) { /* Eyes of the Overworld */
-	    You(cant_reach);
-	    return res;
+		You(cant_reach);
+		return res;
 	}
 
 	/* Attack the monster there */
 	if ((mtmp = m_at(cc.x, cc.y)) != (struct monst *)0) {
-	    int oldhp = mtmp->mhp;
-
-	    bhitpos = cc;
-	    check_caitiff(mtmp);
-	    (void) thitmonst(mtmp, uwep);
-	    /* check the monster's HP because thitmonst() doesn't return
-	     * an indication of whether it hit.  Not perfect (what if it's a
-	     * non-silver weapon on a shade?)
-	     */
-	    if (mtmp->mhp < oldhp)
-		u.uconduct.weaphit++;
-	} else
-	    /* Now you know that nothing is there... */
-	    pline(nothing_happens);
+		int oldhp = mtmp->mhp;
+		if (attack_checks(mtmp, obj)) {
+			return res;
+		}
+		bhitpos = cc;
+		check_caitiff(mtmp);
+		(void) thitmonst(mtmp, uwep);
+		/* check the monster's HP because thitmonst() doesn't return
+		 * an indication of whether it hit.  Not perfect (what if it's a
+		 * non-silver weapon on a shade?)
+		 */
+		if (mtmp->mhp < oldhp) {
+			u.uconduct.weaphit++;
+		}
+	} else {
+		/* Now you know that nothing is there... */
+		pline(nothing_happens);
+	}
 	return (1);
 }
 
@@ -2581,8 +2603,8 @@ do_break_wand(obj)
     struct obj *obj;
 {
     static const char nothing_else_happens[] = "But nothing else happens...";
-    register int i, x, y;
-    register struct monst *mon;
+    int i, x, y;
+    struct monst *mon;
     int dmg, damage;
     boolean affects_objects;
     boolean shop_damage = FALSE;
@@ -2737,7 +2759,7 @@ do_break_wand(obj)
 STATIC_OVL boolean
 uhave_graystone()
 {
-	register struct obj *otmp;
+	struct obj *otmp;
 
 	for(otmp = invent; otmp; otmp = otmp->nobj)
 		if(is_graystone(otmp))
@@ -2760,7 +2782,7 @@ int
 doapply()
 {
 	struct obj *obj;
-	register int res = 1;
+	int res = 1;
 	char class_list[MAXOCLASSES+2];
 
 	if(check_capacity((char *)0)) return (0);

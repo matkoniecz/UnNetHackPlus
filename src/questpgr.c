@@ -22,7 +22,7 @@ STATIC_DCL const char * NDECL(neminame);
 STATIC_DCL const char * NDECL(guardname);
 STATIC_DCL const char * NDECL(homebase);
 STATIC_DCL struct qtmsg * FDECL(msg_in, (struct qtmsg *,int));
-STATIC_DCL void FDECL(convert_arg, (CHAR_P));
+STATIC_DCL void FDECL(convert_arg, (char));
 STATIC_DCL void NDECL(convert_line);
 STATIC_DCL void FDECL(deliver_by_pline, (struct qtmsg *));
 STATIC_DCL void FDECL(deliver_by_window, (struct qtmsg *,int));
@@ -153,7 +153,7 @@ quest_info(typ)
 int typ;
 {
 	switch (typ) {
-	    case 0:		return (urole.questarti);
+	    case 0:		return (urole.quest_artifact_index);
 	    case MS_LEADER:	return (urole.ldrnum);
 	    case MS_NEMESIS:	return (urole.neminum);
 	    case MS_GUARDIAN:	return (urole.guardnum);
@@ -183,7 +183,7 @@ boolean
 is_quest_artifact(otmp)
 struct obj *otmp;
 {
-	return((boolean)(otmp->oartifact == urole.questarti));
+	return((boolean)(otmp->oartifact == urole.quest_artifact_index));
 }
 
 STATIC_OVL const char *
@@ -228,7 +228,7 @@ STATIC_OVL void
 convert_arg(c)
 char c;
 {
-	register const char *str;
+	const char *str;
 
 	switch (c) {
 
@@ -250,7 +250,7 @@ char c;
 			break;
 	    case 'i':	str = intermed();
 			break;
-	    case 'o':	str = the(artiname(urole.questarti));
+	    case 'o':	str = the(artiname(urole.quest_artifact_index));
 			break;
 	    case 'm':	str = creatorname();
 			break;

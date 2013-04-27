@@ -11,7 +11,7 @@
 STATIC_DCL boolean FDECL(is_swallow_sym, (int));
 STATIC_DCL int FDECL(append_str, (char *, const char *));
 STATIC_DCL struct permonst * FDECL(lookat, (int, int, char *, char *));
-STATIC_DCL int FDECL(do_look, (BOOLEAN_P));
+STATIC_DCL int FDECL(do_look, (boolean));
 STATIC_DCL boolean FDECL(help_menu, (int *));
 #ifdef PORT_HELP
 extern void NDECL(port_help);
@@ -57,7 +57,7 @@ lookat(x, y, buf, monbuf)
     int x, y;
     char *buf, *monbuf;
 {
-    register struct monst *mtmp = (struct monst *) 0;
+    struct monst *mtmp = (struct monst *) 0;
     struct permonst *pm = (struct permonst *) 0;
     int glyph;
 
@@ -721,6 +721,7 @@ static const char * const bogusobjects[] = {
 	"maximally subsentient emacs mode",
 	"bongard diagram",                  /* Intelligence test */
 	"git repository",
+	"server",
 
 	/* Historical */
 	"dead sea scroll",
@@ -757,6 +758,7 @@ static const char * const bogusobjects[] = {
 	"scroll of stupidity",
 	"spellbook of detect foot",
 	"spellbook of detect evil",
+	"Spellbook of wishing", /* http://www.alt.org/nethack/addmsgs/viewmsgs.php */
 	"heavily obfuscated spellbook",
 	"helm of telemetry",
 	"blue suede boots of charisma",
@@ -1217,7 +1219,7 @@ doquickwhatis()
 int
 doidtrap()
 {
-	register struct trap *trap;
+	struct trap *trap;
 	int x, y, tt;
 
 	if (!getdir("^")) return 0;
@@ -1253,7 +1255,7 @@ char *cbuf;
 {
 	dlb *fp;
 	char bufr[BUFSZ];
-	register char *buf = &bufr[6], *ep, ctrl, meta;
+	char *buf = &bufr[6], *ep, ctrl, meta;
 
 	fp = dlb_fopen_area(NH_CMDHELPAREA, CMDHELPFILE, "r");
 	if (!fp) {
@@ -1332,9 +1334,7 @@ static const char *help_menu_items[] = {
 #else
 #define WIZHLP_SLOT 10
 #endif
-#ifdef WIZARD
 	"List of wizard-mode commands.",
-#endif
 	"",
 	(char *)0
 };
@@ -1353,10 +1353,9 @@ help_menu(sel)
 
 	any.a_void = 0;		/* zero all bits */
 	start_menu(tmpwin);
-#ifdef WIZARD
-	if (!wizard) help_menu_items[WIZHLP_SLOT] = "",
-		     help_menu_items[WIZHLP_SLOT+1] = (char *)0;
-#endif
+	if (!wizard) {
+		help_menu_items[WIZHLP_SLOT] = "", help_menu_items[WIZHLP_SLOT+1] = (char *)0;
+		}
 	for (i = 0; help_menu_items[i]; i++)
 #ifdef PORT_HELP
 	    /* port-specific line has a %s in it for the PORT_ID */
@@ -1401,10 +1400,8 @@ dohelp()
 			case  7:  (void) doextlist();  break;
 			case  8:  display_file_area(NH_LICENSE_AREA, LICENSE, TRUE);  break;
 			case  9:  tutorial_redisplay();  break;
-#ifdef WIZARD
 			/* handle slot 10 or 11 */
 			default: display_file_area(NH_DEBUGHELP_AREA, DEBUGHELP, TRUE);  break;
-#endif
 #ifdef PORT_HELP
 			case PORT_HELP_ID:  port_help();  break;
 #endif

@@ -23,7 +23,7 @@ STATIC_DCL int FDECL(menu_drop, (int));
 #ifdef OVL2
 STATIC_DCL int NDECL(currentlevel_rewrite);
 STATIC_DCL void NDECL(final_level);
-/* static boolean FDECL(badspot, (XCHAR_P,XCHAR_P)); */
+/* static boolean FDECL(badspot, (xchar,xchar)); */
 #endif
 
 #ifdef OVLB
@@ -59,7 +59,7 @@ dodrop()
 boolean
 boulder_hits_pool(otmp, rx, ry, pushing)
 struct obj *otmp;
-register int rx, ry;
+int rx, ry;
 boolean pushing;
 {
 	if (!otmp || otmp->otyp != BOULDER)
@@ -239,8 +239,7 @@ const char *verb;
 			(t->ttyp==PIT || t->ttyp==SPIKED_PIT)) {
 		/* you escaped a pit and are standing on the precipice */
 		if (Blind && flags.soundok)
-			You_hear("%s %s downwards.",
-				The(xname(obj)), otense(obj, "tumble"));
+			You_hear("%s tumble downwards.", the(xname(obj))); 
 		else
 			pline("%s %s into %s pit.",
 				The(xname(obj)), otense(obj, "tumble"),
@@ -254,7 +253,7 @@ const char *verb;
 
 void
 doaltarobj(obj)  /* obj is an object dropped on an altar */
-	register struct obj *obj;
+	struct obj *obj;
 {
 	if (Blind)
 		return;
@@ -295,7 +294,7 @@ doaltarobj(obj)  /* obj is an object dropped on an altar */
 STATIC_OVL
 void
 trycall(obj)
-register struct obj *obj;
+struct obj *obj;
 {
 	if(!objects[obj->otyp].oc_name_known &&
 	   !objects[obj->otyp].oc_uname)
@@ -369,10 +368,10 @@ teleport_sink()
 STATIC_OVL
 void
 dosinkring(obj)  /* obj is a ring being dropped over a kitchen sink */
-register struct obj *obj;
+struct obj *obj;
 {
-	register struct obj *otmp,*otmp2;
-	register boolean ideed = TRUE;
+	struct obj *otmp,*otmp2;
+	boolean ideed = TRUE;
 
 	You("drop %s down the drain.", doname(obj));
 	obj->in_use = TRUE;	/* block free identification via interrupt */
@@ -534,8 +533,8 @@ giveback:
 /* some common tests when trying to drop or throw items */
 boolean
 canletgo(obj,word)
-register struct obj *obj;
-register const char *word;
+struct obj *obj;
+const char *word;
 {
 	if(obj->owornmask & (W_ARMOR | W_RING | W_AMUL | W_TOOL)){
 		if (*word)
@@ -577,7 +576,7 @@ register const char *word;
 STATIC_PTR
 int
 drop(obj)
-register struct obj *obj;
+struct obj *obj;
 {
 	if(!obj) return(0);
 	if(!canletgo(obj,"drop"))
@@ -640,7 +639,7 @@ register struct obj *obj;
 /* eg ship_object() and dropy() -> sellobj() both produce output */
 void
 dropx(obj)
-register struct obj *obj;
+struct obj *obj;
 {
 #ifndef GOLDOBJ
 	if (obj->oclass != COIN_CLASS || obj == invent) freeinv(obj);
@@ -659,7 +658,7 @@ register struct obj *obj;
 
 void
 dropy(obj)
-register struct obj *obj;
+struct obj *obj;
 {
 	if (obj == uwep) setuwep((struct obj *)0);
 	if (obj == uquiver) setuqwep((struct obj *)0);
@@ -1025,7 +1024,7 @@ d_level save_dlevel = {0, 0};
 STATIC_OVL int
 currentlevel_rewrite()
 {
-	register int fd;
+	int fd;
 	char whynot[BUFSZ];
 
 	/* since level change might be a bit slow, flush any buffered screen
@@ -1080,7 +1079,7 @@ save_currentstate()
 /*
 static boolean
 badspot(x, y)
-register xchar x, y;
+xchar x, y;
 {
 	return((levl[x][y].typ != ROOM && levl[x][y].typ != AIR &&
 			 levl[x][y].typ != CORR) || MON_AT(x, y));
@@ -1182,10 +1181,8 @@ boolean at_stairs, falling, portal;
 		delete_levelfile(l_idx);
 	}
 
-#ifdef REINCARNATION
 	if (Is_rogue_level(newlevel) || Is_rogue_level(&u.uz))
 		assign_rogue_graphics(Is_rogue_level(newlevel));
-#endif
 #ifdef USE_TILES
 	substitute_tiles(newlevel);
 #endif
@@ -1237,7 +1234,7 @@ boolean at_stairs, falling, portal;
 
 	if (portal && !In_endgame(&u.uz)) {
 	    /* find the portal on the new level */
-	    register struct trap *ttrap;
+	    struct trap *ttrap;
 
 	    for (ttrap = ftrap; ttrap; ttrap = ttrap->ntrap)
 		if (ttrap->ttyp == MAGIC_PORTAL) break;
@@ -1252,7 +1249,7 @@ boolean at_stairs, falling, portal;
 		} else {
 		    if (newdungeon) {
 			if (Is_stronghold(&u.uz)) {
-			    register xchar x, y;
+			    xchar x, y;
 			    int trycnt = 0;
 
 			    do {
@@ -1444,10 +1441,8 @@ boolean at_stairs, falling, portal;
 	    if (mesg) pline(mesg);
 	}
 
-#ifdef REINCARNATION
 	if (new && Is_rogue_level(&u.uz))
 	    You("enter what seems to be an older, more primitive world.");
-#endif
 	if (new && Hallucination &&
 	    Role_if(PM_ARCHEOLOGIST) &&
 	    Is_juiblex_level(&u.uz))
@@ -1786,8 +1781,8 @@ dowipe()
 
 void
 set_wounded_legs(side, timex)
-register long side;
-register int timex;
+long side;
+int timex;
 {
 	/* KMH -- STEED
 	 * If you are riding, your steed gets the wounded legs instead.

@@ -77,15 +77,6 @@ extern void NDECL(linux_mapon);
 extern void NDECL(linux_mapoff);
 #endif
 
-#ifdef AUX
-void
-catch_stp()
-{
-    signal(SIGTSTP, SIG_DFL);
-    dosuspend();
-}
-#endif /* AUX */
-
 void
 getwindowsz()
 {
@@ -127,9 +118,6 @@ getioctls()
 # endif
 #endif
 	getwindowsz();
-#ifdef AUX
-	( void ) signal ( SIGTSTP , catch_stp ) ;
-#endif
 }
 
 void
@@ -164,11 +152,7 @@ dosuspend()
 		linux_mapon();
 #  endif
 		(void) signal(SIGTSTP, SIG_DFL);
-#  ifdef AUX
-		( void ) kill ( 0 , SIGSTOP ) ;
-#  else
 		(void) kill(0, SIGTSTP);
-#  endif
 #  ifdef _M_UNIX
 		sco_mapoff();
 #  endif

@@ -21,7 +21,7 @@ extern gsl_rng *rng_state;
 
 int
 rn2(x)		/**< 0 <= rn2(x) < x */
-register int x;
+int x;
 {
 	if (x <= 0) {
 		warning("rn2(%d) attempted", x);
@@ -36,9 +36,9 @@ register int x;
 
 int
 rnl(x)		/**< 0 <= rnl(x) < x; sometimes subtracting Luck */
-register int x;	/**< good luck approaches 0, bad luck approaches (x-1) */
+int x;	/**< good luck approaches 0, bad luck approaches (x-1) */
 {
-	register int i;
+	int i;
 
 	if (x <= 0) {
 		warning("rnl(%d) attempted", x);
@@ -61,7 +61,7 @@ register int x;	/**< good luck approaches 0, bad luck approaches (x-1) */
 
 int
 rnd(x)		/**< 1 <= rnd(x) <= x */
-register int x;
+int x;
 {
 	if (x <= 0) {
 		warning("rnd(%d) attempted", x);
@@ -76,9 +76,9 @@ register int x;
 
 int
 d(n,x)		/**< n <= d(n,x) <= (n*x) */
-register int n, x;
+int n, x;
 {
-	register int tmp = n;
+	int tmp = n;
 
 	if (x < 0 || n < 0 || (x == 0 && n != 0)) {
 		warning("d(%d,%d) attempted", n, x);
@@ -93,9 +93,9 @@ register int n, x;
 
 int
 rne(x)
-register int x;
+int x;
 {
-	register int n, utmp;
+	int n, utmp;
 
 	utmp = (u.ulevel < 15) ? 5 : u.ulevel/3;
 	n = 1;
@@ -118,8 +118,8 @@ int
 rnz(i)
 int i;
 {
-	register long x = i;
-	register long tmp = 1000;
+	long x = i;
+	long tmp = 1000;
 
 	tmp += rn2(1000);
 	tmp *= rne(4);

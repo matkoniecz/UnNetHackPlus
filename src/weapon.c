@@ -94,7 +94,7 @@ int skill;
 
 #endif	/* OVLB */
 
-STATIC_DCL boolean FDECL(can_advance, (int, BOOLEAN_P));
+STATIC_DCL boolean FDECL(can_advance, (int, boolean));
 STATIC_DCL boolean FDECL(could_advance, (int));
 STATIC_DCL boolean FDECL(peaked_skill, (int));
 STATIC_DCL int FDECL(slots_required, (int));
@@ -359,9 +359,9 @@ static struct obj *propellor;
 
 struct obj *
 select_rwep(mtmp)	/* select a ranged weapon for the monster */
-register struct monst *mtmp;
+struct monst *mtmp;
 {
-	register struct obj *otmp;
+	struct obj *otmp;
 	int i;
 
 #ifdef KOPS
@@ -486,10 +486,10 @@ static const NEARDATA short hwep[] = {
 
 struct obj *
 select_hwep(mtmp)	/* select a hand to hand weapon for the monster */
-register struct monst *mtmp;
+struct monst *mtmp;
 {
-	register struct obj *otmp;
-	register int i;
+	struct obj *otmp;
+	int i;
 	boolean strong = strongmonst(mtmp->data);
 	boolean wearing_shield = (mtmp->misc_worn_check & W_ARMS) != 0;
 
@@ -588,7 +588,7 @@ boolean polyspot;
  */
 int
 mon_wield_item(mon)
-register struct monst *mon;
+struct monst *mon;
 {
 	struct obj *obj;
 
@@ -801,19 +801,27 @@ int skill;
 /* return true if this skill can be advanced */
 /*ARGSUSED*/
 STATIC_OVL boolean
-can_advance(skill, speedy)
-int skill;
-boolean speedy;
+can_advance(int skill, boolean speedy)
 {
-    return !P_RESTRICTED(skill)
-	    && P_SKILL(skill) < P_MAX_SKILL(skill) && (
-#ifdef WIZARD
-	    (wizard && speedy) ||
-#endif
-	    (P_ADVANCE(skill) >=
-		(unsigned) practice_needed_to_advance(P_SKILL(skill))
-	    && u.skills_advanced < P_SKILL_LIMIT
-	    && u.unused_skill_slots >= slots_required(skill)));
+	if (P_RESTRICTED(skill)) {
+		return FALSE;
+	}
+	if (P_SKILL(skill) >= P_MAX_SKILL(skill)) {
+		return FALSE;
+	}
+	if (wizard && speedy) {
+		return TRUE;
+	}
+	if (P_ADVANCE(skill) < (unsigned) practice_needed_to_advance(P_SKILL(skill))) {
+		return FALSE;
+	}
+	if (u.skills_advanced >= P_SKILL_LIMIT) {
+		return FALSE;
+	}
+	if (u.unused_skill_slots < slots_required(skill)) {
+		return FALSE;
+	}
+	return TRUE;
 }
 
 /* return true if any skill can be advanced */
@@ -912,11 +920,11 @@ int enhance_skill(boolean want_dump)
     char buf2[BUFSZ];
     boolean logged = FALSE;
 
-#ifdef WIZARD
-	if (!want_dump)
-		if (wizard && yn("Advance skills without practice?") == 'y')
+	if (!want_dump) {
+		if (wizard && yn("Advance skills without practice?") == 'y') {
 			speedy = TRUE;
-#endif
+		}
+	}
 
 	do {
 	    /* find longest available skill name, count those that can advance */
@@ -1017,7 +1025,6 @@ int enhance_skill(boolean want_dump)
 		    prefix = (to_advance + eventually_advance +
 				maxxed_cnt > 0) ? "    " : "";
 		(void) skill_level_name(i, sklnambuf);
-#ifdef WIZARD
 		if (wizard) {
 		    if (!iflags.menu_tab_sep)
 			Sprintf(buf, " %s%-*s %-12s %5d(%4d)",
@@ -1029,9 +1036,7 @@ int enhance_skill(boolean want_dump)
 			    prefix, P_NAME(i), sklnambuf,
 			    P_ADVANCE(i),
 			    practice_needed_to_advance(P_SKILL(i)));
-		 } else
-#endif
-		{
+		 } else {
 		    if (!iflags.menu_tab_sep)
 			Sprintf(buf, " %s %-*s [%s]",
 			    prefix, longest, P_NAME(i), sklnambuf);
@@ -1047,11 +1052,9 @@ int enhance_skill(boolean want_dump)
 
 	    Strcpy(buf, (to_advance > 0) ? "Pick a skill to advance:" :
 					   "Current skills:");
-#ifdef WIZARD
-	    if (wizard && !speedy)
-		Sprintf(eos(buf), "  (%d slot%s available)",
-			u.unused_skill_slots, plur(u.unused_skill_slots));
-#endif
+	    if (wizard && !speedy) {
+		Sprintf(eos(buf), "  (%d slot%s available)", u.unused_skill_slots, plur(u.unused_skill_slots));
+	    }
 	    if (want_dump) {
 		dump_html("</table>\n", "");
 		dump("", "");
@@ -1408,8 +1411,8 @@ const struct def_skill *class_skill;
 
 void
 setmnotwielded(mon,obj)
-register struct monst *mon;
-register struct obj *obj;
+struct monst *mon;
+struct obj *obj;
 {
     if (!obj) return;
     if (artifact_light(obj) && obj->lamplit) {

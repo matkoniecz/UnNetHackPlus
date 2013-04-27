@@ -6,14 +6,12 @@
 #include "prop.h"
 
 STATIC_DCL void FDECL(mkbox_cnts,(struct obj *));
-STATIC_DCL void FDECL(obj_timer_checks,(struct obj *, XCHAR_P, XCHAR_P, int));
+STATIC_DCL void FDECL(obj_timer_checks,(struct obj *, xchar, xchar, int));
 #ifdef OVL1
 STATIC_DCL void FDECL(container_weight, (struct obj *));
 STATIC_DCL struct obj *FDECL(save_mtraits, (struct obj *, struct monst *));
-#ifdef WIZARD
 STATIC_DCL const char *FDECL(where_name, (int));
 STATIC_DCL void FDECL(check_contained, (struct obj *,const char *));
-#endif
 #endif /* OVL1 */
 
 extern struct obj *thrownobj;		/* defined in dothrow.c */
@@ -67,7 +65,6 @@ const struct icp boxiprobs[] = {
 { 1, AMULET_CLASS}
 };
 
-#ifdef REINCARNATION
 const struct icp rogueprobs[] = {
 {12, WEAPON_CLASS},
 {12, ARMOR_CLASS},
@@ -77,7 +74,6 @@ const struct icp rogueprobs[] = {
 { 5, WAND_CLASS},
 { 5, RING_CLASS}
 };
-#endif
 
 const struct icp hellprobs[] = {
 {22, WEAPON_CLASS},
@@ -129,11 +125,9 @@ boolean artif;
 		if(level_difficulty() > 15) {
 			iprobs = (const struct icp *)mkobjdeepprobs;
 		}
-#ifdef REINCARNATION
 		if(Is_rogue_level(&u.uz)) {
 			iprobs = (const struct icp *)rogueprobs;
 		}
-#endif
 		if(Inhell) {
 			iprobs = (const struct icp *)hellprobs;
 		}
@@ -157,8 +151,8 @@ STATIC_OVL void
 mkbox_cnts(box)
 struct obj *box;
 {
-	register int n;
-	register struct obj *otmp;
+	int n;
+	struct obj *otmp;
 
 	box->cobj = (struct obj *) 0;
 
@@ -188,7 +182,7 @@ struct obj *box;
 		    (void) stop_timer(REVIVE_MON, (genericptr_t)otmp);
 		}
 	    } else {
-		register int tprob;
+		int tprob;
 		const struct icp *iprobs = boxiprobs;
 
 		for (tprob = rnd(100); (tprob -= iprobs->iprob) > 0; iprobs++)
@@ -221,8 +215,8 @@ struct obj *box;
 int
 rndmonnum()	/* select a random, common monster type */
 {
-	register struct permonst *ptr;
-	register int	i;
+	struct permonst *ptr;
+	int	i;
 
 	/* Plan A: get a level-appropriate common monster */
 	ptr = rndmonst();
@@ -347,9 +341,9 @@ struct obj *otmp;
  */
 void
 bill_dummy_object(otmp)
-register struct obj *otmp;
+struct obj *otmp;
 {
-	register struct obj *dummy;
+	struct obj *dummy;
 
 	if (otmp->unpaid)
 	    subfrombill(otmp, shop_keeper(*u.ushops));
@@ -742,7 +736,7 @@ start_corpse_timeout(body)
 
 void
 bless(otmp)
-register struct obj *otmp;
+struct obj *otmp;
 {
 #ifdef GOLDOBJ
 	if (otmp->oclass == COIN_CLASS) return;
@@ -760,7 +754,7 @@ register struct obj *otmp;
 
 void
 unbless(otmp)
-register struct obj *otmp;
+struct obj *otmp;
 {
 	otmp->blessed = 0;
 	if (carried(otmp) && confers_luck(otmp))
@@ -771,7 +765,7 @@ register struct obj *otmp;
 
 void
 curse(otmp)
-register struct obj *otmp;
+struct obj *otmp;
 {
 #ifdef GOLDOBJ
 	if (otmp->oclass == COIN_CLASS) return;
@@ -800,7 +794,7 @@ register struct obj *otmp;
 
 void
 uncurse(otmp)
-register struct obj *otmp;
+struct obj *otmp;
 {
 	otmp->cursed = 0;
 	if (carried(otmp) && confers_luck(otmp))
@@ -817,8 +811,8 @@ register struct obj *otmp;
 
 void
 blessorcurse(otmp, chance)
-register struct obj *otmp;
-register int chance;
+struct obj *otmp;
+int chance;
 {
 	if(otmp->blessed || otmp->cursed) return;
 
@@ -837,7 +831,7 @@ register int chance;
 
 int
 bcsign(otmp)
-register struct obj *otmp;
+struct obj *otmp;
 {
 	return(!!otmp->blessed - !!otmp->cursed);
 }
@@ -855,7 +849,7 @@ register struct obj *otmp;
  */
 int
 weight(obj)
-register struct obj *obj;
+struct obj *obj;
 {
 	int wt = objects[obj->otyp].oc_weight;
 
@@ -863,7 +857,7 @@ register struct obj *obj;
 		wt += mons[PM_HOUSECAT].cwt;
 	if (Is_container(obj) || obj->otyp == STATUE) {
 		struct obj *contents;
-		register int cwt = 0;
+		int cwt = 0;
 
 		if (obj->otyp == STATUE && obj->corpsenm >= LOW_PM)
 		    wt = (int)obj->quan *
@@ -937,7 +931,7 @@ mkgold(amount, x, y)
 long amount;
 int x, y;
 {
-    register struct obj *gold = g_at(x,y);
+    struct obj *gold = g_at(x,y);
 
     if (amount <= 0L)
 	amount = (long)(1 + rnd(level_difficulty()+2) * rnd(30));
@@ -977,7 +971,7 @@ struct permonst *ptr;
 int x, y;
 boolean init;
 {
-	register struct obj *otmp;
+	struct obj *otmp;
 
 	if (objtype != CORPSE && objtype != STATUE)
 	    warning("making corpstat type %d", objtype);
@@ -1100,9 +1094,9 @@ boolean copyof;
 struct obj *
 mk_tt_object(objtype, x, y)
 int objtype; /* CORPSE or STATUE */
-register int x, y;
+int x, y;
 {
-	register struct obj *otmp, *otmp2;
+	struct obj *otmp, *otmp2;
 	boolean initialize_it;
 
 	/* player statues never contain books */
@@ -1118,9 +1112,9 @@ register int x, y;
 /* Names from NAO (400 incidents) and http://un.nethack.nu/cause/petrified+by+Medusa (2) */
 /* Names may repeat, some players (DeathRobin and xaiph) managed to get killed 4 times in this way */
 /* Last update date: 27 I 2013 */
-static const char * const petrified_by_medusa [] = { "DeathRobin", "xaiph", "DeathRobin", "xaiph", "DeathRobin", "xaiph", "DeathRobin", "xaiph", "aardvarkj", "Tifa", "Triamis", "zem", "aardvarkj", "Tifa", "Triamis", "zem", "aardvarkj", "Tifa", "Triamis", "zem", "bebing", "bweir", "Cheeta", "clburke", "DoomTurtle", "DrPotato", "Eidolos", "fooquux", "Galdor", "heliogabal", "init", "Inkhoof", "jmaygarden", "jollysoldi", "korso", "KrO2", "liberty", "Lukano", "MehPlusRawr", "mercury5", "musicdemon", "Shreder0", "sparrow4", "Spazm", "subbawt", "VicViper", "zid", "bebing", "bweir", "Cheeta", "clburke", "DoomTurtle", "DrPotato", "Eidolos", "fooquux", "Galdor", "heliogabal", "init", "Inkhoof", "jmaygarden", "jollysoldi", "korso", "KrO2", "liberty", "Lukano", "MehPlusRawr", "mercury5", "musicdemon", "Shreder0", "sparrow4", "Spazm", "subbawt", "VicViper", "zid", "Aerobe", "AgentSei", "Aleron", "AlexD", "ALMSIVI", "Aloha", "Altwa", "androo", "antiparago", "anuite", "aRandomHero", "ArgonSloth", "arxanas", "ascend", "atsi", "axial", "Battlehave", "Bearhobag", "beh", "BEHiker57W", "Belacqui", "Betamax", "Bethrezen", "biodiesel", "Bishness", "blarrrg", "Blooddeath", "Blowfun", "bobbens", "bps", "brian0", "brn", "brooder", "broppy", "cdi", "Cephas", "Ch0Hag", "Che", "Chilliwack", "chomzee", "chrisn42", "Clanger", "clemux", "cognificen", "coolestbond", "cthulu", "D34dlyD34dly", "DainDwarf", "deathdruid", "DeathOnASt", "demirobin", "Dentarthurdent", "Diggy", "djanatyn", "djm", "dkritz", "Dogmaw", "Doh", "Dolphy", "Donna", "DoomChicken", "doytaeb", "dragonizer", "dredd", "drJebus", "DrMuscles", "dtype", "DukGalNamu", "dumdumcoo", "Eaven", "Eben", "efot", "elint", "Elliott", "entreri", "entro", "eragg0", "Erizzle", "Erokh", "escalated", "f00bar", "Fabian", "falzer", "feitd", "Fenix", "Feory", "Flyte", "fontpolice", "foobar", "foolishwtf", "fragmites", "Fredil", "fredward", "fry", "Futilius", "Garnam", "ghfdrvtsyup", "ghtadm", "gillbates", "Gilthir", "GL", "glisignoli", "gmenzel", "GmonSquare", "gneek", "Gorfiend", "goros", "Greybeard", "greycat", "Grimbaldou", "Grund", "Gueust", "Haggard", "hail", "haole", "Harudoku", "healthy", "hellstrom", "Helsbecter", "Hmgn", "hprx", "Impglein", "InstantLoser", "iopdude", "isquidy", "iwantmorepies", "ix", "j3", "Janyson", "Jaskaa", "jasonshalo", "jax82282", "jbmigel", "jejenum", "jessek", "jetblack", "jew2", "jmackellar", "JoeBob", "Jonadab", "jpeirce", "jspeed", "kante", "Kayos", "kcw12", "Kenneth", "kiroh", "knnn", "koitsu", "Krantnejie", "Kurshu", "Led", "LittleWhit", "Loch", "Lurchtoke", "mab", "madcowjim", "marlyn", "Masque", "Maud", "mcmanus", "medibot", "mee", "mfactor", "MikeyP", "Misha", "mistheist", "mithas", "monastic", "morakk", "Moriarty", "Mortuis", "Mossbot", "mr0t", "mrbill82", "Mushroomi", "nardo", "NardoLoopa", "Nebix", "neko", "nethack101", "neutron", "niabverte", "Nightgaunt", "Nightrippe", "nimsumzero", "NobbyNobbs", "Nockpoint", "nodog", "nooodl", "norton", "nremorse", "nunu", "Nybes", "Nyctoparros", "nykevin17", "oj7", "okyada", "omegaham", "orenbum", "Ortlinde", "OsirisBRD", "palla", "PaRaD0xx", "parre", "peters509", "petitchou", "phetus", "pilkington", "PingtheMer", "pizzle", "Planker", "pmcalpin", "potpie", "predakanga", "Presswt", "Price", "quinnr", "Quixel", "Qutri", "Razanul", "rcs", "realcool", "RedBandit", "rednuf", "reid", "Rhubarb", "richard", "ripjack", "rizi", "robq", "Rocknar", "Rocknlol", "rom", "rombus", "roskilde", "Roxus", "RS14", "rudi", "RuLavan", "SabreJon", "Sally", "samech", "sandis", "savagelich", "scm", "scottk", "seadog", "Seymor", "shimato", "shock", "shonuff", "Simokon", "sk9851", "skorm", "Skuzal", "snarius", "sneaker", "SoldierAntEater", "Somecallmetim", "SoulDragon", "soundnfury", "soze", "spaakko", "Spaceduck", "Splatypus", "spontiff", "Squishy", "srf", "Stathol", "stenno", "steveh", "stinkster2", "Stossel", "stumblySF", "SubG", "suzu", "swartzcr", "Tactii", "tapin", "Teabing", "Tenebrys", "Thaddeus", "Theta", "thn", "Thomag", "tmrykr", "topstone01", "Torsktrynet", "TotalNoob", "Trent", "tvm", "tweekeroo", "twitch", "TwiX", "Unctuous", "up", "valkerie", "VoiceOfRea", "warrenlynch", "wastrel", "weziman", "WILDMAN", "wirelesshero", "Wisski", "wisteria", "wizzomafiz", "Wonderin", "WoobleValk", "Xaphania", "Xavior", "xcpp", "Xizlqk", "Xlax", "XxPagxX", "Ybenk", "ylaruum", "Youyou", "yoz", "Yxskaft", "Zadir", "Zanthra", "zaq", "Zaus", "Zeshiro", "zste", "danguy", "Souljazz", };
+static char * const petrified_by_medusa [] = { "DeathRobin", "xaiph", "DeathRobin", "xaiph", "DeathRobin", "xaiph", "DeathRobin", "xaiph", "aardvarkj", "Tifa", "Triamis", "zem", "aardvarkj", "Tifa", "Triamis", "zem", "aardvarkj", "Tifa", "Triamis", "zem", "bebing", "bweir", "Cheeta", "clburke", "DoomTurtle", "DrPotato", "Eidolos", "fooquux", "Galdor", "heliogabal", "init", "Inkhoof", "jmaygarden", "jollysoldi", "korso", "KrO2", "liberty", "Lukano", "MehPlusRawr", "mercury5", "musicdemon", "Shreder0", "sparrow4", "Spazm", "subbawt", "VicViper", "zid", "bebing", "bweir", "Cheeta", "clburke", "DoomTurtle", "DrPotato", "Eidolos", "fooquux", "Galdor", "heliogabal", "init", "Inkhoof", "jmaygarden", "jollysoldi", "korso", "KrO2", "liberty", "Lukano", "MehPlusRawr", "mercury5", "musicdemon", "Shreder0", "sparrow4", "Spazm", "subbawt", "VicViper", "zid", "Aerobe", "AgentSei", "Aleron", "AlexD", "ALMSIVI", "Aloha", "Altwa", "androo", "antiparago", "anuite", "aRandomHero", "ArgonSloth", "arxanas", "ascend", "atsi", "axial", "Battlehave", "Bearhobag", "beh", "BEHiker57W", "Belacqui", "Betamax", "Bethrezen", "biodiesel", "Bishness", "blarrrg", "Blooddeath", "Blowfun", "bobbens", "bps", "brian0", "brn", "brooder", "broppy", "cdi", "Cephas", "Ch0Hag", "Che", "Chilliwack", "chomzee", "chrisn42", "Clanger", "clemux", "cognificen", "coolestbond", "cthulu", "D34dlyD34dly", "DainDwarf", "deathdruid", "DeathOnASt", "demirobin", "Dentarthurdent", "Diggy", "djanatyn", "djm", "dkritz", "Dogmaw", "Doh", "Dolphy", "Donna", "DoomChicken", "doytaeb", "dragonizer", "dredd", "drJebus", "DrMuscles", "dtype", "DukGalNamu", "dumdumcoo", "Eaven", "Eben", "efot", "elint", "Elliott", "entreri", "entro", "eragg0", "Erizzle", "Erokh", "escalated", "f00bar", "Fabian", "falzer", "feitd", "Fenix", "Feory", "Flyte", "fontpolice", "foobar", "foolishwtf", "fragmites", "Fredil", "fredward", "fry", "Futilius", "Garnam", "ghfdrvtsyup", "ghtadm", "gillbates", "Gilthir", "GL", "glisignoli", "gmenzel", "GmonSquare", "gneek", "Gorfiend", "goros", "Greybeard", "greycat", "Grimbaldou", "Grund", "Gueust", "Haggard", "hail", "haole", "Harudoku", "healthy", "hellstrom", "Helsbecter", "Hmgn", "hprx", "Impglein", "InstantLoser", "iopdude", "isquidy", "iwantmorepies", "ix", "j3", "Janyson", "Jaskaa", "jasonshalo", "jax82282", "jbmigel", "jejenum", "jessek", "jetblack", "jew2", "jmackellar", "JoeBob", "Jonadab", "jpeirce", "jspeed", "kante", "Kayos", "kcw12", "Kenneth", "kiroh", "knnn", "koitsu", "Krantnejie", "Kurshu", "Led", "LittleWhit", "Loch", "Lurchtoke", "mab", "madcowjim", "marlyn", "Masque", "Maud", "mcmanus", "medibot", "mee", "mfactor", "MikeyP", "Misha", "mistheist", "mithas", "monastic", "morakk", "Moriarty", "Mortuis", "Mossbot", "mr0t", "mrbill82", "Mushroomi", "nardo", "NardoLoopa", "Nebix", "neko", "nethack101", "neutron", "niabverte", "Nightgaunt", "Nightrippe", "nimsumzero", "NobbyNobbs", "Nockpoint", "nodog", "nooodl", "norton", "nremorse", "nunu", "Nybes", "Nyctoparros", "nykevin17", "oj7", "okyada", "omegaham", "orenbum", "Ortlinde", "OsirisBRD", "palla", "PaRaD0xx", "parre", "peters509", "petitchou", "phetus", "pilkington", "PingtheMer", "pizzle", "Planker", "pmcalpin", "potpie", "predakanga", "Presswt", "Price", "quinnr", "Quixel", "Qutri", "Razanul", "rcs", "realcool", "RedBandit", "rednuf", "reid", "Rhubarb", "richard", "ripjack", "rizi", "robq", "Rocknar", "Rocknlol", "rom", "rombus", "roskilde", "Roxus", "RS14", "rudi", "RuLavan", "SabreJon", "Sally", "samech", "sandis", "savagelich", "scm", "scottk", "seadog", "Seymor", "shimato", "shock", "shonuff", "Simokon", "sk9851", "skorm", "Skuzal", "snarius", "sneaker", "SoldierAntEater", "Somecallmetim", "SoulDragon", "soundnfury", "soze", "spaakko", "Spaceduck", "Splatypus", "spontiff", "Squishy", "srf", "Stathol", "stenno", "steveh", "stinkster2", "Stossel", "stumblySF", "SubG", "suzu", "swartzcr", "Tactii", "tapin", "Teabing", "Tenebrys", "Thaddeus", "Theta", "thn", "Thomag", "tmrykr", "topstone01", "Torsktrynet", "TotalNoob", "Trent", "tvm", "tweekeroo", "twitch", "TwiX", "Unctuous", "up", "valkerie", "VoiceOfRea", "warrenlynch", "wastrel", "weziman", "WILDMAN", "wirelesshero", "Wisski", "wisteria", "wizzomafiz", "Wonderin", "WoobleValk", "Xaphania", "Xavior", "xcpp", "Xizlqk", "Xlax", "XxPagxX", "Ybenk", "ylaruum", "Youyou", "yoz", "Yxskaft", "Zadir", "Zanthra", "zaq", "Zaus", "Zeshiro", "zste", "danguy", "Souljazz", };
 
-char *
+const char *
 get_player_name_petrified_by_Medusa_on_public_server()
 {
 	return petrified_by_medusa[rn2(SIZE(petrified_by_medusa))];
@@ -1134,7 +1128,7 @@ mk_player_statue_on_Medusa_island(int x, int y)
 }
 
 struct obj *
-mk_moster_statue_on_Medusa_island(int x, int y)
+mk_monster_statue_on_Medusa_island(int x, int y)
 {
 	/* Medusa statues don't contain books */
 	struct obj *otmp = mkcorpstat(STATUE, (struct monst *)0, (struct permonst *)0, x, y, FALSE);
@@ -1166,7 +1160,7 @@ const char *nm;
 
 boolean
 is_flammable(otmp)
-register struct obj *otmp;
+struct obj *otmp;
 {
 	int otyp = otmp->otyp;
 	int omat = objects[otyp].oc_material;
@@ -1179,7 +1173,7 @@ register struct obj *otmp;
 
 boolean
 is_rottable(otmp)
-register struct obj *otmp;
+struct obj *otmp;
 {
 	int otyp = otmp->otyp;
 
@@ -1198,10 +1192,10 @@ register struct obj *otmp;
 /* put the object at the given location */
 void
 place_object(otmp, x, y)
-register struct obj *otmp;
+struct obj *otmp;
 int x, y;
 {
-    register struct obj *otmp2 = level.objects[x][y];
+    struct obj *otmp2 = level.objects[x][y];
 
     if (otmp->where != OBJ_FREE)
 	panic("place_object: obj not free (%d)", otmp->where);
@@ -1353,7 +1347,7 @@ int force;	/* 0 = no force so do checks, <0 = force off, >0 force on */
 
 void
 remove_object(otmp)
-register struct obj *otmp;
+struct obj *otmp;
 {
     xchar x = otmp->ox;
     xchar y = otmp->oy;
@@ -1601,7 +1595,6 @@ dealloc_obj(obj)
     free((genericptr_t) obj);
 }
 
-#ifdef WIZARD
 /* Check all object lists for consistency. */
 void
 obj_sanity_check()
@@ -1731,7 +1724,6 @@ check_contained(container, mesg)
 		fmt_ptr((genericptr_t)container, obj2_address));
     }
 }
-#endif /* WIZARD */
 
 #endif /* OVL1 */
 

@@ -6,12 +6,6 @@
 /* Exceptions to autopickup */
 #undef AUTOPICKUP_EXCEPTIONS
 
-/* Open doors by walking into them */
-#undef AUTO_OPEN
-
-/* Blackmarket */
-#undef BLACKMARKET
-
 /* Multiple bones per level */
 #undef BONES_POOL
 
@@ -74,9 +68,6 @@
 
 /* Engraving the E-word repels monsters */
 #undef ELBERETH
-
-/* Show experience on bottom line */
-#undef EXP_ON_BOTL
 
 /* Place files in different directories */
 #undef FILE_AREAS
@@ -191,9 +182,6 @@
 /* Microsoft Window's native graphics */
 #undef MSWIN_GRAPHICS
 
-/* No void type available */
-#undef NOVOID
-
 /* Define to the address where bug reports for this package should be sent. */
 #undef PACKAGE_BUGREPORT
 
@@ -211,9 +199,6 @@
 
 /* Define to the version of this package. */
 #undef PACKAGE_VERSION
-
-/* Require some questions to be answered with 'yes' instead of 'y' */
-#undef PARANOID
 
 /* Compare High Score entries by user id instead of user name */
 #undef PERS_IS_UID
@@ -233,14 +218,11 @@
 /* Redo last command */
 #undef REDO
 
-/* Special Rogue-like levels */
-#undef REINCARNATION
-
 /* Show score on bottom line */
 #undef SCORE_ON_BOTL
 
-/* Succubi/incubi seduction */
-#undef SEDUCE
+/* Start a shell from within the game */
+#undef SHELL
 
 /* Display number of created monsters at the end of game */
 #undef SHOW_BORN
@@ -272,9 +254,6 @@
 /* Define to 1 if you have the ANSI C header files. */
 #undef STDC_HEADERS
 
-/* Ability to ride monsters */
-#undef STEED
-
 /* Use strncmpi */
 #undef STRNCMPI
 
@@ -283,9 +262,6 @@
 
 /* Using msleep */
 #undef TIMED_DELAY
-
-/* Tourist class */
-#undef TOURIST
 
 /* Console output */
 #undef TTY_GRAPHICS
@@ -307,9 +283,6 @@
 
 /* An MS-Windows system */
 #undef WIN32
-
-/* enable wizard mode for the specified user */
-#undef WIZARD
 
 /* X11 graphics */
 #undef X11_GRAPHICS

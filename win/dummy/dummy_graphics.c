@@ -404,7 +404,7 @@ void dummy_clear_nhwindow(winid wid)
                 -- Calling display_nhwindow(WIN_MESSAGE,???) will do a
                    --more--, if necessary, in the tty window-port.
 */
-void dummy_display_nhwindow(winid wid, BOOLEAN_P block)
+void dummy_display_nhwindow(winid wid, boolean block)
 {
 	printf("dummy_display_nhwindow(%s, %d)\n", winid2str(wid), block);
 }
@@ -459,7 +459,7 @@ void dummy_putstr(winid wid, int attr, const char *text)
 /* Display the file named str.  Complain about missing files
                    iff complain is TRUE.
 */
-void dummy_display_file(const char *filename,BOOLEAN_P must_exist)
+void dummy_display_file(const char *filename,boolean must_exist)
 {
 	printf("dummy_display_file(%s, %d)\n", filename, must_exist);
 	dlb *f;
@@ -526,8 +526,8 @@ add_menu(windid window, int glyph, const anything identifier,
                    menu is displayed, set preselected to TRUE.
 */
 void dummy_add_menu(winid wid, int glyph, const ANY_P * identifier,
-		CHAR_P accelerator, CHAR_P group_accel, int attr, 
-		const char *str, BOOLEAN_P presel)
+		char accelerator, char group_accel, int attr, 
+		const char *str, boolean presel)
 {
 	/* Do Nothing */
 	printf("dummy_add_menu(%s, %d, %d, %c, %c, %d, %s, %d\n", winid2str(wid),
@@ -641,7 +641,7 @@ print_glyph(window, x, y, glyph)
                    port wants (symbol, font, color, attributes, ...there's
                    a 1-1 map between glyphs and distinct things on the map).
 */
-void dummy_print_glyph(winid wid,XCHAR_P x,XCHAR_P y,int glyph)
+void dummy_print_glyph(winid wid,xchar x,xchar y,int glyph)
 {
 	if (wid != -1) {
 		printf("winid %d; x %d, y %d, glyph: %d\n",
@@ -795,7 +795,7 @@ char yn_function(const char *ques, const char *choices, char default)
                    ports might use a popup.
 */
 char dummy_yn_function(const char *question, const char *choices,
-		CHAR_P def)
+		char def)
 {
 	// TODO
 	printf("dummy_yn_function %s\n", question);

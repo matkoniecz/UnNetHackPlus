@@ -69,7 +69,7 @@ int fd;
 static int
 eraseoldlocks()
 {
-	register int i;
+	int i;
 
 	/* cannot use maxledgerno() here, because we need to find a lock name
 	 * before starting everything (including the dungeon initialization
@@ -97,7 +97,7 @@ eraseoldlocks()
 void
 getlock()
 {
-	register int i = 0, fd, c;
+	int i = 0, fd, c;
 #ifndef FILE_AREAS
 	const char *fq_lock;
 #endif
@@ -244,9 +244,9 @@ gotlock:
 
 void
 regularize(s)	/* normalize file name - we don't like .'s, /'s, spaces */
-register char *s;
+char *s;
 {
-	register char *lp;
+	char *lp;
 
 	while((lp=index(s, '.')) || (lp=index(s, '/')) || (lp=index(s,' ')))
 		*lp = '_';
@@ -292,7 +292,7 @@ int
 child(wt)
 int wt;
 {
-	register int f;
+	int f;
 	suspend_nhwindows((char *)0);	/* also calls end_screen() */
 #ifdef _M_UNIX
 	sco_mapon();
@@ -323,9 +323,9 @@ int wt;
 	linux_mapoff();
 #endif
 	(void) signal(SIGINT, (SIG_RET_TYPE) done1);
-#ifdef WIZARD
-	if(wizard) (void) signal(SIGQUIT,SIG_DFL);
-#endif
+	if(wizard) {
+		(void) signal(SIGQUIT,SIG_DFL);
+	}
 	if(wt) {
 		raw_print("");
 		wait_synch();
