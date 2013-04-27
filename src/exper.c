@@ -190,15 +190,15 @@ const char *drainer;	/* cause of death, if drain should be fatal */
 {
 	int num;
 
-#ifdef WIZARD
 	/* override life-drain resistance when handling an explicit
 	   wizard mode request to reduce level; never fatal though */
-	if (drainer && !strcmp(drainer, "#levelchange"))
-	    drainer = 0;
-	else
-#endif
-	    if (resists_drli(&youmonst)) return;
-
+	if (drainer && !strcmp(drainer, "#levelchange")) {
+		drainer = 0;
+	} else {
+		if (resists_drli(&youmonst)) {
+			return;
+		}
+	}
 	if (u.ulevel > 1) {
 		pline("%s level %d.", Goodbye(), u.ulevel--);
 		/* remove intrinsic abilities */

@@ -26,7 +26,7 @@ STATIC_DCL void FDECL(polyuse, (struct obj*, int, int));
 STATIC_DCL void FDECL(create_polymon, (struct obj *, int));
 STATIC_DCL boolean FDECL(zap_updown, (struct obj *));
 STATIC_DCL int FDECL(zhitm, (struct monst *,int,int,struct obj **));
-STATIC_DCL void FDECL(zhitu, (int,int,const char *,XCHAR_P,XCHAR_P));
+STATIC_DCL void FDECL(zhitu, (int,int,const char *,xchar,xchar));
 STATIC_DCL void FDECL(revive_egg, (struct obj *));
 STATIC_DCL boolean FDECL(zap_steed, (struct obj *));
 
@@ -104,7 +104,7 @@ struct obj *otmp;
 {
 	boolean wake = TRUE;	/* Most 'zaps' should wake monster */
 	boolean reveal_invis = FALSE;
-	boolean dbldam = Role_if(PM_KNIGHT) && u.uhave.questart;
+	boolean dbldam = Role_if(PM_KNIGHT) && u.uhave.quest_artifact;
 	int dmg, otyp = otmp->otyp;
 	const char *zap_type_text = "spell";
 	struct obj *obj;
@@ -2152,7 +2152,7 @@ boolean ordinary;
 		case SPE_HEALING:
 		case SPE_EXTRA_HEALING:
 		    healup(d(6, obj->otyp == SPE_EXTRA_HEALING ? 8 : 4),
-			   0, FALSE, (obj->otyp == SPE_EXTRA_HEALING));
+			   0, FALSE, (obj->otyp == SPE_EXTRA_HEALING), FALSE);
 		    You_feel("%sbetter.",
 			obj->otyp == SPE_EXTRA_HEALING ? "much " : "");
 		    break;
@@ -3166,7 +3166,7 @@ struct obj **ootmp;	/* to return worn armor for caller to disintegrate */
 		break;
 	}
 	if (sho_shieldeff) shieldeff(mon->mx, mon->my);
-	if (is_hero_spell(type) && (Role_if(PM_KNIGHT) && u.uhave.questart))
+	if (is_hero_spell(type) && (Role_if(PM_KNIGHT) && u.uhave.quest_artifact))
 	    tmp *= 2;
 	if (tmp > 0 && type >= 0 &&
 		resist(mon, type < ZT_SPELL(0) ? WAND_CLASS : '\0', 0, NOTELL))

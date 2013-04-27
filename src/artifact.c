@@ -24,7 +24,7 @@ extern boolean notonhead;	/* for long worms */
 STATIC_DCL int FDECL(spec_applies, (const struct artifact *,struct monst *));
 STATIC_DCL int FDECL(arti_invoke, (struct obj*));
 STATIC_DCL boolean FDECL(Mb_hit, (struct monst *magr,struct monst *mdef,
-				  struct obj *,int *,int,BOOLEAN_P,char *));
+				  struct obj *,int *,int,boolean,char *));
 
 /* The amount added to the victim's total hit points to insure that the
    victim will be killed even after damage bonus/penalty adjustments.
@@ -68,9 +68,9 @@ hack_artifacts()
 	    artilist[ART_EXCALIBUR].role = NON_PM;
 
 	/* Fix up the quest artifact */
-	if (urole.questarti) {
-	    artilist[urole.questarti].alignment = alignmnt;
-	    artilist[urole.questarti].role = Role_switch;
+	if (urole.quest_artifact_index) {
+	    artilist[urole.quest_artifact_index].alignment = alignmnt;
+	    artilist[urole.quest_artifact_index].role = Role_switch;
 	}
 	return;
 }
@@ -1113,13 +1113,11 @@ int dieroll; /* needed for Magicbane and vorpal blades */
 				return TRUE;
 			}
 			*dmgptr = 2 * mdef->mhp + FATAL_DAMAGE_MODIFIER;
-			if(mdef->data==&mons[PM_ETTIN]
-			||mdef->data==&mons[PM_ETTIN_ZOMBIE])
-				pline("%s goes through both necks of %s at once like butter!",
-					wepdesc, mon_nam(mdef));
-			else
-				pline(behead_msg[rn2(SIZE(behead_msg))],
-					wepdesc, mon_nam(mdef));
+			if(has_two_heads(mdef->data)) {
+				pline("%s goes through both necks of %s at once like butter!", wepdesc, mon_nam(mdef));
+			} else {
+				pline(behead_msg[rn2(SIZE(behead_msg))], wepdesc, mon_nam(mdef));
+			}
 			otmp->dknown = TRUE;
 			return TRUE;
 		} else {
@@ -1135,13 +1133,11 @@ int dieroll; /* needed for Magicbane and vorpal blades */
 				return TRUE;
 			}
 			*dmgptr = 2 * (Upolyd ? u.mh : u.uhp) + FATAL_DAMAGE_MODIFIER;
-			if(mdef->data==&mons[PM_ETTIN]
-			||mdef->data==&mons[PM_ETTIN_ZOMBIE])
-				pline("%s goes through both your necks at once like butter!",
-					wepdesc);
-			else
-				pline(behead_msg[rn2(SIZE(behead_msg))],
-					wepdesc, "you");
+			if(has_two_heads(mdef->data)) {
+				pline("%s goes through both your necks at once like butter!", wepdesc);
+			} else {
+				pline(behead_msg[rn2(SIZE(behead_msg))], wepdesc, "you");
+			}
 			otmp->dknown = TRUE;
 			/* Should amulets fall off? */
 			return TRUE;
@@ -1168,7 +1164,7 @@ int dieroll; /* needed for Magicbane and vorpal blades */
 			    mdef->mhpmax -= drain;
 			    mdef->m_lev--;
 			    drain /= 2;
-			    if (drain) healup(drain, 0, FALSE, FALSE);
+			    if (drain) healup(drain, 0, FALSE, FALSE, FALSE);
 			}
 			return vis;
 		} else { /* youdefend */

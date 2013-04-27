@@ -118,7 +118,7 @@
 #include "hack.h"
 #include "region.h"
 
-STATIC_DCL void FDECL(display_monster,(XCHAR_P,XCHAR_P,struct monst *,int,XCHAR_P));
+STATIC_DCL void FDECL(display_monster,(xchar,xchar,struct monst *,int,xchar));
 STATIC_DCL int FDECL(swallow_to_glyph, (int, int));
 STATIC_DCL void FDECL(display_warning,(struct monst *));
 

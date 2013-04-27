@@ -8,24 +8,22 @@ extern const char * const destroy_strings[];	/* from zap.c */
 
 STATIC_DCL void FDECL(dofiretrap, (struct obj *));
 STATIC_DCL void NDECL(domagictrap);
-STATIC_DCL boolean FDECL(emergency_disrobe,(boolean *));
+STATIC_DCL boolean FDECL(emergency_disrobe, (boolean *));
 STATIC_DCL int FDECL(untrap_prob, (struct trap *ttmp));
 STATIC_DCL void FDECL(cnv_trap_obj, (int, int, struct trap *));
 STATIC_DCL void FDECL(move_into_trap, (struct trap *));
-STATIC_DCL int FDECL(try_disarm, (struct trap *,BOOLEAN_P));
+STATIC_DCL int FDECL(try_disarm, (struct trap *,boolean));
 STATIC_DCL int FDECL(disarm_holdingtrap, (struct trap *));
 STATIC_DCL int FDECL(disarm_landmine, (struct trap *));
 STATIC_DCL int FDECL(disarm_squeaky_board, (struct trap *));
 STATIC_DCL int FDECL(disarm_shooting_trap, (struct trap *, int));
-STATIC_DCL int FDECL(try_lift, (struct monst *, struct trap *, int, BOOLEAN_P));
+STATIC_DCL int FDECL(try_lift, (struct monst *, struct trap *, int, boolean));
 STATIC_DCL int FDECL(help_monster_out, (struct monst *, struct trap *));
-STATIC_DCL boolean FDECL(thitm, (int,struct monst *,struct obj *,int,BOOLEAN_P));
-STATIC_DCL int FDECL(mkroll_launch,
-			(struct trap *,XCHAR_P,XCHAR_P,SHORT_P,long));
-STATIC_DCL boolean FDECL(isclearpath,(coord *, int, SCHAR_P, SCHAR_P));
+STATIC_DCL boolean FDECL(thitm, (int,struct monst *,struct obj *,int,boolean));
+STATIC_DCL int FDECL(mkroll_launch, (struct trap *,xchar,xchar,short,long));
+STATIC_DCL boolean FDECL(isclearpath,(coord *, int, schar, schar));
 STATIC_OVL int FDECL(steedintrap, (struct trap *, struct obj *));
-STATIC_OVL boolean FDECL(keep_saddle_with_steedcorpse,
-			(unsigned, struct obj *, struct obj *));
+STATIC_OVL boolean FDECL(keep_saddle_with_steedcorpse, (unsigned, struct obj *, struct obj *));
 
 #ifndef OVLB
 STATIC_VAR const char *a_your[2];
@@ -2197,7 +2195,7 @@ instapetrify(str)
 const char *str;
 {
 	if (Stone_resistance) return;
-	if (poly_when_stoned(youmonst.data) && polymon(PM_STONE_GOLEM))
+	if (polymorph_player_instead_stoning())
 	    return;
 	You("turn to stone...");
 	killer_format = KILLED_BY;
@@ -3109,7 +3107,7 @@ struct trap *ttmp;
 	if (ttmp && ttmp->madeby_u) chance--;
 	if (Role_if(PM_ROGUE)) {
 	    if (rn2(2 * MAXULEV) < u.ulevel) chance--;
-	    if (u.uhave.questart && chance > 1) chance--;
+	    if (u.uhave.quest_artifact && chance > 1) chance--;
 	} else if (Role_if(PM_RANGER) && chance > 1) chance--;
 	return rn2(chance);
 }
@@ -3432,7 +3430,7 @@ struct trap *ttmp;
 		You("grab the trapped %s using your bare %s.",
 				mtmp->data->mname, makeplural(body_part(HAND)));
 
-		if (poly_when_stoned(youmonst.data) && polymon(PM_STONE_GOLEM))
+		if (polymorph_player_instead_stoning())
 			display_nhwindow(WIN_MESSAGE, FALSE);
 		else {
 			char kbuf[BUFSZ];
@@ -4067,9 +4065,9 @@ lava_effects()
 	    You("fall into the lava!");
 
 	usurvive = Lifesaved || discover;
-#ifdef WIZARD
-	if (wizard) usurvive = TRUE;
-#endif
+	if (wizard) {
+		usurvive = TRUE;
+	}
 	for(obj = invent; obj; obj = obj2) {
 	    obj2 = obj->nobj;
 	    if(is_organic(obj) && !obj->oerodeproof) {

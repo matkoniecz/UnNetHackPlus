@@ -77,14 +77,14 @@ int  FDECL (main, (int, char **));
 void FDECL (yyerror, (const char *));
 void FDECL (yywarning, (const char *));
 int  NDECL (yywrap);
-int FDECL(get_floor_type, (CHAR_P));
+int FDECL(get_floor_type, (char));
 int FDECL(get_room_type, (char *));
 int FDECL(get_trap_type, (char *));
-int FDECL(get_monster_id, (char *,CHAR_P));
-int FDECL(get_object_id, (char *,CHAR_P));
-boolean FDECL(check_monster_char, (CHAR_P));
-boolean FDECL(check_object_char, (CHAR_P));
-char FDECL(what_map_char, (CHAR_P));
+int FDECL(get_monster_id, (char *,char));
+int FDECL(get_object_id, (char *,char));
+boolean FDECL(check_monster_char, (char));
+boolean FDECL(check_object_char, (char));
+char FDECL(what_map_char, (char));
 void FDECL(scan_map, (char *, sp_lev *));
 boolean FDECL(check_subrooms, (sp_lev *));
 boolean FDECL(write_level_file, (char *,sp_lev *));
@@ -828,8 +828,6 @@ char c;
 	for (i = LOW_PM; i < NUMMONS; i++)
 	    if (!class || class == mons[i].mlet)
 		if (!strcasecmp(s, mons[i].mname)) {
-		    if (be_verbose)
-			lc_warning("Monster type \"%s\" matches \"%s\".", s, mons[i].mname);
 		    return i;
 		}
 	return ERR;

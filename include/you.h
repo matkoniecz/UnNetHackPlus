@@ -31,7 +31,7 @@ struct u_have {
 	Bitfield(bell,1);	/* carrying Bell	*/
 	Bitfield(book,1);	/* carrying Book	*/
 	Bitfield(menorah,1);	/* carrying Candelabrum */
-	Bitfield(questart,1);	/* carrying the Quest Artifact */
+	Bitfield(quest_artifact,1);	/* carrying the Quest Artifact */
 	Bitfield(unused,3);
 };
 
@@ -122,7 +122,7 @@ struct Role {
 	      ldrnum,		/* PM_ of quest leader (questpgr.c) */
 	      guardnum,		/* PM_ of quest guardians (questpgr.c) */
 	      neminum;		/* PM_ of quest nemesis (questpgr.c) */
-	short questarti;	/* index (ART_) of quest artifact (questpgr.c) */
+	short quest_artifact_index;	/* index (ART_) of quest artifact (questpgr.c) */
 
 	/*** Bitmasks ***/
 	short allow;		/* bit mask of allowed variations */

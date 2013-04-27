@@ -16,9 +16,9 @@ extern const int monstr[];
 #ifdef OVLB
 
 STATIC_DCL short FDECL(which_arti, (int));
-STATIC_DCL boolean FDECL(mon_has_arti, (struct monst *,SHORT_P));
-STATIC_DCL struct monst *FDECL(other_mon_has_arti, (struct monst *,SHORT_P));
-STATIC_DCL struct obj *FDECL(on_ground, (SHORT_P));
+STATIC_DCL boolean FDECL(mon_has_arti, (struct monst *,short));
+STATIC_DCL struct monst *FDECL(other_mon_has_arti, (struct monst *,short));
+STATIC_DCL struct obj *FDECL(on_ground, (short));
 STATIC_DCL boolean FDECL(you_have, (int));
 STATIC_DCL long FDECL(target_on, (int,struct monst *));
 STATIC_DCL long FDECL(strategy, (struct monst *));
@@ -208,7 +208,7 @@ you_have(mask)
 	    case M3_WANTSBELL:	return(boolean)(u.uhave.bell);
 	    case M3_WANTSCAND:	return(boolean)(u.uhave.menorah);
 	    case M3_WANTSBOOK:	return(boolean)(u.uhave.book);
-	    case M3_WANTSARTI:	return(boolean)(u.uhave.questart);
+	    case M3_WANTSARTI:	return(boolean)(u.uhave.quest_artifact);
 	    default:		break;
 	}
 	return(0);

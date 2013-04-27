@@ -10,9 +10,7 @@
 #define EXTERN_H	/* comment line for pre-compiled headers */
 #include "config.h"
 
-#if defined(MONITOR_HEAP) || defined(WIZARD)
 char *FDECL(fmt_ptr, (const genericptr,char *));
-#endif
 
 #ifdef MONITOR_HEAP
 #undef alloc
@@ -42,8 +40,6 @@ unsigned int lth;
 }
 
 
-#if defined(MONITOR_HEAP) || defined(WIZARD)
-
 # if defined(MICRO) || defined(WIN32)
 /* we actually want to know which systems have an ANSI run-time library
  * to know which support the new %p format for printing pointers.
@@ -72,8 +68,6 @@ char *buf;
 	Sprintf(buf, PTR_FMT, (PTR_TYP)ptr);
 	return buf;
 }
-
-#endif
 
 #ifdef MONITOR_HEAP
 

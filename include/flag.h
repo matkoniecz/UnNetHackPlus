@@ -72,9 +72,7 @@ struct flag {
 	boolean  pushweapon;	/* When wielding, push old weapon into second slot */
 	boolean  rest_on_space; /* space means rest */
 	boolean  safe_dog;	/* give complete protection to the dog */
-#ifdef EXP_ON_BOTL
 	boolean  showexp;	/* show experience points */
-#endif
 #ifdef SCORE_ON_BOTL
 	boolean  showscore;	/* show score */
 #endif
@@ -216,10 +214,8 @@ struct instance_flags {
 #ifdef SIMPLE_MAIL
 	boolean simplemail;	/* simple mail format $NAME:$MESSAGE */
 #endif
-#ifdef WIZARD
 	boolean  sanity_check;	/* run sanity checks */
 	boolean  mon_polycontrol;	/* debug: control monster polymorphs */
-#endif
 #ifdef TTY_GRAPHICS
 	char prevmsg_window;	/* type of old message window to use */
 #endif

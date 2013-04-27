@@ -28,7 +28,7 @@ STATIC_DCL int FDECL(defdisintagr, (struct monst *,struct monst *,struct attack 
 STATIC_DCL void FDECL(mswingsm, (struct monst *, struct monst *, struct obj *));
 STATIC_DCL void FDECL(noises,(struct monst *,struct attack *));
 STATIC_DCL void FDECL(missmm,(struct monst *,struct monst *,struct attack *));
-STATIC_DCL int FDECL(passivemm, (struct monst *, struct monst *, BOOLEAN_P, int));
+STATIC_DCL int FDECL(passivemm, (struct monst *, struct monst *, boolean, int));
 
 /* Needed for the special case of monsters wielding vorpal blades (rare).
  * If we use this a lot it should probably be a parameter to mdamagem()
@@ -1270,8 +1270,7 @@ mdamagem(magr, mdef, mattk)
 		break;
 	    case AD_SLIM:
 		if (cancelled) break;	/* physical damage only */
-		if (!rn2(4) && !flaming(mdef->data) &&
-				mdef->data != &mons[PM_GREEN_SLIME]) {
+		if (!rn2(4) && is_monster_slimeable(mdef->data)) {
 		    (void) newcham(mdef, &mons[PM_GREEN_SLIME], FALSE, vis);
 		    mdef->mstrategy &= ~STRAT_WAITFORU;
 		    tmp = 0;
