@@ -282,8 +282,3 @@ char *s;
 }
 # endif /* WIN32 */
 #endif /* OVLB */
-
-
-#ifdef __EMX__
-void seteuid(int i){;}
-#endif

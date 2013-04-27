@@ -180,16 +180,16 @@ doride()
 {
 	boolean forcemount = FALSE;
 
-	if (u.usteed)
-	    dismount_steed(DISMOUNT_BYCHOICE);
-	else if (getdir((char *)0) && isok(u.ux+u.dx, u.uy+u.dy)) {
-#ifdef WIZARD
-	if (wizard && yn("Force the mount to succeed?") == 'y')
-		forcemount = TRUE;
-#endif
-	    return (mount_steed(m_at(u.ux+u.dx, u.uy+u.dy), forcemount));
-	} else
-	    return 0;
+	if (u.usteed) {
+		dismount_steed(DISMOUNT_BYCHOICE);
+	} else if (getdir((char *)0) && isok(u.ux+u.dx, u.uy+u.dy)) {
+		if (wizard && yn("Force the mount to succeed?") == 'y') {
+			forcemount = TRUE;
+		}
+		return (mount_steed(m_at(u.ux+u.dx, u.uy+u.dy), forcemount));
+	} else {
+		return 0;
+	}
 	return 1;
 }
 
@@ -227,12 +227,11 @@ mount_steed(mtmp, force)
 	 */
 	if (Wounded_legs) {
 	    Your("%s are in no shape for riding.", makeplural(body_part(LEG)));
-#ifdef WIZARD
-	    if (force && wizard && yn("Heal your legs?") == 'y')
+	    if (force && wizard && yn("Heal your legs?") == 'y') {
 		HWounded_legs = EWounded_legs = 0;
-	    else
-#endif
-	    return (FALSE);
+	    } else {
+		return (FALSE);
+	    }
 	}
 
 	if (Upolyd && (!humanoid(youmonst.data) || verysmall(youmonst.data) ||

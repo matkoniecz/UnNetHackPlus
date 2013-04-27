@@ -20,16 +20,16 @@ static int NDECL(mgetc);
 #endif
 STATIC_DCL void NDECL(find_lev_obj);
 STATIC_DCL void FDECL(restlevchn, (int));
-STATIC_DCL void FDECL(restdamage, (int,BOOLEAN_P));
-STATIC_DCL struct obj *FDECL(restobjchn, (int,BOOLEAN_P,BOOLEAN_P));
-STATIC_DCL struct monst *FDECL(restmonchn, (int,BOOLEAN_P));
+STATIC_DCL void FDECL(restdamage, (int,boolean));
+STATIC_DCL struct obj *FDECL(restobjchn, (int,boolean,boolean));
+STATIC_DCL struct monst *FDECL(restmonchn, (int,boolean));
 STATIC_DCL struct fruit *FDECL(loadfruitchn, (int));
 STATIC_DCL void FDECL(freefruitchn, (struct fruit *));
 STATIC_DCL void FDECL(ghostfruit, (struct obj *));
 STATIC_DCL boolean FDECL(restgamestate, (int, unsigned int *, unsigned int *));
 STATIC_DCL void FDECL(restlevelstate, (unsigned int, unsigned int));
-STATIC_DCL int FDECL(restlevelfile, (int,XCHAR_P));
-STATIC_DCL void FDECL(reset_oattached_mids, (BOOLEAN_P));
+STATIC_DCL int FDECL(restlevelfile, (int,xchar));
+STATIC_DCL void FDECL(reset_oattached_mids, (boolean));
 
 /*
  * Save a mapping of IDs from ghost levels to the current level.  This
@@ -426,10 +426,9 @@ unsigned int *stuckid, *steedid;
 	    /* for wizard mode, issue a reminder; for others, treat it
 	       as an attempt to cheat and refuse to restore this file */
 	    pline("Saved game was not yours.");
-#ifdef WIZARD
-	    if (!wizard)
-#endif
+	    if (!wizard) {
 		return FALSE;
+	    }
 	}
 
 	mread(fd, (genericptr_t) &flags, sizeof(struct flag));
@@ -810,9 +809,9 @@ boolean ghostly;
 			hpid, pid);
 	    else
 		Sprintf(trickbuf, "This is level %d, not %d!", dlvl, lev);
-#ifdef WIZARD
-	    if (wizard) pline(trickbuf);
-#endif
+	    if (wizard) {
+		pline(trickbuf);
+	    }
 	    trickery(trickbuf);
 	}
 

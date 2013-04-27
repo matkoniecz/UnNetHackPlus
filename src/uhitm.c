@@ -756,8 +756,7 @@ int thrown;
 			break;
 		    case MIRROR:
 			if (breaktest(obj)) {
-			    You("break %s mirror.  That's bad luck!",
-				shk_your(yourbuf, obj));
+			    You("break %s %s.  That's bad luck!", shk_your(yourbuf, obj), simple_typename(obj->otyp));
 			    change_luck(-2);
 			    useup(obj);
 			    obj = (struct obj *) 0;

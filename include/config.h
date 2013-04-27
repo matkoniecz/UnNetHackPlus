@@ -145,20 +145,10 @@
 
 /*
  * Section 2:	Some global parameters and filenames.
- *		Commenting out WIZARD, LOGFILE, NEWS or PANICLOG removes that
- *		feature from the game; otherwise set the appropriate wizard
- *		name.  LOGFILE, NEWS and PANICLOG refer to files in the
- *		playground.
+ *		Commenting out LOGFILE, NEWS or PANICLOG removes that
+ *		feature from the game LOGFILE, NEWS and PANICLOG refer to 
+ *		files in the playground.
  */
-
-#ifndef WIZARD		/* allow for compile-time or Makefile changes */
-# ifndef KR1ED
-#  define WIZARD  "wizard" /* the person allowed to use the -D option */
-# else
-#  define WIZARD
-#  define WIZARD_NAME "wizard"
-# endif
-#endif
 
 #define LOGFILE "logfile"	/* larger file for debugging purposes */
 #define LOGAREA FILE_AREA_VAR
@@ -250,13 +240,6 @@
  */
 
 /*
- * Uncomment the following line if your compiler doesn't understand the
- * 'void' type (and thus would give all sorts of compile errors without
- * this definition).
- */
-/* #define NOVOID */			/* define if no "void" data type. */
-
-/*
  * Uncomment the following line if your compiler falsely claims to be
  * a standard C compiler (i.e., defines __STDC__ without cause).
  * Examples are Apollo's cc (in some versions) and possibly SCO UNIX's rcc.
@@ -328,18 +311,8 @@ typedef long glyph_t;
  * size, but runs slightly faster than the alternate algorithm.  (MSDOS in
  * particular cannot tolerate the increase in data size; other systems can
  * flip a coin weighted to local conditions.)
- *
- * If VISION_TABLES is not defined, things will be faster if you can use
- * MACRO_CPATH.  Some cpps, however, cannot deal with the size of the
- * functions that have been macroized.
  */
-
 /* #define VISION_TABLES */ /* use vision tables generated at compile time */
-#ifndef VISION_TABLES
-# ifndef NO_MACRO_CPATH
-#  define MACRO_CPATH	/* use clear_path macros instead of functions */
-# endif
-#endif
 
 /*
  * Section 4:  THE FUN STUFF!!!
@@ -475,6 +448,17 @@ typedef long glyph_t;
 #define REINCARNATION	/* Special Rogue-like levels */
 
 /* End of Section 7 */
+
+/*
+ * Section 8:  FICTIONAL DEFINES THAT MUST BE DEFINED
+ *
+ * Commenting out these defines is not allowes, as #ifdef etc were removed from code 
+ * and features are incorporated into UnNetHackPlus without evil preprocessor instructions littering code
+ * and some potentialy useful code was included without this one
+ */
+#define WIZARD
+
+/* End of Section 8 */
 
 #include "global.h"	/* Define everything else according to choices above */
 

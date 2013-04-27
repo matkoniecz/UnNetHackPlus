@@ -972,12 +972,8 @@ boolean fingers;
 		break;
 
 	    case VENOM_CLASS:
-#ifdef WIZARD
-		if (wizard) {
-		    pline("Writing a poison pen letter??");
-		    break;
-		}
-#endif
+		pline("Writing a poison pen letter?");
+		break;
 	    case ILLOBJ_CLASS:
 		warning("You're engraving with an illegal object!");
 		break;

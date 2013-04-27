@@ -561,13 +561,8 @@ do_date()
 	Fprintf(ofp,"/*\tSCCS Id: @(#)date.h\t3.4\t2002/02/03 */\n\n");
 	Fprintf(ofp,Dont_Edit_Code);
 
-#ifdef KR1ED
-	(void) time(&clocktim);
-	Strcpy(cbuf, ctime(&clocktim));
-#else
 	(void) time((time_t *)&clocktim);
 	Strcpy(cbuf, ctime((time_t *)&clocktim));
-#endif
 	for (c = cbuf; *c; c++) if (*c == '\n') break;
 	*c = '\0';	/* strip off the '\n' */
 	Fprintf(ofp,"#define BUILD_DATE \"%s\"\n", cbuf);
@@ -633,6 +628,7 @@ static const char *build_pseudo_opts[] = {
 		"auto open doors",
 		"basic UnNetHack features",
 		"blackmarket level",
+		"debug mode",
 		"dungeon map overview patch",
 		"experience points on status line",
 		"rogue level",
@@ -664,9 +660,6 @@ static const char *build_opts[] = {
 #endif
 #ifdef DLB
 		"data librarian",
-#endif
-#ifdef WIZARD
-		"debug mode",
 #endif
 #ifdef REALTIME_ON_BOTL
 		"elapsed time on status line",

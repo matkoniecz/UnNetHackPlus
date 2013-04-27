@@ -8,15 +8,15 @@
 
 #include "hack.h"
 
-STATIC_DCL void FDECL(simple_look, (struct obj *,BOOLEAN_P));
+STATIC_DCL void FDECL(simple_look, (struct obj *,boolean));
 #ifndef GOLDOBJ
 STATIC_DCL boolean FDECL(query_classes, (char *,boolean *,boolean *,
-		const char *,struct obj *,BOOLEAN_P,BOOLEAN_P,int *));
+		const char *,struct obj *,boolean,boolean,int *));
 #else
 STATIC_DCL boolean FDECL(query_classes, (char *,boolean *,boolean *,
-		const char *,struct obj *,BOOLEAN_P,int *));
+		const char *,struct obj *,boolean,int *));
 #endif
-STATIC_DCL void FDECL(check_here, (BOOLEAN_P));
+STATIC_DCL void FDECL(check_here, (boolean));
 STATIC_DCL boolean FDECL(n_or_more, (struct obj *));
 STATIC_DCL boolean FDECL(all_but_uchain, (struct obj *));
 #if 0 /* not used */
@@ -25,20 +25,20 @@ STATIC_DCL boolean FDECL(allow_cat_no_uchain, (struct obj *));
 STATIC_DCL int FDECL(autopick, (struct obj*, int, menu_item **));
 STATIC_DCL int FDECL(count_categories, (struct obj *,int));
 STATIC_DCL long FDECL(carry_count,
-		      (struct obj *,struct obj *,long,BOOLEAN_P,int *,int *));
-STATIC_DCL int FDECL(lift_object, (struct obj *,struct obj *,long *,BOOLEAN_P));
+		      (struct obj *,struct obj *,long,boolean,int *,int *));
+STATIC_DCL int FDECL(lift_object, (struct obj *,struct obj *,long *,boolean));
 STATIC_DCL boolean FDECL(mbag_explodes, (struct obj *,int));
 STATIC_PTR int FDECL(in_container,(struct obj *));
 STATIC_PTR int FDECL(ck_bag,(struct obj *));
 STATIC_PTR int FDECL(out_container,(struct obj *));
 STATIC_DCL long FDECL(mbag_item_gone, (int,struct obj *));
 STATIC_DCL void FDECL(observe_quantum_cat, (struct obj *));
-STATIC_DCL int FDECL(menu_loot, (int, struct obj *, BOOLEAN_P));
-STATIC_DCL int FDECL(in_or_out_menu, (const char *,struct obj *, BOOLEAN_P, BOOLEAN_P));
-STATIC_DCL int FDECL(container_at, (int, int, BOOLEAN_P));
+STATIC_DCL int FDECL(menu_loot, (int, struct obj *, boolean));
+STATIC_DCL int FDECL(in_or_out_menu, (const char *,struct obj *, boolean, boolean));
+STATIC_DCL int FDECL(container_at, (int, int, boolean));
 STATIC_DCL boolean FDECL(able_to_loot, (int, int));
 STATIC_DCL boolean FDECL(mon_beside, (int, int));
-STATIC_DCL int FDECL(dump_container, (struct obj*, BOOLEAN_P));
+STATIC_DCL int FDECL(dump_container, (struct obj*, boolean));
 STATIC_DCL void NDECL(del_sokoprize);
 
 /* define for query_objlist() and autopickup() */
@@ -2514,7 +2514,7 @@ boolean outokay, inokay;
 int
 dump_container(container, destroy_after)
 struct obj* container;
-BOOLEAN_P destroy_after;
+boolean destroy_after;
 {
 	struct obj* otmp,*otmp2;
 	int ret = 0;

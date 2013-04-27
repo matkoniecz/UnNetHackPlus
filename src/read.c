@@ -24,17 +24,13 @@ static NEARDATA const char readable[] =
 static const char all_count[] = { ALLOW_COUNT, ALL_CLASSES, 0 };
 
 static void FDECL(wand_explode, (struct obj *));
-#if 0
 static void NDECL(do_class_genocide);
-#endif
 static void FDECL(stripspe,(struct obj *));
 static void FDECL(p_glow1,(struct obj *));
 static void FDECL(p_glow2,(struct obj *,const char *));
 static void FDECL(randomize,(int *, int));
 static void FDECL(forget_single_object, (int));
-#if 0
 static void FDECL(forget, (int));
-#endif
 static void FDECL(maybe_tame, (struct monst *,struct obj *));
 
 STATIC_PTR void FDECL(do_flood, (int,int,genericptr_t));
@@ -686,19 +682,19 @@ forget_single_object(obj_id)
 }
 
 
-#if 0	/* here if anyone wants it.... */
+/* this function is currently unused */
 /* Forget everything known about a particular object class. */
 static void
 forget_objclass(oclass)
 	int oclass;
 {
+	warning("this function (forget_objclass) is marked as unused");
 	int i;
 
 	for (i=bases[oclass];
 		i < NUM_OBJECTS && objects[i].oc_class==oclass; i++)
 	    forget_single_object(i);
 }
-#endif
 
 
 /* randomize the given list of numbers  0 <= i < count */
@@ -717,32 +713,41 @@ randomize(indices, count)
 	}
 }
 
-
+/* this function is currently unused */
 /* Forget % of known objects. */
 void
 forget_objects(percent)
 	int percent;
 {
-	int i, count;
+	warning("this function (forget_objects) is marked as unused");
+	int i, count, fractional_part;
 	int indices[NUM_OBJECTS];
 
-	if (percent == 0) return;
+	if (percent == 0) {
+		return;
+	}
 	if (percent <= 0 || percent > 100) {
 	    impossible("forget_objects: bad percent %d", percent);
 	    return;
 	}
 
-	for (count = 0, i = 1; i < NUM_OBJECTS; i++)
-	    if (OBJ_DESCR(objects[i]) &&
-		    (objects[i].oc_name_known || objects[i].oc_uname))
-		indices[count++] = i;
+	for (count = 0, i = 1; i < NUM_OBJECTS; i++) {
+		if (OBJ_DESCR(objects[i]) && (objects[i].oc_name_known || objects[i].oc_uname)) {
+			indices[count++] = i;
+		}
+	}
 
 	randomize(indices, count);
 
 	/* forget first % of randomized indices */
-	count = ((count * percent) + 50) / 100;
-	for (i = 0; i < count; i++)
-	    forget_single_object(indices[i]);
+	fractional_part = (count * percent) % 100;
+	count = (count * percent) / 100;
+	if (rn2(100) < fractional_part) {
+		count++;
+	}
+	for (i = 0; i < count; i++) {
+		forget_single_object(indices[i]);
+	}
 }
 
 
@@ -1643,10 +1648,11 @@ do_it:
 	vision_full_recalc = 1;	/* delayed vision recalculation */
 }
 
-#if 0
+/* this function is currently unused */
 static void
 do_class_genocide()
 {
+	warning("this function (do_class_genocide) is marked as unused");
 	int i, j, immunecnt, gonecnt, goodcnt, class, feel_dead = 0;
 	char buf[BUFSZ];
 	boolean gameover = FALSE;	/* true iff killed self */
@@ -1699,7 +1705,7 @@ do_class_genocide()
 				(buf[0] == DEF_INVISIBLE && buf[1] == '\0'))
 	You("aren't permitted to genocide such monsters.");
 			else
-#ifdef WIZARD	/* to aid in topology testing; remove pesky monsters */
+			/* to aid in topology testing; remove pesky monsters */
 			  if (wizard && buf[0] == '*') {
 			    struct monst *mtmp, *mtmp2;
 
@@ -1713,7 +1719,6 @@ do_class_genocide()
 	pline("Eliminated %d monster%s.", gonecnt, plur(gonecnt));
 			    return;
 			} else
-#endif
 	pline("That symbol does not represent any monster.");
 			continue;
 		}
@@ -1796,7 +1801,6 @@ do_class_genocide()
 		return;
 	}
 }
-#endif
 
 #define REALLY 1
 #define PLAYER 2
@@ -1843,7 +1847,7 @@ boolean only_on_level; /**< if TRUE only genocide monsters on current level,
 		    } else return;
 		}
 
-#ifdef WIZARD	/* to aid in topology testing; remove pesky monsters */
+		/* to aid in topology testing; remove pesky monsters */
 		/* copy from do_class_genocide */
 		if (wizard && buf[0] == '*') {
 			struct monst *mtmp, *mtmp2;
@@ -1858,7 +1862,6 @@ boolean only_on_level; /**< if TRUE only genocide monsters on current level,
 			pline("Eliminated %d monster%s.", gonecnt, plur(gonecnt));
 			return;
 		}
-#endif
 
 		mndx = name_to_mon(buf);
 		if (mndx == NON_PM || (mvitals[mndx].mvflags & G_GENOD)) {
@@ -2050,7 +2053,6 @@ boolean revival;
 	return FALSE;
 }
 
-#ifdef WIZARD
 /*
  * Make a new monster with the type controlled by the user.
  *
@@ -2126,7 +2128,6 @@ create_particular()
 	}
 	return madeany;
 }
-#endif /* WIZARD */
 
 #endif /* OVLB */
 

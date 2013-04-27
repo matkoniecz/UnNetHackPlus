@@ -36,9 +36,9 @@ STATIC_DCL int FDECL(use_cream_pie, (struct obj *));
 STATIC_DCL int FDECL(use_grapple, (struct obj *));
 STATIC_DCL int FDECL(do_break_wand, (struct obj *));
 STATIC_DCL boolean FDECL(figurine_location_checks,
-				(struct obj *, coord *, BOOLEAN_P));
+				(struct obj *, coord *, boolean));
 STATIC_DCL boolean NDECL(uhave_graystone);
-STATIC_DCL void FDECL(add_class, (char *, CHAR_P));
+STATIC_DCL void FDECL(add_class, (char *, char));
 
 #ifdef	AMIGA
 void FDECL( amii_speaker, ( struct obj *, char *, int ) );
@@ -618,8 +618,7 @@ xchar x, y;
 static const char look_str[] = "look %s.";
 
 STATIC_OVL int
-use_mirror(obj)
-struct obj *obj;
+use_mirror(struct obj *obj)
 {
 	struct monst *mtmp;
 	char mlet;
@@ -627,125 +626,135 @@ struct obj *obj;
 
 	if(!getdir((char *)0)) return 0;
 	if(obj->cursed && !rn2(2)) {
-		if (!Blind)
-			pline_The("mirror fogs up and doesn't reflect!");
+		if (!Blind) {
+			pline_The("%s fogs up and doesn't reflect!", simple_typename(obj->otyp));
+		}
 		return 1;
 	}
 	if(!u.dx && !u.dy && !u.dz) {
 		if(!Blind && !Invisible) {
-		    if (u.umonnum == PM_FLOATING_EYE) {
-			if (!Free_action) {
-			pline(Hallucination ?
-			      "Yow!  The mirror stares back!" :
-			      "Yikes!  You've frozen yourself!");
-			nomul(-rnd((MAXULEV+6) - u.ulevel), "gazing into a mirror");
-			} else You("stiffen momentarily under your gaze.");
-		    } else if (is_vampire(youmonst.data))
-			You("don't have a reflection.");
-		    else if (u.umonnum == PM_UMBER_HULK) {
-			pline("Huh?  That doesn't look like you!");
-			make_confused(HConfusion + d(3,4),FALSE);
-		    } else if (Hallucination)
-			You(look_str, hcolor((char *)0));
-		    else if (Sick)
-			You(look_str, "peaked");
-		    else if (u.uhs >= WEAK)
-			You(look_str, "undernourished");
-		    else You("look as %s as ever.",
-				beautiful());
+			 if (is_vampire(youmonst.data)) {
+				You("don't have a reflection.");
+			} else if (u.umonnum == PM_FLOATING_EYE) {
+				if (!Free_action) {
+					pline(Hallucination ? "Yow!  The %s stares back!" : "Yikes!  You've frozen yourself!", simple_typename(obj->otyp));
+					nomul(-rnd((MAXULEV+6) - u.ulevel), "gazing into a mirror");
+				} else {
+					You("stiffen momentarily under your gaze.");
+				}
+			} else if (u.umonnum == PM_UMBER_HULK) {
+				pline("Huh?  That doesn't look like you!");
+				make_confused(HConfusion + d(3,4),FALSE);
+			} else if (Hallucination) {
+				You(look_str, hcolor((char *)0));
+			} else if (Sick) {
+				You(look_str, "peaked");
+			} else if (u.uhs >= WEAK) {
+				You(look_str, "undernourished");
+			} else {
+				You("look as %s as ever.", beautiful());
+			}
 		} else {
-			You_cant("see your %s %s.",
-				beautiful(),
-				body_part(FACE));
+			You_cant("see your %s %s.", beautiful(), body_part(FACE));
 		}
 		return 1;
 	}
 	if(u.uswallow) {
-		if (!Blind) You("reflect %s %s.", s_suffix(mon_nam(u.ustuck)),
-		    mbodypart(u.ustuck, STOMACH));
+		if (!Blind) {
+			You("reflect %s %s.", s_suffix(mon_nam(u.ustuck)), mbodypart(u.ustuck, STOMACH));
+		}
 		return 1;
 	}
 	if(Underwater) {
-		You(Hallucination ?
-		    "give the fish a chance to fix their makeup." :
-		    "reflect the murky water.");
+		You(Hallucination ? "give the fish a chance to fix their makeup." : "reflect the murky water.");
 		return 1;
 	}
 	if(u.dz) {
-		if (!Blind)
-		    You("reflect the %s.",
-			(u.dz > 0) ? surface(u.ux,u.uy) : ceiling(u.ux,u.uy));
+		if (!Blind) {
+			You("reflect the %s.", (u.dz > 0) ? surface(u.ux,u.uy) : ceiling(u.ux,u.uy));
+		}
 		return 1;
 	}
 	mtmp = bhit(u.dx, u.dy, COLNO, INVIS_BEAM,
 		    (int FDECL((*),(MONST_P,OBJ_P)))0,
 		    (int FDECL((*),(OBJ_P,OBJ_P)))0,
 		    obj, NULL);
-	if (!mtmp || !haseyes(mtmp->data))
+	if (!mtmp || !haseyes(mtmp->data)) {
 		return 1;
+	}
 
 	vis = canseemon(mtmp);
 	mlet = mtmp->data->mlet;
 	if (mtmp->msleeping) {
-		if (vis)
-		    pline ("%s is too tired to look at your mirror.",
-			    Monnam(mtmp));
+		if (vis) {
+			pline ("%s is too tired to look at your %s.", Monnam(mtmp), simple_typename(obj->otyp));
+		}
 	} else if (!mtmp->mcansee) {
-	    if (vis)
-		pline("%s can't see anything right now.", Monnam(mtmp));
+		if (vis) {
+			pline("%s can't see anything right now.", Monnam(mtmp));
+		}
 	/* some monsters do special things */
 	} else if (is_vampire(mtmp->data) || mlet == S_GHOST) {
-	    if (vis)
-		pline ("%s doesn't have a reflection.", Monnam(mtmp));
-	} else if(!mtmp->mcan && !mtmp->minvis &&
-					mtmp->data == &mons[PM_MEDUSA]) {
-		if (mon_reflects(mtmp, "The gaze is reflected away by %s %s!"))
+		if (vis) {
+			pline ("%s doesn't have a reflection.", Monnam(mtmp));
+		}
+	} else if(!mtmp->mcan && !mtmp->minvis && mtmp->data == &mons[PM_MEDUSA]) {
+		if (mon_reflects(mtmp, "The gaze is reflected away by %s %s!")) {
 			return 1;
-		if (vis)
+		}
+		if (vis) {
 			pline("%s is turned to stone!", Monnam(mtmp));
+		}
 		stoned = TRUE;
 		killed(mtmp);
-	} else if(!mtmp->mcan && !mtmp->minvis &&
-					mtmp->data == &mons[PM_FLOATING_EYE]) {
+	} else if(!mtmp->mcan && !mtmp->minvis && mtmp->data == &mons[PM_FLOATING_EYE]) {
 		int tmp = d((int)mtmp->m_lev, (int)mtmp->data->mattk[0].damd);
-		if (!rn2(4)) tmp = 120;
-		if (vis)
-			pline("%s is frozen by its reflection.", Monnam(mtmp));
-		else You_hear("%s stop moving.",something);
-		mtmp->mcanmove = 0;
-		if ( (int) mtmp->mfrozen + tmp > 127)
-			mtmp->mfrozen = 127;
-		else mtmp->mfrozen += tmp;
-	} else if(!mtmp->mcan && !mtmp->minvis &&
-					mtmp->data == &mons[PM_UMBER_HULK]) {
-		if (vis)
-			pline ("%s confuses itself!", Monnam(mtmp));
-		mtmp->mconf = 1;
-	} else if(!mtmp->mcan && !mtmp->minvis && (mlet == S_NYMPH
-				     || mtmp->data==&mons[PM_SUCCUBUS])) {
+		if (!rn2(4)) {
+			tmp = 120;
+		}
 		if (vis) {
-		    pline ("%s admires herself in your mirror.", Monnam(mtmp));
-		    pline ("She takes it!");
-		} else pline ("It steals your mirror!");
+			pline("%s is frozen by its reflection.", Monnam(mtmp));
+		}
+		else {
+			You_hear("%s stop moving.", something);
+		}
+		mtmp->mcanmove = 0;
+		if ( (int) mtmp->mfrozen + tmp > 127) {
+			mtmp->mfrozen = 127;
+		} else {
+			mtmp->mfrozen += tmp;
+		}
+	} else if(!mtmp->mcan && !mtmp->minvis && mtmp->data == &mons[PM_UMBER_HULK]) {
+		if (vis) {
+			pline ("%s confuses itself!", Monnam(mtmp));
+		}
+		mtmp->mconf = 1;
+	} else if(!mtmp->mcan && !mtmp->minvis && (mlet == S_NYMPH || mtmp->data==&mons[PM_SUCCUBUS])) {
+		if (vis) {
+			pline ("%s admires herself in your %s.", Monnam(mtmp), simple_typename(obj->otyp));
+			pline ("She takes it!");
+		} else {
+			pline ("It steals your %s!", simple_typename(obj->otyp));
+		}
 		setnotworn(obj); /* in case mirror was wielded */
 		freeinv(obj);
 		(void) mpickobj(mtmp,obj);
-		if (!tele_restrict(mtmp)) (void) rloc(mtmp, FALSE);
-	} else if (!is_unicorn(mtmp->data) && !humanoid(mtmp->data) &&
-			(!mtmp->minvis || perceives(mtmp->data)) && rn2(5)) {
-		if (vis)
-		    pline("%s is frightened by its reflection.", Monnam(mtmp));
+		if (!tele_restrict(mtmp)) {
+			(void) rloc(mtmp, FALSE);
+		}
+	} else if (!is_unicorn(mtmp->data) && !humanoid(mtmp->data) && (!mtmp->minvis || perceives(mtmp->data)) && rn2(5)) {
+		if (vis) {
+			pline("%s is frightened by its reflection.", Monnam(mtmp));
+		}
 		monflee(mtmp, d(2,4), FALSE, FALSE);
 	} else if (!Blind) {
-		if (mtmp->minvis && !See_invisible)
-		    ;
-		else if ((mtmp->minvis && !perceives(mtmp->data))
-			 || !haseyes(mtmp->data))
-		    pline("%s doesn't seem to notice its reflection.",
-			Monnam(mtmp));
-		else
-		    pline("%s ignores %s reflection.",
-			  Monnam(mtmp), mhis(mtmp));
+		if (mtmp->minvis && !See_invisible) {
+			;
+		} else if ((mtmp->minvis && !perceives(mtmp->data)) || !haseyes(mtmp->data)) {
+			pline("%s doesn't seem to notice its reflection.", Monnam(mtmp));
+		} else {
+			pline("%s ignores %s reflection.", Monnam(mtmp), mhis(mtmp));
+		}
 	}
 	return 1;
 }

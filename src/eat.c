@@ -6,11 +6,7 @@
 /* #define DEBUG */	/* uncomment to enable new eat code debugging */
 
 #ifdef DEBUG
-# ifdef WIZARD
 #define debugpline	if (wizard) pline
-# else
-#define debugpline	pline
-# endif
 #endif
 
 STATIC_PTR int NDECL(eatmdone);
@@ -20,12 +16,12 @@ STATIC_PTR int NDECL(opentin);
 STATIC_PTR int NDECL(unfaint);
 
 #ifdef OVLB
-STATIC_DCL const char *FDECL(food_xname, (struct obj *,BOOLEAN_P));
+STATIC_DCL const char *FDECL(food_xname, (struct obj *,boolean));
 STATIC_DCL void FDECL(choke, (struct obj *));
 STATIC_DCL void NDECL(recalc_wt);
 STATIC_DCL struct obj *FDECL(touchfood, (struct obj *));
 STATIC_DCL void NDECL(do_reset_eat);
-STATIC_DCL void FDECL(done_eating, (BOOLEAN_P));
+STATIC_DCL void FDECL(done_eating, (boolean));
 STATIC_DCL void FDECL(cprefx, (int));
 STATIC_DCL int FDECL(intrinsic_possible, (int,struct permonst *));
 STATIC_DCL void FDECL(givit, (int,struct permonst *));
@@ -42,8 +38,8 @@ STATIC_DCL int FDECL(rottenfood, (struct obj *));
 STATIC_DCL void NDECL(eatspecial);
 STATIC_DCL void FDECL(eataccessory, (struct obj *));
 STATIC_DCL const char *FDECL(foodword, (struct obj *));
-STATIC_DCL const char *FDECL(decayed_food_word, (struct obj *));
-STATIC_DCL boolean FDECL(maybe_cannibal, (int,BOOLEAN_P));
+STATIC_DCL char *FDECL(decayed_food_word, (struct obj *));
+STATIC_DCL boolean FDECL(maybe_cannibal, (int,boolean));
 
 char msgbuf[BUFSZ];
 
@@ -1938,18 +1934,19 @@ struct obj *otmp;
 
 /* NOTE: the order of these words exactly corresponds to the
    order of oc_material values #define'd in objclass.h (and foodwords array above). */
-static const char *decayed_food_words[] = {
+static char *decayed_food_words[] = {
 	"rotten", "decayed", "dirty", "rotten", "rotten",
 	"rotten", "rotten", "rotten", "rotten", "dirty", "dirty",
 	"contaminated", "contaminated", "contaminated", "contaminated", "contaminated", "contaminated", "contaminated",
 	"dirty", "dirty", "dirty", "dirty"
 };
 
-STATIC_OVL const char *
-decayed_food_word(otmp)
-struct obj *otmp;
+STATIC_OVL char *
+decayed_food_word(struct obj *otmp)
 {
-	if (otmp->oclass == FOOD_CLASS) return "rotten";
+	if (otmp->oclass == FOOD_CLASS) {
+		return "rotten";
+	}
 	return decayed_food_words[objects[otmp->otyp].oc_material];
 }
 

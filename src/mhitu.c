@@ -21,8 +21,8 @@ STATIC_DCL void FDECL(mayberem, (struct obj *, const char *));
 STATIC_DCL boolean FDECL(diseasemu, (struct permonst *));
 STATIC_DCL int FDECL(hitmu, (struct monst *,struct attack *));
 STATIC_DCL int FDECL(gulpmu, (struct monst *,struct attack *));
-STATIC_DCL int FDECL(explmu, (struct monst *,struct attack *,BOOLEAN_P));
-STATIC_DCL void FDECL(missmu,(struct monst *,BOOLEAN_P,struct attack *));
+STATIC_DCL int FDECL(explmu, (struct monst *,struct attack *,boolean));
+STATIC_DCL void FDECL(missmu,(struct monst *,boolean,struct attack *));
 STATIC_DCL void FDECL(mswings,(struct monst *,struct obj *));
 STATIC_DCL void FDECL(wildmiss, (struct monst *,struct attack *));
 STATIC_DCL int FDECL(mon_scream, (struct monst*,struct attack*));
@@ -1108,38 +1108,18 @@ hitmu(struct monst *mtmp, struct attack *mattk)
 				Your("brain is eaten!");
 				/* No such thing as mindless players... */
 				if (ABASE(A_INT) <= ATTRMIN(A_INT)) {
-					int lifesaved = 0;
-					struct obj *wore_amulet = uamul;
-
-					while(1) {
-						/* avoid looping on "die(y/n)?" */
-						if (lifesaved && (discover || wizard)) {
-							if (wore_amulet && !uamul) {
-								/* used up AMULET_OF_LIFE_SAVING; still subject to dying from brainlessness */
-								wore_amulet = 0;
-							} else {
-								/* explicitly chose not to die; arbitrarily boost intelligence */
-								ABASE(A_INT) = ATTRMIN(A_INT) + 2;
-								You_feel("like a scarecrow.");
-								break;
-							}
-						}
-						if (lifesaved) {
-							pline("Unfortunately your brain is still gone.");
-						} else {
-							Your("last thought fades away.");
-							killer = "brainlessness";
-							killer_format = KILLED_BY;
-							done(DIED);
-							lifesaved++;
-						}
-					}
+					Your("last thought fades away.");
+					killer = "brainlessness";
+					killer_format = KILLED_BY;
+					done(DIED);
+					ABASE(A_INT) = ATTRMIN(A_INT) + 2;
+					You_feel("like a scarecrow.");
 				}
+				forget_skills();
+				forget_spells();
 			}
 			/* adjattrib gives dunce cap message when appropriate */
 			(void) adjattrib(A_INT, -rnd(2), FALSE);
-			forget_skills();
-			forget_spells();
 			exercise(A_WIS, FALSE);
 			break;
 		case AD_PLYS:
@@ -1429,13 +1409,12 @@ hitmu(struct monst *mtmp, struct attack *mattk)
 			if (mtmp->mcan) {
 				break;
 			}
+			hurtarmor(AD_DCAY);
 			if (u.umonnum == PM_WOOD_GOLEM || u.umonnum == PM_LEATHER_GOLEM) {
 				You("rot!");
 				/* KMH -- this is okay with unchanging */
 				rehumanize();
-				break;
 			}
-			hurtarmor(AD_DCAY);
 			break;
 		case AD_HEAL:
 			/* a cancelled nurse is just an ordinary monster */

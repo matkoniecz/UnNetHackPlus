@@ -65,7 +65,7 @@ STATIC_DCL void FDECL(topten_print, (const char *));
 STATIC_DCL void FDECL(topten_print_bold, (const char *));
 STATIC_DCL xchar FDECL(observable_depth, (d_level *));
 STATIC_DCL void NDECL(outheader);
-STATIC_DCL void FDECL(outentry, (int,struct toptenentry *,BOOLEAN_P));
+STATIC_DCL void FDECL(outentry, (int,struct toptenentry *,boolean));
 STATIC_DCL void FDECL(readentry, (FILE *,struct toptenentry *));
 STATIC_DCL void FDECL(writeentry, (FILE *,struct toptenentry *));
 #ifdef XLOGFILE
@@ -73,9 +73,9 @@ STATIC_DCL void FDECL(munge_xlstring, (char *dest, char *src, int n));
 STATIC_DCL void FDECL(write_xlentry, (FILE *,struct toptenentry *));
 #endif
 STATIC_DCL void FDECL(free_ttlist, (struct toptenentry *));
-STATIC_DCL int FDECL(classmon, (char *,BOOLEAN_P));
+STATIC_DCL int FDECL(classmon, (char *,boolean));
 STATIC_DCL int FDECL(score_wanted,
-		(BOOLEAN_P, int,struct toptenentry *,int,const char **,int));
+		(boolean, int,struct toptenentry *,int,const char **,int));
 #ifdef RECORD_ACHIEVE
 STATIC_DCL long FDECL(encodeachieve, (void));
 #endif
@@ -464,7 +464,7 @@ int how;
 	    toptenwin = create_nhwindow(NHW_TEXT);
 	}
 
-#if defined(UNIX) || defined(VMS) || defined(__EMX__)
+#if defined(UNIX) || defined(VMS)
 #define HUP	if (!program_state.done_hup)
 #else
 #define HUP
