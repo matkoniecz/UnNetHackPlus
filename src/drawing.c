@@ -47,7 +47,7 @@ const char def_oc_syms[MAXOCLASSES] = {
 
 const char invisexplain[] = "remembered, unseen, creature";
 
-/* Object descriptions.  Used in do_look(). */
+/* Object descriptions.  Used in do_look(). Values should be in sync with bogusclasses from pager.c */
 const char * const objexplain[] = {	/* these match def_oc_syms, above */
 /* 0*/	0,
 	"strange object",
@@ -188,14 +188,12 @@ const char * const monexplain[MAXMCLASSES] = {
 };
 
 const struct symdef def_warnsyms[WARNCOUNT] = {
-	{'0', "unknown creature causing you worry", C(CLR_WHITE)},  	/* white warning  */
-	{'1', "unknown creature causing you concern", C(CLR_RED)},	/* pink warning   */
-	{'2', "unknown creature causing you anxiety", C(CLR_RED)},	/* red warning    */
-	{'3', "unknown creature causing you disquiet", C(CLR_RED)},	/* ruby warning   */
-	{'4', "unknown creature causing you alarm",
-						C(CLR_MAGENTA)},        /* purple warning */
-	{'5', "unknown creature causing you dread",
-						C(CLR_BRIGHT_MAGENTA)}	/* black warning  */
+	{'0', "unknown creature causing you worry",    C(CLR_WHITE)},
+	{'1', "unknown creature causing you concern",  C(CLR_RED)},
+	{'2', "unknown creature causing you anxiety",  C(CLR_RED)},
+	{'3', "unknown creature causing you disquiet", C(CLR_RED)},
+	{'4', "unknown creature causing you alarm",    C(CLR_MAGENTA)},
+	{'5', "unknown creature causing you dread",    C(CLR_BRIGHT_MAGENTA)}
 };
 
 /*
@@ -758,10 +756,10 @@ def_char_to_monclass(ch)
 
 void
 assign_graphics(graph_chars, glth, maxlen, offset)
-register glyph_t *graph_chars;
+glyph_t *graph_chars;
 int glth, maxlen, offset;
 {
-    register int i;
+    int i;
 
     for (i = 0; i < maxlen; i++)
 	showsyms[i+offset] = (((i < glth) && graph_chars[i]) ?
@@ -861,7 +859,6 @@ glyph_t value;
 #endif
 }
 
-#ifdef REINCARNATION
 
 /*
  * saved display symbols for objects & features.
@@ -942,7 +939,7 @@ boolean is_rlevel;
     /* Adjust graphics display characters on Rogue levels */
 
     if (is_rlevel) {
-	register int i;
+	int i;
 
 	(void) memcpy((genericptr_t)save_showsyms,
 		      (genericptr_t)showsyms, sizeof showsyms);
@@ -1056,6 +1053,5 @@ boolean is_rlevel;
 #endif
     }
 }
-#endif /* REINCARNATION */
 
 /*drawing.c*/

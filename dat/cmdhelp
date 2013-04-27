@@ -80,7 +80,6 @@ Z       Zap (cast) a spell
 /       Show what type of thing a symbol corresponds to
 ?       Give a help message
 &       Tell what a command does
-!       Do a shell escape (only if defined)
 \       Show what object types have been discovered
 _       Travel via a shortest-path algorithm to a point on the map 
 .       Rest one move while doing nothing

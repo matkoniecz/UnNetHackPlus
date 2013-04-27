@@ -6,9 +6,7 @@
 #include "epri.h"
 #include "emin.h"
 #include "edog.h"
-#ifdef REINCARNATION
 #include <ctype.h>
-#endif
 
 STATIC_VAR NEARDATA struct monst zeromonst;
 
@@ -41,7 +39,7 @@ extern const int monstr[];
 #ifdef OVLB
 boolean
 is_home_elemental(ptr)
-register struct permonst *ptr;
+struct permonst *ptr;
 {
 	if (ptr->mlet == S_ELEMENTAL)
 	    switch (monsndx(ptr)) {
@@ -58,7 +56,7 @@ register struct permonst *ptr;
  */
 STATIC_OVL boolean
 wrong_elem_type(ptr)
-    register struct permonst *ptr;
+    struct permonst *ptr;
 {
     if (ptr->mlet == S_ELEMENTAL) {
 	return((boolean)(!is_home_elemental(ptr)));
@@ -79,11 +77,11 @@ wrong_elem_type(ptr)
 
 STATIC_OVL void
 m_initgrp(mtmp, x, y, n)	/* make a group just like mtmp */
-register struct monst *mtmp;
-register int x, y, n;
+struct monst *mtmp;
+int x, y, n;
 {
 	coord mm;
-	register int cnt = rnd(n);
+	int cnt = rnd(n);
 	struct monst *mon;
 #if defined(__GNUC__) && (defined(HPUX) || defined(DGUX))
 	/* There is an unresolved problem with several people finding that
@@ -148,7 +146,7 @@ m_initthrow(mtmp,otyp,oquan)
 struct monst *mtmp;
 int otyp,oquan;
 {
-	register struct obj *otmp;
+	struct obj *otmp;
 
 	otmp = mksobj(otyp, TRUE, FALSE);
 	otmp->quan = (long) rn1(oquan, 3);
@@ -162,15 +160,13 @@ int otyp,oquan;
 
 STATIC_OVL void
 m_initweap(mtmp)
-register struct monst *mtmp;
+struct monst *mtmp;
 {
-	register struct permonst *ptr = mtmp->data;
-	register int mm = monsndx(ptr);
+	struct permonst *ptr = mtmp->data;
+	int mm = monsndx(ptr);
 	struct obj *otmp;
 
-#ifdef REINCARNATION
 	if (Is_rogue_level(&u.uz)) return;
-#endif
 /*
  *	first a few special cases:
  *
@@ -495,14 +491,12 @@ long amount;
 
 STATIC_OVL void
 m_initinv(mtmp)
-register struct	monst	*mtmp;
+struct	monst	*mtmp;
 {
-	register int cnt;
-	register struct obj *otmp;
-	register struct permonst *ptr = mtmp->data;
-#ifdef REINCARNATION
+	int cnt;
+	struct obj *otmp;
+	struct permonst *ptr = mtmp->data;
 	if (Is_rogue_level(&u.uz)) return;
-#endif
 /*
  *	Soldiers get armour & rations - armour approximates their ac.
  *	Nymphs may get mirror or potion of object detection.
@@ -511,7 +505,7 @@ register struct	monst	*mtmp;
 
 	    case S_HUMAN:
 		if(is_mercenary(ptr)) {
-		    register int mac;
+		    int mac;
 
 		    switch(monsndx(ptr)) {
 			case PM_GUARD: mac = -1 - depth(&u.uz)/5; break;
@@ -873,9 +867,10 @@ boolean ghostly;
 		 mvitals[mndx].born++;
 	if ((int) mvitals[mndx].born >= lim && !(mons[mndx].geno & G_NOGEN) &&
 		!(mvitals[mndx].mvflags & G_EXTINCT)) {
-#if defined(DEBUG) && defined(WIZARD)
-		if (wizard) pline("Automatically extinguished %s.",
-					makeplural(mons[mndx].mname));
+#if defined(DEBUG)
+		if (wizard) {
+			pline("Automatically extinguished %s.", makeplural(mons[mndx].mname));
+		}
 #endif
 		mvitals[mndx].mvflags |= G_EXTINCT;
 		reset_rndmonst(mndx);
@@ -892,11 +887,11 @@ boolean ghostly;
  */
 struct monst *
 makemon(ptr, x, y, mmflags)
-register struct permonst *ptr;
-register int	x, y;
-register int	mmflags;
+struct permonst *ptr;
+int	x, y;
+int	mmflags;
 {
-	register struct monst *mtmp;
+	struct monst *mtmp;
 	int mndx, mcham, ct, mitem, xlth;
 	boolean anymon = (!ptr);
 	boolean byyou = (x == u.ux && y == u.uy);
@@ -943,7 +938,7 @@ register int	mmflags;
 		/* if you are to make a specific monster and it has
 		   already been genocided, return */
 		if (mvitals[mndx].mvflags & G_GENOD) return((struct monst *) 0);
-#if defined(WIZARD) && defined(DEBUG)
+#if defined(DEBUG)
 		if (wizard && (mvitals[mndx].mvflags & G_EXTINCT))
 		    pline("Explicitly creating extinct monster %s.",
 			mons[mndx].mname);
@@ -1086,7 +1081,7 @@ register int	mmflags;
 	} else if (mndx == PM_WIZARD_OF_YENDOR) {
 		mtmp->iswiz = TRUE;
 		flags.no_of_wizards++;
-		if (flags.no_of_wizards == 1 && Is_earthlevel(&u.uz))
+		if (flags.no_of_wizards == 1 && In_endgame(&u.uz))
 			mitem = SPE_DIG;
 	} else if (mndx == PM_DJINNI) {
 		flags.djinni_count++;
@@ -1181,12 +1176,9 @@ struct permonst *mptr;		/* usually null; used for confused reading */
 	int x, y;
 	struct monst *mon;
 	boolean known = FALSE;
-#ifdef WIZARD
 	boolean ask = wizard;
-#endif
 
 	while (cnt--) {
-#ifdef WIZARD
 	    if (ask) {
 		if (create_particular()) {
 		    known = TRUE;
@@ -1194,7 +1186,6 @@ struct permonst *mptr;		/* usually null; used for confused reading */
 		}
 		else ask = FALSE;	/* ESC will shut off prompting */
 	    }
-#endif
 	    x = u.ux,  y = u.uy;
 	    /* if in water, try to encourage an aquatic monster
 	       by finding and then specifying another wet location */
@@ -1229,11 +1220,11 @@ int mndx;
  */
 STATIC_OVL int
 align_shift(ptr)
-register struct permonst *ptr;
+struct permonst *ptr;
 {
     static NEARDATA long oldmoves = 0L;	/* != 1, starting value of moves */
     static NEARDATA s_level *lev;
-    register int alshift;
+    int alshift;
 
     if(oldmoves != moves) {
 	lev = Is_special(&u.uz);
@@ -1313,8 +1304,8 @@ static NEARDATA struct {
 struct permonst *
 rndmonst()
 {
-	register struct permonst *ptr;
-	register int mndx, ct;
+	struct permonst *ptr;
+	int mndx, ct;
 
 	if (level.mon_gen &&
 	    (rn2(100) < level.mon_gen->override_chance) &&
@@ -1324,9 +1315,7 @@ rndmonst()
 	if (rndmonst_state.choice_count < 0) {	/* need to recalculate */
 	    int minmlev, maxmlev;
 	    boolean elemlevel;
-#ifdef REINCARNATION
 	    boolean upper;
-#endif
 
 	    rndmonst_state.choice_count = 0;
 	    /* look for first common monster */
@@ -1343,9 +1332,7 @@ rndmonst()
 	    } /* else `mndx' now ready for use below */
 	    minmlev = min_monster_difficulty();
 	    maxmlev = max_monster_difficulty();
-#ifdef REINCARNATION
 	    upper = Is_rogue_level(&u.uz);
-#endif
 	    elemlevel = In_endgame(&u.uz) && !Is_astralevel(&u.uz);
 
 /*
@@ -1357,9 +1344,7 @@ rndmonst()
 		rndmonst_state.mchoices[mndx] = 0;
 		if (tooweak(mndx, minmlev) || toostrong(mndx, maxmlev))
 		    continue;
-#ifdef REINCARNATION
 		if (upper && !isupper(def_monsyms[(int)(ptr->mlet)])) continue;
-#endif
 		if (elemlevel && wrong_elem_type(ptr)) continue;
 		if (uncommon(mndx)) continue;
 		if (Inhell && (ptr->geno & G_NOHELL)) continue;
@@ -1429,7 +1414,7 @@ mkclass(class,spc)
 char	class;
 int	spc;
 {
-	register int	first, last, num = 0;
+	int	first, last, num = 0;
 	int maxmlev, mask = (G_NOGEN | G_UNIQ) & ~spc;
 
 	maxmlev = level_difficulty() >> 1;
@@ -1477,7 +1462,7 @@ int	spc;
 
 int
 adj_lev(ptr)	/* adjust strength of monsters based on u.uz and u.ulevel */
-register struct permonst *ptr;
+struct permonst *ptr;
 {
 	int	tmp, tmp2;
 
@@ -1600,10 +1585,10 @@ struct monst *mtmp, *victim;
 
 int
 mongets(mtmp, otyp)
-register struct monst *mtmp;
-register int otyp;
+struct monst *mtmp;
+int otyp;
 {
-	register struct obj *otmp;
+	struct obj *otmp;
 	int spe;
 
 	if (!otyp) return 0;
@@ -1684,7 +1669,7 @@ int type;
  */
 boolean
 peace_minded(ptr)
-register struct permonst *ptr;
+struct permonst *ptr;
 {
 	aligntyp mal = ptr->maligntyp, ual = u.ualign.type;
 
@@ -1786,7 +1771,7 @@ static NEARDATA char syms[] = {
 
 void
 set_mimic_sym(mtmp)		/* KAA, modified by ERS */
-register struct monst *mtmp;
+struct monst *mtmp;
 {
 	int typ, roomno, rt;
 	unsigned appear, ap_type;

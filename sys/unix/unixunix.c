@@ -69,7 +69,7 @@ int fd;
 static int
 eraseoldlocks()
 {
-	register int i;
+	int i;
 
 	/* cannot use maxledgerno() here, because we need to find a lock name
 	 * before starting everything (including the dungeon initialization
@@ -97,7 +97,7 @@ eraseoldlocks()
 void
 getlock()
 {
-	register int i = 0, fd, c;
+	int i = 0, fd, c;
 #ifndef FILE_AREAS
 	const char *fq_lock;
 #endif
@@ -244,9 +244,9 @@ gotlock:
 
 void
 regularize(s)	/* normalize file name - we don't like .'s, /'s, spaces */
-register char *s;
+char *s;
 {
-	register char *lp;
+	char *lp;
 
 	while((lp=index(s, '.')) || (lp=index(s, '/')) || (lp=index(s,' ')))
 		*lp = '_';
@@ -287,29 +287,12 @@ unsigned msec;				/* milliseconds */
 }
 #endif /* TIMED_DELAY for SYSV */
 
-#ifdef SHELL
-int
-dosh()
-{
-	register char *str;
-	if(child(0)) {
-		if((str = getenv("SHELL")) != (char*)0)
-			(void) execl(str, str, (char *)0);
-		else
-			(void) execl("/bin/sh", "sh", (char *)0);
-		raw_print("sh: cannot execute.");
-		exit(EXIT_FAILURE);
-	}
-	return 0;
-}
-#endif /* SHELL */
-
-#if defined(SHELL) || defined(DEF_PAGER) || defined(DEF_MAILREADER)
+#if defined(DEF_PAGER) || defined(DEF_MAILREADER)
 int
 child(wt)
 int wt;
 {
-	register int f;
+	int f;
 	suspend_nhwindows((char *)0);	/* also calls end_screen() */
 #ifdef _M_UNIX
 	sco_mapon();
@@ -340,9 +323,9 @@ int wt;
 	linux_mapoff();
 #endif
 	(void) signal(SIGINT, (SIG_RET_TYPE) done1);
-#ifdef WIZARD
-	if(wizard) (void) signal(SIGQUIT,SIG_DFL);
-#endif
+	if(wizard) {
+		(void) signal(SIGQUIT,SIG_DFL);
+	}
 	if(wt) {
 		raw_print("");
 		wait_synch();

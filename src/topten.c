@@ -65,7 +65,7 @@ STATIC_DCL void FDECL(topten_print, (const char *));
 STATIC_DCL void FDECL(topten_print_bold, (const char *));
 STATIC_DCL xchar FDECL(observable_depth, (d_level *));
 STATIC_DCL void NDECL(outheader);
-STATIC_DCL void FDECL(outentry, (int,struct toptenentry *,BOOLEAN_P));
+STATIC_DCL void FDECL(outentry, (int,struct toptenentry *,boolean));
 STATIC_DCL void FDECL(readentry, (FILE *,struct toptenentry *));
 STATIC_DCL void FDECL(writeentry, (FILE *,struct toptenentry *));
 #ifdef XLOGFILE
@@ -73,9 +73,9 @@ STATIC_DCL void FDECL(munge_xlstring, (char *dest, char *src, int n));
 STATIC_DCL void FDECL(write_xlentry, (FILE *,struct toptenentry *));
 #endif
 STATIC_DCL void FDECL(free_ttlist, (struct toptenentry *));
-STATIC_DCL int FDECL(classmon, (char *,BOOLEAN_P));
+STATIC_DCL int FDECL(classmon, (char *,boolean));
 STATIC_DCL int FDECL(score_wanted,
-		(BOOLEAN_P, int,struct toptenentry *,int,const char **,int));
+		(boolean, int,struct toptenentry *,int,const char **,int));
 #ifdef RECORD_ACHIEVE
 STATIC_DCL long FDECL(encodeachieve, (void));
 #endif
@@ -315,11 +315,11 @@ encode_carried()
 
   /* this encodes important items potentially owned by the player at the
      time of death */
-  if (u.uhave.amulet)   c |= 0x0001UL; /* real Amulet of Yendor */
-  if (u.uhave.bell)     c |= 0x0002UL; /* Bell of Opening */
-  if (u.uhave.book)     c |= 0x0004UL; /* Book of the Dead */
-  if (u.uhave.menorah)  c |= 0x0008UL; /* Candelabrum of Invocation */
-  if (u.uhave.questart) c |= 0x0010UL; /* own quest artifact */
+  if (u.uhave.amulet)         c |= 0x0001UL; /* real Amulet of Yendor */
+  if (u.uhave.bell)           c |= 0x0002UL; /* Bell of Opening */
+  if (u.uhave.book)           c |= 0x0004UL; /* Book of the Dead */
+  if (u.uhave.menorah)        c |= 0x0008UL; /* Candelabrum of Invocation */
+  if (u.uhave.quest_artifact) c |= 0x0010UL; /* own quest artifact */
 
   return c;
 }
@@ -433,10 +433,10 @@ int how;
 	int uid = getuid();
 	int rank, rank0 = -1, rank1 = 0;
 	int occ_cnt = PERSMAX;
-	register struct toptenentry *t0, *tprev;
+	struct toptenentry *t0, *tprev;
 	struct toptenentry *t1;
 	FILE *rfile;
-	register int flg = 0;
+	int flg = 0;
 	boolean t0_used;
 #ifdef LOGFILE
 	FILE *lfile;
@@ -464,7 +464,7 @@ int how;
 	    toptenwin = create_nhwindow(NHW_TEXT);
 	}
 
-#if defined(UNIX) || defined(VMS) || defined(__EMX__)
+#if defined(UNIX) || defined(VMS)
 #define HUP	if (!program_state.done_hup)
 #else
 #define HUP
@@ -787,7 +787,7 @@ STATIC_OVL void
 outheader()
 {
 	char linebuf[BUFSZ];
-	register char *bp;
+	char *bp;
 
 	Strcpy(linebuf, " No  Points     Name");
 	bp = eos(linebuf);
@@ -1112,10 +1112,10 @@ char **argv;
 	const char **players;
 	int playerct, rank;
 	boolean current_ver = TRUE, init_done = FALSE;
-	register struct toptenentry *t1;
+	struct toptenentry *t1;
 	FILE *rfile;
 	boolean match_found = FALSE;
-	register int i;
+	int i;
 	char pbuf[BUFSZ];
 	int uid = -1;
 #ifndef PERS_IS_UID
@@ -1278,8 +1278,8 @@ tt_oname(otmp)
 struct obj *otmp;
 {
 	int rank;
-	register int i;
-	register struct toptenentry *tt;
+	int i;
+	struct toptenentry *tt;
 	FILE *rfile;
 	struct toptenentry tt_buf;
 

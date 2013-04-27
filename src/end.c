@@ -30,23 +30,23 @@ static struct val_list { struct valuable_data *list; int size; } valuables[] = {
 
 #ifndef NO_SIGNAL
 STATIC_PTR void FDECL(done_intr, (int));
-# if defined(UNIX) || defined(VMS) || defined (__EMX__)
+# if defined(UNIX) || defined(VMS)
 static void FDECL(done_hangup, (int));
 # endif
 #endif
-STATIC_DCL void FDECL(disclose,(int,BOOLEAN_P));
+STATIC_DCL void FDECL(disclose,(int,boolean));
 STATIC_DCL void FDECL(get_valuables, (struct obj *));
 STATIC_DCL void FDECL(sort_valuables, (struct valuable_data *,int));
-STATIC_DCL void FDECL(artifact_score, (struct obj *,BOOLEAN_P,winid));
+STATIC_DCL void FDECL(artifact_score, (struct obj *,boolean,winid));
 STATIC_DCL void FDECL(savelife, (int));
-void FDECL(list_vanquished, (CHAR_P,BOOLEAN_P));
+void FDECL(list_vanquished, (char,boolean));
 #ifdef DUMP_LOG
 extern char msgs[][BUFSZ];
 extern int msgs_count[];
 extern int lastmsg;
-void FDECL(do_vanquished, (int, BOOLEAN_P));
+void FDECL(do_vanquished, (int, boolean));
 #endif /* DUMP_LOG */
-STATIC_DCL void FDECL(list_genocided, (int, BOOLEAN_P, BOOLEAN_P));
+STATIC_DCL void FDECL(list_genocided, (int, boolean, boolean));
 STATIC_DCL boolean FDECL(should_query_disclose_option, (int,char *));
 
 #if defined(__BEOS__) || defined(MICRO) || defined(WIN32) || defined(OS2)
@@ -140,7 +140,7 @@ done2()
 		}
 		return 0;
 	}
-#if defined(WIZARD) && (defined(UNIX) || defined(VMS) || defined(LATTICE))
+#if defined(UNIX) || defined(VMS) || defined(LATTICE)
 	if(wizard) {
 	    int c;
 # ifdef VMS
@@ -178,7 +178,7 @@ int sig_unused;
 	return;
 }
 
-# if defined(UNIX) || defined(VMS) || defined(__EMX__)
+# if defined(UNIX) || defined(VMS)
 static void
 done_hangup(sig)	/* signal() handler */
 int sig;
@@ -193,7 +193,7 @@ int sig;
 
 void
 done_in_by(mtmp)
-register struct monst *mtmp;
+struct monst *mtmp;
 {
 	char buf[BUFSZ];
 	boolean distorted = (boolean)(Hallucination && canspotmon(mtmp));
@@ -262,10 +262,6 @@ register struct monst *mtmp;
 	return;
 }
 
-#if defined(WIN32)
-#define NOTIFY_NETHACK_BUGS
-#endif
-
 /*VARARGS1*/
 void
 panic VA_DECL(const char *, str)
@@ -287,29 +283,14 @@ panic VA_DECL(const char *, str)
 		  !program_state.something_worth_saving ?
 		  "Program initialization has failed." :
 		  "Suddenly, the dungeon collapses.");
-#if defined(WIZARD) && !defined(MICRO)
-# if defined(NOTIFY_NETHACK_BUGS)
-	if (!wizard)
-	    raw_printf("Report the following error to \"%s\".",
-			"bulwersator@gmail.com");
-	else if (program_state.something_worth_saving)
-	    raw_print("\nError save file being written.\n");
-# else
-	if (!wizard)
-	    raw_printf("Report error to \"%s\"%s.",
-#  ifdef WIZARD_NAME	/*(KR1ED)*/
-			WIZARD_NAME,
-#  else
-			WIZARD,
-#  endif
-			!program_state.something_worth_saving ? "" :
-			" and it may be possible to rebuild.");
-# endif
+	if (!wizard) {
+	    raw_printf("Report the following error to <https://github.com/Bulwersator/UnNetHackPlus/issues>.");
+	}
 	if (program_state.something_worth_saving) {
+	    raw_print("\nError save file being written.\n");
 	    set_error_savefile();
 	    (void) dosave0();
 	}
-#endif
 	{
 	    char buf[BUFSZ];
 	    Vsprintf(buf,str,VA_ARGS);
@@ -322,7 +303,7 @@ panic VA_DECL(const char *, str)
 #ifdef LIVELOGFILE
 	livelog_game_action("panicked");
 #endif
-#if defined(WIZARD) && (defined(UNIX) || defined(VMS) || defined(LATTICE) || defined(WIN32))
+#if defined(UNIX) || defined(VMS) || defined(LATTICE) || defined(WIN32)
 	if (wizard)
 	    NH_abort();	/* generate core dump */
 #endif
@@ -466,8 +447,8 @@ STATIC_OVL void
 get_valuables(list)
 struct obj *list;	/* inventory or container contents */
 {
-    register struct obj *obj;
-    register int i;
+    struct obj *obj;
+    int i;
 
     /* find amulets and gems, ignoring all artifacts */
     for (obj = list; obj; obj = obj->nobj)
@@ -500,7 +481,7 @@ sort_valuables(list, size)
 struct valuable_data list[];
 int size;		/* max value is less than 20 */
 {
-    register int i, j;
+    int i, j;
     struct valuable_data ltmp;
 
     /* move greater quantities to the front of the list */
@@ -576,12 +557,10 @@ int how;
 		paniclog("trickery", killer);
 		killer = 0;
 	    }
-#ifdef WIZARD
 	    if (wizard) {
 		You("are a very tricky wizard, it seems.");
 		return;
 	    }
-#endif
 	}
 
 	/* kilbuf: used to copy killer in case it comes from something like
@@ -630,11 +609,7 @@ int how;
 			}
 		}
 	}
-	if ((
-#ifdef WIZARD
-			wizard ||
-#endif
-			discover) && (how <= MAX_SURVIVABLE_DEATH)) {
+	if ((wizard || discover) && (how <= MAX_SURVIVABLE_DEATH)) {
 		if(yn("Die?") == 'y') goto die;
 		pline("OK, so you don't %s.",
 			(how == CHOKING) ? "choke" : (how == DISINTEGRATED) ? "disintegrate" : "die");
@@ -722,7 +697,7 @@ die:
 	if (have_windows) wait_synch();	/* flush screen output */
 #ifndef NO_SIGNAL
 	(void) signal(SIGINT, (SIG_RET_TYPE) done_intr);
-# if defined(UNIX) || defined(VMS) || defined (__EMX__)
+# if defined(UNIX) || defined(VMS)
 	(void) signal(SIGQUIT, (SIG_RET_TYPE) done_intr);
 	(void) signal(SIGHUP, (SIG_RET_TYPE) done_hangup);
 # endif
@@ -824,10 +799,9 @@ die:
 	}
 
 	if (bones_ok) {
-#ifdef WIZARD
-	    if (!wizard || paranoid_yn("Save bones?", iflags.paranoid_quit) == 'y')
-#endif /* WIZARD */
-		savebones(corpse);
+	    if (!wizard || paranoid_yn("Save bones?", iflags.paranoid_quit) == 'y') {
+			savebones(corpse);
+	    }
 	    /* corpse may be invalid pointer now so
 		ensure that it isn't used again */
 	    corpse = (struct obj *)0;
@@ -910,10 +884,10 @@ die:
 #ifdef ASTRAL_ESCAPE
 	if (how == ESCAPED || how == DEFIED || how == ASCENDED) {
 #endif
-	    register struct monst *mtmp;
-	    register struct obj *otmp;
-	    register struct val_list *val;
-	    register int i;
+	    struct monst *mtmp;
+	    struct obj *otmp;
+	    struct val_list *val;
+	    int i;
 
 	    for (val = valuables; val->list; val++)
 		for (i = 0; i < val->size; i++) {
@@ -1065,7 +1039,7 @@ container_contents(list, identified, all_containers, want_disp)
 struct obj *list;
 boolean identified, all_containers, want_disp;
 {
-	register struct obj *box, *obj;
+	struct obj *box, *obj;
 #ifdef SORTLOOT
 	struct obj **oarray;
 	int i,j,n;
@@ -1194,7 +1168,7 @@ int defquery;
 boolean ask;
 #endif
 {
-    register int i, lev;
+    int i, lev;
     int ntypes = 0, max_lev = 0, nkilled;
     long total_killed = 0L;
     char c;
@@ -1294,7 +1268,7 @@ int defquery;
 boolean ask;
 boolean want_disp;
 {
-    register int i;
+    int i;
     int ngenocided=0;
 #ifdef SHOW_EXTINCT
     int nextincted=0;

@@ -329,7 +329,7 @@ ghost_from_bottle()
 int
 dodrink()
 {
-	register struct obj *otmp;
+	struct obj *otmp;
 	const char *potion_descr;
 
 	if (Strangled) {
@@ -393,7 +393,7 @@ dodrink()
 
 int
 dopotion(otmp)
-register struct obj *otmp;
+struct obj *otmp;
 {
 	int retval;
 
@@ -419,9 +419,9 @@ register struct obj *otmp;
 
 int
 peffects(otmp)
-	register struct obj	*otmp;
+	struct obj	*otmp;
 {
-	register int i, ii, lim;
+	int i, ii, lim;
 
 	switch(otmp->otyp){
 	case POT_RESTORE_ABILITY:
@@ -495,7 +495,7 @@ peffects(otmp)
 					losehp(d(2,6), "potion of holy water", KILLED_BY_AN);
 				} else if(otmp->cursed) {
 					You_feel("quite proud of yourself.");
-					healup(d(2,6),0,0,0);
+					healup(d(2,6), 0, FALSE, FALSE, FALSE);
 					if (u.ulycn >= LOW_PM && !Upolyd) {
 						you_were();
 					}
@@ -536,7 +536,7 @@ peffects(otmp)
 			}
 			/* the whiskey makes us feel better */
 			if (!otmp->odiluted) {
-				healup(1, 0, FALSE, FALSE);
+				healup(1, 0, FALSE, FALSE, FALSE);
 			}
 			u.uhunger += 10 * (2 + bcsign(otmp));
 			newuhs(FALSE);
@@ -807,8 +807,7 @@ peffects(otmp)
 		break;
 	case POT_SPEED:
 		{
-			if(Wounded_legs && !otmp->cursed
-			   && !u.usteed) {	/* heal_legs() would heal steeds legs */
+			if(Wounded_legs && !otmp->cursed && !u.usteed) { /* heal_legs() would heal steeds legs */
 				heal_legs();
 				unkn++;
 				break;
@@ -858,7 +857,7 @@ peffects(otmp)
 						goto_level(&earth_level, FALSE, FALSE, FALSE);
 #endif
 					} else {
-						register int newlev = depth(&u.uz)-1;
+						int newlev = depth(&u.uz)-1;
 						d_level newlevel;
 						get_level(&newlevel, newlev);
 						if(on_level(&newlevel, &u.uz)) {
@@ -890,11 +889,12 @@ peffects(otmp)
 			int increase_max_hp = !otmp->cursed ? 1 : 0;
 			boolean cure_sick = otmp->blessed;
 			boolean cure_blind = !otmp->cursed;
+			boolean cure_wounded_legs =  !otmp->odiluted && otmp->blessed;
 			if(otmp->odiluted) {
 				heal_hp /= 2;
 				increase_max_hp /= 2;
 			}
-			healup(heal_hp, increase_max_hp, cure_sick, cure_blind);
+			healup(heal_hp, increase_max_hp, cure_sick, cure_blind, cure_wounded_legs);
 			exercise(A_CON, TRUE);
 		}
 		break;
@@ -905,11 +905,12 @@ peffects(otmp)
 			int increase_max_hp = otmp->blessed ? 5 : !otmp->cursed ? 2 : 0;
 			boolean cure_sick = !otmp->cursed;
 			boolean cure_blind = TRUE;
+			boolean cure_wounded_legs =  !otmp->odiluted && !otmp->cursed;
 			if(otmp->odiluted) {
 				heal_hp /= 2;
 				increase_max_hp /= 2;
 			}
-			healup(heal_hp, increase_max_hp, cure_sick, cure_blind);
+			healup(heal_hp, increase_max_hp, cure_sick, cure_blind, cure_wounded_legs);
 			(void) make_hallucinated(0L,TRUE,0L);
 			exercise(A_CON, TRUE);
 			exercise(A_STR, TRUE);
@@ -922,11 +923,12 @@ peffects(otmp)
 			int increase_max_hp = 4+4*bcsign(otmp);
 			boolean cure_sick = !otmp->cursed;
 			boolean cure_blind = TRUE;
+			boolean cure_wounded_legs = !otmp->cursed;
 			if(otmp->odiluted) {
 				heal_hp /= 2;
 				increase_max_hp /= 2;
 			}
-			healup(heal_hp, increase_max_hp, cure_sick, cure_blind);
+			healup(heal_hp, increase_max_hp, cure_sick, cure_blind, cure_wounded_legs);
 			/* Restore one lost level if blessed */
 			if (otmp->blessed && u.ulevel < u.ulevelmax) {
 				/* when multiple levels have been lost, drinking
@@ -979,7 +981,7 @@ peffects(otmp)
 		break;
 	case POT_GAIN_ENERGY:
 		{
-			register int num;
+			int num;
 			if(otmp->cursed) {
 				You_feel("lackluster.");
 			} else {
@@ -1111,29 +1113,39 @@ peffects(otmp)
 }
 
 void
-healup(nhp, nxtra, curesick, cureblind)
-	int nhp, nxtra;
-	register boolean curesick, cureblind;
+healup(int nhp, int nxtra, boolean cure_sick, boolean cure_blind, boolean cure_wounded_legs)
 {
 	if (nhp) {
 		if (Upolyd) {
 			u.mh += nhp;
-			if (u.mh > u.mhmax) u.mh = (u.mhmax += nxtra);
+			if (u.mh > u.mhmax) {
+				u.mh = (u.mhmax += nxtra);
+			}
 		} else {
 			u.uhp += nhp;
-			if(u.uhp > u.uhpmax) u.uhp = (u.uhpmax += nxtra);
+			if(u.uhp > u.uhpmax) {
+				u.uhp = (u.uhpmax += nxtra);
+			}
 		}
 	}
-	if(cureblind)	make_blinded(0L,TRUE);
-	if(curesick)	make_sick(0L, (char *) 0, TRUE, SICK_ALL);
+	if(cure_blind) {
+		make_blinded(0L, TRUE);
+	}
+	if(cure_sick) {
+		make_sick(0L, (char *) 0, TRUE, SICK_ALL);
+	}
+	if(Wounded_legs && cure_wounded_legs && !u.usteed) { /* heal_legs() would heal steeds legs */
+		heal_legs();
+		unkn++;
+	} 
 	flags.botl = 1;
 	return;
 }
 
 void
 strange_feeling(obj,txt)
-register struct obj *obj;
-register const char *txt;
+struct obj *obj;
+const char *txt;
 {
 	if (flags.beginner || !txt)
 		You("have a %s feeling for a moment, then it passes.",
@@ -1169,11 +1181,11 @@ bottlename()
 
 void
 potionhit(mon, obj, your_fault)
-register struct monst *mon;
-register struct obj *obj;
+struct monst *mon;
+struct obj *obj;
 boolean your_fault;
 {
-	register const char *botlnam = bottlename();
+	const char *botlnam = bottlename();
 	boolean isyou = (mon == &youmonst);
 	int distance;
 	boolean disint = (touch_disintegrates(mon->data) && 
@@ -1300,7 +1312,7 @@ boolean your_fault;
 		break;
 	case POT_BLINDNESS:
 		if(haseyes(mon->data)) {
-		    register int btmp = 64 + rn2(32) +
+		    int btmp = 64 + rn2(32) +
 			rn2(32) * !resist(mon, POTION_CLASS, 0, NOTELL);
 		    btmp += mon->mblinded;
 		    mon->mblinded = min(btmp,127);
@@ -1384,7 +1396,7 @@ boolean your_fault;
 		}
 	}
 	if(*u.ushops && obj->unpaid) {
-	        register struct monst *shkp =
+	        struct monst *shkp =
 			shop_keeper(*in_rooms(u.ux, u.uy, SHOPBASE));
 
 		if(!shkp)
@@ -1401,9 +1413,9 @@ boolean your_fault;
 /* vapors are inhaled or get in your eyes */
 void
 potionbreathe(obj)
-register struct obj *obj;
+struct obj *obj;
 {
-	register int i, ii, kn = 0;
+	int i, ii, kn = 0;
 
 	switch(obj->otyp) {
 	case POT_RESTORE_ABILITY:
@@ -1657,7 +1669,7 @@ alchemy_init()
 /** Returns the potion type when object o1 is dipped into object o2 */
 STATIC_OVL short
 mixtype(o1, o2)
-register struct obj *o1, *o2;
+struct obj *o1, *o2;
 {
 	/* cut down on the number of cases below */
 	if (o1->oclass == POTION_CLASS &&
@@ -1751,7 +1763,7 @@ register struct obj *o1, *o2;
 
 boolean
 get_wet(obj)
-register struct obj *obj;
+struct obj *obj;
 /* returns TRUE if something happened (potion should be used up) */
 {
 	char Your_buf[BUFSZ];
@@ -1771,6 +1783,7 @@ register struct obj *obj;
 		if (obj->otyp == POT_ACID) {
 			pline("It boils vigorously!");
 			You("are caught in the explosion!");
+			wake_nearby();
 			losehp(Acid_resistance ? rnd(5) : rnd(10),
 			       "elementary chemistry", KILLED_BY);
 			makeknown(obj->otyp);
@@ -1859,7 +1872,7 @@ register struct obj *obj;
 int
 dodip()
 {
-	register struct obj *potion, *obj;
+	struct obj *potion, *obj;
 	const char *tmp;
 	uchar here;
 	char allowall[2];
@@ -2041,6 +2054,7 @@ struct obj *potion, *obj;
 		/* KMH, balance patch -- acid is particularly unstable */
 		if (obj->cursed || obj->otyp == POT_ACID || potion->otyp == POT_ACID || !rn2(10)) {
 			pline("BOOM!  They explode!");
+			wake_nearby();
 			exercise(A_STR, FALSE);
 			if (!breathless(youmonst.data) || haseyes(youmonst.data)) {
 				potionbreathe(obj);
@@ -2246,6 +2260,7 @@ struct obj *potion, *obj;
 		if (obj->lamplit || potion->lamplit) {
 			useup(potion);
 			explode(u.ux, u.uy, 11, d(6,6), 0, EXPL_FIERY);
+			wake_nearby();
 			exercise(A_WIS, FALSE);
 			return 1;
 		}
@@ -2354,7 +2369,7 @@ struct obj *potion, *obj;
 
 void
 djinni_from_bottle(obj)
-register struct obj *obj;
+struct obj *obj;
 {
 	struct monst *mtmp;
 	int chance;

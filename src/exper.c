@@ -37,13 +37,13 @@ int en;
 
 int
 experience(mtmp, nk)	/* return # of exp points for mtmp after nk killed */
-	register struct	monst *mtmp;
-	register int	nk;
+	struct	monst *mtmp;
+	int	nk;
 #if defined(macintosh) && (defined(__SC__) || defined(__MRC__))
 # pragma unused(nk)
 #endif
 {
-	register struct permonst *ptr = mtmp->data;
+	struct permonst *ptr = mtmp->data;
 	int	i, tmp, tmp2;
 
 	tmp = 1 + mtmp->m_lev * mtmp->m_lev;
@@ -100,7 +100,7 @@ experience(mtmp, nk)	/* return # of exp points for mtmp after nk killed */
  */
 void
 more_experienced(exp, score, rexp)
-	register int exp, score, rexp;
+	int exp, score, rexp;
 {
 	u.uexp += exp;
 	u.urexp += 4*exp + rexp;
@@ -118,17 +118,17 @@ void
 losexp(drainer)		/* e.g., hit by drain life attack */
 const char *drainer;	/* cause of death, if drain should be fatal */
 {
-	register int num;
+	int num;
 
-#ifdef WIZARD
 	/* override life-drain resistance when handling an explicit
 	   wizard mode request to reduce level; never fatal though */
-	if (drainer && !strcmp(drainer, "#levelchange"))
-	    drainer = 0;
-	else
-#endif
-	    if (resists_drli(&youmonst)) return;
-
+	if (drainer && !strcmp(drainer, "#levelchange")) {
+		drainer = 0;
+	} else {
+		if (resists_drli(&youmonst)) {
+			return;
+		}
+	}
 	if (u.ulevel > 1) {
 		pline("%s level %d.", Goodbye(), u.ulevel--);
 		/* remove intrinsic abilities */
@@ -185,7 +185,7 @@ void
 pluslvl(incr)
 boolean incr;	/* true iff via incremental experience growth */
 {		/*	(false for potion of gain level)      */
-	register int num;
+	int num;
 
 	if (!incr) You_feel("more experienced.");
 	num = newhp();

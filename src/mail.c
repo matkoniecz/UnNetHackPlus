@@ -279,10 +279,10 @@ static NEARDATA const char *mail_text[] = {
 STATIC_OVL boolean
 md_rush(md,tx,ty)
     struct monst *md;
-    register int tx, ty;		/* destination of mail daemon */
+    int tx, ty;		/* destination of mail daemon */
 {
     struct monst *mon;			/* displaced monster */
-    register int dx, dy;		/* direction counters */
+    int dx, dy;		/* direction counters */
     int fx = md->mx, fy = md->my;	/* current location */
     int nfx = fx, nfy = fy,		/* new location */
 	d1, d2;				/* shortest distances */
@@ -454,7 +454,7 @@ struct obj *otmp;
     "Only Amiga makes it possible.",
     "CATS have all the answers.",
 #endif
-    "Report bugs to <bulwersator@gmail.com>.",
+    "Report bugs to <https://github.com/Bulwersator/UnNetHackPlus/issues>.",
     "Invitation: Visit the NetHack web site at http://www.nethack.org!"
     };
 
@@ -514,7 +514,7 @@ readmail(otmp)
 struct obj *otmp;
 {
 #ifdef DEF_MAILREADER
-	register const char *mr = 0;
+	const char *mr = 0;
 #endif /* DEF_MAILREADER */
 #ifdef SIMPLE_MAIL
 	if (iflags.simplemail)

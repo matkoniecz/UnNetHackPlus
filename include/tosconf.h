@@ -35,7 +35,6 @@
 /* configurable options */
 #define MFLOPPY			/* floppy support		*/
 #define RANDOM			/* improved random numbers	*/
-#define SHELL			/* allow spawning of shell	*/
 #define TERMLIB			/* use termcap			*/
 #define TEXTCOLOR		/* allow color			*/
 #define MAIL			/* enable the fake maildemon */
@@ -76,10 +75,6 @@ extern int FDECL(strncmpi,(const char *, const char *, size_t));
 
 #ifdef TEXTCOLOR
 extern boolean colors_changed;	/* in tos.c */
-#endif
-
-#ifdef __GNUC__
-#define GCC_BUG		/* correct a gcc bug involving double for loops */
 #endif
 
 #endif /* TOSCONF_H */

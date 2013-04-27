@@ -22,7 +22,7 @@
 void FDECL(cmov, (int, int));
 void FDECL(nocmov, (int, int));
 int FDECL(process_keystroke, (INPUT_RECORD *, boolean *,
-    BOOLEAN_P numberpad, int portdebug));
+    boolean numberpad, int portdebug));
 
 /*
  * The following WIN32 Console API routines are used in this file.
@@ -69,7 +69,7 @@ typedef int (__stdcall * PROCESS_KEYSTROKE)(
     HANDLE,
     INPUT_RECORD *,
     boolean *,
-    BOOLEAN_P,
+    boolean,
     int
 );
 
@@ -82,7 +82,7 @@ typedef int (__stdcall * CHECKINPUT)(
 	HANDLE,
 	INPUT_RECORD *,
 	DWORD *,
-	BOOLEAN_P,
+	boolean,
 	int,
 	int *,
 	coord *
@@ -373,7 +373,7 @@ int *x, *y, *mod;
 static void
 really_move_cursor()
 {
-#if defined(PORT_DEBUG) && defined(WIZARD)
+#if defined(PORT_DEBUG)
 	char oldtitle[BUFSZ], newtitle[BUFSZ];
 	if (display_cursor_info && wizard) {
 		oldtitle[0] = '\0';
@@ -395,7 +395,7 @@ really_move_cursor()
 
 void
 cmov(x, y)
-register int x, y;
+int x, y;
 {
 	ttyDisplay->cury = y;
 	ttyDisplay->curx = x;
@@ -887,7 +887,7 @@ void win32con_toggle_cursor_info()
 
 void
 map_subkeyvalue(op)
-register char *op;
+char *op;
 {
 	char digits[] = "0123456789";
 	int length, i, idx, val;

@@ -145,20 +145,10 @@
 
 /*
  * Section 2:	Some global parameters and filenames.
- *		Commenting out WIZARD, LOGFILE, NEWS or PANICLOG removes that
- *		feature from the game; otherwise set the appropriate wizard
- *		name.  LOGFILE, NEWS and PANICLOG refer to files in the
- *		playground.
+ *		Commenting out LOGFILE, NEWS or PANICLOG removes that
+ *		feature from the game LOGFILE, NEWS and PANICLOG refer to 
+ *		files in the playground.
  */
-
-#ifndef WIZARD		/* allow for compile-time or Makefile changes */
-# ifndef KR1ED
-#  define WIZARD  "wizard" /* the person allowed to use the -D option */
-# else
-#  define WIZARD
-#  define WIZARD_NAME "wizard"
-# endif
-#endif
 
 #define LOGFILE "logfile"	/* larger file for debugging purposes */
 #define LOGAREA FILE_AREA_VAR
@@ -250,13 +240,6 @@
  */
 
 /*
- * Uncomment the following line if your compiler doesn't understand the
- * 'void' type (and thus would give all sorts of compile errors without
- * this definition).
- */
-/* #define NOVOID */			/* define if no "void" data type. */
-
-/*
  * Uncomment the following line if your compiler falsely claims to be
  * a standard C compiler (i.e., defines __STDC__ without cause).
  * Examples are Apollo's cc (in some versions) and possibly SCO UNIX's rcc.
@@ -328,18 +311,8 @@ typedef long glyph_t;
  * size, but runs slightly faster than the alternate algorithm.  (MSDOS in
  * particular cannot tolerate the increase in data size; other systems can
  * flip a coin weighted to local conditions.)
- *
- * If VISION_TABLES is not defined, things will be faster if you can use
- * MACRO_CPATH.  Some cpps, however, cannot deal with the size of the
- * functions that have been macroized.
  */
-
 /* #define VISION_TABLES */ /* use vision tables generated at compile time */
-#ifndef VISION_TABLES
-# ifndef NO_MACRO_CPATH
-#  define MACRO_CPATH	/* use clear_path macros instead of functions */
-# endif
-#endif
 
 /*
  * Section 4:  THE FUN STUFF!!!
@@ -354,7 +327,6 @@ typedef long glyph_t;
 #define SINKS		/* Kitchen sinks - Janet Walz */
 /* dungeon levels */
 #define WALLIFIED_MAZE	/* Fancy mazes - Jean-Christophe Collet */
-#define REINCARNATION	/* Special Rogue-like levels */
 /* monsters & objects */
 #define KOPS		/* Keystone Kops by Scott R. Turner */
 /* difficulty */
@@ -365,7 +337,6 @@ typedef long glyph_t;
 # define CLIPPING	/* allow smaller screens -- ERS */
 #endif
 
-#define EXP_ON_BOTL	/* Show experience on bottom line */
 /* #define SCORE_ON_BOTL */	/* added by Gary Erickson (erickson@ucivax) */
 #endif /* AUTOCONF */
 
@@ -431,8 +402,6 @@ typedef long glyph_t;
 /*#define DUMP_HTML_LOG*/   /* Dump game end information to a html file */
 #define DUMPMSGS 30     /* Number of latest messages in the dump file  */
 
-#define AUTO_OPEN	/* open doors by walking into them - Stefano Busti */
-
 /* #define WHEREIS_FILE "./whereis/%n.whereis" */ /* Write out player's current location to player.whereis */
 
 #endif /* AUTOCONF */
@@ -464,7 +433,10 @@ typedef long glyph_t;
  *
  * These defines are useless, as #ifdef etc were removed from code 
  * and features are incorporated into UnNetHackPlus without evil preprocessor instructions littering code
+ * these defines are also listed in build_pseudo_opts (util\makedefs.c)
  */
+#define AUTO_OPEN	/* open doors by walking into them - Stefano Busti */
+#define EXP_ON_BOTL	/* Show experience on bottom line */
 #define STEED		/* Riding steeds */
 #define SEDUCE		/* Succubi/incubi seduction, by KAA, suggested by IM */
 #define TOURIST		/* Tourist players with cameras and Hawaiian shirts */
@@ -472,8 +444,21 @@ typedef long glyph_t;
 #define ADJSPLIT /* splittable #adjust - Sam Dennis, conditionalized by Jukka Lahtinen */
 #define ELBERETH_CONDUCT /* Track the number of times the player engraves Elbereth. - Ray Kulhanek */
 #define BLACKMARKET	/* Massimo Campostrini (campo@sunthpi3.difi.unipi.it) */
+#define PARANOID
+#define REINCARNATION	/* Special Rogue-like levels */
 
 /* End of Section 7 */
+
+/*
+ * Section 8:  FICTIONAL DEFINES THAT MUST BE DEFINED
+ *
+ * Commenting out these defines is not allowes, as #ifdef etc were removed from code 
+ * and features are incorporated into UnNetHackPlus without evil preprocessor instructions littering code
+ * and some potentialy useful code was included without this one
+ */
+#define WIZARD
+
+/* End of Section 8 */
 
 #include "global.h"	/* Define everything else according to choices above */
 

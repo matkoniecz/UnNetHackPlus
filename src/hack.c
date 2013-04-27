@@ -10,14 +10,14 @@
 STATIC_DCL void NDECL(maybe_wail);
 #endif /*OVL1*/
 STATIC_DCL int NDECL(moverock);
-STATIC_DCL int FDECL(still_chewing,(XCHAR_P,XCHAR_P));
+STATIC_DCL int FDECL(still_chewing,(xchar,xchar));
 #ifdef SINKS
 STATIC_DCL void NDECL(dosinkfall);
 #endif
 STATIC_DCL boolean FDECL(findtravelpath, (boolean(*)(int, int)));
 STATIC_DCL boolean FDECL(monstinroom, (struct permonst *,int));
 
-STATIC_DCL void FDECL(move_update, (BOOLEAN_P));
+STATIC_DCL void FDECL(move_update, (boolean));
 STATIC_DCL void FDECL(struggle_sub, (const char *));
 
 static boolean door_opened;	/* set to true if door was opened during test_move */
@@ -59,13 +59,13 @@ count_herbs_at(x,y, watery)
 xchar x,y;
 boolean watery;
 {
-   register int dd;
-   register long count = 0;
+   int dd;
+   long count = 0;
 
    if (isok(x,y)) {
       for (dd = 0; dd < SIZE(herb_info); dd++) {
 	 if (watery == herb_info[dd].in_water) {
-	    register struct obj *otmp = sobj_at(herb_info[dd].herb, x,y);
+	    struct obj *otmp = sobj_at(herb_info[dd].herb, x,y);
 	    if (otmp)
 	      count += otmp->quan;
 	 }
@@ -80,7 +80,7 @@ herb_can_grow_at(x,y, watery)
 xchar x,y;
 boolean watery;
 {
-  register struct rm *lev = &levl[x][y];
+  struct rm *lev = &levl[x][y];
   if (inside_shop(x,y)) return FALSE;
   if (watery)
      return (IS_POOL(lev->typ) &&
@@ -229,7 +229,7 @@ drop_ripe_treefruit(x,y,showmsg, update)
 xchar x,y;
 boolean showmsg, update;
 {
-   register struct rm *lev;
+   struct rm *lev;
 
    rndmappos(&x,&y);
    lev = &levl[x][y];
@@ -357,7 +357,7 @@ revive_nasty(x, y, msg)
 int x,y;
 const char *msg;
 {
-    register struct obj *otmp, *otmp2;
+    struct obj *otmp, *otmp2;
     struct monst *mtmp;
     coord cc;
     boolean revived = FALSE;
@@ -391,10 +391,10 @@ const char *msg;
 STATIC_OVL int
 moverock()
 {
-    register xchar rx, ry, sx, sy;
-    register struct obj *otmp;
-    register struct trap *ttmp;
-    register struct monst *mtmp;
+    xchar rx, ry, sx, sy;
+    struct obj *otmp;
+    struct trap *ttmp;
+    struct monst *mtmp;
 
     sx = u.ux + u.dx,  sy = u.uy + u.dy;	/* boulder starting position */
     while ((otmp = sobj_at(BOULDER, sx, sy)) != 0) {
@@ -419,11 +419,7 @@ moverock()
 	}
 	if (isok(rx,ry) && !IS_ROCK(levl[rx][ry].typ) &&
 	    levl[rx][ry].typ != IRONBARS &&
-	    (!IS_DOOR(levl[rx][ry].typ) || !(u.dx && u.dy) || (
-#ifdef REINCARNATION
-		!Is_rogue_level(&u.uz) &&
-#endif
-		(levl[rx][ry].doormask & ~D_BROKEN) == D_NODOOR)) &&
+	    (!IS_DOOR(levl[rx][ry].typ) || !(u.dx && u.dy) || (!Is_rogue_level(&u.uz) && (levl[rx][ry].doormask & ~D_BROKEN) == D_NODOOR)) &&
 	    !sobj_at(BOULDER, rx, ry)) {
 	    ttmp = t_at(rx, ry);
 	    mtmp = m_at(rx, ry);
@@ -739,8 +735,8 @@ still_chewing(x,y)
 
 void
 movobj(obj, ox, oy)
-register struct obj *obj;
-register xchar ox, oy;
+struct obj *obj;
+xchar ox, oy;
 {
 	/* optimize by leaving on the fobj chain? */
 	remove_object(obj);
@@ -755,7 +751,7 @@ static NEARDATA const char fell_on_sink[] = "fell onto a sink";
 STATIC_OVL void
 dosinkfall()
 {
-	register struct obj *obj;
+	struct obj *obj;
 
 	if (is_floater(youmonst.data) || (HLevitation & FROMOUTSIDE)) {
 	    You("wobble unsteadily for a moment.");
@@ -806,7 +802,7 @@ dosinkfall()
 
 boolean
 may_dig(x,y)
-register xchar x,y;
+xchar x,y;
 /* intended to be called only on ROCKs */
 {
     return (boolean)(!((IS_STWALL(levl[x][y].typ) || IS_TREES(levl[x][y].typ)) &&
@@ -815,7 +811,7 @@ register xchar x,y;
 
 boolean
 may_passwall(x,y)
-register xchar x,y;
+xchar x,y;
 {
    return (boolean)(!((IS_STWALL(levl[x][y].typ) || IS_TREES(levl[x][y].typ)) &&
 			(levl[x][y].wall_info & W_NONPASSWALL)));
@@ -827,7 +823,7 @@ register xchar x,y;
 boolean
 bad_rock(mdat,x,y)
 struct permonst *mdat;
-register xchar x,y;
+xchar x,y;
 {
 	return((boolean) ((In_sokoban(&u.uz) && sobj_at(BOULDER,x,y)) ||
 	       (IS_ROCK(levl[x][y].typ)
@@ -867,8 +863,8 @@ int mode;
 {
     int x = ux+dx;
     int y = uy+dy;
-    register struct rm *tmpr = &levl[x][y];
-    register struct rm *ust;
+    struct rm *tmpr = &levl[x][y];
+    struct rm *ust;
 
     /*
      *  Check for physical obstacles.  First, the place we are going.
@@ -912,12 +908,10 @@ int mode;
 		if (mode == DO_MOVE) {
 		    if (amorphous(youmonst.data))
 			You("try to ooze under the door, but can't squeeze your possessions through.");
-#ifdef AUTO_OPEN
 		    else if (iflags.autoopen
 				&& !Confusion && !Stunned && !Fumbling) {
 			    door_opened = flags.move = doopen_indir(x, y);
 		    }
-#endif
 		    else if (x == ux || y == uy) {
 			if (Blind || Stunned || ACURR(A_DEX) < 10 || Fumbling) {
 			    if (u.usteed) {
@@ -935,11 +929,7 @@ int mode;
 	} else {
 	testdiag:
 	    if (dx && dy && !Passes_walls
-		&& ((tmpr->doormask & ~D_BROKEN)
-#ifdef REINCARNATION
-		    || Is_rogue_level(&u.uz)
-#endif
-		    || block_door(x,y))) {
+		&& ((tmpr->doormask & ~D_BROKEN) || Is_rogue_level(&u.uz) || block_door(x,y))) {
 		/* Diagonal moves into a door are not allowed. */
 		if (Blind && mode == DO_MOVE)
 		    feel_location(x,y);
@@ -992,12 +982,7 @@ int mode;
 
     /* Now see if other things block our way . . */
     if (dx && dy && !Passes_walls
-		     && (IS_DOOR(ust->typ) && ((ust->doormask & ~D_BROKEN)
-#ifdef REINCARNATION
-			     || Is_rogue_level(&u.uz)
-#endif
-			     || block_entry(x, y))
-			 )) {
+		&& (IS_DOOR(ust->typ) && ((ust->doormask & ~D_BROKEN) || Is_rogue_level(&u.uz) || block_entry(x, y)))) {
 	/* Can't move at a diagonal out of a doorway with door. */
 	 if (mode == DO_MOVE) autoexplore_msg("something", mode);
 	 return FALSE;
@@ -1321,9 +1306,9 @@ interesting_to_explore(x,y) {
 void
 domove()
 {
-	register struct monst *mtmp;
-	register struct rm *tmpr;
-	register xchar x,y;
+	struct monst *mtmp;
+	struct rm *tmpr;
+	xchar x,y;
 	struct trap *trap;
 	int wtcap;
 	boolean on_ice;
@@ -1459,7 +1444,7 @@ domove()
 		x = u.ux + u.dx;
 		y = u.uy + u.dy;
 		if(Stunned || (Confusion && !rn2(5))) {
-			register int tries = 0;
+			int tries = 0;
 
 			do {
 				if(tries++ > 50) {
@@ -1658,21 +1643,11 @@ domove()
 		return;
 	}
 
-	/* warn player before walking into known traps */
-	if (iflags.paranoid_trap &&
-			((trap = t_at(x, y)) && trap->tseen)) {
-		char qbuf[BUFSZ];
-		Sprintf(qbuf,"Do you really want to %s into that %s?", 
-				locomotion(youmonst.data, "step"),
-				defsyms[trap_to_defsym(trap->ttyp)].explanation);
-		if (yn(qbuf) != 'y') {
-			nomul(0, 0);
-			flags.move = 0;
-			return;
-		}
-	}
 	if(u.utrap) {
-		if(u.utraptype == TT_PIT) {
+		if(u.utraptype == TT_PIT && Passes_walls) {
+			You("phase through walls and escape from pit."); 
+			u.utrap = 0;
+		} else if(u.utraptype == TT_PIT) {
 		    if (!rn2(2) && sobj_at(BOULDER, u.ux, u.uy)) {
 			Your("%s gets stuck in a crevice.", body_part(LEG));
 			display_nhwindow(WIN_MESSAGE, FALSE);
@@ -1761,6 +1736,20 @@ domove()
 		    }
 		}
 		return;
+	}
+
+	/* warn player before walking into known traps */
+	if (iflags.paranoid_trap &&
+			((trap = t_at(x, y)) && trap->tseen)) {
+		char qbuf[BUFSZ];
+		Sprintf(qbuf,"Do you really want to %s into that %s?", 
+				locomotion(youmonst.data, "step"),
+				defsyms[trap_to_defsym(trap->ttyp)].explanation);
+		if (yn(qbuf) != 'y') {
+			nomul(0, 0);
+			flags.move = 0;
+			return;
+		}
 	}
 
 	if (!test_move(u.ux, u.uy, x-u.ux, y-u.uy, DO_MOVE)) {
@@ -2031,7 +2020,7 @@ void
 spoteffects(pick)
 boolean pick;
 {
-	register struct monst *mtmp;
+	struct monst *mtmp;
 
 	if(u.uinwater) {
 		int was_underwater;
@@ -2164,7 +2153,7 @@ monstinroom(mdat,roomno)
 struct permonst *mdat;
 int roomno;
 {
-	register struct monst *mtmp;
+	struct monst *mtmp;
 
 	for(mtmp = fmon; mtmp; mtmp = mtmp->nmon)
 		if(!DEADMONSTER(mtmp) && mtmp->data == mdat &&
@@ -2175,13 +2164,13 @@ int roomno;
 
 char *
 in_rooms(x, y, typewanted)
-register xchar x, y;
-register int typewanted;
+xchar x, y;
+int typewanted;
 {
 	static char buf[5];
 	char rno, *ptr = &buf[4];
 	int typefound, min_x, min_y, max_x, max_y_offset, step;
-	register struct rm *lev;
+	struct rm *lev;
 
 #define goodtype(rno) (!typewanted || \
 	     ((typefound = rooms[rno - ROOMOFFSET].rtype) == typewanted) || \
@@ -2244,10 +2233,10 @@ register int typewanted;
 /* is (x,y) in a town? */
 boolean
 in_town(x, y)
-register int x, y;
+int x, y;
 {
 	s_level *slev = Is_special(&u.uz);
-	register struct mkroom *sroom;
+	struct mkroom *sroom;
 	boolean has_subrooms = FALSE;
 
 	if (!slev || !slev->flags.town) return FALSE;
@@ -2268,7 +2257,7 @@ register int x, y;
 
 STATIC_OVL void
 move_update(newlev)
-register boolean newlev;
+boolean newlev;
 {
 	char *ptr1, *ptr2, *ptr3, *ptr4;
 
@@ -2310,9 +2299,9 @@ register boolean newlev;
 
 void
 check_special_room(newlev)
-register boolean newlev;
+boolean newlev;
 {
-	register struct monst *mtmp;
+	struct monst *mtmp;
 	char *ptr;
 
 	move_update(newlev);
@@ -2328,7 +2317,7 @@ register boolean newlev;
 	    u_entered_shop(u.ushops_entered);
 
 	for (ptr = &u.uentered[0]; *ptr; ptr++) {
-	    register int roomno = *ptr - ROOMOFFSET, rt = rooms[roomno].rtype;
+	    int roomno = *ptr - ROOMOFFSET, rt = rooms[roomno].rtype;
 
 	    /* Did we just enter some other special room? */
 	    /* vault.c insists that a vault remain a VAULT,
@@ -2531,10 +2520,10 @@ dopickup()
 void
 lookaround()
 {
-    register int x, y, i, x0 = 0, y0 = 0, m0 = 1, i0 = 9;
-    register int corrct = 0, noturn = 0;
-    register struct monst *mtmp;
-    register struct trap *trap;
+    int x, y, i, x0 = 0, y0 = 0, m0 = 1, i0 = 9;
+    int corrct = 0, noturn = 0;
+    struct monst *mtmp;
+    struct trap *trap;
 
     /* Grid bugs stop if trying to move diagonal, even if blind.  Maybe */
     /* they polymorphed while in the middle of a long move. */
@@ -2671,8 +2660,8 @@ stop:
 int
 monster_nearby()
 {
-	register int x,y;
-	register struct monst *mtmp;
+	int x,y;
+	struct monst *mtmp;
 
 	/* Also see the similar check in dochugw() in monmove.c */
 	for(x = u.ux-1; x <= u.ux+1; x++)
@@ -2695,7 +2684,7 @@ monster_nearby()
 
 void
 nomul(nval, txt)
-register int nval;
+int nval;
 const char *txt;
 {
 	if(multi < nval) return;	/* This is a bug fix by ab@unido */
@@ -2760,22 +2749,20 @@ maybe_wail()
 }
 
 /** Print the amount n of damage inflicted.
- * In contrast to Slash'Em, in UnNetHack the damage is only shown in
- * Wizard mode.
+ * In contrast to Slash'Em, in UnNetHackPlus the damage is only shown in Wizard mode.
  */
 void
 showdmg(n,you)
 int n; /**< amount of damage inflicted */
 boolean you; /**< true, if you are hit */
 {
-#ifdef WIZARD
 	if (iflags.showdmg && wizard && n > 0) {
-		if (you)
+		if (you) {
 			pline("[%d pts.]", n);
-		else
+		} else {
 			pline("(%d pts.)", n);
+		}
 	}
-#endif
 }
 
 void
@@ -2826,7 +2813,7 @@ boolean k_format;
 int
 weight_cap()
 {
-	register long carrcap;
+	long carrcap;
 
 	carrcap = 25*(ACURRSTR + ACURR(A_CON)) + 50;
 	if (Upolyd) {
@@ -2860,8 +2847,8 @@ static int wc;	/* current weight_cap(); valid after call to inv_weight() */
 int
 inv_weight()
 {
-	register struct obj *otmp = invent;
-	register int wt = 0;
+	struct obj *otmp = invent;
+	int wt = 0;
 
 #ifndef GOLDOBJ
 	/* when putting stuff into containers, gold is inserted at the head
@@ -2936,8 +2923,8 @@ const char *str;
 int
 inv_cnt()
 {
-	register struct obj *otmp = invent;
-	register int ct = 0;
+	struct obj *otmp = invent;
+	int ct = 0;
 
 	while(otmp){
 		ct++;
@@ -2964,5 +2951,32 @@ struct obj *otmp;
 }
 #endif
 #endif /* OVLB */
+
+boolean
+is_player_slimeable()
+{
+	if (Slimed) {
+		return FALSE;
+	}
+	if (Unchanging) {
+		return FALSE;
+	}
+	return is_monster_slimeable(youmonst.data);
+}
+
+boolean
+is_monster_slimeable(struct permonst *mptr)
+{
+	if (flaming(mptr)) {
+		return FALSE;
+	}
+	if (unsolid(mptr)) {
+		return FALSE;
+	}
+	if (mptr == &mons[PM_GREEN_SLIME]) {
+		return FALSE;
+	}
+	return TRUE;
+}
 
 /*hack.c*/

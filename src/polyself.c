@@ -364,7 +364,6 @@ int	mntmp;
 {
 	boolean sticky = sticks(youmonst.data) && u.ustuck && !u.uswallow,
 		was_blind = !!Blind, dochange = FALSE;
-	boolean could_pass_walls = Passes_walls;
 	int mlvl;
 
 	if (mvitals[mntmp].mvflags & G_GENOD) {	/* allow G_EXTINCT */
@@ -418,9 +417,8 @@ int	mntmp;
 			You_feel("like a new %s!", mons[mntmp].mname);
 	}
 	if (Stoned && poly_when_stoned(&mons[mntmp])) {
-		/* poly_when_stoned already checked stone golem genocide */
 		You("turn to stone!");
-		mntmp = PM_STONE_GOLEM;
+		mntmp = get_potential_stoned_form_of_monster(mntmp);
 		Stoned = 0;
 		delayed_killer = 0;
 	}
@@ -489,13 +487,6 @@ int	mntmp;
 	else
 		u.uundetected = 0;
 
-	if (u.utraptype == TT_PIT) {
-	    if (could_pass_walls && !Passes_walls) {
-		u.utrap = rn1(6,2);
-	    } else if (!could_pass_walls && Passes_walls) {
-		u.utrap = 0;
-	    }
-	}
 	if (was_blind && !Blind) {	/* previous form was eyeless */
 	    Blinded = 1L;
 	    make_blinded(0L, TRUE);	/* remove blindness */
@@ -593,7 +584,7 @@ int	mntmp;
 STATIC_OVL void
 break_armor()
 {
-    register struct obj *otmp;
+    struct obj *otmp;
 
     if (breakarm(youmonst.data)) {
 	if ((otmp = uarm) != 0) {
@@ -813,7 +804,7 @@ doremove()
 int
 dospinweb()
 {
-	register struct trap *ttmp = t_at(u.ux,u.uy);
+	struct trap *ttmp = t_at(u.ux,u.uy);
 
 	if (Levitation || Is_airlevel(&u.uz)
 	    || Underwater || Is_waterlevel(&u.uz)) {
@@ -947,7 +938,7 @@ dosummon()
 int
 dogaze()
 {
-	register struct monst *mtmp;
+	struct monst *mtmp;
 	int looked = 0;
 	char qbuf[QBUFSZ];
 	int i;

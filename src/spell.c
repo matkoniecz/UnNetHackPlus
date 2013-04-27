@@ -18,7 +18,7 @@ static NEARDATA struct obj *book;	/* last/current book being xscribed */
 #define spellev(spell)		spl_book[spell].sp_lev
 #define spellname(spell)	OBJ_NAME(objects[spellid(spell)])
 
-STATIC_DCL int FDECL(spell_let_to_idx, (CHAR_P));
+STATIC_DCL int FDECL(spell_let_to_idx, (char));
 STATIC_DCL boolean FDECL(cursed_book, (struct obj *bp));
 STATIC_DCL boolean FDECL(confused_book, (struct obj *));
 STATIC_DCL void FDECL(deadbook, (struct obj *));
@@ -210,8 +210,8 @@ struct obj *book2;
     /* KMH -- Need ->known to avoid "_a_ Book of the Dead" */
     book2->known = 1;
     if(invocation_pos(u.ux, u.uy) && !On_stairs(u.ux, u.uy)) {
-	register struct obj *otmp;
-	register boolean arti1_primed = FALSE, arti2_primed = FALSE,
+	struct obj *otmp;
+	boolean arti1_primed = FALSE, arti2_primed = FALSE,
 			 arti_cursed = FALSE;
 
 	if(book2->cursed) {
@@ -392,10 +392,10 @@ learn()
 
 int
 study_book(spellbook)
-register struct obj *spellbook;
+struct obj *spellbook;
 {
-	register int	 booktype = spellbook->otyp;
-	register boolean confused = (Confusion != 0);
+	int	 booktype = spellbook->otyp;
+	boolean confused = (Confusion != 0);
 	boolean too_hard = FALSE;
 
 	if (delay && !confused && spellbook == book &&
@@ -933,7 +933,7 @@ boolean atme;
 		break;
 
 	case SPE_CURE_BLINDNESS:
-		healup(0, 0, FALSE, TRUE);
+		healup(0, 0, FALSE, TRUE, FALSE);
 		break;
 	case SPE_CURE_SICKNESS:
 		if (Sick) You("are no longer ill.");
@@ -942,7 +942,7 @@ boolean atme;
 		    Slimed = 0;
 		 /* flags.botl = 1; -- healup() handles this */
 		}
-		healup(0, 0, TRUE, FALSE);
+		healup(0, 0, TRUE, FALSE, FALSE);
 		break;
 	case SPE_CREATE_FAMILIAR:
 		(void) make_familiar((struct obj *)0, u.ux, u.uy, FALSE);

@@ -34,7 +34,7 @@ STATIC_DCL void FDECL(savegamestate, (int,int));
 void FDECL(save_mongen_override, (int,struct mon_gen_override *, int));
 void FDECL(save_lvl_sounds, (int,struct lvl_sounds *, int));
 #ifdef MFLOPPY
-STATIC_DCL void FDECL(savelev0, (int,XCHAR_P,int));
+STATIC_DCL void FDECL(savelev0, (int,xchar,int));
 STATIC_DCL boolean NDECL(swapout_oldest);
 STATIC_DCL void FDECL(copyfile, (char *,char *));
 #endif /* MFLOPPY */
@@ -44,7 +44,7 @@ static long nulls[10];
 #define nulls nul
 #endif
 
-#if defined(UNIX) || defined(VMS) || defined(__EMX__) || defined(WIN32)
+#if defined(UNIX) || defined(VMS) || defined(WIN32)
 #define HUP	if (!program_state.done_hup)
 #else
 #define HUP
@@ -67,6 +67,12 @@ extern gsl_rng *rng_state;
 /* need to preserve these during save to avoid accessing freed memory */
 static unsigned ustuck_id = 0, usteed_id = 0;
 
+char *
+get_goodbye_message()
+{
+	return "Be seeing you...\n\nI would welcome help in increasing variation of text used by shopkeepers, \nas currently their yells are quite repetitive. Ideas may be posted on\nhttps://github.com/Bulwersator/UnNetHackPlus/issues/9 or \non http://www.reddit.com/r/roguelikes/comments/1bt3ip/ .\nThanks to anybody who would share idea for new hollers!\n\nBug tracker is located at https://github.com/Bulwersator/UnNetHackPlus/issues\n- both bug reports and help in dealing with listed issues are welcomed! \n\n-- Bulwersator\n";
+}
+
 int
 dosave()
 {
@@ -77,7 +83,7 @@ dosave()
 	} else {
 		clear_nhwindow(WIN_MESSAGE);
 		pline("Saving...");
-#if defined(UNIX) || defined(VMS) || defined(__EMX__)
+#if defined(UNIX) || defined(VMS)
 		program_state.done_hup = 0;
 #endif
 		if(dosave0()) {
@@ -88,7 +94,7 @@ dosave()
 			u.uhp = -1;		/* universal game's over indicator */
 			/* make sure they see the Saving message */
 			display_nhwindow(WIN_MESSAGE, TRUE);
-			exit_nhwindows("Be seeing you...");
+			exit_nhwindows(get_goodbye_message());
 			terminate(EXIT_SUCCESS);
 		} else (void)doredraw();
 	}
@@ -96,7 +102,7 @@ dosave()
 }
 
 
-#if defined(UNIX) || defined(VMS) || defined (__EMX__) || defined(WIN32)
+#if defined(UNIX) || defined(VMS) || defined(WIN32)
 /*ARGSUSED*/
 void
 hangup(sig_unused)  /* called as signal() handler, so sent at least one arg */
@@ -132,7 +138,7 @@ int
 dosave0()
 {
 	const char *fq_save;
-	register int fd, ofd;
+	int fd, ofd;
 	xchar ltmp;
 	d_level uz_save;
 	char whynot[BUFSZ];
@@ -291,7 +297,7 @@ dosave0()
 
 STATIC_OVL void
 savegamestate(fd, mode)
-register int fd, mode;
+int fd, mode;
 {
 	int uid;
 #if defined(RECORD_REALTIME) || defined(REALTIME_ON_BOTL)
@@ -656,7 +662,7 @@ int fd;
 
 void
 bflush(fd)  /* flush run and buffer */
-register int fd;
+int fd;
 {
     bwritefd = fd;
     if (outrunlength >= 0) {	/* flush run */
@@ -668,7 +674,7 @@ register int fd;
 
     if (outbufp) {
 	if (write(fd, outbuf, outbufp) != outbufp) {
-#if defined(UNIX) || defined(VMS) || defined(__EMX__)
+#if defined(UNIX) || defined(VMS)
 	    if (program_state.done_hup)
 		terminate(EXIT_FAILURE);
 	    else
@@ -683,9 +689,9 @@ void
 bwrite(fd, loc, num)
 int fd;
 genericptr_t loc;
-register unsigned num;
+unsigned num;
 {
-    register unsigned char *bp = (unsigned char *)loc;
+    unsigned char *bp = (unsigned char *)loc;
 
     if (!compressing) {
 #ifdef MFLOPPY
@@ -693,7 +699,7 @@ register unsigned num;
 	if (count_only) return;
 #endif
 	if ((unsigned) write(fd, loc, num) != num) {
-#if defined(UNIX) || defined(VMS) || defined(__EMX__)
+#if defined(UNIX) || defined(VMS)
 	    if (program_state.done_hup)
 		terminate(EXIT_FAILURE);
 	    else
@@ -769,9 +775,9 @@ bflush(fd)
 
 void
 bwrite(fd,loc,num)
-register int fd;
-register genericptr_t loc;
-register unsigned num;
+int fd;
+genericptr_t loc;
+unsigned num;
 {
 	boolean failed;
 
@@ -798,7 +804,7 @@ register unsigned num;
 	}
 
 	if (failed) {
-#if defined(UNIX) || defined(VMS) || defined(__EMX__)
+#if defined(UNIX) || defined(VMS)
 	    if (program_state.done_hup)
 		terminate(EXIT_FAILURE);
 	    else
@@ -826,7 +832,7 @@ bclose(fd)
 
 STATIC_OVL void
 savelevchn(fd, mode)
-register int fd, mode;
+int fd, mode;
 {
 	s_level	*tmplev, *tmplev2;
 	int cnt = 0;
@@ -848,9 +854,9 @@ register int fd, mode;
 
 STATIC_OVL void
 savedamage(fd, mode)
-register int fd, mode;
+int fd, mode;
 {
-	register struct damage *damageptr, *tmp_dam;
+	struct damage *damageptr, *tmp_dam;
 	unsigned int xl = 0;
 
 	damageptr = level.damagelist;
@@ -873,8 +879,8 @@ register int fd, mode;
 
 void
 save_mongen_override(fd, or, mode)
-register int fd, mode;
-register struct mon_gen_override *or;
+int fd, mode;
+struct mon_gen_override *or;
 {
     struct mon_gen_tuple *mt;
     struct mon_gen_tuple *prev;
@@ -908,8 +914,8 @@ register struct mon_gen_override *or;
 
 void
 save_lvl_sounds(fd, or, mode)
-register int fd, mode;
-register struct lvl_sounds *or;
+int fd, mode;
+struct lvl_sounds *or;
 {
     int marker = 0;
     int i;
@@ -946,10 +952,10 @@ register struct lvl_sounds *or;
 
 STATIC_OVL void
 saveobjchn(fd, otmp, mode)
-register int fd, mode;
-register struct obj *otmp;
+int fd, mode;
+struct obj *otmp;
 {
-	register struct obj *otmp2;
+	struct obj *otmp2;
 	unsigned int xl;
 	int minusone = -1;
 
@@ -978,10 +984,10 @@ register struct obj *otmp;
 
 STATIC_OVL void
 savemonchn(fd, mtmp, mode)
-register int fd, mode;
-register struct monst *mtmp;
+int fd, mode;
+struct monst *mtmp;
 {
-	register struct monst *mtmp2;
+	struct monst *mtmp2;
 	unsigned int xl;
 	int minusone = -1;
 	struct permonst *monbegin = &mons[0];
@@ -1008,10 +1014,10 @@ register struct monst *mtmp;
 
 STATIC_OVL void
 savetrapchn(fd, trap, mode)
-register int fd, mode;
-register struct trap *trap;
+int fd, mode;
+struct trap *trap;
 {
-	register struct trap *trap2;
+	struct trap *trap2;
 
 	while (trap) {
 	    trap2 = trap->ntrap;
@@ -1032,9 +1038,9 @@ register struct trap *trap;
  */
 void
 savefruitchn(fd, mode)
-register int fd, mode;
+int fd, mode;
 {
-	register struct fruit *f2, *f1;
+	struct fruit *f2, *f1;
 
 	f1 = ffruit;
 	while (f1) {
@@ -1204,12 +1210,10 @@ int lev;
 			if (!swapout_oldest())
 				return FALSE;
 	}
-# ifdef WIZARD
 	if (wizard) {
 		pline("Swapping in `%s'.", from);
 		wait_synch();
 	}
-# endif
 	copyfile(from, to);
 	(void) unlink(from);
 	level_info[lev].where = ACTIVE;
@@ -1236,12 +1240,10 @@ swapout_oldest() {
 	Sprintf(to, "%s%s", permbones, alllevels);
 	set_levelfile_name(from, oldest);
 	set_levelfile_name(to, oldest);
-# ifdef WIZARD
 	if (wizard) {
 		pline("Swapping out `%s'.", from);
 		wait_synch();
 	}
-# endif
 	copyfile(from, to);
 	(void) unlink(from);
 	level_info[oldest].where = SWAPPED;

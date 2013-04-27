@@ -2618,7 +2618,7 @@ Things appear to have become so bad that you fear that soon
 "Did you bring me back any souvenirs?"
 %E
 %Cc Tou 00015
-"Is it really you, %p!  I had given up hope for your return.
+"It is really you, %p!  I had given up hope for your return.
 As you can %x, we are desperately in need of your talents.  Someone must
 defeat %n if our town is become what it once was.
 
@@ -3361,7 +3361,7 @@ essential in locating the Amulet of Yendor."
 #	Angelic maledictions.
 #
 %Cp - 00010
-"Repent, and thou shalt be saved!"
+"Depart, thou accursed, into everlasting fire!"
 %E
 %Cp - 00011
 "Thou shalt pay for thine insolence!"
@@ -3410,6 +3410,15 @@ essential in locating the Amulet of Yendor."
 %E
 %Cp - 00026
 "You have fought against us as one would attack a cliff with a broken straw."
+%E
+%Cp - 00027
+"Abandon this arrogance and accept your mortality!"
+%E
+%Cp - 00028
+"Had your soul been worth saving They would not send me."
+%E
+%Cp - 00029
+"Hold still for your smiting!"
 %E
 #
 #	Demonic maledictions.
@@ -3482,6 +3491,27 @@ essential in locating the Amulet of Yendor."
 %E
 %Cp - 00052
 "There you are, like butter in sunshine."
+%E
+%Cp - 00053
+"Begone, or I shall taunt you!"
+%E
+%Cp - 00054
+"It hurts to be you!"
+%E
+%Cp - 00055
+"Where is your god now?"
+%E
+%Cp - 00056
+"Is that a unicorn horn, or are you happy to see me?"
+%E
+%Cp - 00057
+"I shall bathe in thy blood! I shall taste of they flesh! And than...tea and crumpets we shall have!"
+%E
+%Cp - 00058
+"You frog-eating surrender monkey!"
+%E
+%Cp - 00059
+"You are an explicitly recycled marketing person!"
 %E
 #
 #	Banishment message (for converted hero)

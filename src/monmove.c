@@ -21,7 +21,7 @@ STATIC_DCL void FDECL(watch_on_duty,(struct monst *));
 
 boolean /* TRUE : mtmp died */
 mb_trapped(mtmp)
-register struct monst *mtmp;
+struct monst *mtmp;
 {
 	if (flags.verbose) {
 	    if (cansee(mtmp->mx, mtmp->my))
@@ -47,7 +47,7 @@ register struct monst *mtmp;
 
 STATIC_OVL void
 watch_on_duty(mtmp)
-register struct monst *mtmp;
+struct monst *mtmp;
 {
 	int	x, y;
 
@@ -81,9 +81,9 @@ register struct monst *mtmp;
 
 int
 dochugw(mtmp)
-	register struct monst *mtmp;
+	struct monst *mtmp;
 {
-	register int x = mtmp->mx, y = mtmp->my;
+	int x = mtmp->mx, y = mtmp->my;
 	boolean already_saw_mon = !occupation ? 0 : canspotmon(mtmp);
 	int rd = dochug(mtmp);
 
@@ -156,7 +156,7 @@ boolean digest_meal;
  */
 STATIC_OVL int
 disturb(mtmp)
-	register struct monst *mtmp;
+	struct monst *mtmp;
 {
 	/*
 	 * + Ettins are hard to surprise.
@@ -200,6 +200,9 @@ int fleetime;
 boolean first;
 boolean fleemsg;
 {
+	if (DEADMONSTER(mtmp)) {
+		return;
+	}
 	struct monst* mtmp2;
 
 	if (u.ustuck == mtmp) {
@@ -289,7 +292,7 @@ boolean fleemsg;
 
 STATIC_OVL void
 distfleeck(mtmp,inrange,nearby,scared)
-register struct monst *mtmp;
+struct monst *mtmp;
 int *inrange, *nearby, *scared;
 {
 	int seescaryx, seescaryy;
@@ -345,10 +348,10 @@ struct monst *mon;
  */
 int
 dochug(mtmp)
-register struct monst *mtmp;
+struct monst *mtmp;
 {
-	register struct permonst *mdat;
-	register int tmp=0;
+	struct permonst *mdat;
+	int tmp=0;
 	int inrange, nearby, scared;
 #ifdef GOLDOBJ
         struct obj *ygold = 0, *lepgold = 0;
@@ -477,7 +480,7 @@ register struct monst *mtmp;
 		    (!Conflict || resist(mtmp, RING_CLASS, 0, 0)))
 			pline("It feels quite soothing.");
 		else {
-			register boolean m_sen = sensemon(mtmp);
+			boolean m_sen = sensemon(mtmp);
 
 			if (m_sen || (Blind_telepat && rn2(2)) || !rn2(10)) {
 				int dmg;
@@ -641,7 +644,7 @@ static NEARDATA const char gem_class[] = { GEM_CLASS, 0 };
 
 boolean
 itsstuck(mtmp)
-register struct monst *mtmp;
+struct monst *mtmp;
 {
 	if (sticks(youmonst.data) && mtmp==u.ustuck && !u.uswallow) {
 		pline("%s cannot escape from you!", Monnam(mtmp));
@@ -658,10 +661,10 @@ register struct monst *mtmp;
  */
 int
 m_move(mtmp, after)
-register struct monst *mtmp;
-register int after;
+struct monst *mtmp;
+int after;
 {
-	register int appr;
+	int appr;
 	xchar gx,gy,nix,niy,chcnt;
 	int chi;	/* could be schar except for stupid Sun-2 compiler */
 	boolean likegold=0, likegems=0, likeobjs=0, likemagic=0, conceals=0;
@@ -702,9 +705,7 @@ register int after;
 	/* Not necessary if m_move called from this file, but necessary in
 	 * other calls of m_move (ex. leprechauns dodging)
 	 */
-#ifdef REINCARNATION
 	if (!Is_rogue_level(&u.uz))
-#endif
 	    can_tunnel = tunnels(ptr);
 	can_open = !(nohands(ptr) || verysmall(ptr));
 	can_unlock = ((can_open && m_carrying(mtmp, SKELETON_KEY)) ||
@@ -816,7 +817,7 @@ not_special:
 			appr = -1;
 
 		if (!should_see && can_track(ptr)) {
-			register coord *cp;
+			coord *cp;
 
 			cp = gettrack(omx,omy);
 			if (cp) {
@@ -826,11 +827,7 @@ not_special:
 		}
 	}
 
-	if ((!mtmp->mpeaceful || !rn2(10))
-#ifdef REINCARNATION
-				    && (!Is_rogue_level(&u.uz))
-#endif
-							    ) {
+	if ((!mtmp->mpeaceful || !rn2(10)) && (!Is_rogue_level(&u.uz))) {
 	    boolean in_line = lined_up(mtmp) &&
 		(distmin(mtmp->mx, mtmp->my, mtmp->mux, mtmp->muy) <=
 		    (throws_rocks(youmonst.data) ? 20 : ACURRSTR/2+1)
@@ -841,7 +838,7 @@ not_special:
 		 * situation where you toss arrows at it and it has nothing
 		 * better to do than pick the arrows up.
 		 */
-		register int pctload = (curr_mon_load(mtmp) * 100) /
+		int pctload = (curr_mon_load(mtmp) * 100) /
 			max_mon_load(mtmp);
 
 		/* look for gold or jewels nearby */
@@ -860,9 +857,9 @@ not_special:
 
 #define SQSRCHRADIUS	5
 
-      { register int minr = SQSRCHRADIUS;	/* not too far away */
-	register struct obj *otmp;
-	register int xx, yy;
+      { int minr = SQSRCHRADIUS;	/* not too far away */
+	struct obj *otmp;
+	int xx, yy;
 	int oomx, oomy, lmx, lmy;
 
 	/* cut down the search radius if it thinks character is closer. */
@@ -982,10 +979,10 @@ not_special:
 	if (can_unlock) flag |= UNLOCKDOOR;
 	if (doorbuster) flag |= BUSTDOOR;
 	{
-	    register int i, j, nx, ny, nearer;
+	    int i, j, nx, ny, nearer;
 	    int jcnt, cnt;
 	    int ndist, nidist;
-	    register coord *mtrk;
+	    coord *mtrk;
 	    coord poss[9];
 
 	    cnt = mfndpos(mtmp, poss, info, flag);
@@ -1030,7 +1027,7 @@ not_special:
 	}
 
 	if(mmoved) {
-	    register int j;
+	    int j;
 
 	    if (mmoved==1 && (u.ux != nix || u.uy != niy) && itsstuck(mtmp))
 		return(3);
@@ -1231,7 +1228,7 @@ postmov:
 		/* recompute the likes tests, in case we polymorphed
 		 * or if the "likegold" case got taken above */
 		if (setlikes) {
-		    register int pctload = (curr_mon_load(mtmp) * 100) /
+		    int pctload = (curr_mon_load(mtmp) * 100) /
 			max_mon_load(mtmp);
 
 		    /* look for gold or jewels nearby */
@@ -1309,7 +1306,7 @@ postmov:
 
 boolean
 closed_door(x, y)
-register int x, y;
+int x, y;
 {
 	return((boolean)(IS_DOOR(levl[x][y].typ) &&
 			(levl[x][y].doormask & (D_LOCKED | D_CLOSED))));
@@ -1317,7 +1314,7 @@ register int x, y;
 
 boolean
 accessible(x, y)
-register int x, y;
+int x, y;
 {
 	return((boolean)(ACCESSIBLE(levl[x][y].typ) && !closed_door(x, y)));
 }
@@ -1328,10 +1325,10 @@ register int x, y;
 /* decide where the monster thinks you are standing */
 void
 set_apparxy(mtmp)
-register struct monst *mtmp;
+struct monst *mtmp;
 {
 	boolean notseen, gotu;
-	register int disp, mx = mtmp->mux, my = mtmp->muy;
+	int disp, mx = mtmp->mux, my = mtmp->muy;
 #ifdef GOLDOBJ
 	long umoney = money_cnt(invent);
 #endif
@@ -1371,7 +1368,7 @@ register struct monst *mtmp;
 	gotu = notseen ? !rn2(3) : Displaced ? !rn2(4) : FALSE;
 
 	if (!gotu) {
-	    register int try_cnt = 0;
+	    int try_cnt = 0;
 	    do {
 		if (++try_cnt > 200) goto found_you;		/* punt */
 		mx = u.ux - disp + rn2(2*disp+1);
@@ -1430,9 +1427,7 @@ struct monst *mtmp;
 		    typ != LUMP_OF_ROYAL_JELLY &&
 		    obj->oclass != AMULET_CLASS &&
 		    obj->oclass != RING_CLASS &&
-#ifdef WIZARD
 		    obj->oclass != VENOM_CLASS &&
-#endif
 		    typ != SACK && typ != BAG_OF_HOLDING &&
 		    typ != BAG_OF_TRICKS && !Is_candle(obj) &&
 		    typ != OILSKIN_SACK && typ != LEASH &&
