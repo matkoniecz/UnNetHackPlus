@@ -20,11 +20,7 @@
 #include "dlb.h"
 
 /* version information */
-#ifdef SHORT_FILENAMES
-#include "patchlev.h"
-#else
 #include "patchlevel.h"
-#endif
 
 #ifdef MAC
 # if defined(__SC__) || defined(__MRC__)	/* MPW compilers */
@@ -959,13 +955,7 @@ do_data()
 #endif
 	Sprintf(eos(filename), DATA_TEMPLATE, DATA_FILE);
 	Sprintf(infile, DATA_IN_TEMPLATE, DATA_FILE);
-	Strcat(infile,
-#ifdef SHORT_FILENAMES
-		".bas"
-#else
-		".base"
-#endif
-		);
+	Strcat(infile, ".base");
 	if (!(ifp = fopen(infile, RDTMODE))) {		/* data.base */
 		perror(infile);
 		exit(EXIT_FAILURE);
