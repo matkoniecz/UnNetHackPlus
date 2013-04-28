@@ -21,7 +21,6 @@ static int NDECL(dochat);
 
 static int FDECL(mon_in_room, (struct monst *,int));
 
-/* this easily could be a macro, but it might overtax dumb compilers */
 static int
 mon_in_room(mon, rmtyp)
 struct monst *mon;
