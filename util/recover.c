@@ -314,27 +314,6 @@ char *basename;
 	}
 
 	Close(sfd);
-
-#if 0 /* OBSOLETE, HackWB is no longer in use */
-#ifdef AMIGA
-			/* we need to create an icon for the saved game
-			 * or HackWB won't notice the file.
-			 */
-	{
-	char iconfile[FILENAME];
-	int in, out;
-
-	(void) sprintf(iconfile, "%s.info", savename);
-	in = open("NetHack:default.icon", O_RDONLY);
-	out = open(iconfile, O_WRONLY | O_TRUNC | O_CREAT);
-	if(in > -1 && out > -1){
-		copy_bytes(in,out);
-	}
-	if(in > -1)close(in);
-	if(out > -1)close(out);
-	}
-#endif
-#endif
 	return(0);
 }
 
