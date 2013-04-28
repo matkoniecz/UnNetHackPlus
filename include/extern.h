@@ -252,13 +252,6 @@ E void FDECL(bury_objs, (int,int));
 E void FDECL(unearth_objs, (int,int));
 E void FDECL(rot_organic, (genericptr_t, long));
 E void FDECL(rot_corpse, (genericptr_t, long));
-#if 0
-E void FDECL(bury_monst, (struct monst *));
-E void NDECL(bury_you);
-E void NDECL(unearth_you);
-E void NDECL(escape_tomb);
-E void FDECL(bury_obj, (struct obj *));
-#endif
 
 /* ### display.c ### */
 
