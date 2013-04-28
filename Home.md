@@ -113,8 +113,6 @@ aspects of the monster (blue=tame, brown=peaceful, magenta=detected).
 * http://nethackwiki.com/wiki/Key#Breakage
 * http://www.darkshire.net/jhkim/rpg/lordoftherings/names.pdf
 * "It's time for you to die again." 
-* use 'spooky' flag
-* Baruk Khazad! Khazad Ai-Menu!
 * Today is a good day for someone else to die!
 * "Prepare to be eviscerated! FOOL!" <^V http://tvtropes.org/pmwiki/pmwiki.php/Main/BattleCry
 * "Remember Tunnel Seventeen!" 
