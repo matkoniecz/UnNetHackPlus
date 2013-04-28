@@ -1206,19 +1206,19 @@ dochat()
 	return(0);
     }
 
-    if (u.dx == 0 && u.dy == 0) {
-/*
- * Let's not include this.  It raises all sorts of questions: can you wear
- * 2 helmets, 2 amulets, 3 pairs of gloves or 6 rings as a marilith,
- * etc...  --KAA
-	if (u.umonnum == PM_ETTIN) {
-	    You("discover that your other head makes boring conversation.");
-	    return(1);
+	if (u.dx == 0 && u.dy == 0) {
+		/*
+		* It raises all sorts of questions: can you wear
+		* 2 helmets, 2 amulets, 3 pairs of gloves or 6 rings as a marilith, etc...
+		* But similar things appear in decapitation messages, so there is no point in not using this.
+		*/
+		if (has_two_heads(youmonst.data)) {
+			You("discover that your other head makes boring conversation.");
+			return(1);
+		}
+		pline("Talking to yourself is a bad habit for a dungeoneer.");
+		return(0);
 	}
-*/
-	pline("Talking to yourself is a bad habit for a dungeoneer.");
-	return(0);
-    }
 
     tx = u.ux+u.dx; ty = u.uy+u.dy;
     mtmp = m_at(tx, ty);
