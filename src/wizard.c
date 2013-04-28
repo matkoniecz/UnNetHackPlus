@@ -56,10 +56,10 @@ amulet()
 	struct trap *ttmp;
 	struct obj *amu;
 
-#if 0		/* caller takes care of this check */
-	if (!u.uhave.amulet)
+	if (!u.uhave.amulet) {
+		warning("impossible happened in amulet function");
 		return;
-#endif
+	}
 	if ((((amu = uamul) != 0 && amu->otyp == AMULET_OF_YENDOR) ||
 	     ((amu = uwep) != 0 && amu->otyp == AMULET_OF_YENDOR))
 	    && !rn2(15)) {
