@@ -1948,165 +1948,177 @@ struct attack *mattk;
 	 * after exactly 1 round of attack otherwise.  -KAA
 	 */
 
-	if(mdef->data->msize >= MZ_HUGE) return 0;
+	if(mdef->data->msize >= MZ_HUGE) {
+		return 0;
+	}
 
 	if(u.uhunger < 1500 && !u.uswallow) {
-	    for (otmp = mdef->minvent; otmp; otmp = otmp->nobj)
-		(void) snuff_lit(otmp);
+		for (otmp = mdef->minvent; otmp; otmp = otmp->nobj) {
+			snuff_lit(otmp);
+		}
 
-      if((!touch_petrifies(mdef->data) || Stone_resistance) && (!touch_disintegrates(mdef->data) || Disint_resistance)) {
-		static char msgbuf[BUFSZ];
-		start_engulf(mdef);
-		switch(mattk->adtyp) {
-		    case AD_DGST:
-			/* eating a Rider or its corpse is fatal */
-			if (is_rider(mdef->data)) {
-			 pline("Unfortunately, digesting any of it is fatal.");
-			    end_engulf();
-			    Sprintf(msgbuf, "unwisely tried to eat %s",
-				    mdef->data->mname);
-			    killer = msgbuf;
-			    killer_format = NO_KILLER_PREFIX;
-			    done(DIED);
-			    return 0;		/* lifesaved */
-			}
-
-			if (Slow_digestion) {
-			    dam = 0;
-			    break;
-			}
-
-			/* KMH, conduct */
-			if (!vegetarian(mdef->data))
-			    violated(CONDUCT_VEGETARIAN);
-			else if (!vegan(mdef->data))
-			    violated(CONDUCT_VEGAN);
-			else
-			    violated(CONDUCT_FOODLESS);
-
-			/* Use up amulet of life saving */
-			if (!!(otmp = mlifesaver(mdef))) m_useup(mdef, otmp);
-
-			newuhs(FALSE);
-			xkilled(mdef,2);
-			if (mdef->mhp > 0) { /* monster lifesaved */
-			    You("hurriedly regurgitate the sizzling in your %s.",
-				body_part(STOMACH));
-			} else {
-			    tmp = 1 + (mdef->data->cwt >> 8);
-			    if (corpse_chance(mdef, &youmonst, TRUE) &&
-				!(mvitals[monsndx(mdef->data)].mvflags &
-				  G_NOCORPSE)) {
-				/* nutrition only if there can be a corpse */
-				u.uhunger += (mdef->data->cnutrit+1) / 2;
-			    } else tmp = 0;
-			    Sprintf(msgbuf, "You totally digest %s.",
-					    mon_nam(mdef));
-			    if (tmp != 0) {
-				/* setting afternmv = end_engulf is tempting,
-				 * but will cause problems if the player is
-				 * attacked (which uses his real location) or
-				 * if his See_invisible wears off
-				 */
-				You("digest %s.", mon_nam(mdef));
-				if (Slow_digestion) tmp *= 2;
-				nomul(-tmp, "digesting something");
-				nomovemsg = msgbuf;
-			    } else pline("%s", msgbuf);
-			    if (mdef->data == &mons[PM_GREEN_SLIME]) {
-				Sprintf(msgbuf, "%s isn't sitting well with you.",
-					The(mdef->data->mname));
-				if (!Unchanging) {
-					Slimed = 5L;
-					flags.botl = 1;
+		if((!touch_petrifies(mdef->data) || Stone_resistance) && (!touch_disintegrates(mdef->data) || Disint_resistance)) {
+			static char msgbuf[BUFSZ];
+			start_engulf(mdef);
+			switch(mattk->adtyp) {
+				case AD_DGST:
+					/* eating a Rider or its corpse is fatal */
+					if (is_rider(mdef->data)) {
+						pline("Unfortunately, digesting any of it is fatal.");
+						end_engulf();
+						Sprintf(msgbuf, "unwisely tried to eat %s", mdef->data->mname);
+						killer = msgbuf;
+						killer_format = NO_KILLER_PREFIX;
+						done(DIED);
+						return 0; /* lifesaved */
+					}
+					if (Slow_digestion) {
+						dam = 0;
+						break;
+					}
+					/* KMH, conduct */
+					if (!vegetarian(mdef->data)) {
+						violated(CONDUCT_VEGETARIAN);
+					} else if (!vegan(mdef->data)) {
+						violated(CONDUCT_VEGAN);
+					} else {
+						violated(CONDUCT_FOODLESS);
+					}
+					/* Use up amulet of life saving */
+					if (!!(otmp = mlifesaver(mdef))) {
+						m_useup(mdef, otmp);
+					}
+					newuhs(FALSE);
+					xkilled(mdef,2);
+					if (mdef->mhp > 0) { /* monster lifesaved */
+						You("hurriedly regurgitate the sizzling in your %s.",
+						body_part(STOMACH));
+					} else {
+						tmp = 1 + (mdef->data->cwt >> 8);
+						if (corpse_chance(mdef, &youmonst, TRUE) && !(mvitals[monsndx(mdef->data)].mvflags & G_NOCORPSE)) {
+							/* nutrition only if there can be a corpse */
+							u.uhunger += (mdef->data->cnutrit+1) / 2;
+						} else {
+							tmp = 0;
+						}
+						Sprintf(msgbuf, "You totally digest %s.", mon_nam(mdef));
+						if (tmp != 0) {
+							/* setting afternmv = end_engulf is tempting,
+							 * but will cause problems if the player is
+							 * attacked (which uses his real location) or
+							 * if his See_invisible wears off
+							 */
+							You("digest %s.", mon_nam(mdef));
+							if (Slow_digestion) {
+								tmp *= 2;
+							}
+							nomul(-tmp, "digesting something");
+							nomovemsg = msgbuf;
+						} else {
+							pline("%s", msgbuf);
+						}
+						if (mdef->data == &mons[PM_GREEN_SLIME]) {
+							Sprintf(msgbuf, "%s isn't sitting well with you.", The(mdef->data->mname));
+							if (!Unchanging) {
+								Slimed = 5L;
+								flags.botl = 1;
+							}
+						} else {
+							exercise(A_CON, TRUE);
+						}
+					}
+					end_engulf();
+					return(2);
+				case AD_PHYS:
+					if (youmonst.data == &mons[PM_FOG_CLOUD]) {
+						pline("%s is laden with your moisture.", Monnam(mdef));
+						if (amphibious(mdef->data) && !flaming(mdef->data)) {
+							dam = 0;
+							pline("%s seems unharmed.", Monnam(mdef));
+						}
+					} else {
+						pline("%s is pummeled with your debris!", Monnam(mdef));
+					}
+					break;
+				case AD_ACID:
+					pline("%s is covered with your goo!", Monnam(mdef));
+					if (resists_acid(mdef)) {
+						pline("It seems harmless to %s.", mon_nam(mdef));
+						dam = 0;
+					}
+					break;
+				case AD_BLND:
+					if (can_blnd(&youmonst, mdef, mattk->aatyp, (struct obj *)0)) {
+						if (mdef->mcansee) {
+							pline("%s can't see in there!", Monnam(mdef));
+						}
+						mdef->mcansee = 0;
+						dam += mdef->mblinded;
+						if (dam > 127) {
+							dam = 127;
+						}
+						mdef->mblinded = dam;
+					}
+					dam = 0;
+					break;
+				case AD_ELEC:
+					if (rn2(2)) {
+						pline_The("air around %s crackles with electricity.", mon_nam(mdef));
+						if (resists_elec(mdef)) {
+							pline("%s seems unhurt.", Monnam(mdef));
+							dam = 0;
+						}
+						golemeffects(mdef,(int)mattk->adtyp,dam);
+					} else {
+						dam = 0;
+					}
+					break;
+				case AD_COLD:
+					if (rn2(2)) {
+						if (resists_cold(mdef)) {
+							pline("%s seems mildly chilly.", Monnam(mdef));
+							dam = 0;
+						} else {
+							pline("%s is freezing to death!",Monnam(mdef));
+						}
+						golemeffects(mdef,(int)mattk->adtyp,dam);
+					} else {
+						dam = 0;
+					}
+					break;
+				case AD_FIRE:
+				{
+					if (rn2(2)) {
+						if (resists_fire(mdef)) {
+							pline("%s seems mildly hot.", Monnam(mdef));
+							dam = 0;
+						} else {
+							pline("%s is burning to a crisp!",Monnam(mdef));
+						}
+						golemeffects(mdef,(int)mattk->adtyp,dam);
+					} else {
+						dam = 0;
+					}
+					break;
 				}
-			    } else
-			    exercise(A_CON, TRUE);
 			}
 			end_engulf();
-			return(2);
-		    case AD_PHYS:
-			if (youmonst.data == &mons[PM_FOG_CLOUD]) {
-			    pline("%s is laden with your moisture.",
-				  Monnam(mdef));
-			    if (amphibious(mdef->data) &&
-				!flaming(mdef->data)) {
-				dam = 0;
-				pline("%s seems unharmed.", Monnam(mdef));
-			    }
-			} else
-			    pline("%s is pummeled with your debris!",
-				  Monnam(mdef));
-			break;
-		    case AD_ACID:
-			pline("%s is covered with your goo!", Monnam(mdef));
-			if (resists_acid(mdef)) {
-			    pline("It seems harmless to %s.", mon_nam(mdef));
-			    dam = 0;
+			if ((mdef->mhp -= dam) <= 0) {
+				killed(mdef);
+				if (mdef->mhp <= 0)	/* not lifesaved */
+					return(2);
 			}
-			break;
-		    case AD_BLND:
-			if (can_blnd(&youmonst, mdef, mattk->aatyp, (struct obj *)0)) {
-			    if (mdef->mcansee)
-				pline("%s can't see in there!", Monnam(mdef));
-			    mdef->mcansee = 0;
-			    dam += mdef->mblinded;
-			    if (dam > 127) dam = 127;
-			    mdef->mblinded = dam;
+			You("%s %s!", is_animal(youmonst.data) ? "regurgitate" : "expel", mon_nam(mdef));
+			if (Slow_digestion || is_animal(youmonst.data)) {
+				pline("Obviously, you didn't like %s taste.", s_suffix(mon_nam(mdef)));
 			}
-			dam = 0;
-			break;
-		    case AD_ELEC:
-			if (rn2(2)) {
-			    pline_The("air around %s crackles with electricity.", mon_nam(mdef));
-			    if (resists_elec(mdef)) {
-				pline("%s seems unhurt.", Monnam(mdef));
-				dam = 0;
-			    }
-			    golemeffects(mdef,(int)mattk->adtyp,dam);
-			} else dam = 0;
-			break;
-		    case AD_COLD:
-			if (rn2(2)) {
-			    if (resists_cold(mdef)) {
-				pline("%s seems mildly chilly.", Monnam(mdef));
-				dam = 0;
-			    } else
-				pline("%s is freezing to death!",Monnam(mdef));
-			    golemeffects(mdef,(int)mattk->adtyp,dam);
-			} else dam = 0;
-			break;
-		    case AD_FIRE:
-			if (rn2(2)) {
-			    if (resists_fire(mdef)) {
-				pline("%s seems mildly hot.", Monnam(mdef));
-				dam = 0;
-			    } else
-				pline("%s is burning to a crisp!",Monnam(mdef));
-			    golemeffects(mdef,(int)mattk->adtyp,dam);
-			} else dam = 0;
-			break;
+		} else {
+			char kbuf[BUFSZ];
+			You("bite into %s.", mon_nam(mdef));
+			Sprintf(kbuf, "swallowing %s whole", an(mdef->data->mname));
+			instapetrify(kbuf);
+			instadisintegrate(kbuf);
 		}
-		end_engulf();
-		if ((mdef->mhp -= dam) <= 0) {
-		    killed(mdef);
-		    if (mdef->mhp <= 0)	/* not lifesaved */
-			return(2);
-		}
-		You("%s %s!", is_animal(youmonst.data) ? "regurgitate"
-			: "expel", mon_nam(mdef));
-		if (Slow_digestion || is_animal(youmonst.data)) {
-		    pline("Obviously, you didn't like %s taste.",
-			  s_suffix(mon_nam(mdef)));
-		}
-	    } else {
-		char kbuf[BUFSZ];
-
-		You("bite into %s.", mon_nam(mdef));
-		Sprintf(kbuf, "swallowing %s whole", an(mdef->data->mname));
-		instapetrify(kbuf);
-		instadisintegrate(kbuf);
-	    }
 	}
 	return(0);
 }
