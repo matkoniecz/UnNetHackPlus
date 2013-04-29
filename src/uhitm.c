@@ -1957,7 +1957,9 @@ struct attack *mattk;
 			snuff_lit(otmp);
 		}
 
-		if((!touch_petrifies(mdef->data) || Stone_resistance) && (!touch_disintegrates(mdef->data) || Disint_resistance)) {
+		boolean petrifies = touch_petrifies(mdef->data) && !Stone_resistance;
+		boolean desintegrates = touch_disintegrates(mdef->data) && !Disint_resistance;
+		if(!petrifies && !desintegrates) {
 			static char msgbuf[BUFSZ];
 			start_engulf(mdef);
 			switch(mattk->adtyp) {
@@ -2116,8 +2118,12 @@ struct attack *mattk;
 			char kbuf[BUFSZ];
 			You("bite into %s.", mon_nam(mdef));
 			Sprintf(kbuf, "swallowing %s whole", an(mdef->data->mname));
-			instapetrify(kbuf);
-			instadisintegrate(kbuf);
+			if (petrifies) {
+				instapetrify(kbuf);
+			}
+			if (desintegrates) {
+				instadisintegrate(kbuf);
+			}
 		}
 	}
 	return(0);
