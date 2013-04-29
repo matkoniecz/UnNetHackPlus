@@ -1957,6 +1957,15 @@ struct attack *mattk;
 			snuff_lit(otmp);
 		}
 
+		if (mattk->adtyp == AD_DGST) {
+			if (!vegetarian(mdef->data)) {
+				violated(CONDUCT_VEGETARIAN);
+			} else if (!vegan(mdef->data)) {
+				violated(CONDUCT_VEGAN);
+			} else {
+				violated(CONDUCT_FOODLESS);
+			}
+		}
 		boolean petrifies = touch_petrifies(mdef->data) && !Stone_resistance;
 		boolean desintegrates = touch_disintegrates(mdef->data) && !Disint_resistance;
 		if(!petrifies && !desintegrates) {
@@ -1977,14 +1986,6 @@ struct attack *mattk;
 					if (Slow_digestion) {
 						dam = 0;
 						break;
-					}
-					/* KMH, conduct */
-					if (!vegetarian(mdef->data)) {
-						violated(CONDUCT_VEGETARIAN);
-					} else if (!vegan(mdef->data)) {
-						violated(CONDUCT_VEGAN);
-					} else {
-						violated(CONDUCT_FOODLESS);
 					}
 					/* Use up amulet of life saving */
 					if (!!(otmp = mlifesaver(mdef))) {

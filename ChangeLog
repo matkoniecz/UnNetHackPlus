@@ -29,6 +29,7 @@
 		- C343-81 "Ghosts can be slimed."
 		- C343-118 "Some messages use "mirror" where they should use "looking glass."" (from GruntHack)
 		- C343-302 "Amnesia of object discoveries may forget to forget one thing."
+		- C343-134 "Being petrified by swallowing a cockatrice violates foodless conduct."
 		Patches are linked at http://nethackwiki.com/wiki/User:Bulwersator/UnNetHackPlus_bug_tracking
 	* UnNetHack bug fixes
 		- #143 Angered quest guardians will no longer go berserk.
