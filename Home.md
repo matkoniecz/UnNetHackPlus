@@ -1,6 +1,6 @@
 Plans for UnNetHackPlus
 
-* WIDENED_PROTOTYPES (related to boolean mess)
+* same_color (dragonfix mess, maybe affects also UnNetHack)
 * why "no bones when swallowed"?
 * /* ^O command - display dungeon layout */
 * kill NEWS
