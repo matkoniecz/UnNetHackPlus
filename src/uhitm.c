@@ -1949,6 +1949,7 @@ struct attack *mattk;
 	 */
 
 	if(mdef->data->msize >= MZ_HUGE) {
+		pline("%s is too large to be engulfed.", Monnam(mdef));
 		return 0;
 	}
 
