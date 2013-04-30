@@ -1,5 +1,5 @@
 Plans for UnNetHackPlus
-
+* monsters - show data in game http://notehack.campwide.com/notehack.html
 * same_color (dragonfix mess, maybe affects also UnNetHack)
 * why "no bones when swallowed"?
 * /* ^O command - display dungeon layout */
