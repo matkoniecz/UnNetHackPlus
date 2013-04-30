@@ -886,7 +886,7 @@ peffects(otmp)
 		{
 			You_feel("better.");
 			int heal_hp = d(6 + 2 * bcsign(otmp), 4);
-			int increase_max_hp = !otmp->cursed ? 1 : 0;
+			int increase_max_hp = otmp->blessed ? 1 : !otmp->cursed ? 1 : 0;
 			boolean cure_sick = otmp->blessed;
 			boolean cure_blind = !otmp->cursed;
 			boolean cure_wounded_legs =  !otmp->odiluted && otmp->blessed;
@@ -920,7 +920,7 @@ peffects(otmp)
 		{
 			You_feel("completely healed.");
 			int heal_hp = 400;
-			int increase_max_hp = 4+4*bcsign(otmp);
+			int increase_max_hp = otmp->blessed ? 8 : !otmp->cursed ? 4 : 0;
 			boolean cure_sick = !otmp->cursed;
 			boolean cure_blind = TRUE;
 			boolean cure_wounded_legs = !otmp->cursed;
