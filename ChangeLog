@@ -74,6 +74,7 @@
 		- Luring wraiths from graveyards is now pointless - undead creatures are as likely to leave corpse on graveyard as on normal levels (reduced chance for normal levels, raised for graveyards)
 		- Autoidentify BUC of products from BUC identified item generator (tinning kit, horn of plenty).
 		- Fire traps removed from Plane of Fire
+		- Healing potions should be more effective at healing and less at boosting HP
 	* Merging in the best part of SporkHack absent from UnNetHack
 		- Allow more than one special room per level in the DoD
 		- Touch of death changed - from SporkHack. Instadeath removed, antimagic is not fully protecting.

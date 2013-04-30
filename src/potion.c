@@ -885,8 +885,8 @@ peffects(otmp)
 	case POT_HEALING:
 		{
 			You_feel("better.");
-			int heal_hp = d(6 + 2 * bcsign(otmp), 4);
-			int increase_max_hp = otmp->blessed ? 1 : !otmp->cursed ? 1 : 0;
+			int heal_hp = d(6 + 2 * bcsign(otmp), 4) + 10;
+			int increase_max_hp = otmp->blessed ? rn2(2) : !otmp->cursed ? 0 : 0;
 			boolean cure_sick = otmp->blessed;
 			boolean cure_blind = !otmp->cursed;
 			boolean cure_wounded_legs =  !otmp->odiluted && otmp->blessed;
@@ -901,8 +901,8 @@ peffects(otmp)
 	case POT_EXTRA_HEALING:
 		{
 			You_feel("much better.");
-			int heal_hp = d(6 + 2 * bcsign(otmp), 8);
-			int increase_max_hp = otmp->blessed ? 5 : !otmp->cursed ? 2 : 0;
+			int heal_hp = d(6 + 2 * bcsign(otmp), 8) + 20;
+			int increase_max_hp = otmp->blessed ? 2 : !otmp->cursed ? 1 : 0;
 			boolean cure_sick = !otmp->cursed;
 			boolean cure_blind = TRUE;
 			boolean cure_wounded_legs =  !otmp->odiluted && !otmp->cursed;
@@ -919,8 +919,8 @@ peffects(otmp)
 	case POT_FULL_HEALING:
 		{
 			You_feel("completely healed.");
-			int heal_hp = 400;
-			int increase_max_hp = otmp->blessed ? 8 : !otmp->cursed ? 4 : 0;
+			int heal_hp = 200 * bcsign(otmp) + 400;
+			int increase_max_hp = otmp->blessed ? 3 : !otmp->cursed ? 2 : 0;
 			boolean cure_sick = !otmp->cursed;
 			boolean cure_blind = TRUE;
 			boolean cure_wounded_legs = !otmp->cursed;
