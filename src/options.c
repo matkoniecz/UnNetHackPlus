@@ -155,11 +155,6 @@ static struct Bool_Opt
 	{"mouse_support", &iflags.wc_mouse_support, TRUE, DISP_IN_GAME},	/*WC*/
 #endif
 	{"newcolors", &iflags.wc2_newcolors, TRUE, SET_IN_FILE},
-#ifdef NEWS
-	{"news", &iflags.news, TRUE, DISP_IN_GAME},
-#else
-	{"news", (boolean *)0, FALSE, SET_IN_FILE},
-#endif
 	{"conducts_ascet", &flags.ascet, FALSE, SET_IN_FILE },
 	{"conducts_atheist", &flags.atheist, FALSE, SET_IN_FILE },
 	{"conducts_blindfolded", &flags.blindfolded, FALSE, SET_IN_FILE },

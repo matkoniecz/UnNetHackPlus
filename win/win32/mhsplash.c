@@ -122,42 +122,6 @@ void mswin_display_splash_window (BOOL show_ver)
 		}
 		(void) dlb_fclose(f);
 	    }
-	} else {
-	    /* Show news, if any */
-	    if (iflags.news) {	    
-		FILE *nf;
-		
-		iflags.news = 0; /* prevent newgame() from re-displaying news */
-		nf = fopen(NEWS, "r");
-		if (nf != NULL) {
-		    char line[LLEN + 1];
-		    
-		    while (fgets(line, LLEN, nf)) {
-			size_t len;
-			len = strlen(line);
-			if (len > 0 && line[len - 1] == '\n') {
-			    line[len - 1] = '\r';
-			    line[len] = '\n';
-			    line[len + 1] = '\0';
-			    len++;
-			}
-			if (strsize + (int)len + 1 > bufsize)
-			{
-			    bufsize += BUFSZ;
-			    buf = realloc(buf, bufsize);
-			    if (buf == NULL)
-				panic("out of memory");
-			}
-			strcat(buf, line);
-			strsize += len;
-		    }
-		    (void) fclose(nf);
-		} 
-		else
-		{
-		    strcat(buf, "No news.");
-		}
-	    }
 	}
 	SetWindowText(GetDlgItem(hWnd, IDC_EXTRAINFO), buf);
 	free(buf);

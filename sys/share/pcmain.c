@@ -394,12 +394,6 @@ char *argv[];
 #ifndef NO_SIGNAL
 		(void) signal(SIGINT, (SIG_RET_TYPE) done1);
 #endif
-#ifdef NEWS
-		if(iflags.news){
-		    display_file_area(NEWS_AREA, NEWS, FALSE);
-		    iflags.news = FALSE;
-		}
-#endif
 		pline("Restoring save file...");
 		mark_synch();	/* flush output */
 
@@ -473,11 +467,6 @@ char *argv[];
 		case 'X':
 			discover = TRUE;
 			break;
-#ifdef NEWS
-		case 'n':
-			iflags.news = FALSE;
-			break;
-#endif
 		case 'u':
 			if(argv[0][2])
 			  (void) strncpy(plname, argv[0]+2, sizeof(plname)-1);
@@ -589,9 +578,6 @@ nhusage()
 	 "\n%s [-d dir] [-u name] [-r race] [-p profession] [-[DX]]",
 		hname);
 	ADD_USAGE(buf2);
-#ifdef NEWS
-	ADD_USAGE(" [-n]");
-#endif
 #ifndef AMIGA
 	ADD_USAGE(" [-I] [-i] [-d]");
 #endif

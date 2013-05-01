@@ -145,16 +145,14 @@
 
 /*
  * Section 2:	Some global parameters and filenames.
- *		Commenting out LOGFILE, NEWS or PANICLOG removes that
- *		feature from the game LOGFILE, NEWS and PANICLOG refer to 
+ *		Commenting out LOGFILE or PANICLOG removes that
+ *		feature from the game LOGFILE and PANICLOG refer to 
  *		files in the playground.
  */
 
 #define LOGFILE "logfile"	/* larger file for debugging purposes */
 #define LOGAREA FILE_AREA_VAR
 /* #define XLOGFILE "xlogfile" */ /* even larger logfile */
-#define NEWS "news"		/* the file containing the latest hack news */
-#define NEWS_AREA FILE_AREA_SHARE
 #define PANICLOG "paniclog"	/* log of panic and impossible events */
 /* #define LIVELOGFILE "livelog" */ /* live game progress log file */
 

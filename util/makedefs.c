@@ -700,9 +700,6 @@ static const char *build_opts[] = {
 #ifdef GNUDOS
 		"MSDOS protected mode",
 #endif
-#ifdef NEWS
-		"news file",
-#endif
 #ifdef OVERLAY
 # ifdef MOVERLAY
 		"MOVE overlays",

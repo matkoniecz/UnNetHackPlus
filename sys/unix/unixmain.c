@@ -249,12 +249,6 @@ char *argv[];
 		(void) chmod_area(FILE_AREA_SAVE, SAVEF, 0);
 #endif
 		(void) signal(SIGINT, (SIG_RET_TYPE) done1);
-#ifdef NEWS
-		if(iflags.news) {
-		    display_file_area(NEWS_AREA, NEWS, FALSE);
-		    iflags.news = FALSE; /* in case dorecover() fails */
-		}
-#endif
 		pline("Restoring save file...");
 		mark_synch();	/* flush output */
 		if(!dorecover(fd))
@@ -317,11 +311,6 @@ char *argv[];
 		case 'X':
 			discover = TRUE;
 			break;
-#ifdef NEWS
-		case 'n':
-			iflags.news = FALSE;
-			break;
-#endif
 		case 'u':
 			if(argv[0][2])
 			  (void) strncpy(plname, argv[0]+2, sizeof(plname)-1);
