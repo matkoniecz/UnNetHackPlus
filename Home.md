@@ -4,7 +4,7 @@ Plans for UnNetHackPlus
 * same_color (dragonfix mess, maybe affects also UnNetHack)
 * why "no bones when swallowed"?
 * /* ^O command - display dungeon layout */
-* kill NEWS
+* Use or delete EXTEND_SPINE code
 * kill NOTSTDC
 * http://bilious.alt.org/?224
 
