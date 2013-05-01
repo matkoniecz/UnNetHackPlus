@@ -283,6 +283,8 @@ NEARDATA extern coord bhitpos;	/* place where throw or zap hits or stops */
 #define min(x,y) ((x) < (y) ? (x) : (y))
 #endif
 #define plur(x) (((x) == 1) ? "" : "s")
+#define sign(z) ((z) < 0 ? -1 : ((z) ? 1 : 0 ))
+#define v_abs(z)  ((z) < 0 ? -(z) : (z))	/* don't use abs -- it may exist */
 
 #define ARM_BONUS(obj)	(objects[(obj)->otyp].a_ac + (obj)->spe \
 			 /* extra AC point for racial armor */ \

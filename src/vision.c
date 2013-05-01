@@ -103,10 +103,6 @@ STATIC_DCL void FDECL(view_from,(int,int,char **,char *,char *,int,
 STATIC_DCL void FDECL(get_unused_cs, (char ***,char **,char **));
 STATIC_DCL void FDECL(rogue_vision, (char **,char *,char *));
 
-/* Macro definitions that I can't find anywhere. */
-#define sign(z) ((z) < 0 ? -1 : ((z) ? 1 : 0 ))
-#define v_abs(z)  ((z) < 0 ? -(z) : (z))	/* don't use abs -- it may exist */
-
 /*
  * vision_init()
  *
