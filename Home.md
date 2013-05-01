@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* there is still "buried" code - see https://github.com/Bulwersator/UnNetHackPlus/commit/6f6ad4cdfac08bd6a83401e5aec1e46221c079de
 * monsters - show data in game http://notehack.campwide.com/notehack.html
 * same_color (dragonfix mess, maybe affects also UnNetHack)
 * why "no bones when swallowed"?
