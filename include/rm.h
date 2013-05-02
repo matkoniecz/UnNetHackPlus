@@ -578,14 +578,9 @@ extern dlevel_t level;	/* structure describing the current level */
 /*
  * Macros for encapsulation of level.monsters references.
  */
-#define MON_AT(x,y)	(level.monsters[x][y] != (struct monst *)0 && \
-			 !(level.monsters[x][y])->mburied)
-#define MON_BURIED_AT(x,y)	(level.monsters[x][y] != (struct monst *)0 && \
-				(level.monsters[x][y])->mburied)
+#define MON_AT(x,y)	(level.monsters[x][y] != (struct monst *)0)
 #define place_worm_seg(m,x,y)	level.monsters[x][y] = m
 #define m_at(x,y)		(MON_AT(x,y) ? level.monsters[x][y] : \
 						(struct monst *)0)
-#define m_buried_at(x,y)	(MON_BURIED_AT(x,y) ? level.monsters[x][y] : \
-						       (struct monst *)0)
 
 #endif /* RM_H */

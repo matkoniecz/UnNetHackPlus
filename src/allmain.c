@@ -283,8 +283,6 @@ moveloop()
 			movebubbles();
 		    else if (Underwater)
 			under_water(0);
-		    /* vision while buried done here */
-		    else if (u.uburied) under_ground(0);
 
 		    /* when immobile, count is in turns */
 		    if(multi < 0) {

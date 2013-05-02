@@ -81,7 +81,7 @@ struct monst {
 				 */
 
 	Bitfield(mcan,1);	/* has been cancelled */
-	Bitfield(mburied,1);	/* has been buried */
+	Bitfield(unused,1);	/* unused (DevTeam planned to use it as "has been buried" */
 	Bitfield(mspeed,2);	/* current speed */
 	Bitfield(permspeed,2);	/* intrinsic mspeed value */
 	Bitfield(mrevived,1);	/* has been revived from the dead */

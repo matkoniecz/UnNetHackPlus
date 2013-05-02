@@ -1037,36 +1037,6 @@ under_water(mode)
     lasty = u.uy;
 }
 
-/*
- *	under_ground()
- *
- *	Very restricted display.  You can only see yourself.
- */
-void
-under_ground(mode)
-    int mode;
-{
-    static boolean dela;
-
-    /* swallowing has a higher precedence than under ground */
-    if (u.uswallow) return;
-
-    /* full update */
-    if (mode == 1 || dela) {
-	cls();
-	dela = FALSE;
-    }
-    /* delayed full update */
-    else if (mode == 2) {
-	dela = TRUE;
-	return;
-    }
-    /* limited update */
-    else
-	newsym(u.ux,u.uy);
-}
-
-
 /* ========================================================================= */
 
 /*
@@ -1185,10 +1155,6 @@ docrt()
     }
     if (Underwater && !Is_waterlevel(&u.uz)) {
 	under_water(1);
-	return;
-    }
-    if (u.uburied) {
-	under_ground(1);
 	return;
     }
 

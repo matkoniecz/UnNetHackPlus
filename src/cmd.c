@@ -417,7 +417,7 @@ domonability()
 		return 1;
 	} else if (youmonst.data->msound == MS_SHRIEK) {
 		You("shriek.");
-		if(u.uburied) {
+		if(is_player_stuck_in_wall()) {
 			pline("Unfortunately sound does not carry well through rock.");
 		} else {
 			aggravate();
@@ -915,7 +915,7 @@ boolean want_disp;
 	}
 	if (Stoned) you_are("turning to stone");
 	if (Slimed) you_are("turning into slime");
-	if (Strangled) you_are((u.uburied) ? "buried" : "being strangled");
+	if (Strangled) you_are("being strangled");
 	if (Glib) {
 		Sprintf(buf, "slippery %s", makeplural(body_part(FINGER)));
 		you_have(buf);
@@ -2159,19 +2159,17 @@ char *cmd;
 #endif
 		check_tutorial_command(*cmd & 0xff);
 
-		if (u.uburied && !tlist->can_if_buried) {
-		    You_cant("do that while you are buried!");
-		    res = 0;
-		} else {
-		    /* we discard 'const' because some compilers seem to have
-		       trouble with the pointer passed to set_occupation() */
-		    func = ((struct func_tab *)tlist)->f_funct;
-		    if (tlist->f_text && !occupation && multi)
+		/* we discard 'const' because some compilers seem to have
+		 * trouble with the pointer passed to set_occupation() 
+		 */
+		func = ((struct func_tab *)tlist)->f_funct;
+		if (tlist->f_text && !occupation && multi) {
 			set_occupation(func, tlist->f_text, multi);
-		    /* remember pressed character */
-		    last_cmd_char = *cmd;
-		    res = (*func)();		/* perform the command */
 		}
+		/* remember pressed character */
+		last_cmd_char = *cmd;
+		res = (*func)();		/* perform the command */
+
 		if (!res) {
 		    flags.move = FALSE;
 		    multi = 0;

@@ -284,7 +284,6 @@ outgoldmap:
     docrt();
     u.uinwater = uw;
     if (Underwater) under_water(2);
-    if (u.uburied) under_ground(2);
     return(0);
 }
 
@@ -385,7 +384,6 @@ struct obj	*sobj;
 	docrt();
 	u.uinwater = uw;
 	if (Underwater) under_water(2);
-	if (u.uburied) under_ground(2);
     }
     return(0);
 }
@@ -572,7 +570,6 @@ boolean		quiet;		/* don't output any message */
 
     u.uinwater = uw;
     if (Underwater) under_water(2);
-    if (u.uburied) under_ground(2);
     return 0;
 }
 
@@ -639,7 +636,6 @@ int mclass;			/* monster class, 0 for all */
 	display_nhwindow(WIN_MAP, TRUE);
 	docrt();
 	if (Underwater) under_water(2);
-	if (u.uburied) under_ground(2);
     }
     return 0;
 }
@@ -745,7 +741,6 @@ outtrapmap:
     docrt();
     u.uinwater = uw;
     if (Underwater) under_water(2);
-    if (u.uburied) under_ground(2);
     return(0);
 }
 

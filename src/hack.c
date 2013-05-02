@@ -3008,4 +3008,56 @@ is_monster_slimeable(struct permonst *mptr)
 	return TRUE;
 }
 
+/* assumes isok() at one space away, but not necessarily at two */
+boolean
+blocked_boulder(dx,dy)
+int dx,dy;
+{
+    struct obj *otmp;
+    long count = 0L;
+
+    for(otmp = level.objects[u.ux+dx][u.uy+dy]; otmp; otmp = otmp->nexthere) {
+	if(otmp->otyp == BOULDER)
+	    count += otmp->quan;
+    }
+
+    switch(count) {
+	case 0: return FALSE; /* no boulders--not blocked */
+	case 1: break; /* possibly blocked depending on if it's pushable */
+	default: return TRUE; /* >1 boulder--blocked after they push the top
+	    one; don't force them to push it first to find out */
+    }
+
+    if (!isok(u.ux+2*dx, u.uy+2*dy))
+	return TRUE;
+    if (IS_ROCK(levl[u.ux+2*dx][u.uy+2*dy].typ))
+	return TRUE;
+    if (sobj_at(BOULDER, u.ux+2*dx, u.uy+2*dy))
+	return TRUE;
+
+    return FALSE;
+}
+
+boolean
+is_player_stuck_in_wall()
+{
+	int i, j, count=0;
+	for (i= -1; i<=1; i++) {
+		for(j= -1; j<=1; j++) {
+			if (!i && !j) {
+				continue;
+			}
+			if (!isok(u.ux+i, u.uy+j) || IS_ROCK(levl[u.ux+i][u.uy+j].typ) || (blocked_boulder(i,j) && !throws_rocks(youmonst.data))) {
+				count++;
+			}
+		}
+	}
+	if (count == 8 && !Passes_walls) {
+		return TRUE;
+	} else {
+		return FALSE;
+	}
+}
+
+
 /*hack.c*/

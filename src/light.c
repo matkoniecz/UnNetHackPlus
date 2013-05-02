@@ -146,7 +146,7 @@ do_light_sources(cs_rows)
 	    if (get_obj_location((struct obj *) ls->id, &ls->x, &ls->y, 0))
 		ls->flags |= LSF_SHOW;
 	} else if (ls->type == LS_MONSTER) {
-	    if (get_mon_location((struct monst *) ls->id, &ls->x, &ls->y, 0))
+	    if (get_mon_location((struct monst *) ls->id, &ls->x, &ls->y))
 		ls->flags |= LSF_SHOW;
 	}
 

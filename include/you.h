@@ -375,9 +375,9 @@ struct you {
 	Bitfield(uundetected,1);	/* if you're a hiding monster/piercer */
 	Bitfield(mfemale,1);		/* saved human value of flags.female */
 	Bitfield(uinvulnerable,1);	/* you're invulnerable (praying) */
-	Bitfield(uburied,1);		/* you're buried */
+	Bitfield(unused,1);		/* unused (DevTeam planned to use it as "you're buried" */
 	Bitfield(uedibility,1);		/* blessed food detection; sense unsafe food */
-	/* 1 free bit! */
+	/* 1 free bit! + 1 unused field */
 
 	unsigned udg_cnt;		/* how long you have been demigod */
 	struct u_event	uevent;		/* certain events have happened */

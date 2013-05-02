@@ -340,7 +340,7 @@ nh_timeout()
 				break;
 			case STRANGLED:
 				killer_format = KILLED_BY;
-				killer = (u.uburied) ? "suffocation" : "strangulation";
+				killer = "strangulation";
 				done(DIED);
 				break;
 			case FUMBLING:

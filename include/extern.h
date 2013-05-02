@@ -270,7 +270,6 @@ E void FDECL(newsym, (int,int));
 E void FDECL(shieldeff, (xchar,xchar));
 E void FDECL(tmp_at, (int,int));
 E void FDECL(swallowed, (int));
-E void FDECL(under_ground, (int));
 E void FDECL(under_water, (int));
 E void NDECL(see_monsters);
 E void NDECL(set_mimic_blocking);
@@ -768,6 +767,8 @@ E long FDECL(money_cnt, (struct obj *));
 #endif
 E boolean NDECL(is_player_slimeable);
 E boolean FDECL(is_monster_slimeable, (struct permonst *));
+E boolean FDECL(blocked_boulder,(int,int));
+E boolean NDECL(is_player_stuck_in_wall);
 
 /* ### hacklib.c ### */
 
@@ -2501,7 +2502,7 @@ E int FDECL(dowrite, (struct obj *));
 E int FDECL(bhitm, (struct monst *,struct obj *));
 E void FDECL(probe_monster, (struct monst *));
 E boolean FDECL(get_obj_location, (struct obj *,xchar *,xchar *,int));
-E boolean FDECL(get_mon_location, (struct monst *,xchar *,xchar *,int));
+E boolean FDECL(get_mon_location, (struct monst *,xchar *,xchar *));
 E struct monst *FDECL(get_container_location, (struct obj *obj, int *, int *));
 E struct monst *FDECL(montraits, (struct obj *,coord *));
 E struct monst *FDECL(revive, (struct obj *));

@@ -446,20 +446,19 @@ int locflags;
 }
 
 boolean
-get_mon_location(mon, xp, yp, locflags)
+get_mon_location(mon, xp, yp)
 struct monst *mon;
 xchar *xp, *yp;
-int locflags;	/* non-zero means get location even if monster is buried */
 {
 	if (mon == &youmonst) {
 	    *xp = u.ux;
 	    *yp = u.uy;
 	    return TRUE;
-	} else if (mon->mx > 0 && (!mon->mburied || locflags)) {
+	} else if (mon->mx > 0) {
 	    *xp = mon->mx;
 	    *yp = mon->my;
 	    return TRUE;
-	} else {	/* migrating or buried */
+	} else {	/* migrating */
 	    *xp = *yp = 0;
 	    return FALSE;
 	}
@@ -506,7 +505,6 @@ coord *cc;
 		mtmp2->weapon_check = mtmp->weapon_check;
 		mtmp2->mtrapseen = mtmp->mtrapseen;
 		mtmp2->mflee = mtmp->mflee;
-		mtmp2->mburied = mtmp->mburied;
 		mtmp2->mundetected = mtmp->mundetected;
 		mtmp2->mfleetim = mtmp->mfleetim;
 		mtmp2->mlstmv = mtmp->mlstmv;

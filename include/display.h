@@ -48,8 +48,7 @@
 #define mon_visible(mon) (		/* The hero can see the monster     */\
 					/* IF the monster		    */\
     (!mon->minvis || See_invisible) &&	/* 1. is not invisible AND	    */\
-    (!mon->mundetected) &&		/* 2. not an undetected hider	    */\
-    (!(mon->mburied || u.uburied))	/* 3. neither you or it is buried   */\
+    (!mon->mundetected) 		/* 2. not an undetected hider	    */\
 )
 
 /*
