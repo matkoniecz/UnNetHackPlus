@@ -476,7 +476,6 @@ struct monst *mtmp;
 #ifdef GOLDOBJ
 /*
  *   Makes up money for monster's inventory.
- *   This will change with silver & copper coins
  */
 void 
 mkmonmoney(mtmp, amount)

@@ -1076,7 +1076,7 @@ int *wt_before, *wt_after;
     if (is_gold)	/* merged gold might affect cumulative weight */
 	wt -= (GOLD_WT(u.ugold) + GOLD_WT(count) - GOLD_WT(u.ugold + count));
 #else
-    /* This will go with silver+copper & new gold weight */
+    /* This will go with new gold weight */
     if (is_gold)	/* merged gold might affect cumulative weight */
 	wt -= (GOLD_WT(umoney) + GOLD_WT(count) - GOLD_WT(umoney + count));
 #endif
