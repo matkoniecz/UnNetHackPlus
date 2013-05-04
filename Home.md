@@ -8,6 +8,7 @@ Plans for UnNetHackPlus
 * Use or delete EXTEND_SPINE code
 * kill NOTSTDC
 * http://bilious.alt.org/?224
+* The 95_enh_engulf_prayers.dpatch patch makes being engulfed a major trouble, so that a successful prayer while engulfed will get you expelled and cause the engulfing monster to flee.  http://nethackwiki.com/wiki/Debian
 
 roast
 u.umonnum == PM_WOOD_GOLEM || u.umonnum == PM_LEATHER_GOLEM
