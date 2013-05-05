@@ -273,7 +273,6 @@ fix completely broken alignment, maybe also better gods
 * (Warning: Pregnant women, the elderly, and children under 10 should avoid prolonged exposure to Vibrating Square. If Vibrating Square begins to smoke, get away immediately. Seek shelter and cover head. Do not taunt Vibrating Square. http://forum.rpg.net/showthread.php?466187-(Let-s-Play!)-Sporkhack/page89
 * make healing potions useful for healing
 * split room from spork
-*  Mars grants Nefarious with the gift of Dragonbane, an artifact spear. As I've said before, vanilla bane artifacts are uniformly crap, but in Sporkhack Dragonbane in particular is startlingly good, especially early on. Wielding it grants fire, cold, poison, shock, sleep, acid, and disintegration resistance. No, that isn't a typo. You get all of them, and at 100%. Fantastic weapon for conducts. It also has the usual anti-dragon properties, like all bane weapons.
 * remove pet apport
 * identify projectiles - for Rangers http://nh.gmuf.com/ranger_ammo-343.diff
 * nerf speed boots
