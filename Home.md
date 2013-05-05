@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* travel         enable the command to travel to a map location via [TRUE] <enable pernamently>
 * the goal of the this branch is to require players with the Amulet of Yendor to take an alternate route out of the dungeon.  - http://nethackwiki.com/wiki/SLASHEM_PHLEGETHON
 * 		pline("Unfortunately sound does not carry well through rock."); - for buried shrieker
 * monsters - show data in game http://notehack.campwide.com/notehack.html
