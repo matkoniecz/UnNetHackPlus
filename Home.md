@@ -1,6 +1,5 @@
 Plans for UnNetHackPlus
-* there is still "buried" code - see https://github.com/Bulwersator/UnNetHackPlus/commit/6f6ad4cdfac08bd6a83401e5aec1e46221c079de
-*  the goal of the this branch is to require players with the Amulet of Yendor to take an alternate route out of the dungeon.  - http://nethackwiki.com/wiki/SLASHEM_PHLEGETHON
+* the goal of the this branch is to require players with the Amulet of Yendor to take an alternate route out of the dungeon.  - http://nethackwiki.com/wiki/SLASHEM_PHLEGETHON
 * 		pline("Unfortunately sound does not carry well through rock."); - for buried shrieker
 * monsters - show data in game http://notehack.campwide.com/notehack.html
 * same_color (dragonfix mess, maybe affects also UnNetHack)
