@@ -416,6 +416,7 @@ proud owner of a magic whistle.
 * weeping angels - blinking effect - long, rare move (what about blindness? Should it be instant YASD?) pschysical attacks, trap autoturned into statue trap
 * mark "Picking up gold doesn't honor the setting of pickup_burden if the game is compiled without GOLD_OBJ (no prompt when the encumbrance level is exceeded)." and "impossible() can mangle the parameter values." in http://nethackwiki.com/wiki/User:Bulwersator/UnNetHackPlus_bug_tracking as fixed
 * deep orc color (black? white uruk-hai?)
+* http://www.reddit.com/r/nethack/comments/1dnzs4/is_there_a_version_of_the_nethack_343_source_with/c9tcg3f?context=3 (otherwise do it)
 
 #recheck
 * [[petfruitnames]] http://alt.org/nethack/petnames.html
