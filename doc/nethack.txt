@@ -110,9 +110,8 @@ DESCRIPTION
        scores, or by a number to print that many top scores.
 
        The  -D or -X option will start the game in a special non-
-       scoring discovery mode.  -D will, if  the  player  is  the
-       game  administrator,  start  in  debugging  (wizard)  mode
-       instead.
+       scoring discovery mode.  -D will  start  in  debugging  
+	  (wizard)  mode  instead.
 
        The -d option, which must be  the  first  argument  if  it
        appears,  supplies  a  directory  which is to serve as the
