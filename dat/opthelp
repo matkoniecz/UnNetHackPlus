@@ -60,9 +60,6 @@ Boolean option if INSURANCE was set at compile time:
 checkpoint save game state after each level change, for possible  [TRUE]
            recovery after program crash
 
-Boolean option if NEWS was set at compile time:
-news       print any news from game administrator on startup      [TRUE]
-
 Boolean option if MFLOPPY was set at compile time:
 checkspace check free disk space before writing files to disk     [TRUE]
 
@@ -247,5 +244,5 @@ msg_window the type of message window to use:
 
 Some sample options lists are:
 !autopickup,!tombstone,name:Gandalf,scores:own/3 top/2 around
-female,nonews,dogname:Rover,dungeon: |--------||.-|++.##<><>_\\#{}.}..## #}
+female,dogname:Rover,dungeon: |--------||.-|++.##<><>_\\#{}.}..## #}
 rest_on_space,!verbose,menustyle:traditional

@@ -2014,10 +2014,6 @@ Set the color palette for tty ports to more beautiful values
 than the original NetHack palette. If black is not shown as dark gray,
 disable this option (default on).
 Cannot be set with the `O' command.
-.lp "news    "
-Read the NetHack news file, if present (default on).
-Since the news is shown at the beginning of the game, there's no point
-in setting this with the `O' command.
 .lp "null    "
 Send padding nulls to the terminal (default off).
 .lp number_pad

@@ -109,9 +109,6 @@ DESCRIPTION
        of  the  players  mentioned,  by  'all'  to  print out all
        scores, or by a number to print that many top scores.
 
-       The -n option suppresses printing of  any  news  from  the
-       game administrator.
-
        The  -D or -X option will start the game in a special non-
        scoring discovery mode.  -D will, if  the  player  is  the
        game  administrator,  start  in  debugging  (wizard)  mode
