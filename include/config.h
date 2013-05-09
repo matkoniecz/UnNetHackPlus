@@ -390,7 +390,6 @@ typedef long glyph_t;
 
 #define STATUS_COLORS /* Shachaf & Oren Ben-Kiki */
 
-#define DUNGEON_GROWTH /* Makes the dungeons feel a bit more living - Pasi Kallinen*/
 /*#define GOLDOBJ */	/* Gold is kept on obj chains - Helge Hafting */
 /*#define AUTOPICKUP_EXCEPTIONS */ /* exceptions to autopickup */
 #define DUMP_LOG        /* Dump game end information to a file */
@@ -434,6 +433,7 @@ typedef long glyph_t;
  * these defines are also listed in build_pseudo_opts (util\makedefs.c)
  */
 #define AUTO_OPEN	/* open doors by walking into them - Stefano Busti */
+#define DUNGEON_GROWTH /* Makes the dungeons feel a bit more living - Pasi Kallinen*/
 #define EXP_ON_BOTL	/* Show experience on bottom line */
 #define STEED		/* Riding steeds */
 #define SEDUCE		/* Succubi/incubi seduction, by KAA, suggested by IM */

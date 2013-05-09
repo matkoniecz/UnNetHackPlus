@@ -766,7 +766,6 @@ enable_shell
 enable_show_born
 enable_show_extinct
 enable_sortloot
-enable_dungeon_growth
 enable_goldobj
 enable_autopickup_exceptions
 enable_quiver_fired
@@ -1459,7 +1458,6 @@ Optional Features:
                           (default=yes)
   --enable-sortloot       Sort item lists alphabetically by description.
                           (default=yes)
-  --enable-dungeon-growth Dungeon growth (default=yes)
   --enable-goldobj        Gold is kept on object chains (experimental)
                           (default=no)
   --enable-autopickup-exceptions
@@ -6584,25 +6582,7 @@ _ACEOF
 
    fi
 
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking whether to enable dungeon-growth" >&5
-$as_echo_n "checking whether to enable dungeon-growth... " >&6; }
-   # Check whether --enable-dungeon-growth was given.
-if test "${enable_dungeon_growth+set}" = set; then :
-  enableval=$enable_dungeon_growth;
-else
-  enable_dungeon_growth="yes"
-fi
-
-   { $as_echo "$as_me:${as_lineno-$LINENO}: result: $enable_dungeon_growth" >&5
-$as_echo "$enable_dungeon_growth" >&6; }
-   if test "$enable_dungeon_growth" != "no" ; then
-
-cat >>confdefs.h <<_ACEOF
-#define DUNGEON_GROWTH /**/
-_ACEOF
-
-   fi
-
+# NETHACK_ARG(dungeon-growth,[Dungeon growth],DUNGEON_GROWTH,yes) - enabled uncoditionally
 #NETHACK_ARG(shout,[Shouting and pet commands (not implemented)],SHOUT,no)
 # NETHACK_ARG(display-layers,[Support transparent tilesets],DISPLAY_LAYERS,yes)
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether to enable goldobj" >&5
@@ -7014,6 +6994,8 @@ _ACEOF
 $as_echo "no" >&6; }
    fi
 
+
+# NETHACK_ARG_WITH_PARAM(wizmode,[enable wizard mode for the specified user],WIZARD,yes,USER,[wizard]) - enabled uncoditionally
 
 if test "$CHOWN" != "true"; then
     { $as_echo "$as_me:${as_lineno-$LINENO}: checking for owner of installed files" >&5

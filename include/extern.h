@@ -734,10 +734,8 @@ E void NDECL(drinksink);
 
 /* ### hack.c ### */
 
-#ifdef DUNGEON_GROWTH
 E void FDECL(catchup_dgn_growths, (int));
 E void FDECL(dgn_growths, (boolean,boolean));
-#endif
 E boolean FDECL(revive_nasty, (int,int,const char*));
 E void FDECL(movobj, (struct obj *,xchar,xchar));
 E boolean FDECL(may_dig, (xchar,xchar));

@@ -27,7 +27,6 @@ static boolean door_opened;	/* set to true if door was opened during test_move *
 
 #ifdef OVL2
 
-#ifdef DUNGEON_GROWTH
 void
 rndmappos(x,y) /* guaranteed to return a valid coord */
 xchar *x;
@@ -350,7 +349,6 @@ int mvs;
    while (mvs-- > 0)
      dgn_growths(FALSE, FALSE);
 }
-#endif /* DUNGEON_GROWTH */
 
 boolean
 revive_nasty(x, y, msg)

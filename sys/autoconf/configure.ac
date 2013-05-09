@@ -434,7 +434,7 @@ NETHACK_ARG(shell,[Start a shell from within the game],SHELL,no)
 NETHACK_ARG(show-born,[Display number of created monsters at the end of game],SHOW_BORN,yes)
 NETHACK_ARG(show-extinct,[Display extinct monsters at the end of game],SHOW_EXTINCT,yes)
 NETHACK_ARG(sortloot,[Sort item lists alphabetically by description.],SORTLOOT,yes)
-NETHACK_ARG(dungeon-growth,[Dungeon growth],DUNGEON_GROWTH,yes)
+# NETHACK_ARG(dungeon-growth,[Dungeon growth],DUNGEON_GROWTH,yes) - enabled uncoditionally
 #NETHACK_ARG(shout,[Shouting and pet commands (not implemented)],SHOUT,no)
 # NETHACK_ARG(display-layers,[Support transparent tilesets],DISPLAY_LAYERS,yes)
 NETHACK_ARG(goldobj,[Gold is kept on object chains (experimental)],GOLDOBJ,no)
