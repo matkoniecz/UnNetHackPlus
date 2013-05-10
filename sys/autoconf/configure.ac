@@ -390,56 +390,61 @@ dnl  ----- Check for compile-time options
 NETHACK_ARG(data-librarian,[Data librarian],DLB,auto,
   [enable_data_librarian=yes])
 NETHACK_ARG(sinks,[Kitchen sinks],SINKS,yes)
+
+#not implemented
 # NETHACK_ARG(light-src-spell,[Spells are light sources],LIGHT_SRC_SPELL,yes)
-NETHACK_ARG(wallified-maze,[Fancy mazes],WALLIFIED_MAZE,yes)
-# NETHACK_ARG(reincarnation,[Special Rogue-like levels],REINCARNATION,yes) - enabled uncoditionally
-# NETHACK_ARG(blackmarket,[Blackmarket],BLACKMARKET,yes) - enabled uncoditionally
-NETHACK_ARG(kops,[Keystone Kops],KOPS,yes)
-# NETHACK_ARG(seduce,[Succubi/incubi seduction],SEDUCE,yes) - enabled uncoditionally
+# NETHACK_ARG(yeoman,[Yeoman class],YEOMAN,yes)
 # NETHACK_ARG(invisible-objects,[Invisible objects],INVISIBLE_OBJECTS,yes)
 # NETHACK_ARG(unpolypile,[Object unpolymorphing],UNPOLYPILE,yes)
 # NETHACK_ARG(wallet-o-p,[Perseus' Wallet],WALLET_O_P,yes)
 # NETHACK_ARG(lightsabers,[Lightsabers],LIGHTSABERS,yes)
 # NETHACK_ARG(firearms,[Guns and Bullets],FIREARMS,yes)
-# NETHACK_ARG(eaten-memory,[Remember which monsters have been eaten],
-#  EATEN_MEMORY,yes)
+# NETHACK_ARG(eaten-memory,[Remember which monsters have been eaten], EATEN_MEMORY,yes)
+# NETHACK_ARG(no-bones,[Disable loading and saving bones levels],NO_BONES,no)
+# NETHACK_ARG(keep-save,[Keep save files after restore],KEEP_SAVE,no)
+# NETHACK_ARG(show-weight,[Display object weight],SHOW_WEIGHT,yes)
+# NETHACK_ARG(other-services,[Shopkeeper services],OTHER_SERVICES,yes)
+# NETHACK_ARG(shout,[Shouting and pet commands],SHOUT,no)
+# NETHACK_ARG(display-layers,[Support transparent tilesets],DISPLAY_LAYERS,yes)
+
+#enabled uncoditionally
+# NETHACK_ARG(reincarnation,[Special Rogue-like levels],REINCARNATION,yes)
+# NETHACK_ARG(blackmarket,[Blackmarket],BLACKMARKET,yes)
+# NETHACK_ARG(seduce,[Succubi/incubi seduction],SEDUCE,yes)
+# NETHACK_ARG(steed,[Ability to ride monsters],STEED,yes)
+# NETHACK_ARG(tourist,[Tourist class],TOURIST,yes)
+# NETHACK_ARG(auto-open,[Open doors by walking into them],AUTO_OPEN,yes)
+# NETHACK_ARG(exp-on-botl,[Show experience on bottom line],EXP_ON_BOTL,yes)
+# NETHACK_ARG(paranoid,[Require some questions to be answered with 'yes' instead of 'y'],PARANOID,yes)
+# NETHACK_ARG(dungeon-growth,[Dungeon growth],DUNGEON_GROWTH,yes)
+# NETHACK_ARG_WITH_PARAM(wizmode,[enable wizard mode for the specified user],WIZARD,yes,USER,[wizard])
+
+#real options
+NETHACK_ARG(wallified-maze,[Fancy mazes],WALLIFIED_MAZE,yes)
+NETHACK_ARG(kops,[Keystone Kops],KOPS,yes)
 NETHACK_ARG(randomized-planes,[Shuffling order of Elemental Planes],RANDOMIZED_PLANES,yes)
-# NETHACK_ARG(steed,[Ability to ride monsters],STEED,yes) - enabled uncoditionally
-# NETHACK_ARG(tourist,[Tourist class],TOURIST,yes) - enabled uncoditionally
-# NETHACK_ARG(yeoman,[Yeoman class],YEOMAN,yes)
 NETHACK_ARG(redo,[Redo last command],REDO,yes)
 NETHACK_ARG(clipping,[Allow smaller screens],CLIPPING,yes)
 NETHACK_ARG(menu-color,[TTY graphics menu color],MENU_COLOR,yes)
 if test "$enable_tty_graphics" != "no"; then
 NETHACK_ARG(status-color,[TTY graphics status color],STATUS_COLORS,yes)
 fi
-# NETHACK_ARG(auto-open,[Open doors by walking into them],AUTO_OPEN,yes) - enabled uncoditionally
 NETHACK_ARG(elbereth,[Engraving the E-word repels monsters],ELBERETH,yes)
-# NETHACK_ARG(no-bones,[Disable loading and saving bones levels],NO_BONES,no)
 if test $host_os != mingw32; then
  NETHACK_ARG(bones-pool,[Multiple bones per level],BONES_POOL,yes)
 fi
 NETHACK_ARG(user-sounds,
   [Allow user-defined mapping from messages to sounds)],
   USER_SOUNDS,no)
-# NETHACK_ARG(exp-on-botl,[Show experience on bottom line],EXP_ON_BOTL,yes) - enabled uncoditionally
 NETHACK_ARG(score-on-botl,[Show score on bottom line],SCORE_ON_BOTL,no)
 NETHACK_ARG(realtime-on-botl,[Show elapsed time on bottom line],REALTIME_ON_BOTL,no)
 NETHACK_ARG(high-score-comparison-by-uid,[Compare High Score entries by user id instead of user name],PERS_IS_UID,no)
-# NETHACK_ARG(keep-save,[Keep save files after restore],KEEP_SAVE,no)
-# NETHACK_ARG(show-weight,[Display object weight],SHOW_WEIGHT,yes)
-# NETHACK_ARG(other-services,[Shopkeeper services],OTHER_SERVICES,yes)
-# NETHACK_ARG(paranoid,[Require some questions to be answered with 'yes' instead of 'y'],PARANOID,yes) - enabled uncoditionally
 NETHACK_ARG(shell,[Start a shell from within the game],SHELL,no)
 NETHACK_ARG(show-born,[Display number of created monsters at the end of game],SHOW_BORN,yes)
 NETHACK_ARG(show-extinct,[Display extinct monsters at the end of game],SHOW_EXTINCT,yes)
 NETHACK_ARG(sortloot,[Sort item lists alphabetically by description.],SORTLOOT,yes)
-# NETHACK_ARG(dungeon-growth,[Dungeon growth],DUNGEON_GROWTH,yes) - enabled uncoditionally
-#NETHACK_ARG(shout,[Shouting and pet commands (not implemented)],SHOUT,no)
-# NETHACK_ARG(display-layers,[Support transparent tilesets],DISPLAY_LAYERS,yes)
 NETHACK_ARG(goldobj,[Gold is kept on object chains (experimental)],GOLDOBJ,no)
-NETHACK_ARG(autopickup-exceptions,[Exceptions to autopickup],
-  AUTOPICKUP_EXCEPTIONS,yes)
+NETHACK_ARG(autopickup-exceptions,[Exceptions to autopickup], AUTOPICKUP_EXCEPTIONS,yes)
 NETHACK_ARG(quiver-fired,[Firing without anything quivered will ask you what to quiver],QUIVER_FIRED,yes)
 NETHACK_ARG(qwertz,[QWERTZ keyboard layout support],QWERTZ,yes)
 NETHACK_ARG(simple-mail,[simple mail dgamelaunch support],SIMPLE_MAIL,no)
@@ -474,10 +479,7 @@ if test "$enable_tty_graphics" != "no"; then
 	fi
 fi
 
-
 NETHACK_ARG_WITH_PARAM(whereis-file,[Log information about running games],WHEREIS_FILE,no,FILE,[%n.whereis])
-
-# NETHACK_ARG_WITH_PARAM(wizmode,[enable wizard mode for the specified user],WIZARD,yes,USER,[wizard]) - enabled uncoditionally
 
 if test "$CHOWN" != "true"; then
     AC_MSG_CHECKING([for owner of installed files])
