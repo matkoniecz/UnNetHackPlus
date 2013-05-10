@@ -1,5 +1,14 @@
 Plans for UnNetHackPlus
-* backup github http://addyosmani.com/blog/backing-up-a-github-account/ https://www.google.pl/search?q=backing+up+a+github+account+wiki&ie=utf-8&oe=utf-8&aq=t&rls=org.mozilla:en-US:official&client=firefox-a&channel=fflb https://gist.github.com/rodw/3073987 https://github.com/zauberlabs/backup-github 
+# NETHACK_ARG(light-src-spell,[Spells are light sources],LIGHT_SRC_SPELL,yes)
+# NETHACK_ARG(invisible-objects,[Invisible objects],INVISIBLE_OBJECTS,yes)
+# NETHACK_ARG(unpolypile,[Object unpolymorphing],UNPOLYPILE,yes)
+# NETHACK_ARG(wallet-o-p,[Perseus' Wallet],WALLET_O_P,yes)
+# NETHACK_ARG(keep-save,[Keep save files after restore],KEEP_SAVE,no)
+# NETHACK_ARG(show-weight,[Display object weight],SHOW_WEIGHT,yes)
+# NETHACK_ARG(other-services,[Shopkeeper services],OTHER_SERVICES,yes)
+# NETHACK_ARG(shout,[Shouting and pet commands],SHOUT,no)
+# NETHACK_ARG(display-layers,[Support transparent tilesets],DISPLAY_LAYERS,yes)
+* autobackup wiki 
 * kill opthelp by replacing " {"autodig", &flags.autodig, FALSE, SET_IN_GAME}," with " {"autodig", &flags.autodig, FALSE, SET_IN_GAME, "dig if moving and wielding digging tool"},"
 * travel         enable the command to travel to a map location via [TRUE] <enable pernamently>
 * the goal of the this branch is to require players with the Amulet of Yendor to take an alternate route out of the dungeon.  - http://nethackwiki.com/wiki/SLASHEM_PHLEGETHON
