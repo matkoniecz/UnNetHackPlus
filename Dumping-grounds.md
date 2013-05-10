@@ -1,3 +1,7 @@
+gravestone
+Just one more hit...
+
+
 static const char *epitaphs_with_playername[] = {
 	/* from http://www.alt.org/nethack/addmsgs/viewmsgs.php */
 	"%s took war to Team Ant and bought this fine trackt of land as benefits.",
@@ -49,11 +53,12 @@ Engraving	Do not move forward
 Engraving	Don't go that way.
 Engraving	Here be dragons.
 Engraving	Here there be soldier ants.
-Engraving	Hoc est qui sumus.
 Hallucinatory Monster	district attorney
 Hallucinatory Monster	dwarven construct
 Hallucinatory Monster	mummy zombie
 Hallucinatory Monster	rabid lawyer
+T-shirt        PETA - People Eating Tasty Animals 
+the largest prime number 
 
 http://donjon.bin.sh/fantasy/random/#dungeon_graffiti
 http://www.imdb.com/character/ch0002561/quotes done to  You fools! Do you think with your crosses and your wafers you can destroy me? Me! You do not know how many men have come against me. I am the king of my kind! 
