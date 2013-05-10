@@ -169,10 +169,10 @@ static struct Bool_Opt
 #else
 	{"page_wait", (boolean *)0, FALSE, SET_IN_FILE},
 #endif
-	{"paranoid_hit", &iflags.paranoid_hit, TRUE, SET_IN_FILE},
-	{"paranoid_quit", &iflags.paranoid_quit, TRUE, SET_IN_FILE},
-	{"paranoid_remove", &iflags.paranoid_remove, FALSE, SET_IN_FILE},
-	{"paranoid_trap", &iflags.paranoid_trap, FALSE, SET_IN_FILE},
+	{"paranoid_hit", &iflags.paranoid_hit, TRUE, SET_IN_GAME},
+	{"paranoid_quit", &iflags.paranoid_quit, TRUE, SET_IN_GAME},
+	{"paranoid_remove", &iflags.paranoid_remove, FALSE, SET_IN_GAME},
+	{"paranoid_trap", &iflags.paranoid_trap, FALSE, SET_IN_GAME},
 	{"perm_invent", &flags.perm_invent, FALSE, SET_IN_GAME},
 	{"pickup_dropped", &flags.pickup_dropped, FALSE, SET_IN_GAME},
 	{"pickup_thrown", &flags.pickup_thrown, TRUE, SET_IN_GAME},
@@ -211,13 +211,13 @@ static struct Bool_Opt
 #else
 	{"showscore", (boolean *)0, FALSE, SET_IN_FILE},
 #endif
-	{"silent", &flags.silent, TRUE, SET_IN_GAME},
+	{"silent", &flags.silent, TRUE, SET_IN_FILE}, /*OBSOLETE*/
 	{"softkeyboard", &iflags.wc2_softkeyboard, FALSE, SET_IN_FILE},
 	{"sortpack", &flags.sortpack, TRUE, SET_IN_GAME},
-	{"sound", &flags.soundok, TRUE, SET_IN_GAME},
+	{"sound", &flags.soundok, TRUE, SET_IN_FILE}, /*OBSOLETE*/
 	{"sparkle", &flags.sparkle, TRUE, SET_IN_GAME},
 	/* not removed for backwards compatibilty */
-	{"standout", &flags.standout, TRUE, SET_IN_FILE}, 
+	{"standout", &flags.standout, TRUE, SET_IN_FILE}, /*OBSOLETE*/
 #if defined(STATUS_COLORS) && defined(TEXTCOLOR)
 	{"statuscolors", &iflags.use_status_colors, TRUE, SET_IN_GAME},
 #else
@@ -233,7 +233,7 @@ static struct Bool_Opt
 #endif
 	{"tombstone",&flags.tombstone, TRUE, SET_IN_GAME},
 	{"toptenwin",&flags.toptenwin, FALSE, SET_IN_GAME},
-	{"travel", &iflags.travelcmd, TRUE, SET_IN_GAME},
+	{"travel", &iflags.travelcmd, TRUE, SET_IN_FILE}, /*OBSOLETE*/
 #ifdef UTF8_GLYPHS
 	{"UTF8graphics", &iflags.UTF8graphics, FALSE, SET_IN_GAME},
 #else
