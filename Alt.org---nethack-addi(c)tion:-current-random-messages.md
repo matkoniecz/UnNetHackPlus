@@ -4,11 +4,12 @@ Current messages
 
 Back to the add-form
 
-Number of added messages: 2691
+Number of added messages: 2719
 Gravestone	"Don't be daft, they couldn't hit an elephant at this dist-"
 Gravestone	"I wonder what deleting 'system32' does?"
 Gravestone	"I wonder what deleting 'system32' does?"
 Gravestone	"If wizards can do the tengu shuffle, I bet tourists can do the fox-trot..."
+Gravestone	"Kai su, teknon?"
 Gravestone	"So this is what it feels like to be buried alive." Last words of Indiana Jones 1889- 1946
 Gravestone	"Wonder what this mushroom does?..."
 Gravestone	"Y'all watch this!"
@@ -98,6 +99,7 @@ Gravestone	Finally I am becoming stupider no more
 Gravestone	Flooring inspector.
 Gravestone	Follow me to hell.
 Gravestone	Follow me to hell.
+Gravestone	Fool me once, shame on you. Fool me twice, ...
 Gravestone	For you, scum; only 700,000,000 for this grave reserve.
 Gravestone	Game over, man. Game over.
 Gravestone	Ganked again...
@@ -125,6 +127,7 @@ Gravestone	Here Lies Patient Zero
 Gravestone	Here Rest The Three Stooges
 Gravestone	Here lays Butch, we planted him raw, he was quick on the trigger but slow on the draw.
 Gravestone	Here lies $cat killed by $playername
+Gravestone	Here lies $playername. He never scored.
 Gravestone	Here lies /usr/bin/nethack, killed by SIGSEGV.
 Gravestone	Here lies @
 Gravestone	Here lies Acid blob killed by bob
@@ -225,6 +228,7 @@ Gravestone	It's nothing... it's nothing...
 Gravestone	It's only a flesh wound; nothing serious.
 Gravestone	James Brown is dead.
 Gravestone	Jeanne -- She died and we did nothing.
+Gravestone	Just one more hit . . .
 Gravestone	Just resting a while.
 Gravestone	Killed by a black dragon -- This grave is empty
 Gravestone	Killed by a succubus with AIDS.
@@ -583,6 +587,7 @@ False rumor	Living light brings bad luck!
 False rumor	Looks like we're in for some rain.
 False rumor	Lucky numbers: 10-14-15-28-56
 False rumor	Make sure to destroy any heathen altars you find.
+False rumor	My other job is putting djinn in magic lamps.
 False rumor	Need more pets? Talk to a giant named Andre!
 False rumor	NetHack 3.5.0 is out! nethack.org
 False rumor	NetHack 3.5.0 released! http://www.nethack.org
@@ -657,6 +662,7 @@ False rumor	They say that by digging down next to pools of lava, you might revea
 False rumor	They say that carrying uncursed loadstones will raise your strength to 18/**
 False rumor	They say that chickatrices are not as deadly as cockatrices.
 False rumor	They say that civilized people should not eat horses.
+False rumor	They say that cockatrice corpses provide stoning resistance.
 False rumor	They say that cockatrice tastes like chicken.
 False rumor	They say that dilithium crystals can be used to cast warp drive.
 False rumor	They say that drinking a potion of oil will make you smarter.
@@ -668,6 +674,7 @@ False rumor	They say that eels may know the way to victory.
 False rumor	They say that elves will respect the name of Elbereth.
 False rumor	They say that hitting a gecko with a credit card can save you 15% or more on car insurance.
 False rumor	They say that hitting a golem with a rubber chicken is a clever move
+False rumor	They say that incubi make great mounts.
 False rumor	They say that killing Vlad with an iron chain, then eating his body, grants you life saving
 False rumor	They say that land mines can be made into time bombs.
 False rumor	They say that nethack is better than Minecraft
@@ -679,6 +686,7 @@ False rumor	They say that shopkeepers are very weak...
 False rumor	They say that shopkeepers will never buy stolen goods.
 False rumor	They say that soldier ants live in military barracks.
 False rumor	They say that stepping on a polymorph trap twice will change you back.
+False rumor	They say that succubi make great mounts.
 False rumor	They say that the Amulet is in another castle.
 False rumor	They say that the Dungeons of Doom are quite dangerous.
 False rumor	They say that the Holy Hand Grenade of Antioch can be used to slay any monster.
@@ -716,6 +724,7 @@ False rumor	They say you should only sacrifice a unicorn on an altar of its own 
 False rumor	This is a secret to everybody
 False rumor	This is a true rumor
 False rumor	This rumor tells the truth
+False rumor	This sentence is false.
 False rumor	To barrel roll, press Z or R twice!
 False rumor	To cast spells, you must first teach your pet how to read spellbooks.
 False rumor	Trololololololololololololol
@@ -1037,6 +1046,7 @@ T-Shirt	Only you can prevent forest fires.
 T-Shirt	Outlook not so good.
 T-Shirt	Overcharge me!
 T-Shirt	P Happens
+T-Shirt	PETA - People Eating Tasty Animals
 T-Shirt	Pain is vital bodily fluids leaving the body.
 T-Shirt	Play Paranoid!
 T-Shirt	Plunder Island Brimstone Beach Club Lifetime Member
@@ -1236,6 +1246,7 @@ Engraving	Don't look behind you.
 Engraving	Don't worry. You're still illiterate.
 Engraving	Duck!
 Engraving	E=mc ... no, that's not it.
+Engraving	ETAOIN SHRDLU
 Engraving	Eat at Joe's
 Engraving	Elbcreth
 Engraving	Elber
@@ -1445,6 +1456,7 @@ Hallucinatory Monster	Astral call bug
 Hallucinatory Monster	Aud Ketilsdatter
 Hallucinatory Monster	Aunt Irma
 Hallucinatory Monster	BASIC elemental
+Hallucinatory Monster	BDFL
 Hallucinatory Monster	BIKECAT
 Hallucinatory Monster	Baba Yaga
 Hallucinatory Monster	Bachelor's party
@@ -1532,6 +1544,7 @@ Hallucinatory Monster	Cthulhu
 Hallucinatory Monster	Cthulhu
 Hallucinatory Monster	Cucumber
 Hallucinatory Monster	Cucumber sandwich
+Hallucinatory Monster	Curly Brace
 Hallucinatory Monster	Curse of the Were-Rabbit
 Hallucinatory Monster	Cursed pile of coins
 Hallucinatory Monster	Cyberman
@@ -1652,10 +1665,12 @@ Hallucinatory Monster	Grover
 Hallucinatory Monster	Grue
 Hallucinatory Monster	Gundam
 Hallucinatory Monster	HAL 9000
+Hallucinatory Monster	HURD kernel
 Hallucinatory Monster	Hacker
 Hallucinatory Monster	Hag of Bolding
 Hallucinatory Monster	Haggis Golem
 Hallucinatory Monster	Half Chewed Taxi Squasher
+Hallucinatory Monster	Halloween Document
 Hallucinatory Monster	Hallucinatory Monster
 Hallucinatory Monster	Hamburglar
 Hallucinatory Monster	Hammer Pants
@@ -1683,6 +1698,7 @@ Hallucinatory Monster	IFC Yipes
 Hallucinatory Monster	Ian-Keith on crack
 Hallucinatory Monster	Idiotic nerd that looks like your momma
 Hallucinatory Monster	Ig
+Hallucinatory Monster	Igor
 Hallucinatory Monster	Integrated Data Sentient Entity
 Hallucinatory Monster	Inu Yasha
 Hallucinatory Monster	Invisible Pink Unicorn
@@ -1848,6 +1864,7 @@ Hallucinatory Monster	Psychadelic Eyeball
 Hallucinatory Monster	Pudding Farmer
 Hallucinatory Monster	Pyramid Head
 Hallucinatory Monster	Pyramidhead
+Hallucinatory Monster	Quote
 Hallucinatory Monster	RNG
 Hallucinatory Monster	RNG
 Hallucinatory Monster	RNG
@@ -1978,6 +1995,7 @@ Hallucinatory Monster	Toilet Duck
 Hallucinatory Monster	Tom Nook
 Hallucinatory Monster	Tom Servo
 Hallucinatory Monster	Tonberry
+Hallucinatory Monster	Toroko
 Hallucinatory Monster	Toto
 Hallucinatory Monster	Trekkie Monster
 Hallucinatory Monster	Trogdor the Burninator
@@ -1989,6 +2007,7 @@ Hallucinatory Monster	Uncle Henry
 Hallucinatory Monster	Undead Core
 Hallucinatory Monster	Undead angel
 Hallucinatory Monster	Underwater Basket Weaving Kobold
+Hallucinatory Monster	Unladen swallow
 Hallucinatory Monster	Upperclass Twit of the Year
 Hallucinatory Monster	Urist McDwarf
 Hallucinatory Monster	Van Darkholme
@@ -2021,6 +2040,7 @@ Hallucinatory Monster	Your Dad On A Sybian
 Hallucinatory Monster	Your Mom
 Hallucinatory Monster	Yourself
 Hallucinatory Monster	Yourself
+Hallucinatory Monster	Ysalamir
 Hallucinatory Monster	Yukari Yakumo
 Hallucinatory Monster	Zadir the Washer
 Hallucinatory Monster	Zaku
@@ -2040,10 +2060,13 @@ Hallucinatory Monster	a one-winged dewinged stab-bat
 Hallucinatory Monster	a plain gold ring
 Hallucinatory Monster	a plastic surgeon
 Hallucinatory Monster	a praying mantis
+Hallucinatory Monster	a squee
 Hallucinatory Monster	a team of Caballists
 Hallucinatory Monster	a tree full of monkeys on nitrous oxide
 Hallucinatory Monster	a vision of Ragnarök
+Hallucinatory Monster	a whark
 Hallucinatory Monster	a winged serpent
+Hallucinatory Monster	a ytram
 Hallucinatory Monster	aardvark
 Hallucinatory Monster	absurd pop-culture reference
 Hallucinatory Monster	abyss
@@ -2135,6 +2158,7 @@ Hallucinatory Monster	coelacanth
 Hallucinatory Monster	collapsed mine golem
 Hallucinatory Monster	colorless green idea
 Hallucinatory Monster	commissar
+Hallucinatory Monster	contrabassoon
 Hallucinatory Monster	convention furry
 Hallucinatory Monster	conventioneer
 Hallucinatory Monster	cookie monster
@@ -2231,6 +2255,7 @@ Hallucinatory Monster	furry
 Hallucinatory Monster	fyora
 Hallucinatory Monster	gang member
 Hallucinatory Monster	gaping goatse
+Hallucinatory Monster	gargantua
 Hallucinatory Monster	gazebo
 Hallucinatory Monster	gazer
 Hallucinatory Monster	gerbil
@@ -2306,6 +2331,7 @@ Hallucinatory Monster	invisible pink unicorn
 Hallucinatory Monster	invisible potion of invisibility
 Hallucinatory Monster	invisible shiny Bulbasaur
 Hallucinatory Monster	janitor
+Hallucinatory Monster	jehovah's witness
 Hallucinatory Monster	jell-o golem
 Hallucinatory Monster	jolly green giant
 Hallucinatory Monster	jophur
@@ -2588,6 +2614,7 @@ Hallucinatory Monster	the hellbride
 Hallucinatory Monster	the invisible Demogorgon
 Hallucinatory Monster	the invisible cockatrice
 Hallucinatory Monster	the invisible werewaiter
+Hallucinatory Monster	the largest prime number
 Hallucinatory Monster	the paparazzi
 Hallucinatory Monster	the road
 Hallucinatory Monster	the roots of Yggdrasil
@@ -2686,6 +2713,7 @@ Hallucinatory Monster	your foot
 Hallucinatory Monster	your mom
 Hallucinatory Monster	your mom
 Hallucinatory Monster	your own hands
+Hallucinatory Monster	ysalamiri
 Hallucinatory Monster	zappy eel
 Hallucinatory Monster	zappy eel
 Hallucinatory Monster	zergling
