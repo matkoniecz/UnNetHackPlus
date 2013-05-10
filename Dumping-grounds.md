@@ -1,6 +1,8 @@
 gravestone
 Just one more hit...
 
+scroll
+ETAOIN SHRDLU
 
 static const char *epitaphs_with_playername[] = {
 	/* from http://www.alt.org/nethack/addmsgs/viewmsgs.php */
