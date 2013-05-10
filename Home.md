@@ -415,6 +415,7 @@ proud owner of a magic whistle.
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/4a6337948eb34e2c0dbf4ec2609316d6dafcf234
  
 #unnethack synchronisation
+* drain_en function: gulpmu, gulpum - AT_ENGL, AD_DREN by energy vortex
 * remember about MONSTERCOLOR notes as UnNetHack imported part of changes
 * http://sourceforge.net/apps/trac/unnethack/changeset/1423
 * nymph level activated
