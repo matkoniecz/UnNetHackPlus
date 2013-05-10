@@ -36,6 +36,7 @@ or
 To regenerate configure file from /sys/autoconf/configure.ac run /sys/autoconf/bootstrap.sh
 
 == Contact info ==
+
 Please direct bugs, questions or suggestions to <https://github.com/Bulwersator/UnNetHackPlus/issues> or post them to the
 http://www.reddit.com/r/nethack/.
 
