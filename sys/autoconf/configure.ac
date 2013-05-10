@@ -392,17 +392,6 @@ NETHACK_ARG(data-librarian,[Data librarian],DLB,auto,
   [enable_data_librarian=yes])
 NETHACK_ARG(sinks,[Kitchen sinks],SINKS,yes)
 
-#not implemented
-# NETHACK_ARG(light-src-spell,[Spells are light sources],LIGHT_SRC_SPELL,yes)
-# NETHACK_ARG(invisible-objects,[Invisible objects],INVISIBLE_OBJECTS,yes)
-# NETHACK_ARG(unpolypile,[Object unpolymorphing],UNPOLYPILE,yes)
-# NETHACK_ARG(wallet-o-p,[Perseus' Wallet],WALLET_O_P,yes)
-# NETHACK_ARG(keep-save,[Keep save files after restore],KEEP_SAVE,no)
-# NETHACK_ARG(show-weight,[Display object weight],SHOW_WEIGHT,yes)
-# NETHACK_ARG(other-services,[Shopkeeper services],OTHER_SERVICES,yes)
-# NETHACK_ARG(shout,[Shouting and pet commands],SHOUT,no)
-# NETHACK_ARG(display-layers,[Support transparent tilesets],DISPLAY_LAYERS,yes)
-
 #enabled uncoditionally
 # NETHACK_ARG(reincarnation,[Special Rogue-like levels],REINCARNATION,yes)
 # NETHACK_ARG(blackmarket,[Blackmarket],BLACKMARKET,yes)
