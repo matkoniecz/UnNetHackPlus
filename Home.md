@@ -458,3 +458,6 @@ proud owner of a magic whistle.
 * rgrn
 * /r/nethack
 * /r/roguelikes
+
+#backups
+*[[Vanilia bugs]]
