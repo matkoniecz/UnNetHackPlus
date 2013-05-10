@@ -426,7 +426,6 @@ NETHACK_ARG(user-sounds,
 NETHACK_ARG(score-on-botl,[Show score on bottom line],SCORE_ON_BOTL,no)
 NETHACK_ARG(realtime-on-botl,[Show elapsed time on bottom line],REALTIME_ON_BOTL,no)
 NETHACK_ARG(high-score-comparison-by-uid,[Compare High Score entries by user id instead of user name],PERS_IS_UID,no)
-NETHACK_ARG(shell,[Start a shell from within the game],SHELL,no)
 NETHACK_ARG(show-extinct,[Display extinct monsters at the end of game],SHOW_EXTINCT,yes)
 NETHACK_ARG(sortloot,[Sort item lists alphabetically by description.],SORTLOOT,yes)
 NETHACK_ARG(goldobj,[Gold is kept on object chains (experimental)],GOLDOBJ,no)

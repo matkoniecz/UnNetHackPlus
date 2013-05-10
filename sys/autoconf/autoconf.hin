@@ -215,9 +215,6 @@
 /* Show score on bottom line */
 #undef SCORE_ON_BOTL
 
-/* Start a shell from within the game */
-#undef SHELL
-
 /* Display extinct monsters at the end of game */
 #undef SHOW_EXTINCT
 

@@ -628,30 +628,7 @@ void
 readmail(otmp)
 struct obj *otmp;
 {
-#  ifdef SHELL	/* can't access mail reader without spawning subprocess */
-    const char *txt, *cmd;
-    char *p, buf[BUFSZ], qbuf[BUFSZ];
-    int len;
-
-    /* there should be a command hidden beyond the object name */
-    txt = otmp->onamelth ? ONAME(otmp) : "";
-    len = strlen(txt);
-    cmd = (len + 1 < otmp->onamelth) ? txt + len + 1 : (char *) 0;
-    if (!cmd || !*cmd) cmd = "SPAWN";
-
-    Sprintf(qbuf, "System command (%s)", cmd);
-    getlin(qbuf, buf);
-    if (*buf != '\033') {
-	for (p = eos(buf); p > buf; *p = '\0')
-	    if (*--p != ' ') break;	/* strip trailing spaces */
-	if (*buf) cmd = buf;		/* use user entered command */
-	if (!strcmpi(cmd, "SPAWN") || !strcmp(cmd, "!"))
-	    cmd = (char *) 0;		/* interactive escape */
-
-	vms_doshell(cmd, TRUE);
-	(void) sleep(1);
-    }
-#  endif /* SHELL */
+/* can't access mail reader without spawning subprocess, requires removed SHELL compile time option */
 }
 
 # endif /* VMS */

@@ -175,7 +175,6 @@ FILES
 ENVIRONMENT
        USER or LOGNAME      Your login name.
        HOME                 Your home directory.
-       SHELL                Your shell.
        TERM                 The type of your terminal.
        HACKPAGER or PAGER   Replacement for default pager.
        MAIL                 Mailbox file.

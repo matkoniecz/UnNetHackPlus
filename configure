@@ -762,7 +762,6 @@ enable_user_sounds
 enable_score_on_botl
 enable_realtime_on_botl
 enable_high_score_comparison_by_uid
-enable_shell
 enable_show_extinct
 enable_sortloot
 enable_goldobj
@@ -1449,7 +1448,6 @@ Optional Features:
   --enable-high-score-comparison-by-uid
                           Compare High Score entries by user id instead of
                           user name (default=no)
-  --enable-shell          Start a shell from within the game (default=no)
   --enable-show-extinct   Display extinct monsters at the end of game
                           (default=yes)
   --enable-sortloot       Sort item lists alphabetically by description.
@@ -6491,25 +6489,6 @@ $as_echo "$enable_high_score_comparison_by_uid" >&6; }
 
 cat >>confdefs.h <<_ACEOF
 #define PERS_IS_UID /**/
-_ACEOF
-
-   fi
-
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking whether to enable shell" >&5
-$as_echo_n "checking whether to enable shell... " >&6; }
-   # Check whether --enable-shell was given.
-if test "${enable_shell+set}" = set; then :
-  enableval=$enable_shell;
-else
-  enable_shell="no"
-fi
-
-   { $as_echo "$as_me:${as_lineno-$LINENO}: result: $enable_shell" >&5
-$as_echo "$enable_shell" >&6; }
-   if test "$enable_shell" != "no" ; then
-
-cat >>confdefs.h <<_ACEOF
-#define SHELL /**/
 _ACEOF
 
    fi
