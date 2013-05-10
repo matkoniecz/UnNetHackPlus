@@ -1,5 +1,5 @@
 Plans for UnNetHackPlus
-* backup github http://addyosmani.com/blog/backing-up-a-github-account/
+* backup github http://addyosmani.com/blog/backing-up-a-github-account/ https://www.google.pl/search?q=backing+up+a+github+account+wiki&ie=utf-8&oe=utf-8&aq=t&rls=org.mozilla:en-US:official&client=firefox-a&channel=fflb https://gist.github.com/rodw/3073987 https://github.com/zauberlabs/backup-github 
 * kill opthelp by replacing " {"autodig", &flags.autodig, FALSE, SET_IN_GAME}," with " {"autodig", &flags.autodig, FALSE, SET_IN_GAME, "dig if moving and wielding digging tool"},"
 * travel         enable the command to travel to a map location via [TRUE] <enable pernamently>
 * the goal of the this branch is to require players with the Amulet of Yendor to take an alternate route out of the dungeon.  - http://nethackwiki.com/wiki/SLASHEM_PHLEGETHON
