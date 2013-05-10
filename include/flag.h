@@ -266,9 +266,7 @@ struct instance_flags {
 #ifdef SORTLOOT
 	char sortloot;		/* sort items to loot alphabetically */
 #endif
-#ifdef SHOW_BORN
 	boolean show_born;	/* show numbers of created monsters */
-#endif
 	boolean showdmg;	/* show damage */
 	boolean paranoid_hit;	/* Ask for 'yes' when hitting peacefuls */
 	boolean paranoid_quit;	/* Ask for 'yes' when quitting */

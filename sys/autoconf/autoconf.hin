@@ -218,9 +218,6 @@
 /* Start a shell from within the game */
 #undef SHELL
 
-/* Display number of created monsters at the end of game */
-#undef SHOW_BORN
-
 /* Display extinct monsters at the end of game */
 #undef SHOW_EXTINCT
 

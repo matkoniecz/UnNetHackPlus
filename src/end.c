@@ -1224,11 +1224,9 @@ boolean ask;
 			else
 			    Sprintf(buf, "%d %s",
 				    nkilled, makeplural(mons[i].mname));
-#ifdef SHOW_BORN
 			if (iflags.show_born && nkilled != mvitals[i].born)
 			    Sprintf(buf + strlen(buf), " (%d created)",
 				    (int) mvitals[i].born);
-#endif
 		    }
 		    if (c == 'y') putstr(klwin, 0, buf);
 		    dump_list_item_link(mons[i].mname, buf);

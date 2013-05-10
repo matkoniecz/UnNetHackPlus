@@ -763,7 +763,6 @@ enable_score_on_botl
 enable_realtime_on_botl
 enable_high_score_comparison_by_uid
 enable_shell
-enable_show_born
 enable_show_extinct
 enable_sortloot
 enable_goldobj
@@ -1451,8 +1450,6 @@ Optional Features:
                           Compare High Score entries by user id instead of
                           user name (default=no)
   --enable-shell          Start a shell from within the game (default=no)
-  --enable-show-born      Display number of created monsters at the end of
-                          game (default=yes)
   --enable-show-extinct   Display extinct monsters at the end of game
                           (default=yes)
   --enable-sortloot       Sort item lists alphabetically by description.
@@ -6255,6 +6252,7 @@ _ACEOF
 # NETHACK_ARG(dungeon-growth,[Dungeon growth],DUNGEON_GROWTH,yes)
 # NETHACK_ARG_WITH_PARAM(wizmode,[enable wizard mode for the specified user],WIZARD,yes,USER,[wizard])
 # NETHACK_ARG(quiver-fired,[Firing without anything quivered will ask you what to quiver],QUIVER_FIRED,yes)
+# NETHACK_ARG(show-born,[Display number of created monsters at the end of game],SHOW_BORN,yes)
 
 #real options
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether to enable wallified-maze" >&5
@@ -6523,25 +6521,6 @@ $as_echo "$enable_shell" >&6; }
 
 cat >>confdefs.h <<_ACEOF
 #define SHELL /**/
-_ACEOF
-
-   fi
-
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking whether to enable show-born" >&5
-$as_echo_n "checking whether to enable show-born... " >&6; }
-   # Check whether --enable-show-born was given.
-if test "${enable_show_born+set}" = set; then :
-  enableval=$enable_show_born;
-else
-  enable_show_born="yes"
-fi
-
-   { $as_echo "$as_me:${as_lineno-$LINENO}: result: $enable_show_born" >&5
-$as_echo "$enable_show_born" >&6; }
-   if test "$enable_show_born" != "no" ; then
-
-cat >>confdefs.h <<_ACEOF
-#define SHOW_BORN /**/
 _ACEOF
 
    fi

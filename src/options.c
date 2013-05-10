@@ -197,9 +197,7 @@ static struct Bool_Opt
 	{"safe_pet", &flags.safe_dog, TRUE, SET_IN_GAME},
 	{"sanity_check", &iflags.sanity_check, FALSE, SET_IN_GAME},
 	{"showannotation", &iflags.show_annotation, TRUE, SET_IN_FILE},
-#ifdef SHOW_BORN
 	{"showborn", &iflags.show_born, TRUE, SET_IN_GAME},
-#endif
 	{"showbuc", &iflags.show_buc, TRUE, SET_IN_GAME},
 	{"showdmg", &iflags.showdmg, FALSE, SET_IN_GAME},
 	{"show_dgn_name", &iflags.show_dgn_name, TRUE, SET_IN_GAME},
