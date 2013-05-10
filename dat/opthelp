@@ -32,6 +32,9 @@ paranoid_trap   always show menu with the T and R commands         [FALSE]
 perm_invent     keep inventory in a permanent window               [FALSE]
 pickup_thrown   autopickup things you threw                        [TRUE]
 prayconfirm     use confirmation prompt when #pray command issued  [TRUE]
+quiver_fired    when using the f (fire) command and no ammunition
+                is quivered, prompt for ammunition to quiver, then 
+                fire it.                                           [TRUE]
 pushweapon      when wielding a new weapon, put your previously
                 wielded weapon into the secondary weapon slot      [FALSE]
 rawio           allow the use of raw I/O                           [FALSE]
@@ -79,11 +82,6 @@ timed_delay    on unix and VMS, use a timer instead of sending
                extra screen output when attempting to pause for
                display effect.  on MSDOS without the termcap
                lib, whether or not to pause for visual effect.    [TRUE]
-
-Boolean option if QUIVER_FIRED was set at compile time:
-quiver_fired   when using the f (fire) command and no ammunition
-               is quivered, prompt for ammunition to quiver, then 
-               fire it.                                           [TRUE]
 
 Boolean option if QWERTZ was set at compile time:
 qwertz_layout  swap the y and z keys                              [FALSE]

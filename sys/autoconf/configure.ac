@@ -413,6 +413,7 @@ NETHACK_ARG(sinks,[Kitchen sinks],SINKS,yes)
 # NETHACK_ARG(paranoid,[Require some questions to be answered with 'yes' instead of 'y'],PARANOID,yes)
 # NETHACK_ARG(dungeon-growth,[Dungeon growth],DUNGEON_GROWTH,yes)
 # NETHACK_ARG_WITH_PARAM(wizmode,[enable wizard mode for the specified user],WIZARD,yes,USER,[wizard])
+# NETHACK_ARG(quiver-fired,[Firing without anything quivered will ask you what to quiver],QUIVER_FIRED,yes)
 
 #real options
 NETHACK_ARG(wallified-maze,[Fancy mazes],WALLIFIED_MAZE,yes)
@@ -440,7 +441,6 @@ NETHACK_ARG(show-extinct,[Display extinct monsters at the end of game],SHOW_EXTI
 NETHACK_ARG(sortloot,[Sort item lists alphabetically by description.],SORTLOOT,yes)
 NETHACK_ARG(goldobj,[Gold is kept on object chains (experimental)],GOLDOBJ,no)
 NETHACK_ARG(autopickup-exceptions,[Exceptions to autopickup], AUTOPICKUP_EXCEPTIONS,yes)
-NETHACK_ARG(quiver-fired,[Firing without anything quivered will ask you what to quiver],QUIVER_FIRED,yes)
 NETHACK_ARG(qwertz,[QWERTZ keyboard layout support],QWERTZ,yes)
 NETHACK_ARG(simple-mail,[simple mail dgamelaunch support],SIMPLE_MAIL,no)
 
