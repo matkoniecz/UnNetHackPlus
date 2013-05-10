@@ -6234,7 +6234,31 @@ _ACEOF
 
    fi
 
+
+#not implemented
 # NETHACK_ARG(light-src-spell,[Spells are light sources],LIGHT_SRC_SPELL,yes)
+# NETHACK_ARG(invisible-objects,[Invisible objects],INVISIBLE_OBJECTS,yes)
+# NETHACK_ARG(unpolypile,[Object unpolymorphing],UNPOLYPILE,yes)
+# NETHACK_ARG(wallet-o-p,[Perseus' Wallet],WALLET_O_P,yes)
+# NETHACK_ARG(keep-save,[Keep save files after restore],KEEP_SAVE,no)
+# NETHACK_ARG(show-weight,[Display object weight],SHOW_WEIGHT,yes)
+# NETHACK_ARG(other-services,[Shopkeeper services],OTHER_SERVICES,yes)
+# NETHACK_ARG(shout,[Shouting and pet commands],SHOUT,no)
+# NETHACK_ARG(display-layers,[Support transparent tilesets],DISPLAY_LAYERS,yes)
+
+#enabled uncoditionally
+# NETHACK_ARG(reincarnation,[Special Rogue-like levels],REINCARNATION,yes)
+# NETHACK_ARG(blackmarket,[Blackmarket],BLACKMARKET,yes)
+# NETHACK_ARG(seduce,[Succubi/incubi seduction],SEDUCE,yes)
+# NETHACK_ARG(steed,[Ability to ride monsters],STEED,yes)
+# NETHACK_ARG(tourist,[Tourist class],TOURIST,yes)
+# NETHACK_ARG(auto-open,[Open doors by walking into them],AUTO_OPEN,yes)
+# NETHACK_ARG(exp-on-botl,[Show experience on bottom line],EXP_ON_BOTL,yes)
+# NETHACK_ARG(paranoid,[Require some questions to be answered with 'yes' instead of 'y'],PARANOID,yes)
+# NETHACK_ARG(dungeon-growth,[Dungeon growth],DUNGEON_GROWTH,yes)
+# NETHACK_ARG_WITH_PARAM(wizmode,[enable wizard mode for the specified user],WIZARD,yes,USER,[wizard])
+
+#real options
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether to enable wallified-maze" >&5
 $as_echo_n "checking whether to enable wallified-maze... " >&6; }
    # Check whether --enable-wallified-maze was given.
@@ -6254,8 +6278,6 @@ _ACEOF
 
    fi
 
-# NETHACK_ARG(reincarnation,[Special Rogue-like levels],REINCARNATION,yes) - enabled uncoditionally
-# NETHACK_ARG(blackmarket,[Blackmarket],BLACKMARKET,yes) - enabled uncoditionally
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether to enable kops" >&5
 $as_echo_n "checking whether to enable kops... " >&6; }
    # Check whether --enable-kops was given.
@@ -6275,14 +6297,6 @@ _ACEOF
 
    fi
 
-# NETHACK_ARG(seduce,[Succubi/incubi seduction],SEDUCE,yes) - enabled uncoditionally
-# NETHACK_ARG(invisible-objects,[Invisible objects],INVISIBLE_OBJECTS,yes)
-# NETHACK_ARG(unpolypile,[Object unpolymorphing],UNPOLYPILE,yes)
-# NETHACK_ARG(wallet-o-p,[Perseus' Wallet],WALLET_O_P,yes)
-# NETHACK_ARG(lightsabers,[Lightsabers],LIGHTSABERS,yes)
-# NETHACK_ARG(firearms,[Guns and Bullets],FIREARMS,yes)
-# NETHACK_ARG(eaten-memory,[Remember which monsters have been eaten],
-#  EATEN_MEMORY,yes)
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether to enable randomized-planes" >&5
 $as_echo_n "checking whether to enable randomized-planes... " >&6; }
    # Check whether --enable-randomized-planes was given.
@@ -6302,9 +6316,6 @@ _ACEOF
 
    fi
 
-# NETHACK_ARG(steed,[Ability to ride monsters],STEED,yes) - enabled uncoditionally
-# NETHACK_ARG(tourist,[Tourist class],TOURIST,yes) - enabled uncoditionally
-# NETHACK_ARG(yeoman,[Yeoman class],YEOMAN,yes)
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether to enable redo" >&5
 $as_echo_n "checking whether to enable redo... " >&6; }
    # Check whether --enable-redo was given.
@@ -6383,7 +6394,6 @@ _ACEOF
    fi
 
 fi
-# NETHACK_ARG(auto-open,[Open doors by walking into them],AUTO_OPEN,yes) - enabled uncoditionally
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether to enable elbereth" >&5
 $as_echo_n "checking whether to enable elbereth... " >&6; }
    # Check whether --enable-elbereth was given.
@@ -6403,7 +6413,6 @@ _ACEOF
 
    fi
 
-# NETHACK_ARG(no-bones,[Disable loading and saving bones levels],NO_BONES,no)
 if test $host_os != mingw32; then
  { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether to enable bones-pool" >&5
 $as_echo_n "checking whether to enable bones-pool... " >&6; }
@@ -6444,7 +6453,6 @@ _ACEOF
 
    fi
 
-# NETHACK_ARG(exp-on-botl,[Show experience on bottom line],EXP_ON_BOTL,yes) - enabled uncoditionally
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether to enable score-on-botl" >&5
 $as_echo_n "checking whether to enable score-on-botl... " >&6; }
    # Check whether --enable-score-on-botl was given.
@@ -6502,10 +6510,6 @@ _ACEOF
 
    fi
 
-# NETHACK_ARG(keep-save,[Keep save files after restore],KEEP_SAVE,no)
-# NETHACK_ARG(show-weight,[Display object weight],SHOW_WEIGHT,yes)
-# NETHACK_ARG(other-services,[Shopkeeper services],OTHER_SERVICES,yes)
-# NETHACK_ARG(paranoid,[Require some questions to be answered with 'yes' instead of 'y'],PARANOID,yes) - enabled uncoditionally
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether to enable shell" >&5
 $as_echo_n "checking whether to enable shell... " >&6; }
    # Check whether --enable-shell was given.
@@ -6582,9 +6586,6 @@ _ACEOF
 
    fi
 
-# NETHACK_ARG(dungeon-growth,[Dungeon growth],DUNGEON_GROWTH,yes) - enabled uncoditionally
-#NETHACK_ARG(shout,[Shouting and pet commands (not implemented)],SHOUT,no)
-# NETHACK_ARG(display-layers,[Support transparent tilesets],DISPLAY_LAYERS,yes)
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether to enable goldobj" >&5
 $as_echo_n "checking whether to enable goldobj... " >&6; }
    # Check whether --enable-goldobj was given.
@@ -6966,7 +6967,6 @@ _ACEOF
 	fi
 fi
 
-
 { $as_echo "$as_me:${as_lineno-$LINENO}: checking whether to enable whereis file" >&5
 $as_echo_n "checking whether to enable whereis file... " >&6; }
    # Check whether --enable-whereis-file was given.
@@ -6994,8 +6994,6 @@ _ACEOF
 $as_echo "no" >&6; }
    fi
 
-
-# NETHACK_ARG_WITH_PARAM(wizmode,[enable wizard mode for the specified user],WIZARD,yes,USER,[wizard]) - enabled uncoditionally
 
 if test "$CHOWN" != "true"; then
     { $as_echo "$as_me:${as_lineno-$LINENO}: checking for owner of installed files" >&5
