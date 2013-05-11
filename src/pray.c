@@ -1608,20 +1608,86 @@ attempt_altar_conversion(aligntyp altaralign, struct obj *otmp)
 	}
 }
 
-int
-dosacrifice()
+void
+reward_sacrifice(int value)
 {
-	struct obj *otmp;
-	aligntyp altaralign = a_align(u.ux,u.uy);
+	int saved_anger = u.ugangr;
+	int saved_cnt = u.ublesscnt;
+	int saved_luck = u.uluck;
+	if(u.ugangr) {
+		u.ugangr -= ((value * (u.ualign.type == A_CHAOTIC ? 2 : 3)) / get_max_sacrifice_value());
+		if(u.ugangr < 0) {
+			u.ugangr = 0;
+		}
+		if(u.ugangr != saved_anger) {
+			if (u.ugangr) {
+				pline("%s seems %s.", u_gname(), Hallucination ? "groovy" : "slightly mollified");
+				if ((int)u.uluck < 0) { 
+					change_luck(1);
+				}
+			} else {
+				pline("%s seems %s.", u_gname(), Hallucination ? "cosmic (not a new fact)" : "mollified");
+				if ((int)u.uluck < 0) {
+					u.uluck = 0;
+				}
+			}
+		} else { 
+			if (Hallucination) {
+				pline_The("gods seem tall.");
+			}
+			else {
+				You("have a feeling of inadequacy.");
+			}
+		}
+	} else if(ugod_is_angry()) {
+		if(value > get_max_sacrifice_value()) {
+			value = get_max_sacrifice_value();
+		}
+		if(value > -u.ualign.record) {
+			value = -u.ualign.record;
+		}
+		adjalign(value);
+		You_feel("partially absolved.");
+	} else if (u.ublesscnt > 0) {
+		u.ublesscnt -= ((value * (u.ualign.type == A_CHAOTIC ? 500 : 300)) / get_max_sacrifice_value());
+		if(u.ublesscnt < 0) {
+			u.ublesscnt = 0;
+		}
+		if(u.ublesscnt != saved_cnt) {
+			if (u.ublesscnt) {
+				if (Hallucination) {
+					You("realize that the gods are not like you and I.");
+				} else {
+					You("have a hopeful feeling.");
+				}
+				if ((int)u.uluck < 0) {
+					change_luck(1);
+				}
+			} else {
+				if (Hallucination) {
+					pline("Overall, there is a smell of fried onions.");
+				} else {
+					You("have a feeling of reconciliation.");
+				}
+				if ((int)u.uluck < 0) {
+					u.uluck = 0;
+				}
+			}
+		}
+	} else {
+		/* you were already in pretty good standing
+		* The player can gain an object
+		*/
+		grant_object_from_sacrifice(value, saved_luck);
+	}
+}
+
+struct obj *
+get_object_to_sacrifice()
+{
 	char qbuf[QBUFSZ];
 	char c;
-	int value = 0;
-
-	if (!on_altar() || u.uswallow) {
-		You("are not standing on an altar.");
-	return 0;
-	}
-
+	struct obj *otmp;
 	/* Check for corpses or (fake) amulets of yendor on the floor */
 	for (otmp = level.objects[u.ux][u.uy]; otmp; otmp = otmp->nexthere) {
 		if (otmp->otyp==CORPSE ||
@@ -1642,6 +1708,25 @@ dosacrifice()
 		if (!(otmp = getobj(sacrifice_types, "sacrifice"))) {
 			return 0;
 		}
+	}
+	return otmp;
+}
+
+int
+dosacrifice()
+{
+	struct obj *otmp;
+	aligntyp altaralign = a_align(u.ux,u.uy);
+	int value = 0;
+
+	if (!on_altar() || u.uswallow) {
+		You("are not standing on an altar.");
+	return 0;
+	}
+
+	otmp = get_object_to_sacrifice();
+	if (otmp == 0) {
+		return 0;
 	}
 
 	if (otmp->otyp == AMULET_OF_YENDOR || otmp->otyp == FAKE_AMULET_OF_YENDOR) {
@@ -1679,82 +1764,12 @@ dosacrifice()
 	if (value < 0) { /* I don't think the gods are gonna like this... */
 		gods_upset(altaralign);
 	} else {
-		int saved_anger = u.ugangr;
-		int saved_cnt = u.ublesscnt;
-		int saved_luck = u.uluck;
-
 		/* Sacrificing at an altar of a different alignment */
 		if (u.ualign.type != altaralign) {
 			return attempt_altar_conversion(altaralign, otmp);
 		}
 		consume_offering(otmp);
-		/* OK, you get brownie points. */
-		if(u.ugangr) {
-			u.ugangr -= ((value * (u.ualign.type == A_CHAOTIC ? 2 : 3)) / get_max_sacrifice_value());
-			if(u.ugangr < 0) {
-				u.ugangr = 0;
-			}
-			if(u.ugangr != saved_anger) {
-				if (u.ugangr) {
-					pline("%s seems %s.", u_gname(), Hallucination ? "groovy" : "slightly mollified");
-					if ((int)u.uluck < 0) { 
-						change_luck(1);
-					}
-				} else {
-					pline("%s seems %s.", u_gname(), Hallucination ? "cosmic (not a new fact)" : "mollified");
-					if ((int)u.uluck < 0) {
-						u.uluck = 0;
-					}
-				}
-			} else { 
-				if (Hallucination) {
-					pline_The("gods seem tall.");
-				}
-				else {
-					You("have a feeling of inadequacy.");
-				}
-			}
-		} else if(ugod_is_angry()) {
-			if(value > get_max_sacrifice_value()) {
-				value = get_max_sacrifice_value();
-			}
-			if(value > -u.ualign.record) {
-				value = -u.ualign.record;
-			}
-			adjalign(value);
-			You_feel("partially absolved.");
-		} else if (u.ublesscnt > 0) {
-			u.ublesscnt -= ((value * (u.ualign.type == A_CHAOTIC ? 500 : 300)) / get_max_sacrifice_value());
-			if(u.ublesscnt < 0) {
-				u.ublesscnt = 0;
-			}
-			if(u.ublesscnt != saved_cnt) {
-				if (u.ublesscnt) {
-					if (Hallucination) {
-						You("realize that the gods are not like you and I.");
-					} else {
-						You("have a hopeful feeling.");
-					}
-					if ((int)u.uluck < 0) {
-						change_luck(1);
-					}
-				} else {
-					if (Hallucination) {
-						pline("Overall, there is a smell of fried onions.");
-					} else {
-						You("have a feeling of reconciliation.");
-					}
-					if ((int)u.uluck < 0) {
-						u.uluck = 0;
-					}
-				}
-			}
-		} else {
-			/* you were already in pretty good standing
-			* The player can gain an object
-			*/
-			return grant_object_from_sacrifice(value, saved_luck);
-		}
+		reward_sacrifice(value);
 	}
 	return(1);
 }
