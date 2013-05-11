@@ -1516,7 +1516,11 @@ struct monst *mtmp;
 	case PM_TOURIST:
 	    return ("Aloha");       /* Hawaiian */
 	case PM_VALKYRIE:
-	    return ("Velkommen");   /* Norse */
+	    return (
+#ifdef MAIL
+	    		mtmp && mtmp->data == &mons[PM_MAIL_DAEMON] ? "Hallo" :
+#endif
+	    		"Velkommen");   /* Norse */
 	default:
 	    return ("Hello");
 	}

@@ -415,7 +415,7 @@ struct monst *mtmp;
 			(void)mongets(mtmp, FLAIL);
 			break;
 		}
-		/* prevent djinnis from leaving objects when
+		/* prevent djinnis and mail daemons from leaving objects when
 		 * they vanish
 		 */
 		if (!is_demon(ptr)) break;

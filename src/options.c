@@ -133,7 +133,11 @@ static struct Bool_Opt
 #else
 	{"Macgraphics", (boolean *)0, FALSE, SET_IN_FILE},
 #endif
-	{"mail", (boolean *)0, TRUE, SET_IN_FILE},	/* OBSOLETE */
+#ifdef MAIL
+	{"mail", &flags.biff, TRUE, SET_IN_GAME},
+#else
+	{"mail", (boolean *)0, TRUE, SET_IN_FILE},
+#endif
 #ifdef MENU_COLOR
 # ifdef MICRO
 	{"menucolors", &iflags.use_menu_color, TRUE,  SET_IN_FILE},
@@ -2997,6 +3001,12 @@ goodfruit:
 			else if ((boolopt[i].addr) == &flags.invlet_constant) {
 			    if (flags.invlet_constant) reassign();
 			}
+#ifdef LAN_MAIL
+			else if ((boolopt[i].addr) == &flags.biff) {
+			    if (flags.biff) lan_mail_init();
+			    else lan_mail_finish();
+			}
+#endif
 			else if (((boolopt[i].addr) == &flags.lit_corridor) ||
 			         ((boolopt[i].addr) == &iflags.dark_room)) {
 			    /*

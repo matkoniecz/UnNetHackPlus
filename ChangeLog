@@ -30,10 +30,6 @@
 		- C343-118 "Some messages use "mirror" where they should use "looking glass."" (from GruntHack)
 		- C343-302 "Amnesia of object discoveries may forget to forget one thing."
 		- C343-134 "Being petrified by swallowing a cockatrice violates foodless conduct."
-		- As mail deamon functionality was removed from game following bugs are moot:
-			- C343-165 "Scroll of mail can be abused slightly."
-			- C343-320 "Reading scroll of mail break illiterate conduct."
-			- C343-415 "Mail daemons can be created when populating special levels with demons."
 		Patches are linked at http://nethackwiki.com/wiki/User:Bulwersator/UnNetHackPlus_bug_tracking
 	* UnNetHack bug fixes
 		- #143 Angered quest guardians will no longer go berserk.
@@ -119,7 +115,6 @@
 	* Better code (removal of useless #ifdefs for defines TOURIST, STEED etc, removal of pointless code like this related to SHELL, DUMB, STUPID defines, refactoring)
 	* Spellbook delivery is now more reliable in the Endgame (from GruntHack)
 	* Healing potions may fix wounded legs
-	* Removal of SHELL, MAIL, SIMPLE_MAIL
 	Full list of changes available at https://github.com/Bulwersator/UnNetHackPlus/commits/master
 
 2012-04-01  UnNetHack 4.0.0

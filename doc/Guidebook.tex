@@ -1669,6 +1669,21 @@ blessed, and how many uses it has left.  Some objects of subtle
 enchantment are difficult to identify without these.
 
 %.pg
+A mail daemon may run up and deliver mail to you as a %
+{\it scroll of mail} (on versions compiled with this feature).
+To use this feature on versions where {\it NetHack\/}
+mail delivery is triggered by electronic mail appearing in your system mailbox,
+you must let {\it NetHack\/} know where to look for new mail by setting the
+``MAIL'' environment variable to the file name of your mailbox.
+You may also want to set the ``MAILREADER'' environment variable to the
+file name of your favorite reader, so {\it NetHack\/} can shell to it when you
+read the scroll.
+On versions of {\it NetHack\/} where mail is randomly
+generated internal to the game, these environment variables are ignored.
+You can disable the mail daemon by turning off the
+{\it mail\/} option.
+
+%.pg
 The command to read a scroll is `{\tt r}'.
 
 %.hn 2
@@ -2323,6 +2338,9 @@ character as lit (default off).
 \item[\ib{lootabc}]
 Use the old `{\tt a}', `{\tt b}', and `{\tt c}' keyboard shortcuts when
 looting, rather than the mnemonics `{\tt o}', `{\tt i}', and `{\tt b}' (default off).
+%.lp
+\item[\ib{mail}]
+Enable mail delivery during the game (default on).
 %.lp
 \item[\ib{male}]
 An obsolete synonym for ``{\tt gender:male}''.  Cannot be set with the

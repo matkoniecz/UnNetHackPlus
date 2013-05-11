@@ -4081,7 +4081,7 @@ sel_set_door(dx,dy,arg)
     /*SpLev_Map[x][y] = 1;*/
 
     /* Now the complicated part, list it with each subroom */
-    /* The dog move use this */
+    /* The dog move and mail daemon routines use this */
     while(droom->hx >= 0 && doorindex < DOORMAX) {
 	if(droom->hx >= x-1 && droom->lx <= x+1 &&
 	   droom->hy >= y-1 && droom->ly <= y+1) {

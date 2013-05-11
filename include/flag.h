@@ -26,6 +26,9 @@ struct flag {
 	boolean  autoquiver;	/* Automatically fill quiver */
 	boolean  autounlock;	/* Automatically apply unlocking tool */
 	boolean  beginner;
+#ifdef MAIL
+	boolean  biff;		/* enable checking for mail */
+#endif
 	boolean  botl;		/* partially redo status line */
 	boolean  botlx;		/* print an entirely new bottom line */
 	boolean  confirm;	/* confirm before hitting tame monsters */
@@ -206,6 +209,9 @@ struct instance_flags {
 	coord	travelcc;	/* coordinates for travel_cache */
 #ifdef QWERTZ
 	boolean  qwertz_layout; /* swap y/z for this key layout */
+#endif
+#ifdef SIMPLE_MAIL
+	boolean simplemail;	/* simple mail format $NAME:$MESSAGE */
 #endif
 	boolean  sanity_check;	/* run sanity checks */
 	boolean  mon_polycontrol;	/* debug: control monster polymorphs */

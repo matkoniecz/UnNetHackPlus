@@ -37,6 +37,7 @@
 #define RANDOM			/* improved random numbers	*/
 #define TERMLIB			/* use termcap			*/
 #define TEXTCOLOR		/* allow color			*/
+#define MAIL			/* enable the fake maildemon */
 #ifdef MINT
 #define SUSPEND			/* allow suspending the game	*/
 #endif

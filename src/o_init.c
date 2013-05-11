@@ -218,7 +218,7 @@ shuffle_all()
 			}
 
 			/* non-magical amulets, scrolls, and spellbooks
-			 * (ex. imitation Amulets, blank)
+			 * (ex. imitation Amulets, blank, scrolls of mail)
 			 * and one-of-a-kind magical artifacts at the end of
 			 * their class in objects[] have fixed descriptions.
 			 */

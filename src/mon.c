@@ -1491,6 +1491,10 @@ uchar adtyp;
 	/* if it's a (possibly polymorphed) quest leader, mark him as dead */
 	if (mtmp->m_id == quest_status.leader_m_id)
 	    quest_status.leader_is_dead = TRUE;
+#ifdef MAIL
+	/* if the mail daemon dies, no more mail delivery.  -3. */
+	if (tmp == PM_MAIL_DAEMON) mvitals[tmp].mvflags |= G_GENOD;
+#endif
 
 #ifdef KOPS
 	if (mtmp->data->mlet == S_KOP) {
@@ -1900,6 +1904,12 @@ xkilled(mtmp, dest)
 	if((dest & 2) || LEVEL_SPECIFIC_NOCORPSE(mdat))
 		goto cleanup;
 
+#ifdef MAIL
+	if(mdat == &mons[PM_MAIL_DAEMON]) {
+		stackobj(mksobj_at(SCR_MAIL, x, y, FALSE, FALSE));
+		redisp = TRUE;
+	}
+#endif
 	if((!accessible(x, y) && !is_pool(x, y)) ||
 	   (x == u.ux && y == u.uy)) {
 	    /* might be mimic in wall or corpse in lava or on player's spot */
