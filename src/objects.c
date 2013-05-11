@@ -90,12 +90,12 @@ PROJECTILE("orcish arrow", "crude arrow",
 PROJECTILE("silver arrow", (char *)0,
 		1, 12, 1, 5, 6, 6, 0, SILVER, -P_BOW, HI_SILVER),
 PROJECTILE("ya", "bamboo arrow",
-		0, 15, 1, 4, 7, 7, 1, METAL, -P_BOW, HI_METAL),
+		0, 15, 1, 4, 7, 7, 1, METAL, -P_BOW, HI_WOOD),
 PROJECTILE("crossbow bolt", (char *)0,
 		1, 55, 1, 2, 4, 6, 0, IRON, -P_CROSSBOW, HI_METAL),
 
 WEAPON("dart", (char *)0,
-	1, 1, 0, 60,  1,  2,  3,  2, 0, P,   -P_DART, IRON, HI_METAL),
+	1, 1, 0, 60,  1,  2,  3,  2, 0, P,   -P_DART, IRON, CLR_RED),
 WEAPON("shuriken", "throwing star",
 	0, 1, 0, 35,  1,  5,  8,  6, 2, P,   -P_SHURIKEN, IRON, HI_METAL),
 WEAPON("boomerang", (char *)0,
@@ -240,7 +240,7 @@ WEAPON("club", (char *)0,
 	1, 0, 0, 12, 30,  3,  6,  3, 0, B,   P_CLUB, WOOD, HI_WOOD),
 #ifdef KOPS
 WEAPON("rubber hose", (char *)0,
-	1, 0, 0,  0, 20,  3,  4,  3, 0, B,   P_WHIP, PLASTIC, CLR_BROWN),
+	1, 0, 0,  0, 20,  3,  4,  3, 0, B,   P_WHIP, PLASTIC, CLR_GREEN),
 #endif
 WEAPON("quarterstaff", "staff",
 	0, 0, 1, 11, 40,  5,  6,  6, 0, B,   P_QUARTERSTAFF, WOOD, HI_WOOD),
@@ -312,13 +312,13 @@ HELM("tinfoil hat", (char *)0,
 		1, 0,  0,	1, 0,  0,   1, 10, 0, METAL, HI_METAL),
 /* With shuffled appearances... */
 HELM("helmet", "plumed helmet",
-		0, 0,  0,      10, 1, 30,  10, 9, 0, IRON, HI_METAL),
+		0, 0,  0,      10, 1, 30,  10, 9, 0, IRON, CLR_BRIGHT_BLUE),
 HELM("helm of brilliance", "etched helmet",
-		0, 1,  0,	6, 1, 50,  50, 9, 0, IRON, CLR_GREEN),
+		0, 1,  0,	6, 1, 50,  50, 9, 0, IRON, CLR_BRIGHT_GREEN),
 HELM("helm of opposite alignment", "crested helmet",
-		0, 1,  0,	6, 1, 50,  50, 9, 0, IRON, HI_METAL),
+		0, 1,  0,	6, 1, 50,  50, 9, 0, IRON, CLR_BRIGHT_MAGENTA),
 HELM("helm of telepathy", "visored helmet",
-		0, 1,  TELEPAT, 2, 1, 50,  50, 9, 0, IRON, HI_METAL),
+		0, 1,  TELEPAT, 2, 1, 50,  50, 9, 0, IRON, CLR_BRIGHT_CYAN),
 
 /* suits of armor */
 /*
@@ -603,7 +603,7 @@ CONTAINER("bag of tricks", "bag",    0, 1, 1,  20, 15, 100,    CLOTH,   HI_CLOTH
 /* lock opening tools */
 TOOL("skeleton key", "key",          0, 0, 0, 0,  80,  3,  10, IRON,    HI_METAL),
 TOOL("lock pick", (char *)0,         1, 0, 0, 0,  60,  4,  20, IRON,    HI_METAL),
-TOOL("credit card", (char *)0,       1, 0, 0, 0,  15,  1,  10, PLASTIC, CLR_WHITE),
+TOOL("credit card", (char *)0,       1, 0, 0, 0,  15,  1,  10, PLASTIC, CLR_BRIGHT_MAGENTA),
 /* light sources */
 TOOL("tallow candle", "candle",      0, 1, 0, 0,  20,  2,  10, WAX,     CLR_WHITE),
 TOOL("wax candle", "candle",         0, 1, 0, 0,   5,  2,  20, WAX,     CLR_WHITE),
