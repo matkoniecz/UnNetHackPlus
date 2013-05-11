@@ -1427,8 +1427,7 @@ dosacrifice_of_own_race(aligntyp altaralign, struct obj *otmp)
 			levl[u.ux][u.uy].altarmask = AM_CHAOTIC;
 		}
 		angry_priest();
-	}
-	if (altaralign == A_LAWFUL || altaralign == A_NEUTRAL) {
+	} else {
 		struct monst *dmon;
 		const char *demonless_msg;
 		/* Human sacrifice on a chaotic or unaligned altar */
