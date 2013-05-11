@@ -125,7 +125,6 @@ extern char *FDECL(gets, (char *));
 
 #define TEXTCOLOR		/* Use colored monsters and objects */
 #define HACKFONT		/* Use special hack.font */
-#define MAIL			/* Get mail at unexpected occasions */
 #define DEFAULT_ICON "NetHack:default.icon"	/* private icon */
 #define AMIFLUSH		/* toss typeahead (select flush in .cnf) */
 /* #define OPT_DISPMAP		/* enable fast_map option */

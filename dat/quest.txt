@@ -5322,26 +5322,6 @@ which you find out that information; if you know for certain an object
 is neither blessed nor cursed, it'll be marked as "uncursed". There
 won't be a notation at all if you aren't sure, though.
 %E
-%Cm - 00339
-Tutorial: MAIL
-
-You've got mail! If someone sends you a message, a mail daemon will
-turn up and give it to you; it'll appear in the form of a scroll, and
-reading the scroll will allow you to check what the message was. The
-form of the message will depend on where and how you're playing; if
-you're on your own computer, then the scroll will normally be a
-response to the receipt of email, in which case you can read the
-scroll to read the email; but when playing on a public NetHack server,
-the mail will probably be related to your game, sent by someone
-watching. In this case, you can effectively send a reply by pressing
-#, then space, then typing in your message and leaving it on the
-screen for a while; whoever's watching your game (and sent the mail)
-will be able to read the response on your screen.
-
-If you get fed up of being sent mail all the time, you can turn this
-option off, by using O to enter the options screen, and turning off
-the 'mail' option.
-%E
 %Cm - 00340
 Tutorial: SPELLCASTING AND ARMOR
 

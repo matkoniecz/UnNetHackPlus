@@ -218,9 +218,6 @@
 /* Display extinct monsters at the end of game */
 #undef SHOW_EXTINCT
 
-/* simple mail dgamelaunch support */
-#undef SIMPLE_MAIL
-
 /* Kitchen sinks */
 #undef SINKS
 

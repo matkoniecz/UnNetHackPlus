@@ -35,7 +35,7 @@ beconf.h        color.h         config.h        config1.h       coord.h
 decl.h          def_os2.h       dgn_file.h      display.h       dlb.h
 dungeon.h       edog.h          emin.h          engrave.h       epri.h
 eshk.h          extern.h        flag.h          func_tab.h      global.h
-hack.h          lev.h           mail.h          mfndpos.h       micro.h
+hack.h          lev.h           mfndpos.h       micro.h
 mkroom.h        monattk.h       mondata.h       monflag.h       monst.h
 monsym.h        nhlan.h         ntconf.h        obj.h           objclass.h
 os2conf.h       patchlevel.h    pcconf.h        permonst.h      prop.h
@@ -67,7 +67,7 @@ do.c            do_name.c       do_wear.c       dog.c           dogmove.c
 dokick.c        dothrow.c       drawing.c       dungeon.c       eat.c
 end.c           engrave.c       exper.c         explode.c       extralev.c
 files.c         fountain.c      hack.c          hacklib.c       invent.c
-light.c         lock.c          mail.c          makemon.c       mapglyph.c
+light.c         lock.c          makemon.c       mapglyph.c
 mcastu.c        mhitm.c         mhitu.c         minion.c        mklev.c
 mkmap.c         mkmaze.c        mkobj.c         mkroom.c        mon.c
 mondata.c       monmove.c       monst.c         mplayer.c       mthrowu.c
@@ -196,7 +196,7 @@ stat.h
 sys/winnt:
 (files for Windows 9x, NT and Windows2000 version)
 Install.nt      Makefile.bcc    Makefile.gcc    Makefile.msc    console.rc
-defaults.nh     mapimail.c      nethack.def     nh340key.c      nhdefkey.c
+defaults.nh     nethack.def     nh340key.c      nhdefkey.c
 nhico.uu        nhraykey.c      nhsetup.bat     ntsound.c       nttty.c
 porthelp        win32api.h      winnt.c
 

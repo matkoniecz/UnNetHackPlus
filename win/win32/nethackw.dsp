@@ -272,10 +272,6 @@ SOURCE=..\src\lock.c
 # End Source File
 # Begin Source File
 
-SOURCE=..\src\mail.c
-# End Source File
-# Begin Source File
-
 SOURCE=..\src\makemon.c
 # End Source File
 # Begin Source File
@@ -721,10 +717,6 @@ SOURCE=..\include\mactty.h
 # Begin Source File
 
 SOURCE=..\include\macwin.h
-# End Source File
-# Begin Source File
-
-SOURCE=..\include\mail.h
 # End Source File
 # Begin Source File
 

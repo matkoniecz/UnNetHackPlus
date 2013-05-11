@@ -311,12 +311,7 @@ int udist;
 		    edog->droptime = monstermoves;
 		}
 	} else {
-	    if((obj=level.objects[omx][omy]) && !index(nofetch,obj->oclass)
-			&& !Is_sokoprize(obj)
-#ifdef MAIL
-			&& obj->otyp != SCR_MAIL
-#endif
-									){
+	    if((obj=level.objects[omx][omy]) && !index(nofetch,obj->oclass) && !Is_sokoprize(obj)){
 		int edible = dogfood(mtmp, obj);
 
 		if ((edible <= CADAVER ||

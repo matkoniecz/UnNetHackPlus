@@ -767,7 +767,6 @@ enable_sortloot
 enable_goldobj
 enable_autopickup_exceptions
 enable_qwertz
-enable_simple_mail
 enable_xlogfile
 enable_livelog
 enable_livelog_shout
@@ -1457,7 +1456,6 @@ Optional Features:
   --enable-autopickup-exceptions
                           Exceptions to autopickup (default=yes)
   --enable-qwertz         QWERTZ keyboard layout support (default=yes)
-  --enable-simple-mail    simple mail dgamelaunch support (default=no)
   --enable-xlogfile=FILE  More verbose logfile (default=yes, default
                           file=[xlogfile])
   --enable-livelog=FILE   Live game progress logfile (default=no, default
@@ -6584,25 +6582,6 @@ $as_echo "$enable_qwertz" >&6; }
 
 cat >>confdefs.h <<_ACEOF
 #define QWERTZ /**/
-_ACEOF
-
-   fi
-
-{ $as_echo "$as_me:${as_lineno-$LINENO}: checking whether to enable simple-mail" >&5
-$as_echo_n "checking whether to enable simple-mail... " >&6; }
-   # Check whether --enable-simple-mail was given.
-if test "${enable_simple_mail+set}" = set; then :
-  enableval=$enable_simple_mail;
-else
-  enable_simple_mail="no"
-fi
-
-   { $as_echo "$as_me:${as_lineno-$LINENO}: result: $enable_simple_mail" >&5
-$as_echo "$enable_simple_mail" >&6; }
-   if test "$enable_simple_mail" != "no" ; then
-
-cat >>confdefs.h <<_ACEOF
-#define SIMPLE_MAIL /**/
 _ACEOF
 
    fi

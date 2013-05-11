@@ -206,7 +206,6 @@ struct	qtlists {
 #define QT_T_MAJORTROUBLE   336 /* in major trouble and #pray will work */
 #define QT_T_BURDEN         337 /* became burdened */
 #define QT_T_EQUIPCURSE     338 /* BCU-known item is cursed */
-#define QT_T_MAILSCROLL     339 /* mail was delivered */
 #define QT_T_CASTER_ARMOR   340 /* spellcaster wearing inappropriate armour */
 #define QT_T_WEAPON_SKILL   341 /* wielding an unskilled weapon */
 #define QT_T_ENGULFED       342 /* engulfed by a monster */

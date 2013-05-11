@@ -1319,9 +1319,7 @@ static const char * const bogusmons[] = {
 	"Dumbledore",                /* Harry Potter */
 	"Harry Potter",              /* Harry Potter */
 	"Crumple-Horned Snorkack",   /* Harry Potter */
-#ifndef MAIL
-	"mail daemon",
-#endif
+	"mail daemon",               /* vanilla NetHack */
 	"Vaarsuvius",                /* The Order of the Stick */
 	"Durkon Thundershield",      /* The Order of the Stick */
 	"Roy Greenhilt",             /* The Order of the Stick */

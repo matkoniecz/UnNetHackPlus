@@ -637,11 +637,6 @@ uchar damage_type;
 
 	/* scrolls will fade if exposed to water, or dissolve in acid */
 	if (target->oclass == SCROLL_CLASS) {
-#ifdef MAIL
-		if (target->otyp == SCR_MAIL) {
-			unaffected = TRUE;
-		} else
-#endif
 		if (target->otyp != SCR_BLANK_PAPER && damage_type == AD_RUST) {
 			if (!Blind) {
 				if (victim == &youmonst) {

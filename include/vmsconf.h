@@ -89,18 +89,6 @@
 #define TIMED_DELAY	/* enable the `timed_delay' run-time option */
 
 /*
- * If you define MAIL, then NetHack will capture incoming broadcast
- * messages such as "New mail from so-and-so" and "Print job completed,"
- * and then deliver them to the player.  For mail and phone broadcasts
- * a scroll of mail will be created, which when read will cause NetHack
- * to prompt the player for a command to spawn in order to respond.  The
- * latter capability will not be available if SHELL is disabled below.
- * If you undefine MAIL, broadcasts will go straight to the terminal,
- * resulting in disruption of the screen display; use <ctrl/R> to redraw.
- */
-#define MAIL		/* enable broadcast trapping */
-
-/*
  * SUSPEND enables someone running NetHack in a subprocess to reconnect
  * to the parent process with the <ctrl/Z> command; this is not very
  * close to Unix job control, but it's better than nothing.

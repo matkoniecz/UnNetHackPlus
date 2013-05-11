@@ -987,17 +987,6 @@ E void FDECL(nocmov, (int x, int y));
 
 #endif /* MAC */
 
-/* ### mail.c ### */
-
-#ifdef MAIL
-# ifdef UNIX
-E void NDECL(getmailstatus);
-# endif
-E void NDECL(ckmailstatus);
-E void FDECL(read_hint, (struct obj *));
-E void FDECL(readmail, (struct obj *));
-#endif /* MAIL */
-
 /* ### makemon.c ### */
 
 E boolean FDECL(is_home_elemental, (struct permonst *));
@@ -1405,13 +1394,6 @@ E int FDECL(do_play_instrument, (struct obj *));
 #ifdef LAN_FEATURES
 E void NDECL(init_lan_features);
 E char *NDECL(lan_username);
-# ifdef LAN_MAIL
-E boolean NDECL(lan_mail_check);
-E void FDECL(lan_mail_read, (struct obj *));
-E void NDECL(lan_mail_init);
-E void NDECL(lan_mail_finish);
-E void NDECL(lan_mail_terminate);
-# endif
 #endif
 
 /* ### nttty.c ### */
@@ -2322,15 +2304,6 @@ E boolean FDECL(same_dir, (const char *,const char *));
 E int FDECL(c__translate, (int));
 E char *FDECL(vms_basename, (const char *));
 
-/* ### vmsmail.c ### */
-
-E unsigned long NDECL(init_broadcast_trapping);
-E unsigned long NDECL(enable_broadcast_trapping);
-E unsigned long NDECL(disable_broadcast_trapping);
-# if 0
-E struct mail_info *NDECL(parse_next_broadcast);
-# endif /*0*/
-
 /* ### vmsmain.c ### */
 
 E int FDECL(main, (int, char **));
@@ -2369,9 +2342,6 @@ E char *NDECL(verify_termcap);
 # if defined(CHDIR) || defined(SECURE)
 E void NDECL(privoff);
 E void NDECL(privon);
-# endif
-# if defined(MAIL)
-E int FDECL(vms_doshell, (const char *,boolean));
 # endif
 # ifdef SUSPEND
 E int NDECL(dosuspend);

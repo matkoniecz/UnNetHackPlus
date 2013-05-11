@@ -374,7 +374,7 @@ VOBJ06 = $(O)dothrow.o  $(O)drawing.o  $(O)dungeon.o  $(O)eat.o
 VOBJ07 = $(O)end.o      $(O)engrave.o  $(O)exper.o    $(O)explode.o
 VOBJ08 = $(O)extralev.o $(O)files.o    $(O)fountain.o $(O)hack.o
 VOBJ09 = $(O)hacklib.o  $(O)invent.o   $(O)light.o    $(O)lock.o
-VOBJ10 = $(O)mail.o     $(O)makemon.o  $(O)mapglyph.o $(O)mcastu.o
+VOBJ10 = $(O)makemon.o  $(O)mapglyph.o $(O)mcastu.o
 VOBJ11 = $(O)mhitm.o    $(O)mhitu.o    $(O)minion.o   $(O)mklev.o
 VOBJ12 = $(O)mkmap.o    $(O)mkmaze.o   $(O)mkobj.o    $(O)mkroom.o
 VOBJ13 = $(O)mon.o      $(O)mondata.o  $(O)monmove.o  $(O)monst.o
@@ -400,7 +400,7 @@ TTYOBJ = $(O)cursmain.o $(O)curswins.o  $(O)cursmisc.o $(O)cursdial.o \
 	$(O)cursstat.o $(O)cursinit.o $(O)cursmesg.o 
 
 SOBJ   = $(O)winnt.o    $(O)pcsys.o      $(O)pcunix.o  \
-	$(SOUND) $(O)pcmain.o $(O)mapimail.o $(O)nhlan.o
+	$(SOUND) $(O)pcmain.o $(O)nhlan.o
 
 OBJS   = $(VOBJ01) $(VOBJ02) $(VOBJ03) $(VOBJ04) $(VOBJ05) \
 	$(VOBJ06) $(VOBJ07) $(VOBJ08) $(VOBJ09) $(VOBJ10) \
@@ -1097,9 +1097,6 @@ $(O)winnt.o: $(HACK_H) $(INCL)/win32api.h $(NTSYS)/winnt.c
 	$(cc) $(CFLAGS) -o$@  $(NTSYS)/winnt.c
 $(O)ntsound.o: $(HACK_H) $(NTSYS)/ntsound.c
 	$(cc) $(CFLAGS)  -o$@ $(NTSYS)/ntsound.c
-$(O)mapimail.o: $(HACK_H) $(INCL)/nhlan.h $(NTSYS)/mapimail.c
-	$(cc) $(CFLAGS) -DMAPI_VERBOSE  -o$@ $(NTSYS)/mapimail.c
-
 #
 # util dependencies
 #
@@ -1279,7 +1276,6 @@ $(O)hacklib.o: hacklib.c $(HACK_H)
 $(O)invent.o: invent.c $(HACK_H)
 $(O)light.o: light.c $(HACK_H) $(INCL)/lev.h
 $(O)lock.o: lock.c $(HACK_H)
-$(O)mail.o: mail.c $(HACK_H) $(INCL)/mail.h
 $(O)makemon.o: makemon.c $(HACK_H) $(INCL)/epri.h $(INCL)/emin.h \
 		$(INCL)/edog.h
 $(O)mapglyph.o: mapglyph.c $(HACK_H)

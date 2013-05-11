@@ -1311,21 +1311,6 @@ can be used to determine what another object is, whether it is cursed or
 blessed, and how many uses it has left.  Some objects of subtle
 enchantment are difficult to identify without these.
 .pg
-A mail daemon may run up and deliver mail to you as a
-\fIscroll of mail\fP (on versions compiled with this feature).
-To use this feature on versions where NetHack mail delivery is triggered
-by electronic mail appearing in your system mailbox,
-you must let NetHack know where to look for new mail by setting
-the ``MAIL'' environment variable to the file name of your mailbox.
-You may also want to set the ``MAILREADER'' environment
-variable to the file name of your favorite reader, so NetHack can shell to it
-when you read the scroll.
-On versions of NetHack where mail is randomly generated internal to the game,
-these environment variables are ignored.
-You can disable the mail daemon by turning off the
-.op mail
-option.
-.pg
 The command to read a scroll is `r'.
 .hn 2
 Potions (`!')
@@ -1888,8 +1873,6 @@ character as lit (default off).
 .lp lootabc
 Use the old `a', `b', and `c' keyboard shortcuts when
 looting, rather than the mnemonics `o', `i', and `b' (default off).
-.lp "mail    "
-Enable mail delivery during the game (default on).
 .lp "male    "
 An obsolete synonym for ``gender:male''.
 Cannot be set with the `O' command.

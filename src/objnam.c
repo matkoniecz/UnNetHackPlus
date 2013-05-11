@@ -836,9 +836,6 @@ boolean with_price;
 		 * printed to avoid ambiguity between an item whose curse
 		 * status is unknown, and an item known to be uncursed.
 		 */
-#ifdef MAIL
-			&& obj->otyp != SCR_MAIL
-#endif
 			&& obj->otyp != FAKE_AMULET_OF_YENDOR
 			&& obj->otyp != AMULET_OF_YENDOR
 			&& !Role_if(PM_PRIEST)))
@@ -1081,14 +1078,8 @@ struct obj *otmp;
     /* gold doesn't have any interesting attributes [yet?] */
     if (otmp->oclass == COIN_CLASS) return FALSE;	/* always fully ID'd */
 #endif
-    /* check fundamental ID hallmarks first */
-    if (!otmp->known || !otmp->dknown ||
-#ifdef MAIL
-	    (!otmp->bknown && otmp->otyp != SCR_MAIL) ||
-#else
-	    !otmp->bknown ||
-#endif
-	    !objects[otmp->otyp].oc_name_known)	/* ?redundant? */
+    /* check fundamental ID hallmarks first */				/* ?redundant? */
+    if (!otmp->known || !otmp->dknown || !otmp->bknown || !objects[otmp->otyp].oc_name_known)
 	return TRUE;
     if (otmp->oartifact && undiscovered_artifact(otmp->oartifact))
 	return TRUE;
@@ -2835,9 +2826,6 @@ typfnd:
 		case HEAVY_IRON_BALL: case IRON_CHAIN: case STATUE:
 			/* otmp->cobj already done in mksobj() */
 				break;
-#ifdef MAIL
-		case SCR_MAIL: otmp->spe = 1; break;
-#endif
 		case WAN_WISHING:
 			if (!wizard) {
 				otmp->spe = (rn2(10) ? -1 : 0);
@@ -2876,11 +2864,7 @@ typfnd:
 			}
 			break;
 		case FIGURINE:
-			if (!(mons[mntmp].geno & G_UNIQ)
-#ifdef MAIL
-			    && mntmp != PM_MAIL_DAEMON
-#endif
-							)
+			if (!(mons[mntmp].geno & G_UNIQ))
 				otmp->corpsenm = mntmp;
 			break;
 		case EGG:

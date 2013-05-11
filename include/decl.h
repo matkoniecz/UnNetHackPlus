@@ -517,10 +517,6 @@ E struct realtime_data {
 } realtime_data;
 #endif /* RECORD_REALTIME || REALTIME_ON_BOTL */
 
-#ifdef SIMPLE_MAIL
-E int mailckfreq;
-#endif
-
 #ifdef USE_MERSENNE_TWISTER
 #include <gsl/gsl_rng.h>
 E gsl_rng *rngstate;
