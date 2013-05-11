@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* rename M2_NASTY to M2_DANGEROUS (?)
 * Spells are light sources,LIGHT_SRC_SPELL
 * Invisible objects,INVISIBLE_OBJECTS
 * Object unpolymorphing,UNPOLYPILE
