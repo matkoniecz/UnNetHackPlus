@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* scrap \sys\unix\snd86unx.shr
 * nethack-bugs@nethack.org
 * dragon scale mail Guidebook
 * do not ask about attacking shopkeepers
