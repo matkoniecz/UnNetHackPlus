@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* dragon scale mail Guidebook
 * do not ask about attacking shopkeepers
 * statues in cockatrice nests made from players petrified by cockatrices, like with the Medusa
 * rename M2_NASTY to M2_DANGEROUS (?)
