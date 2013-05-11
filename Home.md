@@ -1,5 +1,5 @@
 Plans for UnNetHackPlus
-* kill? LAN_FEATURES
+* CLR_BRIGHT_MAGENTA tool
 * scrap \sys\unix\snd86unx.shr \UnNetHackPlus\sys\unix\README.linux \UnNetHackPlus\doc\README.nh343
 * nethack-bugs@nethack.org
 * dragon scale mail Guidebook
