@@ -1718,44 +1718,51 @@ struct monst *mtmp;
 
 	if (mtmp->ispriest || mtmp->isminion) {
 		/* some monsters have individual alignments; check them */
-		if (mtmp->ispriest)
+		if (mtmp->ispriest) {
 			mal = EPRI(mtmp)->shralign;
-		else if (mtmp->isminion)
+		} else if (mtmp->isminion) {
 			mal = EMIN(mtmp)->min_align;
+		}
 		/* unless alignment is none, set mal to -5,0,5 */
 		/* (see align.h for valid aligntyp values)     */
-		if(mal != A_NONE)
+		if(mal != A_NONE) {
 			mal *= 5;
+		}
 	}
 
 	coaligned = (sgn(mal) == sgn(u.ualign.type));
 	if (mtmp->data->msound == MS_LEADER) {
 		mtmp->malign = -20;
 	} else if (mal == A_NONE) {
-		if (mtmp->mpeaceful)
+		if (mtmp->mpeaceful) {
 			mtmp->malign = 0;
-		else
+		} else {
 			mtmp->malign = 20;	/* really hostile */
+		}
 	} else if (always_peaceful(mtmp->data)) {
 		int absmal = abs(mal);
-		if (mtmp->mpeaceful)
+		if (mtmp->mpeaceful) {
 			mtmp->malign = -3*max(5,absmal);
-		else
+		} else {
 			mtmp->malign = 3*max(5,absmal); /* renegade */
+		}
 	} else if (always_hostile(mtmp->data)) {
 		int absmal = abs(mal);
-		if (coaligned)
+		if (coaligned) {
 			mtmp->malign = 0;
-		else
+		} else {
 			mtmp->malign = max(5,absmal);
+		}
 	} else if (coaligned) {
 		int absmal = abs(mal);
-		if (mtmp->mpeaceful)
+		if (mtmp->mpeaceful) {
 			mtmp->malign = -3*max(3,absmal);
-		else	/* renegade */
+		} else { /* renegade */
 			mtmp->malign = max(3,absmal);
-	} else	/* not coaligned and therefore hostile */
+		}
+	} else { /* not coaligned and therefore hostile */
 		mtmp->malign = abs(mal);
+	}
 }
 
 #endif /* OVL1 */
