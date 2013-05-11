@@ -1,5 +1,6 @@
 Plans for UnNetHackPlus
-* scrap \sys\unix\snd86unx.shr
+* kill? LAN_FEATURES
+* scrap \sys\unix\snd86unx.shr \UnNetHackPlus\sys\unix\README.linux \UnNetHackPlus\doc\README.nh343
 * nethack-bugs@nethack.org
 * dragon scale mail Guidebook
 * do not ask about attacking shopkeepers
