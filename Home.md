@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* nethack-bugs@nethack.org
 * dragon scale mail Guidebook
 * do not ask about attacking shopkeepers
 * statues in cockatrice nests made from players petrified by cockatrices, like with the Medusa
