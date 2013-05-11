@@ -1137,7 +1137,7 @@ sacrifice_amulet(aligntyp altaralign, struct obj *otmp)
 
 	/* Don't accidentally break atheist conduct */
 	if (otmp->otyp == AMULET_OF_YENDOR || otmp->otyp == FAKE_AMULET_OF_YENDOR) {
-		if (successful_cdt(CONDUCT_ATHEISM) {
+		if (successful_cdt(CONDUCT_ATHEISM)) {
 			if (paranoid_yn("Really stop being an atheist by sacrificing the Amulet of Yendor?", TRUE) == 'n') {
 				return 0;
 			}
