@@ -17,7 +17,6 @@ Plans for UnNetHackPlus
 * travel         enable the command to travel to a map location via [TRUE] <enable pernamently>
 * the goal of the this branch is to require players with the Amulet of Yendor to take an alternate route out of the dungeon.  - http://nethackwiki.com/wiki/SLASHEM_PHLEGETHON
 * 		pline("Unfortunately sound does not carry well through rock."); - for buried shrieker
-* monsters - show data in game http://notehack.campwide.com/notehack.html
 * same_color (dragonfix mess, maybe affects also UnNetHack)
 * why "no bones when swallowed"?
 * /* ^O command - display dungeon layout */
@@ -92,14 +91,11 @@ aspects of the monster (blue=tame, brown=peaceful, magenta=detected).
 * removing armour while wearing a cloak should give a better message than “You can’t take that off.”
 * you should also get YAFMs for throwing ring of levitation upwards
 * various appropriate YAFMs when you kill Vlad with a non-weapon object (GreyKnight is supposedly writing a patch for this)
-* occasionally substitute a “3.4.3 level” or “crawl level” for the rogue level
-* Eating an orange while fumbling or with greasy hands: “Segmentation fault.”
 * ID kicking boots when they make things reel
 * option to stop autoexplore with unexplored objects in LOS
 * name levels you aren’t on
 * list wishes in dumplog etc
 * warn on self-zaps of known dangerous wands
-* ID base types of wished-for items
 * attacking with polearms is utterly broken at interface level
 * player polymorphed in monsters that is neither herbivorous nor carnivorous may eat corpses and tins
 *  Have Medusa's passive gaze interact with monsters as it does with the player. (For fun, try bringing Medusa to bigroom for a lovely demonstration of this behaviour.) https://github.com/sgrunt/GruntHack/commit/ca041a03fed8e775f00daa1a78c8b60db490cee0 + https://github.com/sgrunt/GruntHack/commit/9ee62a54b5f99c36f1109bd6a3f37bc6e94f621b
@@ -183,10 +179,9 @@ m_dowear_type
 * https://github.com/tung/NitroHack/commit/206f8427deefee0e87110c6f93f1df49fa31e9e3
 * https://github.com/Chris-plus-alphanumericgibberish/dnethack/commit/310da13976ab30e9db08f73e94aafab96ff1ac41
 * http://bilious.alt.org/?151
-* autotravel and stopping for engravings
 * monster with tele= resist \ of tele
 * https://github.com/tung/NitroHack/wiki - UnNetHack bug fixes (not already in UnNetHack)
-* fast travel should not stop on graves
+* fast travel should not stop on graves, engravings (or only on new ones?)
 * save vibrating square in dungeon overwiev
 * autotravel, traps (squaky, pits) and pernament levitation
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/5832f415db395a31c23ac37c7e954185e2b0425c  - stun happening during travel
@@ -213,7 +208,6 @@ m_dowear_type
 * topten.c tt_oname - use names from NAO (?)
 * nethack.alt.org, there is an option (hilite_hidden_stairs) http://bilious.alt.org/?433
 * new level generator (moria, see newsgroup, http://imgur.com/d6NWagD)
-* the alignment system  a complete overhaul 
 * make stupid water noticeable different from stupid fountains
 * http://nethackwiki.com/wiki/W343-3
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/21de56b16793ec139ea0859cbec29c40c4072309 Non-mindless monsters will no longer blindly walk into traps they've seen
@@ -271,7 +265,6 @@ fix completely broken alignment, maybe also better gods
 * http://i295.photobucket.com/albums/mm153/Kobold_Lord/Sporkhack%202/T554883.jpg The Master of Assassins hasn't died yet (telewand)
 * http://i295.photobucket.com/albums/mm153/Kobold_Lord/Sporkhack%202/T63823.jpg
 * verbalize("Get %s, you fools, or I'll have your figgin on a stick!",uhim());
-* taunts
 * http://i295.photobucket.com/albums/mm153/Kobold_Lord/Sporkhack%202/T645341.jpg http://i295.photobucket.com/albums/mm153/Kobold_Lord/Sporkhack%202/T645342.jpg This message is caused by a new divine monster spell. The hill giant shaman has just inflicted the cold vulnerability intrinsic on Mouse. It eventually wears off, but until then Mouse will take heavy damage from cold attacks even though he has 100% cold resistance. You REALLY do not want to get hit by cold attacks if you have cold vulnerability and 0% cold resistance.
 *  This is the ideal place to settle in when clearing the Zoo at Fort Ludios. Doors have the interesting property that even when they are opened, you can only go through them straight on. The monsters have to single file through three tiles, and in the last of the three they'll stop to fight Spelunky. Until she kills the monster she faces, the others will get jammed behind it. None of them can line up to zap a wand, either, until they're already in melee with Spelunky. http://i295.photobucket.com/albums/mm153/Kobold_Lord/Sporkhack%203/T28982.jpg
 *  Formally identifying the Amulet of Yendor now. Wouldn't do to pick up one of the Wizard's fakes. In vanilla, there's an easy test: try putting it in your bag. The Amulet of Yendor will refuse to enter a container, but the fakes go in easily. That's been changed in Sporkhack, so bring a means of identification just in case. The #name trick still works.
@@ -285,7 +278,6 @@ fix completely broken alignment, maybe also better gods
 * give levitation/teleport control to Sam with random chance (1/3?) to stop trivial ways to kill him
 * force player to stay in polymorphed form rather than kill 
 * (Warning: Pregnant women, the elderly, and children under 10 should avoid prolonged exposure to Vibrating Square. If Vibrating Square begins to smoke, get away immediately. Seek shelter and cover head. Do not taunt Vibrating Square. http://forum.rpg.net/showthread.php?466187-(Let-s-Play!)-Sporkhack/page89
-* make healing potions useful for healing
 * split room from spork
 * remove pet apport
 * identify projectiles - for Rangers http://nh.gmuf.com/ranger_ammo-343.diff
@@ -310,7 +302,6 @@ proud owner of a magic whistle.
 * unflee zombies on low HP
 * Dragons will never breath in melee combat.
 * Only your quest Nemeses will deliberately steal your quest artifact, other monsters may steal the amulet and invocation items. The quest artifact may of course be randomly stolen by nymphs and the like.  -Makes QA a dependable source of extrinsics, deepening differences between classes. -dnethack
-* oversight: you can #chat while being choked by a rope golem ("strangulation seem to be handled okay)
 
 #savebreaking?
 * http://bilious.alt.org/?63
