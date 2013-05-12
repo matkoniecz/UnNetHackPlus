@@ -151,14 +151,11 @@ http://tvtropes.org/pmwiki/pmwiki.php/Main/TomeOfEldritchLore
 * Allow looking at dungeon overview during level teleport prompt - from http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * revamp https://github.com/Bulwersator/UnNetHackPlus/blob/master/README.configure (z windowsem z msdna)
 * kill this 18/something strength
-* http://nhqdb.alt.org/?663 
-* http://nhqdb.alt.org/?686 
-* http://nhqdb.alt.org/?8   
-* http://nhqdb.alt.org/?311 
-* http://nhqdb.alt.org/?71
-* http://nhqdb.alt.org/?85
+* http://nhqdb.alt.org/?311 "Vlad the compiler" he guards the Candelabrum of Installation 
+* http://nhqdb.alt.org/?71 blessed tinning kit named Even Trolls will know permadeath
 * http://nhqdb.alt.org/?49
-* http://nhqdb.alt.org/?354 http://nhqdb.alt.org/?448 http://nhqdb.alt.org/?314 http://nhqdb.alt.org/?245 http://nhqdb.alt.org/?259 http://nhqdb.alt.org/?235 http://nhqdb.alt.org/?236 http://nhqdb.alt.org/?611 
+* http://nhqdb.alt.org/?314 -  YANI: The gnome puts on a ring of polymorph control. The gnome zaps himself with a wand of polymorph!
+* http://nhqdb.alt.org/?245 http://nhqdb.alt.org/?259 http://nhqdb.alt.org/?235 http://nhqdb.alt.org/?236 http://nhqdb.alt.org/?611 
 * object icons appearing in menus, like on linux 
 * list created monster without kills
 * cleanup configure https://github.com/Bulwersator/CopyOfUnNetHack/commits/master/trunk/configure http://www.gnu.org/software/autoconf/manual/autoconf.html#Making-configure-Scripts http://www.gnu.org/software/autoconf/manual/autoconf.html#autoreconf-Invocation http://www.edwardrosten.com/code/autoconf/index.html
