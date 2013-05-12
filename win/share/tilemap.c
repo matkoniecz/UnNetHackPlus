@@ -32,9 +32,7 @@ struct conditionals {
 	int sequence, predecessor;
 	const char *name;
 } conditionals[] = {
-#ifndef CHARON /* not supported yet */
 	{ MON_GLYPH, PM_HELL_HOUND, "Cerberus" },
-#endif
 	/* commented out in monst.c at present */
 	{ MON_GLYPH, PM_SHOCKING_SPHERE, "beholder" },
 	{ MON_GLYPH, PM_BABY_SILVER_DRAGON, "baby shimmering dragon" },
@@ -47,9 +45,7 @@ struct conditionals {
 #endif
 	{ MON_GLYPH, PM_VAMPIRE_LORD, "vampire mage" },
 
-#ifndef CHARON /* not supported yet */
 	{ MON_GLYPH, PM_CROESUS, "Charon" },
-#endif
 #ifndef MAIL
 	{ MON_GLYPH, PM_FAMINE, "mail daemon" },
 #endif
