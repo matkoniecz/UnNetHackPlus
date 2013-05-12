@@ -451,313 +451,320 @@ bad_data_file:	impossible("'data' file in wrong format");
 const char what_is_an_unknown_object[] = "an unknown object";
 
 STATIC_OVL int
-do_look(quick)
-    boolean quick;	/* use cursor && don't search for "more info" */
+do_look(boolean quick)
+/* quick: use cursor && don't search for "more info" */
 {
-    char    out_str[BUFSZ], look_buf[BUFSZ];
-    const char *x_str, *firstmatch = 0;
-    struct permonst *pm = 0;
-    int     i, ans = 0;
-    glyph_t     sym;		/* typed symbol or converted glyph */
-    int	    found;		/* count of matching syms found */
-    coord   cc;			/* screen pos of unknown glyph */
-    boolean save_verbose;	/* saved value of flags.verbose */
-    boolean from_screen;	/* question from the screen */
-    boolean force_defsyms;	/* force using glyphs from defsyms[].sym */
-    boolean need_to_look;	/* need to get explan. from glyph */
-    boolean hit_trap;		/* true if found trap explanation */
-    int skipped_venom;		/* non-zero if we ignored "splash of venom" */
-    int hallu_obj;		/* non-zero if found hallucinable object */
-    static const char *mon_interior = "the interior of a monster";
+	char out_str[BUFSZ], look_buf[BUFSZ];
+	const char *x_str, *firstmatch = 0;
+	struct permonst *pm = 0;
+	int i, ans = 0;
+	glyph_t sym;            /* typed symbol or converted glyph */
+	int found;              /* count of matching syms found */
+	coord cc;               /* screen pos of unknown glyph */
+	boolean save_verbose;   /* saved value of flags.verbose */
+	boolean from_screen;    /* question from the screen */
+	boolean force_defsyms;  /* force using glyphs from defsyms[].sym */
+	boolean need_to_look;   /* need to get explan. from glyph */
+	boolean hit_trap;       /* true if found trap explanation */
+	int skipped_venom;      /* non-zero if we ignored "splash of venom" */
+	int hallu_obj;          /* non-zero if found hallucinable object */
+	static const char *mon_interior = "the interior of a monster";
 
-    force_defsyms = FALSE;
-    if (quick) {
-	from_screen = TRUE;	/* yes, we want to use the cursor */
-    } else {
-	i = ynq("Specify unknown object by cursor?");
-	if (i == 'q') return 0;
-	from_screen = (i == 'y');
-    }
-
-    if (from_screen) {
-	cc.x = u.ux;
-	cc.y = u.uy;
-	sym = 0;		/* gcc -Wall lint */
-    } else {
-	getlin("Specify what? (type the word)", out_str);
-	if (out_str[0] == '\0' || out_str[0] == '\033')
-	    return 0;
-
-	if (out_str[1]) {	/* user typed in a complete string */
-	    checkfile(out_str, pm, TRUE, TRUE);
-	    return 0;
+	force_defsyms = FALSE;
+	if (quick) {
+		from_screen = TRUE;	/* yes, we want to use the cursor */
+	} else {
+		i = ynq("Specify unknown object by cursor?");
+		if (i == 'q') return 0;
+		from_screen = (i == 'y');
 	}
-	sym = out_str[0];
-    }
-
-    /* Save the verbose flag, we change it later. */
-    save_verbose = flags.verbose;
-    flags.verbose = flags.verbose && !quick;
-    /*
-     * The user typed one letter, or we're identifying from the screen.
-     */
-    do {
-	/* Reset some variables. */
-	need_to_look = FALSE;
-	pm = (struct permonst *)0;
-	skipped_venom = 0;
-	hallu_obj = 0;
-	found = 0;
-	out_str[0] = '\0';
 
 	if (from_screen) {
-	    int glyph;	/* glyph at selected position */
+		cc.x = u.ux;
+		cc.y = u.uy;
+		sym = 0;		/* gcc -Wall lint */
+	} else {
+		getlin("Specify what? (type the word)", out_str);
+		if (out_str[0] == '\0' || out_str[0] == '\033')
+		return 0;
 
-	    if (flags.verbose)
-		pline("Please move the cursor to %s.",
-		       what_is_an_unknown_object);
-	    else
-		pline("Pick an object.");
-
-	    ans = getpos(&cc, quick, what_is_an_unknown_object);
-	    if (ans < 0 || cc.x < 0) {
-		flags.verbose = save_verbose;
-		return 0;	/* done */
-	    }
-	    flags.verbose = FALSE;	/* only print long question once */
-
-	    /* Convert the glyph at the selected position to a symbol. */
-	    glyph = glyph_at(cc.x,cc.y);
-	    if (glyph_is_cmap(glyph)) {
-		if (iflags.UTF8graphics) {
-			/* Temporary workaround as UnNetHack can't yet
-			 * display UTF-8 glyphs on the topline */
-			force_defsyms = TRUE;
-			sym = defsyms[glyph_to_cmap(glyph)].sym;
-		} else {
-			sym = showsyms[glyph_to_cmap(glyph)];
+		if (out_str[1]) {	/* user typed in a complete string */
+			checkfile(out_str, pm, TRUE, TRUE);
+			return 0;
 		}
-	    } else if (glyph_is_trap(glyph)) {
-		sym = showsyms[trap_to_defsym(glyph_to_trap(glyph))];
-	    } else if (glyph_is_object(glyph)) {
-		sym = oc_syms[(int)objects[glyph_to_obj(glyph)].oc_class];
-		if (sym == '`' && iflags.bouldersym && (int)glyph_to_obj(glyph) == BOULDER)
-			sym = iflags.bouldersym;
-	    } else if (glyph_is_monster(glyph)) {
-		/* takes care of pets, detected, ridden, and regular mons */
-		sym = monsyms[(int)mons[glyph_to_mon(glyph)].mlet];
-	    } else if (glyph_is_swallow(glyph)) {
-		sym = showsyms[glyph_to_swallow(glyph)+S_sw_tl];
-	    } else if (glyph_is_invisible(glyph)) {
-		sym = DEF_INVISIBLE;
-	    } else if (glyph_is_warning(glyph)) {
-		sym = glyph_to_warning(glyph);
-	    	sym = warnsyms[sym];
-	    } else {
-		impossible("do_look:  bad glyph %d at (%d,%d)",
-						glyph, (int)cc.x, (int)cc.y);
-		sym = ' ';
-	    }
+		sym = out_str[0];
 	}
 
+	/* Save the verbose flag, we change it later. */
+	save_verbose = flags.verbose;
+	flags.verbose = flags.verbose && !quick;
 	/*
-	 * Check all the possibilities, saving all explanations in a buffer.
-	 * When all have been checked then the string is printed.
-	 */
+	* The user typed one letter, or we're identifying from the screen.
+	*/
+	do {
+		/* Reset some variables. */
+		need_to_look = FALSE;
+		pm = (struct permonst *)0;
+		skipped_venom = 0;
+		hallu_obj = 0;
+		found = 0;
+		out_str[0] = '\0';
 
-	/* Check for monsters */
-	for (i = 0; i < MAXMCLASSES; i++) {
-	    if (sym == (from_screen ? monsyms[i] : def_monsyms[i]) &&
-		monexplain[i]) {
-		need_to_look = TRUE;
-		if (!found) {
-		    Sprintf(out_str, "%c       %s", sym, an(monexplain[i]));
-		    firstmatch = monexplain[i];
-		    found++;
-		} else {
-		    found += append_str(out_str, an(monexplain[i]));
+		if (from_screen) {
+			int glyph;	/* glyph at selected position */
+
+			if (flags.verbose) {
+				pline("Please move the cursor to %s.",
+				what_is_an_unknown_object);
+			} else {
+				pline("Pick an object.");
+			}
+			ans = getpos(&cc, quick, what_is_an_unknown_object);
+			if (ans < 0 || cc.x < 0) {
+				flags.verbose = save_verbose;
+				return 0;	/* done */
+			}
+			flags.verbose = FALSE;	/* only print long question once */
+
+			/* Convert the glyph at the selected position to a symbol. */
+			glyph = glyph_at(cc.x,cc.y);
+			if (glyph_is_cmap(glyph)) {
+				if (iflags.UTF8graphics) {
+					/* Temporary workaround as UnNetHack can't yet
+			* display UTF-8 glyphs on the topline */
+					force_defsyms = TRUE;
+					sym = defsyms[glyph_to_cmap(glyph)].sym;
+				} else {
+					sym = showsyms[glyph_to_cmap(glyph)];
+				}
+			} else if (glyph_is_trap(glyph)) {
+				sym = showsyms[trap_to_defsym(glyph_to_trap(glyph))];
+			} else if (glyph_is_object(glyph)) {
+				sym = oc_syms[(int)objects[glyph_to_obj(glyph)].oc_class];
+				if (sym == '`' && iflags.bouldersym && (int)glyph_to_obj(glyph) == BOULDER) {
+					sym = iflags.bouldersym;
+				}
+			} else if (glyph_is_monster(glyph)) {
+				/* takes care of pets, detected, ridden, and regular mons */
+				sym = monsyms[(int)mons[glyph_to_mon(glyph)].mlet];
+			} else if (glyph_is_swallow(glyph)) {
+				sym = showsyms[glyph_to_swallow(glyph)+S_sw_tl];
+			} else if (glyph_is_invisible(glyph)) {
+				sym = DEF_INVISIBLE;
+			} else if (glyph_is_warning(glyph)) {
+				sym = glyph_to_warning(glyph);
+				sym = warnsyms[sym];
+			} else {
+				impossible("do_look:  bad glyph %d at (%d,%d)",
+				glyph, (int)cc.x, (int)cc.y);
+				sym = ' ';
+			}
 		}
-	    }
-	}
-	/* handle '@' as a special case if it refers to you and you're
-	   playing a character which isn't normally displayed by that
-	   symbol; firstmatch is assumed to already be set for '@' */
-	if ((from_screen ?
-		(sym == monsyms[S_HUMAN] && cc.x == u.ux && cc.y == u.uy) :
-		(sym == def_monsyms[S_HUMAN] && !iflags.showrace)) &&
-	    !(Race_if(PM_HUMAN) || Race_if(PM_ELF)) && !Upolyd)
-	    found += append_str(out_str, "you");	/* tack on "or you" */
 
-	/*
-	 * Special case: if identifying from the screen, and we're swallowed,
-	 * and looking at something other than our own symbol, then just say
-	 * "the interior of a monster".
-	 */
-	if (u.uswallow && from_screen && is_swallow_sym(sym)) {
-	    if (!found) {
-		Sprintf(out_str, "%c       %s", sym, mon_interior);
-		firstmatch = mon_interior;
-	    } else {
-		found += append_str(out_str, mon_interior);
-	    }
-	    need_to_look = TRUE;
-	}
+		/*
+		 * Check all the possibilities, saving all explanations in a buffer.
+		 * When all have been checked then the string is printed.
+		 */
 
-	/* Now check for objects */
-	for (i = 1; i < MAXOCLASSES; i++) {
-	    if (sym == (from_screen ? oc_syms[i] : def_oc_syms[i])) {
-		need_to_look = TRUE;
-		if (from_screen && i == VENOM_CLASS) {
-		    skipped_venom++;
-		    continue;
+		/* Check for monsters */
+		for (i = 0; i < MAXMCLASSES; i++) {
+			if (sym == (from_screen ? monsyms[i] : def_monsyms[i]) && monexplain[i]) {
+				need_to_look = TRUE;
+				if (!found) {
+					Sprintf(out_str, "%c       %s", sym, an(monexplain[i]));
+					firstmatch = monexplain[i];
+					found++;
+				} else {
+					found += append_str(out_str, an(monexplain[i]));
+				}
+			}
 		}
-		if (!found) {
-		    Sprintf(out_str, "%c       %s", sym, an(objexplain[i]));
-		    firstmatch = objexplain[i];
-		    found++;
-		    hallu_obj++;
-		} else {
-		    found += append_str(out_str, an(objexplain[i]));
+		/* handle '@' as a special case if it refers to you and you're
+		 * playing a character which isn't normally displayed by that
+		 * symbol; firstmatch is assumed to already be set for '@'
+		 */
+		if ((from_screen ?
+					(sym == monsyms[S_HUMAN] && cc.x == u.ux && cc.y == u.uy) :
+					(sym == def_monsyms[S_HUMAN] && !iflags.showrace)) &&
+				!(Race_if(PM_HUMAN) || Race_if(PM_ELF)) && !Upolyd) {
+			found += append_str(out_str, "you");	/* tack on "or you" */
 		}
-	    }
-	}
+		/*
+		 * Special case: if identifying from the screen, and we're swallowed,
+		 * and looking at something other than our own symbol, then just say
+		 * "the interior of a monster".
+		 */
+		if (u.uswallow && from_screen && is_swallow_sym(sym)) {
+			if (!found) {
+				Sprintf(out_str, "%c       %s", sym, mon_interior);
+				firstmatch = mon_interior;
+			} else {
+				found += append_str(out_str, mon_interior);
+			}
+			need_to_look = TRUE;
+		}
 
-	if (sym == DEF_INVISIBLE) {
-	    if (!found) {
-		Sprintf(out_str, "%c       %s", sym, an(invisexplain));
-		firstmatch = invisexplain;
-		found++;
-	    } else {
-		found += append_str(out_str, an(invisexplain));
-	    }
-	}
+		/* Now check for objects */
+		for (i = 1; i < MAXOCLASSES; i++) {
+			if (sym == (from_screen ? oc_syms[i] : def_oc_syms[i])) {
+				need_to_look = TRUE;
+				if (from_screen && i == VENOM_CLASS) {
+					skipped_venom++;
+					continue;
+				}
+				if (!found) {
+					Sprintf(out_str, "%c       %s", sym, an(objexplain[i]));
+					firstmatch = objexplain[i];
+					found++;
+					hallu_obj++;
+				} else {
+					found += append_str(out_str, an(objexplain[i]));
+				}
+			}
+		}
+
+		if (sym == DEF_INVISIBLE) {
+			if (!found) {
+				Sprintf(out_str, "%c       %s", sym, an(invisexplain));
+				firstmatch = invisexplain;
+				found++;
+			} else {
+				found += append_str(out_str, an(invisexplain));
+			}
+		}
 
 #define is_cmap_trap(i) ((i) >= S_arrow_trap && (i) <= S_polymorph_trap)
 #define is_cmap_drawbridge(i) ((i) >= S_vodbridge && (i) <= S_hcdbridge)
 
-	/* Now check for graphics symbols */
-	for (hit_trap = FALSE, i = 0; i < MAXPCHARS; i++) {
-	    x_str = defsyms[i].explanation;
-	    if (sym == (force_defsyms ? defsyms[i].sym : (from_screen ? showsyms[i] : defsyms[i].sym)) && *x_str) {
-		/* avoid "an air", "a water", "a floor of a room", "a dark part of a room" */
-		int article = ((i == S_room)||(i == S_darkroom)) ? 2 :		/* 2=>"the" */
-			      !(strcmp(x_str, "air") == 0 ||	/* 1=>"an"  */
+		/* Now check for graphics symbols */
+		for (hit_trap = FALSE, i = 0; i < MAXPCHARS; i++) {
+			x_str = defsyms[i].explanation;
+			if (sym == (force_defsyms ? defsyms[i].sym : (from_screen ? showsyms[i] : defsyms[i].sym)) && *x_str) {
+				/* avoid "an air", "a water", "a floor of a room", "a dark part of a room" */
+				int article = ((i == S_room)||(i == S_darkroom)) ? 2 :		/* 2=>"the" */
+				!(strcmp(x_str, "air") == 0 ||	/* 1=>"an"  */
 				strcmp(x_str, "water") == 0);	/* 0=>(none)*/
 
-		if (!found) {
-		    if (is_cmap_trap(i)) {
-			Sprintf(out_str, "%c       a trap", sym);
-			hit_trap = TRUE;
-		    } else {
-			Sprintf(out_str, "%c       %s", sym,
-				article == 2 ? the(x_str) :
-				article == 1 ? an(x_str) : x_str);
-		    }
-		    firstmatch = x_str;
-		    found++;
-		} else if (!u.uswallow && !(hit_trap && is_cmap_trap(i)) &&
-			   !(found >= 3 && is_cmap_drawbridge(i))) {
-		    found += append_str(out_str,
+				if (!found) {
+					if (is_cmap_trap(i)) {
+						Sprintf(out_str, "%c       a trap", sym);
+						hit_trap = TRUE;
+					} else {
+						Sprintf(out_str, "%c       %s", sym,
+						article == 2 ? the(x_str) :
+						article == 1 ? an(x_str) : x_str);
+					}
+					firstmatch = x_str;
+					found++;
+				} else if (!u.uswallow && !(hit_trap && is_cmap_trap(i)) && !(found >= 3 && is_cmap_drawbridge(i))) {
+					found += append_str(out_str,
 					article == 2 ? the(x_str) :
 					article == 1 ? an(x_str) : x_str);
-		    if (is_cmap_trap(i)) hit_trap = TRUE;
+					if (is_cmap_trap(i)) {
+						hit_trap = TRUE;
+					}
+				}
+
+				if (i == S_altar || is_cmap_trap(i)) {
+					need_to_look = TRUE;
+				}
+			}
 		}
 
-		if (i == S_altar || is_cmap_trap(i))
-		    need_to_look = TRUE;
-	    }
-	}
+		/* Now check for warning symbols */
+		for (i = 1; i < WARNCOUNT; i++) {
+			x_str = def_warnsyms[i].explanation;
+			if (sym == (from_screen ? warnsyms[i] : def_warnsyms[i].sym)) {
+				if (!found) {
+					Sprintf(out_str, "%c       %s",
+					sym, def_warnsyms[i].explanation);
+					firstmatch = def_warnsyms[i].explanation;
+					found++;
+				} else {
+					found += append_str(out_str, def_warnsyms[i].explanation);
+				}
+				/* Kludge: warning trumps boulders on the display.
+				 * Reveal the boulder too or player can get confused
+				 */
+				if (from_screen && sobj_at(BOULDER, cc.x, cc.y)) {
+					Strcat(out_str, " co-located with a boulder");
+					break;	/* out of for loop*/
+				}
+			}
+		}
 
-	/* Now check for warning symbols */
-	for (i = 1; i < WARNCOUNT; i++) {
-	    x_str = def_warnsyms[i].explanation;
-	    if (sym == (from_screen ? warnsyms[i] : def_warnsyms[i].sym)) {
-		if (!found) {
-			Sprintf(out_str, "%c       %s",
-				sym, def_warnsyms[i].explanation);
-			firstmatch = def_warnsyms[i].explanation;
-			found++;
+		/* if we ignored venom and list turned out to be short, put it back */
+		if (skipped_venom && found < 2) {
+			x_str = objexplain[VENOM_CLASS];
+			if (!found) {
+				Sprintf(out_str, "%c       %s", sym, an(x_str));
+				firstmatch = x_str;
+				found++;
+			} else {
+				found += append_str(out_str, an(x_str));
+			}
+		}
+
+		/* handle optional boulder symbol as a special case */ 
+		if (iflags.bouldersym && sym == iflags.bouldersym) {
+			if (!found) {
+				firstmatch = "boulder";
+				Sprintf(out_str, "%c       %s", sym, an(firstmatch));
+				found++;
+			} else {
+				found += append_str(out_str, "boulder");
+			}
+		}
+		
+		/*
+		 * If we are looking at the screen, follow multiple possibilities or
+		 * an ambiguous explanation by something more detailed.
+		 */
+		if (from_screen) {
+			if (hallu_obj && Hallucination) {
+				char temp_buf[BUFSZ];
+				Sprintf(temp_buf, "%s (%s)", get_bogus_class_name(), get_bogus_item_name());
+				(void)strncpy(out_str, temp_buf, BUFSZ-strlen(out_str)-1);
+			} else if (found > 1 || need_to_look) {
+				char monbuf[BUFSZ];
+				char temp_buf[BUFSZ];
+
+				pm = lookat(cc.x, cc.y, look_buf, monbuf);
+				firstmatch = look_buf;
+				if (*firstmatch) {
+					Sprintf(temp_buf, " (%s)", firstmatch);
+					(void)strncat(out_str, temp_buf, BUFSZ-strlen(out_str)-1);
+					found = 1;	/* we have something to look up */
+				}
+				if (monbuf[0]) {
+					Sprintf(temp_buf, " [seen: %s]", monbuf);
+					(void)strncat(out_str, temp_buf, BUFSZ-strlen(out_str)-1);
+				}
+			}
+		}
+
+		/* Finally, print out our explanation. */
+		if (found) {
+			pline("%s", out_str);
+			/* check the data file for information about this thing */
+			if (found == 1 && ans != LOOK_QUICK && ans != LOOK_ONCE) {
+				if(ans == LOOK_VERBOSE || (flags.help && !quick)) {
+					char temp_buf[BUFSZ];
+					Strcpy(temp_buf, firstmatch);
+					checkfile(temp_buf, pm, FALSE, (boolean)(ans == LOOK_VERBOSE));
+				}
+			}
 		} else {
-			found += append_str(out_str, def_warnsyms[i].explanation);
+			pline("I've never heard of such things.");
 		}
-		/* Kludge: warning trumps boulders on the display.
-		   Reveal the boulder too or player can get confused */
-		if (from_screen && sobj_at(BOULDER, cc.x, cc.y))
-			Strcat(out_str, " co-located with a boulder");
-		break;	/* out of for loop*/
-	    }
-	}
-    
-	/* if we ignored venom and list turned out to be short, put it back */
-	if (skipped_venom && found < 2) {
-	    x_str = objexplain[VENOM_CLASS];
-	    if (!found) {
-		Sprintf(out_str, "%c       %s", sym, an(x_str));
-		firstmatch = x_str;
-		found++;
-	    } else {
-		found += append_str(out_str, an(x_str));
-	    }
-	}
 
-	/* handle optional boulder symbol as a special case */ 
-	if (iflags.bouldersym && sym == iflags.bouldersym) {
-	    if (!found) {
-		firstmatch = "boulder";
-		Sprintf(out_str, "%c       %s", sym, an(firstmatch));
-		found++;
-	    } else {
-		found += append_str(out_str, "boulder");
-	    }
-	}
-	
-	/*
-	 * If we are looking at the screen, follow multiple possibilities or
-	 * an ambiguous explanation by something more detailed.
-	 */
-	if (from_screen) {
-	    if (hallu_obj && Hallucination) {
-		char temp_buf[BUFSZ];
-		Sprintf(temp_buf, "%s (%s)", get_bogus_class_name(), get_bogus_item_name());
-		(void)strncpy(out_str, temp_buf, BUFSZ-strlen(out_str)-1);
-	    } else if (found > 1 || need_to_look) {
-		char monbuf[BUFSZ];
-		char temp_buf[BUFSZ];
-
-		pm = lookat(cc.x, cc.y, look_buf, monbuf);
-		firstmatch = look_buf;
-		if (*firstmatch) {
-		    Sprintf(temp_buf, " (%s)", firstmatch);
-		    (void)strncat(out_str, temp_buf, BUFSZ-strlen(out_str)-1);
-		    found = 1;	/* we have something to look up */
+		if (quick) {
+			check_tutorial_farlook(cc.x, cc.y);
 		}
-		if (monbuf[0]) {
-		    Sprintf(temp_buf, " [seen: %s]", monbuf);
-		    (void)strncat(out_str, temp_buf, BUFSZ-strlen(out_str)-1);
-		}
-	    }
-	}
+	} while (from_screen && !quick && ans != LOOK_ONCE);
 
-	/* Finally, print out our explanation. */
-	if (found) {
-	    pline("%s", out_str);
-	    /* check the data file for information about this thing */
-	    if (found == 1 && ans != LOOK_QUICK && ans != LOOK_ONCE &&
-			(ans == LOOK_VERBOSE || (flags.help && !quick))) {
-		char temp_buf[BUFSZ];
-		Strcpy(temp_buf, firstmatch);
-		checkfile(temp_buf, pm, FALSE, (boolean)(ans == LOOK_VERBOSE));
-	    }
-	} else {
-	    pline("I've never heard of such things.");
-	}
-
-	if (quick) check_tutorial_farlook(cc.x, cc.y);
-
-    } while (from_screen && !quick && ans != LOOK_ONCE);
-
-    flags.verbose = save_verbose;
-    return 0;
+	flags.verbose = save_verbose;
+	return 0;
 }
 
 
