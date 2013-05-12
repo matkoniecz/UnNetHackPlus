@@ -317,7 +317,7 @@ ghost_from_bottle()
 		return;
 	}
 	pline("As you open the bottle, an enormous %s emerges!",
-		Hallucination ? rndmonnam() : (const char *)"ghost");
+		Hallucination ? get_bogus_monster_name() : (const char *)"ghost");
 	if(flags.verbose)
 	    You("are frightened to death, and unable to move.");
 	nomul(-3, "being frightened to death");
@@ -1166,15 +1166,11 @@ const char *bottlenames[] = {
 	"bottle", "phial", "flagon", "carafe", "flask", "jar", "vial"
 };
 
-const char *bogus_bottlenames[] = {
-	"jug", "pitcher", "bucket", "thermos", "amphora", "barrel", "ampoule"
-};
-
 const char *
 bottlename()
 {
 	if (Hallucination) {
-		return bogus_bottlenames[rn2(SIZE(bogus_bottlenames))];
+		return get_bogus_bottle_name();
 	}
 	return bottlenames[rn2(SIZE(bottlenames))];
 }

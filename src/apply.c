@@ -195,7 +195,7 @@ struct obj* tobj;
 	 * so we can avoid things like "a owlbear", etc. */
 	if (otmp = sobj_at(EGG,rx,ry)) {
 		if (Hallucination) {
-			pline("You listen to the egg and guess... %s?",rndmonnam());
+			pline("You listen to the egg and guess... %s?", get_bogus_monster_name());
 		} else {
 			if (stale_egg(otmp) || otmp->corpsenm == NON_PM) {
 				pline("The egg doesn't make much noise at all.");
@@ -646,7 +646,7 @@ use_mirror(struct obj *obj)
 				pline("Huh?  That doesn't look like you!");
 				make_confused(HConfusion + d(3,4),FALSE);
 			} else if (Hallucination) {
-				You(look_str, hcolor((char *)0));
+				You(look_str, get_bogus_color_name());
 			} else if (Sick) {
 				You(look_str, "peaked");
 			} else if (u.uhs >= WEAK) {

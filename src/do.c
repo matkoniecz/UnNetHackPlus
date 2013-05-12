@@ -395,7 +395,7 @@ giveback:
 		break;
 	    case RIN_AGGRAVATE_MONSTER:
 		pline("Several %s buzz angrily around the sink.",
-		      Hallucination ? makeplural(rndmonnam()) : "flies");
+		      Hallucination ? makeplural(get_bogus_monster_name()) : "flies");
 		break;
 	    case RIN_SHOCK_RESISTANCE:
 		pline("Static electricity surrounds the sink.");
@@ -452,7 +452,7 @@ giveback:
 	    case MEAT_RING:
 		/* Not the same as aggravate monster; besides, it's obvious. */
 		pline("Several %s buzz around the sink.",
-		      Hallucination ? makeplural(rndmonnam()) : "flies");
+		      Hallucination ? makeplural(get_bogus_monster_name()) : "flies");
 		break;
 	    default:
 		ideed = FALSE;

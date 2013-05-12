@@ -132,7 +132,7 @@ slime_dialogue()
 		    if (!Blind)	/* [what if you're already green?] */
 			pline(str, hcolor(NH_GREEN));
 		} else
-		    pline(str, an(Hallucination ? rndmonnam() : "green slime"));
+		    pline(str, an(Hallucination ? get_bogus_monster_name() : "green slime"));
 	    } else
 		pline(str);
 	}

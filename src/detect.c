@@ -834,7 +834,7 @@ struct obj *obj;
 
     if (Hallucination) {
 	if (!obj->spe) {
-	    pline("All you see is funky %s haze.", hcolor((char *)0));
+	    pline("All you see is funky %s haze.", get_bogus_color_name());
 	} else {
 	    switch(rnd(6)) {
 	    case 1 : You("grok some groovy globs of incandescent lava.");
@@ -842,8 +842,7 @@ struct obj *obj;
 	    case 2 : pline("Whoa!  Psychedelic colors, %s!",
 			   poly_gender() == 1 ? "babe" : "dude");
 		break;
-	    case 3 : pline_The("crystal pulses with sinister %s light!",
-				hcolor((char *)0));
+	    case 3 : pline_The("crystal pulses with sinister %s light!", get_bogus_color_name());
 		break;
 	    case 4 : You("see goldfish swimming above fluorescent rocks.");
 		break;

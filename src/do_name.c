@@ -785,7 +785,7 @@ boolean called;
 	/* Put the actual monster name or type into the buffer now */
 	/* Be sure to remember whether the buffer starts with a name */
 	if (do_hallu) {
-	    Strcat(buf, rndmonnam());
+	    Strcat(buf, get_bogus_monster_name());
 	    name_at_start = FALSE;
 	} else if (mtmp->mnamelth) {
 	    char *name = NAME(mtmp);
@@ -995,358 +995,6 @@ char *outbuf;
     return outbuf;
 }
 
-static const char * const bogusmons[] = {
-	"jumbo shrimp", "giant pigmy", "gnu", "killer penguin",
-	"giant cockroach", "giant slug", "maggot", "pterodactyl",
-	"tyrannosaurus rex", "basilisk", "beholder", "nightmare",
-	"efreeti", "marid", "rot grub", "bookworm", "master lichen",
-	"shadow", "hologram", "jester", "attorney", "sleazoid",
-	"killer tomato", "amazon", "robot", "battlemech",
-	"rhinovirus", "harpy", "lion-dog", "rat-ant", "Y2K bug",
-						/* misc. */
-	"grue", "Christmas-tree monster", "luck sucker", "paskald",
-	"brogmoid", "dornbeast",		/* Quendor (Zork, &c.) */
-	"Ancient Multi-Hued Dragon", "Evil Iggy",
-						/* Moria */
-	"emu", "kestrel", "xeroc", "venus flytrap",
-						/* Rogue */
-	"creeping coins",			/* Wizardry */
-	"hydra", "siren",			/* Greek legend */
-	"killer bunny",				/* Monty Python */
-	"rodent of unusual size",		/* The Princess Bride */
-	"Smokey the bear",			/* "Only you can prevent forest fires!" */
-	"Luggage",				/* Discworld */
-	"Ent",					/* Lord of the Rings */
-	"tangle tree", "nickelpede", "wiggle",	/* Xanth */
-	"white rabbit", "snark",		/* Lewis Carroll */
-	"pushmi-pullyu",			/* Dr. Dolittle */
-	"smurf",				/* The Smurfs */
-	"tribble", "Klingon", "Borg",		/* Star Trek */
-	"Ewok",					/* Star Wars */
-	"Totoro",				/* Tonari no Totoro */
-	"ohmu",					/* Nausicaa */
-	"youma",				/* Sailor Moon */
-	"nyaasu",				/* Pokemon (Meowth) */
-	"Godzilla", "King Kong",		/* monster movies */
-	"earthquake beast",			/* old L of SH */
-	"Invid",				/* Robotech */
-	"Terminator",				/* The Terminator */
-	"boomer",				/* Bubblegum Crisis */
-	"Dalek",				/* Dr. Who ("Exterminate!") */
-	"microscopic space fleet", "Ravenous Bugblatter Beast of Traal",
-						/* HGttG */
-	"teenage mutant ninja turtle",		/* TMNT */
-	"samurai rabbit",			/* Usagi Yojimbo */
-	"aardvark",				/* Cerebus */
-	"Audrey II",				/* Little Shop of Horrors */
-	"witch doctor", "one-eyed one-horned flying purple people eater",
-						/* 50's rock 'n' roll */
-	"Barney the dinosaur",			/* saccharine kiddy TV */
-	"Morgoth",				/* Angband */
-	"Vorlon",				/* Babylon 5 */
-	"questing beast",			/* King Arthur */
-	"Predator",				/* Movie */
-	"mother-in-law",			/* common pest */
-	
-	/* from NAO, added in UnNetHack */
-	"one-winged dewinged stab-bat",		/* KoL */
-	"praying mantis",
-	"arch-pedant",
-	"beluga whale",
-	"bluebird of happiness",
-	"bouncing eye", "floating nose",
-	"buffer overflow", "dangling pointer", "walking disk drive",
-	"cacodemon", "scrag",
-	"cardboard golem", "duct tape golem",
-	"chess pawn",
-	"chicken",
-	"chocolate pudding",
-	"coelacanth",
-	"corpulent porpoise",
-	"Crow T. Robot",
-	"diagonally moving grid bug",
-	"dropbear",
-	"Dudley",
-	"El Pollo Diablo",
-	"evil overlord",
-	"existential angst",
-	"figment of your imagination", "flash of insight",
-	"flying pig",
-	"gazebo",
-	"gonzo journalist",
-	"gray goo", "magnetic monopole",
-	"heisenbug",
-	"lag monster",
-	"loan shark",
-	"Lord British",
-	"newsgroup troll",
-	"ninja pirate zombie robot",
-	"octarine dragon",
-	"particle man",
-	"possessed waffle iron",
-	"poultrygeist",
-	"raging nerd",
-	"roomba",
-	"sea cucumber",
-	"spelling bee",
-	"Strong Bad",
-	"stuffed raccoon puppet",
-	"tapeworm",
-	"liger",
-	"velociraptor",
-	"vermicious knid",
-	"viking",
-	"voluptuous ampersand",
-	"wee green blobbie",
-	"wereplatypus",
-	"zergling",
-	"hag of bolding",
-	"grind bug",
-	"enderman",
-	"wight supremacist",
-	"Magical Trevor",
-	"first category perpetual motion device",
-	"ghoti",
-	"regex engine",
-	"netsplit",
-	"peer",
-	"pigasus",
-	"Semigorgon",
-	"meeple",
-	"conventioneer",
-	"terracotta warrior",
-	"large microbat", "small megabat",
-
-	/* soundex and typos of monsters, from NAO, added in UnNetHack */
-	"gloating eye",
-	"flush golem"
-	"martyr orc",
-	"mortar orc",
-	"acute blob",
-	"aria elemental",
-	"aliasing priest",
-	"aligned parasite",
-	"aligned parquet",
-	"aligned proctor",
-	"baby balky dragon",
-	"baby blues dragon",
-	"baby caricature",
-	"baby crochet",
-	"baby grainy dragon",
-	"baby bong worm",
-	"baby long word",
-	"baby parable worm",
-	"barfed devil",
-	"beer wight",
-	"boor wight",
-	"brawny mold",
-	"rave spider",
-	"clue golem",
-	"bust vortex",
-	"errata elemental",
-	"elastic eel",
-	"electrocardiogram eel",
-	"fir elemental",
-	"tire elemental",
-	"flamingo sphere",
-	"fallacy golem",
-	"frizzed centaur",
-	"forest centerfold",
-	"fierceness sphere",
-	"frosted giant",
-	"geriatric snake",
-	"gnat ant",
-	"giant bath",
-	"grant beetle",
-	"giant mango",
-	"glossy golem",
-	"gnome laureate",
-	"gnome dummy",
-	"gooier ooze",
-	"green slide",
-	"guardian nacho",
-	"hell hound pun",
-	"high purist",
-	"hairnet devil",
-	"ice trowel",
-	"feather golem",
-	"lounge worm",
-	"mountain lymph",
-	"pager golem",
-	"pie fiend",
-	"prophylactic worm",
-	"sock mole",
-	"rogue piercer",
-	"seesawing sphere",
-	"simile mimic",
-	"moldier ant",
-	"stain vortex",
-	"scone giant",
-	"umbrella hulk",
-	"vampire mace",
-	"verbal jabberwock",
-	"water lemon",
-	"water melon",
-	"winged grizzly",
-	"yellow wight",
-
-	/* from http://www.alt.org/nethack/addmsgs/viewmsgs.php added in UnNetHackPlus*/
-	"lurker below",
-	"worthless yellowish-brown glass golem",
-	"writhing mass of primal chaos", /* ADOM */
-	"hallucinatory monster",
-	"jumping brain",
-	"colorless green idea",
-	"floating ear",
-	"floating tongue",
-	"hallucinogen-distorted hallucination",
-	"mountain dwarf",
-	"were(random beast)",
-	"weremindflayer",
-	"wereplatypus",
-	"Gnome With the Wand of Death",
-	"arch-lichen",
-	"Baba Yaga",
-	"harmless protoplasm",
-	"badger",
-	"giant dwarf",
-	"magically animated Vorpal Blade",
-	"Legendary black beast of Arrrgh",
-
-	/* from UnNetHack */
-	"apostroph golem", "Bob the angry flower",
-	"bonsai-kitten", "Boxxy", "lonelygirl15",
-	"tie-thulu", "Domo-kun", "nyan cat",
-	"looooooooooooong cat",			/* internet memes */
-	"bohrbug", "mandelbug", "schroedinbug", /* bugs */
-	"Gerbenok",				/* Monty Python killer rabbit */
-	"doenertier",				/* Erkan & Stefan */
-	"Invisible Pink Unicorn",
-	"Flying Spaghetti Monster",		/* deities */
-	"Bluebear", "Professor Abdullah Nightingale",
-	"Qwerty Uiop", "troglotroll",		/* Zamonien */
-	"wolpertinger", "elwedritsche", "skvader",
-	"Nessie", "tatzelwurm", "dahu",		/* european cryptids */
-	"three-headed monkey",			/* Monkey Island */
-	"little green man",			/* modern folklore */
-	"weighted Companion Cube",		/* Portal */
-	"/b/tard",				/* /b/ */
-	"manbearpig",				/* South Park */
-	"ceiling cat", "basement cat",
-	"monorail cat",				/* the Internet is made for cat pix */
-	"rape golem",				/* schnippi */
-	"tridude",				/* POWDER */
-	"orcus cosmicus",			/* Radomir Dopieralski */
-	"yeek", "quylthulg",
-	"Greater Hell Beast",			/* Angband */
-	"Vendor of Yizard",			/* Souljazz */
-	"Sigmund", "lernaean hydra", "Ijyb",
-	"Gloorx Vloq", "Blork the orc",		/* Dungeon Crawl Stone Soup */
-	"unicorn pegasus kitten",		/* Wil Wheaton, John Scalzi */
-	"dwerga nethackus", "dwerga castrum",	/* Ask ASCII Ponies */
-
-	/* from UnNetHackPlus */
-	"King Krakus",               /* Polish folklore */
-	"Topielec",                  /* Slavic folklore */
-	"pink oliphaunt",            /* Lord of the Rings + silliness */
-	"Amphisbaena",               /* Greek mythology */
-	"phoenix",                   /* Greek mythology */
-	"catoblepas",                /* Greek mythology */
-	"phantom kangaroo",          /* urban legend */
-	"echinemon",                 /* from medieval literature, "enemy of the dragon" */
-	"Ratatoskr",                 /* Norse mythology */
-	"Twrch Trwyth",              /* Arthurian legends */
-	"Unperson",                  /* Nineteen Eighty-Four */
-	"Somebody Else's Problem",   /* Douglas Adams */
-	"Armok",                     /* Dwarf Fortress */
-	"Dwarf-Eating Carp",         /* Dwarf Fortress */
-	"werecapybara",              /* Dwarf Fortress */
-	"Urist McDwarf",             /* Dwarf Fortress */
-	"Evil Otto",                 /* Berzerk - via GruntHack */
-	"P'lod",                     /* Weekly World News */
-	"mortgage golem", 
-	"dark matter golem", 
-	"giant orange brain",        /* Dungeon Crawl Stone Soup */
-	"ugly thing",                /* Dungeon Crawl Stone Soup */
-	"hellephant",                /* Dungeon Crawl Stone Soup */
-	"inept mimic",               /* Dungeon Crawl Stone Soup */
-	"hungry ghost",              /* Dungeon Crawl Stone Soup */
-	"unborn deep dwarf",         /* Dungeon Crawl Stone Soup */
-	"Wandering mushroom",        /* Dungeon Crawl Stone Soup */
-	"Vlad the Inhaler",
-	"Delaunay tessellation field estimator",
-	"unnameable horror from beyond",/* NAO fruit name*/
-	"munchkin",
-	"shambling horror",          /* SporkHack */
-	"Grid Bug Mk. 2",            /* SLAS'EM (nickname of arc bugs) */
-	"killer tripe ration",       /* SLAS'EM */
-	"yet another D&D monster",
-	"kobold mage",
-	"hobbyte",
-	/* via ProgressQuest */
-	"will-o'-the-wisp", 
-	"ignis fatuus",
-	"triceratops",
-	"sylph",
-	"stegosaurus",
-	"sphinx",
-	"spectre",
-	"lamassu",
-	"su-monster",                /* Dungeons & Dragons */
-	"shambling mound",           /* Dungeons & Dragons */
-	"sand elemental",            /* Dungeons & Dragons */
-	"rubber golem"               /* Dungeons & Dragons */
-	"remorhaz",                  /* Dungeons & Dragons */
-	"otyugh",                    /* Dungeons & Dragons */
-	"bacon elemental",
-	"roper",
-	"roc",
-	"peryton",                   /* Jorge Luis Borges - Book of Imaginary Beings */
-	"octopus",
-	"beer golem",                /* ProgressQuest */
-	"rice giant",                /* ProgressQuest */
-	"porn elemental",            /* ProgressQuest */
-	"demicanadian",              /* ProgressQuest */
-	"gyrognome",                 /* ProgressQuest */
-	"cardboard golem",
-	"cheese elemental",
-	"dervish",
-	"dragon turtle",
-	"megalosaurus",
-	"organist",
-	/* end of monsters via ProgressQuest */
-	"Lucius Malfoy",             /* Harry Potter */
-	"Dumbledore",                /* Harry Potter */
-	"Harry Potter",              /* Harry Potter */
-	"Crumple-Horned Snorkack",   /* Harry Potter */
-#ifndef MAIL
-	"mail daemon",               /* with defined MAIL it may be selected as real monster in rndmonnam */
-#endif
-	"Vaarsuvius",                /* The Order of the Stick */
-	"Durkon Thundershield",      /* The Order of the Stick */
-	"Roy Greenhilt",             /* The Order of the Stick */
-};
-
-
-/* Return a random monster name, for hallucination.
- * KNOWN BUG: May be a proper name (Godzilla, Barney), may not
- * (the Terminator, a Dalek).  There's no elegant way to deal
- * with this without radically modifying the calling functions.
- */
-const char *
-rndmonnam()
-{
-	int name;
-
-	do {
-	    name = rn1(SPECIAL_PM + SIZE(bogusmons) - LOW_PM, LOW_PM);
-	} while (name < SPECIAL_PM &&
-	    (type_is_pname(&mons[name]) || (mons[name].geno & G_NOGEN)));
-
-	if (name >= SPECIAL_PM) return bogusmons[name - SPECIAL_PM];
-	return mons[name].mname;
-}
-
 const char *
 roguename() /* Name of a Rogue player */
 {
@@ -1368,24 +1016,18 @@ roguename() /* Name of a Rogue player */
 
 #ifdef OVL2
 
-static NEARDATA const char * const hcolors[] = {
-	"ultraviolet", "infrared", "bluish-orange",
-	"reddish-green", "dark white", "light black", "sky blue-pink",
-	"salty", "sweet", "sour", "bitter", "umami",
-	"striped", "spiral", "swirly", "plaid", "checkered", "argyle",
-	"paisley", "blotchy", "guernsey-spotted", "polka-dotted",
-	"square", "round", "triangular",
-	"cabernet", "sangria", "fuchsia", "wisteria",
-	"lemon-lime", "strawberry-banana", "peppermint",
-	"romantic", "incandescent"
-};
-
 const char *
 hcolor(colorpref)
 const char *colorpref;
 {
-	return (Hallucination || !colorpref) ?
-		hcolors[rn2(SIZE(hcolors))] : colorpref;
+	if (!colorpref) {
+		impossible("invalid parameter of hcolor, get_bogus_color_name() should be used to get bogus color name.");
+		return "buggy";
+	}
+	if (Hallucination) {
+		return get_bogus_color_name();
+	}
+	return colorpref;
 }
 
 /* return a random real color unless hallucinating */
@@ -1393,7 +1035,7 @@ const char *
 rndcolor()
 {
 	int k = rn2(CLR_MAX);
-	return Hallucination ? hcolor((char *)0) : (k == NO_COLOR) ?
+	return Hallucination ? get_bogus_color_name() : (k == NO_COLOR) ?
 		"colorless" : c_obj_colors[k];
 }
 

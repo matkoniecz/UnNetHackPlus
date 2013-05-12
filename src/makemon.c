@@ -2027,7 +2027,7 @@ int x, y;
 	    (mtmp = makemon(&mons[PM_HOMUNCULUS],x,y, NO_MM_FLAGS)) != 0) {
 		pline("%s is released!", !canspotmon(mtmp) ?
 				Something : Hallucination ?
-				An(rndmonnam()) : "The picture-painting demon");
+				An(get_bogus_monster_name()) : "The picture-painting demon");
 		mtmp->mpeaceful = !camera->cursed;
 		set_malign(mtmp);
 	}

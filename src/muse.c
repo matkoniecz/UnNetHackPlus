@@ -84,7 +84,7 @@ struct obj *obj;
 			if (vis) {
 			    pline("As %s opens the bottle, an enormous %s emerges!",
 			       mon_nam(mon),
-			       Hallucination ? rndmonnam() : (const char *)"ghost");
+			       Hallucination ? get_bogus_monster_name() : (const char *)"ghost");
 			    pline("%s is frightened to death, and unable to move.",
 				    Monnam(mon));
 			}

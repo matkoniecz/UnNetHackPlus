@@ -321,15 +321,6 @@ dosounds()
 #endif /* OVL0 */
 #ifdef OVLB
 
-static const char * const h_sounds[] = {
-    "beep", "boing", "sing", "belche", "creak", "cough", "rattle",
-    "ululate", "pop", "jingle", "sniffle", "tinkle", "eep",
-    "clatter", "hum", "sizzle", "twitter", "wheeze", "rustle",
-    "honk", "lisp", "yodel", "coo", "burp", "moo", "boom",
-    "murmur", "oink", "quack", "rumble", "twang", "bellow",
-    "toot", "gargle", "hoot", "warble"
-};
-
 const char *
 growl_sound(mtmp)
 struct monst *mtmp;
@@ -384,7 +375,7 @@ struct monst *mtmp;
 
     /* presumably nearness and soundok checks have already been made */
     if (Hallucination)
-	growl_verb = h_sounds[rn2(SIZE(h_sounds))];
+	growl_verb = get_bogus_sound();
     else
 	growl_verb = growl_sound(mtmp);
     if (growl_verb) {
@@ -406,7 +397,7 @@ struct monst *mtmp;
 
     /* presumably nearness and soundok checks have already been made */
     if (Hallucination)
-	yelp_verb = h_sounds[rn2(SIZE(h_sounds))];
+	yelp_verb = get_bogus_sound();
     else switch (mtmp->data->msound) {
 	case MS_MEW:
 	    yelp_verb = "yowl";
@@ -447,7 +438,7 @@ struct monst *mtmp;
 
     /* presumably nearness and soundok checks have already been made */
     if (Hallucination)
-	whimper_verb = h_sounds[rn2(SIZE(h_sounds))];
+	whimper_verb = get_bogus_sound();
     else switch (mtmp->data->msound) {
 	case MS_MEW:
 	case MS_GROWL:

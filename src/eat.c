@@ -1191,7 +1191,7 @@ opentin()		/* called during each move whilst opening a tin */
 		}
 		which = 0;	/* 0=>plural, 1=>as-is, 2=>"the" prefix */
 		if (Hallucination) {
-			what = rndmonnam();
+			what = get_bogus_monster_name();
 		} else {
 			what = mons[tin.tin->corpsenm].mname;
 			if (mons[tin.tin->corpsenm].geno & G_UNIQ) {

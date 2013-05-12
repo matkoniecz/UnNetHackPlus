@@ -345,7 +345,6 @@ E char *FDECL(Adjmonnam, (struct monst *,const char *));
 E char *FDECL(Amonnam, (struct monst *));
 E char *FDECL(a_monnam, (struct monst *));
 E char *FDECL(distant_monnam, (struct monst *,int,char *));
-E const char *NDECL(rndmonnam);
 E const char *FDECL(hcolor, (const char *));
 E const char *NDECL(rndcolor);
 E const char *NDECL(roguename);
@@ -822,6 +821,14 @@ E char *FDECL(iso8601, (time_t));
 E char *FDECL(iso8601_duration, (long));
 E char *FDECL(get_formatted_time, (time_t, const char *));
 E time_t NDECL(current_epoch);
+
+/* ### hallucination.c ### */
+E const char *NDECL(get_bogus_monster_name);
+E const char *NDECL(get_bogus_item_name);
+E const char *NDECL(get_bogus_class_name);
+E const char *NDECL(get_bogus_bottle_name);
+E const char *NDECL(get_bogus_color_name);
+E const char *NDECL(get_bogus_sound);
 
 /* ### invent.c ### */
 
