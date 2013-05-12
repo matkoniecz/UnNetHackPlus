@@ -1,4 +1,5 @@
 Plans for UnNetHackPlus
+* kill cerberus
 * scrap \sys\unix\snd86unx.shr \UnNetHackPlus\sys\unix\README.linux \UnNetHackPlus\doc\README.nh343
 * nethack-bugs@nethack.org
 * dragon scale mail Guidebook
