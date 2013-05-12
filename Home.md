@@ -186,7 +186,6 @@ m_dowear_type
 * autotravel and stopping for engravings
 * monster with tele= resist \ of tele
 * https://github.com/tung/NitroHack/wiki - UnNetHack bug fixes (not already in UnNetHack)
-* wishing for unidentified dragon mail by power is not supposed to work (UnH)
 * fast travel should not stop on graves
 * save vibrating square in dungeon overwiev
 * autotravel, traps (squaky, pits) and pernament levitation
