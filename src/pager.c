@@ -499,8 +499,8 @@ do_look(boolean quick)
 	save_verbose = flags.verbose;
 	flags.verbose = flags.verbose && !quick;
 	/*
-	* The user typed one letter, or we're identifying from the screen.
-	*/
+	 * The user typed one letter, or we're identifying from the screen.
+	 */
 	do {
 		/* Reset some variables. */
 		need_to_look = FALSE;
@@ -531,7 +531,8 @@ do_look(boolean quick)
 			if (glyph_is_cmap(glyph)) {
 				if (iflags.UTF8graphics) {
 					/* Temporary workaround as UnNetHack can't yet
-			* display UTF-8 glyphs on the topline */
+					 * display UTF-8 glyphs on the topline
+					 */
 					force_defsyms = TRUE;
 					sym = defsyms[glyph_to_cmap(glyph)].sym;
 				} else {
