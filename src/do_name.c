@@ -1048,7 +1048,7 @@ static const char * const bogusmons[] = {
 	"Predator",				/* Movie */
 	"mother-in-law",			/* common pest */
 	
-	/* from NAO */
+	/* from NAO, added in UnNetHack */
 	"one-winged dewinged stab-bat",		/* KoL */
 	"praying mantis",
 	"arch-pedant",
@@ -1117,7 +1117,7 @@ static const char * const bogusmons[] = {
 	"terracotta warrior",
 	"large microbat", "small megabat",
 
-	/* soundex and typos of monsters */
+	/* soundex and typos of monsters, from NAO, added in UnNetHack */
 	"gloating eye",
 	"flush golem"
 	"martyr orc",
@@ -1190,7 +1190,7 @@ static const char * const bogusmons[] = {
 	"winged grizzly",
 	"yellow wight",
 
-	/* http://www.alt.org/nethack/addmsgs/viewmsgs.php */
+	/* from http://www.alt.org/nethack/addmsgs/viewmsgs.php added in UnNetHackPlus*/
 	"lurker below",
 	"worthless yellowish-brown glass golem",
 	"writhing mass of primal chaos", /* ADOM */
@@ -1320,7 +1320,7 @@ static const char * const bogusmons[] = {
 	"Harry Potter",              /* Harry Potter */
 	"Crumple-Horned Snorkack",   /* Harry Potter */
 #ifndef MAIL
-	"mail daemon",
+	"mail daemon",               /* with defined MAIL it may be selected as real monster in rndmonnam */
 #endif
 	"Vaarsuvius",                /* The Order of the Stick */
 	"Durkon Thundershield",      /* The Order of the Stick */
