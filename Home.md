@@ -12,7 +12,6 @@ Plans for UnNetHackPlus
 * Keep save files after restore,KEEP_SAVE
 * Display object weight,SHOW_WEIGHT
 * Shopkeeper services,OTHER_SERVICES
-* Shouting and pet commands,SHOUT
 * kill opthelp by replacing " {"autodig", &flags.autodig, FALSE, SET_IN_GAME}," with " {"autodig", &flags.autodig, FALSE, SET_IN_GAME, "dig if moving and wielding digging tool"},"
 * travel         enable the command to travel to a map location via [TRUE] <enable pernamently>
 * the goal of the this branch is to require players with the Amulet of Yendor to take an alternate route out of the dungeon.  - http://nethackwiki.com/wiki/SLASHEM_PHLEGETHON
@@ -152,12 +151,16 @@ http://tvtropes.org/pmwiki/pmwiki.php/Main/TomeOfEldritchLore
 * Allow looking at dungeon overview during level teleport prompt - from http://nethackwiki.com/wiki/Bugs_in_NetHack_4
 * revamp https://github.com/Bulwersator/UnNetHackPlus/blob/master/README.configure (z windowsem z msdna)
 * kill this 18/something strength
-* http://nhqdb.alt.org/?168 http://nhqdb.alt.org/?663 http://nhqdb.alt.org/?686 http://nhqdb.alt.org/?8   http://nhqdb.alt.org/?311 http://nhqdb.alt.org/?71 http://nhqdb.alt.org/?85 http://nhqdb.alt.org/?49 http://nhqdb.alt.org/?354 http://nhqdb.alt.org/?448 http://nhqdb.alt.org/?448 http://nhqdb.alt.org/?314 http://nhqdb.alt.org/?245 http://nhqdb.alt.org/?259 http://nhqdb.alt.org/?235 http://nhqdb.alt.org/?236 http://nhqdb.alt.org/?611 
-* http://nhqdb.alt.org/?latest
-* http://nethackwiki.com/wiki/Talk:Cthulhu
+* http://nhqdb.alt.org/?663 
+* http://nhqdb.alt.org/?686 
+* http://nhqdb.alt.org/?8   
+* http://nhqdb.alt.org/?311 
+* http://nhqdb.alt.org/?71
+* http://nhqdb.alt.org/?85
+* http://nhqdb.alt.org/?49
+* http://nhqdb.alt.org/?354 http://nhqdb.alt.org/?448 http://nhqdb.alt.org/?314 http://nhqdb.alt.org/?245 http://nhqdb.alt.org/?259 http://nhqdb.alt.org/?235 http://nhqdb.alt.org/?236 http://nhqdb.alt.org/?611 
 * object icons appearing in menus, like on linux 
 * list created monster without kills
-* enable SHOW_EXTINCT SHOW_BORN
 * cleanup configure https://github.com/Bulwersator/CopyOfUnNetHack/commits/master/trunk/configure http://www.gnu.org/software/autoconf/manual/autoconf.html#Making-configure-Scripts http://www.gnu.org/software/autoconf/manual/autoconf.html#autoreconf-Invocation http://www.edwardrosten.com/code/autoconf/index.html
 * esc on gen
 * [[DFlike statues]]
@@ -286,8 +289,6 @@ fix completely broken alignment, maybe also better gods
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/dbb7e37a081c6280d50d75cfd7b2e2e801a8354b 
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/586f1855f856437d4cfa725d6ea164ee4d93a09c (fix to one of above)
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/05b6dbfc2247fb0194bc58df6c04c278c4149fa0
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/03be90768097959dcd3e062d46c9a9afc89f77fe
-* https://github.com/Bulwersator/CopyOfSporkHack/commit/cd21033f22b5e9e7ef318ea1a1b9dd76c8351bfa
 * water damage to flaming spheres (losehp(dam, "drenching", KILLED_BY); in https://github.com/Chris-plus-alphanumericgibberish/dnethack/blob/f167bb7bd5568288c1e54f7581ae34499d7945fd/dnethack-3.4.3/src/trap.c)
 * When I found the black market (the portal was on the nymphs level), I 
 had a few thousand zorkmids prepared. I wanted to buy a magic whistle. 
@@ -344,7 +345,6 @@ proud owner of a magic whistle.
 * http://bilious.alt.org/?37 - what about rogue player monster?
 
 # too complicated
-* http://bilious.alt.org/?183
 * http://bilious.alt.org/?165
 * http://bilious.alt.org/?212
 * http://bilious.alt.org/?307
@@ -372,6 +372,9 @@ proud owner of a magic whistle.
 * from angry_priest() - priests should try to reconvert altar back- in the middle of spaghetti code - see  http://bilious.alt.org/?38
 * https://github.com/Bulwersator/CopyOfSporkHack/commit/dea61cde17b8758091e3f3cef95c2d651d11cb3e - When attacking a peaceful monster, make other peaceful monsters react.  - in the middle of spaghetti code
 * on savegame mismatch game eats the save
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/03be90768097959dcd3e062d46c9a9afc89f77fe -  Add random "vaults". 
+* https://github.com/Bulwersator/CopyOfSporkHack/commit/cd21033f22b5e9e7ef318ea1a1b9dd76c8351bfa - 10 new vaults
+* http://bilious.alt.org/?183
 
 # no playtesting
 *  Ixoth's stats are somewhat higher than they are in vanilla. In vanilla, Ixoth is physically substantially weaker than other dragons.
