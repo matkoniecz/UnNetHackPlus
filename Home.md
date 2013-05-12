@@ -4,7 +4,7 @@ Plans for UnNetHackPlus
 * dragon scale mail Guidebook
 * do not ask about attacking shopkeepers
 * statues in cockatrice nests made from players petrified by cockatrices, like with the Medusa
-* rename M2_NASTY to M2_DANGEROUS (?)
+* rename M2_NASTY to M2_DANGEROUS and extra_nasty to extra_dangerous (?)
 * Spells are light sources,LIGHT_SRC_SPELL
 * Invisible objects,INVISIBLE_OBJECTS
 * Object unpolymorphing,UNPOLYPILE
