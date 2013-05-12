@@ -121,7 +121,7 @@ Known Issues
 
 The current list may be found at:
 
-http://nethack-curses.wikia.com/wiki/Known_Issues
+http://sourceforge.net/p/nethack-curses/bugs/
 
 Contact
 =======
