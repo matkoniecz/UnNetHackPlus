@@ -8,7 +8,6 @@ Plans for UnNetHackPlus
 * Spells are light sources,LIGHT_SRC_SPELL
 * Invisible objects,INVISIBLE_OBJECTS
 * Object unpolymorphing,UNPOLYPILE
-* Perseus' Wallet,WALLET_O_P
 * Keep save files after restore,KEEP_SAVE
 * Display object weight,SHOW_WEIGHT
 * Shopkeeper services,OTHER_SERVICES
