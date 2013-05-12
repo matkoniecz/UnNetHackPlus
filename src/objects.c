@@ -95,7 +95,7 @@ PROJECTILE("crossbow bolt", (char *)0,
 		1, 55, 1, 2, 4, 6, 0, IRON, -P_CROSSBOW, HI_METAL),
 
 WEAPON("dart", (char *)0,
-	1, 1, 0, 60,  1,  2,  3,  2, 0, P,   -P_DART, IRON, CLR_RED),
+	1, 1, 0, 60,  1,  2,  3,  2, 0, P,   -P_DART, IRON, CLR_ORANGE),
 WEAPON("shuriken", "throwing star",
 	0, 1, 0, 35,  1,  5,  8,  6, 2, P,   -P_SHURIKEN, IRON, HI_METAL),
 WEAPON("boomerang", (char *)0,
