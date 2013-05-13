@@ -704,7 +704,7 @@ static const char * const bogus_items[] = {
 	"peace hammer",
 	"heap of wands of wishing", /* Janis Papanagnou on rgrn */
 	"size XXXS gray dragon scale mail", /* http://www.nicolaas.net/dudley/index.php?f=20050819 */
-	//"blessed greased fixed erodeproof disenchanterproof demonpossessionproof vacuumofdeepspaceproof proofremovalproof fully insured 100% all-natural materials completely and utterly intact, undamaged and structurally sound freshly washed and free of the stench of congealed human blood totally bereft of ancient unbreakable curses and absolutely NOT stolen from any nearby easily-angered shopkeepers +3 armor enhancement GRAY DRAGON SCALE MAIL",   /* http://www.nicolaas.net/dudley/index.php?f=20050819 */ [too long name, see #define BUFSZ in global.h]
+	"blessed greased fixed erodeproof disenchanterproof demonpossessionproof vacuumofdeepspaceproof proofremovalproof fully insured 100% all-natural materials completely and utterly intact, undamaged and structurally sound freshly washed and free of the stench of congealed human blood totally bereft of ancient unbreakable curses and absolutely NOT stolen from any nearby easily-angered shopkeepers +3 armor enhancement GRAY DRAGON SCALE MAIL", /* http://www.nicolaas.net/dudley/index.php?f=20050819 */
 
 	/* from tvtropes.org */
 	"Sealed Good in a Can",
