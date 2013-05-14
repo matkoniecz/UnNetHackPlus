@@ -66,10 +66,6 @@
 			 * Linux, Solaris 2.x
 			 */
 
-/* #define OPENWINBUG */	/* avoid a problem using OpenWindows 3.0 for
-				   X11 on SunOS 4.1.x, x>= 2.  Do not define
-				   for other X11 implementations. */
-/* #define BSD_43_BUG */	/* for real 4.3BSD cc's without schain botch fix */
 /* #define MICROPORT_BUG */	/* problems with large arrays in structs */
 /* #define MICROPORT_286_BUG */ /* changes needed in termcap.c to get it to
 				   run with Microport Sys V/AT version 2.4.
