@@ -601,38 +601,6 @@
 \\&\\$3\\f3\\$1\\fP\\$2
 ..
 .\" **********
-.\" trademarked names
-.de pd					\" print "PDP-11"
-.ie \\n(p1 \\&\\$2\\s-1PDP\\s0-11\\$1
-.el \{\
-.	nr p1 +1			\" mark footnote as dropped
-\\&\\$2\\s-1PDP\\s0-11\\*(rg\\$1
-.	fn				\" put out the footnote
-\\&\\*(rgPDP-11 is a registered trademark of Digital Equipment Corporation.
-.	ef				\" short and sweet ...
-.\}
-..
-.de ux					\" print "UNIX"
-.ie \\n(ux \\&\\$2\\s-1UNIX\\s0\\$1
-.el \{\
-.	nr ux +1			\" mark footnote as dropped
-\\&\\$2\\s-1UNIX\\s0\\*(rg\\$1
-.	fn				\" put out the footnote
-\\&\\*(rgUNIX is a registered trademark of AT&T.
-.	ef				\" short and sweet ...
-.\}
-..
-.de vx					\" print "VAX"
-.ie \\n(vx \\&\\$2\\s-1VAX\\s0\\$1
-.el \{\
-.	nr vx +1			\" mark footnote as dropped
-\\&\\$2\\s-1VAX\\s0\\*(rg\\$1
-.	fn				\" put out the footnote
-\\&\\*(rgVAX is a trademark of Digital Equipment Corporation.
-.	ef				\" short and sweet ...
-.\}
-..
-.\" **********
 .\" set up string and number registers
 .					\" set up for the date
 .if \n(mo=1  .ds mo January
