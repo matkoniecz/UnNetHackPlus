@@ -38,10 +38,6 @@
 # define SpinCursor(x)
 #endif
 
-#if defined(AMIGA) && defined(DLB)
-# define PREFIX "NH:slib/"
-#endif
-
 #ifndef O_WRONLY
 #include <fcntl.h>
 #endif
@@ -1403,7 +1399,7 @@ struct tc_lcl_data tc_lcl_data;
 #  ifdef TOS
 const char *hilites[CLR_MAX];
 #  else
-char NEARDATA *hilites[CLR_MAX];
+char *hilites[CLR_MAX];
 #  endif
 # endif
 /* trap.c */

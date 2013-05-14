@@ -33,7 +33,7 @@
 			/* Hint: if you're not developing code, don't define
 			   ULTRIX_PROTO. */
 
-#include "config1.h"	/* should auto-detect MSDOS, MAC, AMIGA, and WIN32 */
+#include "config1.h"	/* should auto-detect MSDOS, MAC, and WIN32 */
 
 #ifdef AUTOCONF
 # include "autoconf_paths.h"
@@ -64,12 +64,6 @@
 # ifndef	AUX
 #  define DEFAULT_WINDOW_SYS "mac"
 # endif
-#endif
-
-/* Amiga supports AMII_GRAPHICS and/or TTY_GRAPHICS */
-#ifdef AMIGA
-# define AMII_GRAPHICS			/* (optional) */
-# define DEFAULT_WINDOW_SYS "amii"	/* "amii", "amitile" or "tty" */
 #endif
 
 /* Atari supports GEM_GRAPHICS and/or TTY_GRAPHICS */

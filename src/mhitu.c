@@ -6,7 +6,7 @@
 #include "artifact.h"
 #include "edog.h"
 
-STATIC_VAR NEARDATA struct obj *otmp;
+STATIC_VAR struct obj *otmp;
 
 STATIC_DCL void FDECL(urustm, (struct monst *, struct obj *));
 # ifdef OVL1

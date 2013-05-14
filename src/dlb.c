@@ -53,7 +53,7 @@ extern FILE *FDECL(fopen_datafile, (const char *,const char *,int));
  * size, and current file mark.  This descriptor is used for all
  * successive calls.
  *
- * The ability to open more than one library is supported but used
+ * The ability to open more than one library is supported but (was) used
  * only in the Amiga port (the second library holds the sound files).
  * For Unix, the idea would be to split the NetHack library
  * into text and binary parts, where the text version could be shared.

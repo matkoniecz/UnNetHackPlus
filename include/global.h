@@ -164,10 +164,6 @@ typedef uchar	boolean;		/* 0 or 1 */
 #include "tosconf.h"
 #endif
 
-#ifdef AMIGA
-#include "amiconf.h"
-#endif
-
 #ifdef MAC
 #include "macconf.h"
 #endif
@@ -213,9 +209,6 @@ typedef uchar	boolean;		/* 0 or 1 */
 
 /* Displayable name of this port; don't redefine if defined in *conf.h */
 #ifndef PORT_ID
-# ifdef AMIGA
-#  define PORT_ID	"Amiga"
-# endif
 # ifdef MAC
 #  define PORT_ID	"Mac"
 # endif

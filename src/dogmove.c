@@ -47,7 +47,7 @@ struct monst *mon;
 	return (struct obj *)0;
 }
 
-static NEARDATA const char nofetch[] = { BALL_CLASS, CHAIN_CLASS, ROCK_CLASS, 0 };
+static const char nofetch[] = { BALL_CLASS, CHAIN_CLASS, ROCK_CLASS, 0 };
 
 #endif /* OVL0 */
 

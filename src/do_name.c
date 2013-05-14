@@ -548,7 +548,7 @@ const char *name;
 	return obj;
 }
 
-static NEARDATA const char callable[] = {
+static const char callable[] = {
 	SCROLL_CLASS, POTION_CLASS, WAND_CLASS, RING_CLASS, AMULET_CLASS,
 	GEM_CLASS, SPBOOK_CLASS, ARMOR_CLASS, TOOL_CLASS, 0 };
 

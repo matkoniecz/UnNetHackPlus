@@ -12,8 +12,8 @@
 #define MAGIC_COOKIE 1000
 
 #ifdef OVLB
-static NEARDATA boolean obj_zapped;
-static NEARDATA int poly_zapped;
+static boolean obj_zapped;
+static int poly_zapped;
 #endif
 
 extern boolean notonhead;	/* for long worms */
@@ -1892,7 +1892,7 @@ struct obj *otmp;
 	useup(otmp);
 }
 
-static NEARDATA const char zap_syms[] = { WAND_CLASS, 0 };
+static const char zap_syms[] = { WAND_CLASS, 0 };
 
 int
 dozap()

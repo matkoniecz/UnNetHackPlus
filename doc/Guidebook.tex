@@ -970,7 +970,6 @@ bit), you can invoke many extended commands by meta-ing the first
 letter of the command.
 %- In {\it NT, OS/2, PC\/ {\rm and} ST NetHack},
 %- the `Alt' key can be used in this fashion;
-%- on the Amiga set the {\it altmeta\/} option to get this behavior.
 In {\it NT, OS/2, {\rm and} PC NetHack},
 the `Alt' key can be used in this fashion.
 \blist{}
@@ -2361,15 +2360,15 @@ object classes rather than a character prompt, and then a menu of matching
 objects for selection.
 \item[\ib{menu\_deselect\_all}]
 Menu character accelerator to deselect all items in a menu.
-Implemented by the Amiga, Gem, X11 and tty ports.
+Implemented by the Gem, X11 and tty ports.
 Default `-'.
 \item[\ib{menu\_deselect\_page}]
 Menu character accelerator to deselect all items on this page of a menu.
-Implemented by the Amiga, Gem and tty ports.
+Implemented by the Gem and tty ports.
 Default `\verb+\+'.
 \item[\ib{menu\_first\_page}]
 Menu character accelerator to jump to the first page in a menu.
-Implemented by the Amiga, Gem and tty ports.
+Implemented by the Gem and tty ports.
 Default `\verb+^+'.
 \item[\ib{menu\_headings}]
 Controls how the headings in a menu are highlighted.
@@ -2377,35 +2376,35 @@ Values are ``{\tt bold}'', ``{\tt inverse}'', or ``{\tt underline}''.
 Not all ports can actually display all three types.
 \item[\ib{menu\_invert\_all}]
 Menu character accelerator to invert all items in a menu.
-Implemented by the Amiga, Gem, X11 and tty ports.
+Implemented by the Gem, X11 and tty ports.
 Default `@'.
 \item[\ib{menu\_invert\_page}]
 Menu character accelerator to invert all items on this page of a menu.
-Implemented by the Amiga, Gem and tty ports.
+Implemented by the Gem and tty ports.
 Default `\verb+~+'.
 \item[\ib{menu\_last\_page}]
 Menu character accelerator to jump to the last page in a menu.
-Implemented by the Amiga, Gem and tty ports.
+Implemented by the Gem and tty ports.
 Default `\verb+|+'.
 \item[\ib{menu\_next\_page}]
 Menu character accelerator to goto the next menu page.
-Implemented by the Amiga, Gem and tty ports.
+Implemented by the Gem and tty ports.
 Default `\verb+>+'.
 \item[\ib{menu\_previous\_page}]
 Menu character accelerator to goto the previous menu page.
-Implemented by the Amiga, Gem and tty ports.
+Implemented by the Gem and tty ports.
 Default `\verb+<+'.
 \item[\ib{menu\_search}]
 Menu character accelerator to search for a menu item.
-Implemented by the Amiga, Gem and X11 ports.
+Implemented by the Gem and X11 ports.
 Default `:'.
 \item[\ib{menu\_select\_all}]
 Menu character accelerator to select all items in a menu.
-Implemented by the Amiga, Gem, X11 and tty ports.
+Implemented by the Gem, X11 and tty ports.
 Default `.'.
 \item[\ib{menu\_select\_page}]
 Menu character accelerator to select all items on this page of a menu.
-Implemented by the Amiga, Gem and tty ports.
+Implemented by the Gem and tty ports.
 Default `,'.
 %.lp
 \item[\ib{monsters}]
@@ -2864,17 +2863,11 @@ Select an alternate keystroke handler dll to load ({\it Win32 tty\/ NetHack\/} o
 The name of the handler is specified without the .dll extension and without any
 path information.
 Cannot be set with the `{\tt O}' command.
-%.lp 
-\item[\ib{altmeta}]
-(default on, {\it Amiga NetHack \/} only).
 %.lp
 \item[\ib{BIOS}]
 Use BIOS calls to update the screen display quickly and to read the keyboard
 (allowing the use of arrow keys to move) on machines with an IBM PC
 compatible BIOS ROM (default off, {\it OS/2, PC\/ {\rm and} ST NetHack\/} only).
-%.lp 
-\item[\ib{flush}]
-(default off, {\it Amiga NetHack \/} only).
 %.lp 
 \item[\ib{Macgraphics}]
 (default on, {\it Mac NetHack \/} only).
@@ -3459,7 +3452,6 @@ Irina Rempt-Drijfhout & Mike Passaretti
 %UNIX is a registered trademark of AT\&T.\\
 %Lattice is a trademark of Lattice, Inc.\\
 %Atari and 1040ST are trademarks of Atari, Inc.\\
-%AMIGA is a trademark of Commodore-Amiga, Inc.\\
 %%.sm
 %Brand and product names are trademarks or registered trademarks
 %of their respective holders.

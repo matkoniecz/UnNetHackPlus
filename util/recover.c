@@ -67,9 +67,6 @@ char *argv[];
 {
 	int argno;
 	const char *dir = (char *)0;
-#ifdef AMIGA
-	char *startdir = (char *)0;
-#endif
 
 
 	if (!dir) dir = getenv("NETHACKDIR");
@@ -120,9 +117,6 @@ char *argv[];
 	if (!dir) dir = HACKDIR;
 #endif
 
-#ifdef AMIGA
-	startdir = getcwd(0,255);
-#endif
 	if (dir && chdir((char *) dir) < 0) {
 		Fprintf(stderr, "%s: cannot chdir to %s.\n", argv[0], dir);
 		exit(EXIT_FAILURE);
@@ -134,9 +128,6 @@ char *argv[];
 			    argv[argno], savename);
 		argno++;
 	}
-#ifdef AMIGA
-	if (startdir) (void)chdir(startdir);
-#endif
 	exit(EXIT_SUCCESS);
 	/*NOTREACHED*/
 	return 0;
@@ -354,11 +345,6 @@ char *str;
 	return tmp;
 }
 #endif /* EXEPATH */
-
-#ifdef AMIGA
-#include "date.h"
-const char amiga_version_string[] = AMIGA_VERSION_STRING;
-#endif
 
 #ifdef WIN_CE
 void nhce_message(FILE* f, const char* str, ...)

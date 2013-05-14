@@ -2,18 +2,9 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1985. */
 /* NetHack may be freely redistributed.  See license for details. */
 
-#ifdef OPTION_LISTS_ONLY	/* (AMIGA) external program for opt lists */
-#include "config.h"
-#include "objclass.h"
-#include "flag.h"
-NEARDATA struct flag flags;	/* provide linkage */
-NEARDATA struct instance_flags iflags;	/* provide linkage */
-#define static
-#else
 #include "hack.h"
 #include "tcap.h"
 #include <ctype.h>
-#endif
 #include <errno.h>
 
 #define WINTYPELEN 16
@@ -44,11 +35,7 @@ static struct Bool_Opt
 	boolean	*addr, initvalue;
 	int optflags;
 } boolopt[] = {
-#ifdef AMIGA
-	{"altmeta", &flags.altmeta, TRUE, DISP_IN_GAME},
-#else
-	{"altmeta", (boolean *)0, TRUE, DISP_IN_GAME},
-#endif
+	{"altmeta", (boolean *)0, TRUE, SET_IN_FILE}, /* OBSOLETE (was used in AMIGA port) */
 	{"ascii_map",     &iflags.wc_ascii_map, !PREFER_TILED, SET_IN_GAME},	/*WC*/
 #ifdef MFLOPPY
 	{"asksavedisk", &flags.asksavedisk, FALSE, SET_IN_GAME},
@@ -60,7 +47,7 @@ static struct Bool_Opt
 	{"autopickup", &flags.pickup, TRUE, SET_IN_GAME},
 	{"autoquiver", &flags.autoquiver, FALSE, SET_IN_GAME},
 	{"autounlock", &flags.autounlock, TRUE, SET_IN_GAME},
-#if defined(MICRO) && !defined(AMIGA)
+#if defined(MICRO)
 	{"BIOS", &iflags.BIOS, FALSE, SET_IN_FILE},
 #else
 	{"BIOS", (boolean *)0, FALSE, SET_IN_FILE},
@@ -188,7 +175,7 @@ static struct Bool_Opt
 #ifdef QWERTZ
 	{"qwertz_layout", &iflags.qwertz_layout, FALSE, SET_IN_GAME},
 #endif
-#if defined(MICRO) && !defined(AMIGA)
+#if defined(MICRO)
 	{"rawio", &iflags.rawio, FALSE, DISP_IN_GAME},
 #else
 	{"rawio", (boolean *)0, FALSE, SET_IN_FILE},
@@ -251,8 +238,7 @@ static struct Bool_Opt
 	{(char *)0, (boolean *)0, FALSE, 0}
 };
 
-/* compound options, for option_help() and external programs like Amiga
- * frontend */
+/* compound options, for option_help() and external programs like Amiga frontend */
 static struct Comp_Opt
 {
 	const char *name, *descr;
@@ -1630,7 +1616,7 @@ boolean tinitial, tfrom_file;
 		return;
 	}
 
-#if defined(MICRO) && !defined(AMIGA)
+#if defined(MICRO)
 	/* included for compatibility with old NetHack.cnf files */
 	if (match_optname(opts, "IBM_", 4, FALSE)) {
 		iflags.BIOS = !negated;
@@ -1967,21 +1953,15 @@ boolean tinitial, tfrom_file;
 		    }
 		    while (cnt-- > 0) {
 			if (*pt && *pt != '/') {
-# ifdef AMIGA
-			    rgb <<= 4;
-# else
 			    rgb <<= 8;
-# endif
 			    tmp = *(pt++);
 			    if (isalpha(tmp)) {
 				tmp = (tmp + 9) & 0xf;	/* Assumes ASCII... */
 			    } else {
 				tmp &= 0xf;	/* Digits in ASCII too... */
 			    }
-# ifndef AMIGA
 			    /* Add an extra so we fill f -> ff and 0 -> 00 */
 			    rgb += tmp << 4;
-# endif
 			    rgb += tmp;
 			}
 		    }
@@ -3055,21 +3035,21 @@ goodfruit:
 }
 
 
-static NEARDATA const char *menutype[] = {
+static const char *menutype[] = {
 	"traditional", "combination", "partial", "full"
 };
 
-static NEARDATA const char *burdentype[] = {
+static const char *burdentype[] = {
 	"unencumbered", "burdened", "stressed",
 	"strained", "overtaxed", "overloaded"
 };
 
-static NEARDATA const char *runmodes[] = {
+static const char *runmodes[] = {
 	"teleport", "run", "walk", "crawl"
 };
 
 #ifdef SORTLOOT
-static NEARDATA const char *sortltype[] = {
+static const char *sortltype[] = {
 	"none", "loot", "full"
 };
 #endif

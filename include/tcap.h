@@ -12,7 +12,7 @@
 #endif
 
 /* might display need graphics code? */
-#if !defined(AMIGA) && !defined(TOS) && !defined(MAC)
+#if !defined(TOS) && !defined(MAC)
 # if defined(TERMLIB) || defined(OS2) || defined(MSDOS)
 #  define ASCIIGRAPH
 # endif
@@ -50,7 +50,7 @@ extern short ospeed;		/* set up in termcap.c */
 # ifdef TOS
 extern const char *hilites[CLR_MAX];
 # else
-extern NEARDATA char *hilites[CLR_MAX];
+extern char *hilites[CLR_MAX];
 # endif
 #endif
 

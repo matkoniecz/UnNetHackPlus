@@ -242,14 +242,10 @@ int set, entry;
 
 #define TILE_FILE	"tile.c"
 
-#ifdef AMIGA
-# define SOURCE_TEMPLATE	"NH:src/%s"
+#ifdef MAC
+#  define SOURCE_TEMPLATE	":src:%s"
 #else
-# ifdef MAC
-#   define SOURCE_TEMPLATE	":src:%s"
-# else
-#   define SOURCE_TEMPLATE	"../src/%s"
-# endif
+#  define SOURCE_TEMPLATE	"../src/%s"
 #endif
 
 short tilemap[MAX_GLYPH];

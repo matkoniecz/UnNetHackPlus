@@ -537,7 +537,7 @@ moverock()
 
 	    {
 		/* note: reset to zero after save/restore cycle */
-		static NEARDATA long lastmovetime;
+		static long lastmovetime;
 		if (!u.usteed) {
 		  if (moves > lastmovetime+2 || moves < lastmovetime)
 		    pline("With %s effort you move %s.",
@@ -744,7 +744,7 @@ xchar ox, oy;
 }
 
 #ifdef SINKS
-static NEARDATA const char fell_on_sink[] = "fell onto a sink";
+static const char fell_on_sink[] = "fell onto a sink";
 
 STATIC_OVL void
 dosinkfall()

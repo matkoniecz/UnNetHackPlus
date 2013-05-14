@@ -55,7 +55,7 @@ struct amii_WinDesc {
     char *resp;			/* valid menu responses (for NHW_INVEN) */
     char *canresp;		/* cancel responses; 1st is the return value */
     char *morestr;		/* string to display instead of default */
-/* amiga stuff */
+/* amiga stuff (note: amiga port was removed) */
     struct Window *win;		/* Intuition window pointer */
 #ifdef	INTUI_NEW_LOOK
     struct ExtNewWindow *newwin;	/* NewWindow alloc'd */

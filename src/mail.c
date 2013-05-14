@@ -27,9 +27,7 @@
  *	- Make the daemon always appear at a stairwell, and have it find a
  *	  path to the hero.
  *
- * Note by Olaf Seibert: On the Amiga, we usually don't get mail.  So we go
- *			 through most of the effects at 'random' moments.
- * Note by Paul Winner:  The MSDOS port also 'fakes' the mail daemon at
+ * Note by Paul Winner:  The MSDOS port fakes the mail daemon at
  *			 random intervals.
  */
 
@@ -263,7 +261,7 @@ md_stop(stopp, startp)
 }
 
 /* Let the mail daemon have a larger vocabulary. */
-static NEARDATA const char *mail_text[] = {
+static const char *mail_text[] = {
     "Gangway!",
     "Look out!",
     "Pardon me!"
@@ -429,7 +427,7 @@ ckmailstatus()
 {
 	if (u.uswallow || !flags.biff) return;
 	if (mustgetmail < 0) {
-#if defined(AMIGA) || defined(MSDOS) || defined(TOS)
+#if defined(MSDOS) || defined(TOS)
 	    mustgetmail=(moves<2000)?(100+rn2(2000)):(2000+rn2(3000));
 #endif
 	    return;
@@ -450,10 +448,6 @@ struct obj *otmp;
     static char *junk[] = {
     "Please disregard previous letter.",
     "Welcome to UnNetHackPlus.",
-#ifdef AMIGA
-    "Only Amiga makes it possible.",
-    "CATS have all the answers.",
-#endif
     "Report bugs to <https://github.com/Bulwersator/UnNetHackPlus/issues>.",
     "Invitation: Visit the NetHack web site at http://www.nethack.org!"
     };

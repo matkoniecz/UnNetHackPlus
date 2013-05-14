@@ -59,8 +59,8 @@ extern int amii_numcolors;
 #include "quest.h"
 
 boolean restoring = FALSE;
-static NEARDATA struct fruit *oldfruit;
-static NEARDATA long omoves;
+static struct fruit *oldfruit;
+static long omoves;
 
 #define Is_IceBox(o) ((o)->otyp == ICE_BOX ? TRUE : FALSE)
 
@@ -573,9 +573,6 @@ xchar ltmp;
 		/* Remove levels and bones that may have been created.
 		 */
 		(void) close(nfd);
-# ifdef AMIGA
-		clearlocks();
-# else
 		eraseall(levels, alllevels);
 		eraseall(levels, allbones);
 
@@ -592,12 +589,9 @@ xchar ltmp;
 			(void) uptodate(fd, (char *)0);	/* skip version */
 			return dorecover(fd);	/* 0 or 1 */
 		} else {
-# endif
 			pline(get_goodbye_message());
 			terminate(EXIT_SUCCESS);
-# ifndef AMIGA
 		}
-# endif
 	}
 #endif
 	bufon(nfd);
@@ -1076,11 +1070,11 @@ boolean ghostly;
 #ifndef ZEROCOMP_BUFSIZ
 #define ZEROCOMP_BUFSIZ BUFSZ
 #endif
-static NEARDATA unsigned char inbuf[ZEROCOMP_BUFSIZ];
-static NEARDATA unsigned short inbufp = 0;
-static NEARDATA unsigned short inbufsz = 0;
-static NEARDATA short inrunlength = -1;
-static NEARDATA int mreadfd;
+static unsigned char inbuf[ZEROCOMP_BUFSIZ];
+static unsigned short inbufp = 0;
+static unsigned short inbufsz = 0;
+static short inrunlength = -1;
+static int mreadfd;
 
 static int
 mgetc()

@@ -103,7 +103,7 @@ const char *pref;
 static char *
 nextobuf()
 {
-	static char NEARDATA bufs[NUMOBUF][BUFSZ];
+	static char bufs[NUMOBUF][BUFSZ];
 	static int bufidx = 0;
 
 	bufidx = (bufidx + 1) % NUMOBUF;
@@ -1786,7 +1786,7 @@ STATIC_DCL const struct o_range o_ranges[];
 #else /* OVLB */
 
 /* wishable subranges of objects */
-STATIC_OVL NEARDATA const struct o_range o_ranges[] = {
+STATIC_OVL const struct o_range o_ranges[] = {
 	{ "bag",	TOOL_CLASS,   SACK,	      BAG_OF_TRICKS },
 	{ "lamp",	TOOL_CLASS,   OIL_LAMP,	      MAGIC_LAMP },
 	{ "candle",	TOOL_CLASS,   TALLOW_CANDLE,  WAX_CANDLE },

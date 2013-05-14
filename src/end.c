@@ -57,24 +57,20 @@ extern void FDECL(nethack_exit,(int));
 
 #define done_stopprint program_state.stopprint
 
-#ifdef AMIGA
-# define NH_abort()	Abort(0)
-#else
-# ifdef SYSV
+#ifdef SYSV
 # define NH_abort()	(void) abort()
+#else
+# ifdef WIN32
+#  define NH_abort()	win32_abort()
 # else
-#  ifdef WIN32
-# define NH_abort()	win32_abort()
-#  else
-# define NH_abort()	abort()
-#  endif
+#  define NH_abort()	abort()
 # endif
 #endif
 
 /*
  * The order of these needs to match the macros in hack.h.
  */
-static NEARDATA const char *deaths[] = {		/* the array of death */
+static const char *deaths[] = {		/* the array of death */
 	"died", "choked", "poisoned", "starvation", "drowning",
 	"burning", "dissolving under the heat and pressure",
 	"crushed", "turned to stone", "turned into slime",
@@ -86,7 +82,7 @@ static NEARDATA const char *deaths[] = {		/* the array of death */
 #endif
 };
 
-static NEARDATA const char *ends[] = {		/* "when you..." */
+static const char *ends[] = {		/* "when you..." */
 	"died", "choked", "were poisoned", "starved", "drowned",
 	"burned", "dissolved in the lava",
 	"were crushed", "turned to stone", "turned into slime",

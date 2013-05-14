@@ -30,7 +30,7 @@ nethack.txt     recover.6       recover.txt     tmac.n          window.doc
 
 include:
 (files for all versions)
-align.h         amiconf.h       artifact.h      artilist.h      attrib.h
+align.h         artifact.h      artilist.h      attrib.h
 beconf.h        color.h         config.h        config1.h       coord.h
 decl.h          def_os2.h       dgn_file.h      display.h       dlb.h
 dungeon.h       edog.h          emin.h          engrave.h       epri.h
@@ -83,17 +83,6 @@ version.c       vision.c        weapon.c        were.c          wield.c
 windows.c       wizard.c        worm.c          worn.c          write.c
 zap.c
 
-sys/amiga:
-(files for Amiga versions)
-Build.ami       Install.ami     Makefile.agc    Makefile.ami    NetHack.cnf
-amidos.c        amidos.p        amifont.uu      amifont8.uu     amigst.c
-amii.hlp        amimenu.c       amirip.c        amisnd.c        amistack.c
-amitty.c        amiwind.c       amiwind.p       clipwin.c       colorwin.c
-cvtsnd.c        grave16.xpm     ifchange        mkdmake         txt2iff.c
-winami.c        winami.p        winchar.c       windefs.h       winext.h
-winfuncs.c      winkey.c        winmenu.c       winproto.h      winreq.c
-winstr.c        xpm2iff.c
-
 sys/atari:
 (files for Atari version)
 Install.tos     atarifnt.uue    nethack.mnu     setup.g         tos.c
@@ -128,7 +117,7 @@ Install.os2     Makefile.os2    nhpmico.uu      os2.c
 sys/share:
 (files for MSDOS and OS/2 versions)
 Makefile.lib    termcap.uu
-(file for MSDOS, OS/2, NT, Amiga, and Atari versions)
+(file for MSDOS, OS/2, NT, and Atari versions)
 pcmain.c
 (files for MSDOS, OS/2, NT, and Atari versions)
 pcsys.c         pcunix.c
@@ -151,7 +140,7 @@ dgn_comp.h      dgn_lex.c       dgn_yacc.c      lev_comp.h      lev_lex.c
 lev_yacc.c
 
 sys/share/sounds:
-(files for Amiga and Macintosh versions)
+(files for Macintosh version)
 README          bell.uu         bugle.uu        erthdrum.uu     firehorn.uu
 frsthorn.uu     lethdrum.uu     mgcflute.uu     mgcharp.uu      toolhorn.uu
 wdnflute.uu     wdnharp.uu

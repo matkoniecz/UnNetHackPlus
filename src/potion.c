@@ -7,8 +7,8 @@
 #ifdef OVLB
 boolean notonhead = FALSE;
 
-static NEARDATA int nothing, unkn;
-static NEARDATA const char beverages[] = { POTION_CLASS, 0 };
+static int nothing, unkn;
+static const char beverages[] = { POTION_CLASS, 0 };
 
 STATIC_DCL long FDECL(itimeout, (long));
 STATIC_DCL long FDECL(itimeout_incr, (long,int));

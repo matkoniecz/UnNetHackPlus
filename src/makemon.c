@@ -8,7 +8,7 @@
 #include "edog.h"
 #include <ctype.h>
 
-STATIC_VAR NEARDATA struct monst zeromonst;
+STATIC_VAR struct monst zeromonst;
 
 /* this assumes that a human quest leader or nemesis is an archetype
    of the corresponding role; that isn't so for some roles (tourist
@@ -1221,8 +1221,8 @@ STATIC_OVL int
 align_shift(ptr)
 struct permonst *ptr;
 {
-    static NEARDATA long oldmoves = 0L;	/* != 1, starting value of moves */
-    static NEARDATA s_level *lev;
+    static long oldmoves = 0L;	/* != 1, starting value of moves */
+    static s_level *lev;
     int alshift;
 
     if(oldmoves != moves) {
@@ -1294,7 +1294,7 @@ struct mon_gen_override *override;
     return NULL;
 }
 
-static NEARDATA struct {
+static struct {
 	int choice_count;
 	char mchoices[SPECIAL_PM];	/* value range is 0..127 */
 } rndmonst_state = { -1, {0} };
@@ -1768,7 +1768,7 @@ struct monst *mtmp;
 #endif /* OVL1 */
 #ifdef OVLB
 
-static NEARDATA char syms[] = {
+static char syms[] = {
 	MAXOCLASSES, MAXOCLASSES+1, RING_CLASS, WAND_CLASS, WEAPON_CLASS,
 	FOOD_CLASS, COIN_CLASS, SCROLL_CLASS, POTION_CLASS, ARMOR_CLASS,
 	AMULET_CLASS, TOOL_CLASS, ROCK_CLASS, GEM_CLASS, SPBOOK_CLASS,

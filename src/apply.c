@@ -40,10 +40,6 @@ STATIC_DCL boolean FDECL(figurine_location_checks,
 STATIC_DCL boolean NDECL(uhave_graystone);
 STATIC_DCL void FDECL(add_class, (char *, char));
 
-#ifdef	AMIGA
-void FDECL( amii_speaker, ( struct obj *, char *, int ) );
-#endif
-
 static const char no_elbow_room[] = "don't have enough elbow-room to maneuver.";
 
 STATIC_OVL int
@@ -773,9 +769,6 @@ struct obj **optr;
 	You("ring %s.", the(xname(obj)));
 
 	if (Underwater || (u.uswallow && ordinary)) {
-#ifdef	AMIGA
-	    amii_speaker( obj, "AhDhGqEqDhEhAqDqFhGw", AMII_MUFFLED_VOLUME );
-#endif
 	    pline("But the sound is muffled.");
 
 	} else if (invoking && ordinary) {
@@ -784,9 +777,6 @@ struct obj **optr;
 	    learno = TRUE;	/* help player figure out why */
 
 	} else if (ordinary) {
-#ifdef	AMIGA
-	    amii_speaker( obj, "ahdhgqeqdhehaqdqfhgw", AMII_MUFFLED_VOLUME );
-#endif
 	    if (obj->cursed && !rn2(4) &&
 		    /* note: once any of them are gone, we stop all of them */
 		    !(mvitals[PM_WOOD_NYMPH].mvflags & G_GONE) &&
@@ -834,9 +824,6 @@ struct obj **optr;
 	    } else  if (invoking) {
 		pline("%s an unsettling shrill sound...",
 		      Tobjnam(obj, "issue"));
-#ifdef	AMIGA
-		amii_speaker( obj, "aefeaefeaefeaefeaefe", AMII_LOUDER_VOLUME );
-#endif
 		obj->age = moves;
 		learno = TRUE;
 		wakem = TRUE;
@@ -844,9 +831,6 @@ struct obj **optr;
 	    } else if (obj->blessed) {
 		int res = 0;
 
-#ifdef	AMIGA
-		amii_speaker( obj, "ahahahDhEhCw", AMII_SOFT_VOLUME );
-#endif
 		if (uchain) {
 		    unpunish();
 		    res = 1;
@@ -861,9 +845,6 @@ struct obj **optr;
 		}
 
 	    } else {  /* uncursed */
-#ifdef	AMIGA
-		amii_speaker( obj, "AeFeaeFeAefegw", AMII_OKAY_VOLUME );
-#endif
 		if (findit() != 0) learno = TRUE;
 		else pline(nothing_happens);
 	    }
@@ -1187,7 +1168,7 @@ light_cocktail(obj)
 	    begin_burn(obj, FALSE);
 }
 
-static NEARDATA const char cuddly[] = { TOOL_CLASS, GEM_CLASS, 0 };
+static const char cuddly[] = { TOOL_CLASS, GEM_CLASS, 0 };
 
 int
 dorub()
@@ -1776,8 +1757,8 @@ struct obj **optr;
 	*optr = 0;
 }
 
-static NEARDATA const char lubricables[] = { ALL_CLASSES, ALLOW_NONE, 0 };
-static NEARDATA const char need_to_remove_outer_armor[] =
+static const char lubricables[] = { ALL_CLASSES, ALLOW_NONE, 0 };
+static const char need_to_remove_outer_armor[] =
 			"need to remove your %s to grease your %s.";
 
 STATIC_OVL void

@@ -67,8 +67,8 @@ extern int min_rx, max_rx, min_ry, max_ry; /* from mkmap.c */
 
 char SpLev_Map[COLNO][ROWNO];
 static aligntyp	ralign[3] = { AM_CHAOTIC, AM_NEUTRAL, AM_LAWFUL };
-static NEARDATA xchar xstart, ystart;
-static NEARDATA char xsize, ysize;
+static xchar xstart, ystart;
+static char xsize, ysize;
 
 STATIC_DCL void FDECL(set_wall_property, (xchar,xchar,xchar,xchar,int));
 STATIC_DCL int NDECL(rnddoor);

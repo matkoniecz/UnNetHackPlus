@@ -19,7 +19,7 @@ STATIC_DCL const char *breathwep[];
 /*
  * Keep consistent with breath weapons in zap.c, and AD_* in monattk.h.
  */
-STATIC_OVL NEARDATA const char *breathwep[] = {
+STATIC_OVL const char *breathwep[] = {
 				"fragments",
 				"fire",
 				"frost",
