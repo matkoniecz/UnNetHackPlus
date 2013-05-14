@@ -43,7 +43,7 @@
 		- More t-shirt messages (from NAO and original ones)
 		- Names for player statues on Medusa level are now based on list of people petrified by Medusa on public servers instead of top ten local players.
 		- Kobolds vs elves grudge added
-		- Wands and Gain Ability 0.1 by Grunt
+		- Dipping a wand of nothing into a potion of gain ability polymorphs the wand (Wands and Gain Ability 0.1 by Grunt)
 		- Trees planted on: quest levels of wizard and samurai, nymph level
 		- Tree Cutting v1.0 by Michael Lehotay
 	* Starting equipment changes
@@ -115,6 +115,8 @@
 	* Better code (removal of useless #ifdefs for defines TOURIST, STEED etc, removal of pointless code like this related to SHELL, DUMB, STUPID defines, refactoring)
 	* Spellbook delivery is now more reliable in the Endgame (from GruntHack)
 	* Healing potions may fix wounded legs
+	* Player can wish for up to 100 projectiles
+	* Land mines and beartraps weigh less
 	Full list of changes available at https://github.com/Bulwersator/UnNetHackPlus/commits/master
 
 2012-04-01  UnNetHack 4.0.0
