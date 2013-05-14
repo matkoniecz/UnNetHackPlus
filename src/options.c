@@ -83,11 +83,7 @@ static struct Bool_Opt
 #else
 	{"extmenu", (boolean *)0, FALSE, SET_IN_FILE},
 #endif
-#ifdef OPT_DISPMAP
-	{"fast_map", &flags.fast_map, TRUE, SET_IN_GAME},
-#else
-	{"fast_map", (boolean *)0, TRUE, SET_IN_FILE},
-#endif
+	{"fast_map", (boolean *)0, TRUE, SET_IN_FILE}, /* OBSOLETE after removal of OPT_DISPMAP define */
 	{"female", &flags.female, FALSE, DISP_IN_GAME},
 	{"fixinv", &flags.invlet_constant, TRUE, SET_IN_GAME},
 #ifdef AMIFLUSH

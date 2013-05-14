@@ -37,9 +37,6 @@ struct flag {
 	boolean  end_own;	/* list all own scores */
 	boolean  explore;	/* in exploration mode */
 	boolean  tutorial;      /* in tutorial mode */
-#ifdef OPT_DISPMAP
-	boolean  fast_map;	/* use optimized, less flexible map display */
-#endif
 #define discover flags.explore
 	boolean  female;
 	boolean  forcefight;
