@@ -54,7 +54,7 @@ typedef unsigned int	size_t;
 #if defined(ULTRIX) || defined(VMS)
 # define off_t long
 #endif
-#if defined(AZTEC) || defined(THINKC4) || defined(__TURBOC__)
+#if defined(THINKC4) || defined(__TURBOC__)
 typedef long	off_t;
 #endif
 
@@ -145,7 +145,7 @@ E void FDECL(qsort, (genericptr_t,size_t,size_t,
 # if defined(BSD) || defined(ULTRIX)
 E  int qsort();
 # else
-#  if !defined(LATTICE) && !defined(AZTEC_50)
+#  if !defined(LATTICE)
 E   void FDECL(qsort, (genericptr_t,size_t,size_t,
 		       int(*)(const genericptr,const genericptr)));
 #  endif
@@ -154,7 +154,7 @@ E   void FDECL(qsort, (genericptr_t,size_t,size_t,
 #endif /* NeXT */
 
 #ifndef __SASC_60
-#if !defined(AZTEC_50) && !defined(__GNUC__)
+#if !defined(__GNUC__)
 /* may already be defined */
 
 # ifdef ULTRIX
@@ -193,7 +193,7 @@ E int FDECL(unlink, (const char *));
 #  endif
 # endif
 
-#endif /* AZTEC_50 && __GNUC__ */
+#endif /* __GNUC__ */
 
 #ifdef MAC
 #ifndef __CONDITIONALMACROS__	/* universal headers */
@@ -334,7 +334,7 @@ E int FDECL(memcmp, (const void *,const void *,size_t));
 E void *FDECL(memcpy, (void *,const void *,size_t));
 E void *FDECL(memset, (void *,int,size_t));
 # else
-#  if defined(AZTEC_50) || defined(NHSTDC) || defined(WIN32)
+#  if defined(NHSTDC) || defined(WIN32)
 E int  FDECL(memcmp, (const void *, const void *, size_t));
 E void *FDECL(memcpy, (void *, const void *, size_t));
 E void *FDECL(memset, (void *, int, size_t));
@@ -342,7 +342,7 @@ E void *FDECL(memset, (void *, int, size_t));
 E int FDECL(memcmp, (char *,char *,unsigned int));
 E char *FDECL(memcpy, (char *,char *,unsigned int));
 E char *FDECL(memset, (char*,int,int));
-#  endif /* AZTEC_50 || NHSTDC */
+#  endif /* NHSTDC || WIN32 */
 # endif /* TOS */
 #endif /* MICRO */
 
@@ -453,7 +453,7 @@ E char	*FDECL(rindex, (const char *,int));
 #if (defined(SUNOS4) && defined(__STDC__)) || defined(_AIX32)
 #define SPRINTF_PROTO
 #endif
-#if defined(TOS) || defined(AZTEC_50) || defined(__sgi) || defined(__GNUC__)
+#if defined(TOS) || defined(__sgi) || defined(__GNUC__)
 	/* problem with prototype mismatches */
 #define SPRINTF_PROTO
 #endif

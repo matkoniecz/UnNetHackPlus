@@ -6,7 +6,7 @@
 
 #include "config.h"
 #include "dlb.h"
-#if !defined(O_WRONLY) && !defined(MAC) && !defined(AZTEC_C)
+#if !defined(O_WRONLY) && !defined(MAC)
 #include <fcntl.h>
 #endif
 #if defined(__DJGPP__)
