@@ -297,16 +297,6 @@ typedef long glyph_t;
 /* #define STRNCMPI */	/* compiler/library has the strncmpi function */
 
 /*
- * There are various choices for the NetHack vision system.  There is a
- * choice of two algorithms with the same behavior.  Defining VISION_TABLES
- * creates huge (60K) tables at compile time, drastically increasing data
- * size, but runs slightly faster than the alternate algorithm.  (MSDOS in
- * particular cannot tolerate the increase in data size; other systems can
- * flip a coin weighted to local conditions.)
- */
-/* #define VISION_TABLES */ /* use vision tables generated at compile time */
-
-/*
  * Section 4:  THE FUN STUFF!!!
  *
  * Conditional compilation of special options are controlled here.
