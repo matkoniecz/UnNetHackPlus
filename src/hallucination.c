@@ -836,6 +836,51 @@ get_bogus_sound()
 	return bogus_sounds[rn2(SIZE(bogus_sounds))];
 }
 
+static const char* bogus_god_names[] = {
+	"Svetovid", /* Slavic deity */
+	"Radegast", /* Slavic deity */
+	"Kupala", /* Slavic deity */
+	"Dziewanna", /* Slavic deity (unclear status, maybe made up by Jan Długosz) */
+	"Weles", /* Slavic deity */
+	"Żywie", /* Slavic deity */
+	"Zeus", /* Greek mythology */
+	"Aphrodite", /* Greek mythology */
+	"Ares", /* Greek mythology */
+	"Atropos", /* Greek mythology */
+	"Eris", /* Greek mythology */
+	"Helios", /* Greek mythology */
+	"the Invisible Pink Unicorn",
+	"the Flying Spaghetti Monster", /* Church of the FSM */
+	"the Martians", /* every science fiction ever */
+	"Xom", /* Crawl */
+	"AnDoR dRaKoN", /* ADOM */
+	"the Central Bank of Yendor", /* economics */
+	"Tooth Fairy", /* real world(?) */
+	"Om", /* Discworld */
+	"Yawgmoth", /* Magic: the Gathering */
+	"Morgoth", /* Silmarilion */
+	"Ulmo", /* Silmarilion */
+	"Mandos", /* Silmarilion */
+	"Tulkas", /* Silmarilion */
+	"Yavanna", /* Silmarilion */
+	"Varda", /* Silmarilion */
+	"Cthulhu", /* Lovecraft */
+	"the Ori", /* Stargate */
+	"destiny", /* why not? */
+	"the Doctor", /* Doctor Who */
+	"Aslan", /* Narnia */
+	"Tash", /* Narnia */
+	"Emperor of Mankind", /* Warhammer 40K */
+	"Nurgle", /* Warhammer 40K */
+	"Slaanesh", /* Warhammer 40K */
+	"Armok", /* Dwarf Fortress */
+	"the Iron General", /* Jacek Dukaj */
+	"the RNG",
+	"the gnome with the wand of death",
+	"bhaak",
+	"Bulwersator",
+};
+
 /* select a random god based on role if provided */
 const char *
 get_bogus_god_name(int role)
@@ -843,15 +888,18 @@ get_bogus_god_name(int role)
 	const char *gnam;
 	int which;
 
-	/* select random role if valid role supplied */
+	/* select random role if valid role not supplied */
 	which = (validrole(role)) ? role : randrole();
-	switch (rn2(3)) {
+	int choice = rn2(12);
+	switch (choice) {
 		case 0:	gnam = roles[which].lgod; break;
 		case 1:	gnam = roles[which].ngod; break;
 		case 2:	gnam = roles[which].cgod; break;
-		default:	gnam = 0; break;
+		case 3:	gnam = "Moloch"; break;
+		default:	gnam = bogus_god_names[rn2(SIZE(bogus_god_names))]; break;
 	}
 	if (!gnam) {
+		//for example priests have no predefined names in roles array
 		gnam = "Moloch";
 	}
 	if (*gnam == '_') {
