@@ -902,7 +902,7 @@ get_bogus_god_name(int role)
 		//for example priests have no predefined names in roles array
 		gnam = "Moloch";
 	}
-	if (*gnam == '_') {
+	if (*gnam == '_') { /* God names use a leading underscore to flag goddesses, see role.c */
 		++gnam;
 	}
 	return gnam;
