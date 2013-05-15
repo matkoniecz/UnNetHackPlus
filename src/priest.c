@@ -275,7 +275,7 @@ char *pname;		/* caller-supplied output buffer */
 		/* Astral Call bugfix */
 		if (mon->data == &mons[PM_HIGH_PRIEST] && !Hallucination &&
 		            Is_astralevel(&u.uz) && distu(mon->mx, mon->my) > 2) {
-			Strcat(pname, rnd_gname(str2role((char*)urole.name.m)));
+			Strcat(pname, get_bogus_god_name(str2role((char*)urole.name.m)));
 			Strcat(pname, "?");
 		} else {
 		Strcat(pname, halu_gname((int)EPRI(mon)->shralign));

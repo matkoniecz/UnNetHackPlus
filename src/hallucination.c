@@ -822,16 +822,40 @@ get_bogus_color_name()
 }
 
 static const char * const bogus_sounds[] = {
-    "beep", "boing", "sing", "belche", "creak", "cough", "rattle",
-    "ululate", "pop", "jingle", "sniffle", "tinkle", "eep",
-    "clatter", "hum", "sizzle", "twitter", "wheeze", "rustle",
-    "honk", "lisp", "yodel", "coo", "burp", "moo", "boom",
-    "murmur", "oink", "quack", "rumble", "twang", "bellow",
-    "toot", "gargle", "hoot", "warble"
+	"beep", "boing", "sing", "belche", "creak", "cough", "rattle",
+	"ululate", "pop", "jingle", "sniffle", "tinkle", "eep",
+	"clatter", "hum", "sizzle", "twitter", "wheeze", "rustle",
+	"honk", "lisp", "yodel", "coo", "burp", "moo", "boom",
+	"murmur", "oink", "quack", "rumble", "twang", "bellow",
+	"toot", "gargle", "hoot", "warble"
 };
 
 const char *
 get_bogus_sound()
 {
 	return bogus_sounds[rn2(SIZE(bogus_sounds))];
+}
+
+/* select a random god based on role if provided */
+const char *
+get_bogus_god_name(int role)
+{
+	const char *gnam;
+	int which;
+
+	/* select random role if valid role supplied */
+	which = (validrole(role)) ? role : randrole();
+	switch (rn2(3)) {
+		case 0:	gnam = roles[which].lgod; break;
+		case 1:	gnam = roles[which].ngod; break;
+		case 2:	gnam = roles[which].cgod; break;
+		default:	gnam = 0; break;
+	}
+	if (!gnam) {
+		gnam = "Moloch";
+	}
+	if (*gnam == '_') {
+		++gnam;
+	}
+	return gnam;
 }

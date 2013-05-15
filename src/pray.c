@@ -43,7 +43,6 @@ STATIC_DCL boolean FDECL(blocked_boulder,(int,int));
  *	responsible for the theft of the Amulet from Marduk, the Creator.
  *	Moloch is unaligned.
  */
-static const char	*Moloch = "Moloch";
 
 static const char *godvoices[] = {
     "booms out",
@@ -2041,7 +2040,7 @@ aligntyp alignment;
     const char *gnam;
 
     switch (alignment) {
-     case A_NONE:	gnam = Moloch; break;
+     case A_NONE:	gnam = "Moloch"; break;
      case A_LAWFUL:	gnam = urole.lgod; break;
      case A_NEUTRAL:	gnam = urole.ngod; break;
      case A_CHAOTIC:	gnam = urole.cgod; break;
@@ -2060,28 +2059,7 @@ aligntyp alignment;
 {
     if (!Hallucination) return align_gname(alignment);
 
-    return rnd_gname(ROLE_RANDOM);
-}
-
-/* select a random god based on role if provided */
-const char *
-rnd_gname(role)
-int role;
-{
-    const char *gnam;
-    int which;
-
-    /* select random role if valid role supplied */
-    which = (validrole(role)) ? role : randrole();
-    switch (rn2(3)) {
-     case 0:	gnam = roles[which].lgod; break;
-     case 1:	gnam = roles[which].ngod; break;
-     case 2:	gnam = roles[which].cgod; break;
-     default:	gnam = 0; break;		/* lint suppression */
-    }
-    if (!gnam) gnam = Moloch;
-    if (*gnam == '_') ++gnam;
-    return gnam;
+    return get_bogus_god_name(ROLE_RANDOM);
 }
 
 /* deity's title */

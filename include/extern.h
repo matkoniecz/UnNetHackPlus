@@ -829,6 +829,7 @@ E const char *NDECL(get_bogus_class_name);
 E const char *NDECL(get_bogus_bottle_name);
 E const char *NDECL(get_bogus_color_name);
 E const char *NDECL(get_bogus_sound);
+E const char *FDECL(get_bogus_god_name, (int));
 
 /* ### invent.c ### */
 
@@ -1695,7 +1696,6 @@ E const char *NDECL(a_gname);
 E const char *FDECL(a_gname_at, (xchar x,xchar y));
 E const char *FDECL(align_gname, (aligntyp));
 E const char *FDECL(halu_gname, (aligntyp));
-E const char *FDECL(rnd_gname, (int));
 E const char *FDECL(align_gtitle, (aligntyp));
 E void FDECL(altar_wrath, (int,int));
 #ifdef ASTRAL_ESCAPE
