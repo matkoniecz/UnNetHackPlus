@@ -1124,7 +1124,7 @@ struct obj *
 mk_player_statue_on_Medusa_island(int x, int y)
 {
 
-	return mk_named_object(STATUE, &mons[get_random_role()], x, y, get_player_name_petrified_by_Medusa_on_public_server());
+	return mk_named_object(STATUE, &mons[get_random_player_monster()], x, y, get_player_name_petrified_by_Medusa_on_public_server());
 }
 
 struct obj *

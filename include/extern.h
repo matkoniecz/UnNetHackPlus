@@ -1316,7 +1316,7 @@ E void NDECL(monstr_init);
 E const char *FDECL(elf_name, (size_t));
 E struct monst *FDECL(mk_mplayer, (struct permonst *,xchar,
 				   xchar,boolean));
-E int NDECL(get_random_role);
+E int NDECL(get_random_player_monster);
 E void FDECL(create_mplayers, (int,boolean));
 E int FDECL(hostile_mplayer_talk, (struct monst *));
 

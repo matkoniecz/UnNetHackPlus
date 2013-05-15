@@ -321,7 +321,7 @@ boolean special;
 }
 
 int
-get_random_role()
+get_random_player_monster()
 {
 	return PM_ARCHEOLOGIST + rn2(PM_WIZARD - PM_ARCHEOLOGIST + 1);
 }
@@ -345,7 +345,7 @@ boolean special;
 		int tryct = 0;
 
 		/* roll for character class */
-		pm = get_random_role();
+		pm = get_random_player_monster();
 		fakemon.data = &mons[pm];
 
 		/* roll for an available location */
