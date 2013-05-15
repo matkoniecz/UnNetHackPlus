@@ -25,7 +25,6 @@ static const char * const bogus_monsters[] = {
 	"creeping coins",			/* Wizardry */
 	"hydra", "siren",			/* Greek legend */
 	"killer bunny",				/* Monty Python */
-	"rodent of unusual size",		/* The Princess Bride */
 	"Smokey the bear",			/* "Only you can prevent forest fires!" */
 	"Luggage",				/* Discworld */
 	"Ent",					/* Lord of the Rings */
