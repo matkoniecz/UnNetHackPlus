@@ -550,66 +550,70 @@ boolean allowmsg;
 }
 
 STATIC_OVL void
-cprefx(pm)
-int pm;
+cprefx(int pm)
 {
-	(void) maybe_cannibal(pm,TRUE);
+	maybe_cannibal(pm,TRUE);
 	if (touch_petrifies(&mons[pm]) || pm == PM_MEDUSA) {
-	    if (!Stone_resistance && !polymorph_player_instead_stoning()) {
-		Sprintf(killer_buf, "tasting %s meat", mons[pm].mname);
-		killer_format = KILLED_BY;
-		killer = killer_buf;
-		You("turn to stone.");
-		done(STONING);
-		if (victual.piece)
-		    victual.eating = FALSE;
-		return; /* lifesaved */
-	    }
+		if (!Stone_resistance && !polymorph_player_instead_stoning()) {
+			Sprintf(killer_buf, "tasting %s meat", mons[pm].mname);
+			killer_format = KILLED_BY;
+			killer = killer_buf;
+			You("turn to stone.");
+			done(STONING);
+			if (victual.piece) {
+				victual.eating = FALSE;
+			}
+			return; /* lifesaved */
+		}
 	}
 
 	switch(pm) {
-	    case PM_LITTLE_DOG:
-	    case PM_DOG:
-	    case PM_LARGE_DOG:
-	    case PM_KITTEN:
-	    case PM_HOUSECAT:
-	    case PM_LARGE_CAT:
+		case PM_LITTLE_DOG:
+		case PM_DOG:
+		case PM_LARGE_DOG:
+		case PM_KITTEN:
+		case PM_HOUSECAT:
+		case PM_LARGE_CAT:
 		if (!CANNIBAL_ALLOWED()) {
-		    You_feel("that eating the %s was a bad idea.", mons[pm].mname);
-		    HAggravate_monster |= FROMOUTSIDE;
+			You_feel("that eating the %s was a bad idea.", mons[pm].mname);
+			HAggravate_monster |= FROMOUTSIDE;
 		}
 		break;
-	    case PM_LIZARD:
-		if (Stoned) fix_petrification();
-		break;
-	    case PM_DEATH:
-	    case PM_PESTILENCE:
-	    case PM_FAMINE:
-		{ char buf[BUFSZ];
-		    pline("Eating that is instantly fatal.");
-		    Sprintf(buf, "unwisely ate the body of %s",
-			    mons[pm].mname);
-		    killer = buf;
-		    killer_format = NO_KILLER_PREFIX;
-		    done(DIED);
-		    /* It so happens that since we know these monsters */
-		    /* cannot appear in tins, victual.piece will always */
-		    /* be what we want, which is not generally true. */
-		    if (revive_corpse(victual.piece))
-			victual.piece = (struct obj *)0;
-		    return;
+		case PM_LIZARD:
+			if (Stoned) fix_petrification();
+			break;
+		case PM_DEATH:
+		case PM_PESTILENCE:
+		case PM_FAMINE:
+		{
+			char buf[BUFSZ];
+			pline("Eating that is instantly fatal.");
+			Sprintf(buf, "unwisely ate the body of %s", mons[pm].mname);
+			killer = buf;
+			killer_format = NO_KILLER_PREFIX;
+			done(DIED);
+			/* It so happens that since we know these monsters */
+			/* cannot appear in tins, victual.piece will always */
+			/* be what we want, which is not generally true. */
+			if (revive_corpse(victual.piece)) {
+				victual.piece = (struct obj *)0;
+			}
+			return;
 		}
-	    case PM_GREEN_SLIME:
-		if (is_player_slimeable()) {
-		    You("don't feel very well.");
-		    Slimed = 10L;
-		    flags.botl = 1;
+		case PM_GREEN_SLIME:
+			if (is_player_slimeable()) {
+				You("don't feel very well.");
+				Slimed = 10L;
+				flags.botl = 1;
+			}
+			/* Fall through */
+		default:
+		{
+			if (acidic(&mons[pm]) && Stoned) {
+				fix_petrification();
+			}
+			break;
 		}
-		/* Fall through */
-	    default:
-		if (acidic(&mons[pm]) && Stoned)
-		    fix_petrification();
-		break;
 	}
 }
 
