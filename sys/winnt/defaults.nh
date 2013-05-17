@@ -204,6 +204,7 @@ MSGTYPE=stop "The bullwhip wraps around * you're wielding!"
 #MONSTERCOLOR=cthulhu:magenta
 #MONSTERCOLOR=arch-lich:magenta
 #MONSTERCOLOR=giant beetle:black
+#MONSTERCOLOR=cobra:blue
 
 # Prevent alert notification messages about feature changes in a
 # (Un)NetHack version and the previous versions
