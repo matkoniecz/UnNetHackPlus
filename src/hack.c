@@ -1301,6 +1301,39 @@ interesting_to_explore(x,y) {
 	return TRUE;
 }
 
+boolean
+ask_about_trap(int x, int y)
+{
+	if(!iflags.paranoid_trap) {
+		return FALSE;
+	}
+
+	struct trap *traphere = t_at(x, y);
+	if(traphere && traphere->tseen) {
+		if (traphere->ttyp == MAGIC_PORTAL) {
+			return FALSE;
+		}
+		if (Levitation || Flying) {
+			if (!In_sokoban(&u.uz) && traphere->ttyp == PIT) {
+				return FALSE;
+			}
+			if (!In_sokoban(&u.uz) && traphere->ttyp == SPIKED_PIT) {
+				return FALSE;
+			}
+			if (!In_sokoban(&u.uz) && traphere->ttyp == HOLE) {
+				return FALSE;
+			}
+			if (traphere->ttyp == BEAR_TRAP) {
+				return FALSE;
+			}
+			if (traphere->ttyp == SQKY_BOARD) {
+				return FALSE;
+			}
+		}
+		return TRUE;
+	}
+	return FALSE;
+}
 void
 domove()
 {
@@ -1737,9 +1770,9 @@ domove()
 	}
 
 	/* warn player before walking into known traps */
-	if (iflags.paranoid_trap &&
-			((trap = t_at(x, y)) && trap->tseen)) {
+	if (ask_about_trap(x, y)) {
 		char qbuf[BUFSZ];
+		trap = t_at(x, y);
 		Sprintf(qbuf,"Do you really want to %s into that %s?", 
 				locomotion(youmonst.data, "step"),
 				defsyms[trap_to_defsym(trap->ttyp)].explanation);
