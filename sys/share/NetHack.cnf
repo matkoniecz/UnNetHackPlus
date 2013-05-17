@@ -1,4 +1,4 @@
-#
+# Sample config file for UnNetHackPlus
 # A '#' at the beginning of a line means the rest of the line is a comment.
 #
 # Some options MUST be set in this file, other options can be toggled while
@@ -235,12 +235,11 @@ OPTIONS=notime,noshowexp,number_pad:2
 # *** LOCATIONS ***
 # Some platforms allow you to change the location where various things are kept.
 # IMPORTANT: If you change any of these locations, the directories they
-# point at must exist.  NetHack will not create them for you.
+# point at must exist. UnNetHackPlus will not create them for you.
 #
 # The default location for everything.
 # Note: On Windows HACKDIR defaults to the location 
-#       of the NetHack.exe or NetHackw.exe file so
-#       setting HACKDIR below to override that is 
+#       of the executable so setting HACKDIR below to override that is 
 #       not usually necessary or recommended.
 #HACKDIR=c:\games\nethack
 #
