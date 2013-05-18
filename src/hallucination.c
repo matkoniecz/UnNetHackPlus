@@ -271,8 +271,10 @@ static const char * const bogus_monsters[] = {
 	"Somebody Else's Problem",   /* Douglas Adams */
 	"Armok",                     /* Dwarf Fortress */
 	"Dwarf-Eating Carp",         /* Dwarf Fortress */
-	"werecapybara",              /* Dwarf Fortress */
 	"Urist McDwarf",             /* Dwarf Fortress */
+	"werecapybara",              /* Dwarf Fortress */
+	"werecthulhu",
+	"weresomething",
 	"Evil Otto",                 /* Berzerk - via GruntHack */
 	"P'lod",                     /* Weekly World News */
 	"mortgage golem", 
