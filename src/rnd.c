@@ -24,7 +24,7 @@ rn2(x)		/**< 0 <= rn2(x) < x */
 int x;
 {
 	if (x <= 0) {
-		warning("rn2(%d) attempted", x);
+		//warning("rn2(%d) attempted", x);
 		return(0);
 	}
 	x = RND(x);
