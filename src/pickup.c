@@ -24,8 +24,7 @@ STATIC_DCL boolean FDECL(allow_cat_no_uchain, (struct obj *));
 #endif
 STATIC_DCL int FDECL(autopick, (struct obj*, int, menu_item **));
 STATIC_DCL int FDECL(count_categories, (struct obj *,int));
-STATIC_DCL long FDECL(carry_count,
-		      (struct obj *,struct obj *,long,boolean,int *,int *));
+STATIC_DCL long FDECL(carry_count, (struct obj *,struct obj *,long,boolean,int *,int *));
 STATIC_DCL int FDECL(lift_object, (struct obj *,struct obj *,long *,boolean));
 STATIC_DCL boolean FDECL(mbag_explodes, (struct obj *,int));
 STATIC_PTR int FDECL(in_container,(struct obj *));
