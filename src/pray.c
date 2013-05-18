@@ -1746,6 +1746,7 @@ dosacrifice()
 			godvoice(altaralign, "So, mortal!  You dare desecrate my High Temple!");
 			/* Throw everything we have at the player */
 			god_zaps_you(altaralign);
+			return 1;
 		}
 		if(corpse_used){
 			return (1);
