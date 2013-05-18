@@ -2207,16 +2207,18 @@ int held;
 	    otmp = curr->nobj;
 	    if (Is_mbag(obj) && obj->cursed && !rn2(13)) {
 		obj_extract_self(curr);
+		obj->owt = weight(obj);
 		loss += mbag_item_gone(held, curr);
+		bot();
 		used = 1;
 	    } else {
 		cnt++;
 	    }
 	}
+	encumber_msg();
 
 	if (loss)	/* magic bag lost some shop goods */
 	    You("owe %ld %s for lost merchandise.", loss, currency(loss));
-	obj->owt = weight(obj);	/* in case any items were lost */
 
 	if (!cnt)
 	    Sprintf(emptymsg, "%s is %sempty.", Yname2(obj),
@@ -2245,7 +2247,7 @@ int held;
 		    if (!cnt) Sprintf(menuprompt, "%s ", emptymsg);
 		    Strcat(menuprompt, "Do what?");
 		    t = in_or_out_menu(menuprompt, current_container, outokay, inokay);
-		    if (t <= 0) return 0;
+		    if (t <= 0) return used;
 		    loot_out = (t & 0x01) != 0;
 		    loot_in  = (t & 0x02) != 0;
 		} else {	/* MENU_COMBINATION or MENU_PARTIAL */
