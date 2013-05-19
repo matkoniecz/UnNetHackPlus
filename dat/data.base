@@ -159,6 +159,7 @@ maud
 		[ Maud, And Other Poems by Alfred, Lord Tennyson ]
 ~amulet of yendor
 ~amulet of restful sleep
+~amulet of strangulation
 *amulet
 amulet of *
 amulet versus *
@@ -176,6 +177,13 @@ amulet versus *
 	"And it can give you your heart's desire."
 	"Now you're talking," said Robert.
 		[ The Story of the Amulet, by Edith Nesbit ]
+amulet of strangulation
+	<Irashtar> p - an uncursed amulet of strangulation (being worn).
+	<Irashtar> what use is that?
+	<Irashtar> should I take it off?
+	<rast> ... yes
+	<bclewis> it depends on if you want to be strangled or not.
+		[ http://nhqdb.alt.org/?676 - NetHack Quote Database ]
 amulet of yendor
 	This mysterious talisman is the object of your quest.  It is
 	said to possess powers which mere mortals can scarcely
@@ -5555,9 +5563,9 @@ tiger
 	What immortal hand or eye
 	Could frame thy fearful symmetry?
 		[ The Tyger, by William Blake ]
+~tin of spinach
 tin
 tin of *
-tinning kit
 	"You know salmon, Sarge," said Nobby.
 	"It is a fish of which I am aware, yes."
 	"You know they sell kind of slices of it in tins..."
@@ -5566,6 +5574,21 @@ tinning kit
 	gets thinner at both ends."
 	"Interesting point, Nobby.  I think-"
 		[ Soul Music, by Terry Pratchett ]
+tin of spinach
+	<Anvilgames> My new Tourist started with 
+	two uncursed cans of spinach
+	<danirijeka> TOOT-TOOT
+	<Anvilgames> exactly
+	<Rodney> Anvilgames (Tou Hum Fem Neu), 5 points,
+	choked on a tin of spinach
+		[ http://nhqdb.alt.org/?285 - NetHack Quote Database ]
+tinning kit
+	<pmcalpin> what use are tinning kits?
+	<greycat> you gain one tin of meat. You lose one corpse.
+	<pmcalpin> can you offer them?
+	<greycat> no
+	<greycat> God doesn't have a can opener.
+		[ http://nhqdb.alt.org/?405 - NetHack Quote Database ]
 tin opener
 	Less than thirty Cat tribes now survived, roaming the cargo
 	decks on their hind legs in a desperate search for food.
@@ -5936,6 +5959,7 @@ wakizashi
 # takes "wand or a wall" when specifying "/"
 ~*sleep
 ~wand of death
+~wand of polymorph
 wand of *
 *wand
 	'Saruman!' he cried, and his voice grew in power and authority.
@@ -5948,6 +5972,15 @@ wand of *
 	fell down at Gandalf's feet.  'Go!' said Gandalf.  With a cry
 	Saruman fell back and crawled away.
 		[ The Two Towers, by J.R.R. Tolkien ]
+wand of polymorph
+	<Keolah> ... so, from the looks of things, a goblin zapped itself 
+	with a wand of polymorph and turned into a lichen. A second goblin 
+	came up and went "Ooh! Wand!" and also turned into a lichen.
+	<SrsWisski> keolah - hows that? :O
+	<Keolah> I heard zap-clanks 
+	and found two lichens next to a couple caps.
+	<Keolah> With the wand in question ;p 
+		[ http://nhqdb.alt.org/?279 - NetHack Quote Database ]
 warg
 	Suddenly Aragorn leapt to his feet.  "How the wind howls!"
 	he cried.  "It is howling with wolf-voices.  The Wargs have
