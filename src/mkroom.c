@@ -75,7 +75,8 @@ mkshop()
 {
 	if(mvitals[PM_SHOPKEEPER].died != NULL){ //yes, it is necessary
 		if(!rn2(mvitals[PM_SHOPKEEPER].died+1)) {
-			pline("A feeling of loss comes over you %s.", mvitals[PM_SHOPKEEPER].died+1);
+			pline("A feeling of loss comes over you.");
+			return;
 		}
 	}
 	struct mkroom *sroom;
