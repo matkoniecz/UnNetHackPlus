@@ -991,8 +991,8 @@ boolean twoweap; /* used to restore twoweapon mode if wielded weapon returns */
 
 		boolean obj_destroyed = FALSE;
 		mon = bhit(u.dx, u.dy, range, THROWN_WEAPON,
-			   (int FDECL((*),(MONST_P,OBJ_P)))0,
-			   (int FDECL((*),(OBJ_P,OBJ_P)))0,
+			   (int FDECL((*),(struct monst*, struct obj*)))0,
+			   (int FDECL((*),(struct obj*, struct obj*)))0,
 			   obj, &obj_destroyed);
 
 		/* have to do this after bhit() so u.ux & u.uy are correct */
@@ -1828,8 +1828,8 @@ struct obj *obj;
 			bhitpos.y = u.uy;
 		} else {
 			mon = bhit(u.dx, u.dy, range, THROWN_WEAPON,
-				   (int FDECL((*),(MONST_P,OBJ_P)))0,
-				   (int FDECL((*),(OBJ_P,OBJ_P)))0,
+				   (int FDECL((*),(struct monst*, struct obj*)))0,
+				   (int FDECL((*),(struct obj*, struct obj*)))0,
 				   obj, NULL);
 			if(mon) {
 			    if (ghitm(mon, obj))	/* was it caught? */

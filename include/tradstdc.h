@@ -15,20 +15,6 @@
 #define NHSTDC
 #endif
 
-#if defined(ultrix) && defined(__STDC__) && !defined(__LANGUAGE_C)
-/* Ultrix seems to be in a constant state of flux.  This check attempts to
- * set up ansi compatibility if it wasn't set up correctly by the compiler.
- */
-#ifdef mips
-#define __mips mips
-#endif
-
-#ifdef LANGUAGE_C
-#define __LANGUAGE_C LANGUAGE_C
-#endif
-
-#endif
-
 /*
  * ANSI X3J11 detection.
  * Makes substitutes for compatibility with the old C standard.
@@ -51,7 +37,7 @@
 # define USE_VARARGS
 #endif
 
-#if defined(NHSTDC) || defined(ULTRIX_PROTO) || defined(MAC)
+#if defined(NHSTDC) || defined(MAC)
 # if !defined(USE_VARARGS) && !defined(USE_OLDARGS) && !defined(USE_STDARG)
 #   define USE_STDARG
 # endif
@@ -68,9 +54,6 @@
 # define VA_ARGS		the_args
 # define VA_START(x)		va_start(the_args, x)
 # define VA_END()		va_end(the_args)
-# if defined(ULTRIX_PROTO) && !defined(_VA_LIST_)
-#  define _VA_LIST_	/* prevents multiple def in stdio.h */
-# endif
 #else
 # ifdef USE_VARARGS
 #include <varargs.h>
@@ -97,7 +80,7 @@
 #endif
 #endif /* NEED_VARARGS */
 
-#if defined(NHSTDC) || defined(MSDOS) || defined(MAC) || defined(ULTRIX_PROTO) || defined(__BEOS__)
+#if defined(NHSTDC) || defined(MSDOS) || defined(MAC) || defined(__BEOS__)
 
 /*
  * Used for robust ANSI parameter forward declarations:
@@ -124,13 +107,12 @@
 /* generic pointer, always a macro; genericptr_t is usually a typedef */
 # define genericptr	void *
 
-# if (defined(ULTRIX_PROTO) && !defined(__GNUC__)) || defined(OS2_CSET2)
-/* Cover for Ultrix on a DECstation with 2.0 compiler, which coredumps on
+# if defined(OS2_CSET2)
+/* Cover for IBM CSet/2, which coredumps on
  *   typedef void * genericptr_t;
  *   extern void a(void(*)(int, genericptr_t));
  * Using the #define is OK for other compiler versions too.
  */
-/* And IBM CSet/2.  The redeclaration of free hoses the compile. */
 #  define genericptr_t	genericptr
 # else
 #  if !defined(NHSTDC) && !defined(MAC)
@@ -146,7 +128,7 @@
  * because some compilers choke on `defined(const)'.
  * This has been observed with Lattice, MPW, and High C.
  */
-# if (defined(ULTRIX_PROTO) && !defined(NHSTDC)) || defined(apollo)
+# if defined(apollo)
 	/* the system header files don't use `const' properly */
 #  ifndef const
 #   define const

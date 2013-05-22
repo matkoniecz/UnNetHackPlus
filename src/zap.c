@@ -1782,7 +1782,7 @@ smell:
 int
 bhitpile(obj,fhito,tx,ty)
     struct obj *obj;
-    int FDECL((*fhito), (OBJ_P,OBJ_P));
+    int FDECL((*fhito), (struct obj*,struct obj*));
     int tx, ty;
 {
     int hitanything = 0;
@@ -2727,8 +2727,8 @@ struct monst *
 bhit(ddx,ddy,range,weapon,fhitm,fhito,obj,obj_destroyed)
 int ddx,ddy,range;		/**< direction and range */
 int weapon;				/**< see values in hack.h */
-int FDECL((*fhitm), (MONST_P, OBJ_P)),	/**< fns called when mon/obj hit */
-    FDECL((*fhito), (OBJ_P, OBJ_P));
+int FDECL((*fhitm), (struct monst*, struct obj*)),	/**< fns called when mon/obj hit */
+    FDECL((*fhito), (struct obj*, struct obj*));
 struct obj *obj;			/**< object tossed/used */
 boolean *obj_destroyed;			/**< has object been deallocated? Pointer to boolean, may be NULL */
 {

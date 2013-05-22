@@ -1293,12 +1293,12 @@ static const char removeables[] =
 int
 ggetobj(word, fn, mx, combo, resultflags)
 const char *word;
-int FDECL((*fn),(OBJ_P)), mx;
+int FDECL((*fn),(struct obj*)), mx;
 boolean combo;		/* combination menu flag */
 unsigned *resultflags;
 {
-	int FDECL((*ckfn),(OBJ_P)) = (int FDECL((*),(OBJ_P))) 0;
-	boolean FDECL((*filter),(OBJ_P)) = (boolean FDECL((*),(OBJ_P))) 0;
+	int FDECL((*ckfn),(struct obj*)) = (int FDECL((*),(struct obj*))) 0;
+	boolean FDECL((*filter),(struct obj*)) = (boolean FDECL((*),(struct obj*))) 0;
 	boolean takeoff, ident, allflag, m_seen;
 	int itemcount;
 #ifndef GOLDOBJ
@@ -1489,7 +1489,7 @@ askchain(objchn, olets, allflag, fn, ckfn, mx, word)
 struct obj **objchn;
 int allflag, mx;
 const char *olets, *word;	/* olets is an Obj Class char array */
-int FDECL((*fn),(OBJ_P)), FDECL((*ckfn),(OBJ_P));
+int FDECL((*fn),(struct obj*)), FDECL((*ckfn),(struct obj*));
 {
 	struct obj *otmp, *otmp2, *otmpo;
 	char sym, ilet;
@@ -2650,7 +2650,7 @@ dotypeinv()
 #ifndef GOLDOBJ
 					      (u.ugold != 0),
 #endif
-					      (boolean FDECL((*),(OBJ_P))) 0, &itemcount);
+					      (boolean FDECL((*),(struct obj*))) 0, &itemcount);
 	    if (unpaid_count) {
 		Strcat(types, "u");
 		class_count++;

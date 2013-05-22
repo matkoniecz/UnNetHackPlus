@@ -235,7 +235,7 @@ struct obj *obj;
 char *
 distant_name(obj, func)
 struct obj *obj;
-char *FDECL((*func), (OBJ_P));
+char *FDECL((*func), (struct obj*));
 {
 	char *str;
 
@@ -1191,7 +1191,7 @@ struct obj *obj;
 const char *
 singular(otmp, func)
 struct obj *otmp;
-char *FDECL((*func), (OBJ_P));
+char *FDECL((*func), (struct obj*));
 {
 	long savequan;
 	char *nam;

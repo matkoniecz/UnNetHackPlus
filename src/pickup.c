@@ -94,7 +94,7 @@ collect_obj_classes(ilets, otmp, here, incl_gold, filter, itemcount)
 char ilets[];
 struct obj *otmp;
 boolean here, incl_gold;
-boolean FDECL((*filter),(OBJ_P));
+boolean FDECL((*filter),(struct obj*));
 int *itemcount;
 #else
 int
@@ -102,7 +102,7 @@ collect_obj_classes(ilets, otmp, here, filter, itemcount)
 char ilets[];
 struct obj *otmp;
 boolean here;
-boolean FDECL((*filter),(OBJ_P));
+boolean FDECL((*filter),(struct obj*));
 int *itemcount;
 #endif
 {
@@ -173,7 +173,7 @@ int *menu_on_demand;
 #ifndef GOLDOBJ
 				     incl_gold,
 #endif
-				     (boolean FDECL((*),(OBJ_P))) 0, &itemcount);
+				     (boolean FDECL((*),(struct obj*))) 0, &itemcount);
 	if (iletct == 0) {
 		return FALSE;
 	} else if (iletct == 1) {
@@ -703,7 +703,7 @@ struct obj *olist;		/* the list to pick from */
 int qflags;			/* options to control the query */
 menu_item **pick_list;		/* return list of items picked */
 int how;			/* type of query */
-boolean FDECL((*allow), (OBJ_P));/* allow function */
+boolean FDECL((*allow), (struct obj*));/* allow function */
 {
 #ifdef SORTLOOT
 	int i, j;
@@ -2279,7 +2279,7 @@ ask_again2:
 			if (askchain((struct obj **)&current_container->cobj,
 				     (one_by_one ? (char *)0 : select),
 				     allflag, out_container,
-				     (int FDECL((*),(OBJ_P)))0,
+				     (int FDECL((*),(struct obj*)))0,
 				     0, "nodot"))
 			    used = 1;
 		    } else if (menu_on_request < 0) {

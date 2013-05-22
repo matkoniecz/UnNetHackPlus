@@ -141,14 +141,4 @@
 # endif
 #endif /*VMS*/
 
-#ifdef vax
-/* just in case someone thinks a DECstation is a vax. It's not, it's a mips */
-# ifdef ULTRIX_PROTO
-#  undef ULTRIX_PROTO
-# endif
-# ifdef ULTRIX_CC20
-#  undef ULTRIX_CC20
-# endif
-#endif
-
 #endif	/* CONFIG1_H */
