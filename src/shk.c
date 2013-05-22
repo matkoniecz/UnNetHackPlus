@@ -4066,7 +4066,7 @@ const char* tool_wares[] = {
 const char* book_wares[] = {
 	/* From SporHack */
 	"Large print available!",
-	"If you can read, %s, you'll want some of these!"
+	"If you can read, %s, you'll want some of these!",
 	"Mental magnificence for the scholarly IN-clined!",
 	"Credit available for valued customers!",
 	"'Banned' section now open! (I.D. required)",
