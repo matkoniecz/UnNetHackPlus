@@ -804,9 +804,6 @@ E void NDECL(setrandom);
 E int NDECL(getyear);
 E int NDECL(getmonth);
 E int NDECL(getmday);
-#if 0
-E char *FDECL(yymmdd, (time_t));
-#endif
 E long FDECL(yyyymmdd, (time_t));
 E int NDECL(phase_of_the_moon);
 E boolean NDECL(friday_13th);

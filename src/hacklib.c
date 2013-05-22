@@ -39,7 +39,6 @@ NetHack, except that rounddiv may call panic().
 	int		getyear		(void)
 	int		getmonth	(void)
 	int		getmday		(void)
-	char *		yymmdd		(time_t)
 	long		yyyymmdd	(time_t)
 	int		phase_of_the_moon	(void)
 	boolean		friday_13th	(void)
