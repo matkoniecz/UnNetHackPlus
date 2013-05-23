@@ -188,6 +188,7 @@ MSGTYPE=stop "The bullwhip wraps around * you're wielding!"
 #MONSTERCOLOR=chickatrice:brown
 #MONSTERCOLOR=fox:red
 #MONSTERCOLOR=warg:brown
+#MONSTERCOLOR=wolf:brown
 #MONSTERCOLOR=mind flayer:magenta
 #MONSTERCOLOR=master mind flayer:magenta
 #MONSTERCOLOR=manes:red
