@@ -149,7 +149,7 @@ WINLIB = @WINLIB@
 
 LIBS =
 
-# make UnNetHack
+# make UnNetHackPlus
 GAME     = unnethackplus$(EXEEXT)
 
 RANDOBJ =

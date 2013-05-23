@@ -69,7 +69,7 @@
 #define BEOS_GRAPHICS /* (optional) */
 #define DEFAULT_WINDOW_SYS "BeOS"  /* "tty" */
 #ifndef HACKDIR	/* override the default hackdir below */
-# define HACKDIR "/boot/apps/UnNetHack"
+# define HACKDIR "/boot/apps/UnNetHackPlus"
 #endif
 #endif
 
@@ -101,7 +101,7 @@
 # ifndef DEFAULT_WINDOW_SYS
 #  define DEFAULT_WINDOW_SYS "mswin"
 # endif
-# define HACKDIR "\\unnethack"
+# define HACKDIR "\\unnethackplus"
 #endif
 
 #ifdef CURSES_GRAPHICS

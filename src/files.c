@@ -1751,12 +1751,12 @@ const char* configfile =
 			".unnethackrc";
 #else
 # if defined(MAC) || defined(__BEOS__)
-			"UnNetHack Defaults";
+			"UnNetHackPlus Defaults";
 # else
 #  if defined(MSDOS) || defined(WIN32)
 			"defaults.unh";
 #  else
-			"UnNetHack.cnf";
+			"UnNetHackPlus.cnf";
 #  endif
 # endif
 #endif

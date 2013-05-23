@@ -17,7 +17,7 @@ srcdir=@srcdir@
 # execute things like 'data' and 'rumors')
 # MAKE = make
 
-# make UnNetHack
+# make UnNetHackPlus
 
 PREFIX   = @prefix@
 prefix   = @prefix@
