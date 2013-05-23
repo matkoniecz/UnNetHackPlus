@@ -40,9 +40,9 @@
 #define AD_FIRE		2	/* fire damage */
 #define AD_COLD		3	/* frost damage */
 #define AD_SLEE		4	/* sleep ray */
-#define AD_DISN		5	/* disintegration (death ray) */
+#define AD_DISN		5	/* disintegration */
 #define AD_ELEC		6	/* shock damage */
-#define AD_DRST		7	/* drains str (poison) */
+#define AD_DRST		7	/* drains strength (poison) */
 #define AD_ACID		8	/* acid damage */
 #define AD_SPC1		9	/* for extension of buzz() */
 #define AD_SPC2		10	/* for extension of buzz() */
@@ -70,7 +70,7 @@
 #define AD_DRIN		32	/* drains intelligence (mind flayer) */
 #define AD_DISE		33	/* confers diseases */
 #define AD_DCAY		34	/* decays organics (brown Pudding) */
-#define AD_SSEX		35	/* Succubus seduction (extended) */
+#define AD_SSEX		35	/* foocubus seduction */
 #define AD_HALU		36	/* causes hallucination */
 #define AD_DETH		37	/* for Death only */
 #define AD_PEST		38	/* for Pestilence only */
