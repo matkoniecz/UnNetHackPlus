@@ -336,13 +336,13 @@ BEGIN
         BLOCK "040904b0"
         BEGIN
             VALUE "FileDescription", "UnNetHackPlus\0"
-            VALUE "FileVersion", "4.7.0\0"
+            VALUE "FileVersion", "4.8.0\0"
             VALUE "InternalName", "UnNetHackPlusW\0"
             VALUE "LegalCopyright", "Copyright (C) 1985 - 2003.  By Stichting Mathematisch Centrum and M. Stephenson.  See license for details.\0"
             VALUE "OriginalFilename", "UnNetHackPlusW.exe\0"
             VALUE "PrivateBuild", "120401\0"
             VALUE "ProductName", "UnNetHackPlus\0"
-            VALUE "ProductVersion", "4.7.0\0"
+            VALUE "ProductVersion", "4.8.0\0"
         END
     END
     BLOCK "VarFileInfo"

@@ -1,6 +1,6 @@
 # To use this file run /sys/autoconf/bootstrap.sh
 dnl	UNNETHACKPLUS autoconf template
-AC_INIT(UNNETHACKPLUS, 4.7.0, https://github.com/Bulwersator/UnNetHackPlus/issues)
+AC_INIT(UNNETHACKPLUS, 4.8.0, https://github.com/Bulwersator/UnNetHackPlus/issues)
 dnl Avoid AC_REVISION() because we check configure into CVS
 dnl and it will cause confusing revision numbers to be included
 dnl in configure if developers forget to check in configure.ac

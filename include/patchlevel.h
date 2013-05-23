@@ -2,10 +2,10 @@
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1985. */
 /* NetHack may be freely redistributed.  See license for details. */
 
-/* UnNetHackPlus 4.7.0 */
+/* UnNetHackPlus 4.8.0 */
 #define GAME_SHORT_NAME	"UNH"
 #define VERSION_MAJOR	4
-#define VERSION_MINOR	7
+#define VERSION_MINOR	8
 /*
  * PATCHLEVEL is updated for each release.
  */
