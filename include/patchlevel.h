@@ -52,7 +52,7 @@
  * As UnNetHackPlus may load UnNetHack saves it is possible that 
  * there is a second, disjointed set of compatible releases
  */
-#define VERSION_COMPATIBILITY 0x04070000L	/* 4.0.0-e0 */
+#define VERSION_COMPATIBILITY 0x04070000L	/* 4.7.0-e0 */
 
 #define MIN_UN_VERSION_COMPATIBILITY 0x04000000L	/* 4.0.0-e0 */
 #define MAX_UN_VERSION_COMPATIBILITY 0x04000000L	/* 4.0.0-e0 */
