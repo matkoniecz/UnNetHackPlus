@@ -1187,6 +1187,9 @@ struct permonst mons[] = {
 	 *
 	 * As reptiles, dragons are cold-blooded and thus aren't seen
 	 * with infravision.  Red dragons are the exception.
+	 *
+	 * Note that is_adult_dragon function relies on fact 
+	 * that iff dragon is adult it have M2_NASTY flag.
 	 */
     MON("baby tatzelworm", S_DRAGON,
 	LVL(12, 9, 2, 10, 0), G_GENO,

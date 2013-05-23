@@ -1284,6 +1284,8 @@ E const char *FDECL(on_fire, (struct permonst *,struct attack *));
 E const struct permonst *FDECL(raceptr, (struct monst *));
 E struct permonst *FDECL(get_monster_index_after_stone_to_flesh, (struct permonst *));
 E boolean FDECL(has_two_heads, (struct permonst *));
+E boolean FDECL(is_adult_dragon, (struct permonst *));
+E boolean FDECL(ignores_elbereth_and_scare_monster_scroll, (struct permonst *));
 
 /* ### monmove.c ### */
 
