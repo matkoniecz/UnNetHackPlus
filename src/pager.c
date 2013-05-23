@@ -7,7 +7,6 @@
 
 #include "hack.h"
 #include "dlb.h"
-	boolean debug = FALSE;
 
 STATIC_DCL boolean FDECL(is_swallow_sym, (int));
 STATIC_DCL int FDECL(append_str, (char *, const char *));
@@ -806,11 +805,6 @@ do_look(boolean quick)
 int
 plined_length(char * buf)
 {
-	if(debug) {
-		pline("===============================================================================");
-		pline("%s", buf);
-	}
-
 	int i = 0;
 	int current_line = 0;
 	int current_word = 0;
@@ -826,13 +820,6 @@ plined_length(char * buf)
 			current_line++;
 			if (current_line == COLNO - 1) {
 				current_line = 0;
-				if(debug) {
-					pline("#[n0^%d]", total);
-				}
-			} else {
-				if(debug) {
-					pline("#");
-				}
 			}
 		} else {
 			int available_space = COLNO - current_line - 1;
@@ -842,54 +829,19 @@ plined_length(char * buf)
 				//space after word will fit into current line
 				total += current_word + 1;
 				current_line += current_word + 1;
-
-				if(debug) {
-					char to[BUFSZ];
-					strncpy(to, buf + i - current_word, current_word + 1);
-					to[current_word + 1] = '\0';
-					pline("[%s]", to);
-				}
 			} else if (current_word <= available_space) {
 				//word will fit into line without space
 				total += current_word;
 				current_line = 0; //new line
-
-				if(debug) {
-					char to[BUFSZ];
-					strncpy(to, buf + i - current_word, current_word);
-					to[current_word] = '\0';
-					if(buf[i] == ' ') {
-						pline("[%s][n1^%d]", to, total);
-					} else {
-						pline("[%s]\0", to);
-					}
-				}
 			} else if (buf[i] == ' ' && current_word < COLNO - 1 ) {
 				//word will fit into next line with a space
 				total += current_word + 1 + available_space;
 				current_line = current_word + 1;
-
-				if(debug) {
-					char to[BUFSZ];
-					strncpy(to, buf + i - current_word, current_word + 1);
-					to[current_word + 1] = '\0';
-					pline("[n2^%d][%s]^%d", total - current_word - 1, to, total);
-				}
 			} else if (current_word < COLNO) {
 				//word will fit into next line without space
 				total += current_word + available_space;
 				current_line = 0;
-
-				if(debug) {
-					char to[BUFSZ];
-					strncpy(to, buf + i - current_word, current_word);
-					to[current_word] = '\0';
-					pline("[n3^%d][%s]^%d", total - current_word, to, total);
-				}
 			} else {
-				if(debug) {
-					pline("[DEBUG]");
-				}
 				//word will take entire next line and more of the next one. Or maybe even multiple lines.
 				if (current_line == 0) {
 					total += current_word;
@@ -906,9 +858,6 @@ plined_length(char * buf)
 		}
 		i++;
 	} while (buf[i-1] != '\0');
-	if(debug) {
-		pline("{%d}", total);
-	}
 	return total;
 }
 
@@ -934,10 +883,6 @@ append_newline_to_pline_string(char * buf)
 	#endif
 	while(addditional_required--) {
 		strcat(buf, " ");
-	}
-	if(debug){
-		pline("after");
-		plined_length(buf);
 	}
 }
 
@@ -1328,7 +1273,6 @@ get_description_of_monster_type(struct permonst * ptr, char * description)
 		strcat(description, " Ignores Elbereth engravings and scare monster scrolls.");
 	}
 
-	//debug = TRUE;
 	append_newline_to_pline_string(description);
 	if (is_adult_dragon(ptr)) {
 		if (!objects[monsndx(ptr)-PM_GRAY_DRAGON+GRAY_DRAGON_SCALES].oc_name_known) {
@@ -1339,7 +1283,6 @@ get_description_of_monster_type(struct permonst * ptr, char * description)
 		}
 	}
 	strcat(description, "Attacks:");
-	debug = FALSE;
 	append_newline_to_pline_string(description);
 	struct attack *mattk;
 	struct attack alt_attk;
