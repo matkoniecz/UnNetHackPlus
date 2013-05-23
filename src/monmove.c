@@ -120,16 +120,21 @@ struct monst *mtmp;
 	if (!mtmp->mcansee || mtmp->mpeaceful) {
 		return FALSE;
 	}
+	if (is_vampire(mtmp->data) && IS_ALTAR(levl[x][y].typ)) {
+		return TRUE;
+	}
 	if (ignores_elbereth_and_scare_monster_scroll(mtmp->data)) {
 		return FALSE;
 	}
-
-	return (boolean)(sobj_at(SCR_SCARE_MONSTER, x, y)
+	if (sobj_at(SCR_SCARE_MONSTER, x, y)) {
+		return TRUE;
+	}
 #ifdef ELBERETH
-			 || sengr_at("Elbereth", x, y)
+	if (sengr_at("Elbereth", x, y)) {
+		return TRUE;
+	}
 #endif
-			 || (is_vampire(mtmp->data)
-			     && IS_ALTAR(levl[x][y].typ)));
+	return FALSE;
 }
 
 #endif /* OVL2 */
