@@ -2920,9 +2920,17 @@ drown()
 	    You("%s into the water%c",
 		Is_waterlevel(&u.uz) ? "plunge" : "fall",
 		Amphibious || Swimming ? '.' : '!');
-	    if (!Swimming && !Is_waterlevel(&u.uz))
-		    You("sink like %s.",
-			Hallucination ? "the Titanic" : "a rock");
+	    if (!Swimming && !Is_waterlevel(&u.uz)) {
+			if (Hallucination) {
+				if(rn2(2)) {
+					You("sink like the Titanic.");
+				} else {
+					pline("Dude, you're floating like a brick!");
+				}
+			} else {
+				You("sink like a rock.");
+			}
+		}
 	}
 
 	water_damage(invent, FALSE, FALSE);
