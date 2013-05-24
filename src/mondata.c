@@ -821,7 +821,7 @@ ignores_elbereth_and_scare_monster_scroll(struct permonst *mptr)
 	if (mptr->mlet == S_HUMAN) {
 		return TRUE;
 	}
-	if (mptr == &mons[PM_ANGEL]) {
+	if (mptr->mlet == S_ANGEL) {
 		return TRUE;
 	}
 	if (mptr == &mons[PM_CTHULHU]) {
