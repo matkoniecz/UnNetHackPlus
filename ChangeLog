@@ -60,6 +60,7 @@
 		- Shopkeepers prefer save dungeons
 	* Interface changes
 		- Monster info displayed on farlook
+		- Identified dragons are again colour-coded for your convenience. Unidentified are brown, identified (usually by witnessing use of their breath attack) have colors matching their abilities, like in vanilla
 		- Colours for walls and floor of special dungeon regions in TTY mode, work by "L" (Leon Arnott), slightly modified. Affects beehives, gardens, Mines, Wizard's tower, Astral Plane and altars.
 		- Magic trap glyph is now yellow, anti-magic field dark green
 		- Smarter object colours (unique colours for can of grease - bright green and tinning kit - orange).
