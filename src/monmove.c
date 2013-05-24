@@ -114,23 +114,27 @@ onscary(x, y, mtmp)
 int x, y;
 struct monst *mtmp;
 {
-	if (mtmp->isshk || mtmp->isgd || mtmp->iswiz || !mtmp->mcansee ||
-	    mtmp->mpeaceful || mtmp->data->mlet == S_HUMAN ||
-	    is_lminion(mtmp) || mtmp->data == &mons[PM_ANGEL] ||
-	    mtmp->data == &mons[PM_CTHULHU] ||
-	    /* Vlad ignores Elbereth/Scare Monster/Garlic */
-	    mtmp->data == &mons[PM_VLAD_THE_IMPALER] ||
-	    mtmp->mnum == quest_info(MS_NEMESIS) ||
-	    (mtmp->data->geno & G_UNIQ && is_demon(mtmp->data)) ||
-	    is_rider(mtmp->data))
-		return(FALSE);
-
-	return (boolean)(sobj_at(SCR_SCARE_MONSTER, x, y)
+	if (mtmp->isshk || mtmp->isgd || mtmp->iswiz || is_lminion(mtmp)){
+		return FALSE;
+	}
+	if (!mtmp->mcansee || mtmp->mpeaceful) {
+		return FALSE;
+	}
+	if (is_vampire(mtmp->data) && IS_ALTAR(levl[x][y].typ)) {
+		return TRUE;
+	}
+	if (ignores_elbereth_and_scare_monster_scroll(mtmp->data)) {
+		return FALSE;
+	}
+	if (sobj_at(SCR_SCARE_MONSTER, x, y)) {
+		return TRUE;
+	}
 #ifdef ELBERETH
-			 || sengr_at("Elbereth", x, y)
+	if (sengr_at("Elbereth", x, y)) {
+		return TRUE;
+	}
 #endif
-			 || (is_vampire(mtmp->data)
-			     && IS_ALTAR(levl[x][y].typ)));
+	return FALSE;
 }
 
 #endif /* OVL2 */

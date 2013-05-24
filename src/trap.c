@@ -2063,8 +2063,7 @@ glovecheck:		    target = which_armor(mtmp, W_ARMG);
 				/* fall though */
 			    default:
 				if (mptr->mlet == S_GIANT ||
-				    (mptr->mlet == S_DRAGON &&
-					extra_nasty(mptr)) || /* excl. babies */
+				    (is_adult_dragon(mptr)) ||
 				    (mtmp->wormno && count_wsegs(mtmp) > 5)) {
 				    tear_web = TRUE;
 				} else if (in_sight) {

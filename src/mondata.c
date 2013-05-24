@@ -805,6 +805,39 @@ has_two_heads(struct permonst *mptr)
 	return FALSE;
 }
 
+boolean
+is_adult_dragon(struct permonst *mptr)
+{
+	return mptr->mlet == S_DRAGON && extra_nasty(mptr);
+	//alternative method: ptr->mlet == S_DRAGON && mndx >= PM_GRAY_DRAGON 
+}
+
+boolean
+ignores_elbereth_and_scare_monster_scroll(struct permonst *mptr)
+{
+	if (mptr->msound == MS_NEMESIS) {
+		return TRUE;
+	}
+	if (mptr->mlet == S_HUMAN) {
+		return TRUE;
+	}
+	if (mptr == &mons[PM_ANGEL]) {
+		return TRUE;
+	}
+	if (mptr == &mons[PM_CTHULHU]) {
+		return TRUE;
+	}
+	if (mptr == &mons[PM_VLAD_THE_IMPALER]) {
+		return TRUE;
+	}
+	if ((mptr->geno & G_UNIQ) && (is_demon(mptr))) {
+		return TRUE;
+	}
+	if (is_rider(mptr)) {
+		return TRUE;
+	}
+	return FALSE;
+}
 #endif /* OVLB */
 
 /*mondata.c*/
