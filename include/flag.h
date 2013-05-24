@@ -95,7 +95,7 @@ struct flag {
 				/* 3: FH, 4: ff+, 5: ff-, 6: FF+, 7: FF- */
 				/* 8: travel */
 	unsigned long warntype; /* warn_of_mon monster type M2 */
-	int	 warnlevel;
+	int	 warnlevel;  //unused, as warning currently detects everything
 	int	 djinni_count, ghost_count;	/* potion effect tuning */
 	int	 pickup_burden;		/* maximum burden before prompt */
 	char	 inv_order[MAXOCLASSES];

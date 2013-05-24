@@ -601,7 +601,7 @@ initoptions()
 		warnsyms[i] = def_warnsyms[i].sym;
 	iflags.bouldersym = 0;
 	iflags.travelcc.x = iflags.travelcc.y = -1;
-	flags.warnlevel = 1;
+	flags.warnlevel = 0; //unused, as warning currently detects everything
 	flags.warntype = 0L;
 
      /* assert( sizeof flags.inv_order == sizeof def_inv_order ); */

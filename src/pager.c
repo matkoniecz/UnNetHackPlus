@@ -701,7 +701,7 @@ do_look(boolean quick)
 		}
 
 		/* Now check for warning symbols */
-		for (i = 1; i < WARNCOUNT; i++) {
+		for (i = 0; i < WARNCOUNT; i++) {
 			x_str = def_warnsyms[i].explanation;
 			if (sym == (from_screen ? warnsyms[i] : def_warnsyms[i].sym)) {
 				if (!found) {

@@ -134,6 +134,28 @@ STATIC_DCL void FDECL(set_seenv, (struct rm *, int, int, int, int));
 STATIC_DCL void FDECL(t_warn, (struct rm *));
 STATIC_DCL int FDECL(wall_angle, (struct rm *));
 
+/*
+ * mon_warning() is used to warn of any dangerous monsters in your
+ * vicinity, and a glyph representing the warning level is displayed.
+ */
+
+boolean
+mon_warning(struct monst *mon) {
+	if (mon->data == &mons[PM_CTHULHU]) {
+		return TRUE;
+	}
+	if (!Warning) {
+		return FALSE;
+	}
+	if (mon->mpeaceful) {
+		return FALSE;
+	}
+	if (distu(mon->mx, mon->my) >= 100) {
+		return FALSE;
+	}
+	return TRUE;
+}
+
 #ifdef INVISIBLE_OBJECTS
 /*
  * vobj_at()
@@ -454,26 +476,27 @@ display_monster(x, y, mon, sightflags, worm_tail)
  * Do not call for worm tails.
  */
 STATIC_OVL void
-display_warning(mon)
-    struct monst *mon;
+display_warning(struct monst *mon)
 {
-    int x = mon->mx, y = mon->my;
-    int wl = (int) (mon->m_lev / 4);
-    int glyph;
+	int x = mon->mx, y = mon->my;
+	int wl = (int) (mon->m_lev / 4);
+	int glyph;
 
-    if (mon_warning(mon)) {
-        if (wl > WARNCOUNT - 1) wl = WARNCOUNT - 1;
-	/* 3.4.1: this really ought to be rn2(WARNCOUNT), but value "0"
-	   isn't handled correctly by the what_is routine so avoid it */
-	if (Hallucination) wl = rn1(WARNCOUNT-1,1);
-        glyph = warning_to_glyph(wl);
-    } else if (MATCH_WARN_OF_MON(mon)) {
-	glyph = mon_to_glyph(mon);
-    } else {
-    	warning("display_warning did not match warning type?");
-        return;
-    }
-    show_glyph(x, y, glyph);
+	if (mon_warning(mon)) {
+		if (wl > WARNCOUNT - 1) {
+			wl = WARNCOUNT - 1;
+		}
+		if (Hallucination) {
+			wl = rn2(WARNCOUNT);
+		}
+		glyph = warning_to_glyph(wl);
+	} else if (MATCH_WARN_OF_MON(mon)) {
+		glyph = mon_to_glyph(mon);
+	} else {
+		warning("display_warning did not match warning type?");
+		return;
+	}
+	show_glyph(x, y, glyph);
 }
 
 /*
@@ -725,10 +748,9 @@ newsym(x,y)
 	    /* This also gets rid of any invisibility glyph */
 	    display_monster(x, y, mon, see_it ? 0 : DETECTED, 0);
 	}
-	else if ((mon = m_at(x,y)) && mon_warning(mon) &&
-		 !is_worm_tail(mon)) {
-	        display_warning(mon);
-	}		
+	else if ((mon = m_at(x,y)) && mon_warning(mon) && !is_worm_tail(mon)) {
+		display_warning(mon);
+	}
 
 	/*
 	 * If the location is remembered as being both dark (waslit is false)

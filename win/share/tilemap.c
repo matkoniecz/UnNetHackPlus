@@ -364,7 +364,7 @@ init_tilemap()
 	}
 
 	for (i = 0; i < WARNCOUNT; i++) {
-		tilemap[GLYPH_WARNING_OFF+i] = tilenum;
+		tilemap[GLYPH_WARNING_OFF+i] = tilenum - 1; //warning: -1 added in session of shotgun debugging
 		tilenum++;
 	}
 
