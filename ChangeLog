@@ -65,11 +65,10 @@
 		- Follow guidelines for monster color assignment (based on work by "L" - Leon Arnott)
 		- Bear trap is no longer ineffective on diagonals
 		- Better default config file - MSGTYPE and MONSTERCOLOR are mentioned, obvious MSGTYPE settings are appplied.
-		- PARANOID define enabled
-		- Smarter paranoid_trap
-		- automatically apply unlocking tool to containers during #loot-ing
+		- PARANOID define enabled, with smarter paranoid_trap
+		- Automatically apply unlocking tool to containers during #loot-ing
 		- Mind flayers and vampires with sound mind will not attempt to eat during fight
-		- name is no longer checked on entering debug mode
+		- Name is no longer checked on entering debug mode
 	* Grinding elimination
 		- Chance of wand wresting raised to 1/11
 		- Carrying digging tools to shop is no longer blocked
