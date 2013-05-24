@@ -7,13 +7,13 @@ Mike Thome, and Jon Payne.
 
 Andries Brouwer did a major re-write, transforming Hack into a very different
 game, and published (at least) three versions (1.0.1, 1.0.2, and 1.0.3) for
-UNIX(tm) machines to the Usenet.
+UNIX machines to the Usenet.
 
-Don G. Kneller ported Hack 1.0.3 to Microsoft(tm) C and MS-DOS(tm), producing
+Don G. Kneller ported Hack 1.0.3 to Microsoft C and MS-DOS, producing
 PC HACK 1.01e, added support for DEC Rainbow graphics in version 1.03g, and
 went on to produce at least four more versions (3.0, 3.2, 3.51, and 3.6).
 
-R. Black ported PC HACK 3.51 to Lattice(tm) C and the Atari 520/1040ST,
+R. Black ported PC HACK 3.51 to Lattice C and the Atari 520/1040ST,
 producing ST Hack 1.03.
 
 Mike Stephenson merged these various versions back together, incorporating

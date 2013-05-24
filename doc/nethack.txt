@@ -13,7 +13,7 @@ SYNOPSIS
        ] [ -r race ] [ playernames ]
 
 DESCRIPTION
-       NetHack  is  a  display  oriented Dungeons & Dragons(tm) -
+       NetHack  is  a  display  oriented Dungeons & Dragons -
        like game.  The standard tty display and command structure
        resemble rogue.
 

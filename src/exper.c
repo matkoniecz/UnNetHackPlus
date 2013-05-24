@@ -169,7 +169,7 @@ const char *drainer;	/* cause of death, if drain should be fatal */
 }
 
 /*
- * Make experience gaining similar to AD&D(tm), whereby you can at most go
+ * Make experience gaining similar to AD&D, whereby you can at most go
  * up by one level at a time, extra expr possibly helping you along.
  * After all, how much real experience does one get shooting a wand of death
  * at a dragon created with a wand of polymorph??
