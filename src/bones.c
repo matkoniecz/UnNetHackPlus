@@ -317,7 +317,7 @@ make_bones:
 	if (uball) uball->owornmask = uchain->owornmask = 0;
 
 	/* extinguish armor */
-	if (uarm && Is_gold_dragon_armor(uarm->otyp))
+	if (uarm && Is_glowing_dragon_armor(uarm->otyp))
 		end_burn(uarm,FALSE);
 
 	/* dispose of your possessions, usually cursed */

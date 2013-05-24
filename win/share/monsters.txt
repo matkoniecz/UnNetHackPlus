@@ -2788,7 +2788,7 @@ P = (108, 145, 182)
   MMMMMGFAAMMFFAAM
   MMMMMMMMMMMFAAMM
 }
-# tile 394 (baby gold dragon)
+# tile 394 (baby gold dragon, now called glowing dragon)
 {
   MMMMMMMMMMMMMMMM
   MMMMMMMMMMMMMMMM
@@ -2997,7 +2997,7 @@ P = (108, 145, 182)
   MMMMGFAAMMMFFJAM
   MMMMMMMMFFFFJAMM
 }
-# tile 395 (gold dragon)
+# tile 395 (gold dragon, now called glowing dragon)
 {
   MMMMMMNNNHAMMMMM
   MMMMMDHDHHHAMMMM

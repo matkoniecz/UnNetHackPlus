@@ -549,7 +549,7 @@ STATIC_PTR
 int
 Armor_on()
 {
-	if (uarm && Is_gold_dragon_armor(uarm->otyp)) {
+	if (uarm && Is_glowing_dragon_armor(uarm->otyp)) {
 		begin_burn(uarm,FALSE);
 		if (!Blind)
 			pline("%s to glow.",Tobjnam(uarm,"begin"));
@@ -599,7 +599,7 @@ Armor_off_sub()
 int
 Armor_off()
 {
-	if (uarm && Is_gold_dragon_armor(uarm->otyp)) {
+	if (uarm && Is_glowing_dragon_armor(uarm->otyp)) {
 		end_burn(uarm,FALSE);
 		if (!Blind)
 			pline("%s glowing.",Tobjnam(uarm,"stop"));
@@ -617,7 +617,7 @@ Armor_off()
 int
 Armor_gone()
 {
-	if (uarm && Is_gold_dragon_armor(uarm->otyp))
+	if (uarm && Is_glowing_dragon_armor(uarm->otyp))
 		end_burn(uarm,FALSE);
 	Armor_off_sub();
 	takeoff_mask &= ~W_ARM;

@@ -51,6 +51,7 @@ moveloop()
     monstr_init();	/* monster strengths */
     objects_init();
     dragons_init();
+    doredraw(); //partial workaround to #2 bug of UnNetHack - "Dragons get false color on first turn after loading" - http://sourceforge.net/apps/trac/unnethack/ticket/2 
     shop_selection_init();
 
     if (wizard) {
