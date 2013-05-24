@@ -3348,13 +3348,13 @@ struct monst *shkp;
 	omx = shkp->mx;
 	omy = shkp->my;
 
-	/* Random advertising to passersby */
-	if (!ANGRY(shkp) && inhishop(shkp) && !*u.ushops && distu(shkp->mx,shkp->my)<=150 && (!rn2(5+40*eshkp->visitct))) {
-		shk_holler(shkp);
+	if (inhishop(shkp)) {
+		/* Random advertising to passersby */
+		if (!ANGRY(shkp) && inhishop(shkp) && !*u.ushops && distu(shkp->mx,shkp->my)<=150 && (!rn2(15+40*eshkp->visitct))) {
+			shk_holler(shkp);
+		}
+		remove_damage(shkp, FALSE);
 	}
-
-	if (inhishop(shkp))
-	    remove_damage(shkp, FALSE);
 
 	if((udist = distu(omx,omy)) < 3 &&
 	   (shkp->data != &mons[PM_GRID_BUG] || (omx==u.ux || omy==u.uy))) {
