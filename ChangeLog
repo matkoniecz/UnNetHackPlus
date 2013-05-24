@@ -120,6 +120,7 @@
 	* Healing potions may fix wounded legs
 	* Player can wish for up to 100 projectiles
 	* Land mines and beartraps weigh less
+	* Warning now covers all monsters, also weaker ones
 	Full list of changes available at https://github.com/Bulwersator/UnNetHackPlus/commits/master
 
 2012-04-01  UnNetHack 4.0.0
