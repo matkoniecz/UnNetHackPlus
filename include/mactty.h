@@ -1,4 +1,4 @@
-/*	SCCS Id: @(#)mactty.h	3.4	1993/03/01	*/
+/* File modified during XXI century in process of creating UnNetHackPlus */
 /* Copyright (c) Jon W{tte 1993.					*/
 /* NetHack may be freely redistributed.  See license for details.	*/
 

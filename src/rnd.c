@@ -1,4 +1,4 @@
-/*	SCCS Id: @(#)rnd.c	3.4	1996/02/07	*/
+/* File modified during XXI century in process of creating UnNetHackPlus */
 /* NetHack may be freely redistributed.  See license for details. */
 
 #include "hack.h"

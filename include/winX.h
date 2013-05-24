@@ -1,4 +1,4 @@
-/*	SCCS Id: @(#)winX.h	3.4	1996/08/18	*/
+/* File modified during XXI century in process of creating UnNetHackPlus */
 /* Copyright (c) Dean Luick, 1992				  */
 /* NetHack may be freely redistributed.  See license for details. */
 

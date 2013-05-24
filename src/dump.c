@@ -1,4 +1,4 @@
-/*	SCCS Id: @(#)end.c	3.5	2010/03/08	*/
+/* File modified during XXI century in process of creating UnNetHackPlus */
 /* Copyright (c) Patric Mueller.			*/
 /* NetHack may be freely redistributed.  See license for details. */
 

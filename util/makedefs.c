@@ -1,4 +1,4 @@
-/*	SCCS Id: @(#)makedefs.c	3.4	2002/08/14	*/
+/* File modified during XXI century in process of creating UnNetHackPlus */
 /* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1985. */
 /* Copyright (c) M. Stephenson, 1990, 1991.			  */
 /* Copyright (c) Dean Luick, 1990.				  */

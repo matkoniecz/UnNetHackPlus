@@ -1,4 +1,4 @@
-/*	SCCS Id: @(#)music.c	3.4	2003/05/25	*/
+/* File modified during XXI century in process of creating UnNetHackPlus */
 /*	Copyright (c) 1989 by Jean-Christophe Collet */
 /* NetHack may be freely redistributed.  See license for details. */
 

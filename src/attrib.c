@@ -1,4 +1,4 @@
-/*	SCCS Id: @(#)attrib.c	3.4	2002/10/07	*/
+/* File modified during XXI century in process of creating UnNetHackPlus */
 /*	Copyright 1988, 1989, 1990, 1992, M. Stephenson		  */
 /* NetHack may be freely redistributed.  See license for details. */
 

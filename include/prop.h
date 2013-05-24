@@ -1,4 +1,4 @@
-/*	SCCS Id: @(#)prop.h	3.4	1999/07/07	*/
+/* File modified during XXI century in process of creating UnNetHackPlus */
 /* Copyright (c) 1989 Mike Threepoint				  */
 /* NetHack may be freely redistributed.  See license for details. */
 

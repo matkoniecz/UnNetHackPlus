@@ -1,4 +1,4 @@
-/*	SCCS Id: @(#)nhlan.c	3.4	1999/11/21	*/
+/* File modified during XXI century in process of creating UnNetHackPlus */
 /* Copyright (c) Michael Allison, 1997                  */
 /* NetHack may be freely redistributed.  See license for details. */
 

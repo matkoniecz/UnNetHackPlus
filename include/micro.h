@@ -1,4 +1,4 @@
-/*	SCCS Id: @(#)micro.h	3.4	1990/02/22	*/
+/* File modified during XXI century in process of creating UnNetHackPlus */
 /* micro.h - function declarations for various microcomputers */
 /* NetHack may be freely redistributed.  See license for details. */
 

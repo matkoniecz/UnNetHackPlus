@@ -1,4 +1,4 @@
-/*	SCCS Id: @(#)steed.c	3.4	2003/01/10	*/
+/* File modified during XXI century in process of creating UnNetHackPlus */
 /* Copyright (c) Kevin Hugo, 1998-1999. */
 /* NetHack may be freely redistributed.  See license for details. */
 

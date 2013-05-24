@@ -1,4 +1,4 @@
-/*	SCCS Id: @(#)timeout.h	3.4	1999/02/13	*/
+/* File modified during XXI century in process of creating UnNetHackPlus */
 /* Copyright 1994, Dean Luick					  */
 /* NetHack may be freely redistributed.  See license for details. */
 

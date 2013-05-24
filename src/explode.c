@@ -1,4 +1,4 @@
-/*	SCCS Id: @(#)explode.c	3.4	2002/11/10	*/
+/* File modified during XXI century in process of creating UnNetHackPlus */
 /*	Copyright (C) 1990 by Ken Arromdee */
 /* NetHack may be freely redistributed.  See license for details. */
 

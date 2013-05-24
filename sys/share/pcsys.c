@@ -1,4 +1,4 @@
-/*	SCCS Id: @(#)pcsys.c	3.4	2002/01/22		  */
+/* File modified during XXI century in process of creating UnNetHackPlus */
 /* NetHack may be freely redistributed.  See license for details. */
 
 /*

@@ -1,4 +1,4 @@
-/*	SCCS Id: @(#)tutorial.c	3.4	2009/09/05	*/
+/* File modified during XXI century in process of creating UnNetHackPlus */
 /*	Copyright 2009, Alex Smith		  */
 /* NetHack may be freely redistributed.  See license for details. */
 

@@ -1,4 +1,4 @@
-/*	SCCS Id: @(#)tile2bmp.c	3.4	2002/03/14	*/
+/* File modified during XXI century in process of creating UnNetHackPlus */
 /*   Copyright (c) NetHack PC Development Team 1995                 */
 /*   NetHack may be freely redistributed.  See license for details. */
 

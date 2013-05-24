@@ -1,4 +1,4 @@
-/*	SCCS Id: @(#)wingem.h	3.4	1999/12/10	*/
+/* File modified during XXI century in process of creating UnNetHackPlus */
 /* Copyright (c) Christian Bressler, 1999				  */
 /* NetHack may be freely redistributed.  See license for details. */
 

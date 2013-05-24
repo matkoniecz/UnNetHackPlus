@@ -1,4 +1,4 @@
-/*	SCCS Id: @(#)nttty.c	3.4	$Date: 2003/11/15 00:39:32 $   */
+/* File modified during XXI century in process of creating UnNetHackPlus */
 /* Copyright (c) NetHack PC Development Team 1993    */
 /* NetHack may be freely redistributed.  See license for details. */
 

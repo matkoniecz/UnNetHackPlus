@@ -1,4 +1,4 @@
-/*	SCCS Id: @(#)quest.c	3.4	2000/05/05	*/
+/* File modified during XXI century in process of creating UnNetHackPlus */
 /*	Copyright 1991, M. Stephenson		  */
 /* NetHack may be freely redistributed.  See license for details. */
 

@@ -1,4 +1,4 @@
-/*	SCCS Id: @(#)monattk.h	3.4	2002/03/24	*/
+/* File modified during XXI century in process of creating UnNetHackPlus */
 /* NetHack may be freely redistributed.  See license for details. */
 /* Copyright 1988, M. Stephenson */
 

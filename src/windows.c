@@ -1,4 +1,4 @@
-/*	SCCS Id: @(#)windows.c	3.4	1996/05/19	*/
+/* File modified during XXI century in process of creating UnNetHackPlus */
 /* Copyright (c) D. Cohrs, 1993. */
 /* NetHack may be freely redistributed.  See license for details. */
 

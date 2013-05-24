@@ -1,4 +1,4 @@
-/*	SCCS Id: @(#)drawing.c	3.4	1999/12/02	*/
+/* File modified during XXI century in process of creating UnNetHackPlus */
 /* Copyright (c) NetHack Development Team 1992.			  */
 /* NetHack may be freely redistributed.  See license for details. */
 

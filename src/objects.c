@@ -1,4 +1,4 @@
-/*	SCCS Id: @(#)objects.c	3.4	2002/07/31	*/
+/* File modified during XXI century in process of creating UnNetHackPlus */
 /* Copyright (c) Mike Threepoint, 1989.				  */
 /* NetHack may be freely redistributed.  See license for details. */
 

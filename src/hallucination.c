@@ -1,3 +1,5 @@
+/* File modified during XXI century in process of creating UnNetHackPlus */
+/* Copyright (c) Stichting Mathematisch Centrum, Amsterdam, 1985. */
 /* NetHack may be freely redistributed.  See license for details. */
 /* This file contains functions producing bogus text replacement for various things during hallucination (for example - monsters, colors).
  * Significant amount of logic related to displaying stuff on the screen is handled by display code (defines in include\display.h etc)

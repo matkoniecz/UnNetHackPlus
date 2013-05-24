@@ -1,4 +1,4 @@
-/*	SCCS Id: @(#)qt_kde0.h	3.4	1999/11/19	*/
+/* File modified during XXI century in process of creating UnNetHackPlus */
 /* Copyright (c) Warwick Allison, 1999. */
 /* NetHack may be freely redistributed.  See license for details. */
 

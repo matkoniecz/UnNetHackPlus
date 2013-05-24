@@ -1,4 +1,4 @@
-/*	SCCS Id: @(#)mail.h	3.4	1991/10/11	*/
+/* File modified during XXI century in process of creating UnNetHackPlus */
 /* NetHack may be freely redistributed.  See license for details. */
 
 /* used by ckmailstatus() to pass information to the mail-daemon in newmail() */

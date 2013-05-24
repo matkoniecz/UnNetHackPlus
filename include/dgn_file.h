@@ -1,4 +1,4 @@
-/*	SCCS Id: @(#)dgn_file.h 3.4	1993/01/17	*/
+/* File modified during XXI century in process of creating UnNetHackPlus */
 /* Copyright (c) 1989 by M. Stephenson				  */
 /* NetHack may be freely redistributed.  See license for details. */
 

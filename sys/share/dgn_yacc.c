@@ -31,7 +31,7 @@ extern int YYPARSE_DECL();
 static int yygrowstack(void);
 #define YYPREFIX "yy"
 #line 2 "dgn_comp.y"
-/*	SCCS Id: @(#)dgn_comp.c	3.4	1996/06/22	*/
+/* File modified during XXI century in process of creating UnNetHackPlus */
 /*	Copyright (c) 1989 by Jean-Christophe Collet */
 /*	Copyright (c) 1990 by M. Stephenson				  */
 /* NetHack may be freely redistributed.  See license for details. */

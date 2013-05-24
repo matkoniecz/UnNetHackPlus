@@ -1,4 +1,4 @@
-/*	SCCS Id: @(#)nhraykey.c	3.4	$Date: 2003/11/01 23:57:00 $   */
+/* File modified during XXI century in process of creating UnNetHackPlus */
 /* Copyright (c) NetHack PC Development Team 2003                      */
 /* NetHack may be freely redistributed.  See license for details.      */
 

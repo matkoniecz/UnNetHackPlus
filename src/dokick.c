@@ -1,4 +1,4 @@
-/*	SCCS Id: @(#)dokick.c	3.4	2003/12/04	*/
+/* File modified during XXI century in process of creating UnNetHackPlus */
 /* Copyright (c) Izchak Miller, Mike Stephenson, Steve Linhart, 1989. */
 /* NetHack may be freely redistributed.  See license for details. */
 

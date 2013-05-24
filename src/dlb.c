@@ -1,4 +1,4 @@
-/*	SCCS Id: @(#)dlb.c	3.4	1997/07/29	*/
+/* File modified during XXI century in process of creating UnNetHackPlus */
 /* Copyright (c) Kenneth Lorber, Bethesda, Maryland, 1993. */
 /* NetHack may be freely redistributed.  See license for details. */
 

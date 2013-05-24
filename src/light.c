@@ -1,4 +1,4 @@
-/*	SCCS Id: @(#)light.c	3.4	1997/04/10	*/
+/* File modified during XXI century in process of creating UnNetHackPlus */
 /* Copyright (c) Dean Luick, 1994					*/
 /* NetHack may be freely redistributed.  See license for details.	*/
 

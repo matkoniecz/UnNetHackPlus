@@ -1,4 +1,4 @@
-/*	SCCS Id: @(#)monsym.h	3.4	1992/10/18	*/
+/* File modified during XXI century in process of creating UnNetHackPlus */
 /*	Monster symbols and creation information rev 1.0	  */
 /* NetHack may be freely redistributed.  See license for details. */
 

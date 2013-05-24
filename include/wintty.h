@@ -1,4 +1,4 @@
-/*	SCCS Id: @(#)wintty.h	3.4	1996/02/18	*/
+/* File modified during XXI century in process of creating UnNetHackPlus */
 /* Copyright (c) David Cohrs, 1991,1992				  */
 /* NetHack may be freely redistributed.  See license for details. */
 

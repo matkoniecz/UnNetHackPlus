@@ -1,4 +1,4 @@
-/*	SCCS Id: @(#)display.h	3.4	1999/11/30	*/
+/* File modified during XXI century in process of creating UnNetHackPlus */
 /* Copyright (c) Dean Luick, with acknowledgements to Kevin Darcy */
 /* and Dave Cohrs, 1990.					  */
 /* NetHack may be freely redistributed.  See license for details. */

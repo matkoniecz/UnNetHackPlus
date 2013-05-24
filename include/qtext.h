@@ -1,4 +1,4 @@
-/*	SCCS Id: @(#)qtext.h	3.4	1997/02/02	*/
+/* File modified during XXI century in process of creating UnNetHackPlus */
 /* Copyright (c) Mike Stephenson 1991.				  */
 /* NetHack may be freely redistributed.  See license for details. */
 
