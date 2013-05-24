@@ -4035,7 +4035,7 @@ const char* food_wares[] = {
 	"Sausage inna bun!  Hot sausage!",
 	"Genuine pig parts, these. So good most pigs don't even know they got 'em.",
 	/* by kzastle from reddit */
-	"Our sausages are guaranteed 75% goblin-free!",
+	"Our sausages are guaranteed 75%% goblin-free!",
 };
 const char* ring_wares[] = {
 	/* From SporHack */
