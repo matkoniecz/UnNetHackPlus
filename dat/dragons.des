@@ -94,7 +94,6 @@ PP--    --TTTT..............................------   -------
 ENDMAP
 
 NON_DIGGABLE: (64,06,75,15)
-REGION: (67,09,72,11),lit,"dragon shop"
 DOOR: open,(66,10)
 
 STAIR: (00,00,63,20),(0,0,0,0),up
