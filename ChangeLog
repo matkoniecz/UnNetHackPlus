@@ -72,6 +72,8 @@
 		- Mind flayers and vampires with sound mind will not attempt to eat during fight
 		- Name is no longer checked on entering debug mode
 		- Decluttered ingame option menu
+		- Autoopen and autounlock are no longer optional
+		- "open" command removed, 'o' is now additional command to initiate sacrifice
 	* Grinding elimination
 		- Chance of wand wresting raised to 1/11
 		- Carrying digging tools to shop is no longer blocked
