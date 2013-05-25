@@ -155,7 +155,7 @@ static struct Bool_Opt
 	{"paranoid_hit", &iflags.paranoid_hit, TRUE, SET_IN_GAME},
 	{"paranoid_quit", &iflags.paranoid_quit, TRUE, SET_IN_GAME},
 	{"paranoid_remove", &iflags.paranoid_remove, FALSE, SET_IN_GAME},
-	{"paranoid_trap", &iflags.paranoid_trap, FALSE, SET_IN_GAME},
+	{"paranoid_trap", &iflags.paranoid_trap, TRUE, SET_IN_GAME},
 	{"perm_invent", &flags.perm_invent, FALSE, SET_IN_GAME},
 	{"pickup_dropped", &flags.pickup_dropped, FALSE, SET_IN_GAME},
 	{"pickup_thrown", &flags.pickup_thrown, TRUE, SET_IN_GAME},
