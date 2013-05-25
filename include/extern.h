@@ -1948,7 +1948,7 @@ E void FDECL(add_damage, (xchar,xchar,long));
 E int FDECL(repair_damage, (struct monst *,struct damage *,boolean));
 E int FDECL(shk_move, (struct monst *));
 E void FDECL(after_shk_move, (struct monst *));
-E boolean FDECL(is_fshk, (struct monst *));
+E boolean FDECL(is_following_shopkeeper, (struct monst *));
 E void FDECL(shopdig, (int));
 E void FDECL(pay_for_damage, (const char *,boolean));
 E boolean FDECL(costly_spot, (xchar,xchar));

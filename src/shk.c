@@ -3462,7 +3462,7 @@ struct monst *shkp;
 
 /* for use in levl_follower (mondata.c) */
 boolean
-is_fshk(mtmp)
+is_following_shopkeeper(mtmp)
 struct monst *mtmp;
 {
 	return((boolean)(mtmp->isshk && ESHK(mtmp)->following));
