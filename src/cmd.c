@@ -1578,7 +1578,6 @@ static const struct func_tab cmdlist[] = {
 	{'N', TRUE, ddocall, NULL}, /* if number_pad is on */
 	{M('n'), TRUE, ddocall, NULL},
 	{M('N'), TRUE, ddocall, NULL},
-	{'o', FALSE, doopen, NULL},
 	{'O', TRUE, doset, NULL},
 	{M('o'), FALSE, dosacrifice, NULL},
 	{'p', FALSE, dopay, NULL},

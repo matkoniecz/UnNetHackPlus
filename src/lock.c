@@ -515,12 +515,6 @@ doforce()		/* try to force a chest with your weapon */
 }
 
 int
-doopen()		/* try to open a door */
-{
-	return doopen_indir(0, 0);
-}
-
-int
 doopen_indir(x, y)		/* try to open a door in direction u.dx/u.dy */
 	int x, y;		/* if true, prompt for direction */
 {

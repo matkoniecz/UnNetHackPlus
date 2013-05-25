@@ -139,7 +139,6 @@
 /* ### lock.c ### */
 #define doclose()   doclose_()
 #define doforce()   doforce_()
-#define doopen()    doopen_()
 #define forcelock() forcelock_()
 #define picklock()  picklock_()
 
