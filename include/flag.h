@@ -24,7 +24,7 @@ struct flag {
 #endif
 	boolean  autodig;       /* MRKR: Automatically dig */
 	boolean  autoquiver;	/* Automatically fill quiver */
-	boolean  autounlock;	/* Automatically apply unlocking tool */
+	boolean  autounlock;	/* OBSOLETE - always enabled */
 	boolean  beginner;
 #ifdef MAIL
 	boolean  biff;		/* enable checking for mail */
@@ -347,7 +347,7 @@ struct instance_flags {
 #ifdef REALTIME_ON_BOTL
 	boolean  showrealtime; /* show actual elapsed time */
 #endif
-	boolean  autoopen;	/* open doors by walking into them */
+	boolean  autoopen;	/* OBSOLETE - always enabled */
 	boolean  dark_room;	/* show shadows in lit rooms */
 	boolean  vanilla_ui_behavior;	/* fall back to vanilla behavior */
 	boolean  show_annotation;	/* level annotation when entering level */

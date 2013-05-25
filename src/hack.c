@@ -906,8 +906,7 @@ int mode;
 		if (mode == DO_MOVE) {
 		    if (amorphous(youmonst.data))
 			You("try to ooze under the door, but can't squeeze your possessions through.");
-		    else if (iflags.autoopen
-				&& !Confusion && !Stunned && !Fumbling) {
+		    else if (!Confusion && !Stunned && !Fumbling) {
 			    door_opened = flags.move = doopen_indir(x, y);
 		    }
 		    else if (x == ux || y == uy) {

@@ -1683,8 +1683,6 @@ Cannot be set with the `O' command.
 .lp autodig
 Automatically dig if you are wielding a digging tool and moving into a place
 that can be dug (default false).
-.lp autoopen
-Walking into a door attempts to open it (default true).
 .lp "autopickup  "
 Automatically pick up things onto which you move (default on). 
 See
@@ -1698,8 +1696,6 @@ into account the blessed/cursed status, enchantment, damage, or
 quality of the weapon; you are free to manually fill your quiver with
 the `Q' command instead.  If no weapon is found or the option is
 false, the `t' (throw) command is executed instead.  (default false)
-.lp autounlock
-Automatically apply unlocking tool when trying to open a locked door or container (default true).
 .lp boulder
 Set the character used to display boulders (default is rock class symbol).
 .lp catname

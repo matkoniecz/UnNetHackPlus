@@ -43,10 +43,10 @@ static struct Bool_Opt
 	{"asksavedisk", (boolean *)0, FALSE, SET_IN_FILE},
 #endif
 	{"autodig", &flags.autodig, FALSE, SET_IN_GAME},
-	{"autoopen", &iflags.autoopen, TRUE, SET_IN_GAME},
+	{"autoopen", &iflags.autoopen, TRUE, SET_IN_FILE}, /* OBSOLETE - always enabled */
 	{"autopickup", &flags.pickup, TRUE, SET_IN_GAME},
 	{"autoquiver", &flags.autoquiver, FALSE, SET_IN_GAME},
-	{"autounlock", &flags.autounlock, TRUE, SET_IN_GAME},
+	{"autounlock", &flags.autounlock, TRUE, SET_IN_FILE}, /* OBSOLETE - always enabled */
 #if defined(MICRO)
 	{"BIOS", &iflags.BIOS, FALSE, SET_IN_FILE},
 #else

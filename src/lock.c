@@ -583,10 +583,9 @@ doopen_indir(x, y)		/* try to open a door in direction u.dx/u.dy */
 	    if (Blind) feel_location(cc.x,cc.y);
 	    if (locked) {
 		struct obj *otmp = NULL;
-		if (flags.autounlock &&
-		    ((otmp = carrying(SKELETON_KEY)) ||
+		if ((otmp = carrying(SKELETON_KEY)) ||
 		     (otmp = carrying(CREDIT_CARD)) ||
-		     (otmp = carrying(LOCK_PICK)))) {
+		     (otmp = carrying(LOCK_PICK))) {
 			pick_lock(otmp, cc.x, cc.y, TRUE);
 		}
 	    }
