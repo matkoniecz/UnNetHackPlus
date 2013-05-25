@@ -29,7 +29,7 @@
 #define wiz_detect()	   wiz_detect_()
 #define wiz_genesis()	   wiz_genesis_()
 #define wiz_identify()	   wiz_identify_()
-#define wiz_level_tele()   wiz_level_tele_()
+#define wiz_level_tele_or_tutorial_review()   wiz_level_tele_or_tutorial_review_()
 #define wiz_map()	   wiz_map_()
 #define wiz_where()	   wiz_where_()
 #define wiz_wish()	   wiz_wish_()

@@ -157,7 +157,7 @@ E int NDECL(enter_explore_mode);
 E int NDECL(wiz_detect);
 E int NDECL(wiz_genesis);
 E int NDECL(wiz_identify);
-E int NDECL(wiz_level_tele);
+E int NDECL(wiz_level_tele_or_tutorial_review);
 E int NDECL(wiz_map);
 E int NDECL(wiz_where);
 E int NDECL(wiz_wish);

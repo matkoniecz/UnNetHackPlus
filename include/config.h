@@ -418,19 +418,9 @@ typedef long glyph_t;
 #define BLACKMARKET	/* Massimo Campostrini (campo@sunthpi3.difi.unipi.it) */
 #define PARANOID
 #define REINCARNATION	/* Special Rogue-like levels */
-
-/* End of Section 7 */
-
-/*
- * Section 8:  FICTIONAL DEFINES THAT MUST BE DEFINED
- *
- * Commenting out these defines is not allowes, as #ifdef etc were removed from code 
- * and features are incorporated into UnNetHackPlus without evil preprocessor instructions littering code
- * and some potentialy useful code was included without this one
- */
 #define WIZARD
 
-/* End of Section 8 */
+/* End of Section 7 */
 
 #include "global.h"	/* Define everything else according to choices above */
 

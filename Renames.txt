@@ -7,6 +7,7 @@ function: rndmonnam to get_bogus_monster_name - to unify hallucination related n
 function: rnd_gname to get_bogus_god_name - to unify hallucination related names and properly describe returned result
 function: get_bogus_color_name() should be called instead of hcolor((char *)0)
 function: is_fshk to is_following_shopkeeper - not so cryptic
+function: wiz_level_tele to wiz_level_tele_or_tutorial_review - proper description
 member of you structure: weapon_slots to unused_skill_slots - old name was extremely confusing, new one should be example of self-documenting code
 member of you structure: questart to quest_artifact - short != good 
 member of Role structure: questarti to quest_artifact_index - short != good

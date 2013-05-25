@@ -47,7 +47,7 @@ STATIC_PTR int NDECL(wiz_detect);
 #endif
 STATIC_PTR int NDECL(wiz_panic);
 STATIC_PTR int NDECL(wiz_polyself);
-STATIC_PTR int NDECL(wiz_level_tele);
+STATIC_PTR int NDECL(wiz_level_tele_or_tutorial_review);
 STATIC_PTR int NDECL(wiz_level_change);
 STATIC_PTR int NDECL(wiz_show_seenv);
 STATIC_PTR int NDECL(wiz_show_vision);
@@ -568,7 +568,7 @@ wiz_detect()
 
 /* ^V command - level teleport, or tutorial review */
 STATIC_PTR int
-wiz_level_tele()
+wiz_level_tele_or_tutorial_review()
 {
 	if (wizard)	level_tele();
 	else if(flags.tutorial)
@@ -1536,11 +1536,9 @@ static const struct func_tab cmdlist[] = {
 	{C('p'), TRUE, doprev_message, NULL},
 	{C('r'), TRUE, doredraw, NULL},
 	{C('t'), TRUE, dotele, NULL},
-	{C('v'), TRUE, wiz_level_tele, NULL},
+	{C('v'), TRUE, wiz_level_tele_or_tutorial_review, NULL},
 	{C('w'), TRUE, wiz_wish, NULL},
-#if !defined(WIZARD)
-	{C('v'), TRUE, tutorial_redisplay, NULL},
-#endif
+	{C('b'), TRUE, tutorial_redisplay, NULL}, /* to redisplay tutorial in wizmode */
 	{C('x'), TRUE, doattributes, NULL},
 #ifdef SUSPEND
 	{C('z'), TRUE, dosuspend, NULL},
