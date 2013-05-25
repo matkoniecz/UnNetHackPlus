@@ -64,8 +64,8 @@ static struct Bool_Opt
 	{"checkspace", (boolean *)0, FALSE, SET_IN_FILE},
 #endif
 	{"cmdassist", &iflags.cmdassist, TRUE, SET_IN_GAME},
-	{"color", &iflags.wc_color, TRUE, SET_IN_GAME},		/*WC*/
-	{"confirm",&flags.confirm, TRUE, SET_IN_GAME},
+	{"color", &iflags.wc_color, TRUE, SET_IN_FILE},		/*WC*/
+	{"confirm",&flags.confirm, TRUE, SET_IN_FILE},
 #ifdef CURSES_GRAPHICS
 	{"cursesgraphics", &iflags.cursesgraphics, TRUE, SET_IN_GAME},
 #else
@@ -85,7 +85,7 @@ static struct Bool_Opt
 #endif
 	{"fast_map", (boolean *)0, TRUE, SET_IN_FILE}, /* OBSOLETE after removal of OPT_DISPMAP define */
 	{"female", &flags.female, FALSE, DISP_IN_GAME},
-	{"fixinv", &flags.invlet_constant, TRUE, SET_IN_GAME},
+	{"fixinv", &flags.invlet_constant, TRUE, SET_IN_FILE},
 #ifdef AMIFLUSH
 	{"flush", &flags.amiflush, FALSE, SET_IN_GAME},
 #else
@@ -94,16 +94,16 @@ static struct Bool_Opt
 	{"fullscreen", &iflags.wc2_fullscreen, FALSE, SET_IN_FILE},
 	{"guicolor", &iflags.wc2_guicolor, TRUE, SET_IN_GAME},
 	{"help", &flags.help, TRUE, SET_IN_GAME},
-	{"hilite_pet",    &iflags.wc_hilite_pet, TRUE, SET_IN_GAME},	/*WC*/
+	{"hilite_pet",    &iflags.wc_hilite_pet, TRUE, SET_IN_FILE},	/*WC*/
 	{"hint", &iflags.hint, TRUE, SET_IN_FILE},
-	{"hitpointbar", &flags.hitpointbar, TRUE, SET_IN_GAME},
+	{"hitpointbar", &flags.hitpointbar, TRUE, SET_IN_FILE},
 #ifdef ASCIIGRAPH
 	{"IBMgraphics", &iflags.IBMgraphics, FALSE, SET_IN_GAME},
 #else
 	{"IBMgraphics", (boolean *)0, FALSE, SET_IN_FILE},
 #endif
 #ifndef MAC
-	{"ignintr", &flags.ignintr, FALSE, SET_IN_GAME},
+	{"ignintr", &flags.ignintr, FALSE, SET_IN_FILE},
 #else
 	{"ignintr", (boolean *)0, FALSE, SET_IN_FILE},
 #endif
@@ -135,7 +135,7 @@ static struct Bool_Opt
 #ifdef CURSES_GRAPHICS
 	{"mouse_support", &iflags.wc_mouse_support, FALSE, DISP_IN_GAME},	/*WC*/
 #else
-	{"mouse_support", &iflags.wc_mouse_support, TRUE, DISP_IN_GAME},	/*WC*/
+	{"mouse_support", &iflags.wc_mouse_support, TRUE, SET_IN_FILE},	/*WC*/
 #endif
 	{"newcolors", &iflags.wc2_newcolors, TRUE, SET_IN_FILE},
 	{"conducts_ascet", &flags.ascet, FALSE, SET_IN_FILE },
@@ -177,13 +177,13 @@ static struct Bool_Opt
 	{"rawio", (boolean *)0, FALSE, SET_IN_FILE},
 #endif
 	{"rest_on_space", &flags.rest_on_space, FALSE, SET_IN_FILE},
-	{"safe_pet", &flags.safe_dog, TRUE, SET_IN_GAME},
+	{"safe_pet", &flags.safe_dog, TRUE, SET_IN_FILE},
 	{"sanity_check", &iflags.sanity_check, FALSE, SET_IN_GAME},
 	{"showannotation", &iflags.show_annotation, TRUE, SET_IN_FILE},
-	{"showborn", &iflags.show_born, TRUE, SET_IN_GAME},
+	{"showborn", &iflags.show_born, TRUE, SET_IN_FILE},
 	{"showbuc", &iflags.show_buc, TRUE, SET_IN_GAME},
 	{"showdmg", &iflags.showdmg, FALSE, SET_IN_GAME},
-	{"show_dgn_name", &iflags.show_dgn_name, TRUE, SET_IN_GAME},
+	{"show_dgn_name", &iflags.show_dgn_name, TRUE, SET_IN_FILE},
 	{"showexp", &flags.showexp, FALSE, SET_IN_GAME},
 	{"showrace", &iflags.showrace, FALSE, SET_IN_GAME},
 #ifdef REALTIME_ON_BOTL
@@ -214,7 +214,7 @@ static struct Bool_Opt
 #else
 	{"timed_delay", (boolean *)0, FALSE, SET_IN_GAME},
 #endif
-	{"tombstone",&flags.tombstone, TRUE, SET_IN_GAME},
+	{"tombstone",&flags.tombstone, TRUE, SET_IN_FILE},
 	{"toptenwin",&flags.toptenwin, FALSE, SET_IN_GAME},
 	{"travel", &iflags.travelcmd, TRUE, SET_IN_FILE}, /*OBSOLETE*/
 #ifdef UTF8_GLYPHS
@@ -222,7 +222,7 @@ static struct Bool_Opt
 #else
 	{"UTF8graphics", (boolean *)0, FALSE, SET_IN_FILE},
 #endif
-	{"use_inverse",   &iflags.wc_inverse, TRUE, SET_IN_GAME},		/*WC*/
+	{"use_inverse",   &iflags.wc_inverse, TRUE, SET_IN_FILE},		/*WC*/
 #ifdef WIN_EDGE
 	{"win_edge", &iflags.win_edge, FALSE, SET_IN_GAME},
 #else
