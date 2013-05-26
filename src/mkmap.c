@@ -370,9 +370,7 @@ joinm:
 }
 
 STATIC_OVL void
-finish_map(fg_typ, bg_typ, lit, walled)
-	schar	fg_typ, bg_typ;
-	boolean	lit, walled;
+finish_map(schar fg_typ, schar bg_typ, boolean lit, boolean walled)
 {
 	int	i, j;
 
