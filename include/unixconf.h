@@ -63,12 +63,6 @@
 			 * Linux, Solaris 2.x
 			 */
 
-/* #define MICROPORT_BUG */	/* problems with large arrays in structs */
-/* #define MICROPORT_286_BUG */ /* changes needed in termcap.c to get it to
-				   run with Microport Sys V/AT version 2.4.
-				   By Jay Maynard */
-/* #define AIXPS_2BUG */	/* avoid a problem with little_to_big() optimization */
-
 /* #define RANDOM */		/* if neither random/srandom nor lrand48/srand48
 				   is available from your system */
 
