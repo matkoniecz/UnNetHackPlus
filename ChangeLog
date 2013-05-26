@@ -36,6 +36,7 @@
 		- C343-406 "One of the coyote names is spelled wrong"
 		- C343-95 "If killed by the wish from a magic lamp (or similar situation) and a bones file is produced, the bones file has the lamp in the wrong state." (from GruntHack)
 		- C343-58 "#conduct command description grammar is poor" (from GruntHack)
+		- C343-57 "#enhance command descriptions in Guidebook and game do not match. " (from GruntHack)
 		Patches are linked at http://nethackwiki.com/wiki/User:Bulwersator/UnNetHackPlus_bug_tracking
 	* UnNetHack bug fixes
 		- #143 Angered quest guardians will no longer go berserk.
