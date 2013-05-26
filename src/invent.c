@@ -1583,6 +1583,10 @@ ret:
 	return(cnt);
 }
 
+/* Color-code dragon and its baby form according to its attack
+ * mark its DSM and scales as identified
+ * request screen redraw if necessary
+ */
 void 
 identify_dragon(int number)
 {
