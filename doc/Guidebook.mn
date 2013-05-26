@@ -2010,7 +2010,7 @@ than the original NetHack palette. If black is not shown as dark gray,
 disable this option (default on).
 Cannot be set with the `O' command.
 .lp "null    "
-Send padding nulls to the terminal (default off).
+Send padding nulls to the terminal (default on).
 .lp number_pad
 Use the number keys to move instead of [yuhjklbn] (default 0 or off).
 (number_pad:2 invokes the old DOS behavior where `5' means `g', meta-`5'
