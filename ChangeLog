@@ -97,7 +97,7 @@
 		- generated objects may be eroded or fixed
 		- reduced amount of food on lower levels
 	* Reworked amnesia - mind flayers now target spells and skills instead of level and item memory
-	* Warning is now providing information also about "weak" ones
+	* Warning is now providing information also about "weak" monsters
 	* Dunce cap protects again mind flayer amnesia
 	* Poison gas blasts leave a trail of stinking clouds (based on work by "L" - Leon Arnott)
 	* Assorted YAFMs 1.0 by Adam Borowski, slightly modified
