@@ -2159,16 +2159,21 @@ char *cmd;
 #endif
 		check_tutorial_command(*cmd & 0xff);
 
-		/* we discard 'const' because some compilers seem to have
-		 * trouble with the pointer passed to set_occupation() 
-		 */
-		func = ((struct func_tab *)tlist)->f_funct;
-		if (tlist->f_text && !occupation && multi) {
-			set_occupation(func, tlist->f_text, multi);
+		if (is_player_stuck_in_wall() && !tlist->can_if_buried) {
+			You_cant("do that while you are buried!");
+			res = 0;
+		} else {
+			/* we discard 'const' because some compilers seem to have
+			 * trouble with the pointer passed to set_occupation() 
+			 */
+			func = ((struct func_tab *)tlist)->f_funct;
+			if (tlist->f_text && !occupation && multi) {
+				set_occupation(func, tlist->f_text, multi);
+			}
+			/* remember pressed character */
+			last_cmd_char = *cmd;
+			res = (*func)();		/* perform the command */
 		}
-		/* remember pressed character */
-		last_cmd_char = *cmd;
-		res = (*func)();		/* perform the command */
 
 		if (!res) {
 		    flags.move = FALSE;
