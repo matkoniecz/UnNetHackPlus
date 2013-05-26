@@ -2972,9 +2972,13 @@ typfnd:
 
 	if (isgreased) otmp->greased = 1;
 
-	if (isdiluted && otmp->oclass == POTION_CLASS &&
-			otmp->otyp != POT_WATER)
-		otmp->odiluted = 1;
+	if (otmp->oclass == POTION_CLASS) {
+		if (isdiluted && otmp->otyp != POT_WATER) {
+			otmp->odiluted = 1;
+		} else {
+			otmp->odiluted = 0;
+		}
+	}
 
 	if (name) {
 		const char *aname;
