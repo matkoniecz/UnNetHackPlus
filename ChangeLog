@@ -29,6 +29,7 @@
 		- C343-302 "Amnesia of object discoveries may forget to forget one thing."
 		- C343-134 "Being petrified by swallowing a cockatrice violates foodless conduct."
 		- Two bugs relating to items vanishing from cursed bags of holding. 1) It doesn't use up a turn. 2) If it causes you to become unencumbered, the message saying so doesn't come until the following turn. (patch by Michael Lehotay)
+		- C343-383 "Applying a bullwhip while hero is at edge of map may cause a panic or crash"
 		Patches are linked at http://nethackwiki.com/wiki/User:Bulwersator/UnNetHackPlus_bug_tracking
 	* UnNetHack bug fixes
 		- #143 Angered quest guardians will no longer go berserk.
