@@ -80,7 +80,7 @@
 		- Fire traps removed from Plane of Fire
 		- It is no longer necessary to activate Elbereths
 	* Merging in the best part of SporkHack
-		- Destroy armor and touch of death changed to not be fully blocked by antimagic. ToD is no longer causing instadeath.
+		- Destroy armor and touch of death changed to not be fully blocked by magic resistance. ToD is no longer causing instadeath.
 		- Sacrifice gifts - you may get also armor, normal weapons (fooproof and enchanted)
 		- Effects of anti-magic field should be now noticeable and it will affect also monsters
 		- Nazgul scream attack added
