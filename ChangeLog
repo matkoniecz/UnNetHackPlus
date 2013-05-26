@@ -3,7 +3,6 @@
 		- C343-14 "tombstone message resulting from eating an identified artifact is gramatically incorrect" fixed (from GruntHack)
 		- Successful prayer now protects against stinking cloud (from GruntHack)
 		- C343-438: "Typo "gold piecess" may occur when selling items in a container" fixed (from GruntHack)
-		- Sacrifice that fits many cases (own race + former pet, unicorn + former pet, own race + crossaligned high altar etc) is handled properly
 		- Genociding your pet or peaceful monsters is no longer OK
 		- Bare-hands now gets an actual bonus (from Spork)
 		- Colour of mithril objects is now correct 
