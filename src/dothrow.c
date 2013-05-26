@@ -868,9 +868,7 @@ boolean twoweap; /* used to restore twoweapon mode if wielded weapon returns */
 			   Hallucination || Fumbling);
 
 	obj->was_thrown = TRUE;
-	/* UnNetHack: The chances of slipping a cursed greased object have been
-	 * separated.
-	 * Additionally, throwing unskilled or restricted now causes slipping to
+	/* Throwing unskilled or restricted causes slipping to
 	 * make it harder and to discourage role- or race-atypical fighting (and
 	 * because of real life experience in throwing darts ...)
 	 */
