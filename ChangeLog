@@ -94,7 +94,7 @@
 	* Object generation modified 
 		- lowered amount of death drops
 		- more objects on the floor
-		- generated objects may be eroded or fixed
+		- generated objects may be eroded or fixed (inspired by SporkHack)
 		- reduced amount of food on lower levels
 	* Reworked amnesia - mind flayers now target spells and skills instead of level and item memory
 	* Warning is now providing information also about "weak" monsters
