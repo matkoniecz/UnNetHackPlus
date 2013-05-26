@@ -724,7 +724,7 @@ void curses_choose_character()
         flags.randomall = TRUE;
     }
 #ifdef TUTORIAL_MODE
-    else if (pick4u == 't') /* Tutorial mode in UnNetHack */
+    else if (pick4u == 't') /* Tutorial mode in UnNetHackPlus */
     {
 	    clear();
         mvaddstr(0, 1, "Choose a character");
