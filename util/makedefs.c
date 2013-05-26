@@ -61,8 +61,6 @@ static	const char	SCCS_Id[] = "@(#)makedefs.c\t3.4\t2002/02/03";
 #define MON_STR_C	"monstr.c"
 #define QTXT_I_FILE	"quest.txt"
 #define QTXT_O_FILE	"quest.dat"
-#define VIS_TAB_H	"vis_tab.h"
-#define VIS_TAB_C	"vis_tab.c"
 	/* locations for those files */
 #if defined(MAC) && !defined(__MACH__)
    /* MacOS 9 or earlier */
