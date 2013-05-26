@@ -1641,7 +1641,7 @@ struct ext_func_tab extcmdlist[] = {
 	{"adjust", "adjust inventory letters", doorganize, TRUE},
 	{"annotate", "name current level", donamelevel, TRUE},
 	{"chat", "talk to someone", dotalk, TRUE},	/* converse? */
-	{"conduct", "list which challenges you have adhered to", doconduct, TRUE},
+	{"conduct", "list status of voluntary challenges", doconduct, TRUE},
 	{"dip", "dip an object into something", dodip, FALSE},
 	{"enhance", "advance or check weapons skills", enhance_weapon_skill,
 							TRUE},
