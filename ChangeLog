@@ -33,6 +33,7 @@
 		- C343-343 "Helm of Opposite alignment gives incorrect piety level." (alignment record was unmodified, it was possible to gain alignment for robbing a shop while chaotic and calming the shopkeeper while lawful) (from GruntHack)
 		- C343-115 "Sleeping or paralyzed unicorns can catch gems." (from GruntHack)
 		- C343-409 "Unlocking a mimic pretending to be a door is not handled properly." (from GruntHack)
+		- C343-406 "One of the coyote names is spelled wrong"
 		Patches are linked at http://nethackwiki.com/wiki/User:Bulwersator/UnNetHackPlus_bug_tracking
 	* UnNetHack bug fixes
 		- #143 Angered quest guardians will no longer go berserk.
