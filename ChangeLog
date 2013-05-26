@@ -115,6 +115,7 @@
 	* You really should be careful during new moon.
 	* Land mine and beartrap objects are lightier
 	* Boss type monsters may be generated with an amulet of reflection
+	* Soldiers receive shields of reflection rather than magical items
 	* Player monsters may appear before Astral Plane
 	* New big room variant
 	* Better code (#ifdef removal and uncoditional enabling of code, removal of unused code, refactoring)
