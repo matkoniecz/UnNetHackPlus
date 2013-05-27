@@ -1089,21 +1089,16 @@ static genericptr_t varg;
  * line drawing) for all quadrants.  The algorithm was taken from _Procedural
  * Elements for Computer Graphics_, by David F. Rogers.  McGraw-Hill, 1985.
  */
-STATIC_DCL int FDECL(_q1_path, (int,int,int,int));
-STATIC_DCL int FDECL(_q2_path, (int,int,int,int));
-STATIC_DCL int FDECL(_q3_path, (int,int,int,int));
-STATIC_DCL int FDECL(_q4_path, (int,int,int,int));
-
-#define q1_path(sy,sx,y,x,dummy) result = _q1_path(sy,sx,y,x)
-#define q2_path(sy,sx,y,x,dummy) result = _q2_path(sy,sx,y,x)
-#define q3_path(sy,sx,y,x,dummy) result = _q3_path(sy,sx,y,x)
-#define q4_path(sy,sx,y,x,dummy) result = _q4_path(sy,sx,y,x)
+STATIC_DCL int FDECL(q1_path, (int,int,int,int));
+STATIC_DCL int FDECL(q2_path, (int,int,int,int));
+STATIC_DCL int FDECL(q3_path, (int,int,int,int));
+STATIC_DCL int FDECL(q4_path, (int,int,int,int));
 
 /*
  * Quadrant I (step < 0).
  */
 STATIC_OVL int
-_q1_path(srow,scol,y2,x2)
+q1_path(srow,scol,y2,x2)
     int scol, srow, y2, x2;
 {
     int dx, dy;
@@ -1147,7 +1142,7 @@ _q1_path(srow,scol,y2,x2)
  * Quadrant IV (step > 0).
  */
 STATIC_OVL int
-_q4_path(srow,scol,y2,x2)
+q4_path(srow,scol,y2,x2)
     int scol, srow, y2, x2;
 {
     int dx, dy;
@@ -1191,7 +1186,7 @@ _q4_path(srow,scol,y2,x2)
  * Quadrant II (step < 0).
  */
 STATIC_OVL int
-_q2_path(srow,scol,y2,x2)
+q2_path(srow,scol,y2,x2)
     int scol, srow, y2, x2;
 {
     int dx, dy;
@@ -1235,7 +1230,7 @@ _q2_path(srow,scol,y2,x2)
  * Quadrant III (step > 0).
  */
 STATIC_OVL int
-_q3_path(srow,scol,y2,x2)
+q3_path(srow,scol,y2,x2)
     int scol, srow, y2, x2;
 {
     int dx, dy;
@@ -1290,17 +1285,17 @@ clear_path(col1,row1,col2,row2)
 
     if(col1 < col2) {
 	if(row1 > row2) {
-	    q1_path(row1,col1,row2,col2,cleardone);
+	    result = q1_path(row1,col1,row2,col2);
 	} else {
-	    q4_path(row1,col1,row2,col2,cleardone);
+	    result = q4_path(row1,col1,row2,col2);
 	}
     } else {
 	if(row1 > row2) {
-	    q2_path(row1,col1,row2,col2,cleardone);
+	    result = q2_path(row1,col1,row2,col2);
 	} else if(row1 == row2 && col1 == col2) {
 	    result = 1;
 	} else {
-	    q3_path(row1,col1,row2,col2,cleardone);
+	    result = q3_path(row1,col1,row2,col2);
 	}
     }
     return((boolean)result);
@@ -1401,11 +1396,10 @@ right_side(row, left, right_mark, limits)
 	     */
 	    for (; left <= right_edge; left++) {
 		if (step < 0) {
-		    q1_path(start_row,start_col,row,left,rside1);
+		    result = q1_path(start_row,start_col,row,left);
 		} else {
-		    q4_path(start_row,start_col,row,left,rside1);
+		    result = q4_path(start_row,start_col,row,left);
 		}
-rside1:					/* used if q?_path() is a macro */
 		if (result) break;
 	    }
 
@@ -1452,11 +1446,10 @@ rside1:					/* used if q?_path() is a macro */
 	if (right_mark < right_edge) {
 	    for (right = right_mark; right <= right_edge; right++) {
 		if (step < 0) {
-		    q1_path(start_row,start_col,row,right,rside2);
+		    result = q1_path(start_row,start_col,row,right);
 		} else {
-		    q4_path(start_row,start_col,row,right,rside2);
+		    result = q4_path(start_row,start_col,row,right);
 		}
-rside2:					/* used if q?_path() is a macro */
 		if (!result) break;
 	    }
 	    --right;	/* get rid of the last increment */
@@ -1552,11 +1545,10 @@ left_side(row, left_mark, right, limits)
 	    /* Find the right side. */
 	    for (; right >= left_edge; right--) {
 		if (step < 0) {
-		    q2_path(start_row,start_col,row,right,lside1);
+		    result = q2_path(start_row,start_col,row,right);
 		} else {
-		    q3_path(start_row,start_col,row,right,lside1);
+		    result = q3_path(start_row,start_col,row,right);
 		}
-lside1:					/* used if q?_path() is a macro */
 		if (result) break;
 	    }
 
@@ -1581,11 +1573,10 @@ lside1:					/* used if q?_path() is a macro */
 	if (left_mark > left_edge) {
 	    for (left = left_mark; left >= left_edge; --left) {
 		if (step < 0) {
-		    q2_path(start_row,start_col,row,left,lside2);
+		    result = q2_path(start_row,start_col,row,left);
 		} else {
-		    q3_path(start_row,start_col,row,left,lside2);
+		    result = q3_path(start_row,start_col,row,left);
 		}
-lside2:					/* used if q?_path() is a macro */
 		if (!result) break;
 	    }
 	    left++;	/* get rid of the last decrement */
