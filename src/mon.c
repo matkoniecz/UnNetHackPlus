@@ -288,6 +288,12 @@ struct monst *mtmp;
 			obj = mksobj_at(SCR_BLANK_PAPER, x, y, TRUE, FALSE);
 		mtmp->mnamelth = 0;
 		break;
+	    case PM_WINGED_GARGOYLE:
+		obj = mkcorpstat(STATUE, (struct monst *)0, mdat, x, y, FALSE);
+		break;
+	    case PM_GARGOYLE:
+		obj = mkcorpstat(STATUE, (struct monst *)0, mdat, x, y, FALSE);
+		break;
 	    default_1:
 	    default:
 		if (mvitals[mndx].mvflags & G_NOCORPSE)
