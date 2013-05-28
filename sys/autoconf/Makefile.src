@@ -207,7 +207,7 @@ SYSCSRC = $(srcdir)/../sys/share/nhlan.c $(srcdir)/../sys/share/ioctl.c \
 	$(srcdir)/../sys/share/pcmain.c $(srcdir)/../sys/share/pcsys.c \
 	$(srcdir)/../sys/share/pctty.c $(srcdir)/../sys/share/pcunix.c \
 	$(srcdir)/../sys/share/random.c $(srcdir)/../sys/share/unixtty.c \
-	$(srcdir)/../sys/atari/tos.c $(srcdir)/../sys/be/bemain.c \
+	$(srcdir)/../sys/be/bemain.c \
 	$(srcdir)/../sys/unix/unixmain.c $(srcdir)/../sys/unix/unixres.c \
 	$(srcdir)/../sys/unix/unixunix.c $(srcdir)/../sys/winnt/nttty.c \
 	$(srcdir)/../sys/winnt/winnt.c
@@ -238,7 +238,7 @@ HACKINCL = align.h artifact.h artilist.h attrib.h beconf.h color.h \
 	global.h autoconf.h hack.h lev.h macconf.h mfndpos.h micro.h mkroom.h \
 	monattk.h mondata.h monflag.h monst.h monsym.h obj.h objclass.h \
 	os2conf.h patchlevel.h pcconf.h permonst.h prop.h rect.h region.h rm.h \
-	sp_lev.h spell.h system.h tcap.h timeout.h tosconf.h tradstdc.h \
+	sp_lev.h spell.h system.h tcap.h timeout.h tradstdc.h \
 	trampoli.h trap.h unixconf.h vault.h vision.h vmsconf.h wintty.h \
 	winX.h winprocs.h wintype.h you.h youprop.h
 
@@ -288,11 +288,6 @@ Sysatt:	$(HOBJ) Makefile
 	@echo "Loading ..."
 	@$(LD) $(LFLAGS) /lib/crt0s.o /lib/shlib.ifile -o $(GAME) $(HOBJ)
 	@touch Sysatt
-
-Systos:	$(HOBJ) Makefile
-	@echo "Loading ..."
-	@$(LINK) $(LFLAGS) -o $(GAME) $(HOBJ) $(WINLIB)
-	@touch Systos
 
 SysV-AT:	DUMB.Setup $(HOBJ) Makefile
 	@echo "Loading ..."
@@ -462,7 +457,7 @@ depend: ../sys/autoconf/depend.awk \
 $(CONFIG_H): ../include/config.h ../include/config1.h ../include/tradstdc.h \
 		../include/global.h ../include/coord.h ../include/vmsconf.h \
 		../include/system.h ../include/unixconf.h ../include/os2conf.h \
-		../include/micro.h ../include/pcconf.h ../include/tosconf.h \
+		../include/micro.h ../include/pcconf.h \
 		../include/macconf.h ../include/beconf.h \
 		../include/wceconf.h ../include/ntconf.h ../include/nhlan.h \
 		../include/autoconf.h
@@ -500,8 +495,6 @@ ioctl.o: $(srcdir)/../sys/share/ioctl.c $(HACK_H) ../include/tcap.h
 	$(CC) $(CFLAGS) -c $(srcdir)/../sys/share/ioctl.c
 unixtty.o: $(srcdir)/../sys/share/unixtty.c $(HACK_H)
 	$(CC) $(CFLAGS) -c $(srcdir)/../sys/share/unixtty.c
-tos.o: $(srcdir)/../sys/atari/tos.c $(HACK_H) ../include/tcap.h
-	$(CC) $(CFLAGS) -c $(srcdir)/../sys/atari/tos.c
 bemain.o: $(srcdir)/../sys/be/bemain.c $(HACK_H) ../include/dlb.h
 	$(CC) $(CFLAGS) -c $(srcdir)/../sys/be/bemain.c
 unixmain.o: $(srcdir)/../sys/unix/unixmain.c $(HACK_H) ../include/dlb.h

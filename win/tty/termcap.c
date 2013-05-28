@@ -21,9 +21,7 @@ void FDECL(nocmov, (int, int));
 #if defined(TEXTCOLOR) && defined(TERMLIB)
 # ifdef OVLB
 #  if !defined(UNIX) || !defined(TERMINFO)
-#   ifndef TOS
 static void FDECL(analyze_seq, (char *, int *, int *));
-#   endif
 #  endif
 static void NDECL(init_hilite);
 static void NDECL(kill_hilite);
@@ -58,11 +56,7 @@ STATIC_VAR char tbuf[512];
 #endif
 
 #ifdef TEXTCOLOR
-# ifdef TOS
-const char *hilites[CLR_MAX];	/* terminal escapes for the various colors */
-# else
 char *hilites[CLR_MAX]; /* terminal escapes for the various colors */
-# endif
 #endif
 
 #ifdef OVLB
@@ -76,11 +70,7 @@ extern boolean HE_resets_AS;
 
 #ifndef TERMLIB
 STATIC_VAR char tgotobuf[20];
-# ifdef TOS
-#define tgoto(fmt, x, y)	(Sprintf(tgotobuf, fmt, y+' ', x+' '), tgotobuf)
-# else
 #define tgoto(fmt, x, y)	(Sprintf(tgotobuf, fmt, y+1, x+1), tgotobuf)
-# endif
 #endif /* TERMLIB */
 
 #ifndef MSDOS
@@ -222,37 +212,11 @@ int *wid, *hgt;
 # endif
 		term = getenv("TERM");
 
-# if defined(TOS) && defined(__GNUC__)
-	if (!term)
-		term = "builtin";		/* library has a default */
-# endif
 	if (!term)
 #endif
 #ifndef ANSI_DEFAULT
 		error("Can't get TERM.");
 #else
-# ifdef TOS
-	{
-		CO = 80; LI = 25;
-		TI = VS = VE = TE = nullstr;
-		HO = "\033H";
-		CE = "\033K";		/* the VT52 termcap */
-		UP = "\033A";
-		nh_CM = "\033Y%c%c";	/* used with function tgoto() */
-		nh_ND = "\033C";
-		XD = "\033B";
-		BC = "\033D";
-		SO = "\033p";
-		SE = "\033q";
-	/* HI and HE will be updated in init_hilite if we're using color */
-		nh_HI = "\033p";
-		nh_HE = "\033q";
-		*wid = CO;
-		*hgt = LI;
-		CL = "\033E";		/* last thing set */
-		return;
-	}
-# else /* TOS */
 	{
 #  ifdef MICRO
 		get_scr_size();
@@ -310,7 +274,6 @@ int *wid, *hgt;
 		CL = "\033[2J";		/* last thing set */
 		return;
 	}
-# endif /* TOS */
 #endif /* ANSI_DEFAULT */
 
 #ifdef TERMLIB
@@ -358,18 +321,10 @@ int *wid, *hgt;
 	if (!CO) CO = tgetnum("co");
 	if (!LI) LI = tgetnum("li");
 # else
-#  if defined(TOS) && defined(__GNUC__)
-	if (!strcmp(term, "builtin"))
-		get_scr_size();
-	else {
-#  endif
 		CO = tgetnum("co");
 		LI = tgetnum("li");
 		if (!LI || !CO)			/* if we don't override it */
 			get_scr_size();
-#  if defined(TOS) && defined(__GNUC__)
-	}
-#  endif
 # endif
 # ifdef CLIPPING
 	if(CO < COLNO || LI < ROWNO+3)
@@ -437,14 +392,7 @@ int *wid, *hgt;
 	MD = Tgetstr("md");
 # endif
 # ifdef TEXTCOLOR
-#  if defined(TOS) && defined(__GNUC__)
-	if (!strcmp(term, "builtin") || !strcmp(term, "tw52") ||
-	    !strcmp(term, "st52")) {
-		init_hilite();
-	}
-#  else
 	init_hilite();
-#  endif
 # endif
 	*wid = CO;
 	*hgt = LI;
@@ -1024,7 +972,6 @@ init_hilite()
 
 # else /* UNIX && TERMINFO */
 
-#  ifndef TOS
 /* find the foreground and background colors set by nh_HI or nh_HE */
 static void
 analyze_seq (str, fg, bg)
@@ -1078,7 +1025,6 @@ int *fg, *bg;
 	    c++;
 	}
 }
-#  endif
 
 /*
  * Sets up highlighting sequences, using ANSI escape sequences (highlight code
@@ -1090,48 +1036,6 @@ static void
 init_hilite()
 {
 	int c;
-#  ifdef TOS
-	extern unsigned long tos_numcolors;	/* in tos.c */
-	static char NOCOL[] = "\033b0", COLHE[] = "\033q\033b0";
-
-	if (tos_numcolors <= 2) {
-		return;
-	}
-/* Under TOS, the "bright" and "dim" colors are reversed. Moreover,
- * on the Falcon the dim colors are *really* dim; so we make most
- * of the colors the bright versions, with a few exceptions where
- * the dim ones look OK.
- */
-	hilites[0] = NOCOL;
-	for (c = 1; c < SIZE(hilites); c++) {
-		char *foo;
-		foo = (char *) alloc(sizeof("\033b0"));
-		if (tos_numcolors > 4)
-			Sprintf(foo, "\033b%c", (c&~BRIGHT)+'0');
-		else
-			Strcpy(foo, "\033b0");
-		hilites[c] = foo;
-	}
-
-	if (tos_numcolors == 4) {
-		TI = "\033b0\033c3\033E\033e";
-		TE = "\033b3\033c0\033J";
-		nh_HE = COLHE;
-		hilites[CLR_GREEN] = hilites[CLR_GREEN|BRIGHT] = "\033b2";
-		hilites[CLR_RED] = hilites[CLR_RED|BRIGHT] = "\033b1";
-	} else {
-		sprintf(hilites[CLR_BROWN], "\033b%c", (CLR_BROWN^BRIGHT)+'0');
-		sprintf(hilites[CLR_GREEN], "\033b%c", (CLR_GREEN^BRIGHT)+'0');
-
-		TI = "\033b0\033c\017\033E\033e";
-		TE = "\033b\017\033c0\033J";
-		nh_HE = COLHE;
-		hilites[CLR_WHITE] = hilites[CLR_BLACK] = NOCOL;
-		hilites[NO_COLOR] = hilites[CLR_GRAY];
-	}
-
-#  else /* TOS */
-
 	int backg, foreg, hi_backg, hi_foreg;
 
 	for (c = 0; c < SIZE(hilites); c++)
@@ -1164,14 +1068,12 @@ init_hilite()
 	/* brighten low-visibility colors */
 	hilites[CLR_BLUE] = hilites[CLR_BLUE|BRIGHT];
 #   endif
-#  endif /* TOS */
 }
 # endif /* UNIX */
 
 static void
 kill_hilite()
 {
-# ifndef TOS
 	int c;
 
 	for (c = 0; c < CLR_MAX / 2; c++) {
@@ -1184,7 +1086,6 @@ kill_hilite()
 		if (hilites[c|BRIGHT] && (hilites[c|BRIGHT] != nh_HI))
 			free((genericptr_t) hilites[c|BRIGHT]),  hilites[c|BRIGHT] = 0;
 	}
-# endif
 	return;
 }
 #endif /* TEXTCOLOR */

@@ -145,10 +145,6 @@ typedef uchar	boolean;		/* 0 or 1 */
 #include "pcconf.h"
 #endif
 
-#ifdef TOS
-#include "tosconf.h"
-#endif
-
 #ifdef MAC
 #include "macconf.h"
 #endif
@@ -215,9 +211,6 @@ typedef uchar	boolean;		/* 0 or 1 */
 # endif
 # ifdef OS2
 #  define PORT_ID	"OS/2"
-# endif
-# ifdef TOS
-#  define PORT_ID	"ST"
 # endif
 # ifdef UNIX
 #  define PORT_ID	"Unix"

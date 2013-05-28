@@ -41,7 +41,7 @@ monsym.h        nhlan.h         ntconf.h        obj.h           objclass.h
 os2conf.h       patchlevel.h    pcconf.h        permonst.h      prop.h
 qtext.h         quest.h         rect.h          region.h        rm.h
 skills.h        sp_lev.h        spell.h         system.h        tcap.h
-timeout.h       tosconf.h       tradstdc.h      trampoli.h      trap.h
+timeout.h       tradstdc.h      trampoli.h      trap.h
 unixconf.h      vault.h         vision.h        vmsconf.h       wceconf.h
 winami.h        winprocs.h      wintype.h       you.h           youprop.h
 (file for tty versions)
@@ -82,11 +82,6 @@ track.c         trap.c          u_init.c        uhitm.c         vault.c
 version.c       vision.c        weapon.c        were.c          wield.c
 windows.c       wizard.c        worm.c          worn.c          write.c
 zap.c
-
-sys/atari:
-(files for Atari version)
-Install.tos     atarifnt.uue    nethack.mnu     setup.g         tos.c
-unx2atar.sed
 
 sys/be:
 (files for BeOS version)
