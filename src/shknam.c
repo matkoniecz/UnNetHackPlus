@@ -38,7 +38,7 @@ static const char * const shkliquors[] = {
 static const char * const shkbooks[] = {
     /* Eire */
     "Skibbereen", "Kanturk", "Rath Luirc", "Ennistymon", "Lahinch",
-    "Loughrea", "Croagh", "Maumakeogh", "Ballyjamesduff",
+    "Loughrea", "Croagh", "Mastergeehy", "Ballyjamesduff",
     "Kinnegad", "Lugnaquillia", "Enniscorthy", "Gweebarra",
     "Kittamagh", "Nenagh", "Sneem", "Ballingeary", "Kilgarvan",
     "Cahersiveen", "Glenbeigh", "Kilmihil", "Kiltamagh",
