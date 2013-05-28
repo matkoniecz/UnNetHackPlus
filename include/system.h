@@ -69,7 +69,7 @@ typedef long	off_t;
 # endif
 #endif
 #ifndef SIG_RET_TYPE
-# if defined(SUNOS4) || defined(SVR3) || defined(SVR4)
+# if defined(SVR3) || defined(SVR4)
 	/* SVR3 is defined automatically by some systems */
 #  define SIG_RET_TYPE void (*)()
 # endif
@@ -87,7 +87,7 @@ typedef long	off_t;
 # if !defined(__SC__) && !defined(LINUX)
 E  long NDECL(random);
 # endif
-# if (!defined(SUNOS4) && !defined(bsdi) && !defined(__FreeBSD__) && !defined(__NetBSD__)) || defined(RANDOM)
+# if (!defined(bsdi) && !defined(__FreeBSD__) && !defined(__NetBSD__)) || defined(RANDOM)
 E void FDECL(srandom, (unsigned int));
 # else
 #  if !defined(bsdi) && !defined(__FreeBSD__) && !defined(__NetBSD__)
@@ -237,9 +237,9 @@ E long NDECL(fork);
 /* The POSIX string.h is required to define all the mem* and str* functions */
 #include <string.h>
 #else
-#if defined(SYSV) || defined(VMS) || defined(MAC) || defined(SUNOS4)
+#if defined(SYSV) || defined(VMS) || defined(MAC)
 # if defined(NHSTDC) || defined(VMS)
-#  if !defined(_AIX32) && !(defined(SUNOS4) && defined(__STDC__))
+#  if !defined(_AIX32)
 				/* Solaris unbundled cc (acc) */
 E int FDECL(memcmp, (const void *,const void *,size_t));
 E void *FDECL(memcpy, (void *, const void *, size_t));
@@ -371,7 +371,7 @@ E int	FDECL(strlen, (const char *));
 #if defined(__DECC) || defined(__SASC_60) || defined(WIN32)
 #define SPRINTF_PROTO
 #endif
-#if (defined(SUNOS4) && defined(__STDC__)) || defined(_AIX32)
+#if defined(_AIX32)
 #define SPRINTF_PROTO
 #endif
 #if defined(TOS) || defined(__sgi) || defined(__GNUC__)
@@ -399,11 +399,9 @@ E  char *sprintf();
 #ifdef NEED_VARARGS
 # if defined(USE_STDARG) || defined(USE_VARARGS)
 #  if !defined(SVR4) && !defined(apollo)
-#    if !(defined(SUNOS4) && defined(__STDC__)) /* Solaris unbundled cc (acc) */
 E int FDECL(vsprintf, (char *, const char *, va_list));
 E int FDECL(vfprintf, (FILE *, const char *, va_list));
 E int FDECL(vprintf, (const char *, va_list));
-#    endif
 #  endif
 # else
 #  define vprintf	printf

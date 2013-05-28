@@ -22,12 +22,7 @@ int NDECL(yywrap);
 int NDECL(yylex);
 	/* Traditional lexes let yyunput() and yyoutput() default to int;
 	 * newer ones may declare them as void since they don't return
-	 * values.  For even more fun, the lex supplied as part of the
-	 * newer unbundled compiler for SunOS 4.x adds the void declarations
-	 * (under __STDC__ or _cplusplus ifdefs -- otherwise they remain
-	 * int) while the bundled lex and the one with the older unbundled
-	 * compiler do not.  To detect this, we need help from outside --
-	 * sys/unix/Makefile.utl.
+	 * values. 
 	 *
 	 * Digital UNIX is difficult and still has int in spite of all
 	 * other signs.
@@ -37,11 +32,6 @@ int NDECL(yylex);
 # endif
 # if !defined(VOIDYYPUT) && defined(POSIX_TYPES)
 #  if !defined(BOS) && !defined(HISX) && !defined(_M_UNIX) && !defined(VMS)
-#   define VOIDYYPUT
-#  endif
-# endif
-# if !defined(VOIDYYPUT) && defined(WEIRD_LEX)
-#  if defined(SUNOS4) && defined(__STDC__) && (WEIRD_LEX > 1)
 #   define VOIDYYPUT
 #  endif
 # endif

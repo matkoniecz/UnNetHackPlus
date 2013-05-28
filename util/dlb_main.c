@@ -54,7 +54,7 @@ static const char *list_file = LIBLISTFILE;
 
 /*
  * How the file is encoded within the library.  Don't use a space
- * because (at least) the  SunOS 4.1.3 C library will eat the white
+ * because (at least) the  SunOS 4.1.3 [note: now not supported] C library will eat the white
  * space instead of preserving it like the man page says it should.
  */
 #define ENC_NORMAL 'n'	/* normal: not compressed in any way */
