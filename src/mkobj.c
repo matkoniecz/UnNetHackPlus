@@ -427,6 +427,9 @@ boolean artif;
 		if (!rn2(20)) {
 			set_erodeproof(otmp);
 		}
+		if (!rn2(10000) || (let == ARMOR_CLASS && !rn2(100))) {
+			otmp->greased = 1;
+		}
 	}
 
 	if (init) switch (let) {
