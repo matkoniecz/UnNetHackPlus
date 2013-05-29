@@ -1325,7 +1325,7 @@ grant_object_from_sacrifice(int value, int saved_luck)
 	if (rn2(10) >= (nchance*nchance)/100) {
 		if (u.uluck >= 0 && !rn2(6 + (2 * u.ugifts))) {
 			 int typ, ncount = 0; 
-			 if (rn2(2) && !is_using_martial_arts()) { /* don't give weapons to martial arts users */
+			 if (!rn2(4) && !is_using_martial_arts()) { /* don't give weapons to martial arts users */
 				/* don't give unicorn horns or anything the player's restricted in */
 				do {
 					typ = rnd_class(SPEAR,CROSSBOW);
