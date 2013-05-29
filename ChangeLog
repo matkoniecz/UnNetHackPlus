@@ -135,10 +135,6 @@
 	* Land mines and beartraps weigh less
 	Full list of changes available at https://github.com/Bulwersator/UnNetHackPlus/commits/master
 
-	* vanilla bug fixes:
-	  - Prevent the Book of the Dead from being destroyed when the
-	    player falls into lava. (from GruntHack)
-
 2012-04-01  UnNetHack 4.0.0
 	* Uncursed and blessed scrolls of magic mapping reveal secret doors
 	* Blessed scrolls of magic mapping reveal objects
@@ -398,7 +394,7 @@
 	  - Medusa levels (by Pasi Kallinen)
 	  - Castle levels (by Pasi Kallinen)
 	  - Bigrooms (by Pasi Kallinen)
-	  - Heck² levels (by Kelly Bailey)
+	  - HeckÂ˛ levels (by Kelly Bailey)
 	  - new mine town: Orcish Town (from SporkHack)
 	  - nymph level (from Slash'Em)
 	  - the Blackmarket (by Massimo Campostrini)
