@@ -544,6 +544,7 @@ long timeout;
 		    } else if (mon->data->mlet == S_DRAGON) {
 			verbalize("Gleep!");		/* Mything eggs :-) */
 		    }
+		    stop_occupation();
 		    break;
 
 		case OBJ_FLOOR:
