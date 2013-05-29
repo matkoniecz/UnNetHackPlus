@@ -467,7 +467,7 @@ xchar
 }
 
 /*
- * check wether a monster enters/leaves one or more region.
+ * check whether a monster enters/leaves one or more region.
 */
 boolean
 m_in_out_region(mon, x, y)
