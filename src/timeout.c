@@ -533,11 +533,9 @@ long timeout;
 		case OBJ_INVENT:
 		    knows_egg = TRUE; /* true even if you are blind */
 		    if (!cansee_hatchspot)
-			You_feel("%s %s from your pack!", something,
-			    locomotion(mon->data, "drop"));
+			You_feel("%s %s from your pack!", something, locomotion(mon->data, "drop"));
 		    else
-			You("see %s %s out of your pack!",
-			    monnambuf, locomotion(mon->data, "drop"));
+			You("see %s %s out of your pack!", monnambuf, locomotion(mon->data, "drop"));
 		    if (yours) {
 			pline("%s cries sound like \"%s%s\"",
 			    siblings ? "Their" : "Its",

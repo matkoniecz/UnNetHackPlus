@@ -2146,8 +2146,7 @@ invoke_amulet(otmp)
 				/* stick the proverbial two fingers up at the Gods,
 				* and go home */
 				display_nhwindow(WIN_MESSAGE, FALSE);
-				You("return home with %s...",
-				the(xname(otmp)));
+				You("return home with %s...", the(xname(otmp)));
 				done(DEFIED);
 			}
 		}

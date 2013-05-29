@@ -1687,26 +1687,20 @@ struct obj *corpse;
 			pline("Startled, %s drops %s as it revives!",
 			      mon_nam(mcarry), an(cname));
 		    else
-			pline("%s suddenly appears!", chewed ?
+			pline("%s suddenly appears!", chewed ? 
 			      Adjmonnam(mtmp, "bite-covered") : Monnam(mtmp));
 		}
 		break;
 	   case OBJ_CONTAINED:
-	   	if (container_where == OBJ_MINVENT && cansee(mtmp->mx, mtmp->my) &&
-		    mcarry && canseemon(mcarry) && container) {
+	   	if (container_where == OBJ_MINVENT && cansee(mtmp->mx, mtmp->my) && mcarry && canseemon(mcarry) && container) {
 		        char sackname[BUFSZ];
-		        Sprintf(sackname, "%s %s", s_suffix(mon_nam(mcarry)),
-				xname(container)); 
+		        Sprintf(sackname, "%s %s", s_suffix(mon_nam(mcarry)), xname(container)); 
 	   		pline("%s writhes out of %s!", Amonnam(mtmp), sackname);
 	   	} else if (container_where == OBJ_INVENT && container) {
 		        char sackname[BUFSZ];
 		        Strcpy(sackname, an(xname(container)));
-	   		pline("%s %s out of %s in your pack!",
-	   			Blind ? Something : Amonnam(mtmp),
-				locomotion(mtmp->data,"writhes"),
-	   			sackname);
-	   	} else if (container_where == OBJ_FLOOR && container &&
-		            cansee(mtmp->mx, mtmp->my)) {
+	   		pline("%s %s out of %s in your pack!", (Blind ? Something : Amonnam(mtmp)), (locomotion(mtmp->data, "writhes")), (sackname));
+	   	} else if (container_where == OBJ_FLOOR && container && cansee(mtmp->mx, mtmp->my)) {
 		        char sackname[BUFSZ];
 		        Strcpy(sackname, an(xname(container)));
 			pline("%s escapes from %s!", Amonnam(mtmp), sackname);

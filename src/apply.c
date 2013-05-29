@@ -1618,15 +1618,11 @@ long timeout;
 	}
 	silent = (timeout != monstermoves); /* happened while away */
 	okay_spot = get_obj_location(figurine, &cc.x, &cc.y, 0);
-	if (figurine->where == OBJ_INVENT ||
-	    figurine->where == OBJ_MINVENT)
-		okay_spot = enexto(&cc, cc.x, cc.y,
-				   &mons[figurine->corpsenm]);
-	if (!okay_spot ||
-	    !figurine_location_checks(figurine,&cc, TRUE)) {
+	if (figurine->where == OBJ_INVENT || figurine->where == OBJ_MINVENT)
+		okay_spot = enexto(&cc, cc.x, cc.y, &mons[figurine->corpsenm]);
+	if (!okay_spot || !figurine_location_checks(figurine,&cc, TRUE)) {
 		/* reset the timer to try again later */
-		(void) start_timer((long)rnd(5000), TIMER_OBJECT,
-				FIG_TRANSFORM, (genericptr_t)figurine);
+		(void) start_timer((long)rnd(5000), TIMER_OBJECT, FIG_TRANSFORM, (genericptr_t)figurine);
 		return;
 	}
 
@@ -1637,18 +1633,14 @@ long timeout;
 	    switch (figurine->where) {
 		case OBJ_INVENT:
 		    if (Blind)
-			You_feel("%s %s from your pack!", something,
-			    locomotion(mtmp->data,"drop"));
+			You_feel("%s %s from your pack!", something, locomotion(mtmp->data,"drop"));
 		    else
-			You("see %s %s out of your pack!",
-			    monnambuf,
-			    locomotion(mtmp->data,"drop"));
+			You("see %s %s out of your pack!", monnambuf, locomotion(mtmp->data,"drop"));
 		    break;
 
 		case OBJ_FLOOR:
 		    if (cansee_spot && !silent) {
-			You("suddenly see a figurine transform into %s!",
-				monnambuf);
+			You("suddenly see a figurine transform into %s!", monnambuf);
 			redraw = TRUE;	/* update figurine's map location */
 		    }
 		    break;
@@ -1659,15 +1651,13 @@ long timeout;
 			mon = figurine->ocarry;
 			/* figurine carring monster might be invisible */
 			if (canseemon(figurine->ocarry)) {
-			    Sprintf(carriedby, "%s pack",
-				     s_suffix(a_monnam(mon)));
+			    Sprintf(carriedby, "%s pack", s_suffix(a_monnam(mon)));
 			}
 			else if (is_pool(mon->mx, mon->my))
 			    Strcpy(carriedby, "empty water");
 			else
 			    Strcpy(carriedby, "thin air");
-			You("see %s %s out of %s!", monnambuf,
-			    locomotion(mtmp->data, "drop"), carriedby);
+			You("see %s %s out of %s!", monnambuf, locomotion(mtmp->data, "drop"), carriedby);
 		    }
 		    break;
 #if 0
@@ -1676,9 +1666,8 @@ long timeout;
 #endif
 
 		default:
-		    warning("figurine came to life where? (%d)",
-				(int)figurine->where);
-		break;
+		    warning("figurine came to life where? (%d)", (int)figurine->where);
+		    break;
 	    }
 	}
 	/* free figurine now */
