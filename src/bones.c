@@ -235,7 +235,7 @@ can_make_bones()
 	if (depth(&u.uz) <= 0 ) { /* bulletproofing for endgame */
 		return FALSE;
 	}
-	if (!rn2(1 + (depth(&u.uz)>>2) && !wizard)) { /* fewer bone levels on low levels */
+	if (!rn2(1 + (depth(&u.uz)>>2)) && !wizard) { /* fewer bone levels on low levels */
 		return FALSE;
 	}
 	/* don't let multiple restarts generate multiple copies of objects
