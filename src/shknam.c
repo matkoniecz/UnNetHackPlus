@@ -645,7 +645,7 @@ int sh;
     /* [max] removed int cl,  char buf[bufsz] */
     int i, sx, sy, first = 0, next = 0, total, partial, typ;
     struct obj *otmp;
-    int blkmar_gen[NUM_OBJECTS+2];
+    /* int blkmar_gen[NUM_OBJECTS+2]; */
     int *clp, *lastclp;
     int goodcl[12];
 
@@ -662,9 +662,9 @@ int sh;
     goodcl[10] = GEM_CLASS;
     goodcl[11] = 0;
 
-    for (i=0; i < NUM_OBJECTS; i++) {
+    /* for (i=0; i < NUM_OBJECTS; i++) {
       blkmar_gen[i] = 0;
-    }
+    } */
 
     total = 0;
     for (clp=goodcl; *clp!=0; clp++)  {

@@ -505,7 +505,7 @@ void curses_print_glyph(winid wid, xchar x, xchar y, int glyph)
     int attr = -1;
 
     /* map glyph to character and color */
-    mapglyph(glyph, &ch, &color, &special, x, y);
+    mapglyph(glyph, (glyph_t*)&ch, &color, &special, x, y);
     if ((special & MG_PET) && iflags.hilite_pet)
     {
         attr = iflags.wc2_petattr;

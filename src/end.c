@@ -1268,7 +1268,7 @@ boolean want_disp;
     int nextincted=0;
 #endif
     char c;
-    winid klwin = (winid)NULL;
+    winid klwin = (winid)0;
     char buf[BUFSZ];
 
     /* get totals first */

@@ -1311,8 +1311,8 @@ struct obj	*sobj;
 	case SCR_GENOCIDE:
 		You("have found a scroll of genocide!");
 		known = TRUE;
-		do_genocide(!sobj->cursed | (2 * !!Confusion),
-		            !sobj->blessed);
+		do_genocide((!sobj->cursed) | (2 * !!Confusion),
+		             !sobj->blessed);
 		break;
 	case SCR_LIGHT:
 		if(!Blind) known = TRUE;
