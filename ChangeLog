@@ -133,6 +133,7 @@
 		- #152 Wishing for unknown dragon scales with its actual name results in dragon scale mail (outside of debug mode)
 		- #154 Petrification may cause desintegration, desintegration may cause petrification
 		- small fixes to options help (opthelp file)
+		- version 4.8 contains also bugfixes from UnNetHack 5.0
 	Full list of changes available at https://github.com/Bulwersator/UnNetHackPlus/commits/master
 
 2012-04-01  UnNetHack 4.0.0
