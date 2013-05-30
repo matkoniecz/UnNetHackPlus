@@ -613,7 +613,7 @@ grunt_chat(struct monst *mtmp)
 	const char *pline_msg = 0; // Monnam(mtmp) will be prepended
 	const char *verbl_msg = 0; // verbalize()
 	struct permonst *ptr = mtmp->data;
-	if (is_orc(ptr) && !mtmp->mpeaceful) {
+	if ((is_orc(ptr) && !mtmp->mpeaceful) && rn2(10)) {
 		char * orc_insults_msgs[] = {
 			/* from http://www.anim5.com/wow/generator/dwarf/index.php */
 			"I can't hear ye! Scream a wee bit louder ye hairy, putrid whiny little slimey bastitch!",
@@ -628,6 +628,12 @@ grunt_chat(struct monst *mtmp)
 			"WARGHLBARGLEARGLEBARGLE!", // from http://forum.rpg.net/showthread.php?466187-%28Let-s-Play!%29-Sporkhack/page46
 		};
 		return produce_random_spoken_response_from_this_list(mtmp, orc_insults_msgs, SIZE(orc_insults_msgs));
+	} else if (is_gargoyle(ptr) && rn2(10)) {
+		if (mtmp->mpeaceful) {
+			pline("%s asks if you've seen Elisa Maza.", Monnam(mtmp));
+		} else {
+			pline("%s demands to know if you've seen David Xanatos.", Monnam(mtmp));
+		}
 	} else {
 		pline_msg = "grunts.";
 	}
