@@ -961,7 +961,7 @@ get_resistance_description_of_monster_type(struct permonst * ptr, char * descrip
 	if ((ptr->geno & G_NOCORPSE) != 0) {
 		strcat(description, " Leaves no corpse.");
 	} else if (count == 0) {
-		strcat(description, " No conveyed resistantes.");
+		strcat(description, " No conveyed resistances.");
 	} else {
 		strcat(description, " Conveys ");
 		strcat(description, temp_buf);
