@@ -125,6 +125,8 @@ MSGTYPE=stop "You fail to cast the spell correctly."
 MSGTYPE=stop "You see here a cockatrice corpse."
 MSGTYPE=stop "You see here a chickatrice corpse."
 MSGTYPE=stop "You are beginning to feel weak."
+MSGTYPE=stop "* needs food badly!"
+MSGTYPE=stop "You faint from lack of food."
 
 #----------------
 #| Message Spam |
