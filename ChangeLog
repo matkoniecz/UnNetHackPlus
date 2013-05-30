@@ -1,4 +1,4 @@
-2013-?-?  UnNetHackPlus 4.7.0 (based on UnNetHack 4.0.0) (WIP)
+2013-5-30  UnNetHackPlus 4.8.0 (based on UnNetHack 4.0.0)
 	* vanilia bug fixes
 		- C343-14 "tombstone message resulting from eating an identified artifact is gramatically incorrect" fixed (from GruntHack)
 		- Successful prayer now protects against stinking cloud (from GruntHack)
