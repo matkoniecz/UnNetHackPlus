@@ -818,11 +818,11 @@ plined_length(char * buf)
 		} else if (space_after_space) {
 			total++;
 			current_line++;
-			if (current_line == COLNO - 1) {
+			if (current_line == CO - 1) {
 				current_line = 0;
 			}
 		} else {
-			int available_space = COLNO - current_line - 1;
+			int available_space = CO - current_line - 1;
 			if (current_word == 0) {
 				//end of string, previous character was space
 			} else if (buf[i] == ' ' && current_word < available_space) {
@@ -833,11 +833,11 @@ plined_length(char * buf)
 				//word will fit into line without space
 				total += current_word;
 				current_line = 0; //new line
-			} else if (buf[i] == ' ' && current_word < COLNO - 1 ) {
+			} else if (buf[i] == ' ' && current_word < CO - 1 ) {
 				//word will fit into next line with a space
 				total += current_word + 1 + available_space;
 				current_line = current_word + 1;
-			} else if (current_word < COLNO) {
+			} else if (current_word < CO) {
 				//word will fit into next line without space
 				total += current_word + available_space;
 				current_line = 0;
@@ -848,10 +848,10 @@ plined_length(char * buf)
 				} else {
 					total += current_word + available_space;
 				}
-				current_line = current_word % (COLNO-1);
+				current_line = current_word % (CO-1);
 				if (buf[i] == ' ' && current_line > 0) {
 					total++;
-					current_line = (current_line+1) % (COLNO-1);
+					current_line = (current_line+1) % (CO-1);
 				}
 			}
 			current_word = 0;
@@ -865,7 +865,7 @@ void
 append_newline_to_pline_string(char * buf)
 {
 	int length = plined_length(buf);
-	int line_length = COLNO - 1;
+	int line_length = CO - 1;
 	int addditional_required = (line_length - (length % line_length)) % line_length;
 	boolean trailing_space = FALSE;
 	if (addditional_required == 0 && buf[strlen(buf)-1] != ' ') {
