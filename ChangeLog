@@ -1,49 +1,4 @@
 2013-5-30  UnNetHackPlus 4.8.0
-	* vanilia bug fixes
-		- C343-14 "tombstone message resulting from eating an identified artifact is gramatically incorrect" fixed (from GruntHack)
-		- Successful prayer now protects against stinking cloud (from GruntHack)
-		- C343-438: "Typo "gold piecess" may occur when selling items in a container" fixed (from GruntHack)
-		- Genociding your pet or peaceful monsters is no longer OK
-		- Colour of mithril objects is now correct 
-		- Feeling of amulet draining energy away is now correct in all situations 
-		- Missing foo_on/foo_off calls for objects with strange delay values fixed (this bug was not detectable by players)
-		- Dual ring of slow digestion bug is fixed
-		- Stethoscope no longer reports unaligned monsters as chaotic (affects Wizard of Yendor, priest[ess] of Moloch)
-		- C343-351 "Alchemy-caused explosions don't wake nearby monsters." (based on GruntHack)
-		- C343-355 "Archeologists start out at basic skill level in sling." (from GruntHack)
-		- Weird messages on decayed food for strangevores are fixed
-		- C343-299 "Killing tame engulfer from inside gives a warning message." (from GruntHack)
-		- C343-160 "Name "leather spellbook" is misleading." (renamed to "torn")
-		- C343-175 - chatting to tame prisoners is fixed (thanks to Reddit user Nuclear_Winterfell)
-		- C343-17 "After polymorphing into a xorn and returning to human form, player can be stuck in a pit that isn't there."
-		- "Player polymorphed into Xorn is not trapped by pits but (s)he receives "You fall into a pit!" message" and other related buggy behaviours
-		- "Statues/figurines of golems hit with stone-to-flesh spell are supposed (see Trap.c, line 423 of vanilia source code) to turn into flesh golems, not meatballs."
-		- C343-109 "There is a grammar error in the Tourist leader's greeting."(from GruntHack)
-		- C343-1 "At a pit the game can give messages with poor grammar." (fix by Tung Nguyen)
-		- Shopkeeper names lost in NetHack 2.2a reappear
-		- C343-345 "Display the plural form of the "You can't. They are cursed." message as opposed to the singular when trying to remove a cursed pair of lenses." (from GruntHack)
-		- C343-243 "Hero can throw without hands" (as polymorphed monster, for example killer bee) (from GruntHack)
-		- C343-305 "Attacking with an applied polearm ignores the "confirm" option." (from GruntHack)
-		- C343-81 "Ghosts can be slimed."
-		- C343-118 "Some messages use "mirror" where they should use "looking glass."" (from GruntHack)
-		- C343-302 "Amnesia of object discoveries may forget to forget one thing."
-		- C343-134 "Being petrified by swallowing a cockatrice violates foodless conduct."
-		- Two bugs relating to items vanishing from cursed bags of holding. 1) It doesn't use up a turn. 2) If it causes you to become unencumbered, the message saying so doesn't come until the following turn. (patch by Michael Lehotay)
-		- C343-383 "Applying a bullwhip while hero is at edge of map may cause a panic or crash" (from GruntHack)
-		- C343-343 "Helm of Opposite alignment gives incorrect piety level." (alignment record was unmodified, it was possible to gain alignment for robbing a shop while chaotic and calming the shopkeeper while lawful) (from GruntHack)
-		- C343-115 "Sleeping or paralyzed unicorns can catch gems." (from GruntHack)
-		- C343-409 "Unlocking a mimic pretending to be a door is not handled properly." (from GruntHack)
-		- C343-406 "One of the coyote names is spelled wrong"
-		- C343-95 "If killed by the wish from a magic lamp (or similar situation) and a bones file is produced, the bones file has the lamp in the wrong state." (from GruntHack)
-		- C343-58 "#conduct command description grammar is poor" (from GruntHack)
-		- C343-57 "#enhance command descriptions in Guidebook and game do not match. " (from GruntHack)
-		- C343-24 "Documented default for option "null" is "off"; default is actually "on"." (from GruntHack)
-		Patches are linked at http://nethackwiki.com/wiki/User:Bulwersator/UnNetHackPlus_bug_tracking
-	* UnNetHack bug fixes
-		- #143 Angered quest guardians will no longer go berserk.
-		- #152 Wishing for unknown dragon scales with its actual name results in dragon scale mail (outside of debug mode)
-		- #154 Petrification may cause desintegration, desintegration may cause petrification
-		- small fixes to options help (opthelp file)
 	* Flavour stuff
 		- Far look during hallucination should be more amusing
 		- New hallucinatory monsters, monster sounds (original ones and from NAO) and bottle types
@@ -133,6 +88,51 @@
 	* Player can wish for up to 100 projectiles
 	* Wishes no longer increase prayer timeout
 	* Land mines and beartraps weigh less
+	* vanilia bug fixes
+		- C343-14 "tombstone message resulting from eating an identified artifact is gramatically incorrect" fixed (from GruntHack)
+		- Successful prayer now protects against stinking cloud (from GruntHack)
+		- C343-438: "Typo "gold piecess" may occur when selling items in a container" fixed (from GruntHack)
+		- Genociding your pet or peaceful monsters is no longer OK
+		- Colour of mithril objects is now correct 
+		- Feeling of amulet draining energy away is now correct in all situations 
+		- Missing foo_on/foo_off calls for objects with strange delay values fixed (this bug was not detectable by players)
+		- Dual ring of slow digestion bug is fixed
+		- Stethoscope no longer reports unaligned monsters as chaotic (affects Wizard of Yendor, priest[ess] of Moloch)
+		- C343-351 "Alchemy-caused explosions don't wake nearby monsters." (based on GruntHack)
+		- C343-355 "Archeologists start out at basic skill level in sling." (from GruntHack)
+		- Weird messages on decayed food for strangevores are fixed
+		- C343-299 "Killing tame engulfer from inside gives a warning message." (from GruntHack)
+		- C343-160 "Name "leather spellbook" is misleading." (renamed to "torn")
+		- C343-175 - chatting to tame prisoners is fixed (thanks to Reddit user Nuclear_Winterfell)
+		- C343-17 "After polymorphing into a xorn and returning to human form, player can be stuck in a pit that isn't there."
+		- "Player polymorphed into Xorn is not trapped by pits but (s)he receives "You fall into a pit!" message" and other related buggy behaviours
+		- "Statues/figurines of golems hit with stone-to-flesh spell are supposed (see Trap.c, line 423 of vanilia source code) to turn into flesh golems, not meatballs."
+		- C343-109 "There is a grammar error in the Tourist leader's greeting."(from GruntHack)
+		- C343-1 "At a pit the game can give messages with poor grammar." (fix by Tung Nguyen)
+		- Shopkeeper names lost in NetHack 2.2a reappear
+		- C343-345 "Display the plural form of the "You can't. They are cursed." message as opposed to the singular when trying to remove a cursed pair of lenses." (from GruntHack)
+		- C343-243 "Hero can throw without hands" (as polymorphed monster, for example killer bee) (from GruntHack)
+		- C343-305 "Attacking with an applied polearm ignores the "confirm" option." (from GruntHack)
+		- C343-81 "Ghosts can be slimed."
+		- C343-118 "Some messages use "mirror" where they should use "looking glass."" (from GruntHack)
+		- C343-302 "Amnesia of object discoveries may forget to forget one thing."
+		- C343-134 "Being petrified by swallowing a cockatrice violates foodless conduct."
+		- Two bugs relating to items vanishing from cursed bags of holding. 1) It doesn't use up a turn. 2) If it causes you to become unencumbered, the message saying so doesn't come until the following turn. (patch by Michael Lehotay)
+		- C343-383 "Applying a bullwhip while hero is at edge of map may cause a panic or crash" (from GruntHack)
+		- C343-343 "Helm of Opposite alignment gives incorrect piety level." (alignment record was unmodified, it was possible to gain alignment for robbing a shop while chaotic and calming the shopkeeper while lawful) (from GruntHack)
+		- C343-115 "Sleeping or paralyzed unicorns can catch gems." (from GruntHack)
+		- C343-409 "Unlocking a mimic pretending to be a door is not handled properly." (from GruntHack)
+		- C343-406 "One of the coyote names is spelled wrong"
+		- C343-95 "If killed by the wish from a magic lamp (or similar situation) and a bones file is produced, the bones file has the lamp in the wrong state." (from GruntHack)
+		- C343-58 "#conduct command description grammar is poor" (from GruntHack)
+		- C343-57 "#enhance command descriptions in Guidebook and game do not match. " (from GruntHack)
+		- C343-24 "Documented default for option "null" is "off"; default is actually "on"." (from GruntHack)
+		Patches are linked at http://nethackwiki.com/wiki/User:Bulwersator/UnNetHackPlus_bug_tracking
+	* UnNetHack bug fixes
+		- #143 Angered quest guardians will no longer go berserk.
+		- #152 Wishing for unknown dragon scales with its actual name results in dragon scale mail (outside of debug mode)
+		- #154 Petrification may cause desintegration, desintegration may cause petrification
+		- small fixes to options help (opthelp file)
 	Full list of changes available at https://github.com/Bulwersator/UnNetHackPlus/commits/master
 
 2012-04-01  UnNetHack 4.0.0
