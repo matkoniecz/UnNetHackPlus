@@ -1,4 +1,5 @@
 2012-XX-XX  UnNetHack 4.X.X
+	* Wands and spells of digging are no longer restricted on maze levels
 	* removed monsters:
 	  - anti-matter vortex
 
